@@ -1,0 +1,37 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Lesion"
+		contentHeight="300px"
+		search="handleLesionSearch"
+		confirm="handleLesionClose"
+		cancel="handleLesionClose"
+		items="{
+			path : 'lesionList>/modelData',
+			sorter : {
+				path : 'id',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{lesionList>id}" />
+                <Text text="{lesionList>organname}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Doc No." />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Organ Name" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

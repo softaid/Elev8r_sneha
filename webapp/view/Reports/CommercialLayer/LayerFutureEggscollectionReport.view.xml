@@ -1,0 +1,171 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CommercialLayer.LayerFutureEggsCollectionReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>layerFutureEggscolletionTitle}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                        <form:FormElement label="{i18n>layerFutureEggscolletionLabelLocation}">
+                                            <form:fields>
+                                                <MultiComboBox id="locationtbl"
+                                                    selectionChange="handleSelectionChange"
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'locationList>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{locationList>id}" text="{locationList>locationname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                            <form:FormElement label="{i18n>layerFutureEggscolletionLabelBatchName}">
+                                            <form:fields>
+                                             <Select id="batchtb1" selectedKey="{layerleggsCollRepModel>/layerbatchid}" forceSelection = "false" change="batchChange"  
+                                                items="{
+                                                    path: 'batchModel>/modelData',
+                                                    sorter: { path: 'key' }
+                                                }">
+                                                <core:Item key="{batchModel>layerbatchid}" text="{batchModel>batchname}" />                                            
+                                            </Select>
+                                            </form:fields>
+                                         </form:FormElement>
+                                          <form:FormElement label="{i18n>layerFutureEggscolletionLabelShedName}">
+                                            <form:fields>
+                                              <Select id="shedtb1" selectedKey="{layerleggsCollRepModel>/Shedid}" forceSelection = "false" 
+                                                items="{
+                                                    path: 'shedModel>/modelData',
+                                                    sorter: { path: 'key' }
+                                                }">
+                                                <core:Item key="{shedModel>Shedid}" text="{shedModel>shedname}" />                                            
+                                            </Select>
+                                          
+                                            </form:fields>
+                                         </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                             
+                                           <form:FormElement label="{i18n>layerFutureEggscolletionLabelFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromdate" width="100%" value="{layerleggsCollRepModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="onDateChange"/> 
+                                                 <Input id="txtFromweek" required="true"  value="{layerleggsCollRepModel>/ageinweek}" />  
+                                            </form:fields>
+                                        </form:FormElement>
+                                           <form:FormElement label="{i18n>layerFutureEggscolletionLabelToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtTodate" width="100%" value="{layerleggsCollRepModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="onFromDateChange"/> 
+                                                 <Input id="txtToWeek" required="true"  value="{layerleggsCollRepModel>/ageinweekfortodate}"/>  
+                                            </form:fields>
+                                        </form:FormElement>
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>	
+            		
+    <VBox fitContainer="true">   
+         	<Panel width="auto" class="sapUiResponsiveMargin">
+                <MessageStrip
+                id = "msgStrip"
+                text = "Current Week : {currentEggscollectionModel>/weekno},  Total Eggs Collection: {currentEggscollectionModel>/eggscollectionQty},  Live Stock: {currentEggscollectionModel>/instock}"
+                type="Information"
+                showIcon="true"
+                class="sapUiTinyMarginBottom">
+                </MessageStrip>
+	        </Panel>	     
+                    <ScrollContainer
+                        height="100%"
+                        width="100%"
+                        horizontal="true"
+                        vertical="true"
+                        focusable="true">
+                <Table id="tblEggscollection" width="100%"  growing="true"
+                      growingScrollToLoad="true" items="{
+                                            path: 'lyrFutureEggsCollectionReport>/modelData'                                           
+                                        }"
+                                 mode="None" backgroundDesign="Solid">
+                    <headerToolbar>
+                        <Toolbar>
+                            <content>
+                                <Title  level="H2"/>
+                                <ToolbarSpacer />
+                                 
+                                <Button icon="sap-icon://search" type="Emphasized" text="Search Data" press="onSearchData"/>
+                                <Button icon="sap-icon://download" press="onDataExport" />
+                            </content>
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column mergeDuplicates="true" width="10%"><Text text ="{i18n>layerFutureEggscolletionLabelWeekNo}" /></Column>
+                        <Column mergeDuplicates="true" minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="{i18n>layerFutureEggscolletionLabelExpEggsColl}" /></Column>  
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                        <customData>
+                        </customData>
+                            <cells>
+                                <Text text="{lyrFutureEggsCollectionReport>weekno}" />
+                                <Text text="{lyrFutureEggsCollectionReport>expeggscollection}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table> 
+                </ScrollContainer>                          
+            </VBox>    
+                        
+                    </f:content>
+                    
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

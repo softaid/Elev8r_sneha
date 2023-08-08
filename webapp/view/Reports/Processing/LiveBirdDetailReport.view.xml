@@ -1,0 +1,197 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Processing.LiveBirdDetailReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Live Bird Details"/> 
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                  <form:FormContainer title="">
+                                        <form:formElements>
+                                             <form:FormElement label="{i18n>ProcessinglivebitrddetailModules}">
+                                            <form:fields>
+                                                <MultiComboBox id="moduleid"
+                                                  selectionChange="inputItemSelectionChange"
+                                                  selectionFinish = "moduleSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'moduleList>/modelData',
+                                                        sorter: { path: 'inputitemid' }
+                                                    }">
+                                                    <core:Item key="{moduleList>id}" text="{moduleList>refname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>   
+                                          <form:FormElement label="{i18n>ProcessinglivebitrddetailItem}">
+                                            <form:fields>
+                                                <MultiComboBox id="inputitem"
+                                                  selectionChange="inputItemSelectionChange"
+                                                  selectionFinish = "inputitemBatchSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'ItemList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{ItemList>id}" text="{ItemList>itemname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>   
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+<!-- 
+                                         <form:FormElement  label="" >
+                                            <form:fields>
+                                                 <SearchField search="onSearch" width="25.5rem"  id = "onSearchId"/> 
+                                                  <Button
+                                                 width="20%"
+                                                 align="right"
+                                                tooltip="Group"
+                                                icon="sap-icon://group-2"
+                                                press="handleGroupButtonPressed"/>
+                                            </form:fields>
+                                        </form:FormElement>    -->
+
+
+                                          <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" tooltip="Show Records" type="Emphasized" text="{i18n>ProcessingProductionRegistershorrecords}" width="100%" press="getProcessingLiveBirdDetailReport"/>
+                                                <MenuButton id="txtdownload"  tooltip="Download" text="{i18n>ProcessingProductionRegisterdownlosd}" width="100%"  align="right">
+                                                    <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="{i18n>ProcessingProductionRegistersavecsv}" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="{i18n>ProcessingProductionRegistersavepdf}" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>  
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                        <form:FormContainer title="">
+                                        <form:formElements>
+                                       </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                          
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel" width="200%"  growing="true" sticky="ColumnHeaders" growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData'
+                                                }"
+                                                mode="None" backgroundDesign="Solid">
+                               
+                                <columns>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailDate}" /></Column> 
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>ProcessinglivebitrddetailInvoiceno}" /></Column>  
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailReferenceno}" /></Column>   
+                                    <!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>ProcessinglivebitrddetailDCno}" /></Column>   -->
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailDCDate}" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailPartyName}" /></Column>  
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailFromModule}" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailFromBatch}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailBirdName}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailUnit}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailLocation}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailReceivedQuantity}" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailReceivedWeight}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailActualQuantity}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailActualWeight}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailShrinkage}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailShrinkageLoss}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailMortalityQuantity}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailMortalityPercentage}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailMortalityWeight}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailRate}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessinglivebitrddetailNetAmount}" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+				                    <customData>
+                                    <core:CustomData key="deviationReportgroup" value="{tblModel>shed_name}" writeToDom="true"></core:CustomData>
+                                     </customData>
+                                            <cells>
+                                            <Text text="{tblModel>invoicedate}" />
+                                            <Text text="{tblModel>purchaseinvoiceno}" />
+                                            <Text text="{tblModel>referenceno}" />
+                                            <!-- <Text text="{tblModel>}" /> -->
+                                            <Text text="{tblModel>transferdate}" />
+                                            <Text text="{tblModel>partyname}" />
+                                            <Text text="{tblModel>modulename}" />
+                                            <Text text="{tblModel>itembatch}" />  
+                                            <Text text="{tblModel>itemname}" />
+                                            <Text text="{tblModel>itemunitname}" />
+                                            <Text text="{tblModel>locationname}"/>
+                                            <Text text="{tblModel>transferqty}" />
+                                            <Text text="{tblModel>receivedweight}" />
+                                            <Text text="{tblModel>receiptqty}" />
+                                            <Text text="{tblModel>actualweight}" />
+                                            <Text text="{tblModel>shrinkage}" />
+                                            <Text text="{tblModel>shrikageper}" />
+                                            <Text text="{tblModel>transitmortality}" />
+                                            <Text text="{tblModel>morper}" />
+                                            <Text text="{tblModel>morweight}" />
+                                            <Text text="{tblModel>costperkg}" />
+                                            <Text text="{tblModel>netamt}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+            
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

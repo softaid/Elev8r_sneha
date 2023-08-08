@@ -1,0 +1,41 @@
+{
+	"farmgrade": [
+		{
+			"code" : 1,
+            "gradecategory": "Contract Growing",
+            "location": "",
+            "grade": "Contract Growing",
+            "fromeef": "350-400",
+            "toeef": ""
+
+		},
+		{
+			"code" : 2,
+            "gradecategory": "",
+            "location": "",
+            "grade": "B",
+            "fromeef": "300-350",
+            "toeef": ""
+
+        },
+        {
+			"code" : 3,
+            "gradecategory": "",
+            "location": "",
+            "grade": "Competant250-300",
+            "fromeef": "250-300",
+            "toeef": ""
+
+        },
+        {
+			"code" : 4,
+            "gradecategory": "",
+            "location": "",
+            "grade": "Black Listed<200",
+            "fromeef": "",
+            "toeef": ""
+
+		}
+			
+	]
+}

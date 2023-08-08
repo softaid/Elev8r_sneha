@@ -1,0 +1,33 @@
+{
+	"density": [
+		{
+			"code" : 1,
+            "branchlocation": "Out Grower",
+            "shedhousetype": "Open",
+            "densityperbird": "1.2sqft/bird"
+
+        },
+        {
+			"code" : 2,
+            "branchlocation": "Out Grower",
+            "shedhousetype": "Close",
+            "densityperbird": "0.6sqft/bird"
+
+        },
+        {
+			"code" : 3,
+            "branchlocation": "Own",
+            "shedhousetype": "Cl/pannel",
+            "densityperbird": "0.52sqft/bird"
+
+        },
+        {
+			"code" : 3,
+            "branchlocation": "Out Grower",
+            "shedhousetype": "Slat",
+            "densityperbird": "1sqft/bird"
+
+        }
+		
+	]
+}

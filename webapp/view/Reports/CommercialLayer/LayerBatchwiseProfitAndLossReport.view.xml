@@ -1,0 +1,184 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CommercialLayer.LayerBatchwiseProfitAndLossReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+    <f:title>
+        <f:DynamicPageTitle>
+            <f:heading>
+                <Title text="Layer Batchwise Profit and Loss"/>
+            </f:heading>
+            <f:actions>                           
+            </f:actions>
+        </f:DynamicPageTitle>
+	</f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <VBox>
+                    <form:Form editable="true">
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="2"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+                            <form:FormContainer title="">
+                                <form:formElements>
+                                 <form:FormElement label="{i18n>BatchWiseDailyProductionAndConsumptionFromDate}">
+                                        <form:fields>
+                                            <DatePicker id="txtFromdate"  width="100%" value="{layerbatchpandlModel>/fromdate}" 
+                                            displayFormat="{config>/dateFormat/displayFormat}" 
+                                            valueFormat="{config>/dateFormat/valueFormat}" 
+                                            placeholder="{config>/dateFormat/placeholder}" change="ongetDate" />   
+                                        </form:fields>
+                                    </form:FormElement>
+
+                                    <form:FormElement label="{i18n>BatchWiseDailyProductionAndConsumptionToDate}">
+                                        <form:fields>
+                                            <DatePicker id="txtTodate"  width="100%" value="{layerbatchpandlModel>/todate}" 
+                                            displayFormat="{config>/dateFormat/displayFormat}" 
+                                            valueFormat="{config>/dateFormat/valueFormat}" 
+                                            placeholder="{config>/dateFormat/placeholder}" change="ongetDate"/>   
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                            <form:FormContainer>
+                                <form:formElements>
+                                      <form:FormElement label="{i18n>BatchWiseDailyProductionAndConsumptionBatch}">
+                                        <form:fields>
+                                            <Input
+                                               id = "textBatch"
+                                                type="Text"
+                                                placeholder="Select Batch"
+                                                showSuggestion="true"
+                                                showValueHelp="true"    
+                                                valueHelpOnly="true"
+                                                value="{layerbatchpandlModel>/batchname}"
+                                                valueHelpRequest="handleLayerBatchValueHelp">
+                                            </Input>
+                                        </form:fields>
+                                    </form:FormElement>
+                                     <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Search Data" width="100%" press="onSearchData"/>
+                                                <!-- <MenuButton icon="sap-icon://download" width="50%" align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="SaveCSV" icon="sap-icon://save" press="onDataExport" />
+                                                            <MenuItem text="SavePDF" icon="sap-icon://save" press="createPDF" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton> -->
+                                                </form:fields>
+                                            </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                        </form:formContainers>
+                    </form:Form>
+                </VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>	
+            <HBox>
+
+                <Table id="expensestbl" items="{
+                    path: 'layerbatchwiseExpensesModel>/modelData',
+                        sorter: {
+                            path: 'id'
+                        }
+                    }"
+                    sticky="ColumnHeaders" growing="true"
+                    growingThreshold="100"
+                    growingScrollToLoad="true" backgroundDesign="Solid">
+                    <headerToolbar>
+                        <Toolbar>
+                        <content>
+                            <Title  level="H2"/>
+                            <ToolbarSpacer />
+                        </content>
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column><Label text ="Particulars" /></Column>
+                        <Column><Label text ="Amount" /></Column>
+                        
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                        <customData>
+                            <core:CustomData key="expenses" writeToDom="true"></core:CustomData>
+                        </customData>
+                            <cells>
+                                <Text text="{layerbatchwiseExpensesModel>particulars}" />
+                                <Text text="{layerbatchwiseExpensesModel>amount}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+
+                <VBox justifyContent="Center" class="sapUiTinyMarginBeginEnd">
+                </VBox>
+
+                <Table id="incometbl" items="{
+                    path: 'layerbatchwiseIncomeModel>/modelData',
+                        sorter: {
+                            path: 'id'
+                        }
+                    }"
+                    sticky="ColumnHeaders" growing="true"
+                    growingThreshold="100"
+                    growingScrollToLoad="true" backgroundDesign="Solid">
+                    <headerToolbar>
+                        <Toolbar>
+                        <content>
+                            <Title  level="H2"/>
+                            <ToolbarSpacer />
+                        </content>
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column><Label text ="Particulars" /></Column>
+                        <Column><Label text ="Amount" /></Column>
+                        
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                        <customData>
+                            <core:CustomData key="income" writeToDom="true"></core:CustomData>
+                        </customData>
+                            <cells>
+                                <Text text="{layerbatchwiseIncomeModel>particulars}" />
+                                <Text text="{layerbatchwiseIncomeModel>amount}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+                
+            </HBox>
+        </f:content>                  
+	</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

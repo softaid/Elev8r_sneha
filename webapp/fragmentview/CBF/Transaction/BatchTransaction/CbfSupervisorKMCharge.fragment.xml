@@ -1,0 +1,73 @@
+
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Suop"	
+		contentHeight="300px"
+		search="handleCbfSupervisorKMSearch"
+		confirm="onCbfsupervisorKMClose"
+		cancel="onCbfsupervisorKMClose"
+		items="{
+			path : 'supervisorChargeModel>/modelData'
+			
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{supervisorChargeModel>branchname}" />
+                <Text text="{supervisorChargeModel>statusname}" />
+                <Text text="{supervisorChargeModel>employeename}" />   
+                <Text text="{supervisorChargeModel>fromdate}" /> 
+                <Text text="{supervisorChargeModel>todate}" /> 
+                <Text text="{supervisorChargeModel>chargedate}" />                                     
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Branch" />
+				</header>
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Status" />
+				</header>
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Employee" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="From Date" />
+				</header>
+			</Column>
+
+             <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="To Date" />
+				</header>
+			</Column>
+
+             <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Date" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

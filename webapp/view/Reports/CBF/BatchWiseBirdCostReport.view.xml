@@ -1,0 +1,216 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CBF.BatchWiseBirdCostReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>batchwisebirdcostreporttitle}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                        <form:FormElement label="{i18n>batchwisebirdcostreportlabelbranchname}">
+                                            <form:fields>
+                                                <MultiComboBox id="branchList"
+                                                    selectionChange="batchSelectionChange"
+                                                    selectionFinish="branchSelectionFinish"
+                                                    width="500px"  
+                                                    items="{
+                                                        path: 'branchModel>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{branchModel>id}" text="{branchModel>branchname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                         <form:FormElement label="Farmer Name">
+                                            <form:fields>
+                                                <MultiComboBox id="farmerList"
+                                                   selectionChange="batchSelectionChange"
+                                                  selectionFinish = "farmerSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'FarmerModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{FarmerModel>id}" text="{FarmerModel>farmer_name}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>   
+
+                                           <form:FormElement label="Farm Name">
+                                            <form:fields>
+                                                <MultiComboBox id="farmList"
+                                                   selectionChange="batchSelectionChange"
+                                                  selectionFinish = "farmSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'FarmModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{FarmModel>id}" text="{FarmModel>farm_name}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>   
+                                        </form:formElements>
+                                    </form:FormContainer>   
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                         <form:FormElement label="Batch Name">
+                                            <form:fields>
+                                                <MultiComboBox id="batchList1"
+                                                   selectionChange="batchSelectionChange"
+                                                  selectionFinish = " " 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'BatchModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{BatchModel>id}" text="{BatchModel>batch_id}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement> 
+                                        
+                                           <form:FormElement label="Date">
+                                            <form:fields>
+                                                <DatePicker id="plcementdate"  width="100%" value="{reportModel>/curdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate" />   
+                                            </form:fields>
+                                        </form:FormElement>  
+
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                 
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                          
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel" width="200%" growing="true"  growingScrollToLoad="true"   sticky="ColumnHeaders"
+
+                                               items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'id'
+                                                    }
+                                                }"
+                                                backgroundDesign="Solid">
+                                <headerToolbar>
+                                    <Toolbar>
+                                    <content>
+                                        <Title  level="H2"/>
+                                        <ToolbarSpacer />
+                                          <Button icon="sap-icon://search" type="Emphasized" text="Search Data" press="getBatchwiseBirdCostReport"/>
+                                          
+                                           <MenuButton icon="sap-icon://download">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="SaveCSV" icon="sap-icon://save" press="onDataExport" />
+                                                            <MenuItem text="SavePDF" icon="sap-icon://save" press="createPDF" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                    </content>
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Place Date" /></Column>                                  
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Place Amt" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="LiveQty" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Culls" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Mortality" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Sales Bird Qty" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Feed Consumed" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Feed Amt" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Cummulative Feed" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Cummulative Feed Amt" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Med+Vac Amt" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Cummulative Amt" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Total" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Opening sale Amt" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Closing Sale Amt" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Cummulative Sale Amt" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Bird Cost" /></Column> 
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                            <Text text="{tblModel>placement_date}" />
+                                            <Text text="{tblModel>batch_place_qty}" />
+                                            <Text text="{tblModel>live_batch_qty}" />
+                                            <Text text="{tblModel>culls}" />
+                                            <Text text="{tblModel>total_mortality}" />
+                                            <Text text="{tblModel>saleqty}" />
+                                            <Text text="{tblModel>quantity}" />
+                                            <Text text="{tblModel>amount}" />
+                                            <Text text="{tblModel>cummufeedconsumption}" />
+                                            <Text text="{tblModel>cummufeedamount}" />
+                                            <Text text="{tblModel>feedamount}" />
+                                            <Text text="{tblModel>cummulativeamt}" />
+                                            <Text text="{tblModel>totalamt}" />
+                                            <Text text="{tblModel>fcr}" />
+                                            <Text text="{tblModel>closingstock}" />
+                                            <Text text="{tblModel>chickcost}" /> 
+                                            <Text text="{tblModel>actualcost}" />
+                                             
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                    </f:content>
+			</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

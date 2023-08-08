@@ -1,0 +1,90 @@
+{
+	"supervisorAllocation": [
+		{
+            "code" : "0101A0101",     
+            "branchCode" : "1",                   
+			"branchName" : "CBF Pashyala",
+			"details":[
+				{
+					"empCode" : 182,
+                    "empName" : "Maruti Patil",
+                    "lineId" : 22,
+                    "lineName" : "Shahapur Line",
+                    "manager" : true,
+                    "lineSupervisor" : true,
+                    "liftingSupervisor" : true
+				},
+				{
+                    "empCode" : 179,
+                    "empName" : "Ankush",
+                    "lineId" : 22,
+                    "lineName" : "Shahapur Line",
+                    "manager" : false,
+                    "lineSupervisor" : true,
+                    "liftingSupervisor" : true
+				},
+				{
+                    "empCode" : 179,
+                    "empName" : "Ankush",
+                    "lineId" : 23,
+                    "lineName" : "Shendrun Line",
+                    "manager" : false,
+                    "lineSupervisor" : true,
+                    "liftingSupervisor" : true
+                },
+                {
+                    "empCode" : 91,
+                    "empName" : "Pankaj D. Raut",
+                    "lineId" : 22,
+                    "lineName" : "Shahapur Line",
+                    "manager" : false,
+                    "lineSupervisor" : true,
+                    "liftingSupervisor" : true
+                },
+                {
+                    "empCode" : 182,
+                    "empName" : "Maruti Patil",
+                    "lineId" : 23,
+                    "lineName" : "Shendrun Line",
+                    "manager" : true,
+                    "lineSupervisor" : true,
+                    "liftingSupervisor" : true
+				}
+        	]
+		},
+		{
+            "code" : "0101B0101",     
+            "branchCode" : "2",                   
+			"branchName" : "CBF Test",
+			"details":[
+				{
+					"empCode" : 182,
+                    "empName" : "Maruti Patil",
+                    "lineId" : 22,
+                    "lineName" : "Shahapur Line",
+                    "manager" : true,
+                    "lineSupervisor" : true,
+                    "liftingSupervisor" : true
+				},
+				{
+                    "empCode" : 179,
+                    "empName" : "Ankush",
+                    "lineId" : 22,
+                    "lineName" : "Shahapur Line",
+                    "manager" : false,
+                    "lineSupervisor" : true,
+                    "liftingSupervisor" : true
+				},
+				{
+                    "empCode" : 179,
+                    "empName" : "Ankush",
+                    "lineId" : 23,
+                    "lineName" : "Shendrun Line",
+                    "manager" : false,
+                    "lineSupervisor" : true,
+                    "liftingSupervisor" : true
+                }
+        	]
+		}
+	]
+}

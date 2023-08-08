@@ -1,0 +1,83 @@
+<mvc:View
+		xmlns:c="sap.ui.core"
+		controllerName="sap.ui.elev8rerp.componentcontainer.controller.CompanySettings.LicenseManagementDetail"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:u="sap.ui.unified"
+		xmlns="sap.m"
+		xmlns:t="sap.ui.table"
+		xmlns:f="sap.f"
+		xmlns:layout="sap.ui.layout"
+		xmlns:form="sap.ui.layout.form"
+        xmlns:core="sap.ui.core"
+		height="100%">
+
+		<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="User License Detail"/>
+					</f:heading>
+					<f:actions>
+						<ToolbarSpacer/>
+						 <Button
+							text="{i18n>BreederBatchDetailSave}"
+                            type="Emphasized"
+                            press="onSave"/>
+					</f:actions>
+					<f:navigationActions>
+						<Button
+								icon="sap-icon://decline"
+								type="Transparent" press="onCancel" />
+					</f:navigationActions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:content>					
+				<form:Form editable="true">
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="1"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+ 
+                            <form:FormContainer title="">
+					            <form:formElements>
+
+									<form:FormElement label="User Name">
+										<form:fields>
+											<Input id="txtUserName" valueLiveUpdate="true" value="{userDetailModel>/username}" enabled="false" />
+										</form:fields>
+									</form:FormElement>
+							
+                                    <form:FormElement label="Select Licenses">
+										<MultiComboBox 
+												id="cboUserLicenses"
+												selectionChange="handleSelectionChange"
+												selectionFinish="handleSelectionFinish"	
+												width="500px"
+												items="{path: 'userLicenseDdlModel>/modelData',	sorter: { path: 'id' }}">
+
+											<core:Item key="{userLicenseDdlModel>id}" text="{userLicenseDdlModel>licensetypename} ({userLicenseDdlModel>licenseleft})" />
+										</MultiComboBox>
+                                    </form:FormElement>	                                 
+														
+                                </form:formElements>
+                            </form:FormContainer>              
+                        </form:formContainers>
+                    </form:Form>
+		    </f:content>
+	    </f:DynamicPage>
+</mvc:View>

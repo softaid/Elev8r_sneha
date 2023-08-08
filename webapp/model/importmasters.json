@@ -1,0 +1,41 @@
+{
+    "masters":[
+        {
+             "name" : "Item Master",
+             "code" : "Item Master"
+        },
+        {
+            "name" : "Party Opening Balance",
+            "code" : "Party Opening Balance"
+        },
+        {
+            "name" : "Ledger Opening Balance",
+            "code" : "Ledger Opening Balance"
+        },
+        {
+            "name" : "Item Opening Balance",
+            "code" : "Item Opening Balance"
+        },
+        {
+            "name" : "Chart of Account",
+            "code" : "Chart of Account"
+        },
+        {
+            "name" : "State",
+            "code" : "State"
+        },
+        {
+            "name" : "City",
+            "code" : "City"
+        },
+        {
+            "name" : "Country",
+            "code" : "Country"
+        },
+        { 
+            "name" : "DOCSERIES",
+            "code" : "DOCSERIES"
+            
+        }
+    ]
+}

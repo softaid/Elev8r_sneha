@@ -1,0 +1,167 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CommercialLayer.LayerBatchDetailReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Batch Detail Report"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                            <form:FormElement label="{i18n>FlockDetailReportFromDate}">
+                                                <form:fields>
+                                                    <DatePicker id="txtFromDate" required="true"          
+                                                        value="{flockDetailModel>/fromdate}" 
+                                                        placeholder="{config>/dateFormat/placeholder}"
+                                                        displayFormat="{config>/dateFormat/displayFormat}" 
+                                                        valueFormat="dd/MM/YYYY"
+                                                        change="onDateChange"
+                                                    />
+                                                </form:fields>
+                                            </form:FormElement>   
+                                            <form:FormElement label="{i18n>FlockDetailReportBatchName}">
+                                                <form:fields>
+                                                    <Input
+                                                        id="txtBreederToBatch"
+                                                        type="Text"
+                                                        required="true"
+                                                        value="{flockDetailModel>/batchname}"
+                                                        placeholder="{i18n>FlockDetailReportSelectBreederBatch}"
+                                                        enabled="true"
+                                                        editable="true"
+                                                        showValueHelp="true"     
+                                                        valueHelpOnly="true"       
+                                                        valueHelpRequest="handleBreederValueHelp">
+                                                    </Input>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                            <form:FormElement label="{i18n>FlockDetailReportToDate}">
+                                                <form:fields>
+                                                    <DatePicker id="txtToDate" required="true" 
+                                                    value="{flockDetailModel>/todate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="ongetDate"
+                                                    />
+                                                </form:fields>
+                                            </form:FormElement>
+                                              <!-- <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Search Data" width="100%" press="onSearchData"/>
+                                                <MenuButton icon="sap-icon://download" width="50%" align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="SaveCSV" icon="sap-icon://save" press="onDataExport" />
+                                                            <MenuItem text="SavePDF" icon="sap-icon://save" press="createPDF" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement> -->
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+
+                        <VBox fitContainer="true">
+                          <ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            
+                            <Table id="tblFlockReport" width="150%" growing="true" growingScrollToLoad="true" sticky="ColumnHeaders"  items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'id'
+                                                    }
+                                                }"
+                                                mode="single" backgroundDesign="Solid">
+                                <columns>
+                                    <Column><Text text ="Date" /></Column>
+                                    <Column><Text text ="Live Bird" /></Column>
+                                    <Column><Text text ="Egg %" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Feed/Bird" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Cummu Egg" /></Column>  
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Cummu Feed" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Cummu Mortality" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Cummu Egg/Bird" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Cummu Feed/Egg" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Cummu Mortality Per" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                            <Text text="{tblModel>transactiondate}" />
+                                            <Text text="{tblModel>liveqty}"/>
+                                            <Text text="{tblModel>eggper}" />
+                                            <Text text="{tblModel>feedperbird}"/>
+                                            <Text text="{tblModel>cummuegg}" />
+                                            <Text text="{tblModel>cummufeedcon}" />
+                                            <Text text="{tblModel>cummmortality}" />
+                                            <Text text="{tblModel>cummeggperbird}"/>
+                                            <Text text="{tblModel>cummfeedperegg}" />
+                                            <Text text="{tblModel>cummumorper}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>  
+                             </ScrollContainer>                            
+                        </VBox>  
+                        
+                    </f:content>
+                    
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

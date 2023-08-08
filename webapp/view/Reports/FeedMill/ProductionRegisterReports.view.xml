@@ -1,0 +1,141 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.FeedMill.ProductionRegisterReports" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>Production Register Report}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                        <form:FormElement label="From Date">
+                                        <form:fields>
+                                            <DatePicker id="txtfromdate"  value="{proRgeisterReortModel>/fromdate}" 
+                                            displayFormat="{config>/dateFormat/displayFormat}" 
+                                            valueFormat="{config>/dateFormat/valueFormat}" 
+                                            placeholder="{config>/dateFormat/placeholder}"/>   
+                                        </form:fields>  
+                                    </form:FormElement>
+                                   
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer title="">
+                                    <form:formElements>
+                                    <form:FormElement label="To Date">
+                                        <form:fields>
+                                            <DatePicker id="txttodate"  value="{proRgeisterReortModel>/todate}" 
+                                            displayFormat="{config>/dateFormat/displayFormat}" 
+                                            valueFormat="{config>/dateFormat/valueFormat}" 
+                                            placeholder="{config>/dateFormat/placeholder}"/>   
+                                        </form:fields>  
+                                    </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+
+                    <HBox fitContainer="true">
+                          
+                        <ScrollContainer
+                        height="100%"
+                        width="100%"
+                        horizontal="true"
+                        vertical="true"
+                        focusable="true">
+                            <Table id="tblModel"  growing="true" enableHorizontalScrollbar= "true" growingScrollToLoad="true" visibleRowCount="5" items="{
+                                        path: 'tblModel>/modelData',
+                                            sorter: {
+                                                path: 'itemgroupid'
+                                            }
+                                        }"
+                                        mode="single" backgroundDesign="Solid">
+                                <headerToolbar>
+                                    <Toolbar>
+                                    <content>
+                                        <Title  level="H2"/>
+                                        <ToolbarSpacer />
+                                          <Button icon="sap-icon://search" type="Emphasized" text="Search Data" press="getProductionRegReport"/>
+                                          <Button icon="sap-icon://download"  press="handlePdf" />
+                                    </content>
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Order No." /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Date" /></Column>
+                                      <Column minScreenWidth="Tablet" mergeDuplicates="true"  demandPopin="true" ><Text text ="Item Group" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Item Name" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Order Quantity" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Receipt quantity" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Access Shortage" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="UOM" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Warehouse" /></Column>
+                                    
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                      <customData>
+                                        <core:CustomData key="settingReportgroup" value="{tblModel>itemname}" writeToDom="true"></core:CustomData>
+                                      </customData>
+                                        <cells>
+                                            <Text text="{tblModel>productionorderno}" />
+                                            <Text text="{tblModel>orderdate}" />
+                                            <Text text="{tblModel>groupname}" />
+                                            <Text text="{tblModel>itemname}" />
+                                            <Text text="{tblModel>plannedqty}" />
+                                            <Text text="{tblModel>receipt_qty}" />
+                                            <Text text="{tblModel>accesshortage}" />
+                                            <Text text="{tblModel>refname}" />
+                                            <Text text="{tblModel>warehousename}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+                    
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

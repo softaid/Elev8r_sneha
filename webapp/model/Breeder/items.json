@@ -1,0 +1,34 @@
+{
+	"items": [
+		{
+			"itemNo" : 1,
+			"itemName": "item 1",
+			"quantity": 2,
+			"rate": 200
+		},
+		{
+			"itemNo" : 2,
+			"itemName": "item 2",
+			"quantity": 2,
+			"rate": 300
+		},
+		{
+			"itemNo" : 3,
+			"itemName": "item 3",
+			"quantity": 2,
+			"rate": 150
+		},
+		{
+			"itemNo" : 4,
+			"itemName": "item 4",
+			"quantity": 2,
+			"rate": 400
+		},
+		{
+			"itemNo" : 5,
+			"itemName": "item 5",
+			"quantity": 2,
+			"rate": 100
+		}			
+	]
+}

@@ -1,0 +1,52 @@
+
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="Warehouse Address List"	
+		contentHeight="300px"
+		search="_handleWHAddrSearch"
+		confirm="onWHAddrDialogClose"
+		cancel="onWHAddrDialogClose"
+		items="{
+			path : 'warehouseAddrList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{warehouseAddrList>warehousename}" />
+                <Text text="{warehouseAddrList>address} {warehouseAddrList>cityname} {warehouseAddrList>statename} {warehouseAddrList>countryname} {warehouseAddrList>pincode}" />
+				<Text text="{warehouseAddrList>statecode}" />
+				<Text text="{warehouseAddrList>isunionterritory}" />
+				<Text text="{warehouseAddrList>gstno}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+            <Column width="20%">
+				<header>
+					<Text text="Warehouse" />
+				</header>
+			</Column>
+			<Column width="40%" minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="address" />
+				</header>
+			</Column>
+			<Column width="10%" minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="State Code" />
+				</header>
+			</Column>
+			<Column width="15%" minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Union Territory?" />
+				</header>
+			</Column>
+			<Column width="15%" minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="GST NO" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,48 @@
+
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Layer Shed"	
+		contentHeight="300px"
+		search="handleShedSearch"
+		confirm="handleShedClose"
+		cancel="handleShedClose"
+		items="{
+			path : 'shedModel>/modelData'
+			
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{shedModel>id}" />
+				<Text text="{shedModel>locationname}" />
+                <Text text="{shedModel>shedname}" />
+                <!-- <Text text="{shedModel>refname}" /> -->
+			</cells>
+		</ColumnListItem>
+		<columns>
+		<Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Shed No" />
+				</header>
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Location" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Shed Name" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

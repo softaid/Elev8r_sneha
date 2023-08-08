@@ -1,0 +1,184 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.FeedMill.FeedProductionReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Feed Production Report"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+
+                                         <form:FormElement label="{i18n>feedformulareportfromdatelabel}">
+                                            <form:fields>
+                                                <DatePicker id="fromdate"  width="100%" value="{reportModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="onDateChange" />   
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>feedformulareportitemgrouplabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="itemgroupList"
+                                                    selectionChange="itemgroupSelectionChange"
+                                                    selectionFinish="itemgroupSelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'itemgroupModel>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{itemgroupModel>id}" text="{itemgroupModel>groupname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                     <form:FormContainer>
+                                        <form:formElements>
+                                      <form:FormElement label="{i18n>feedformulareporttodatelabel}">
+                                            <form:fields>
+                                                <DatePicker id="todate"  width="100%" value="{reportModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="onDateChange" />   
+                                            </form:fields>
+                                        </form:FormElement>
+                                         <form:FormElement label="{i18n>feedformulareportitemnamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="itemList"
+                                                   selectionChange="lineSelectionChange"
+                                                  selectionFinish = "itemSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'itemModel>/modelData',                       
+                                                                                                                                                                                                                                                                                                                                                sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{itemModel>id}" text="{itemModel>itemname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                              <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchDailyGodownstockReport"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>                  
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                 
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                          
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel"  width="200%" growing="true"  growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'productionorderno',
+							                            group : true
+
+                                                    }
+                                                }"
+                                                 backgroundDesign="Solid">
+                                <columns>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="Production Date" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Feed Name" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Batch No" /></Column>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="BOM ID" /></Column>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="Bags" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Warehouse Name" /></Column>   
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Rate/Bag" /></Column>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="Process Loss/Gain(%)" /></Column>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="Total Tonnes" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Consumed Quantity" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Total Received KG" /></Column>                               
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Total Amount" /></Column>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="Gross Production Cost/KG." /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Admin Cost/KG." /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Net Production Cost/KG." /></Column>  
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                         <core:CustomData key="settingReportgroup" value="{tblModel>productionorderno}" writeToDom="true"></core:CustomData>
+                        </customData>
+                                        <cells>
+					                        <Text text="{tblModel>productiondate}" />
+                                            <Text text="{tblModel>itemname}" />
+                                            <Text text="{tblModel>batch}" />
+                                            <Text text="{tblModel>bomno}" />
+                                            <Text text="{tblModel>bag}" />
+                                            <Text text="{tblModel>warehousename}" />
+                                            <Text text="{tblModel>baginkg}" />
+                                            <Text text="{tblModel>loss}" />
+                                            <Text text="{tblModel>totaltons}" />
+                                            <Text text="{tblModel>issueqty}" />
+                                            <Text text="{tblModel>receivedqty}" />
+                                            <Text text="{tblModel>totalcostperkg}" />
+                                            <Text text="{tblModel>grossprodcost}" />
+                                            <Text text="{tblModel>admincostperkg}" />
+                                            <Text text="{tblModel>netprocostperkg}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                    </f:content>
+			</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

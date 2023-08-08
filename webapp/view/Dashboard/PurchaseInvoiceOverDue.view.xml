@@ -1,0 +1,63 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Dashboard.PurchaseInvoiceOverDue" height="100%"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:mvc="sap.ui.core.mvc" 
+  xmlns:core="sap.ui.core">
+
+	<f:FlexibleColumnLayout id="fcloverdue" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+ 		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					        <Title text="OverDue Invoices Detail"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+			    <f:content>
+	                <VBox fitContainer="true">
+						<Table id="tblOverdueinvoice"
+						       inset="false" 
+                               items="{
+                                          path: 'overDueModel>/modelData'
+                                }">
+	                            <headerToolbar>
+			                        <Toolbar>
+				                        <content>
+					                        <Title text="" level="H2"/>
+					                        <ToolbarSpacer />
+                                            <SearchField search="onSearch" width="17.5rem" id = "onSearchId"/>
+				                        </content>
+			                        </Toolbar>
+		                        </headerToolbar>
+                                <columns>
+                                    <Column><Text text ="PI No." /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Supllier" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Invoice Date" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Due Date" /></Column>	
+									<Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Amount" /></Column>
+									<Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Action" /></Column>
+									 		
+                                </columns>
+								<items>
+                                    <ColumnListItem type="Navigation" press="onPurchaseOrderDetail">
+                                        <cells>
+                                            <Text text="{overDueModel>purchaseinvoiceno}"/>
+                                            <Text text="{overDueModel>suppliername}"/>
+											<Text text="{overDueModel>invoicedate}"/>
+                                            <Text text="{overDueModel>duedate}"/>
+                                            <Text text="{overDueModel>subtotal}"/>   
+											<HBox>                    
+												<Button class="sapUiTinyMargin" text="JE" press="goToJeTransaction"/>
+												<Button class="sapUiTinyMargin" text="View" press="goToPreview"/>
+											</HBox>     
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                        </Table>
+	                </VBox>
+                </f:content>
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>

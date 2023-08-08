@@ -1,0 +1,40 @@
+{
+	"clinicalsign": [
+		{
+			"code" : 1,
+            "organname": "Intestine",
+            "lesion": "Coccidisis",
+            "clinicalsignname": "Bloody dropings"
+		},
+		{
+			"code" : 2,
+            "organname": "Bursa",
+            "lesion": "IBD",
+            "clinicalsignname": "Fever/Whitish Diarrhoea"
+		},
+		{
+			"code" : 3,
+            "organname": "Heart/Liver",
+            "lesion": "Ecoli",
+            "clinicalsignname": "Roughel feathers,Huddling"
+		},
+		{
+			"code" : 4,
+            "organname": "Proventricular",
+            "lesion": "Haemorrhages",
+            "clinicalsignname": "Greenish Diarrhoea/Sdden Death"
+        },
+        {
+			"code" : 5,
+            "organname": "Peritonium cavity",
+            "lesion": "Blood in peritonial cavitty",
+            "clinicalsignname": "Bloody vomit"
+        },
+        {
+			"code" : 6,
+            "organname": "Lungs",
+            "lesion": "Fluid/pus",
+            "clinicalsignname": "Dyspnoea,Caughing"
+		}		
+	]
+}

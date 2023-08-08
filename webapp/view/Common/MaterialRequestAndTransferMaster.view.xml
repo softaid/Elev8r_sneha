@@ -1,0 +1,33 @@
+<View displayBlock="true"    
+   xmlns:f="sap.f"
+   xmlns:mvc="sap.ui.core.mvc" 
+   xmlns="sap.m"
+   controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.MaterialRequestAndTransferMaster" height="100%">
+   
+    <f:FlexibleColumnLayout  id="fclMaterialRequestTransfer" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="{i18n>MaterialRequestAndTransferTitle}"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+	                <IconTabBar selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
+	                    <items>
+		                   <IconTabFilter text="{i18n>MaterialRequestAndTransferMaterialRequest}" key="materialrequest">
+		                      <mvc:XMLView viewName="sap.ui.elev8rerp.componentcontainer.view.Common.MaterialRequest"></mvc:XMLView>
+		                   </IconTabFilter>
+
+                           <IconTabFilter text="{i18n>MaterialRequestAndTransferMaterialTransfer}" key="materialtransfer">
+		                      <mvc:XMLView viewName="sap.ui.elev8rerp.componentcontainer.view.Common.MaterialTransfer"></mvc:XMLView>						   	
+                           </IconTabFilter>
+	                    </items>
+                    </IconTabBar>				
+                </f:content>				
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</View>

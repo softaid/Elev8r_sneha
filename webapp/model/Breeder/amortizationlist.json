@@ -1,0 +1,79 @@
+{   
+    "amortizationlist":[
+        {
+            "docNo" : 1,
+            "batchNo" : 1001,
+            "batchName" : "EF001",            
+            "docDate" : "10/09/2018",
+            "femaleLiveQty" : 1800.000,
+            "maleLiveQty" : 245.000,
+            "eggsPrediction" : 5.00,
+            "amortizationValue" : -20.71,
+            "ageInWeek" : 100,
+            "days" : 5,
+            "WIPLedgerValue" : 47642.21,
+            "requiredBirdPrice" : 130.00,
+            "totalEggs" : 9.000
+        },
+        {
+            "docNo" : 2,
+            "batchNo" : 1002,
+            "batchName" : "EF002",            
+            "docDate" : "09/03/2018",
+            "femaleLiveQty" : 1800.000,
+            "maleLiveQty" : 245.000,
+            "eggsPrediction" : 5.00,
+            "amortizationValue" : -20.71,
+            "ageInWeek" : 100,
+            "days" : 5,
+            "WIPLedgerValue" : 47642.21,
+            "requiredBirdPrice" : 130.00,
+            "totalEggs" : 9.000
+        },
+        {
+            "docNo" : 3,
+            "batchNo" : 1001,
+            "batchName" : "EF003",            
+            "docDate" : "03/04/2018",
+            "femaleLiveQty" : 1800.000,
+            "maleLiveQty" : 245.000,
+            "eggsPrediction" : 5.00,
+            "amortizationValue" : -20.71,
+            "ageInWeek" : 100,
+            "days" : 5,
+            "WIPLedgerValue" : 47642.21,
+            "requiredBirdPrice" : 130.00,
+            "totalEggs" : 9.000
+        },
+        {
+            "docNo" : 4,
+            "batchNo" : 1004,
+            "batchName" : "EF004",            
+            "docDate" : "07/09/2018",
+            "femaleLiveQty" : 1800.000,
+            "maleLiveQty" : 245.000,
+            "eggsPrediction" : 5.00,
+            "amortizationValue" : -20.71,
+            "ageInWeek" : 100,
+            "days" : 5,
+            "WIPLedgerValue" : 47642.21,
+            "requiredBirdPrice" : 130.00,
+            "totalEggs" : 9.000
+        },
+        {
+            "docNo" : 5,
+            "batchNo" : 1005,
+            "batchName" : "EF005",
+            "docDate" : "03/05/2018",
+            "femaleLiveQty" : 1800.000,
+            "maleLiveQty" : 245.000,
+            "eggsPrediction" : 5.00,
+            "amortizationValue" : -20.71,
+            "ageInWeek" : 100,
+            "days" : 5,
+            "WIPLedgerValue" : 47642.21,
+            "requiredBirdPrice" : 130.00,
+            "totalEggs" : 9.000
+        }
+    ]  
+}

@@ -1,0 +1,182 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Breeder.ItemWiseDailyConsumptionReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Item Wise Daily Consumption Report"/>
+                </f:heading>
+                <f:actions>                           
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <VBox>
+                    <form:Form editable="true">
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                            labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="2"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+                            <form:FormContainer title="">
+                                <form:formElements>
+                                <form:FormElement label="{i18n>DailyConsumptionReportlabelLocation}">
+                                    <form:fields>
+                                        <MultiComboBox id="locationtbl"
+                                            selectionChange="handleSelectionChange"
+                                            selectionFinish="handleSelectionFinish"
+                                            width="500px"
+                                            items="{
+                                                path: 'locationList>/modelData',
+                                                sorter: { path: 'Name' }
+                                            }">
+                                            <core:Item key="{locationList>id}" text="{locationList>locationname}" />
+                                        </MultiComboBox>
+                                    </form:fields>
+                                </form:FormElement>
+                                    <form:FormElement label="{i18n>DailyConsumptionReportlabelBatchName}">
+                                    <form:fields>
+                                    <Input
+                                        type="Text"
+                                        id="batchtb1"
+                                        placeholder="Select Batch"
+                                        showSuggestion="true"
+                                        showValueHelp="true"    
+                                        valueHelpOnly="true"
+                                        value="{dailyconsumptionModel>/batchname}"
+                                        valueHelpRequest="handleBrdBatchValueHelp">
+                                    </Input>
+                            
+                                    </form:fields>
+                                </form:FormElement>
+
+                                 <form:FormElement label="Item Name">
+                                        <form:fields>
+                                            <Select id="txtitemName" valueLiveUpdate="true" 
+                                                selectedKey="{requiredPlanList>/itemid}" 
+                                                enabled="true"
+                                                change="onModeuleChange"
+                                                forceSelection="false"
+                                                items="{
+                                                    path: 'itemList>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                            <core:Item key="{itemList>id}" text="{itemList>itemname}" />  
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                            <form:FormContainer>
+                                <form:formElements>
+                                <form:FormElement label="{i18n>DailyConsumptionReportlabelFromDate}">
+                                    <form:fields>
+                                        <DatePicker id="txtFromdate" width="100%" value="{dailyconsumptionModel>/fromdate}" 
+                                        displayFormat="{config>/dateFormat/displayFormat}" 
+                                        valueFormat="{config>/dateFormat/valueFormat}"
+                                           editable="false"
+                                        placeholder="{config>/dateFormat/placeholder}" change="ongetDate"/>   
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="{i18n>DailyConsumptionReportlabelToDate}">
+                                    <form:fields>
+                                        <DatePicker id="txtTodate"  width="100%" value="{dailyconsumptionModel>/todate}" 
+                                        displayFormat="{config>/dateFormat/displayFormat}" 
+                                        valueFormat="{config>/dateFormat/valueFormat}" 
+                                        placeholder="{config>/dateFormat/placeholder}" change="ongetDate"/>   
+                                    </form:fields>
+                                </form:FormElement>
+                                            <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>          
+                                </form:formElements>
+                            </form:FormContainer>
+                        </form:formContainers>
+                    </form:Form>
+                </VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>				
+            <VBox fitContainer="true">        
+                    <ScrollContainer
+                        height="100%"
+                        width="100%"
+                        horizontal="true"
+                        vertical="true"
+                        focusable="true">
+                <Table id="tblDailyConsumption" width="100%"  growing="true" sticky="ColumnHeaders"
+                      growingScrollToLoad="true" items="{
+                                            path: 'itemWiseDailyconsumpReportModel>/modelData',
+                                            sorter: {
+                                                        path: 'weekno',
+                                                        group : true
+                                                    }
+                                        }"
+                                 mode="None" backgroundDesign="Solid">
+                    <columns>
+			            <Column width="10%"><Text text ="Week No" /></Column>
+                        <Column mergeDuplicates="true" minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Date" /></Column>          
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Daily Transaction ID" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Item Code" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true" ><Text text ="Item Name" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true" ><Text text ="Issue Quantity" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true" ><Text text ="Rate" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Issue Amount" /></Column>                   
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+		                        <Text text="" />
+                                <Text text="{itemWiseDailyconsumpReportModel>transactiondate}" />
+                                <Text text="{itemWiseDailyconsumpReportModel>dailytransactionno}" />
+                                <Text text="{itemWiseDailyconsumpReportModel>itemcode}" />
+                                <Text text="{itemWiseDailyconsumpReportModel>itemname}" />
+                                <Text text="{itemWiseDailyconsumpReportModel>issueqty}" />
+                                <Text text="{itemWiseDailyconsumpReportModel>rate}" />
+                                <Text text="{itemWiseDailyconsumpReportModel>issueamount}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table> 
+                </ScrollContainer>                          
+            </VBox>                      
+        </f:content>                   
+    </f:DynamicPage>    
+</core:View>
+
+
+
+
+ 

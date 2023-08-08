@@ -1,0 +1,29 @@
+{
+	"medicineschedule": [
+		{
+			"code" : 1,
+            "name": "",
+            "drug": "Antibiotic",
+            "dosage": "As per label",
+            "itemname": "",
+            "fromage": "1",
+            "toage": "3",
+            "feedqty": "",
+            "unit": "",
+            "location": "10 ML /BIRD"
+		},
+		{
+			"code" : 1,
+            "name": "",
+            "drug": "Amilyte/Can even Omit this",
+            "dosage": "1g/2ltrs drinking water",
+            "itemname": "",
+            "fromage": "1",
+            "toage": "5",
+            "feedqty": "",
+            "unit": "",
+            "location": ""
+		}
+		
+	]
+}

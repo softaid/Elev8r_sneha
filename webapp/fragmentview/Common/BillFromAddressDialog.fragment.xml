@@ -1,0 +1,46 @@
+
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="Partner Address List"	
+		contentHeight="300px"
+		search="_handleBillFrmAddrSearch"
+		confirm="onBillFrmAddrDialogClose"
+		cancel="onBillFrmAddrDialogClose"
+		items="{
+			path : 'billfromaddressList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{billfromaddressList>address} {billfromaddressList>cityname} {billfromaddressList>statename} {billfromaddressList>countryname} {billfromaddressList>pincode}" />
+				<Text text="{billfromaddressList>statecode}" />
+				<Text text="{billfromaddressList>isunionterritory}" />
+				<Text text="{billfromaddressList>gstno}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+            <Column width="40%">
+				<header>
+					<Text text="address" />
+				</header>
+			</Column>
+			<Column width="15%" minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="State Code" />
+				</header>
+			</Column>
+			<Column width="15%" minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Union Territory?" />
+				</header>
+			</Column>
+			<Column width="30%" minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="GST NO" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

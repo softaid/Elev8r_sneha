@@ -1,0 +1,193 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.BreederSales.BreederBirdSalesOrder" height="100%" 
+    xmlns="sap.m" 
+    xmlns:f="sap.f" 
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:FlexibleColumnLayout id="fclBreederBirdSalesOrder" backgroundDesign="Solid">
+        <f:beginColumnPages>
+            <f:DynamicPage toggleHeaderOnTitleClick="false">
+                <f:title>
+                    <f:DynamicPageTitle>
+                        <f:heading>
+                            <Title text="Bird Sales Order"/>
+                        </f:heading>
+                        <f:actions>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+                        </f:actions>
+                    </f:DynamicPageTitle>
+                </f:title>
+                <f:content>
+                    <VBox fitContainer="true">
+                        <form:Form editable="true">
+                            <form:toolbar>
+                            </form:toolbar>
+                            <form:layout>
+                                <form:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2" singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+
+                                     <form:FormElement label="Module">
+                                            <form:fields>
+                                                <Select id="txtModuleid" forceSelection="false" selectedKey="{breederSalesModel>/moduleid}" change = "moduleChange"
+									                items="{
+					                                    path: 'moduleList>/modelData',
+					                                    sorter: { path: 'id' }
+				                                    }" >
+				                                    <core:Item key="{moduleList>id}" text="{moduleList>refname}" />                                            
+			                                    </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="Party">
+                                            <form:fields>
+                                                <Select id="party" forceSelection="false" selectedKey="{breederSalesModel>/partyid}" 
+									                items="{
+					                                    path: 'vendorModel>/modelData',
+					                                    sorter: { path: 'id' }
+				                                    }" >
+				                                    <core:Item key="{vendorModel>id}" text="{vendorModel>partyname}" />                                            
+			                                    </Select>
+                                            </form:fields>
+                                        </form:FormElement> 
+                                        <form:FormElement label="Location">
+                                            <form:fields>
+                                                <Select id="branch" forceSelection="false" selectedKey="{breederSalesModel>/locationid}" 
+									                items="{
+					                                    path: 'locationList>/modelData',
+					                                    sorter: { path: 'id' }
+				                                    }" change="onBranchSelect">
+				                                    <core:Item key="{locationList>id}" text="{locationList>locationname}" />                                            
+			                                    </Select>
+                                            </form:fields>
+                                        </form:FormElement> 
+                                        <form:FormElement label="Order Date">
+                                            <form:fields>
+                                                <DatePicker id="txtTransactionDate"  value="{breederSalesModel>/orderdate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}"      
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="onDateChange"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="Status">
+                                            <form:fields>
+                                                <Select id="status" forceSelection="false" selectedKey="{breederSalesModel>/statusid}" 
+									                items="{
+					                                    path: 'statusModel>/modelData',
+					                                    sorter: { path: 'id' }
+				                                    }">
+				                                    <core:Item key="{statusModel>id}" text="{statusModel>refname}" />                                            
+			                                    </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                     <form:FormElement label="Total Sale Weight(Kg)">
+                                            <form:fields>
+                                                <Input id="totalSaleQty" value="{breederSalesModel>/totalsalesweight}" description="Kg"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="Rate/Kg">
+                                            <form:fields>
+                                                <Input id="rateperkg" value="{breederSalesModel>/rateperkg}"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="From Weight(Kg)">
+                                            <form:fields>
+                                                <Input id="fromweight" value="{breederSalesModel>/fromweight}"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="To Weight(Kg)">
+                                            <form:fields>
+                                                <Input id="toweight" value="{breederSalesModel>/toweight}"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="">
+                                            <form:fields>
+                                                <Button type="Emphasized" text="Get Batches" press="getBatches"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+
+                        <Table id="tblBBirdSalesOrderContent" mode="None" backgroundDesign="Solid"
+                        inset="false"
+                            items="{
+                                path: 'breederBatchSalesModel>/modelData',
+                                sorter: {
+                                    path: 'itemCode'
+                                }
+                            }"
+                            class="sapFDynamicPageAlignContent"
+                            width="auto">
+                            <headerToolbar>
+                                <Toolbar>
+                                    <content>
+                                        <Title text="" level="H2"/>
+                                        <ToolbarSpacer />
+                                        <!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNewContent"/> -->
+                                    </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column>
+                                    <Text text ="Batch No" />
+                                </Column>
+                                <Column>
+                                    <Text text ="Shed Name" />
+                                </Column>
+                                 <Column>
+                                    <Text text ="Item Name" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Live Batch Qty" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Avg. Weight(Kg)" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Total Batch Weight(Kg)" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Batch Sale Weight(Kg)" />
+                                </Column>
+                               
+                            </columns>
+                            <items>
+                                <ColumnListItem type="" press="onCullsMortalityItemPress">
+                                    <cells>
+                                        <Text text="{breederBatchSalesModel>batchname}" /> 
+                                        <Text text="{breederBatchSalesModel>shedname}" />
+                                        <Text text="{breederBatchSalesModel>itemname}" />
+                                        <Text text="{breederBatchSalesModel>liveqty}"  />   
+                                        <Text text="{breederBatchSalesModel>avgweight}"  /> 
+                                        <Text text="{breederBatchSalesModel>totalbatchsaleweight}" />
+                                        <Input value="{breederBatchSalesModel>batchsaleweight}" id="saleQty" change="saleQtyChange"/> 
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                                
+
+                        <Panel>
+                            <FlexBox alignItems="Start" justifyContent="End">
+                                <items>
+                                    <Button text="Save" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+                                    <Button text="clear" type="Emphasized" class="sapUiSmallMarginEnd" press = "resetModel" />
+                                </items>
+                            </FlexBox>
+                        </Panel>
+                    </VBox>
+                </f:content>
+            </f:DynamicPage>
+        </f:beginColumnPages>
+    </f:FlexibleColumnLayout>
+</core:View>

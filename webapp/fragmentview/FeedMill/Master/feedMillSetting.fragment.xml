@@ -1,0 +1,41 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Test Name"
+		contentHeight="300px"
+		search="handleTestSearch"
+		confirm="handleTestClose"
+		cancel="handleTestClose"
+		items="{
+			path : 'feedMillSettingListModel>/modelData'
+			
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text  text="{feedMillSettingListModel>wipledgerid}" />
+				<Text title="" text="{feedMillSettingListModel>tolerencepercentage}" />
+                <Text title="" text="{feedMillSettingListModel>additionalcost}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column
+			>
+				<header>
+					<Text text="WipLedger" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Tolerence" />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="Additional Cost Per Ton" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

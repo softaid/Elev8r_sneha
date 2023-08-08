@@ -1,0 +1,270 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Purchase.PurchaseRegisterReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>purchaseRegisterReportTitle}"/>
+                </f:heading>
+                <f:actions>                           
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <VBox>
+                    <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>purchaseRegisterReportLableFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromDate" required="true"          
+                                                    value="{purchaseRegisterModel>/fromdate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="onDateChange"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>   
+                                        <form:FormElement label="{i18n>purchaseRegisterReportLablePartyName}">
+                                            <form:fields>
+                                                <MultiComboBox id="partytbl"
+                                                    selectionChange="partySelectionChange"
+                                                    selectionFinish="partySelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'partyList>/modelData',
+                                                        sorter: { path: 'partyname' }
+                                                    }">
+                                                    <core:Item key="{partyList>vendorid}" text="{partyList>partyname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer>
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>purchaseRegisterReportLableToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtToDate" required="true" 
+                                                value="{purchaseRegisterModel>/todate}" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="dd/MM/YYYY"
+                                                change="onDateChange"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>  
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                </VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>		
+         <Panel width="auto" class="" accessibleRole="Region">
+		<content>
+          <VBox fitContainer="true">
+            <ScrollContainer
+            height="100%"
+            width="100%"
+            horizontal="true"
+            vertical="true"
+            focusable="false">
+          <Table id="tblPurchasereg" width="200%"  sticky="ColumnHeaders" growing="true"   growingScrollToLoad="true" items="{
+                            path: 'tblModel>/modelData',
+                                sorter: {
+                                   path: 'docno',
+                                   group : true
+                                }
+                }">
+                
+             <columns>		
+                        <Column><Text text ="Invoice No" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Invoice Date" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Reference No" /></Column>    
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Reference Date" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Party Name" /></Column>    
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>purchaseRegisterReportLableItemCode}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>purchaseRegisterReportLableItemName}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>purchaseRegisterReportLableQuantity}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>purchaseRegisterReportLableRate}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Taxeble Amount" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>purchaseRegisterReportLableDiscountAmount}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="SGST Amount" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="CGST Amount" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="IGST Amount" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Tax Code" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Freight Amount" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Total" /></Column>
+                        
+                    </columns>
+                    <items>   
+                        <ColumnListItem>
+                        <customData>
+                         <core:CustomData key="deviationReportgroup" value="{tblModel>itemname}" writeToDom="true"></core:CustomData>
+                        </customData>
+                            <cells>
+                                <Text text=" " />
+                                <Text text="{tblModel>date}" />
+                                <Text text="{tblModel>billno}" />
+                                <Text text="{tblModel>billdate}" />
+                                <Text text="{tblModel>partnername}" />
+                                <Text text="{tblModel>itemcode}" />
+                                <Text text="{tblModel>itemname}" />
+                                <Text text="{tblModel>quantity}" />
+                                <Text text="{tblModel>rate}" />
+                                <Text text="{tblModel>amount}" />
+                                <Text text="{tblModel>discountamount}" />
+                                <Text text="{tblModel>totalsgstamount}" />
+                                <Text text="{tblModel>totalcgstamount}" />
+                                <Text text="{tblModel>totaligstamount}" />
+                                <Text text="{tblModel>taxcode}" />
+                                <Text text="{tblModel>freightamount}" />
+                                <Text text="{tblModel>total}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>                          
+            </ScrollContainer> 
+
+          <!-- <Table id="tblSummary"  sticky="ColumnHeaders"  backgroundDesign="Solid" growing="true" growingScrollToLoad="true"
+                    items="{
+                    path: 'summaryModel>/modelData',
+                    sorter: {
+                        path: 'id'
+                    }
+                }"  >
+	        <headerToolbar>
+			   <Toolbar>
+				   <content>
+					<Title text="{i18n>purchaseRegisterReportLableSummary}" level="H2"/>
+					<ToolbarSpacer />
+			       
+				  </content>
+			    </Toolbar>
+		    </headerToolbar>
+            <columns>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="PO No" /></Column>  
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="SGSTAmount" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="CGSTAmount" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="IGSTAmount" /></Column> 
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="TaxCode" /></Column>  
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Taxeble Amount" /></Column> 
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Freight Amount" /></Column>  
+            </columns>
+                    <items>
+                        <ColumnListItem >
+                        <customData>
+                         <core:CustomData key="deviationReportgroup" value="{summaryModel>taxname}" writeToDom="true"></core:CustomData>
+                        </customData>
+                            <cells>
+                                <Text text="{summaryModel>docno}" />
+                                <Text text="{summaryModel>totalsgstamount}" />
+                                <Text text="{summaryModel>totalcgstamount}" />
+                                <Text text="{summaryModel>totaligstamount}" />
+                                <Text text="{summaryModel>taxcode}" />
+                                <Text text="{summaryModel>amount}" />
+                                <Text text="{summaryModel>freightamount}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table> -->
+                
+            <!-- <Table id="tblFreight" mode="single" sticky="ColumnHeaders" growing="true" growingScrollToLoad="true"
+                    items="{
+                    path: 'freightModel>/modelData',
+                    sorter: {
+                        path: 'id'
+                    }
+                }"  >
+	        <headerToolbar>
+			   <Toolbar>
+				   <content>
+					<Title text="Frieght OF Summary" level="H2"/>
+					<ToolbarSpacer /> -->
+			        <!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNewRow" id="btnAdd"/> -->
+				  <!-- </content>
+			    </Toolbar> -->
+		    <!-- </headerToolbar>
+            <columns>
+                <Column><Text text ="{i18n>purchaseRegisterReportLableFreightName}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>purchaseRegisterReportLableTaxName}" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>purchaseRegisterReportLableTaxAmount}" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>purchaseRegisterReportLableFreightAmount}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Tax Freight Amount" /></Column>      
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>purchaseRegisterReportLablePurchaseAmount}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>purchaseRegisterReportLableTotalAmount}" /></Column> -->
+                
+                
+            <!-- </columns>
+                    <items>
+                        <ColumnListItem >
+                        <customData>
+                         <core:CustomData key="settingReportgroup" value="{freightModel>taxname}" writeToDom="true"></core:CustomData>
+                        </customData>
+                            <cells>
+                                <Text text="{freightModel>freightname}" />
+                                <Text text="{freightModel>taxname}" />
+                                <Text text="{freightModel>taxamount}" />
+                                <Text text="{freightModel>freightamount}" />
+                                 <Text text="{freightModel>taxfreightamount}" />
+                                <Text text="{freightModel>purchaseamount}" />
+                                <Text text="{freightModel>grandamount}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table> -->
+             </VBox>
+         <!-- </HBox> -->
+        
+         </content>
+	</Panel>       
+        </f:content>             
+    </f:DynamicPage>    
+</core:View>
+
+
+
+
+ 

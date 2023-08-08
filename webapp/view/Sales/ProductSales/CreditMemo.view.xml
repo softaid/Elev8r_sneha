@@ -1,0 +1,301 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.ProductSales.CreditMemo" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+ <f:FlexibleColumnLayout  id="fclCreditMemo" backgroundDesign="Solid">
+		<f:beginColumnPages>
+
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+			<!-- DynamicPage Title -->
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Credit Memo List"/>
+					</f:heading>
+					<f:actions>
+                            <Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+                            <Button icon="sap-icon://add" type="Transparent" press="onAdd"/>
+                            <Button icon="sap-icon://arrow-left" type="Transparent" press="onAdd"/>
+                            <Button icon="sap-icon://arrow-right" type="Transparent" press="onAdd"/>				
+					</f:actions>
+					<!-- <f:navigationActions>
+						<Button
+								icon="sap-icon://decline"
+								type="Transparent" press="onCancel" />
+					</f:navigationActions> -->
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:content>				
+
+
+                        <VBox fitContainer="true">
+                            <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                            <form:FormElement label="Vendor">
+                                                <form:fields>
+                                                    <ComboBox id="vendor" selectedKey="0">
+                                                        <core:Item key="0" text="001" /> 
+                                                        <core:Item key="ABC" text="002" />
+                                                        <core:Item key="PQR" text="003" />
+                                                    </ComboBox>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Name">
+                                                <form:fields>
+                                                    <Input id="name" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Contact Person">
+                                                <form:fields>
+                                                    <ComboBox id="contactPerson" selectedKey="0">
+                                                        <core:Item key="0" text="contact 1" /> 
+                                                        <core:Item key="ABC" text="contact 2" />
+                                                        <core:Item key="PQR" text="contact 3" />
+                                                    </ComboBox>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Vendor Ref. Number">
+                                                <form:fields>
+                                                    <Input id="vendorReferenceNumber" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Local Currency">
+                                                <form:fields>
+                                                    <ComboBox id="localCurrency" selectedKey="0">
+                                                        <core:Item key="0" text="INR" /> 
+                                                        <core:Item key="ABC" text="LKR" />
+                                                        <core:Item key="PQR" text="USD" />
+                                                    </ComboBox>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Transaction Type">
+                                                <form:fields>
+                                                    <Input id="transactionType" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                            <form:FormElement label="Ship From">
+                                                <form:fields>
+                                                    <Input id="shipFrom" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Number">
+                                                <form:fields>
+                                                    <Input id="number" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Status">
+                                                <form:fields>
+                                                    <Input id="status" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Posting Date">
+                                                <form:fields>
+                                                    <DatePicker id="postingDate" value="" valueFormat="dd/MM/yyyy" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Due Date">
+                                                <form:fields>
+                                                    <DatePicker id="dueDate" value="" valueFormat="dd/MM/yyyy" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Document Date">
+                                                <form:fields>
+                                                    <DatePicker id="documentDate" value="" valueFormat="dd/MM/yyyy" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                            
+                            <!-- <IconTabFilter	text="Contents">
+                            <VBox fitContainer="true"> -->
+                            <Table id="tblCreditMemo" mode="single" backgroundDesign="Solid">
+                                <headerToolbar>
+                                    <Toolbar>
+                                    <content>
+                                        <Title  level="H2"/>
+                                        <ToolbarSpacer />
+                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNewRow"/>
+                                    </content>
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column><Text text ="Item/Service Type" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Summary Type" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Description" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="SAC" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="G/L Account" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="G/L Account Name" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Tax" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Total(LC)" /></Column>
+                                    <Column minScreenWidth="Tablet"><Text text ="Action" /></Column>
+                                </columns>
+                            </Table>
+
+                            <form:Form editable="true">
+                                        <form:title>
+                                            <core:Title text="" />
+                                        </form:title>
+                                        <form:layout>
+                                            <form:ResponsiveGridLayout
+                                                labelSpanXL="4"
+                                                labelSpanL="4"
+                                                labelSpanM="4"
+                                                labelSpanS="12"
+                                                adjustLabelSpan="false"
+                                                emptySpanXL="0"
+                                                emptySpanL="0"
+                                                emptySpanM="0"
+                                                emptySpanS="0"
+                                                columnsXL="3"
+                                                columnsL="2"
+                                                columnsM="2"
+                                                singleContainerFullSize="false" />
+                                        </form:layout>
+                                        <form:formContainers>
+                                            <form:FormContainer>
+                                                <form:formElements>
+                                                    <form:FormElement label="Buyer">
+                                                        <form:fields>
+                                                            <!-- <Input placeholder="0.00" id="buyer" /> -->
+                                                            <ComboBox id="buyer" selectedKey="0">
+                                                                <core:Item key="0" text="Buyer 1" /> 
+                                                                <core:Item key="ABC" text="Buyer 2" />
+                                                                <core:Item key="PQR" text="Buyer 3" />
+                                                            </ComboBox>
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                    <form:FormElement label="Owner">
+                                                        <form:fields>
+                                                            <!-- <Input placeholder="" id="owner" /> -->
+                                                            <ComboBox id="owner" selectedKey="0">
+                                                                <core:Item key="0" text="Owner 1" /> 
+                                                                <core:Item key="ABC" text="Owner 2" />
+                                                                <core:Item key="PQR" text="Owner 3" />
+                                                            </ComboBox>
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                    <form:FormElement label="Total Before Discount">
+                                                        <form:fields>
+                                                            <Input placeholder="" id="totalBeforeDiscount" />
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                    <form:FormElement label="Discount">
+                                                        <form:fields>
+                                                            <Input placeholder="0.00" id="discount"/>
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                    <form:FormElement label="Total Down Payment">
+                                                        <form:fields>
+                                                            <Input placeholder="0.00" id="totalDownPayment"/>
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                    <form:FormElement label="Freight">
+                                                        <form:fields>
+                                                            <Input placeholder="0.00" id="freight" />
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                    <form:FormElement label="Tax">
+                                                        <form:fields>
+                                                            <Input placeholder="0.00" id="dTax" />
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                    <form:FormElement label="Total Credit">
+                                                        <form:fields>
+                                                            <Input placeholder="0.00" id="totalCredit" />
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                    <form:FormElement label="Applied Amount">
+                                                        <form:fields>
+                                                            <Input placeholder="0.00" id="appliedAmount" />
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                    <form:FormElement label="Total Balance">
+                                                        <form:fields>
+                                                            <Input placeholder="0.00" id="totalBalance" />
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                </form:formElements>
+                                            </form:FormContainer>
+                                        </form:formContainers>
+                                            
+                                    </form:Form>
+                            <!-- </VBox>
+                            </IconTabFilter> -->
+                            <!-- <IconTabFilter	text="Logistics">
+                            </IconTabFilter>
+                            
+                            <IconTabFilter	text="Accounting">
+                            </IconTabFilter>
+                            
+                            <IconTabFilter	text="Tax">
+                            </IconTabFilter>
+                            
+                            <IconTabFilter	text="Attachments">
+                            </IconTabFilter> -->
+                            
+
+                            <Panel>
+                                <FlexBox		
+                                    alignItems="Start"
+                                    justifyContent="End">
+                                    <items>
+                                        <Button text="Save" type="Emphasized" class="sapUiSmallMarginEnd" />
+                                        <Button text="Cancel" type="Emphasized" class="sapUiSmallMarginEnd" />
+                                    </items>
+                                </FlexBox>
+                            </Panel>
+                            <!-- <form:content>
+                                <Label text="Remark" />
+                                <TextArea placeholder="Enter Remark" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+                            </form:content> -->
+                        </VBox>  
+                        
+                    </f:content>
+                    
+                    
+                        <f:footer>
+                        <OverflowToolbar>
+                            <ToolbarSpacer/>
+                            <Button type="Accept" text="Save"/>
+                        </OverflowToolbar>
+                    </f:footer>
+                    
+
+			</f:DynamicPage>
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>
+
+
+
+
+ 

@@ -1,0 +1,13 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm=".handleGroupDialogConfirm"
+		reset=".resetGroupDialog">
+		<groupItems>
+			<ViewSettingsItem text="Lead Type" key="leadtype" />
+            <ViewSettingsItem text="Lead Category" key="leadscategory" />
+            <ViewSettingsItem text="Stage" key="stagename" />
+		</groupItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

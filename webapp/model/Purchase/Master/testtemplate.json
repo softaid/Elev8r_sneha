@@ -1,0 +1,68 @@
+{   
+    "testtemplatelist":[
+        {
+            "itemno" : 1,
+            "itemname" : "Broiler Bird",
+            "details":[
+				{
+					"testno" : 1,
+                    "testname" : "Test 1",
+                    "deduction": 5
+				},
+				{
+                    "testno" : 2,
+                    "testname" : "Test 2",
+                    "deduction": 7
+				},
+				{
+                    "testno" : 3,
+                    "testname" : "Test 3",
+                    "deduction":8
+				}
+        	]
+        },
+        {
+            "itemno" : 2,
+            "itemname" : "Electrical Switch",
+            "details":[
+				{
+					"testno" : 1,
+                    "testname" : "Test 1",
+                    "deduction": 5
+				},
+				{
+                    "testno" : 2,
+                    "testname" : "Test 2",
+                    "deduction": 7
+				},
+				{
+                    "testno" : 3,
+                    "testname" : "Test 3",
+                    "deduction":8
+				}
+        	]
+        },
+        {
+            "itemno" : 3,
+            "itemname" : "printer",
+            "details":[
+				{
+					"testno" : 1,
+                    "testname" : "Test 1",
+                    "deduction": 5
+				},
+				{
+                    "testno" : 2,
+                    "testname" : "Test 2",
+                    "deduction": 7
+				},
+				{
+                    "testno" : 3,
+                    "testname" : "Test 3",
+                    "deduction":8
+				}
+        	]
+        }
+        
+    ]
+}

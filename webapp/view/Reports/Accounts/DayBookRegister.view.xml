@@ -1,0 +1,142 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Accounts.DayBookRegister" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Day Book"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                        <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false"/>
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer>
+                                    <form:formElements>
+                                        <form:FormElement label="Date">
+                                            <form:fields>
+                                                <DatePicker id="txtFromDate" required="true" 
+                                                value="{daybookModel>/date}" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="dd/MM/YYYY"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement> 
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer>
+                                        <form:formElements>
+                                            <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="bindTbl"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport" />
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="onPdfExport" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>	
+            <VBox fitContainer="true">
+                           <ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tbldaybookReport" width="150%" items="{
+                                                path: 'tblDayBookModel>/modelData',
+                                                    sorter: {
+                                                        path: 'id'
+                                                    }
+                                                }"
+                                               backgroundDesign="Solid"
+												sticky="ColumnHeaders" growing="true"
+                                                growingThreshold="100"
+                                                growingScrollToLoad="true">
+                                <columns>
+                                    <Column><Label text ="Date" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Voucher Type" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Voucher No." /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Party Name" /></Column>
+									<Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Item Name" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Particulars" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Narrations/Comments" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="General Ledger Code" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Ledger" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Debit Amount" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Credit Amount" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                        <core:CustomData key="settingReportgroup" value="{tblDayBookModel>narration}" writeToDom="true"></core:CustomData>
+                                    </customData>
+                                        <cells>
+                                            <Text text="{tblDayBookModel>date}" />
+                                            <Text text="{tblDayBookModel>vouchertype}" />
+                                            <Text text="{tblDayBookModel>vouchernumber}" />
+                                            <Text text="{tblDayBookModel>partyname}" />
+											<Text text="{tblDayBookModel>itemname}" />
+                                            <Text text="{tblDayBookModel>particular}" />
+                                            <Text text="{tblDayBookModel>narration}" />
+                                            <Text text="{tblDayBookModel>glcode}" />
+                                            <Text text="{tblDayBookModel>coaname}" />
+                                            <Text text="{= ${tblDayBookModel>dramount} > 0 ? ${tblDayBookModel>dramount} : '0'}" />
+                                            <Text text="{= ${tblDayBookModel>cramount} > 0 ? ${tblDayBookModel>cramount} : '0'}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                             </ScrollContainer> 
+                           
+                        </VBox>  
+                        
+        </f:content>
+    </f:DynamicPage>
+</core:View>
+
+
+
+
+ 

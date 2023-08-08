@@ -1,0 +1,131 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.CBFSales.SalesInvoiceContentDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	height="100%">
+
+	<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Invoice Content Detail"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+					    <Button
+							text="Save"
+                            type="Emphasized"
+							press="onSave"/>
+						<Button
+							text="Delete"
+							type="Emphasized"
+                            press="onDelete"/>						
+				</f:actions>
+				<f:navigationActions>
+					<Button
+						icon="sap-icon://decline"
+						type="Transparent" press="onCancel" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>				
+   			<form:Form editable="true">
+                <form:title>
+                </form:title>
+                <form:layout>
+                    <form:ResponsiveGridLayout
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="2"
+                        columnsM="1"
+                        singleContainerFullSize="false" />
+                </form:layout>
+                <form:formContainers>
+                    <form:FormContainer title="">
+					    <form:formElements>                           
+                            <form:FormElement label="Item No">
+                                <form:fields>
+                                    <Input id="txtItemNo" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Item Description">
+                                <form:fields>
+                                    <Input id="txtItemDescription" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Quantity">
+                                <form:fields>
+                                    <Input id="txtQuantity" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Unit Price">
+                                <form:fields>
+                                    <Input id="txtUnitPrice" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Discount">
+                                <form:fields>
+                                    <Input id="txtDiscount" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Tax Code">
+                                <form:fields>
+                                    <Input id="txtTaxCode" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="WTax Liable">
+                                <form:fields>
+                                    <CheckBox id="chkWTaxLiable" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Total (LC)">
+                                <form:fields>
+                                    <Input id="txtTotal" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Whse">
+                                <form:fields>
+                                    <Input id="txtWhse" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Bin Location Allocation">
+                                <form:fields>
+                                    <Input id="txtBinLocationAllocation" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="UOM Code">
+                                <form:fields>
+                                    <Input id="txtUOMCode" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="COGS Location">
+                                <form:fields>
+                                    <Input id="txtCOGSLocation" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Location">
+                                <form:fields>
+                                    <Input id="txtLocation" />
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                    </form:FormContainer>
+                </form:formContainers>
+            </form:Form>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

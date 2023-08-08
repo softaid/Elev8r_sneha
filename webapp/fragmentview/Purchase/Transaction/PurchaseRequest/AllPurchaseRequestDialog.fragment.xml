@@ -1,0 +1,59 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="Select Purchase Request"	
+		contentHeight="300px"
+		search="handlePurchaserequestSearch"
+		confirm="onPurchaserequestDialogClose"
+		cancel="onPurchaserequestDialogClose"
+		items="{
+			path : 'PurchaserequestList>/modelData'
+			
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{PurchaserequestList>purchaserequestno}" />
+				<Text text="{PurchaserequestList>requestsource}" />
+                <Text text="{PurchaserequestList>requestdate}" />
+                <Text text="{PurchaserequestList>statusname}" />
+				<Text text="{PurchaserequestList>partyname}" />
+				<Text text="{PurchaserequestList>materialrequireddate}" />
+                
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="PR No" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Request Source"/>
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="PR Date" />
+				</header>
+			</Column>
+             <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Status" />
+				</header>
+			</Column>
+			 <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Supplier Name" />
+				</header>
+			</Column>
+			 <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="MR Date" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

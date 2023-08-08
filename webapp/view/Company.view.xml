@@ -1,0 +1,54 @@
+<mvc:View
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Company"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+>
+	<Page showHeader="false" class="loginPage">
+        <HBox height='100%' class="mainImg">
+        <VBox width='70%'>
+        </VBox>
+            <VBox width='30%' class="login-right" >
+                <FlexBox class="loginForm" direction="Column">
+                    <items>
+                        <Text text="PoultryOS Administration" class="headerText"></Text>
+                    </items>
+                </FlexBox>
+
+                <FlexBox id="vboxLogin"
+                        class="loginForm" visible="false"		
+                        direction="Column">
+                        <items>
+                            <Text text="Login" class="titleText"></Text>
+                            <Input id="umobile" placeholder="Enter Mobile Number"></Input>
+                            <Input id="pasw" placeholder="Enter Password" type="Password"></Input>	       
+                            <Button width="100%" text="Login" type="Emphasized" class="loginButton" press="onLoginTap"></Button>    
+                            <Link text="Can’t access your account?" press="onForgetPswLnk">
+                                <layoutData>
+                                    <FlexItemData alignSelf="End" />
+                                </layoutData>
+                            </Link>
+                            <Text class="noteText" text="PLEASE NOTE: If you have forgotten your password, please click above link, you will get your credential on registered mobile..!"></Text>
+                        </items>
+                    </FlexBox>
+
+                    <FlexBox id="vboxForPsw" visible="false"
+                        class="loginForm"		
+                        direction="Column">
+                        <items>
+                            <Text text="Forgot Password" class="titleText"></Text>
+                            <Label text="Please enter your registered mobile!"></Label>
+                            <Input id="ufmobile" placeholder="Enter Mobile Number"></Input>
+                            <Button width="100%" text="Send OTP" type="Emphasized" press="onForgetPsw" class="loginButton"></Button>
+                            <Link text="Go to Login" press="onGotoLoginLnk">
+                                <layoutData>
+                                    <FlexItemData alignSelf="End" />
+                                </layoutData>
+                            </Link>
+                            <Text class="noteText" text="PLEASE NOTE: You will get your credential on registered mobile via OTP..!"></Text>
+                        </items>
+                    </FlexBox>
+            </VBox>
+        </HBox>
+	</Page>
+</mvc:View>

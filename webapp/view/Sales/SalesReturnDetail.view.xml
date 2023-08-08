@@ -1,0 +1,144 @@
+<mvc:View
+		xmlns:c="sap.ui.core"
+		controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.BreederSales.SalesReturnDetail"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:u="sap.ui.unified"
+		xmlns="sap.m"
+		xmlns:t="sap.ui.table"
+		xmlns:f="sap.f"
+		xmlns:layout="sap.ui.layout"
+		xmlns:form="sap.ui.layout.form"
+		height="100%"
+		xmlns:core="sap.ui.core"
+        >
+		<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Sales Return Detail"/>
+					</f:heading>
+					<f:actions>
+						<ToolbarSpacer/>
+						 <Button
+							text="Save"
+                            type="Emphasized"
+                            press="onSave"/>
+						<Button
+							text="Delete"
+							type="Emphasized"/>						
+					</f:actions>
+					<f:navigationActions>
+						<Button
+								icon="sap-icon://decline"
+								type="Transparent" press="onCancel" />
+					</f:navigationActions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:content>		
+				<form:Form editable="true">
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="1"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+ 
+                            <form:FormContainer title="">
+					            <form:formElements>
+                                    <form:FormElement label="Date">
+                                        <form:fields>
+                                            <DatePicker id="date" width="100%"  value="{editSalesReturnModel>/date}" 
+                                            displayFormat="{config>/dateFormat/displayFormat}" 
+                                            valueFormat="dd/MM/YYYY" 
+                                            placeholder="{config>/dateFormat/placeholder}" required="true" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Transaction">
+                                        <form:fields>
+                                            <Select id="transaction" 
+                                            forceSelection  = "false" selectedKey="{editSalesReturnModel>/transactionid}" 
+                                                items="{
+                                                    path: 'transactionModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }" change="onTransactionSelect">
+                                                <core:Item key="{transactionModel>id}" text="{transactionModel>transactionno}" />   
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Item Name">
+                                        <form:fields>
+                                            <Select id="item" forceSelection  = "false" selectedKey="{editSalesReturnModel>/itemid}" 
+                                                items="{
+                                                    path: 'itemList>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }" change="onitemSelect">
+                                                <core:Item key="{itemList>itemid}" text="{itemList>itemname}" />   
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Warehouse">
+                                        <form:fields>
+                                            <Input id="warehouse" value="{editSalesReturnModel>/warehousename}" enabled="false"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Warehousebin">
+                                        <form:fields>
+                                            <Input id="warehousebin" value="{editSalesReturnModel>/binname}" enabled="false"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="In Stock">
+                                        <form:fields>
+                                            <Input id="instock" value="{editSalesReturnModel>/instock}" enabled="false"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Quantity">
+                                        <form:fields>
+                                            <Input id="quantity" value="{editSalesReturnModel>/quantity}" change="onQtyChange"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Rate">
+                                        <form:fields>
+                                            <Input id="rate" value="{editSalesReturnModel>/unitcost}" enabled="false"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Amount">
+                                        <form:fields>
+                                            <Input id="amount" value="{editSalesReturnModel>/amount}" enabled="false"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Status">
+                                        <form:fields>
+                                            <Select id="status" selectedKey="{editSalesReturnModel>/statusid}" 
+                                                items="{
+                                                    path: 'statusList>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                                <core:Item key="{statusList>id}" text="{statusList>refname}" />   
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Remark">
+                                        <form:fields>
+                                            <Input id="remark" value="{editSalesReturnModel>/remark}" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                        </form:formContainers>
+                    </form:Form>
+		    </f:content>
+	    </f:DynamicPage>
+</mvc:View>

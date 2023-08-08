@@ -1,0 +1,224 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Application.NotificationSettingDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+	height="100%">
+		
+	<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Notification Setting Detail"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+					<Button
+						text="Save"
+                        type="Emphasized"
+						press="onSave"
+						id="btnSave"/>
+				    <Button
+						text="Delete"
+						type="Emphasized"
+						id="btnDelete"
+						press="onDelete"/>						
+				</f:actions>
+				<f:navigationActions>
+					<Button
+						icon="sap-icon://decline"
+						type="Transparent" press="onCancel" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>				
+   			<form:Form editable="true">
+                <form:title>
+                </form:title>
+                <form:layout>
+                    <form:ResponsiveGridLayout
+                        labelSpanXL="3"
+                        labelSpanL="3"
+                        labelSpanM="3"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="2"
+                        columnsM="1"
+                        singleContainerFullSize="false" />
+                </form:layout>
+                <form:formContainers>
+                    <form:FormContainer title="">
+					    <form:formElements>  
+
+							<form:FormElement label="Module">
+                                <form:fields>
+
+												<ComboBox 
+                                                    id="ddlModule" 
+                                                    valueLiveUpdate="true" 
+                                                    valueStateText="Select Module" 
+                                                    change="onModuleChange"
+                                                    selectedKey="{editNotificationModel>/moduleid}"
+                                                    items="{
+                                                    path: 'moduleModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                    }" required="true">
+                                                    <core:Item key="{moduleModel>id}" text="{moduleModel>refname}" />                     
+                                                </ComboBox>
+                                </form:fields>
+                            </form:FormElement>
+
+							<form:FormElement label="Transaction">
+                                <form:fields>
+
+                                    <ComboBox 
+                                                    id="ddlTransaction" 
+                                                    valueLiveUpdate="true" 
+                                                    valueStateText="Select Module" 
+                                                    change="onTransactionChange"
+                                                    selectedKey="{editNotificationModel>/transactiontypeid}"
+                                                    items="{
+                                                    path: 'transactionModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                    }" required="true">
+                                                    <core:Item key="{transactionModel>id}" text="{transactionModel>displayname}" />                     
+                                                </ComboBox>
+
+                                </form:fields>
+                            </form:FormElement>
+
+
+                            <form:FormElement label="Role">
+                                <form:fields>
+                                  
+                                                <MultiComboBox 
+                                                    id="ddlRole" 
+                                                    valueLiveUpdate="true" 
+                                                    valueStateText="Select Roles" 
+                                                    change="onRoleChange"
+                                                    selectedKeys="{editNotificationModel>/roleids}"
+                                                    items="{
+                                                    path: 'rolesModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                    }" required="true">
+                                                    <core:Item key="{rolesModel>id}" text="{rolesModel>refname}" />                     
+                                                </MultiComboBox>
+
+                                </form:fields>
+                            </form:FormElement>
+
+							<!-- <form:FormElement label="Action">
+                                <form:fields>
+
+                                                <ComboBox 
+                                                    id="ddlAction" 
+                                                    valueLiveUpdate="true" 
+                                                    valueStateText="Select Module" 
+                                                    change="onActionChange"
+                                                    selectedKey="{editNotificationModel>/actionid}"
+                                                    items="{
+                                                    path: 'actionModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                    }" required="true">
+                                                    <core:Item key="{actionModel>id}" text="{actionModel>refname}" />                     
+                                                </ComboBox>
+
+
+                                </form:fields>
+                            </form:FormElement> -->
+                           
+							<!-- <form:FormElement label="">
+                                <form:fields>
+									<Label text="Placeholder format:  ##placeholder##" width="100%" />
+                                </form:fields>
+                            </form:FormElement> -->
+
+                            	
+
+                            <form:FormElement label="In App">
+                                <form:fields>
+                                  <Switch valueLiveUpdate="true" state="{editNotificationModel>/inapp}" customTextOn="Yes" customTextOff="No">
+                                                   <layoutData>
+                                                     <FlexItemData growFactor="1" />
+                                                   </layoutData>
+                                                </Switch>
+                                </form:fields>
+                            </form:FormElement>
+                            
+                             <form:FormElement label="SMS">
+                                <form:fields>
+                                 <Switch valueLiveUpdate="true" state="{editNotificationModel>/sms}" customTextOn="Yes" customTextOff="No">
+                                                   <layoutData>
+                                                     <FlexItemData growFactor="1" />
+                                                   </layoutData>
+                                                </Switch>
+                                </form:fields>
+                            </form:FormElement>
+
+                            <form:FormElement label="Email">
+                                <form:fields>
+                                 <Switch valueLiveUpdate="true" state="{editNotificationModel>/email}" customTextOn="Yes" customTextOff="No">
+                                                   <layoutData>
+                                                     <FlexItemData growFactor="1" />
+                                                   </layoutData>
+                                                </Switch>
+                                </form:fields>
+                            </form:FormElement>
+
+                            <form:FormElement label="">
+                                <form:fields>
+                                </form:fields>
+                            </form:FormElement>
+
+                            <form:FormElement label="Template Placeholder">
+                                <form:fields>
+
+                                                <ComboBox 
+                                                    id="ddlPlaceholders" 
+                                                    valueLiveUpdate="true" 
+                                                    valueStateText="Select Placeholder" 
+                                                    change="onPlaceholderChange"
+                                                    items="{
+                                                    path: 'placeholderModel>/modelData',
+                                                    sorter: { path: 'placeholder' }
+                                                    }">
+                                                    <core:Item key="##{placeholderModel>}##" text="{placeholderModel>}" />                     
+                                                </ComboBox>
+
+                                </form:fields>
+                            </form:FormElement>
+
+                            <form:FormElement label="Template">
+                                <form:fields>
+                                </form:fields>
+                            </form:FormElement>
+
+                            <form:FormElement>
+                                <form:fields>							
+                                    <Panel width="auto" id="pnlTemplate" class="sapUiResponsiveMargin">
+                                        <content>
+                                        </content>
+                                    </Panel>
+                                </form:fields>
+                            </form:FormElement>
+                            
+
+
+                        </form:formElements>
+                    </form:FormContainer>
+                </form:formContainers>
+            </form:Form>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

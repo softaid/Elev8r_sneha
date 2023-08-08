@@ -1,0 +1,375 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.BreederSales.EggDelivery" height="100%"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:form="sap.ui.layout.form" 
+  xmlns:core="sap.ui.core">
+
+  <f:FlexibleColumnLayout  id="fclEggDelivery" backgroundDesign="Solid">
+		<f:beginColumnPages>
+
+         <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="Egg Delivery"/>
+				        </f:heading>
+                         <f:actions>
+                            <ToolbarSpacer/>
+                           <Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+				        <Button icon="sap-icon://add" type="Transparent" press="onAdd"/>
+                        </f:actions>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+
+	<VBox fitContainer="true">                   
+        <form:Form editable="true">
+            <form:layout>
+                <form:ResponsiveGridLayout
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="3"
+                    columnsL="2"
+                    columnsM="2"
+                    singleContainerFullSize="false" />
+            </form:layout>
+            <form:formContainers>
+                <form:FormContainer title="">
+					<form:formElements>
+                        
+                        <form:FormElement label="Customer">
+                            <form:fields>
+                                 <Input
+                                    id="txtVendor"
+                                    type="Text"
+                                    value="{salesdeliveryModel>/partyname}"
+                                    placeholder="Select customer"
+                                    enabled="true"
+                                    editable="true"
+                                    showValueHelp="true"                                                
+                                    valueHelpOnly="true"       
+                                    valueHelpRequest="handleSelectVedorList"
+                                    required="true">
+                                </Input>
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="Contact Person">
+                            <form:fields>
+                                <Input id="txtContactperson" enabled="false" value="{salesdeliveryModel>/contactperson}" />
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="With Sales Order">
+                            <form:fields>
+                            <FlexBox
+                                alignItems="Start">
+                                <items>
+                                   <Switch  state="{salesdeliveryModel>/hassalesorder}" id="chkwithsalesorder" 
+                                        customTextOn="Yes" customTextOff="No" 
+                                        valueLiveUpdate="true" change="checkDone" >
+                                    <layoutData>
+                                        <FlexItemData growFactor="1" />
+                                    </layoutData>
+                                </Switch>
+                                <Input
+                                    id="txtsalesorder"
+                                    enabled="false"
+                                    type="Text"
+                                    value="{salesdeliveryModel>/salesorderid}"
+                                    placeholder="Select Sales Order No."
+                                    editable="true"
+                                    showValueHelp="true"                                                
+                                    valueHelpOnly="true"       
+                                    valueHelpRequest="handleSelectSalesOrderNo"
+                                    required="true">
+                                </Input>
+                                </items>
+                            </FlexBox>                                
+                            </form:fields>
+                        </form:FormElement>
+                         <form:FormElement label="Reference No.">
+                            <form:fields> 
+                                <Input id="txtCustomerRefNo" value="{salesdeliveryModel>/referenceno}"  />
+                            </form:fields>
+                        </form:FormElement>
+                       <form:FormElement label="Status">
+                            <form:fields>
+                                <Input id="txtStatus" enabled="false" value="{salesdeliveryModel>/statusname}" />
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+
+                <form:FormContainer title="">
+					<form:formElements>
+                        <form:FormElement label="DC No">
+                            <form:fields>
+                                <Input id="txtdcno" />
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="Sales Order Date">
+                            <form:fields>
+                                
+                                <DatePicker id="txtSalesOrderDate" width="100%" 
+                                    placeholder="{config>/dateFormat/placeholder}"
+                                    displayFormat="{config>/dateFormat/displayFormat}"
+                                    value="{salesdeliveryModel>/salesorderdate}"
+                                    valueFormat="dd/MM/yyyy"
+                                    required="true"  
+                                    />
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="Delivery Date">
+                            <form:fields>
+                                <DatePicker id="txtDeliveryDate" width="100%" 
+                                    placeholder="{config>/dateFormat/placeholder}"
+                                    displayFormat="{config>/dateFormat/displayFormat}"
+                                    value="{salesdeliveryModel>/deliverydate}"
+                                    valueFormat="dd/MM/yyyy"
+                                    required="true"  
+                                    />
+                            </form:fields>
+                        </form:FormElement>
+                         <form:FormElement label="Delivery Address">
+                            <form:fields>
+                                 <Select id="txtshiptoaddress"
+                                                forceSelection  = "false" 
+                                                selectedKey="{salesorderModel>/shippingaddressid}"
+                                                change = "itemgroupSelect"
+                                                items="{
+                                                    path: 'itemGroupModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                                <core:Item key="{itemGroupModel>id}" text="{itemGroupModel>groupname}" />                                            
+                                        </Select>
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="Bill to Address">
+                            <form:fields>
+                                <Select id="txtbilltoaddress"
+                                                forceSelection  = "false" 
+                                                selectedKey="{salesorderModel>/billaddressid}"
+                                                change = "itemgroupSelect"
+                                                items="{
+                                                    path: 'itemGroupModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                                <core:Item key="{itemGroupModel>id}" text="{itemGroupModel>groupname}" />                                            
+                                        </Select>
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+            </form:formContainers>
+        </form:Form>
+
+           <form:Form editable="true">
+            <form:layout>
+                <form:ResponsiveGridLayout
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="3"
+                    columnsL="2"
+                    columnsM="2"
+                    singleContainerFullSize="false" />
+            </form:layout>
+            <form:formContainers>
+
+                <form:FormContainer title="">
+					<form:formElements>
+                        <form:FormElement label="Transaction Type">
+                            <form:fields>
+                                 <ComboBox selectedKey="0">
+				                    <core:Item key="1" text="GST Tax Invoice" />
+				                    <core:Item key="2" text="Bill of Supply" />
+			                    </ComboBox>
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+            </form:formContainers>
+        </form:Form>
+
+
+                <Table id="tblsalesorder" mode="single" backgroundDesign="Solid" items="{
+                                    path: 'tblModel>/modelData',
+                                        sorter: {
+                                            path: 'id'
+                                        }
+                                }">
+                    <headerToolbar>
+                        <Toolbar>
+                        <content>
+                            <Title text="Order Item List" level="H2"/>
+                            <ToolbarSpacer />
+                            <Button icon="sap-icon://add" type="Transparent" press="onAddNewContent"/>
+                        </content>
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <!-- <Column><Text text ="PO No." /></Column> -->
+                        <Column width="25%" minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>purchaseOrderLabelItemName}" /></Column>
+                        <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text text ="{i18n>purchaseOrderLabelQuantity}" /></Column>
+                        <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text text ="{i18n>purchaseOrderLabelUnitCost}" /></Column>                
+                        <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text text ="{i18n>purchaseOrderLabelItemDiscount}"/></Column>
+                        <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text text ="Tax Name" /></Column>
+                        <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text text ="Tax Percent" /></Column>
+
+                        <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="End"><Text text ="CGST" /></Column>                            
+                        <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="End"><Text text ="SGST" /></Column>                            
+                        <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="End"><Text text ="IGST" /></Column>                            
+                        <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="End"><Text text ="UTGST" /></Column>                            
+                        <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Text text ="{i18n>purchaseOrderLabelLineTotal}" /></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem type="{salesorderModel>/navigation}" press="onListItemPress">
+                            <cells>        
+                                <!-- <Text text="{tblModel>purchaseorderid}" />          -->
+                                <Text text="{tblModel>itemname}" />         
+                                <Text text="{tblModel>quantity}" />                       
+                                <Text text="{tblModel>unitprice}"  />
+                                <Text text="{tblModel>discount}"  /> 
+                                <Text text="{tblModel>taxname}"  /> 
+                                <Text text="{tblModel>taxpercent}"  />  
+                                <Text text="{tblModel>CGST}"  />  
+                                <Text text="{tblModel>SGST}"  />  
+                                <Text text="{tblModel>IGST}"  />  
+                                <Text text="{tblModel>UTGST}"  />  
+
+                                <Text text="{tblModel>linetotal}"  />                                  
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+
+                   <Table id="tblFreight" mode="single" backgroundDesign="Solid">
+	                    <headerToolbar>
+			                <Toolbar>
+				                <content>
+					                <Title text="Freight List" level="H2"/>
+					                <ToolbarSpacer />
+			                        <Button icon="sap-icon://add" type="Transparent" press="onAddNewContent"/>
+				                </content>
+			                </Toolbar>
+		                </headerToolbar>
+                        <columns>
+                            <Column width="15%"><Text text ="Freight Name" /></Column>
+                            <Column width="15%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Tax Code" /></Column>
+                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="End"><Text text ="Tax Percent" /></Column>                            
+                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="End"><Text text ="Tax Amount" /></Column>                            
+                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="End"><Text text ="CGST" /></Column>                            
+                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="End"><Text text ="SGST" /></Column>                            
+                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="End"><Text text ="IGST" /></Column>                            
+                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="End"><Text text ="UTGST" /></Column>                            
+                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="End"><Text text ="Line Total" /></Column>                            
+                        </columns>
+                    </Table>
+
+
+                  <form:Form editable="true">
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                            labelSpanXL="4"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="3"
+                            columnsL="2"
+                            columnsM="2"
+                            singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="">
+                            <form:formElements>
+                            <form:FormElement label="Sales Employee">
+                                    <form:fields>
+                                        <ComboBox selectedKey="0">
+                                            <core:Item key="0" text="No Sales Employee" />                                
+                                            <core:Item key="Employee1" text="Employee1" />
+                                            <core:Item key="Employee2" text="Employee2" />
+                                            <core:Item key="Employee3" text="Employee3" />
+                                        </ComboBox>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Owner">
+                                    <form:fields>
+                                        <Input id="txtOwner" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Remark">
+                                    <form:fields>
+                                        <TextArea placeholder="Delivery Place"  value="{salesorderModel>/remark}" 
+                                            growing="true" rows="3" growingMaxLines="5" width="100%"/>
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+
+                        <form:FormContainer title="">
+                            <form:formElements>
+                                <form:FormElement label="Gross Total">
+                                    <form:fields>
+                                        <Input id="txtItemtotal" value="{salesorderModel>/itemtotal}" enabled="false" />
+                                    </form:fields>
+                                </form:FormElement> 
+                                <form:FormElement label="Discount">
+                                    <form:fields>
+                                        <Input id="txtDiscountPercent" placeholder="%" change="onCalcChange"  value="{salesorderModel>/discountpercent}" />
+                                        <Input id="txtDiscount" value="{salesorderModel>/discount}"/>
+                                    </form:fields>
+                                </form:FormElement> 
+                                <form:FormElement label="Freight Total">
+                                    <form:fields>
+                                        <Input id="txtFreight" enabled="false" value="{salesorderModel>/freight}" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Rounding">
+                                    <form:fields>
+                                        <Input id="txtRoundTotal" value="{salesorderModel>/roundoff}" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Net Total">
+                                    <form:fields>
+                                        <Input id="txtTotal" value="{salesorderModel>/grandtotal}" />
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+
+        <Panel>
+    	    <FlexBox		
+				alignItems="Start"
+				justifyContent="End">
+				<items>
+					<Button text="Save" type="Emphasized" class="sapUiSmallMarginEnd" />
+					<Button text="Cancel" type="Emphasized" class="sapUiSmallMarginEnd" />
+				</items>
+			</FlexBox>
+        </Panel> 
+        
+    </VBox>  
+      </f:content>
+			</f:DynamicPage> 
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout> 
+</core:View>

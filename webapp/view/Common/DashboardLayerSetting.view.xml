@@ -1,0 +1,312 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.DashboardLayerSetting" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+	                <VBox fitContainer="true">
+                                    <form:Form editable="true">
+                                        <form:toolbar>			
+			                            </form:toolbar>
+                                        <form:layout>
+                                            <form:ResponsiveGridLayout
+                                                labelSpanXL="4"
+                                                labelSpanL="6"
+                                                labelSpanM="4"
+                                                labelSpanS="12"
+                                                adjustLabelSpan="false"
+                                                emptySpanXL="0"
+                                                emptySpanL="0"
+                                                emptySpanM="0"
+                                                emptySpanS="0"
+                                                columnsXL="3"
+                                                columnsL="2"
+                                                columnsM="2"
+                                                singleContainerFullSize="false" />
+                                        </form:layout>
+                                        <form:formContainers>
+                                        <form:FormContainer title="">
+					                            <form:formElements>                                                    
+                                            <form:FormElement label="COGS Ledger">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{layerModel>/costofgoodsoldledgerid}" 
+                                                    type="{layerModel>/costofgoodsoldledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="WIP Bird Ledger">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{layerModel>/WIPledgerid}" 
+                                                    type="{layerModel>/WIPledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Goods Received But Not Invoiced Ledger">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{layerModel>/grpowithoutinvoiceledgerid}" 
+                                                    type="{layerModel>/grpowithoutinvoiceledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Stock Ledger Id">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{layerModel>/amortizationledgerid}" 
+                                                     type="{layerModel>/stcokledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Cash Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{layerModel>/cashledgerid}" 
+                                                     type="{layerModel>/cashledgeridtype}"  width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Freight Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{layerModel>/freightledgerid}" 
+                                                    type="{layerModel>/freightledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Discount Ledger">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{layerModel>/discountledgerid}" 
+                                                     type="{layerModel>/freightledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Mortality ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{layerModel>/mortalityledgerid}" 
+                                                     type="{layerModel>/mortalityledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Feed Ledger">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{layerModel>/feedledgerid}" 
+                                                    type="{layerModel>/feedledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="vaccine Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{layerModel>/vaccineledgerid}" 
+                                                    type="{layerModel>/vaccineledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Amortization Ledger">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{layerModel>/amortizationledgerid}" 
+                                                     type="{layerModel>/amortizationledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Medicine Ledger">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{layerModel>/medicineledgerid}" 
+                                                     type="{layerModel>/medicineledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Vitamin Ledger">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{layerModel>/vitaminledgerid}" 
+                                                 type="{layerModel>/vitaminledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="CTRL Account Ledger">
+                                                <form:fields>
+                                               <Button class="sapUiSmallMarginEnd" icon="{layerModel>/ctrlaccledgerid}" 
+                                                 type="{layerModel>/ctrlaccledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Inventory Gain And Loss ledger">
+                                                <form:fields>
+                                               <Button class="sapUiSmallMarginEnd" icon="{layerModel>/inventorygainlossledgerid}" 
+                                              type="{layerModel>/inventorygainlossledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                </form:formElements>
+                                        </form:FormContainer>
+                                        <form:FormContainer title="">
+					                            <form:formElements>                                                    
+                                            <form:FormElement label="Default Warehouse for Layer">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{layerModel>/defaultwarehouseid}" 
+                                                    type="{layerModel>/defaultwarehouseidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Female Chick Item">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{layerModel>/defaultfemalechickid}" 
+                                                    type="{layerModel>/defaultfemalechickidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Table Eggs Item">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{layerModel>/defaulttableeggsitemid}" 
+                                                    type="{layerModel>/defaulttableeggsitemidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Cracked Eggs Item">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{layerModel>/defaultcrackedeggsitemid}" 
+                                                     type="{layerModel>/defaultcrackedeggsitemidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                             <form:FormElement label="Default Damage Eggs Item">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{layerModel>/defaultdamageeggsitemid}" 
+                                                     type="{layerModel>/defaultdamageeggsitemidtype}"  width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Pullet Eggs Item">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{layerModel>/defaultpulleteggsitemid}" 
+                                                    type="{layerModel>/defaultpulleteggsitemidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Feed Item Group(s)">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{layerModel>/feeditemgroupids}" 
+                                                     type="{layerModel>/feeditemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Medicine Item Group(s)">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{layerModel>/medicineitemgroupids}" 
+                                                     type="{layerModel>/medicineitemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Chicks Item Group(s)">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{layerModel>/chicksitemgroupids}" 
+                                                    type="{layerModel>/chicksitemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Layer Item Group">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{layerModel>/layeritemgroupids}" 
+                                                    type="{layerModel>/layeritemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                             <form:FormElement label="Table Eggs Cost">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{layerModel>/tableeggscost}" 
+                                                     type="{layerModel>/tableeggscosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Table Damage Cost">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{layerModel>/damageeggscost}" 
+                                                     type="{layerModel>/damageeggscosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Culls Warehouse">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{layerModel>/defaultcullswhid}" 
+                                                 type="{layerModel>/defaultcullswhidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Bird Cost">
+                                                <form:fields>
+                                               <Button class="sapUiSmallMarginEnd" icon="{layerModel>/birdcoststd}" 
+                                                 type="{layerModel>/birdcoststdtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Shed Rest Period">
+                                                <form:fields>
+                                               <Button class="sapUiSmallMarginEnd" icon="{layerModel>/shedrestperiod}" 
+                                              type="{layerModel>/wastageeggscosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                </form:formElements>
+                                        </form:FormContainer>
+                                        <form:FormContainer title="">
+					                        <form:formElements>                                                    
+                                            <form:FormElement label="Female Chicks Cost">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{layerModel>/defaultfemalechickcost}" 
+                                                    type="{layerModel>/defaultfemalechickcosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Labour Charges">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{layerModel>/labourcharge}" 
+                                                    type="{layerModel>/labourchargetype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                             <form:FormElement label="Overhead Cost">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{layerModel>/overheadcost}" 
+                                                    type="{layerModel>/overheadcosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Eggs Collection Warehouse">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{layerModel>/defaultcoldroomwarehouseid}" 
+                                                     type="{layerModel>/defaultcoldroomwarehouseidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                             <form:FormElement label="Eggs Prediction Per Bird">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{layerModel>/eggspredictionperbird}" 
+                                                     type="{layerModel>/eggspredictionperbirdtype}"  width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Standard Egg Cost">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{layerModel>/standardeggcost}" 
+                                                    type="{layerModel>/standardeggcosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                <form:FormElement label="Default Vitamin Item Group(s)">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{layerModel>/vitaminitemgroupids}" 
+                                                    type="{layerModel>/vitaminitemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            </form:formElements>
+                                        </form:FormContainer>
+                                        <form:FormContainer title="">
+					                        <form:formElements>    
+                                            <form:FormElement label="Default Eggs Item Group">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{layerModel>/eggsitemgroupids}" 
+                                                    type="{layerModel>/eggsitemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                             <form:FormElement label="Table Cracked Cost">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{layerModel>/crackedeggscost}" 
+                                                     type="{layerModel>/crackedeggscosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Table Pullet Cost">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{layerModel>/pulleteggscost}" 
+                                                     type="{layerModel>/pulleteggscosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>                                            
+                                            <form:FormElement label="Amortization">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{layerModel>/amortizationcoststd}" 
+                                                    type="{layerModel>/amortizationcoststdtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                  <form:FormElement label="Female Standard Weight">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{layerModel>/femalestandardweight}" 
+                                                     type="{layerModel>/femalestandardweighttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Vaccine Item Group(s)">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{layerModel>/vaccineitemgroupids}" 
+                                                     type="{layerModel>/vaccineitemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            </form:formElements>
+                                        </form:FormContainer>
+                                        </form:formContainers>
+                                    </form:Form>
+                </VBox>  
+</core:View>
+
+
+
+
+
+
+
+ 

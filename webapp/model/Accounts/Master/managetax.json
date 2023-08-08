@@ -1,0 +1,29 @@
+{
+	"managetax": [
+		{
+			"id" : "#",
+            "taxType" : "VAT",
+            "code" : "VAT0",
+            "description" : "VAT@10%",
+            "salesTax" : "28000.00",
+			"purchaseTax":29000.00,
+			"nonDeductible":0,
+			"nonDeduction":0,
+			"details":[
+				{
+					"taxId" : 1,					
+					"taxType" : "VAT",					
+					"taxCode" : "VAT0",
+					"taxdescription" : "VAT@10%",
+					"salesTax" : "28000.00",
+					"purchaseTax" : "29000.00",
+					"nonTax" : "0",
+					"nonTax2" : "0"
+				}
+				
+        	]
+		}
+		
+				
+	]
+}

@@ -1,0 +1,103 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Bank Reconciliation"	
+		contentHeight="300px"
+        search=".handleSearch"
+		confirm="savebankReconciliation"
+		cancel=".handleClose"
+		items="{
+			path : 'ReconciliationModel>/modelData',
+			sorter : {
+				path : 'no',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="" text="{ReconciliationModel>voucherdate}" />
+                <Text text="{ReconciliationModel>jeno}" />
+                <Text text="{ReconciliationModel>vouchertype}" />
+                <Text text="{ReconciliationModel>partyname}" />
+                <Text text="{ReconciliationModel>chequedate}" />
+                <Text text="{ReconciliationModel>chequeno}" />
+                <DatePicker id="txtDueDate" width="100%" 
+                    placeholder="{config>/dateFormat/placeholder}"
+                    displayFormat="{config>/dateFormat/displayFormat}"
+                    value="{ReconciliationModel>chequeclearancedate}"
+                    valueFormat="dd/MM/yyyy"
+                    required="true"  
+                />
+                <Text text="{ReconciliationModel>dramount}" />
+                <Text text="{ReconciliationModel>cramount}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Voucher Date" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="JE No." />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Voucher Type" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Party" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Cheque Date" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Cheque No." />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Cheque Clear Date" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Dr Amt." />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Cr Amt." />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

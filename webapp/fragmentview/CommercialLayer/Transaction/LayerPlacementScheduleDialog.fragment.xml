@@ -1,0 +1,58 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Placement Schedule"
+		contentHeight="300px"
+		search="handlePlcmScheduleSearch"
+		confirm="handlePlcmScheduleClose"
+		cancel="handlePlcmScheduleClose"
+		items="{
+			path : 'placementscheduleList>/modelData',
+			sorter : {
+				path : 'docNo'
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{placementscheduleList>id}" />
+				<Text text="{placementscheduleList>scheduledate}" />
+				<Text text="{placementscheduleList>locationname}" />
+				<tnt:InfoLabel 
+					text="{placementscheduleList>statusname}"
+					displayOnly= "true"
+					colorScheme= "{parts: [{path: 'placementscheduleList>statusname'}],
+					formatter: '.formatter.setColorEggsProcSche'}"
+					/>
+                <!-- <Text text="{placementscheduleList>statusname}" /> -->
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="ID" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Schedule Date" />
+				</header>
+			</Column>
+			<Column
+				demandPopin="true" >
+				<header>
+					<Text text="Location Name" />
+				</header>
+			</Column>
+			
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Status" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

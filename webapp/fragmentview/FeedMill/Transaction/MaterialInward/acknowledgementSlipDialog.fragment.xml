@@ -1,0 +1,85 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Acknowledgement Slip"	
+		contentHeight="300px"
+		search="handleacknowledgmenSearch"
+		confirm="handleacknowledgmenClose"
+		cancel="handleacknowledgmenClose"
+		items="{
+			path : 'acknowledgementslipListModel>/modelData',
+			sorter : {
+				path : 'no',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<!-- <ObjectIdentifier title="" text="{ackmentNumber}" /> -->
+				<Text text="{acknowledgementslipListModel>slipdate}" />
+                <Text text="{acknowledgementslipListModel>vehicleno}" />
+                <Text text="{acknowledgementslipListModel>vehicleweight}" />
+                <Text text="{acknowledgementslipListModel>receivedby}" />
+                <Text text="{acknowledgementslipListModel>companyid}" />
+                <!-- <Text text="{challanDate}" /> -->
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<!-- <Column>
+				<header>
+					<Text text="Acknowledge Number" />
+				</header>
+			</Column> -->
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Date" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End" >
+				<header>
+					<Text text="Vehicle Number" />
+				</header>
+			</Column>
+             <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End" >
+				<header>
+					<Text text="Vehicle Weight" />
+				</header>
+			</Column>
+             <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End" >
+				<header>
+					<Text text="Received By" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End" >
+				<header>
+					<Text text="Company Id" />
+				</header>
+			</Column>
+            <!-- <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End" >
+				<header>
+					<Text text="Challan Date" />
+				</header>
+			</Column> -->
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>
+

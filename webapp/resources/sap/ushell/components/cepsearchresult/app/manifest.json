@@ -1,0 +1,78 @@
+{
+    "sap.app": {
+        "id": "sap.ushell.components.cepsearchresult.app",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "i18n": {
+            "bundleName": "sap.ushell.components.cepsearchresult.app.i18n.i18n"
+        },
+        "title": "{{SEARCHRESULTAPP.App.Title}}",
+        "subTitle": "{{SEARCHRESULTAPP.App.SubTitle}}"
+    },
+    "sap.flp": {
+        "type": "tile",
+        "tileSize": "1x1",
+        "vizOptions": {
+            "displayFormats": {
+                "supported": [
+                    "standard",
+                    "standardWide",
+                    "compact",
+                    "flat",
+                    "flatWide"
+                ],
+                "default": "standard"
+            }
+        }
+    },
+    "sap.ui": {
+        "_version": "1.1.0",
+        "icons": {
+            "icon": "sap-icon://search"
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "supportedThemes": ["sap_hcb", "sap_belize", "sap_belize_plus", "sap_horizon", "alllllllll"]
+    },
+    "sap.ui5": {
+        "dependencies": {
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {},
+                "sap.ushell": {},
+                "sap.ui.integration": {}
+            }
+        },
+        "rootView": {
+            "viewName": "sap.ushell.components.cepsearchresult.app.Main",
+            "type": "XML",
+            "async": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "./css/style.css"
+                }
+            ]
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    }
+}

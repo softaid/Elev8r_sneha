@@ -1,0 +1,35 @@
+{
+	"broodingparameterlist": [
+        {
+            "no" : 1,
+            "particular" : "Coal Brooding",
+            "status" : true,
+            "remarks" : ""
+        },
+        {
+            "no" : 2,
+            "particular" : "Elec Brooding",
+            "status" : true,
+            "remarks" : ""
+        },
+        {
+            "no" : 3,
+            "particular" : "Gas Brooding",
+            "status" : true,
+            "remarks" : ""
+        },
+        {
+            "no" : 4,
+            "particular" : "Electric Brooding",
+            "status" : true,
+            "remarks" : ""
+        },
+        {
+            "no" : 5,
+            "particular" : "Disel Brooding",
+            "status" : true,
+            "remarks" : ""
+        }
+       
+    ]
+}

@@ -1,0 +1,262 @@
+<mvc:View
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Breeder.FlockWiseCostAnalysisReport"
+    xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form"   
+    xmlns:core="sap.ui.core"	
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:tnt="sap.tnt"
+	xmlns:l="sap.ui.layout"
+	xmlns:common="sap.ui.commons"
+    height="100%"
+    >
+
+    <f:FlexibleColumnLayout id="fclCbfDashboard" backgroundDesign="Solid">
+        <f:beginColumnPages>
+            <f:DynamicPage showFooter="true" toggleHeaderOnTitleClick="false">
+                <f:title>
+                    <f:DynamicPageTitle>
+                        <f:heading>
+                            <Title text="Flock Wise Cost Analysis Report"/>
+                        </f:heading>
+                        <f:actions>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+                        </f:actions>
+                    </f:DynamicPageTitle>
+                </f:title>
+                <f:content>
+                    <VBox fitContainer="true">
+                        <form:Form editable="true">
+                            <form:title>
+                                <core:Title text="" />
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+					                <form:formElements>  
+                                     <form:FormElement label="Warehouse">
+                                            <form:fields>
+                                                <MultiComboBox id="warehouse"
+                                                    selectionChange="handleSelectionChange"
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'WarehouseList>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{WarehouseList>id}" text="{WarehouseList>warehousename}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                         <form:FormElement label="{i18n>FlockDetailReportBatchName}">
+                                            <form:fields>
+                                            <MultiComboBox id="batchtb1"
+                                                selectionChange="batchSelectionChange"
+                                                selectionFinish="batchSelectionFinish"
+                                                width="500px"
+                                                items="{
+                                                    path: 'batchModel>/modelData',
+                                                    sorter: { path: 'Name' }
+                                                }">
+                                                <core:Item key="{batchModel>breederbatchid}" text="{batchModel>batchname}" />
+                                            </MultiComboBox>
+                                            </form:fields>
+                                         </form:FormElement> 
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer id="secondContainer">
+                                    <form:formElements>
+                                       <form:FormElement label="{i18n>eggsCollectionReportLabelFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromdate" width="100%" value="{farmperbatchModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="onDateChange"/> 
+                                                 <!-- <Input id="txtFromweek" required="true"  value="{farmperbatchModel>/weeknowithdays}" />   -->
+                                            </form:fields>
+                                        </form:FormElement>
+                                           <form:FormElement label="To Date">
+                                            <form:fields>
+                                                <DatePicker id="txtTodate" width="100%" value="{farmperbatchModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="onFromDateChange"/> 
+                                                 <!-- <Input id="txtToWeek" required="true"  value="{farmperbatchModel>/toweeknowithdays}"/>   -->
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="">
+                                            <form:fields>
+                                               <Button icon="sap-icon://search" type="Emphasized" text="Show Records" press="onSearchData"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                        
+                        <VBox id="singlesupplier">
+                            <ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">     
+                            <Table class="secondGrid"
+                                inset="false" 
+                                items="{
+                                path: 'tblModelpartone>/modelData'
+                                
+                            }">
+                                <headerToolbar>
+                                    <Toolbar>
+                                    <content>
+                                        <Title text="Qty Break Up" level="H2"/>
+                                        <ToolbarSpacer />
+                                         <MenuButton text="Download Data">
+                                            <menu>
+                                                <Menu itemSelected="onMenuAction" >
+                                                    <items>
+                                                        <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExportone"/>
+                                                        <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="singlePartycreatePDF"/>
+                                                    </items>
+                                                </Menu>
+                                            </menu>
+                                        </MenuButton>
+                                    </content>
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                        
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Location" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Flock" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Place Date" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Live Date" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Item Type" /></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Age In Day" /></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Placed Quantity" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Mortality" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Live Balance" /></Column>
+                     </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <cells>
+                                <Text text="{tblModelpartone>locationname}" />
+                                 <Text text="{tblModelpartone>batchname}" />
+								<Text text="{tblModelpartone>pldate}" />
+								<Text text="{tblModelpartone>aslastdate}" />
+                                <Text text="{tblModelpartone>itemid}" />
+								<Text text="{tblModelpartone>ageindays}" />
+								<Text text="{tblModelpartone>paqty}" />
+                                 <Text text="{tblModelpartone>mor}"/>
+                                <Text text="{tblModelpartone>liveqty}"/>
+                                    </cells>
+                            <!-- <customData>
+                            <core:CustomData value="{tblSubledgerRegiModel>openingbalsingleparty}" writeToDom="true"></core:CustomData>
+                            </customData> -->
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                            </ScrollContainer>
+                        </VBox>
+
+                        <VBox id="batchWise">
+
+                                 <ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true"> 
+
+                                <Table id="multiplesupplier" width="200%"  
+                                inset="false" 
+                                items="{
+                                path: 'tblModel>/modelData'
+                              
+                            }">
+                                <headerToolbar>
+                                    <Toolbar>
+                                    <content>
+                                        <Title text="Cost Break Up" level="H2"/>
+                                        <ToolbarSpacer />
+                                            <MenuButton text="Download Data">
+                                            <menu>
+                                                <Menu itemSelected="onMenuAction" >
+                                                    <items>
+                                                        <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                        <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                    </items>
+                                                </Menu>
+                                            </menu>
+                                        </MenuButton>
+                                    </content>
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Flock Name" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Chick Cost" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Before 24 Week Feed Cost"/></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Before 24 Week Medicine Cost" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Before 24 Week Vaccine Cost" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Before 24 Week Vitmin Cost" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Before 24 Week Salary Cost" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true"><Text text ="Before 24 Week Other Cost" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="After 24 Week Feed Cost"/></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="After 24 Week Medicine Cost" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="After 24 Week Vaccine Cost" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="After 24 Week Vitmin  Cost" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="After 24 Week Salary Cost" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true"><Text text ="After 24 Week Farm OH" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true"><Text text ="After 24 Week Mortality Cost" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true"><Text text ="Amortization" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true"><Text text ="Balance Cost" /></Column>
+          
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                <Text text="{tblModel>batchname}" />
+								<Text text="{tblModel>purvalue}" />
+                                <Text text="{tblModel>beforefeedconcost}" />
+								<Text text="{tblModel>beforemedcost}" />
+								<Text text="{tblModel>beforevacccost}" />
+                                <Text text="{tblModel>beforevitcost}" />
+                                <Text text="{tblModel>beforesaleval}" />
+								<Text text="{tblModel>beforeotercost}" />
+								<Text text="{tblModel>afterfeedconcost}" />
+                                <Text text="{tblModel>aftermedcost}" />
+                                <Text text="{tblModel>aftervacccost}" />
+								<Text text="{tblModel>aftervitcost}" />
+								<Text text="{tblModel>aftersaleval}" />
+                                <Text text="{tblModel>afterotercost}" />
+                                 <Text text="{tblModel>afterotercost}" />
+                                <Text text="{tblModel>amotizationvalue}" />
+								<Text text="{tblModel>balancevalue}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                              </ScrollContainer>
+                        </VBox>
+                    </VBox>   
+                </f:content>                
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</mvc:View>

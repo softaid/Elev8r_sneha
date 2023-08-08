@@ -1,0 +1,58 @@
+
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Shed line"	
+		contentHeight="300px"
+		search="handleShedLineSearch"
+		confirm="onShedLineDialogClose"
+		cancel="onShedLineDialogClose"
+		items="{
+			path : 'shedLineListModel>/modelData',
+			sorter : {
+				path : 'id',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{shedLineListModel>id}" />
+                <Text text="{shedLineListModel>linename}" />
+                <Text text="{shedLineListModel>description}" />
+                <Text text="{shedLineListModel>capacity}" />            
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Line Id" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Line Name" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Description" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Capacity" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

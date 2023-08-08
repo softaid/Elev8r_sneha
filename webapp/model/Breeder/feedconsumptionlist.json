@@ -1,0 +1,31 @@
+{
+	"feedconsumptionlist": [
+		{
+			"itemCode" : "B001",
+            "itemDescription": "Breeder Female",
+            "type" : "",
+            "penName": "Line1",
+            "inStock" : 0.000,
+            "stdConsumption" : 0.000,
+            "suggestedConsumption" : 0.000,
+            "quantityFemale" : 0.000,
+            "quantityMale" : 0.000,
+            "quantity" : 0.000,
+            "unit" : ""
+        },
+        {
+			"itemCode" : "B002",
+            "itemDescription": "Breeder Male",
+            "type" : "",
+            "penName": "Line1",
+            "inStock" : 0.000,
+            "stdConsumption" : 0.000,
+            "suggestedConsumption" : 0.000,
+            "quantityFemale" : 0.000,
+            "quantityMale" : 0.000,
+            "quantity" : 0.000,
+            "unit" : ""
+		}
+				
+	]
+}

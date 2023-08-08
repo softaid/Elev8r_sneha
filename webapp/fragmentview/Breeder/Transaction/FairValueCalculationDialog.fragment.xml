@@ -1,0 +1,58 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Fair Value calculation"
+		contentHeight="300px"
+		search="handleSearch"
+		confirm="handleClose"
+		cancel="handleClose"
+		items="{
+			path : '/fairvaluecalculation',
+			sorter : {
+				path : 'docNo',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="" text="{docNo}" />
+				<Text text="{locationName}" />
+                <Text text="{batchName}" />
+                <Text text="{date}" />
+                <Text text="{remark}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Doc No" />
+				</header>
+			</Column>
+			<Column
+				demandPopin="true" >
+				<header>
+					<Text text="Location Name" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Batch Name" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Date" />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="Remark" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

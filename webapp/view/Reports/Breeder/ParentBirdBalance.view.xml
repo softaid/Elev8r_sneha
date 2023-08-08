@@ -1,0 +1,189 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Breeder.ParentBirdBalance" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Parent Bird Balance Report"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+
+                                         <form:FormElement label="{i18n>dailygodownstockreportlabelfromdate}">
+                                            <form:fields>
+                                                <DatePicker id="fromdate"  width="100%" value="{reportModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="onDateChange" />   
+                                            </form:fields>
+                                        </form:FormElement>
+                                      <form:FormElement label="{i18n>FlockDetailReportBatchName}">
+                                            <form:fields>
+                                            <MultiComboBox id="txtBreederToBatch"
+                                                selectionChange="batchSelectionChange"
+                                                selectionFinish="batchSelectionFinish"
+                                                width="500px"
+                                                items="{
+                                                    path: 'batchModel>/modelData',
+                                                    sorter: { path: 'Name' }
+                                                }">
+                                                <core:Item key="{batchModel>id}" text="{batchModel>batchname}" />
+                                            </MultiComboBox>
+                                            </form:fields>
+                                         </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                     <form:FormContainer>
+                                        <form:formElements>
+                                      <form:FormElement label="{i18n>dailygodownstockreportlabeltodate}">
+                                            <form:fields>
+                                                <DatePicker id="todate"  width="100%" value="{reportModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="onDateChange" />   
+                                            </form:fields>
+                                        </form:FormElement>
+                                         <form:FormElement label="">
+                                                <form:fields>
+                                                    <Button icon="sap-icon://search" type="Emphasized" text="Search Data" press="onSearchFlockExpencesBeforeReport"/>
+                                                </form:fields>
+                                            </form:FormElement>            
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                 
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                          
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel" width="200%"  sticky="ColumnHeaders"  growing="true"  growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'id'
+                                                    }
+                                                }"
+                                                 backgroundDesign="Solid">
+                                <headerToolbar>
+                                    <Toolbar>
+                                    <content>
+                                        <Title  level="H2"/>
+                                        <ToolbarSpacer />
+                                            <MenuButton icon="sap-icon://download">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="SaveCSV" icon="sap-icon://save" press="onDataExport" />
+                                                            <MenuItem text="SavePDF" icon="sap-icon://save" press="createPDF" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                          
+                                    </content>
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Flock Name" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Status" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Age" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Live Qty" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Pro Bird" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Mortality" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Chick Cost" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Feed Cost" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Medicine Cost" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Vaccine Cost" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Vitamin" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Transfer Cost" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Sales Cost" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Mortality Cost" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="OH Cost" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Other Expences" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Amortization" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Bird Stock Balance" /></Column> 
+                                      <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Bird Cost"/></Column> 
+                                   
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                             <Text text="{tblModel>batchname}" />
+                                            <Text text="{tblModel>phaseststus}" />
+                                            <Text text="{tblModel>ageinweek}" />
+                                            <Text text="{tblModel>liveqty}" />
+                                             <Text text="{tblModel>productivebird}" />
+                                            <Text text="{tblModel>mortality}" />
+                                            <Text text="{tblModel>purvalue}" />
+                                            <Text text="{tblModel>feedcost}" />
+                                             <Text text="{tblModel>medicost}" />
+                                            <Text text="{tblModel>vaccost}" />
+                                            <Text text="{tblModel>vitmcost}" />
+                                            <Text text="{tblModel>transfercost}" />
+                                            <Text text="{tblModel>salesvalue}" />
+                                            <Text text="{tblModel>mortality}" />
+                                            <Text text="{tblModel>ohexp}" />
+                                             <Text text="{tblModel>otexp}" />
+                                             <Text text="{tblModel>amortizationvalue}" />
+                                            <Text text="{tblModel>balancevalue}" />
+                                            <Text text="{tblModel>birdcost}" />
+                                          
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+            
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

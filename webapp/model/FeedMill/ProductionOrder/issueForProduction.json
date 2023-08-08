@@ -1,0 +1,115 @@
+{   
+    "issueforproduction":[
+        {
+            "number" : "PROD 001",
+            "series" : "Series 1",
+            "numberOfBatches" : 10,
+            "batchQuantity" : 100,
+            "postingDate" : "2018/07/15",
+            "ref2" : "",
+            "details":[
+				{
+                    "orderNumber": "Order 001",
+                    "seriesNumber": "Series 1",
+                    "rowNumber": "Row 1",
+                    "itemNumber" : "ITEM 001",
+                    "itemDescription" : "Demo",
+                    "quantity": 36.555,
+                    "warehouse" : "Warehouse 1"
+				},
+				{
+					"orderNumber": "Order 002",
+                    "seriesNumber": "Series 2",
+                    "rowNumber": "Row 2",
+                    "itemNumber" : "ITEM 002",
+                    "itemDescription" : "Demo",
+                    "quantity": 40,
+                    "warehouse" : "Warehouse 2"
+				},
+				{
+					"orderNumber": "Order 003",
+                    "seriesNumber": "Series 3",
+                    "rowNumber": "Row 3",
+                    "itemNumber" : "ITEM 003",
+                    "itemDescription" : "Test",
+                    "quantity": 36,
+                    "warehouse" : "Warehouse 3"
+				}
+        	]
+        },
+        {
+            "number" : "PROD 002",
+            "series" : "Series 2",
+            "numberOfBatches" : 5,
+            "batchQuantity" : 100,
+            "postingDate" : "2018/07/25",
+            "ref2" : "",
+            "details":[
+				{
+                    "orderNumber": "Order 001",
+                    "seriesNumber": "Series 1",
+                    "rowNumber": "Row 1",
+                    "itemNumber" : "ITEM 001",
+                    "itemDescription" : "Demo",
+                    "quantity": 36.555,
+                    "warehouse" : "Warehouse 1"
+				},
+				{
+					"orderNumber": "Order 002",
+                    "seriesNumber": "Series 2",
+                    "rowNumber": "Row 2",
+                    "itemNumber" : "ITEM 002",
+                    "itemDescription" : "Demo",
+                    "quantity": 40,
+                    "warehouse" : "Warehouse 2"
+				},
+				{
+					"orderNumber": "Order 003",
+                    "seriesNumber": "Series 3",
+                    "rowNumber": "Row 3",
+                    "itemNumber" : "ITEM 003",
+                    "itemDescription" : "Test",
+                    "quantity": 36,
+                    "warehouse" : "Warehouse 3"
+				}
+        	]
+        },
+        {
+            "number" : "PROD 003",
+            "series" : "Series 3",
+            "numberOfBatches" : 50,
+            "batchQuantity" : 10,
+            "postingDate" : "2018/07/05",
+            "ref2" : "",
+            "details":[
+				{
+                    "orderNumber": "Order 001",
+                    "seriesNumber": "Series 1",
+                    "rowNumber": "Row 1",
+                    "itemNumber" : "ITEM 001",
+                    "itemDescription" : "Demo",
+                    "quantity": 36.555,
+                    "warehouse" : "Warehouse 1"
+				},
+				{
+					"orderNumber": "Order 002",
+                    "seriesNumber": "Series 2",
+                    "rowNumber": "Row 2",
+                    "itemNumber" : "ITEM 002",
+                    "itemDescription" : "Demo",
+                    "quantity": 40,
+                    "warehouse" : "Warehouse 2"
+				},
+				{
+					"orderNumber": "Order 003",
+                    "seriesNumber": "Series 3",
+                    "rowNumber": "Row 3",
+                    "itemNumber" : "ITEM 003",
+                    "itemDescription" : "Test",
+                    "quantity": 36,
+                    "warehouse" : "Warehouse 3"
+				}
+        	]
+        }
+    ]
+}

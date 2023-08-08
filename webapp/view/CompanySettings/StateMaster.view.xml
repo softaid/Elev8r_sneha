@@ -1,0 +1,55 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.CompanySettings.StateMaster" height="100%"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:core="sap.ui.core"
+  xmlns:u="sap.ui.unified">
+
+   
+	<VBox fitContainer="true">
+        <Table id="tblPhase"
+               inset="false" 
+               items="{
+                        path: 'stateMasterModel>/statemastercollection',
+                        sorter: {
+                            path: ''
+                        }
+                    }">
+	        <headerToolbar>
+			    <Toolbar>
+				    <content>
+					    <Title text="State Master" level="H2"/>
+					    <ToolbarSpacer />
+                     <SearchField search="onSearch" width="17.5rem"/>
+		
+		<Button
+			text="Upload File"
+			press="handleUploadPress"/>
+
+			           <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/> 
+			            <Button icon="sap-icon://sort" type="Transparent" press="onSort"/>
+                         
+				    </content>
+			    </Toolbar>
+		    </headerToolbar>
+            <columns>                
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Code" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Name" /></Column>
+                
+              		
+            </columns>
+            <items>
+                <ColumnListItem type="Navigation" press="showtable">
+                    <cells>                        
+                        <Text text="{stateMasterModel>Code}"  />
+                        <Text text="{stateMasterModel>Name}"  />
+                                                               
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+ <Title text="" level="H2"/>
+ <Title text="" level="H2"/>
+       
+	</VBox>
+   
+</core:View>

@@ -1,0 +1,74 @@
+
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select CBF Growing Charges"	
+		contentHeight="300px"
+		search="handleGrowingChargeSearch"
+		confirm="onGrowingChargeClose"
+		cancel="onGrowingChargeClose"
+		items="{
+			path : 'cbfGrowingChargesModel>/modelData',
+			sorter : {
+				path : 'id',
+				descending : true
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{cbfGrowingChargesModel>cbf_batchid}" />
+                <Text text="{cbfGrowingChargesModel>farmer_name}" />
+                <Text text="{cbfGrowingChargesModel>farm_name}" />   
+                <Text text="{cbfGrowingChargesModel>branchname}" />                                     
+                <Text text="{cbfGrowingChargesModel>netpayableamt}" />                                     
+                <Text text="{cbfGrowingChargesModel>refname}" />                                     
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Batch ID" />
+				</header>
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Farmer Name" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Farm Name" />
+				</header>
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Branch" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Net Amt(₹)" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Status" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,20 @@
+specVersion: '2.6'
+metadata:
+  name: PoultryOS_ERP
+type: application
+framework:
+  name: SAPUI5
+  version: "1.109.3"
+  libraries:
+    - name: sap.f
+    - name: sap.m
+    - name: sap.suite.ui.commons
+    - name: sap.tnt
+    - name: sap.ui.commons
+    - name: sap.ui.core
+    - name: sap.ui.table
+    - name: sap.ui.ux3
+    - name: sap.ushell
+    - name: sap.uxap
+    - name: sap.viz
+    - name: themelib_sap_belize

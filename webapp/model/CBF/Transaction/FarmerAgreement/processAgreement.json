@@ -1,0 +1,136 @@
+{   
+    "processagreement":[
+        {
+            "bpCode" : "BP 001",
+            "bpName" : "BP 1",
+            "contactPerson" : "Person 1",
+            "telephoneNumber" : "020-555555",
+            "email" : "xyz@gmail.com",
+            "farmName" : "Farm 1",
+            "chickCapacity" : "1000",
+            "description" : "Demo",
+            "number" : "1718",
+            "number1" : "1718",
+            "agreementMethod" : "Method 1",
+            "startDate" : "2018/07/15",
+            "endDate" : "2018/07/15",
+            "terminationDate" : "2018/07/15",
+            "signingDate" : "2018/07/15",
+            "scheme" : "Scheme 1",
+            "details":[
+				{
+					"agreementType" : "Manual",
+                    "setlmentProbability": "20%",
+                    "status": "Open",
+                    "owner": "Owner 1",
+                    "reminder" : "10.21",
+                    "reminder1" : "2018/07/14"
+				},
+				{
+					"agreementType" : "Manual",
+                    "setlmentProbability": "25%",
+                    "status": "Open",
+                    "owner": "Owner 2",
+                    "reminder" : "05.15",
+                    "reminder1" : "2018/07/14"
+				},
+				{
+					"agreementType" : "Manual",
+                    "setlmentProbability": "30%",
+                    "status": "Open",
+                    "owner": "Owner 3",
+                    "reminder" : "11.21",
+                    "reminder1" : "2018/07/14"
+				}
+        	]
+        },
+        {
+            "bpCode" : "BP 002",
+            "bpName" : "BP 2",
+            "contactPerson" : "Person 2",
+            "telephoneNumber" : "020-555555",
+            "email" : "abc@gmail.com",
+            "farmName" : "Farm 2",
+            "chickCapacity" : "5000",
+            "description" : "Demo",
+            "number" : "1718",
+            "number1" : "1718",
+            "agreementMethod" : "Method 2",
+            "startDate" : "2018/07/17",
+            "endDate" : "2018/07/17",
+            "terminationDate" : "2018/07/17",
+            "signingDate" : "2018/07/17",
+            "scheme" : "Scheme 2",
+            "details":[
+				{
+					"agreementType" : "Manual",
+                    "setlmentProbability": "20%",
+                    "status": "Open",
+                    "owner": "Owner 1",
+                    "reminder" : "10.21",
+                    "reminder1" : "2018/07/16"
+				},
+				{
+					"agreementType" : "Manual",
+                    "setlmentProbability": "25%",
+                    "status": "Open",
+                    "owner": "Owner 2",
+                    "reminder" : "05.15",
+                    "reminder1" : "2018/07/16"
+				},
+				{
+					"agreementType" : "Manual",
+                    "setlmentProbability": "30%",
+                    "status": "Open",
+                    "owner": "Owner 3",
+                    "reminder" : "11.21",
+                    "reminder1" : "2018/07/16"
+				}
+        	]
+        },
+        {
+            "bpCode" : "BP 003",
+            "bpName" : "BP 3",
+            "contactPerson" : "Person 3",
+            "telephoneNumber" : "020-555555",
+            "email" : "pqr@gmail.com",
+            "farmName" : "Farm 3",
+            "chickCapacity" : "3000",
+            "description" : "Demo",
+            "number" : "1718",
+            "number1" : "1718",
+            "agreementMethod" : "Method 3",
+            "startDate" : "2018/07/25",
+            "endDate" : "2018/07/25",
+            "terminationDate" : "2018/07/25",
+            "signingDate" : "2018/07/25",
+            "scheme" : "Scheme 3",
+            "details":[
+				{
+					"agreementType" : "Manual",
+                    "setlmentProbability": "20%",
+                    "status": "Open",
+                    "owner": "Owner 1",
+                    "reminder" : "10.21",
+                    "reminder1" : "2018/07/24"
+				},
+				{
+					"agreementType" : "Manual",
+                    "setlmentProbability": "25%",
+                    "status": "Open",
+                    "owner": "Owner 2",
+                    "reminder" : "05.15",
+                    "reminder1" : "2018/07/24"
+				},
+				{
+					"agreementType" : "Manual",
+                    "setlmentProbability": "30%",
+                    "status": "Open",
+                    "owner": "Owner 3",
+                    "reminder" : "11.21",
+                    "reminder1" : "2018/07/24"
+				}
+        	]
+        }
+    ]
+}

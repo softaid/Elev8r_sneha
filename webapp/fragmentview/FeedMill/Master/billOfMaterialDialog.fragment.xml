@@ -1,0 +1,62 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Item"	
+		contentHeight="300px"
+		search="handleBOMSearch"
+		confirm="handleBOMClose"
+		cancel="handleBOMClose"
+			items="{
+			path : 'billOfMaterialList>/modelData'
+			
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{billOfMaterialList>bomcode}" />
+				<Text text="{billOfMaterialList>itemname}" />
+				<Text text="{billOfMaterialList>quantity}" />
+                <Text text="{billOfMaterialList>employeename}" />
+				 <Text text="{billOfMaterialList>bomdate}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+		<Column>
+				<header>
+					<Text text="BOM Code" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Product Name" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End" >
+				<header>
+					<Text text="Quantity" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End" >
+				<header>
+					<Text text="Created By" />
+				</header>
+			</Column>
+             <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End" >
+				<header>
+					<Text text="Date" />
+				</header>
+			</Column>
+            
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

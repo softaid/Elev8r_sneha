@@ -1,0 +1,162 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Breeder.BatchValuationReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+    <f:title>
+        <f:DynamicPageTitle>
+            <f:heading>
+                <Title text="Batch Valuation Report"/>
+            </f:heading>
+            <f:actions>                           
+            </f:actions>
+        </f:DynamicPageTitle>
+	</f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <VBox>
+                    <form:Form editable="true">
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="2"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+                            <form:FormContainer title="">
+                                <form:formElements>
+                                    <form:FormElement label="Batch Name">
+                                        <form:fields>
+                                            <Input
+                                                id = "textBatch"
+                                                type="Text"
+                                                placeholder="Select Batch"
+                                                showSuggestion="true"
+                                                showValueHelp="true"    
+                                                valueHelpOnly="true"
+                                                value="{batchvaluationModel>/batchname}"
+                                                valueHelpRequest="handleBrdBatchValueHelp">
+                                            </Input>
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                            <form:FormContainer>
+                                <form:formElements>
+                                  <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Search Data" width="100%" press="onSearchData"/>
+                                                <MenuButton icon="sap-icon://download" width="50%" align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="SaveCSV" icon="sap-icon://save" press="onDataExport" />
+                                                            <MenuItem text="SavePDF" icon="sap-icon://save" press="onPdfExport" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                        </form:formContainers>
+                    </form:Form>
+                </VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>	
+            <HBox fitContainer="true">
+                <ScrollContainer
+                    height="100%"
+                    width="100%"
+                    horizontal="true"
+                    vertical="true"
+                    focusable="true">
+
+                    <Table id="batchvaluationtbl" width="200%" growing="true" growingScrollToLoad="true" sticky="ColumnHeaders" 
+                    items="{
+                        path: 'batchvaluationtblModel>/modelData',
+                            sorter: {
+                                path: 'id'
+                            }
+                        }"
+                        mode="none"
+                        backgroundDesign="Solid">
+                        <columns>
+                            <Column><Label text ="Date" /></Column>
+                            <Column><Label text ="Age in Weeks" /></Column>
+                            <Column><Label text ="Age in Days" /></Column>
+                            <Column><Label text ="Op. Male" /></Column>
+                            <Column><Label text ="Op. Female" /></Column>
+                            <Column><Label text ="Feed Cost" /></Column>
+                            <Column><Label text ="Medicines Cost" /></Column>
+                            <Column><Label text ="Admin Cost" /></Column>
+                            <Column><Label text ="Op. Valuation" /></Column>
+                            <Column><Label text ="Todays Valuation" /></Column>
+                            <Column><Label text ="Total Collected HE" /></Column>
+                            <Column><Label text ="Cost/Egg" /></Column>
+                            <Column><Label text ="Amort. Cost/Egg" /></Column>
+                            <Column><Label text ="Prod. Cost/Egg" /></Column>
+                            <Column><Label text ="Eggs Valuation" /></Column>
+                            <Column><Label text ="Current Valuation" /></Column>
+                            <Column><Label text ="Cost/Bird" /></Column>
+                            <Column><Label text ="Bird Sold" /></Column>
+                            <Column><Label text ="Bird Sold Amount" /></Column>
+                            <Column><Label text ="Final Flock Valuation " /></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                            <customData>
+                                <core:CustomData key="batch" writeToDom="true"></core:CustomData>
+                            </customData>
+                                <cells>
+                                    <Text text="{batchvaluationtblModel>transactiondate}" />
+                                    <Text text="{batchvaluationtblModel>ageinweek}" />
+                                    <Text text="{batchvaluationtblModel>ageindays}" />
+                                    <Text text="{batchvaluationtblModel>maleopeningbalance}" />
+                                    <Text text="{batchvaluationtblModel>femaleopeningbalance}" />
+                                    <Text text="{batchvaluationtblModel>feedcost}" />
+                                    <Text text="{batchvaluationtblModel>medicinecost}" />
+                                    <Text text="{batchvaluationtblModel>overheadexp}" />
+                                    <Text text="{batchvaluationtblModel>openingvaluation}" />
+                                    <Text text="{batchvaluationtblModel>todaysvaluation}" />
+                                    <Text text="{batchvaluationtblModel>totalcollectedhe}" />
+                                    <Text text="{batchvaluationtblModel>costperegg}" />
+                                    <Text text="{batchvaluationtblModel>amortizationcostperegg}" />
+                                    <Text text="{batchvaluationtblModel>productioncostperegg}" />
+                                    <Text text="{batchvaluationtblModel>eggsvaluation}" />
+                                    <Text text="{batchvaluationtblModel>currentvaluation}" />
+                                    <Text text="{batchvaluationtblModel>costperbird}" />
+                                    <Text text="{batchvaluationtblModel>birdsold}" />
+                                    <Text text="{batchvaluationtblModel>birdsoldamount}" />
+                                    <Text text="{batchvaluationtblModel>finalflockvaluation}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </ScrollContainer>
+            </HBox>
+        </f:content>                  
+	</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

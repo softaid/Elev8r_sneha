@@ -1,0 +1,39 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="{i18n>ChicksPullOutDialogSelectChicksPullOutEntry}"	
+		contentHeight="300px"
+		search="handleOpeningSearch"
+		confirm="handleOpeningClose"
+		cancel="handleOpeningClose"
+		items="{
+			path : 'openingBalanceList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+                <Text text="{openingBalanceList>id}" />
+				<Text text="{openingBalanceList>settingno}" />
+                <Text text="{openingBalanceList>stage}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+         <Column>
+				<header>
+					<Text text="Doc NO." />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Setting No." />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="Stage" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Party"
+		contentHeight="300px"
+		search="handleIndirectCostHeadsSearch"
+		confirm="handleIndirectCostHeadsClose"
+		cancel="handleIndirectCostHeadsClose"
+		items="{
+			path : 'indirectcostheadsModel>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{indirectcostheadsModel>id}" />
+				<Text text="{indirectcostheadsModel>resourcename}" />
+                <Text text="{indirectcostheadsModel>leadger}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="ID" />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Resource Name" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Leadger" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

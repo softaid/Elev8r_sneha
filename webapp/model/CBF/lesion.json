@@ -1,0 +1,34 @@
+{
+	"lesion": [
+		{
+			"code" : 1,
+            "organname": "Intestine",
+            "lesion": "Coccidisis"
+		},
+		{
+			"code" : 2,
+            "organname": "Bursa",
+            "lesion": "IBD"
+		},
+		{
+			"code" : 3,
+            "organname": "Heart/Liver",
+            "lesion": "Ecoli"
+		},
+		{
+			"code" : 4,
+            "organname": "Proventricular",
+            "lesion": "Haemorrhages"
+        },
+        {
+			"code" : 5,
+            "organname": "Peritonium cavity",
+            "lesion": "Blood in peritonial cavitty"
+        },
+        {
+			"code" : 6,
+            "organname": "Lungs",
+            "lesion": "Fluid/pus"
+		}		
+	]
+}

@@ -1,0 +1,22 @@
+{
+    "sa_chartofaccount": [
+            {
+                "id": "1",
+                "categoryid": "1",
+                "coaname": " Tangible Fixed Assets",
+                "glcode": "11100000",
+                "coatypeid": "1001",
+                "isparent": "1",
+                "groupid": "452",
+                "iscontrolacc": "0",
+                "isblockmanualposting": "1",
+                "iscashacc": "0",
+                "isproject": "1",
+                "projectid": "0",
+                "is_deleted": "0",
+                "isactive": "1",
+                "iscostcenterapplicable": "1"
+            }
+        ]
+    
+}

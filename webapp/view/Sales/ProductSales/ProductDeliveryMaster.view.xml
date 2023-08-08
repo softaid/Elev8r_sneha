@@ -1,0 +1,34 @@
+<View displayBlock="true"    
+   xmlns:f="sap.f"
+   xmlns:mvc="sap.ui.core.mvc" 
+   xmlns="sap.m"
+   controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.ProductSales.ProductDeliveryMaster" height="100%">
+    <f:FlexibleColumnLayout  id="fclProductDeliveryMaster" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="Product Delivery"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+						   <mvc:XMLView viewName="sap.ui.elev8rerp.componentcontainer.view.Sales.ProductSales.ProductDeliveryList"></mvc:XMLView>
+				
+	                <!-- <IconTabBar selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
+	                    <items>
+		                   <IconTabFilter text="New" key="new">
+		                      <mvc:XMLView viewName="sap.ui.elev8rerp.componentcontainer.view.Sales.ProductDelivery.ProductDeliveryList"></mvc:XMLView>
+		                   </IconTabFilter>
+
+                           <IconTabFilter text="Processed" key="processed">
+                           </IconTabFilter>      
+
+	                    </items>
+                    </IconTabBar> -->
+                </f:content>
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</View>

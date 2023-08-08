@@ -1,0 +1,155 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Purchase.PurchaseOrderReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Purchase Order Register Report"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+
+                                         <form:FormElement label="{i18n>purchaseRegisterReportLableFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromDate" required="true"          
+                                                    value="{PurchaseOrderReportModel>/fromdate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}" 
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="onDateChange"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>  
+                                         <form:FormElement label="{i18n>purchaseRegisterReportLableToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtToDate" required="true" 
+                                                value="{PurchaseOrderReportModel>/todate}" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="dd/MM/YYYY"
+                                                change="onDateChange"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement> 
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                     <form:FormContainer title="">
+                                        <form:formElements>
+                                              <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="getPurchaseReport"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+
+                        <HBox fitContainer="true">
+                          
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel" width="200%"   growing="true" enableHorizontalScrollbar= "true" growingScrollToLoad="true" visibleRowCount="5" items="{
+                                                path: 'tblModel>/modelData',
+                                                      sorter: {
+                                                               path: 'purchaseorderno',
+							                                   group: 'true'	
+                                                                }
+                                                }"
+                                                mode="single" backgroundDesign="Solid">
+                              
+                                <columns>
+                                        <Column mergeDuplicates="true" minScreenWidth="Tablet"><Text text ="Purchase Order No" /></Column>                                  
+                                        <Column   minScreenWidth="Tablet" ><Text text ="{i18n>purchaseorderpartyname}" /></Column>
+                                        <Column   minScreenWidth="Tablet"  demandPopin="true" 	hAlign="End" ><Text text ="Purchase Order Date" /></Column>
+                                        <Column   minScreenWidth="Tablet"  demandPopin="true" 	hAlign="End"><Text text ="{i18n>purchaseorderitemname}" /></Column>
+                                        <Column   minScreenWidth="Tablet"  demandPopin="true"	hAlign="End" ><Text text ="{i18n>purchaseorderunitname}" /></Column>
+                                        <Column   minScreenWidth="Tablet"  demandPopin="true"	hAlign="End" ><Text text ="Quantity" /></Column>
+                                        <Column   minScreenWidth="Tablet"  demandPopin="true" 	hAlign="End"><Text text ="{i18n>purchaseorderunitcost}" /></Column>
+                                        <Column   minScreenWidth="Tablet"  demandPopin="true" 	hAlign="End"><Text text ="Discount(%)" /></Column>
+                                        <Column   minScreenWidth="Tablet"  demandPopin="true"	hAlign="End" ><Text text ="Line Total" /></Column>
+                                        <Column   minScreenWidth="Tablet"  demandPopin="true"	hAlign="End" ><Text text ="SGST Amount" /></Column>
+                                        <Column   minScreenWidth="Tablet"  demandPopin="true"	hAlign="End" ><Text text ="CGST Amount" /></Column>
+                                        <Column   minScreenWidth="Tablet"  demandPopin="true"	hAlign="End" ><Text text ="IGST Amount" /></Column>
+                                        <Column   minScreenWidth="Tablet"  demandPopin="true"	hAlign="End" ><Text text ="Total" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>                
+                                            <Text text="{tblModel>purchaseorderno}" />
+                                            <Text text="{tblModel>partyname}" />
+                                            <Text text="{tblModel>podate}" />
+                                            <Text text="{tblModel>itemname}" />
+                                            <Text text="{tblModel>itemunitname}" />
+                                            <Text text="{tblModel>quantity}" />
+                                            <Text text="{tblModel>unitprice}" />
+                                            <Text text="{tblModel>itemdiscount}" />
+                                            <Text text="{tblModel>linetotal}" />
+                                            <Text text="{tblModel>sgstamount}"/>
+                                            <Text text="{tblModel>cgstamount}"/>
+                                            <Text text="{tblModel>igstamount}"/>
+                                            <Text text="{tblModel>Total}" /> 
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                    </f:content>
+			</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

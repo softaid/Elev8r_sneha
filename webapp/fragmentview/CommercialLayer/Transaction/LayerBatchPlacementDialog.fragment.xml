@@ -1,0 +1,63 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="Select Layer Batch Placement"
+		contentHeight="300px"
+		search="handleLayerBatchPlacementSearch"
+		confirm="handleLayerBatchPlacementClose"
+		cancel="handleLayerBatchPlacementClose"
+		items="{
+			path : 'layerBatchPlacementModel>/modelData',
+			sorter : {
+				path : 'code',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{layerBatchPlacementModel>id}" />
+				<Text text="{layerBatchPlacementModel>locationname}" />
+				<Text text="{layerBatchPlacementModel>batchname}" />
+                <Text text="{layerBatchPlacementModel>placementdate}" />
+				<Text text="{layerBatchPlacementModel>grpono}" />
+                <Text text="{layerBatchPlacementModel>phasestatus}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Doc No." />
+				</header>
+			</Column>
+            <Column demandPopin="true" >
+				<header>
+					<Text text="Location" />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Layer Batch" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Placement Date" />
+				</header>
+			</Column>
+			<Column
+				demandPopin="true" >
+				<header>
+					<Text text="GRPO No." />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="Phase Status" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

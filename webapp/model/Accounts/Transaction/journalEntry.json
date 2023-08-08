@@ -1,0 +1,32 @@
+{
+	"journalentry": [
+		{
+			"id" : 1,
+			"ledgerName" : "AnnualLedger",
+			"acGroup" : "Bank",
+			"openingBalance" : "10000",
+			"description" : "TEST",
+			"bankName" : "Swargate",
+			"mapToSystemKey" : "F_SUPPIER_PAYABLE_LEDGER"
+		},
+		{
+			"id" : 2,
+			"ledgerName" : "SportLedger",
+			"acGroup" : "Bank",
+			"openingBalance" : "20000",
+			"description" : "TEST",
+			"bankName" : "Swargate",
+			"mapToSystemKey" : "F_SUPPIER_PAYABLE_LEDGER"
+		},
+		{
+			"id" : 3,
+			"ledgerName" : "ExamLedger",
+			"acGroup" : "Bank",
+			"openingBalance" : "5000",
+			"description" : "TEST",
+			"bankName" : "Swargate",
+			"mapToSystemKey" : "F_SUPPIER_PAYABLE_LEDGER"
+		}
+			
+	]
+}

@@ -1,0 +1,384 @@
+{
+	"fairvaluecalculation": [
+		{
+			"docNo" : 1,
+            "locationName": "Horana",
+            "batchName" : "HR1",
+            "date" : "03/08/18",
+            "avgNoOfBirdsPerFarmGrower" : 567,
+            "costOfDayOneBird" : 23.00,
+            "costOfBirdsInput" : 32.00,
+            "costOfFMVV" : 32.00,
+            "mortalityPercentageGrower" : 12.00,
+            "costOfBirdWhenTransferred" : 11.00,
+            "totalCostIncurredPerBird" : 13.00,
+            "totalCostIncurredInGrowerFarm" : 34.00,
+            "avgNoOfBirdsPerFarmLayer" : 545,
+            "mortalityPercentageLayer" : 0.00,
+            "ageOfBirdsInFarm" : 37,
+            "averageLifeOfBirdsInFarm" : 32,
+            "avgProbabilityOfEggs" : 532.00,
+            "breakageOfEggs" :  323.00,
+            "costOfDisposingEgg" : 233.00,
+            "avgSalePriceOfHatchedBird" : 23.00,
+            "sellingPriceOfTableBird" : 23.00,
+            "avgWeightOfBirdAtEndOfLifeTime" : 2.00,
+            "avgPerKiloPrice" : 1.50,
+            "electricityConsumptionCostPerWeek" : 22.00,
+            "beddingMaterialCostPerWeek" : 111.00,
+            "totalCostIncurred" : 34.00,
+            "lessSalesProceedFromBirds" : 1536.900,
+            "amortizedValueCurrent" : -1502.900,
+            "fairValueAtW24" : 334331.000,
+            "fairValueAtW68" : 332111.000,
+            "amortizedValueProposed" : 2220.000,
+            "difference" : -3722.900,
+            "COGSAccountCode" : "_SYS00036",
+            "COGSAccountName" : "Cost-Parent Grower(MKT)",
+            "AssetAccountCode" : "_SYS00026",
+            "AssetAccountName" : "Land(GEN)",
+            "remark" : "Journal Entry 1",
+            
+			"layerFarmDetails":[
+				{
+					"week" : "Week1",
+					"avgNoOfLaidEgg" : 0,
+					"hatchingEgg" : 223.00
+                },
+                {
+					"week" : "Week2",
+					"avgNoOfLaidEgg" : 2,
+					"hatchingEgg" : 102.00
+				}
+            ],
+            "monthlyExpenseDetails" :[
+                {
+					"month" : "January",
+					"ageInWeek" : 24,
+                    "feed" : 0.00,
+                    "drugs" : 0.00,
+                    "salaries" : 0.00,
+                    "disinfectant" : 0.00,
+                    "electricityConsumption" : 0.00,
+                    "beddingMaterialCost" : 0.00,
+                    "total" : 0.00
+                },
+                {
+					"month" : "February",
+					"ageInWeek" : 24,
+                    "feed" : 0.00,
+                    "drugs" : 0.00,
+                    "salaries" : 0.00,
+                    "disinfectant" : 0.00,
+                    "electricityConsumption" : 0.00,
+                    "beddingMaterialCost" : 0.00,
+                    "total" : 0.00
+                }
+            ]
+		},
+		{
+            "docNo" : 2,
+            "locationName": "Horana 2",
+            "batchName" : "HR2",
+            "date" : "04/09/18",
+            "avgNoOfBirdsPerFarmGrower" : 567,
+            "costOfDayOneBird" : 23.00,
+            "costOfBirdsInput" : 32.00,
+            "costOfFMVV" : 32.00,            
+            "mortalityPercentageGrower" : 12.00,
+            "costOfBirdWhenTransferred" : 11.00,
+            "totalCostIncurredPerBird" : 13.00,
+            "totalCostIncurredInGrowerFarm" : 34.00,
+            "avgNoOfBirdsPerFarmLayer" : 545,
+            "mortalityPercentageLayer" : 0.00,
+            "ageOfBirdsInFarm" : 37,
+            "averageLifeOfBirdsInFarm" : 32,
+            "avgProbabilityOfEggs" : 532.00,
+            "breakageOfEggs" :  323.00,
+            "costOfDisposingEgg" : 233.00,
+            "avgSalePriceOfHatchedBird" : 23.00,
+            "sellingPriceOfTableBird" : 23.00,
+            "avgWeightOfBirdAtEndOfLifeTime" : 2.00,
+            "avgPerKiloPrice" : 1.50,
+            "electricityConsumptionCostPerWeek" : 22.00,
+            "beddingMaterialCostPerWeek" : 111.00,
+            "totalCostIncurred" : 34.00,
+            "lessSalesProceedFromBirds" : 1536.900,
+            "amortizedValueCurrent" : -1502.900,
+            "fairValueAtW24" : 334331.000,
+            "fairValueAtW68" : 332111.000,
+            "amortizedValueProposed" : 2220.000,
+            "difference" : -3722.900,
+            "COGSAccountCode" : "_SYS00036",
+            "COGSAccountName" : "Cost-Parent Grower(MKT)",
+            "AssetAccountCode" : "_SYS00026",
+            "AssetAccountName" : "Land(GEN)",
+            "remark" : "Journal Entry 1",
+            
+			"layerFarmDetails":[
+				{
+					"week" : "Week1",
+					"avgNoOfLaidEgg" : 0,
+					"hatchingEgg" : 223.00
+                },
+                {
+					"week" : "Week2",
+					"avgNoOfLaidEgg" : 2,
+					"hatchingEgg" : 102.00
+				}
+            ],
+            "monthlyExpenseDetails" :[
+                {
+					"month" : "January",
+					"ageInWeek" : 24,
+                    "feed" : 0.00,
+                    "drugs" : 0.00,
+                    "salaries" : 0.00,
+                    "disinfectant" : 0.00,
+                    "electricityConsumption" : 0.00,
+                    "beddingMaterialCost" : 0.00,
+                    "total" : 0.00
+                },
+                {
+					"month" : "February",
+					"ageInWeek" : 24,
+                    "feed" : 0.00,
+                    "drugs" : 0.00,
+                    "salaries" : 0.00,
+                    "disinfectant" : 0.00,
+                    "electricityConsumption" : 0.00,
+                    "beddingMaterialCost" : 0.00,
+                    "total" : 0.00
+                }
+            ]
+		},
+		{
+			"docNo" : 3,
+            "locationName": "Horana3",
+            "batchName" : "HR3",
+            "date" : "03/08/18",
+            "avgNoOfBirdsPerFarmGrower" : 567,
+            "costOfDayOneBird" : 23.00,
+            "costOfBirdsInput" : 32.00,
+            "costOfFMVV" : 32.00,            
+            "mortalityPercentageGrower" : 12.00,
+            "costOfBirdWhenTransferred" : 11.00,
+            "totalCostIncurredPerBird" : 13.00,
+            "totalCostIncurredInGrowerFarm" : 34.00,
+            "avgNoOfBirdsPerFarmLayer" : 545,
+            "mortalityPercentageLayer" : 0.00,
+            "ageOfBirdsInFarm" : 37,
+            "averageLifeOfBirdsInFarm" : 32,
+            "avgProbabilityOfEggs" : 532.00,
+            "breakageOfEggs" :  323.00,
+            "costOfDisposingEgg" : 233.00,
+            "avgSalePriceOfHatchedBird" : 23.00,
+            "sellingPriceOfTableBird" : 23.00,
+            "avgWeightOfBirdAtEndOfLifeTime" : 2.00,
+            "avgPerKiloPrice" : 1.50,
+            "electricityConsumptionCostPerWeek" : 22.00,
+            "beddingMaterialCostPerWeek" : 111.00,
+            "totalCostIncurred" : 34.00,
+            "lessSalesProceedFromBirds" : 1536.900,
+            "amortizedValueCurrent" : -1502.900,
+            "fairValueAtW24" : 334331.000,
+            "fairValueAtW68" : 332111.000,
+            "amortizedValueProposed" : 2220.000,
+            "difference" : -3722.900,
+            "COGSAccountCode" : "_SYS00036",
+            "COGSAccountName" : "Cost-Parent Grower(MKT)",
+            "AssetAccountCode" : "_SYS00026",
+            "AssetAccountName" : "Land(GEN)",
+            "remark" : "Journal Entry 1",
+            
+			"layerFarmDetails":[
+				{
+					"week" : "Week1",
+					"avgNoOfLaidEgg" : 0,
+					"hatchingEgg" : 223.00
+                },
+                {
+					"week" : "Week2",
+					"avgNoOfLaidEgg" : 2,
+					"hatchingEgg" : 102.00
+				}
+            ],
+            "monthlyExpenseDetails" :[
+                {
+					"month" : "January",
+					"ageInWeek" : 24,
+                    "feed" : 0.00,
+                    "drugs" : 0.00,
+                    "salaries" : 0.00,
+                    "disinfectant" : 0.00,
+                    "electricityConsumption" : 0.00,
+                    "beddingMaterialCost" : 0.00,
+                    "total" : 0.00
+                },
+                {
+					"month" : "February",
+					"ageInWeek" : 24,
+                    "feed" : 0.00,
+                    "drugs" : 0.00,
+                    "salaries" : 0.00,
+                    "disinfectant" : 0.00,
+                    "electricityConsumption" : 0.00,
+                    "beddingMaterialCost" : 0.00,
+                    "total" : 0.00
+                }
+            ]
+		},
+		{
+			"docNo" : 4,
+            "locationName": "Horana4",
+            "batchName" : "HR4",
+            "date" : "09/07/18",
+            "avgNoOfBirdsPerFarmGrower" : 567,
+            "costOfDayOneBird" : 23.00,
+            "costOfBirdsInput" : 32.00,
+            "costOfFMVV" : 32.00,            
+            "mortalityPercentageGrower" : 12.00,
+            "costOfBirdWhenTransferred" : 11.00,
+            "totalCostIncurredPerBird" : 13.00,
+            "totalCostIncurredInGrowerFarm" : 34.00,
+            "avgNoOfBirdsPerFarmLayer" : 545,
+            "mortalityPercentageLayer" : 0.00,
+            "ageOfBirdsInFarm" : 37,
+            "averageLifeOfBirdsInFarm" : 32,
+            "avgProbabilityOfEggs" : 532.00,
+            "breakageOfEggs" :  323.00,
+            "costOfDisposingEgg" : 233.00,
+            "avgSalePriceOfHatchedBird" : 23.00,
+            "sellingPriceOfTableBird" : 23.00,
+            "avgWeightOfBirdAtEndOfLifeTime" : 2.00,
+            "avgPerKiloPrice" : 1.50,
+            "electricityConsumptionCostPerWeek" : 22.00,
+            "beddingMaterialCostPerWeek" : 111.00,
+            "totalCostIncurred" : 34.00,
+            "lessSalesProceedFromBirds" : 1536.900,
+            "amortizedValueCurrent" : -1502.900,
+            "fairValueAtW24" : 334331.000,
+            "fairValueAtW68" : 332111.000,
+            "amortizedValueProposed" : 2220.000,
+            "difference" : -3722.900,
+            "COGSAccountCode" : "_SYS00036",
+            "COGSAccountName" : "Cost-Parent Grower(MKT)",
+            "AssetAccountCode" : "_SYS00026",
+            "AssetAccountName" : "Land(GEN)",
+            "remark" : "Journal Entry 1",
+            
+			"layerFarmDetails":[
+				{
+					"week" : "Week1",
+					"avgNoOfLaidEgg" : 0,
+					"hatchingEgg" : 223.00
+                },
+                {
+					"week" : "Week2",
+					"avgNoOfLaidEgg" : 2,
+					"hatchingEgg" : 102.00
+				}
+            ],
+            "monthlyExpenseDetails" :[
+                {
+					"month" : "January",
+					"ageInWeek" : 24,
+                    "feed" : 0.00,
+                    "drugs" : 0.00,
+                    "salaries" : 0.00,
+                    "disinfectant" : 0.00,
+                    "electricityConsumption" : 0.00,
+                    "beddingMaterialCost" : 0.00,
+                    "total" : 0.00
+                },
+                {
+					"month" : "February",
+					"ageInWeek" : 24,
+                    "feed" : 0.00,
+                    "drugs" : 0.00,
+                    "salaries" : 0.00,
+                    "disinfectant" : 0.00,
+                    "electricityConsumption" : 0.00,
+                    "beddingMaterialCost" : 0.00,
+                    "total" : 0.00
+                }
+            ]
+		},
+		{
+			"docNo" : 5,
+            "locationName": "Horana5",
+            "batchName" : "HR5",
+            "date" : "11/04/18",
+            "avgNoOfBirdsPerFarmGrower" : 567,
+            "costOfDayOneBird" : 23.00,
+            "costOfBirdsInput" : 32.00,
+            "costOfFMVV" : 32.00,            
+            "mortalityPercentageGrower" : 12.00,
+            "costOfBirdWhenTransferred" : 11.00,
+            "totalCostIncurredPerBird" : 13.00,
+            "totalCostIncurredInGrowerFarm" : 34.00,
+            "avgNoOfBirdsPerFarmLayer" : 545,
+            "mortalityPercentageLayer" : 0.00,
+            "ageOfBirdsInFarm" : 37,
+            "averageLifeOfBirdsInFarm" : 32,
+            "avgProbabilityOfEggs" : 532.00,
+            "breakageOfEggs" :  323.00,
+            "costOfDisposingEgg" : 233.00,
+            "avgSalePriceOfHatchedBird" : 23.00,
+            "sellingPriceOfTableBird" : 23.00,
+            "avgWeightOfBirdAtEndOfLifeTime" : 2.00,
+            "avgPerKiloPrice" : 1.50,
+            "electricityConsumptionCostPerWeek" : 22.00,
+            "beddingMaterialCostPerWeek" : 111.00,
+            "totalCostIncurred" : 34.00,
+            "lessSalesProceedFromBirds" : 1536.900,
+            "amortizedValueCurrent" : -1502.900,
+            "fairValueAtW24" : 334331.000,
+            "fairValueAtW68" : 332111.000,
+            "amortizedValueProposed" : 2220.000,
+            "difference" : -3722.900,
+            "COGSAccountCode" : "_SYS00036",
+            "COGSAccountName" : "Cost-Parent Grower(MKT)",
+            "AssetAccountCode" : "_SYS00026",
+            "AssetAccountName" : "Land(GEN)",
+            "remark" : "Journal Entry 1",
+            
+			"layerFarmDetails":[
+				{
+					"week" : "Week1",
+					"avgNoOfLaidEgg" : 0,
+					"hatchingEgg" : 223.00
+                },
+                {
+					"week" : "Week2",
+					"avgNoOfLaidEgg" : 2,
+					"hatchingEgg" : 102.00
+				}
+            ],
+            "monthlyExpenseDetails" :[
+                {
+					"month" : "January",
+					"ageInWeek" : 24,
+                    "feed" : 0.00,
+                    "drugs" : 0.00,
+                    "salaries" : 0.00,
+                    "disinfectant" : 0.00,
+                    "electricityConsumption" : 0.00,
+                    "beddingMaterialCost" : 0.00,
+                    "total" : 0.00
+                },
+                {
+					"month" : "February",
+					"ageInWeek" : 24,
+                    "feed" : 0.00,
+                    "drugs" : 0.00,
+                    "salaries" : 0.00,
+                    "disinfectant" : 0.00,
+                    "electricityConsumption" : 0.00,
+                    "beddingMaterialCost" : 0.00,
+                    "total" : 0.00
+                }
+            ]
+		}			
+	]
+}

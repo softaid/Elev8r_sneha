@@ -1,0 +1,156 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CBF.BatchStatusReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Batch Status Report"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                        <form:FormElement label="{i18n>BatchStstusReportBranchnamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="branchList"
+                                                    selectionChange="batchSelectionChange"
+                                                    selectionFinish="batchSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'branchModel>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{branchModel>id}" text="{branchModel>branchname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                         <form:FormElement label="{i18n>BatchStstusReportLinenamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="lineList"
+                                                   selectionChange="batchSelectionChange"
+                                                  selectionFinish = "lineSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'lineModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{lineModel>id}" text="{lineModel>linename}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                     <form:FormContainer title="">
+                                              <form:formElements>
+                                             
+                                              <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="getbatchstatusReport"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>  
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel"  growing="true" sticky="ColumnHeaders" growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData'
+                                                   }"
+                                                 backgroundDesign="Solid">
+                               
+                                <columns>
+                                    <Column minScreenWidth="Tablet" mergeDuplicates="true" demandPopin="true" ><Text text ="Branch Code" /></Column>
+                                    <Column minScreenWidth="Tablet" mergeDuplicates="true" demandPopin="true" ><Text text ="Branch Name" /></Column>
+                                    <Column minScreenWidth="Tablet" mergeDuplicates="true"  demandPopin="true" ><Text text ="Line Name" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Farmer Name" /></Column>                                  
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Farm Name" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Batch No" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Last Entry Date" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Supervisor Name" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Batch Age" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Live Batch Quantity" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Status" /></Column> 
+
+                                 </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                         <core:CustomData key="deviationReportgroup" value="{tblModel>linename}" writeToDom="true"></core:CustomData>
+                        </customData>
+                                        <cells>
+                                              <Text text="{tblModel>branchcode}" />
+                                              <Text text="{tblModel>branchname}" />
+                                              <Text text="{tblModel>linename}" />
+                                              <Text text="{tblModel>farmer_name}" />
+                                              <Text text="{tblModel>farm_name}" />
+                                              <Text text="{tblModel>batchid}" />
+                                              <Text text="{tblModel>lastentrydate}" />
+                                              <Text text="{tblModel>supervisorname}" />
+                                              <Text text="{tblModel>age}" />
+                                              <Text text="{tblModel>live_batch_qty}"/>
+                                              <Text text="{tblModel>statusname}" />   
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                    </f:content>
+			</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

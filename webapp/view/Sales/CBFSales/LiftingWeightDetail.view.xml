@@ -1,0 +1,126 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.CBFSales.LiftingWeightDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	height="100%">
+
+	<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Lifting Weight Detail"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+					<Button
+						text="Save"
+                        type="Emphasized"
+						press="onSave"/>
+					<Button
+						text="Delete"
+						type="Emphasized"
+                        press="onDelete"/>						
+				</f:actions>
+				<f:navigationActions>
+					<Button
+						icon="sap-icon://decline"
+						type="Transparent" press="onCancel" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>				
+   			<form:Form editable="true">
+                <form:title>
+                </form:title>
+                <form:layout>
+                    <form:ResponsiveGridLayout
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="2"
+                        columnsM="1"
+                        singleContainerFullSize="false" />
+                </form:layout>
+                <form:formContainers>
+                    <form:FormContainer title="">
+					    <form:formElements>                           
+                            <form:FormElement label="Line Id">
+                                <form:fields>
+                                    <Input id="txtLineId" valueLiveUpdate="true" value="{editLiftingWeightModel>/lineId}" />
+                                </form:fields>
+                            </form:FormElement>
+							<form:FormElement label="Order Number">
+                                <form:fields>
+                                    <Input id="txtOrderNumber" valueLiveUpdate="true" value="{editLiftingWeightModel>/orderNumber}"  />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Order Entry">
+                                <form:fields>
+                                    <Input id="txtOrderEntry" valueLiveUpdate="true" value="{editLiftingWeightModel>/orderEntry}"  />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Order Date">
+                                <form:fields>
+                                    <Input id="txtOrderDate" valueLiveUpdate="true" value="{editLiftingWeightModel>/orderDate}"  />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Customer Name">
+                                <form:fields>
+                                    <Input id="txtCustomerName" valueLiveUpdate="true" value="{editLiftingWeightModel>/customerName}" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Item Name">
+                                <form:fields>
+                                    <Input id="txtItemName" valueLiveUpdate="true" value="{editLiftingWeightModel>/itemName}"  />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Total Weight">
+                                <form:fields>
+                                    <Input id="txtTotalWeight" valueLiveUpdate="true" value="{editLiftingWeightModel>/totalWeight}"  />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Open Quantity">
+                                <form:fields>
+                                    <Input id="txtOpenQuantity" valueLiveUpdate="true" value="{editLiftingWeightModel>/openQuantity}"  />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="To Release">
+                                <form:fields>
+                                    <Input id="txtToRelease" valueLiveUpdate="true" value="{editLiftingWeightModel>/toRelease}"  />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Rate Per Kg">
+                                <form:fields>
+                                    <Input id="txtRatePerKg" valueLiveUpdate="true" value="{editLiftingWeightModel>/ratePerKg}"  />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Farm Name">
+                                <form:fields>
+                                    <Input id="txtFarmName"  valueLiveUpdate="true" value="{editLiftingWeightModel>/farmName}" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Farmer Name">
+                                <form:fields>
+                                    <Input id="txtFarmerName" valueLiveUpdate="true" value="{editLiftingWeightModel>/farmerName}"  />
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                    </form:FormContainer>
+                </form:formContainers>
+            </form:Form>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

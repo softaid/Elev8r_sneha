@@ -1,0 +1,62 @@
+
+
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.SubContractor" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:core="sap.ui.core">
+
+    <f:FlexibleColumnLayout  id="fclSubcontractor" backgroundDesign="Solid">
+		<f:beginColumnPages>
+            <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="{i18n>Subcontractor}"/>
+				        </f:heading>
+                        <f:actions>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://add" type="Transparent" press="onAddIconPress" align="right"/>
+                        </f:actions>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+	                <VBox fitContainer="true">  
+                        <Table 
+                            inset="false" 
+                            id="table"
+                            items="{
+                                        path: 'subContractorModel>/modelData',
+                                        sorter: {
+                                            path: 'id'
+                                        }
+                                    }">
+                            <headerToolbar>
+                                <Toolbar>
+                                    
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns  id="column">
+                                <Column><Text text ="{i18n>subcontractorName}" /></Column>
+                                <Column><Text text ="{i18n>subcontractorDesignation}" /></Column>
+                                <Column><Text text ="{i18n>subcontractorEmail}" /></Column>
+                                <Column><Text text ="{i18n>subcontractorPhoneno}" /></Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem  templateShareable="false" type="Navigation" press="onListItemPress">
+                                    <cells>
+                                        <Text text="{subContractorModel>subconname}"/>
+                                        <Text text="{subContractorModel>designation}"/>
+                                        <Text text="{subContractorModel>email}"/>
+                                        <Text text="{subContractorModel>mobileno}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>       
+                    </VBox>
+                </f:content>
+			</f:DynamicPage> 
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout> 
+</core:View>

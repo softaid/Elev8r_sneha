@@ -1,0 +1,14 @@
+{
+     "checklist": [
+	{
+	    "code" : 1,
+        "name" : "Cleaning",
+        "isMandatory" : true
+	},
+	{
+        "code" : 2,
+        "name" : "Spraying",
+        "isMandatory" : false 
+	}	
+    ]    
+}

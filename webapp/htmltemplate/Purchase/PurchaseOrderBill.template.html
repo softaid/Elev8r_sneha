@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .tableheader {
+            /* border: 1px solid black; */
+            border-collapse: collapse;
+            padding-bottom: 8px;
+            border-bottom: 2px solid black !important;
+            padding: 15px;
+            font-family: "sans-serif";
+            font-size: 14px;
+            line-height: 1;
+            margin: 0;
+            width: 540px;
+
+
+        }
+
+        .tableheaderone {
+            /* border: 1px solid black; */
+            border-collapse: collapse;
+            padding-bottom: 8px;
+            border-bottom: 2px solid black !important;
+            padding: 15px;
+            font-family: "sans-serif";
+            font-size: 14px;
+            line-height: 1;
+            margin: 0;
+
+
+        }
+
+        .tablecompany {
+            /* border: 1px solid black; */
+            border-collapse: collapse;
+            padding: 15px;
+            font-family: "sans-serif";
+            font-size: 14px;
+            line-height: 1;
+            margin: 0;
+
+
+        }
+
+        .tablecompany th {
+            padding-left: -50px;
+            font-size: 15px;
+            height: 5px;
+
+        }
+
+        .tablecompany tr {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        .tableheader td {
+            padding-left: 8px;
+            font-size: 12px;
+            height: 5px;
+
+        }
+
+        .tableheader tr {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        .logo {
+            margin-left: 100px;
+        }
+
+
+        .billofmaterial td {
+
+            padding-left: 8px;
+            font-family: Arial;
+            font-size: 12px;
+
+
+        }
+
+        .billofmaterial tr {
+
+            padding-top: 8px;
+            padding-bottom: 8px;
+
+        }
+
+        .udrline {
+            border-bottom: 1px solid black;
+        }
+
+        #purchase {
+            margin-left: 100px;
+            font-family: 'Times New Roman', Times, serif;
+
+        }
+
+        .tablebdr {
+            border: 1px solid black;
+            /* border-top: 0px solid black!important;
+                border-bottom: 0px solid black!important; */
+        }
+
+        .tablebdr th {
+            border-top: 0px solid black;
+            border-bottom: 1px solid black;
+            font-family: Arial;
+            font-size: 10px;
+            /* border-left: 1px solid black;
+                border-right: 1px solid black; */
+        }
+
+        .tablebdr th {
+            font-family: Arial;
+            font-size: 3px;
+        }
+
+        .tablebdr th {
+            border-right: 1px solid black;
+        }
+
+        .tablebdr th:last-child {
+            border-right: 0px solid black !important;
+        }
+
+        .tablebdr th:first-child {
+            border-left: 0px solid black !important;
+            width: 100px;
+            /* border-right: 0px solid black!important; */
+        }
+
+        .tablebdr>tr>td:nth-child(11) {
+
+            width: 70px !important;
+
+        }
+
+        .tablebdr>tr>th:nth-child(5) {
+
+            width: 100px;
+
+        }
+
+        /* .tablebdr th:nth-child(3){
+               
+               width:40px;
+              
+           } */
+        .tablebdr>tr>th:nth-child(6) {
+
+            width: 60px;
+
+        }
+
+
+
+        .tablebdr th:last-child {
+            /* border-left: 0px solid black!important; */
+            border-right: 0px solid black !important;
+        }
+
+        .tablebdr tr {
+            border-bottom: 1px solid black;
+
+        }
+
+        .tablebdr tr:last-child {
+            border-bottom: 0px solid black !important;
+        }
+
+        .tablebdr td {
+            border-right: 1px solid black;
+            font-size: 14px;
+        }
+
+        .tablebdr th {
+            font-size: 12px;
+        }
+
+        .tablebdr td:last-child {
+            border-right: 0px solid black !important;
+        }
+
+        .purchasetable {
+            border-style: solid;
+        }
+    </style>
+</head>
+
+<body class="bodyborder">
+
+        <table style="width:1080" class="purchasetable">
+            <tr>
+                <div id="">
+                    <th style="width:800;text-decoration: underline;font-family: As rial;font-size: 22px;">
+                        <b><span><u>
+                                    <align="right">Purchase Order</align>
+                                </u></span></b>
+                    </th>
+                </div>
+            </tr>
+            </br>
+            </br>
+        </table>
+
+
+        <table style="width:1080px; float: left;" cellpadding="5" class="tableheader" cellpadding="0" cellspacing="0">
+        
+                <tr>
+                    <td style="width:400;font-family: Arial;font-size: 20px;border-right: 1px solid;"><b>##CompanyName##</b></td>
+
+
+                </tr>
+
+                <tr>
+                    <td style="border-right: 1px solid;"><b>Company Name: </b>##CompanyName##</td>
+                    <td style="width:200;text-align:left;"> <b>PORequest NO:</b>##REQUESTNO##</td>
+                </tr>
+                <tr>
+                    <td style="border-right: 1px solid;"><b>Address: </b>##Address##</td>
+                    <td style="width:200;text-align:left"> <b>PO No:</b>##PONO##</td>
+                </tr>
+                <tr>
+                    <td style="width:400;text-align:left;border-right: 1px solid;"><b>Mobile No: </b>##CompanyContact##</td>
+                    <td style="width:200;text-align:left"> <b>PO Date:</b>##Date##</td>
+                    
+                </tr>
+
+                <tr>
+                    <td style="width:400;text-align:left;border-right: 1px solid;"><b>Pincode: </b>##PinCode##</td>
+                   
+                </tr>
+                <tr>
+                    <td style="width:400;text-align:left;border-right: 1px solid;"><b>Email Id: </b>##CompanyEmail##</td>
+                   
+                </tr>
+
+         
+
+
+        </table>
+        <!-- <table style="width:1080px; float: left;" cellpadding="5" class="" cellpadding="0" cellspacing="0">
+           
+                <tr>
+                    <td style="width:400;font-family: Arial;font-size: 20px"><b>##CompanyName##</b></td>
+
+
+                </tr>
+
+                <tr>
+                    <td><b>Company Name: </b>##CompanyName##</td>
+                </tr>
+                <tr>
+                    <td><b>Address: </b>##Address##</td>
+                </tr>
+                <tr>
+                    <td style="width:400;text-align:left"><b>Mobile No: </b>##CompanyContact##</td>
+                    <td style="width:200;text-align:right"> <b>PORequest NO:</b>##REQUESTNO##</td>
+                </tr>
+
+                <tr>
+                    <td style="width:400;text-align:left"><b>Pincode: </b>##PinCode##</td>
+                    <td style="width:200;text-align:right"> <b>PO No:</b>##PONO##</td>
+                </tr>
+                <tr>
+                    <td style="width:400;text-align:left"><b>Email Id: </b>##CompanyEmail##</td>
+                    <td style="width:200;text-align:right"> <b>PO Date:</b>##Date##</td>
+                </tr>
+
+            
+
+        </table> -->
+
+            <!-- <div class="right-tbl"  style="float:right; width: 540px;">
+                <table  cellpadding="0" cellspacing="0" style="float:left; width: 80%;">
+                    <div>
+                        <tr>
+                            <td style="width:200;text-align:right"> <b>PORequest NO:</b>##REQUESTNO##</td>
+                            <td style="width:200;text-align:right"> <b>PO No:</b>##PONO##</td>
+            
+                        </tr>
+            
+                        <tr>
+                            <td style="width:200;text-align:right"> <b>PO Date:</b>##Date##</td>
+            
+                        </tr>
+                    </div>
+        
+        
+                </table> 
+            </div> -->
+        
+
+        </div>
+        <br>
+
+
+
+
+        <table style="width:1080px;border-bottom: 2px solid black !important;" class="billofmaterial" cellpadding="5">
+
+            <tr>
+                <td style="width:400;text-align:left;border-right: 1px solid;text-align:left"> <b>Supplier Name:</b>##VENDOR##</td>
+                <td style="width:200;text-align:left;text-align:left"> <b>Terms Of Delivery:</b></td>
+            </tr>
+            <tr>
+                <td style="width:400;text-align:left;border-right: 1px solid;text-align:left"> <b>Address:</b>##PARTYADDRESS##<span><span>,</span>##PARTYCITY##</span><span>,</span><span>##PARTYSTATENAME##</span>
+                <span>,</span><span>##PARTYCOUNTRY##</span><span>,</span>##PARTYPINCODE##<span></span> </td>
+            </tr>
+            <!-- <tr>
+                <td style="width:400;text-align:left;border-right: 1px solid;text-align:left"> <b>City:</b>##PARTYCITY##</td>
+            </tr>
+            <tr>
+                <td style="width:400;text-align:left;border-right: 1px solid;text-align:left"> <b>State:</b>##PARTYSTATENAME##</td>
+            </tr> -->
+            <!-- <tr>
+                <td style="width:400;text-align:left;border-right: 1px solid;text-align:left"> <b>Country:</b>##PARTYCOUNTRY##</td>
+            </tr>
+            <tr>
+                <td style="width:400;text-align:left;border-right: 1px solid;text-align:left"> <b>Pin Code:</b>##PARTYPINCODE##</td>
+            </tr> -->
+            <!-- <tr>
+                <td style="width:400;text-align:left;border-right: 1px solid;"><b> </b></td>
+               
+            </tr> -->
+            <!-- <tr>
+                <td style="width:400;text-align:left;border-right: 1px solid;"><b>Email Id: </b>##CompanyEmail##</td>
+                
+            </tr> -->
+        </table>
+
+       
+
+        <table style="width:1080; margin-top:25px !important;" class="tablebdr" cellpadding="3" cellspacing="0">
+            <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Unit Name</th>
+                <th>Item Discount</th>
+                <th>Tax Per</th>
+                <th>CGST %</th>
+                <th>CGST Amount</th>
+                <th>SGST %</th>
+                <th>SGST Amount</th>
+                <th>IGST %</th>
+                <th>IGST Amount</th>
+                <th>UT GST %</th>
+                <th>UT GST Amount%</th>
+                <th>Line Total</th>
+            </tr>
+
+            ##ItemList##
+
+        </table>
+
+        </br> </br> </br>
+
+
+        <table style="width:1080" class="billofmaterial">
+
+            <tr>
+                <td style="width:400;text-align:right"> <b>Item Total:</b>##ITEMTOTAL##</td>
+
+
+            </tr>
+            <tr>
+
+                <td style="width:400;text-align:right"> <b>Discount Per:</b>##DISCOUNT##</td>
+
+            </tr>
+            <tr>
+
+                <td style="width:400;text-align:right"> <b>Discount Qty:</b>##DISCOUNTQTY##</td>
+
+            </tr>
+
+            <tr>
+                <td style="width:400;text-align:right"> <b>Purchse order Total:</b>##DISCOUNTWITHITEMTOTAL##</td>
+            </tr>
+
+
+        </table>
+
+        <table style="width:1080" class="billofmaterial" cellpadding="5">
+            <tr>
+                <td style="width:400;text-align:left;font-size: 12px"> <b>Amount In Words:</b>##GRANDTOTALWITHWORDS##</td>
+
+            </tr>
+            <tr>
+                <td style="width:400;text-align:left"> <b>Remark:</b>##REMARK##</td>
+            </tr>
+        </table>
+        </br>
+        </br></br>
+
+        <table style="width:1080" class="billofmaterial" cellpadding="5">
+            <tr>
+                <!-- <td style="width:400;text-align:left"> <b>...........</td> -->
+                <td style="width:400;text-align:right"> <b>Date:</b>##DATE## ##TIME##</td>
+
+            </tr>
+            <tr>
+                <!-- <td style="width:400;text-align:left;font-size: 20px;font-family: Calibri"> Customer Signature</td> -->
+                <td style="width:400;text-align:right;font-size: 18px;font-family: Calibri"> Prepared By:</td>
+
+            </tr>
+        </table>
+
+
+    </div>
+</body>
+
+</html>

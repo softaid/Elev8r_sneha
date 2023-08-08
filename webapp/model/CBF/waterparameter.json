@@ -1,0 +1,35 @@
+{
+	"waterparameter": [
+		{
+			"code" : 1,
+            "name" : "E Coli",
+            "unit" : "per milileter",
+            "stdSpecification" : "nill"
+		},
+		{
+			"code" : 1,
+            "name" : "Nitrate",
+            "unit" : "ppm",
+            "stdSpecification" : "<10"
+		},
+		{
+			"code" : 1,
+            "name" : "TDS",
+            "unit" : "",
+            "stdSpecification" : "<1000"
+		},
+		{
+			"code" : 1,
+            "name" : "PH",
+            "unit" : "",
+            "stdSpecification" : "6_8"
+
+		},
+		{
+			"code" : 1,
+            "name" : "Hardness",
+            "unit" : "ppm",
+            "stdSpecification" : "110ppm"
+		}			
+	]
+}

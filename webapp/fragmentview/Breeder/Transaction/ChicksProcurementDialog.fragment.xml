@@ -1,0 +1,52 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Chicks Procurement"
+		contentHeight="300px"
+		search="handleSearch"
+		confirm="handleClose"
+		cancel="handleClose"
+		items="{
+			path : '/chicksprocurement',
+			sorter : {
+				path : 'vendorNo',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="" text="{vendorNo}" />
+				<Text text="{name}" />
+                <Text text="{postingDate}" />
+                <Text text="{documentDate}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Vendor" />
+				</header>
+			</Column>
+			<Column
+				demandPopin="true" >
+				<header>
+					<Text text="Name" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Posting Date" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Document Date" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

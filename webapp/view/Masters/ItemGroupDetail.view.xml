@@ -1,0 +1,115 @@
+<mvc:View
+		xmlns:c="sap.ui.core"
+		controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.ItemGroupDetail"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:u="sap.ui.unified"
+		xmlns="sap.m"
+		xmlns:t="sap.ui.table"
+		xmlns:f="sap.f"
+		xmlns:layout="sap.ui.layout"
+		xmlns:form="sap.ui.layout.form"
+        xmlns:core="sap.ui.core"
+		height="100%">
+		<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n&gt;inventoryItemMasterItemGroupDetailHeader}"/>
+					</f:heading>
+					<f:actions>
+						<ToolbarSpacer/>
+						 <Button
+							text="{i18n&gt;inventoryItemMasterItemGroupDetailButtonSave}"
+                            type="Emphasized"
+							press="onSave"/>
+						<!-- <Button
+							text="{i18n&gt;inventoryItemMasterItemGroupDetailButtonDelete}"
+							type="Emphasized"
+                            press="onDelete"/>						 -->
+					</f:actions>
+					<f:navigationActions>
+						<Button
+								icon="sap-icon://decline"
+								type="Transparent" press="onCancel" />
+					</f:navigationActions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:content>				
+   			   <form:Form editable="true">
+                    <form:title>
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="1"
+                                singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="">
+					        <form:formElements>
+                                <form:FormElement label="Module Type">
+                                    <form:fields>
+                                        <MultiComboBox id="ddlMtxtModuleNameodule"
+									    selectionChange="handleSelectionChange"
+										selectionFinish="handleSelectionFinish"
+                                        required="true"
+										width="500px"
+										items="{
+											path: 'moduleModel>/modelData',
+											sorter: { path: 'Name' }
+										}">
+										<core:Item key="{moduleModel>id}" text="{moduleModel>refname}" />
+									</MultiComboBox>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>inventoryItemMasterItemGroupDetailItemGroupName}">
+                                    <form:fields>
+                                        <Input id="txtItemGroupName" valueLiveUpdate="true" value="{editItemGroupModel>/groupname}" change = "getValidId" required="true"/>
+                                    </form:fields>
+                                </form:FormElement>                             
+                                <form:FormElement label="{i18n>inventoryItemMasterItemGroupDetailSeriesStartsWith}">
+                                    <form:fields>
+                                        <Input id="txtItemSeriesStartWith" valueLiveUpdate="true" value="{editItemGroupModel>/seriesstartwith}" enabled="{editItemGroupModel>/enabled}" change = "getValidId" required="true"/>
+                                    </form:fields>
+                                </form:FormElement>
+								<form:FormElement label="{i18n>inventoryItemMasterItemGroupDetailSeriesPrefix}">
+                                    <form:fields>
+                                        <Input id="txtItemSeriesPrefix" valueLiveUpdate="true" value="{editItemGroupModel>/seriesprefix}" change = "getValidId" required="true"/>
+                                    </form:fields>
+                                </form:FormElement>
+								<form:FormElement label="{i18n>inventoryItemMasterItemGroupDetailSeriesSeparator}">
+                                    <form:fields>
+                                        <Input id="txtItemSeriesSeparator" valueLiveUpdate="true" value="{editItemGroupModel>/seriesseparator}" change = "getValidId" required="true"/>
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="Group Type">
+                                    <form:fields>
+                                        <Select id="ddlGroupType" forceSelection="false"  
+                                        selectedKey="{editItemGroupModel>/grouptypeid}" 
+                                        enabled="true"
+                                        items="{
+                                            path: 'groupTypeList>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <c:Item key="{groupTypeList>id}" text="{groupTypeList>refname}" />                             
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+		    </f:content>
+	    </f:DynamicPage>
+</mvc:View>

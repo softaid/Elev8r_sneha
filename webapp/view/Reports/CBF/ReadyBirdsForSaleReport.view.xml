@@ -1,0 +1,176 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CBF.ReadyBirdsForSaleReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>readybirdsforsalereporttitle}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+
+                                         <form:FormElement label="{i18n>readybirdsforsalereportcurdatelabel}">
+                                            <form:fields>
+                                                <DatePicker id="curdate"  width="100%" value="{reportModel>/curdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate" />   
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>readybirdsforsalereportbranchnamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="branchList"
+                                                    selectionChange="batchSelectionChange"
+                                                    selectionFinish="branchSelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'branchModel>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{branchModel>id}" text="{branchModel>branchname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                         <form:FormElement label="{i18n>readybirdsforsalereportfromagelabel}">
+                                                <form:fields>
+                                                    <Input id="fromage" value="{reportModel>/fromage}" />
+                                                </form:fields>
+                                            </form:FormElement> 
+
+                                         <form:FormElement label="{i18n>readybirdsforsalereporttoagelabel}">
+                                                <form:fields>
+                                                    <Input id="toage" value="{reportModel>/toage}" />
+                                                </form:fields>
+                                            </form:FormElement>
+
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                     <form:FormContainer>
+                                          <form:formElements>
+                                             <form:FormElement label="{i18n>readybirdsforsalereportfromweightlabel}">
+                                                <form:fields>
+                                                    <Input id="fromweight" value="{reportModel>/fromweight}" />
+                                                </form:fields>
+                                            </form:FormElement>
+
+                                               <form:FormElement label="{i18n>readybirdsforsalereporttoweightlabel}">
+                                                <form:fields>
+                                                    <Input id="toweight" value="{reportModel>/toweight}" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchReadyBirdForSaleReport"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel"  width="200%"  growing="true" sticky="ColumnHeaders" growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'id'
+                                                    }
+                                                }"
+                                                 backgroundDesign="Solid">
+                                <columns>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>readybirdsforsalereporttblfarmerlabel}" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>readybirdsforsalereporttblfarmlabel}" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>readybirdsforsalereporttblcitylabel}" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>readybirdsforsalereporttblbranchlabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>readybirdsforsalereporttbllinelabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>readybirdsforsalereporttblbatchlabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>readybirdsforsalereporttblbreednamelabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>readybirdsforsalereporttblagelabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>readybirdsforsalereporttbltotalbirdlabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>readybirdsforsalereporttblavgwtforbirdlabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>readybirdsforsalereporttbltotalwtlabel}" /></Column>                                      <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>readybirdsforsalereporttblmorperlabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>readybirdsforsalereporttblfcrlabel}" /></Column> 
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                            <Text text="{tblModel>farmer_name}"/>
+                                            <Text text="{tblModel>farm_name}"/>
+                                            <Text text="{tblModel>cityname}"/>
+                                            <Text text="{tblModel>branchname}"/>
+                                            <Text text="{tblModel>linename}"/>
+                                            <Text text="{tblModel>batch_number}"/>
+                                            <Text text="{tblModel>itemname}"/>
+                                            <Text text="{tblModel>age}"/>
+                                             <Text text="{tblModel>liveqty}"/>
+                                            <Text text="{tblModel>avgweight}"/>
+                                            <Text text="{tblModel>totalwt}"/>
+                                            <Text text="{tblModel>ptotalmortality}"/>
+                                            <Text text="{tblModel>fcr}"/>
+                                            
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                    </f:content>
+			</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

@@ -1,0 +1,65 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Item"	
+		contentHeight="300px"
+		search="handleProdDuctionSearch"
+		confirm="handleProdDuctionClose"
+		cancel="handleProdDuctionClose"
+			items="{
+			path : 'ProductionOrderList>/modelData'
+			
+		}">
+		
+		<ColumnListItem>
+			<cells>
+				<Text text="{ProductionOrderList>status}" />
+				<Text text="{ProductionOrderList>productionno}" />
+                <Text text="{ProductionOrderList>plannedqty}" />
+				 <Text text="{ProductionOrderList>warehousename}" />
+				  <Text text="{ProductionOrderList>orderdate}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Status" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Production No." />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<header>
+					<Text text="palnned Qty" />
+				</header>
+			</Column>
+             <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				>
+				<header>
+					<Text text="Warehouse" />
+				</header>
+			</Column>
+           
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End" >
+				<header>
+					<Text text="Order Date" />
+				</header>
+			</Column>
+		</columns>
+		
+	</TableSelectDialog>
+</core:FragmentDefinition>

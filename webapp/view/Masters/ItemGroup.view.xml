@@ -1,0 +1,58 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.ItemGroup" height="100%"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:core="sap.ui.core">
+
+	<VBox fitContainer="true">
+        <Table id="tblItemGroup" 
+               inset="false" 
+               growing="true"
+               growingThreshold="100"
+               growingScrollToLoad="true"
+               items="{
+                    path: 'itemGroupModel>/modelData',
+                    sorter: {
+                        path: 'groupname'
+                    }
+                }">
+	        <headerToolbar>
+			    <Toolbar>
+				   <content>
+					<Title text="{i18n>inventoryItemMasterItemGroupTitle}" level="H2"/>
+					<ToolbarSpacer />
+                    <SearchField search="onSearch" width="17.5rem" id ="search"/>
+			        <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
+                    <Button icon="sap-icon://sort" type="Transparent" press="onSort"/>
+                    <MenuButton icon="sap-icon://download">
+                        <menu>
+                            <Menu itemSelected="onMenuAction" >
+                                <items>
+                                    <MenuItem text="Item Group List" icon="sap-icon://download" press="onItemGroupExport" />
+                                </items>
+                            </Menu>
+                        </menu>
+                    </MenuButton>
+				  </content>
+			    </Toolbar>
+		    </headerToolbar>
+            <columns>
+                <Column><Text text ="Id" /></Column>
+                <Column><Text text ="{i18n>inventoryItemMasterItemGroupItemGroupName}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>inventoryItemMasterItemGroupItemSeriesStartsWith}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>inventoryItemMasterItemGroupItemSeriesPrefix}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>inventoryItemMasterItemGroupItemSeriesSeparator}" /></Column>
+            </columns>
+            <items>
+                <ColumnListItem type="{itemGroupModel>navigation}" press="onListItemPress">
+                    <cells>
+                        <Text text="{itemGroupModel>id}"  />
+                        <Text text="{itemGroupModel>groupname}"  />
+                        <Text text="{itemGroupModel>seriesstartwith}"  />
+                        <Text text="{itemGroupModel>seriesprefix}"  />
+                        <Text text="{itemGroupModel>seriesseparator}"  />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+	</VBox>
+</core:View>

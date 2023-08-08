@@ -1,0 +1,16 @@
+{
+    "roles":[
+        {
+             "name" : "Supervisor",
+             "description" : "breeder supervisor"
+        },
+        {
+            "name" : "Manager",
+            "description" : "breeder manager"
+        },
+        {
+            "name" : "Executive",
+            "description" : "breeder executive"
+        }
+    ]
+}

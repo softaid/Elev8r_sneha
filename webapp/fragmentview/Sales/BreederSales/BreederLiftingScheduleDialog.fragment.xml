@@ -1,0 +1,53 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Lifting Schedule"
+		contentHeight="300px"
+		search="handleLfsSearch"
+		confirm="handleLfsClose"
+		cancel="handleLfsClose"
+		items="{
+			path : 'BreederLfsList>/modelData'
+			
+		}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="" text="{BreederLfsList>id}" />
+                <Text text="{BreederLfsList>scheduledate}" />
+				<Text text="{BreederLfsList>locationname}" />
+                <Text text="{BreederLfsList>module}" />
+                <Text text="{BreederLfsList>status}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Doc No." />
+				</header>
+			</Column>
+			<Column
+				demandPopin="true" >
+				<header>
+					<Text text="Date" />
+				</header>
+			</Column>
+            <Column >
+				<header>
+					<Text text="Location" />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="Module" />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="Status" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

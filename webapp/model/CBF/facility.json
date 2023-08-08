@@ -1,0 +1,20 @@
+{
+	"facility": [
+		{
+			"code" : 1,
+			"facility": "Tube Well"
+		},
+		{
+			"code" : 2,
+			"facility": "Dug Well"
+		},
+		{
+			"code" : 3,
+			"facility": "River"
+		},
+		{
+			"code" : 4,
+			"facility": "Tank"
+		}		
+	]
+}

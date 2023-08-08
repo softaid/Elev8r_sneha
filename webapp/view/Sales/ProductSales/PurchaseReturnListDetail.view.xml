@@ -1,0 +1,98 @@
+<mvc:View
+		xmlns:c="sap.ui.core"
+		controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.ProductSales.PurchaseReturnListDetail"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:u="sap.ui.unified"
+		xmlns="sap.m"
+		xmlns:t="sap.ui.table"
+		xmlns:f="sap.f"
+		xmlns:layout="sap.ui.layout"
+		xmlns:form="sap.ui.layout.form"
+		height="100%">
+		<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Purchas Rereturn List Detail"/>
+					</f:heading>
+					<f:actions>
+						<ToolbarSpacer/>
+						 <Button
+							text="Edit"
+                            type="Emphasized"/>
+						<Button
+							text="Delete"
+							type="Emphasized"/>						
+					</f:actions>
+					<f:navigationActions>
+						<Button
+								icon="sap-icon://decline"
+								type="Transparent" press="onCancel" />
+					</f:navigationActions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:content>		
+				<form:Form editable="true">
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="1"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+ 
+                            <form:FormContainer title="">
+					            <form:formElements>
+                                    <form:FormElement label="Challan Number">
+                                        <form:fields>
+                                            <Input id="challanNo"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                     <form:FormElement label="Stock Name">
+                                        <form:fields>
+                                            <Input id="stockName"/>
+                                        </form:fields>
+                                    </form:FormElement>
+									<form:FormElement label="Unit">                           <form:fields>
+                                            <Input id="unit"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                     <form:FormElement label="Quantity">
+                                        <form:fields>
+                                            <Input id="quantity"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Stock Status">
+                                        <form:fields>
+                                            <Input id="stockstatus"/>
+                                        </form:fields>
+                                    </form:FormElement>
+									<form:FormElement label="Batch Number">
+                                        <form:fields>
+                                            <Input id="batchno"/>
+                                        </form:fields>
+                                    </form:FormElement>
+									<form:FormElement label="Status">
+                                        <form:fields>
+                                            <Input id="status"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                        </form:formContainers>
+                    </form:Form>
+		    </f:content>
+	    </f:DynamicPage>
+</mvc:View>

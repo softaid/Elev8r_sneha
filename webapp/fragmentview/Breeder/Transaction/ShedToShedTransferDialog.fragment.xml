@@ -1,0 +1,66 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Placement Schedule"
+		contentHeight="300px"
+		search="handleShedTransferSearch"
+		confirm="handleShedTransferClose"
+		cancel="handleShedTransferClose"
+		items="{
+			path : 'shedTransferList>/modelData',
+			sorter : {
+				path : 'docNo'
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{shedTransferList>id}" />
+				<Text text="{shedTransferList>batchname}" />
+				<Text text="{shedTransferList>fromlocationname}" />
+                <Text text="{shedTransferList>tolocationname}" />
+                <Text text="{shedTransferList>transferdate}" />
+				<!-- <tnt:InfoLabel 
+					text="{placementscheduleList>statusname}"
+					displayOnly= "true"
+					colorScheme= "{parts: [{path: 'placementscheduleList>statusname'}],
+					formatter: '.formatter.setColorEggsProcSche'}"
+					/> -->
+                <!-- <Text text="{placementscheduleList>statusname}" /> -->
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="ID" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Breeder Batch" />
+				</header>
+			</Column>
+			<Column
+				demandPopin="true" >
+				<header>
+					<Text text="From Location" />
+				</header>
+			</Column>
+			
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="To Location" />
+				</header>
+			</Column>
+             <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Transfer Date" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

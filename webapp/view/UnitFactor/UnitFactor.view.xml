@@ -1,0 +1,65 @@
+
+
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.UnitFactor.UnitFactor" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:core="sap.ui.core">
+
+    <f:FlexibleColumnLayout  id="fclfactormaster" backgroundDesign="Solid">
+		<f:beginColumnPages>
+            <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="{i18n>factorMastertitle}"/>
+				        </f:heading>
+                        <f:actions>
+                            <ToolbarSpacer/>
+                        </f:actions>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+	                <VBox fitContainer="true">  
+
+                <Table id="factormasterTable"
+                    inset="false" 
+                    items="{
+                                path: 'factormasterModel>/modelData',
+                                sorter: {
+                                    path: 'id'
+                                }
+                            }">
+	        <headerToolbar>
+			    <Toolbar>
+				    <content>
+					    <Title text="{i18n>factorMastertitle}" level="H2"/>
+					    <ToolbarSpacer />
+                        <SearchField search="onSearch" width="17.5rem" id = "searchId"/>
+			            <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
+
+				    </content>
+			    </Toolbar>
+		    </headerToolbar>
+            <columns>
+				<Column><Text text ="{i18n>factorMasterLabelName}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>factorMasterLabelbaseunit}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>factorMasterLabelFactor}" /></Column>		
+			</columns>
+            <items>
+                <ColumnListItem type="Navigation" press="onListItemPress">
+                    <cells>
+						<Text text="{factormasterModel>convertedunitname}"/>
+                        <Text text="{factormasterModel>baseunitname}"/>
+						 <Text text="{factormasterModel>factor}" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>   
+         </VBox>  
+                </f:content>
+			</f:DynamicPage> 
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout> 
+</core:View>

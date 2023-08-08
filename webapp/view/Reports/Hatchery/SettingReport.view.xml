@@ -1,0 +1,148 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Hatchery.SettingReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+	<f:title>
+		<f:DynamicPageTitle>
+			<f:heading>
+			    <Title text="{i18n>setterReportTitle}"/>
+			</f:heading>
+			<f:actions>
+			</f:actions>					
+		</f:DynamicPageTitle>
+	</f:title>
+<f:header class="sapUiNoContentPadding">
+    <f:DynamicPageHeader pinnable="true">
+        <form:Form editable="true">
+            <form:title>
+            </form:title>
+            <form:layout>
+                <form:ResponsiveGridLayout
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="3"
+                    columnsL="2"
+                    columnsM="2"
+                    singleContainerFullSize="false"  />
+             </form:layout>
+             <form:formContainers>
+                <form:FormContainer title="">
+                    <form:formElements>
+                          <form:FormElement label="{i18n>StandardChartsAndSchedulesFeedScheduleFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromDate" value="{mPOModel>/from_date}"  placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" required="true"  />                                            
+                                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+            </form:FormContainer>
+             <form:FormContainer>
+                <form:formElements>
+                       <form:FormElement label="{i18n>StandardChartsAndSchedulesFeedScheduleToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtToDate" value="{mPOModel>/to_date}" placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" required="true" />
+                                            </form:fields>
+                        </form:FormElement>
+                    <form:FormElement label="">
+                        <form:fields>
+                            <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                            <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                <menu>
+                                    <Menu itemSelected="onMenuAction" >
+                                        <items>
+                                            <MenuItem text="{i18n>ProcessingProductionRegistersavecsv}" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                            <MenuItem text="{i18n>ProcessingProductionRegistersavepdf}" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                        </items>
+                                    </Menu>
+                                </menu>
+                             </MenuButton>
+                        </form:fields>
+                    </form:FormElement>
+                </form:formElements>
+            </form:FormContainer>
+            <form:FormContainer>
+                <form:formElements>
+                    </form:formElements>
+                </form:FormContainer>
+            </form:formContainers>
+            </form:Form>
+           </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+        <VBox fitContainer="true">
+            <ScrollContainer
+                height="100%"
+                width="100%"
+                horizontal="true"
+                vertical="true"
+                focusable="true">
+                    <Table id="tblSettingReport" width="200%" growing="true" items="{
+                            path: 'settingReportModel>/modelData',
+                                sorter: {
+                                    path: 'id'
+                                }
+                            }"
+                            mode="single" backgroundDesign="Solid">
+                        <columns>
+                            <Column width="2%"><Label text ="{i18n>hatchReportsrno}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true" ><Label text ="{i18n>settingReportSettingDate}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>settingReportSetterName}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>hatchReportSlotName}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>settingReportSetterBatchNumber}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>hatchReportSourceName}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>settingReportNoOfEggsReceived}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>settingReportCrackedEggs}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>settingReportCrackedEggsPer}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>settingReportNoOfEggsSet}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>settingReportTentativecandlingDate}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>settingReportTentativeTransferDate}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>settingReportTentativeHatchDate}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>settingReportBatchStatus}" /></Column>
+                        </columns>
+                        <items>
+                        <ColumnListItem>
+                            <customData>
+                                <core:CustomData key="settingReportgroup" value="{settingReportModel>breederbatchid}" writeToDom="true"></core:CustomData>
+                            </customData>
+                        <cells>
+                            <Text text="{settingReportModel>sqno}"  />
+                            <Text text="{settingReportModel>batchdate}" />
+                            <Text text="{settingReportModel>settername}"  />
+                            <Text text="{settingReportModel>slotname}" />
+                            <Text text="{settingReportModel>setterbatchid}" />  
+                            <Text text="{settingReportModel>sourcename}"  />  
+                            <Text text="{settingReportModel>availablequantity}"  />
+                            <Text text="{settingReportModel>crackedquantity}"  />
+                            <Text text="{settingReportModel>crackedpercent}"  />
+                            <Text text="{settingReportModel>actualquantity}"  /> 
+                            <Text text="{settingReportModel>tentativecandlingdate}"  /> 
+                            <Text text="{settingReportModel>tentativetransferdate}"  /> 
+                            <Text text="{settingReportModel>tentativehatchdate}"  /> 
+                            <Text text="{settingReportModel>batchstatus}"  />                                      
+                        </cells>
+                        </ColumnListItem>
+                        </items>
+                </Table>
+            </ScrollContainer>     
+        </VBox>  
+        </f:content>
+	</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

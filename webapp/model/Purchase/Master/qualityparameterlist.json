@@ -1,0 +1,67 @@
+{   
+    "qualityparameterlist":[
+        {
+            "no" : 1,
+            "description" : "Broiler Bird",
+            "details":[
+				{
+					"from" : 73,
+                    "to" : 78,
+                    "result": "pass" 
+				},
+				{
+					"from" : 65,
+                    "to" : 78,
+                    "result": "Pass" 
+				},
+				{
+					"from" : 89,
+                    "to" : 92,
+                    "result": "Out" 
+				}
+        	]
+        },
+        {
+            "no" : 2,
+            "description" : "Electrical",
+            "details":[
+				{
+					"from" : 73,
+                    "to" : 78,
+                    "result": "pass" 
+				},
+				{
+					"from" : 65,
+                    "to" : 78,
+                    "result": "Pass" 
+				},
+				{
+					"from" : 89,
+                    "to" : 92,
+                    "result": "Out" 
+				}
+        	]
+        },
+        {
+            "no" : 3,
+            "description" : "printer",
+            "details":[
+				{
+					"from" : 73,
+                    "to" : 78,
+                    "result": "pass" 
+				},
+				{
+					"from" : 65,
+                    "to" : 78,
+                    "result": "Pass" 
+				},
+				{
+					"from" : 89,
+                    "to" : 92,
+                    "result": "Out" 
+				}
+        	]
+        }
+    ]
+}

@@ -1,0 +1,51 @@
+<mvc:View
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Profile.Aboutus"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page showHeader="false">
+
+	<content>
+
+        <l:VerticalLayout id="containerLayout" width="100%" >
+                
+
+                <l:BlockLayout id="BlockLayout1" background="{/selectedBackground}">
+                    <l:BlockLayoutRow accentCells="Accent1">
+                        <l:BlockLayoutCell
+                                width="12"
+                                title="">
+                            
+                            <core:HTML id="htmlcontainer" content="hello"/>
+                            
+                        </l:BlockLayoutCell>
+                    </l:BlockLayoutRow>
+                </l:BlockLayout>
+                
+            <l:BlockLayout id="BlockLayout" background="{/selectedBackground}">
+                    <l:BlockLayoutRow accentCells="Accent1">
+                        <l:BlockLayoutCell
+                                width="2">
+                                <Image src="/css/images/logo.png" />
+                        </l:BlockLayoutCell>       
+                        <l:BlockLayoutCell
+                                width="12"
+                                title="">
+                            <Text class="font-18" text="LogicalDNA IT Solutions Pvt. Ltd." />
+                            <Text class="font-16" text="Address:- 003, Pentagon Tower 1, Slip Rd to Tower-3/4, Magarpatta City, Hadapsar, Pune, Maharashtra 411028" />
+                            <Text class="font-16" text="Phone:- +91 985 097 7384 (INDIA)" />
+                            <Link  class="font-16 block-label" text="URL - https://www.logicaldna.com" target="_blank" href="https://www.logicaldna.com" />
+                            <Text class="font-16" text="Poultry Help - " />
+                            <Link  class="font-16 block-label" text="https://www.logicaldna.com/poultry-software/" target="_blank" href="https://www.logicaldna.com/poultry-software/" />
+                            
+                        </l:BlockLayoutCell>
+                    </l:BlockLayoutRow>
+                </l:BlockLayout>
+
+        </l:VerticalLayout>
+
+		</content>
+
+	</Page>
+</mvc:View>

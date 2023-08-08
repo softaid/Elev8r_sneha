@@ -1,0 +1,35 @@
+<View displayBlock="true"    
+   xmlns:f="sap.f"
+   xmlns:mvc="sap.ui.core.mvc" 
+   xmlns="sap.m"
+   controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.ItemMaster" height="100%">
+   
+    <f:FlexibleColumnLayout  id="fclItemMaster" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="{i18n>inventoryItemMasterHeader}"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+	                <IconTabBar id ="idIconTabBar" selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
+	                    <items>
+		                   <IconTabFilter text="{i18n>inventoryItemMasterTabItemGroup}" key="itemGroup">
+		                      <mvc:XMLView viewName="sap.ui.elev8rerp.componentcontainer.view.Masters.ItemGroup"></mvc:XMLView>
+		                   </IconTabFilter>
+
+                           <IconTabFilter text="{i18n>inventoryItemMasterTabItem}" key="item">
+                           </IconTabFilter>    
+
+						   <IconTabFilter text="HSN Master" key="hsn">
+                           </IconTabFilter>      
+	                    </items>
+                    </IconTabBar>
+                </f:content>
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</View>

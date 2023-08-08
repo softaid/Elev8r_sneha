@@ -1,0 +1,161 @@
+    <core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.FeedMill.QualitycheckReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>quakitycheckreporttitle}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                        <form:FormElement label="{i18n>productionregisterfromdate}">
+                                        <form:fields>
+                                            <DatePicker id="txtfromdate"  value="{proRgeisterReortModel>/fromdate}" 
+                                            displayFormat="{config>/dateFormat/displayFormat}" 
+                                            valueFormat="{config>/dateFormat/valueFormat}" 
+                                            placeholder="{config>/dateFormat/placeholder}"/>   
+                                        </form:fields>  
+                                    </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                     <form:FormContainer>
+                                        <form:formElements>
+                                 
+                                        <form:FormElement label="{i18n>productionregistertodate}">
+                                        <form:fields>
+                                            <DatePicker id="txttodate"  value="{proRgeisterReortModel>/todate}" 
+                                            displayFormat="{config>/dateFormat/displayFormat}" 
+                                            valueFormat="{config>/dateFormat/valueFormat}" 
+                                            placeholder="{config>/dateFormat/placeholder}"/>   
+                                        </form:fields>  
+                                    </form:FormElement>
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchQualityCheckReport"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>	
+                        <HBox fitContainer="true">
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel"  width="250%" growing="true"  growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'purchaseorderno',
+							         group : true
+                                                    }
+                                                }"
+                                                 backgroundDesign="Solid">
+                        
+                                <columns>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreportpartyname}" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreportackno}" /></Column>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreportrefno}" /></Column>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreportqualitytestdate}" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreportlabname}" /></Column>   
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreportlabtype}" /></Column>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreportvehicleno}" /></Column>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreportlabintime}" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreportlabouttime}" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreportitemname}" /></Column>   
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreportnutrient}" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreportfromrange}" /></Column>   
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreporttorange}" /></Column>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreporttestedvalue}" /></Column>
+                                      <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="Result" /></Column>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreportlabstatus}" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quakitycheckreportspecialapproval}" /></Column> 
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                         <core:CustomData key="settingReportgroup"   value="{tblModel>purchaseorderno}" writeToDom="true"></core:CustomData>
+                        </customData>
+                                        <cells>
+                                            <Text text="{tblModel>partyname}" />
+                                            <Text text="{tblModel>ackno}" />
+                                            <Text text="{tblModel>refno}" />
+                                            <Text text="{tblModel>qualitycheckdate}" />
+                                            <Text text="{tblModel>labname}" />
+                                            <Text text="{tblModel>labtype}" />
+                                            <Text text="{tblModel>vehicleno}" />
+                                            <Text text="{tblModel>labintime}" />
+                                            <Text text="{tblModel>labouttime}" />
+                                            <Text text="{tblModel>itemname}" />
+                                            <Text text="{tblModel>nutrientname}" />
+                                            <Text text="{tblModel>fromrange}" />
+                                            <Text text="{tblModel>torange}" />
+                                            <Text text="{tblModel>testedvalue}" />
+                                            <Text text="{tblModel>refname}" />
+                                            <Text text="{tblModel>labstatus}" />
+                                            <Text text="{tblModel>approval}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+            
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

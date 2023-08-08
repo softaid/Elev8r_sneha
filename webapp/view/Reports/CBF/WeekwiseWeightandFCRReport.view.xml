@@ -1,0 +1,233 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CBF.WeekwiseWeightandFCRReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>weekwisebodyweightandfcrreporttitle}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                         <form:FormElement label="{i18n>weekwisebodyweightandfcrreportcurdatelabel}">
+                                            <form:fields>
+                                                <DatePicker id="curdate"  width="100%" value="{reportModel>/curdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate" />   
+                                            </form:fields>
+                                        </form:FormElement>
+                                         <form:FormElement label="{i18n>weekwisebodyweightfcrreportbranchnamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="branchList"
+                                                    selectionChange="branchSelectionChange"
+                                                    selectionFinish="branchSelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'branchModel>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{branchModel>id}" text="{branchModel>branchname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                         <form:FormElement label="{i18n>weekwisebodyweightfcrreportlinenamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="lineList"
+                                                   selectionChange="branchSelectionChange"
+                                                  selectionFinish = "lineSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'lineModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{lineModel>id}" text="{lineModel>linename}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                         </form:formElements>
+                                         </form:FormContainer>
+                                         <form:FormContainer>
+                                          <form:formElements>
+                                          <form:FormElement label="{i18n>weekwisebodyweightfcrreportfarmernamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="farmerList"
+                                                   selectionChange="branchSelectionChange"
+                                                  selectionFinish = "farmerSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'farmerModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{farmerModel>id}" text="{farmerModel>farmer_name}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                       <form:FormElement label="{i18n>weekwisebodyweightfcrreportfarmnamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="farmList"
+                                                   selectionChange="branchSelectionChange"
+                                                  selectionFinish = "farmSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'farmModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{farmModel>id}" text="{farmModel>farm_name}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                           <form:FormElement label="{i18n>weekwisebodyweightfcrreportbatchnolabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="batchno"
+                                                   selectionChange="batchSelectionChange"
+                                                  selectionFinish = "batchSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'batchModel>/modelData',
+                                                        sorter: { path: 'batch_id' }
+                                                    }">
+                                                    <core:Item key="{batchModel>batch_id}" text="{batchModel>batch_number}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="getWeekWiseBodyWeightandFCRReport"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="weekWiseBodyWeightandFCRPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                          </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel" width="250%"  growing="true" sticky="ColumnHeaders"  growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'id'
+                                                    }
+                                                }"
+                                                 backgroundDesign="Solid">
+                           
+                                <columns>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>weekwisebodyweightfcrreportcpdatelabel}" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>weekwisebodyweightfcrreporttblfarmernamenamelabel}" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>weekwisebodyweightfcrreporttblfarmnamelabel}" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreportbatchnolabel}" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreporttblbranchnamelabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreporttbllinenamelabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreportplaceqtylabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport1stweekbirdweight}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport1stfcr}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport2NDweekbirdweight}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport2stfcr}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport3rdweekbirdweight}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport3rdfcr}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport4thweekbirdweight}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport4thfcr}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport5thweekbirdweight}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport5thfcr}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport6thweekbirdweight}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport6thfcr}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport7thweekbirdweight}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport7thfcr}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport8thweekbirdweight}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>weekwisebodyweightfcrreport8thfcr}" /></Column> 
+                                    </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                            <Text text="{tblModel>placement_date}" />
+                                            <Text text="{tblModel>farmer_name}" />
+                                            <Text text="{tblModel>farm_name}" />
+                                            <Text text="{tblModel>batch_number}" />
+                                            <Text text="{tblModel>branchname}" />
+                                            <Text text="{tblModel>linename}" />
+                                            <Text text="{tblModel>chick_qty}" />
+                                            <Text text="{tblModel>fweekbw}" />
+                                            <Text text="{tblModel>fweekfcr}" />
+                                            <Text text="{tblModel>sweekbw}" />
+                                            <Text text="{tblModel>sweekfcr}" />
+                                            <Text text="{tblModel>tweekbw}" />
+                                            <Text text="{tblModel>tweekfcr}" />
+                                            <Text text="{tblModel>forthweekbw}" />
+                                            <Text text="{tblModel>fourthweekfcr}" />
+                                            <Text text="{tblModel>fifththweekbw}" />
+                                            <Text text="{tblModel>fifthweekfcr}" />
+                                            <Text text="{tblModel>sixweekbw}" />
+                                            <Text text="{tblModel>sixweekfcr}" />
+                                            <Text text="{tblModel>sevenweekbw}" />
+                                            <Text text="{tblModel>sevenweekfcr}" />
+                                            <Text text="{tblModel>eightweekbw}" />
+                                            <Text text="{tblModel>eightweekfcr}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+            
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

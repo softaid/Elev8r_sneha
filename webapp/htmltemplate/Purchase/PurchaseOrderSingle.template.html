@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .tableheader 
+             {
+                /* border: 1px solid black; */
+                border-collapse: collapse;
+                padding: 15px;
+            
+            
+            }
+        .tableheader td
+            {
+                padding-left: 8px;
+            
+            }
+        .tableheader tr
+            {
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+        .logo
+            {
+                margin-left:100px;
+            }
+
+
+        .billofmaterial td
+            {
+                
+                padding-left: 8px;
+            
+            }
+             .billofmaterial tr
+                    {
+                        
+                        padding-top: 8px;
+                        padding-bottom: 8px;
+                    
+                    }
+             .udrline
+                    {
+                        border-bottom: 1px solid black;
+                    }
+
+             #purchase
+                {
+                    margin-left:100px;
+                    font-family: 'Times New Roman', Times, serif;
+                    
+                } 
+
+            .tablebdr     
+
+                {
+                    border: 1px solid black;
+                    /* border-top: 0px solid black!important;
+                    border-bottom: 0px solid black!important; */
+                }   
+
+            .tablebdr th
+                {
+                    border-top: 0px solid black;
+                    border-bottom: 1px solid black;
+                    /* border-left: 1px solid black;
+                    border-right: 1px solid black; */
+                }
+            .tablebdr th
+                {
+                    border-right: 1px solid black;
+                }
+            .tablebdr th:last-child
+                {
+                    border-right: 0px solid black!important;
+                }
+            .tablebdr th:first-child
+                {
+                    border-left: 0px solid black!important;
+                    width:100px;
+                    /* border-right: 0px solid black!important; */
+                }
+            .tablebdr th:nth-child(2)
+                {
+                
+                    width:100px;
+                
+                }
+            .tablebdr th:nth-child(5)
+               {
+                    
+                    width:100px;
+                    
+                }
+           .tablebdr th:nth-child(6)
+                {
+                    
+                    width:60px;
+                    
+                }
+           /* .tablebdr th:nth-child(8){
+               
+               width:100px;
+              
+           } */
+
+
+
+            .tablebdr th:last-child
+                {
+                    /* border-left: 0px solid black!important; */
+                    border-right: 0px solid black!important;
+                }
+            .tablebdr tr
+                {
+                    border-bottom: 1px solid black;
+
+                }
+            .tablebdr tr:last-child
+                {
+                    border-bottom: 0px solid black!important;
+                }
+            .tablebdr td
+                {
+                    border-right: 1px solid black;
+                    font-size: 12px;
+                }
+            .tablebdr th
+                {
+                    font-size: 12px;
+                }
+            .tablebdr td:last-child
+                {
+                    border-right: 0px solid black!important;
+                }
+            .billofmaterial td
+                {
+                    
+                    padding-left: 8px;
+                
+                }
+        .billofmaterial tr
+                {
+                    
+                    padding-top: 8px;
+                    padding-bottom: 8px;
+                
+                }
+            /* .tablebdr td
+            {
+                border-top: 0px solid black;
+                border-bottom: 1px solid black;
+                border-left: 0px solid black;
+                border-right: 0px solid black;
+               
+            } */
+
+            /* .tablebdr>tr>td{border: 1px solid black ;} */
+            /* .tablebdr td
+            {
+                border: 1px solid black;
+            }
+    */
+
+    </style>
+</head>
+
+<body>
+
+
+
+    <table style="width:730" class="tableheader" cellpadding="0" cellspacing="0">
+        <div>
+        <tr>
+            <td style="width:400"><b>Logical DNA</b></td>
+            <td style="width:330" rowspan="6" id="img">
+                    <img src="../images/logical.png" width="250px" height="120px" class="logo"   >
+            </td>
+        </tr>
+
+        <tr>
+            <td>LogicalDNA Group Of Companies</td>
+        </tr>
+        <tr>
+            <td>Ground Floor, Unit 003, Pentagon 1</td>
+        </tr>
+        <tr>
+            <td>Magarpatta Cyber City</td>
+        </tr>
+        <tr>
+            <td>Hadpsar Pune 411028</td>
+        </tr>
+        <tr>
+            <td>Maharashtra, India</td>
+        </tr>
+        <tr>
+            <td>Mobile No: +91 985 097 7384 (INDIA)</td>
+
+        </tr>
+        <tr>
+            <td>Email: hr@logicaldnacom</td>
+        </tr>
+    
+    </div>
+        
+        
+    </table>
+
+    <br>
+
+    <!-- <table style="width:730" class="purchasetable">
+        <tr>
+            <div id="">
+            <th style="width:800;text-decoration: underline"  colspan="2" >
+                <b><span><h3></h3></span></b>
+            </th>
+            </div>
+        </tr>
+        ##CompanyName##
+    </table>
+    <br> -->
+    
+    <!-- <table style="width:730" class="billofmaterial">
+        <tr>
+            <td style="width:400;"></td>
+            <td style="width:330; text-align: right"> <b> fromDate: ##ReportFromDate##<br>toDate: ##ReporToDate##</b></td>
+        </tr>
+    </table>
+</br>
+</br> -->
+<table style="width:730" class="purchasetable">
+    <tr>
+        <div id="">
+        <th style="width:800;text-decoration: underline"  colspan="2" >
+            <b><span><u>Purchase Order Report</u></span></b>
+        </th>
+        </div>
+    </tr>
+         
+</table>
+<br>
+
+<table style="width:730" class="billofmaterial">
+    <tr>
+        <td style="width:400;"></td>
+        <td style="width:330; text-align: right"> <b>  PO Date: ##PoDate##<br></b></td>
+       
+    </tr>
+    <tr>
+            <td style="width:400;"></td>
+        <td style="text-align: right"> <b> PO Number: ##PONumber##<br></b></td>
+    </tr>
+    <!-- <tr>
+            <td style="width:400;"></td>
+        <td style="text-align: right"> <b> Party Name: ##PartyName##<br></b></td>
+    </tr> -->
+</table>
+</br>
+</br>
+      
+    <table style="width:730" class="tablebdr" cellpadding="3" cellspacing="0">
+        <tr>         
+            <!-- <th>Po Number</th> -->
+            <th>Item Name</th>
+            <!-- <th>Po Date</th> -->
+            <th>Quantity</th>
+            <th>Unit Cost</th>
+            <th>Unit Name</th>
+            <th>Discount</th>
+            <th>tax %</th>
+        </tr>
+
+        ##ItemList##
+
+    </table>
+    <br>
+    <br>
+
+      
+    <table style="width:730"  cellpadding="3" cellspacing="0">
+                 
+            <!-- <tr><td>Po Number</td></tr>
+            <tr><td>Party Name</td></tr>
+            <tr><td>Po Date</td></tr>
+            <tr><td>Item Name</td></tr>
+            <tr><td>Unit Cost</td></tr>
+            <tr><td>Unit Name</td></tr> -->
+            
+        
+
+        <!-- ##ItemListTotal## -->
+
+    </table>
+    <br>
+
+    <!-- <table style="width:730" class="purchasetable">
+        <tr>
+            <td rowspan="6" style="width:730"> </td>
+        <tr>
+
+        <tr>
+            <td style="width:330">Base Total: ##BaseTotal##</td>
+        </tr>
+        <tr>
+            <td style="width:330">Discount:##Discount##</td>
+        </tr>
+        <tr>
+            <td style="width:330">NA: ##NA##</td>
+        </tr>
+        <tr>
+            <td style="width:330">Freight: ##Freight##</td>
+
+        </tr>
+
+        <tr>
+            <td style="width:330">gross Total: ##GrossToTal##</td>
+
+        </tr>
+        ##ItemListTotal##
+    </table><br> -->
+   
+    <table style="width:730" class="purchasetable">
+        <tr>
+            <td style="width:400;"></td>
+            <td style="width:330; text-align: right"> <b>Logical DNA<br><br><br>Authorised By</b></td>
+        </tr>
+        <!-- ##Name## -->
+    </table>
+
+   
+   
+
+</body>
+
+</html>

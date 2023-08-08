@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <CustomListItem class="sapUShellSearchItemDefault highlightSearchTerm" type="Active">
+    <HBox class="sapUiMediumMarginBeginEnd sapUiSmallMarginTop sapUiTinyMarginBottom titleAvatarLayout">
+      <Avatar src="{data>icon}"
+         displaySize="{= ${category>list/item/icon/size} || 'S'}"
+         class="titleAvatar"
+         backgroundColor="{= ${data>iconBackgroundColor} || ${category>list/item/icon/backgroundColor}}"
+         initials="{data>initials}"
+         displayShape="{= ${category>list/item/icon/shape} || 'Square'}"/>
+      <VBox class="sapUiSmallMarginBegin sapUiSmallMarginBottom">
+        <ObjectIdentifier title="{data>title}" text="{data>description}" titleActive="{= !!${data>_navigation} || !!${data>url}}"
+        titlePress=".itemNavigate"
+        />
+      </VBox>
+    </HBox>
+  </CustomListItem>
+</core:FragmentDefinition>

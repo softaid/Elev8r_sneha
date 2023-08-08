@@ -1,0 +1,148 @@
+{
+	"placementschedule": [
+		{
+			"docNo" : 1,
+			"schedulerCode" : 1,
+            "schedulerName": "Feed Schedule Female",
+            "docDate" : "01/08/17",
+            "status" : "Open",
+			"details":[
+				{
+					"locationCode" : "FEG0100",
+					"locationName" : "Gold coin - Breeder Layer2",
+					"shedCode" : 1,
+                    "shedName" : 2,
+                    "batchNo" : 0.300,
+                    "femaleProposalQty" : 2,
+                    "maleProposalQty" : 4
+				},
+				{
+					"locationCode" : "FEG0100",
+					"locationName" : "Gold coin - Breeder Layer2",
+					"shedCode" : 1,
+                    "shedName" : 2,
+                    "batchNo" : 0.300,
+                    "femaleProposalQty" : 2,
+                    "maleProposalQty" : 4
+				},
+				{
+					"locationCode" : "FEG0100",
+					"locationName" : "Gold coin - Breeder Layer2",
+					"shedCode" : 1,
+                    "shedName" : 2,
+                    "batchNo" : 0.300,
+                    "femaleProposalQty" : 2,
+                    "maleProposalQty" : 4
+				}
+            ]
+		},
+		{
+			"docNo" : 2,
+			"schedulerCode" : 2,			
+            "schedulerName": "Feed Schedule Male",
+            "docDate" : "02/07/18",
+            "status" : "Closed",
+			"details":[
+				{
+					"locationCode" : "FEG0100",
+					"locationName" : "Gold coin - Breeder Layer2",
+					"shedCode" : 1,
+                    "shedName" : 2,
+                    "batchNo" : 0.300,
+                    "femaleProposalQty" : 2,
+                    "maleProposalQty" : 4
+				},
+				{
+					"locationCode" : "FEG0100",
+					"locationName" : "Gold coin - Breeder Layer2",
+					"shedCode" : 1,
+                    "shedName" : 2,
+                    "batchNo" : 0.300,
+                    "femaleProposalQty" : 2,
+                    "maleProposalQty" : 4
+				}
+            ]
+		},
+		{
+			"docNo" : 3,
+			"schedulerCode" : 3,			
+            "schedulerName": "Feed Schedule Female",
+            "docDate" : "06/08/17",
+            "status" : "Open",
+			"details":[
+				{
+					"locationCode" : "FEG0100",
+					"locationName" : "Gold coin - Breeder Layer2",
+					"shedCode" : 1,
+                    "shedName" : 2,
+                    "batchNo" : 0.300,
+                    "femaleProposalQty" : 2,
+                    "maleProposalQty" : 4
+				},
+				{
+					"locationCode" : "FEG0100",
+					"locationName" : "Gold coin - Breeder Layer2",
+					"shedCode" : 1,
+                    "shedName" : 2,
+                    "batchNo" : 0.300,
+                    "femaleProposalQty" : 2,
+                    "maleProposalQty" : 4
+				}
+            ]
+		},
+		{
+			"docNo" : 4,
+			"schedulerCode" : 4,			
+            "schedulerName": "Feed Schedule Male",
+            "docDate" : "09/09/18",
+            "status" : "Closed",
+			"details":[
+				{
+					"locationCode" : "FEG0100",
+					"locationName" : "Gold coin - Breeder Layer2",
+					"shedCode" : 1,
+                    "shedName" : 2,
+                    "batchNo" : 0.300,
+                    "femaleProposalQty" : 2,
+                    "maleProposalQty" : 4
+				},
+				{
+					"locationCode" : "FEG0100",
+					"locationName" : "Gold coin - Breeder Layer2",
+					"shedCode" : 1,
+                    "shedName" : 2,
+                    "batchNo" : 0.300,
+                    "femaleProposalQty" : 2,
+                    "maleProposalQty" : 4
+				}
+            ]
+		},
+		{
+			"docNo" : 5,
+			"schedulerCode" : 5,			
+            "schedulerName": "Feed Schedule Male",
+            "docDate" : "11/03/18",
+            "status" : "Open",
+			"details":[
+				{
+					"locationCode" : "FEG0100",
+					"locationName" : "Gold coin - Breeder Layer2",
+					"shedCode" : 1,
+                    "shedName" : 2,
+                    "batchNo" : 0.300,
+                    "femaleProposalQty" : 2,
+                    "maleProposalQty" : 4
+				},
+				{
+					"locationCode" : "FEG0100",
+					"locationName" : "Gold coin - Breeder Layer2",
+					"shedCode" : 1,
+                    "shedName" : 2,
+                    "batchNo" : 0.300,
+                    "femaleProposalQty" : 2,
+                    "maleProposalQty" : 4
+				}
+            ]
+		}			
+	]
+}

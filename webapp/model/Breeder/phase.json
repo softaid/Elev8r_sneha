@@ -1,0 +1,28 @@
+{
+	"phase": [
+		{
+			"phaseSequence" : 1,
+			"phaseName" : "Brooding",
+			"fromWeek" : 1,
+			"toWeek" : 5
+		},
+		{
+			"phaseSequence" : 2,
+			"phaseName" : "Growing",
+			"fromWeek" : 6,
+			"toWeek" : 17
+		},
+		{
+			"phaseSequence" : 3,
+			"phaseName" : "Prelaying",
+			"fromWeek" : 18,
+			"toWeek" : 23
+		},
+		{
+			"phaseSequence" : 4,
+			"phaseName" : "Laying",
+			"fromWeek" : 24,
+			"toWeek" : 68
+		}		
+	]
+}

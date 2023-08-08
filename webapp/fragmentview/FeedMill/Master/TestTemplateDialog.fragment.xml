@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Branch"
+		contentHeight="300px"
+		search="handleTestTemplateSearch"
+		confirm="handleTestTemplateClose"
+		cancel="handleTestTemplateClose"
+		items="{
+			path : 'testTemplateListModel>/modelData',
+			sorter : {
+				path : 'NoCode',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="" text="{testTemplateListModel>id}" />
+				<ObjectIdentifier title="" text="{testTemplateListModel>itemid}" />
+                <ObjectIdentifier title="" text="{testTemplateListModel>itemname}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="ID" />
+				</header>
+			</Column>
+			<Column
+				demandPopin="true" >
+				<header>
+					<Text text="Item ID" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Item Name" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

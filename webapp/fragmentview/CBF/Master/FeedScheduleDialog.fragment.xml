@@ -1,0 +1,49 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select CBF Feed Schedule"
+		contentHeight="300px"
+		search="handleFeedScheduleSearch"
+		confirm="handleFeedScheduleClose"
+		cancel="handleFeedScheduleClose"
+		items="{
+			path : 'cbfFeedScheduleList>/modelData',
+			sorter : {
+				path : 'id'
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{cbfFeedScheduleList>id}" />
+				<Text text="{cbfFeedScheduleList>schedulename}" />
+                <Text text="{cbfFeedScheduleList>fromdate}" />
+                <Text text="{cbfFeedScheduleList>todate}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Doc No." />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Name" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="From Date" />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="To Date" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

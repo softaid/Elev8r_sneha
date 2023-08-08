@@ -1,0 +1,131 @@
+
+{   
+    "feedmillqualitycheck":[
+        {
+            "docEntry" : "12001",
+            "ackNumber": "ACK 1",
+            "poNumber" : "PO 1",
+            "itemCode" : "001",
+            "itemName" : "Broiler Bird 1",
+            "date" : "2018/08/17",
+            "ackDate" : "2018/08/17",
+            "vendorName" : "Vendor 1",
+            "qualitycheckDetails" :[
+				{
+					"testNo" : 1,
+                    "testName": "Test 1",
+                    "finding" : 100,
+                    "result" : "Pass",
+                    "remark" : "Demo"
+				},
+				{
+					"testNo" : 2,
+                    "testName": "Test 2",
+                    "finding" : 100,
+                    "result" : "Pass",
+                    "remark" : "Test"
+				}
+			],
+            "observedTestDetails":[
+				{
+					"testNo" : 1,
+                    "testName": "Test 1",
+                    "specification" : "Demo",
+                    "finding" : 100,
+                    "result" : "Pass"		
+				},
+				{
+					"testNo" : 2,
+                    "testName": "Test 2",
+                    "specification" : "Demo",
+                    "finding" : 100,
+                    "result" : "Fail"
+				}
+			]
+        },
+        {
+            "docEntry" : "12001",
+            "ackNumber": "ACK 1",
+            "poNumber" : "PO 1",
+            "itemCode" : "001",
+            "itemName" : "Broiler Bird 1",
+            "date" : "2018/08/17",
+            "ackDate" : "2018/08/17",
+            "vendorName" : "Vendor 1",
+            "qualitycheckDetails" :[
+				{
+					"testNo" : 1,
+                    "testName": "Test 1",
+                    "finding" : 100,
+                    "result" : "Pass",
+                    "remark" : "Demo"
+				},
+				{
+					"testNo" : 2,
+                    "testName": "Test 2",
+                    "finding" : 100,
+                    "result" : "Pass",
+                    "remark" : "Test"
+				}
+			],
+            "observedTestDetails":[
+				{
+					"testNo" : 1,
+                    "testName": "Test 1",
+                    "specification" : "Demo",
+                    "finding" : 100,
+                    "result" : "Pass"		
+				},
+				{
+					"testNo" : 2,
+                    "testName": "Test 2",
+                    "specification" : "Demo",
+                    "finding" : 100,
+                    "result" : "Fail"
+				}
+			]
+        },
+        {
+            "docEntry" : "12001",
+            "ackNumber": "ACK 1",
+            "poNumber" : "PO 1",
+            "itemCode" : "001",
+            "itemName" : "Broiler Bird 1",
+            "date" : "2018/08/17",
+            "ackDate" : "2018/08/17",
+            "vendorName" : "Vendor 1",
+            "qualitycheckDetails" :[
+				{
+					"testNo" : 1,
+                    "testName": "Test 1",
+                    "finding" : 100,
+                    "result" : "Pass",
+                    "remark" : "Demo"
+				},
+				{
+					"testNo" : 2,
+                    "testName": "Test 2",
+                    "finding" : 100,
+                    "result" : "Pass",
+                    "remark" : "Test"
+				}
+			],
+            "observedTestDetails":[
+				{
+					"testNo" : 1,
+                    "testName": "Test 1",
+                    "specification" : "Demo",
+                    "finding" : 100,
+                    "result" : "Pass"		
+				},
+				{
+					"testNo" : 2,
+                    "testName": "Test 2",
+                    "specification" : "Demo",
+                    "finding" : 100,
+                    "result" : "Fail"
+				}
+			]
+        }
+    ]
+}

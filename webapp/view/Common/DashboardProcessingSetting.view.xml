@@ -1,0 +1,102 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.DashboardProcessingSetting" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+	                <VBox fitContainer="true">
+                                    <form:Form editable="true">
+                                        <form:toolbar>			
+			                            </form:toolbar>
+                                        <form:layout>
+                                            <form:ResponsiveGridLayout
+                                                labelSpanXL="4"
+                                                labelSpanL="6"
+                                                labelSpanM="4"
+                                                labelSpanS="12"
+                                                adjustLabelSpan="false"
+                                                emptySpanXL="0"
+                                                emptySpanL="0"
+                                                emptySpanM="0"
+                                                emptySpanS="0"
+                                                columnsXL="3"
+                                                columnsL="2"
+                                                columnsM="2"
+                                                singleContainerFullSize="false" />
+                                        </form:layout>
+                                        <form:formContainers>
+                                        <form:FormContainer title="">
+					                            <form:formElements>                                                    
+                                            <form:FormElement label="{i18n>processingSettingsInputItem}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{processingModel>/inputtypeitemgroupids}" 
+                                                    type="{processingModel>/inputtypeitemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>processingSettingsPackingMaterialGroup}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{processingModel>/packagingmaterialgroupids}" 
+                                                    type="{processingModel>/packagingmaterialgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>processingSettingsPackagingFinishGoodItemGroup}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{processingModel>/packgingfinishgooditemgroupids}" 
+                                                    type="{processingModel>/packgingfinishgooditemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>processingSettingsWastageItemGroup}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{processingModel>/wastageitemgroupid}" 
+                                                     type="{processingModel>/wastageitemgroupidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>processingSettingsLiveBirdWarehouse}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{processingModel>/livebirdwarehouseids}" 
+                                                     type="{processingModel>/livebirdwarehouseidstype}"  width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>processingSettingsProcessingWarehouse}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{processingModel>/processingwarehouseids}" 
+                                                    type="{processingModel>/processingwarehouseidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>processingSettingsColdStorage}">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{processingModel>/finishgoodwarehouseids}" 
+                                                     type="{processingModel>/finishgoodwarehouseidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>processingSettingsOverheadExpenseGLLabel}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{processingModel>/overheadexpenseledgerid}" 
+                                                     type="{processingModel>/overheadexpenseledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>processingSettingsInventoryGainAndLossLedger}">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{processingModel>/inventorygainandlossledgerid}" 
+                                                    type="{processingModel>/inventorygainandlossledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>processingSettingsProcessingGainAndLossLedger}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{processingModel>/processinggainlossledgerid}" 
+                                                    type="{processingModel>/processinggainlossledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                </form:formElements>
+                                        </form:FormContainer>
+                                        </form:formContainers>
+                                    </form:Form>
+                </VBox>  
+</core:View>
+
+
+
+
+
+
+
+ 

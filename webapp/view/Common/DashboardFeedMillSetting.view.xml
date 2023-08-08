@@ -1,0 +1,103 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.DashboardFeedMillSetting" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+	                <VBox fitContainer="true">
+                                    <form:Form editable="true">
+                                        <form:toolbar>			
+			                            </form:toolbar>
+                                        <form:layout>
+                                            <form:ResponsiveGridLayout
+                                                labelSpanXL="4"
+                                                labelSpanL="6"
+                                                labelSpanM="4"
+                                                labelSpanS="12"
+                                                adjustLabelSpan="false"
+                                                emptySpanXL="0"
+                                                emptySpanL="0"
+                                                emptySpanM="0"
+                                                emptySpanS="0"
+                                                columnsXL="3"
+                                                columnsL="2"
+                                                columnsM="2"
+                                                singleContainerFullSize="false" />
+                                        </form:layout>
+                                        <form:formContainers>
+                                        <form:FormContainer title="">
+					                            <form:formElements>                                                    
+                                            <form:FormElement label="Tolerence(%)">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{feedmillModel>/tolerencepercentage}" 
+                                                    type="{feedmillModel>/tolerencepercentagetype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Additional Cost Per Ton">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{feedmillModel>/additionalcost}" 
+                                                    type="{feedmillModel>/additionalcosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Warehouse">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{feedmillModel>/inventoryindrledgerid}" 
+                                                    type="{feedmillModel>/inventoryindrledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Inventory In/Dr ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{feedmillModel>/inventoryindrledgerid}" 
+                                                     type="{feedmillModel>/inventoryindrledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="GRPO Without invoice ladger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{feedmillModel>/grpowithoutinvoiceledgerid}" 
+                                                     type="{feedmillModel>/grpowithoutinvoiceledgeridtype}"  width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Discount Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{feedmillModel>/discountledgerid}" 
+                                                    type="{feedmillModel>/discountledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Over head Exp Ledger">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{feedmillModel>/overheadledgerid}" 
+                                                     type="{feedmillModel>/overheadledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Production Loss Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{feedmillModel>/lossledgerid}" 
+                                                     type="{feedmillModel>/lossledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+
+                                             <form:FormElement label="Cost Method FIFO">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{feedmillModel>/overheadledgerid}" 
+                                                     type="{feedmillModel>/overheadledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Receipt Loss apply on production">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{feedmillModel>/isfifo}" 
+                                                     type="{feedmillModel>/isfifotype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                </form:formElements>
+                                        </form:FormContainer>
+                                        </form:formContainers>
+                                    </form:Form>
+                </VBox>  
+</core:View>
+
+
+
+
+
+
+
+ 

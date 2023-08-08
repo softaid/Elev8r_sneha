@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="handleSortDialogConfirm">
+		<sortItems>
+			<ViewSettingsItem text="Lead Id" key="id" selected="true" />
+			<ViewSettingsItem text="Lead Name" key="leadname" />
+			<ViewSettingsItem text="Sale REP" key="salesrep" />
+			<ViewSettingsItem text="Lead Source" key="sourcename" />
+            <ViewSettingsItem text="Lead Stage" key="stagename" />
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

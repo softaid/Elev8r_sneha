@@ -1,0 +1,134 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Employee.EmployeeMasterDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+	height="100%">
+	
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+						<Title text="{i18n>employeeMasterDetailTitle}"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+					<Button
+						text="{i18n>saveButtonText}"
+                        type="Emphasized"
+						press="onSave"/>
+					<Button
+						text="{i18n>deleteButtonText}"
+						type="Emphasized"
+                        press="onDelete"
+                        id = "btnDelete"/>						
+				</f:actions>
+				<f:navigationActions>
+					<Button
+						icon="sap-icon://decline"
+						type="Transparent" press="onCancel" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>				
+   			<form:Form editable="true">
+                <form:title>
+                </form:title>
+                <form:layout>
+                    <form:ResponsiveGridLayout
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="2"
+                        columnsM="1"
+                        singleContainerFullSize="false" />
+                </form:layout>
+                <form:formContainers>
+                    <form:FormContainer title="">
+					    <form:formElements>
+                            <form:FormElement label="{i18n>employeeMasterLabelEmployeename}">
+                                <form:fields>
+                                    <Input id="txtName" valueLiveUpdate="true" value="{editemployeeModel>/employeename}" change = "cahegeName" required="true"/>
+                                </form:fields>
+                            </form:FormElement> 
+                            
+                             <form:FormElement label="{i18n>employeeMasterLabelEmailId}">
+                                <form:fields>
+                                    <Input id="txtEmail" valueLiveUpdate="true"  value="{editemployeeModel>/emailid}" change = "validemail" required="true" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>employeeMasterLabelMobileNo}">
+                                <form:fields>
+                                    <Input id="txtMobile" type="number" maxLength="10"  valueLiveUpdate="true" value="{editemployeeModel>/mobileno}"
+                                     change="cahegeData"/>
+                                </form:fields>
+                            </form:FormElement>
+
+                               <form:FormElement label="{i18n>leadPinCode}">
+                                        <form:fields>
+                                            <Input id="txtPinCode1" type="number" maxLength="6" valueLiveUpdate="true" value="{editPartyModel>/pincode}" change="onNumberInputChange"/>
+                                        </form:fields>
+                                    </form:FormElement>
+
+                             <form:FormElement label="{i18n>employeeMasterLabelActive}">
+                                <form:fields>
+
+                                    <Switch state="{editemployeeModel>/isactive}" customTextOn="Yes" customTextOff="No">
+                                        <layoutData>
+                                            <FlexItemData growFactor="1" />
+                                        </layoutData>
+                                    </Switch>
+
+                                </form:fields>
+                            </form:FormElement>
+                            <!-- <form:FormElement label="Employee Role">
+                                <form:fields>
+                                    <Select id="emprole"
+                                        required="true" 
+                                        change=""
+                                        selectedKey="{editemployeeModel>/emproleids}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'roleModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{roleModel>id}" text="{roleModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>  -->
+                                  <form:FormElement label="Employee Role">
+                                            <form:fields>
+                                                <MultiComboBox id="emprole"
+                                                    required="true" 
+                                                    selectionChange="handleSelectionChange"
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                           path: 'roleModel>/modelData',
+                                                           sorter: { path: 'id' }
+                                                           }">
+                                                    <core:Item key="{roleModel>id}" text="{roleModel>description}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                        </form:formElements>
+                    </form:FormContainer>
+                </form:formContainers>
+            </form:Form>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

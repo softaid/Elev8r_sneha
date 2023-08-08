@@ -1,0 +1,14 @@
+{
+	"openingbalancecollection": [
+		{
+			"id" : 1,			
+			"partyName" : "Adidas",
+			"openingFor" : "Customer",
+			"ledgerName" : "HostelLedger",
+			"openingBalance" : 50000,
+			"crDr" : "CR"
+
+		}
+			
+	]
+}

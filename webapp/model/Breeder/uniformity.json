@@ -1,0 +1,154 @@
+{
+	"uniformity": [
+		{
+			"code" : 1,
+			"date" : "09/07/2018",
+			"uniformityDetails":[
+				{
+					"fromWeek" : 1,
+					"toWeek" : 4,
+					"percentage" : 98.00
+				},
+				{
+					"fromWeek" : 5,
+					"toWeek" : 12,
+					"percentage" : 96.00
+				},
+				{
+					"fromWeek" : 13,
+					"toWeek" : 20,
+					"percentage" : 90.00
+				}
+			],
+			"locationDetails" :[
+                {
+                    "locationCode" : 1,                    
+					"locationName" : "Pashyala",
+                    "isApplicable" : "false"                    
+                },
+                {
+                    "locationCode" : 2,                    
+					"locationName" : "Hillcountry",
+                    "isApplicable" : "false"                    
+				},
+                {
+                    "locationCode" : 3,                    
+					"locationName" : "Horana",
+                    "isApplicable" : "true"                    
+				}
+            ]
+		},
+		{
+			"code" : 2,
+			"date" : "07/08/2017",
+			"uniformityDetails":[
+				{
+					"fromWeek" : 1,
+					"toWeek" : 5,
+					"percentage" : 97.00
+				},
+				{
+					"fromWeek" : 6,
+					"toWeek" : 18,
+					"percentage" : 91.00
+				}
+			],
+			"locationDetails" :[
+                {
+                    "locationCode" : 1,                    
+					"locationName" : "Hillcountry1",
+                    "isApplicable" : "false"                    
+                },
+                {
+                    "locationCode" : 2,                    
+					"locationName" : "Hillcountry2",
+                    "isApplicable" : "false"                    
+				}
+            ]
+		},
+		{
+			"code" : 3,
+			"date" : "05/03/2018",
+			"uniformityDetails":[
+				{
+					"fromWeek" : 1,
+					"toWeek" : 7,
+					"percentage" :89.00
+				},
+				{
+					"fromWeek" : 8,
+					"toWeek" : 20,
+					"percentage" : 83.00 
+				}
+			],
+			"locationDetails" :[
+                {
+                    "locationCode" : 1,                    
+					"locationName" : "Test1",
+                    "isApplicable" : "true"                    
+                },
+                {
+                    "locationCode" : 2,                    
+					"locationName" : "Test2",
+                    "isApplicable" : "true"                    
+				}
+            ]
+		},
+		{
+			"code" : 4,
+			"date" : "11/04/2018",
+			"uniformityDetails":[
+				{
+					"fromWeek" : 1,
+					"toWeek" : 15,
+					"percentage" : 95.00 
+				},
+				{
+					"fromWeek" : 16,
+					"toWeek" : 25,
+					"percentage" : 87.00 
+				}
+			],
+			"locationDetails" :[
+                {
+                    "locationCode" : 1,                    
+					"locationName" : "Location1",
+                    "isApplicable" : "false"                    
+                },
+                {
+                    "locationCode" : 2,                    
+					"locationName" : "Location2",
+                    "isApplicable" : "true"                    
+				}
+            ]
+		},
+		{
+			"code" : 5,
+			"date" : "06/05/2017",
+			"uniformityDetails":[
+				{
+					"fromWeek" : 1,
+					"toWeek" : 9,
+					"percentage" : 96.00
+				},
+				{
+					"fromWeek" : 10,
+					"toWeek" : 19,
+					"percentage" : 88.00 
+				}
+			],
+			"locationDetails" :[
+                {
+					"locationCode" : 2,
+                    "locationName" : "Pune",
+                    "isApplicable" : "true"
+                },
+                {
+					"locationName" : "Mumbai",
+                    "locationCode" : 3,
+                    "isApplicable" : "false"                    
+				}
+            ]
+		}			
+	]
+}

@@ -1,0 +1,34 @@
+{
+	"flock": [
+		{
+			"location" : "RND1",
+			"warehouseName" : "Horana Breeder1",
+			"batch" : "RNDB1",
+			"binCode" : "HR0001-RNDB"
+		},
+		{
+			"location" : "RND2",
+			"warehouseName" : "Horana Breeder2",
+			"batch" : "RNDB2",
+			"binCode" : "HR0002-RNDB"
+		},
+		{
+			"location" : "RND3",
+			"warehouseName" : "Horana Breeder3",
+			"batch" : "RNDB3",
+			"binCode" : "HR0003-RNDB"
+		},
+		{
+			"location" : "RND4",
+			"warehouseName" : "Horana Breeder4",
+			"batch" : "RNDB4",
+			"binCode" : "HR0004-RNDB"
+		},
+		{
+			"location" : "RND5",
+			"warehouseName" : "Horana Breeder5",
+			"batch" : "RNDB5",
+			"binCode" : "HR0005-RNDB"
+		}			
+	]
+}

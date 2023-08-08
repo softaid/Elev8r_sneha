@@ -1,0 +1,14 @@
+{
+	"bankcollection": [
+		{
+			"id" : 1,
+			"branchName" : "HDFC bank",
+			"micrCode" : 99991,
+			"ifscCode" : "HDFC0000335",
+			"address" : "Satara Road",
+			"phone" : 9822283055
+
+		}
+			
+	]
+}

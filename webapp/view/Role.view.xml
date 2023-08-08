@@ -1,0 +1,40 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Role" height="100%"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:core="sap.ui.core">
+
+	<VBox fitContainer="true">
+        <Table id="roleTable"
+               inset="false" 
+               items="{
+                        path: 'roleModel>/roles',
+                        sorter: {
+                            path: 'name'
+                        }
+                    }">
+	        <headerToolbar>
+			    <Toolbar>
+				    <content>
+					    <Title text="User Roles" level="H2"/>
+					    <ToolbarSpacer />
+                        <SearchField search="onSearch" width="17.5rem"/>
+			            <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
+			            <Button icon="sap-icon://sort" type="Transparent" press="onSort"/>
+				    </content>
+			    </Toolbar>
+		    </headerToolbar>
+            <columns>
+                <Column><Text text ="Role" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Description" /></Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Navigation" press="onListItemPress">
+                    <cells>
+                        <Text text="{roleModel>name}"/>
+                        <Text text="{roleModel>description}" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+	</VBox>
+</core:View>

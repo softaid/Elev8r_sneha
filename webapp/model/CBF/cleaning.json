@@ -1,0 +1,39 @@
+{
+	"cleaning": [
+		{
+		    "code" : 1,
+                "parameter": "Litter Removal",
+                "isMandatory" : true
+		},
+		{
+                "code" : 1,
+                "parameter": "Cleaning of equipments",
+                "isMandatory" : true
+		},
+		{	
+                "code" : 1,
+                "parameter": "Pressure Washing",
+                "isMandatory" : true
+		},
+		{
+                "code" : 1,
+                "parameter": "Drinker line cleaning",
+                "isMandatory" : true
+		},
+		{
+                "code" : 1,
+                "parameter": "Spray of Detergent",
+                "isMandatory" : false
+                },
+                {
+                "code" : 1,
+                "parameter": "Presure washing",
+                "isMandatory" : false
+                },
+                {
+                "code" : 1,
+                "parameter": "Fumigation",
+                "isMandatory" : true
+                 }			
+	]
+}

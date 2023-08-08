@@ -1,0 +1,34 @@
+{
+    "companyusers" :[
+        {
+           "firstName" : "user1 fn",
+           "lastName" : "user1 ln",
+           "userName" : "user1 un",
+           "email" : "user1@gmail.com"
+        },
+        {
+            "firstName" : "user2 fn",
+            "lastName" : "user2 ln",
+            "userName" : "user2 un",
+            "email" : "user2@gmail.com"
+         },
+         {
+            "firstName" : "user3 fn",
+            "lastName" : "user3 ln",
+            "userName" : "user3 un",
+            "email" : "user3@gmail.com"
+         },
+         {
+            "firstName" : "user4 fn",
+            "lastName" : "user4 ln",
+            "userName" : "user4 un",
+            "email" : "user4@gmail.com"
+         },
+         {
+            "firstName" : "user5 fn",
+            "lastName" : "user5 ln",
+            "userName" : "user5 un",
+            "email" : "user5@gmail.com"
+         }
+    ]
+}

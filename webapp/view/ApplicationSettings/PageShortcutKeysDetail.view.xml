@@ -1,0 +1,89 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ApplicationSettings.PageShortcutKeysDetail"
+	xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+	height="100%">
+
+	<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Page Shortcut Keys Detail"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+						<Button
+							text="{i18n>saveButtonText}"
+                            type="Emphasized"
+                            press="onSave"
+                            id="btnSave"/>
+				</f:actions>
+				<f:navigationActions>
+					<Button
+						icon="sap-icon://decline"
+						type="Transparent" press="onCancel" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>	
+			<form:Form editable="true">
+                <form:title>
+                </form:title>
+                <form:layout>
+                    <form:ResponsiveGridLayout
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="2"
+                        columnsM="1"
+                        singleContainerFullSize="false" />
+                </form:layout>
+                <form:formContainers>
+                    <form:FormContainer title="">
+					    <form:formElements>
+                            <form:FormElement label="User Role">
+                                <Select id="role"
+                                    selectedKey="{edtPageShortcutKeyModel>/roleid}" 
+                                    items="{
+                                            path: 'roleModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }"
+                                    change="onRoleChange"
+                                    >
+                                    <core:Item key="{roleModel>id}" text="{roleModel>description}" />                       
+                                </Select>
+                            </form:FormElement> 
+                            <form:FormElement label="Page Key">
+                                <Input id="key"  valueLiveUpdate="true" value="{edtPageShortcutKeyModel>/key}" enabled="false"/>                        
+                            </form:FormElement> 
+                            <form:FormElement label="Page">
+                                <Select id="page"
+                                    selectedKey="{edtPageShortcutKeyModel>/pagename}" 
+                                    growingThreshold="200"
+                                    items="{
+                                            path: 'pageModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }"
+                                    >
+                                    <core:Item key="{pageModel>entityname}" text="{pageModel>displayame}" />                       
+                                </Select>
+                            </form:FormElement> 
+                        </form:formElements>
+                    </form:FormContainer>
+                </form:formContainers>
+            </form:Form>
+           
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

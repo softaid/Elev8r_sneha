@@ -1,0 +1,155 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CBF.DocumentCollectionReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+    <f:title>
+        <f:DynamicPageTitle>
+            <f:heading>
+                <Title text="Document Collection Report"/>
+            </f:heading>
+            <f:actions>                           
+            </f:actions>
+        </f:DynamicPageTitle>
+    </f:title>
+    <f:header>
+        <f:DynamicPageHeader pinnable="true">
+            <VBox>
+                <form:Form editable="true">
+                    <form:title>
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                            labelSpanXL="4"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="3"
+                            columnsL="2"
+                            columnsM="2"
+                            singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="">
+                            <form:formElements>
+                                <form:FormElement label="Farmer Name">
+                                    <form:fields>
+                                        <Select id="txtFarmer" 
+                                        forceSelection  = "false"  selectedKey="{reportModel>/farmerenquiryid}" 
+                                        items="{
+                                            path: 'farmerEnquiryModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{farmerEnquiryModel>id}" text="{farmerEnquiryModel>farmer_name}" additionalText = "{farmerEnquiryModel>farm_name}" />       
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+            </VBox>
+        </f:DynamicPageHeader>
+    </f:header>
+    <f:content>				
+        <HBox fitContainer="true">
+
+            <VBox class="modal" id = "imgDiv">
+                <!-- <VBox class="close" press="closeImg"><label>X</label></VBox> -->
+                <Image id="previewImg" class="modal-content"
+                    src=""
+                    alt=""
+                    densityAware="false"
+                    width="18em" >
+                    <layoutData>
+                        <FlexItemData growFactor="1" />
+                    </layoutData>
+                </Image>
+                <VBox id="caption"></VBox>
+            </VBox>
+                    
+            <ScrollContainer
+                height="100%"
+                width="100%"
+                horizontal="true"
+                vertical="true"
+                focusable="true">
+
+                    <Table id="tblModel"
+                        growingScrollToLoad="true"
+                        sticky="ColumnHeaders"
+                        title="Contents"
+                        items="{
+                                path: 'tblModel>/modelData',
+                                    sorter: {
+                                        path: 'farmer_name',
+                                        group : true
+                                    }
+                            }"
+                            class="sapFDynamicPageAlignContent"
+                            width="auto">
+
+                        <headerToolbar>
+                            <Toolbar>
+                            <content>
+                                <Title  level="H2"/>
+                                <ToolbarSpacer />
+                                <Button icon="sap-icon://search" type="Emphasized" text="Search Data" press="onSearchPress"/>
+                                <!-- <MenuButton icon="sap-icon://download">
+                                    <menu>
+                                        <Menu itemSelected="onMenuAction" >
+                                            <items>
+                                                <MenuItem text="SaveCSV" icon="sap-icon://save" press="onDataExport" />
+                                                <MenuItem text="SavePDF" icon="sap-icon://save" press="createPDF" />
+                                            </items>
+                                        </Menu>
+                                    </menu>
+                                </MenuButton> -->
+                                    
+                                    
+                            </content>
+                            </Toolbar>
+                        </headerToolbar>
+                        <columns>                 
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Document" /></Column> 
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Image" /></Column> 
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                            <customData>
+                            <core:CustomData key="settingReportgroup" value="{tblModel>farm_name}" writeToDom="true"></core:CustomData>
+                            </customData>
+                                <cells>
+                                    <!-- <ObjectIdentifier title="{tblModel>farmer_name}" text="{tblModel>farm_name}" /> -->
+                                    <Text text="{tblModel>documentname}" />
+                                    <Image
+                                        alt="{tblModel>documentname}"
+                                        src="{tblModel>image_url}"
+                                        densityAware="false"
+                                        width="5em" press="changeURL">
+                                        <layoutData>
+                                            <FlexItemData growFactor="1" />
+                                        </layoutData>
+                                    </Image>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table> 
+                </ScrollContainer>                          
+            </HBox>    
+        </f:content>  
+	</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

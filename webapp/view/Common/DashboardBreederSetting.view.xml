@@ -1,0 +1,336 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.DashboardBreederSetting" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+	                <VBox fitContainer="true">
+                                    <form:Form editable="true">
+                                        <form:toolbar>			
+			                            </form:toolbar>
+                                        <form:layout>
+                                            <form:ResponsiveGridLayout
+                                                labelSpanXL="4"
+                                                labelSpanL="6"
+                                                labelSpanM="4"
+                                                labelSpanS="12"
+                                                adjustLabelSpan="false"
+                                                emptySpanXL="0"
+                                                emptySpanL="0"
+                                                emptySpanM="0"
+                                                emptySpanS="0"
+                                                columnsXL="3"
+                                                columnsL="2"
+                                                columnsM="2"
+                                                singleContainerFullSize="false" />
+                                        </form:layout>
+                                        <form:formContainers>
+                                        <form:FormContainer title="">
+					                            <form:formElements>                                                    
+                                            <form:FormElement label="WIP Bird Ledger">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/WIPledgerid}" 
+                                                    type="{BreederModel>/WIPledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="COGS Ledger">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/costofgoodsoldledgerid}" 
+                                                    type="{BreederModel>/costofgoodsoldledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Goods Received But Not Invoiced Ledger">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/grpowithoutinvoiceledgerid}" 
+                                                    type="{BreederModel>/grpowithoutinvoiceledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Amortization Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/amortizationledgerid}" 
+                                                     type="{BreederModel>/amortizationledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Stock Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/stockledgerid}" 
+                                                     type="{BreederModel>/stockledgeridtype}"  width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Cash Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/cashledgerid}" 
+                                                    type="{BreederModel>/cashledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Freight Ledger">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/freightledgerid}" 
+                                                     type="{BreederModel>/freightledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Discount Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/discountledgerid}" 
+                                                     type="{BreederModel>/discountledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Control Account Ledger">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/ctrlaccledgerid}" 
+                                                    type="{BreederModel>/ctrlaccledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Inventory Gain and Loss Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/inventorygainandlossledgerid}" 
+                                                    type="{BreederModel>/inventorygainandlossledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Mortality ledger">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/mortalityledgerid}" 
+                                                     type="{BreederModel>/mortalityledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Feed Ledger">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/feedledgerid}" 
+                                                     type="{BreederModel>/feedledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="vaccine Ledger">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/vaccineledgerid}" 
+                                                 type="{BreederModel>/vaccineledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Medicine Ledger">
+                                                <form:fields>
+                                               <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/medicineledgerid}" 
+                                                 type="{BreederModel>/medicineledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Vitamin Ledger">
+                                                <form:fields>
+                                               <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/vitaminledgerid}" 
+                                              type="{BreederModel>/vitaminledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                </form:formElements>
+                                            </form:FormContainer>
+                                            <form:FormContainer title="">
+					                            <form:formElements>                                                    
+                                            <form:FormElement label="Default Warehouse for Breeder">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/defaultchickwarehouseid}" 
+                                                    type="{BreederModel>/defaultchickwarehouseidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Male Chick Item">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/defaultmalechickid}" 
+                                                    type="{BreederModel>/defaultmalechickidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Female Chick Item">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/defaultfemalechickid}" 
+                                                    type="{BreederModel>/defaultfemalechickidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Male Percentage">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/malepercentage}" 
+                                                     type="{BreederModel>/malepercentagetype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                             <form:FormElement label="Default Hatching Eggs Item Group">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/hatchingitemgroupids}" 
+                                                     type="{BreederModel>/hatchingitemgroupidstype}"  width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Commercial Eggs Item">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/defaultcommercialeggsitemid}" 
+                                                    type="{BreederModel>/defaultcommercialeggsitemidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Cracked Eggs Item">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/defaultcrackedeggsitemid}" 
+                                                     type="{BreederModel>/defaultcrackedeggsitemidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Double Yolk Eggs Item">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/defaultdoubleyolkeggsitemid}" 
+                                                     type="{BreederModel>/defaultdoubleyolkeggsitemidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Wastage Eggs Item">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/wastageeggsitemid}" 
+                                                    type="{BreederModel>/wastageeggsitemidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Feed Item Group(s)">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/feeditemgroupids}" 
+                                                    type="{BreederModel>/feeditemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                             <form:FormElement label="Default Medicine Item Group(s)">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/medicineitemgroupids}" 
+                                                     type="{BreederModel>/medicineitemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Breed Item Group">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/breeditemgroupids}" 
+                                                     type="{BreederModel>/breeditemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Hatching Eggs Cost">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/hatchingeggscost}" 
+                                                 type="{BreederModel>/hatchingeggscosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Commercial Eggs Cost">
+                                                <form:fields>
+                                               <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/commercialeggscost}" 
+                                                 type="{BreederModel>/commercialeggscosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Wastage Eggs Cost">
+                                                <form:fields>
+                                               <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/wastageeggscost}" 
+                                              type="{BreederModel>/wastageeggscosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                </form:formElements>
+                                        </form:FormContainer>
+                                        <form:FormContainer title="">
+					                        <form:formElements>                                                    
+                                            <form:FormElement label="Bird Cost STD">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/birdcoststd}" 
+                                                    type="{BreederModel>/birdcoststdtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Shed Rest Period">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/shedrestperiod}" 
+                                                    type="{BreederModel>/shedrestperiodtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                             <form:FormElement label="Male Chick Cost">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/defaultmalechickcost}" 
+                                                    type="{BreederModel>/defaultmalechickcosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Female Chick Cost">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/defaultfemalechickcost}" 
+                                                     type="{BreederModel>/defaultfemalechickcosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                             <form:FormElement label="Labour Charges">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/labourcharge}" 
+                                                     type="{BreederModel>/labourchargetype}"  width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Overhead Cost">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/overheadcost}" 
+                                                    type="{BreederModel>/overheadcosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Warehouse for Outside Hatchery">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/defaultoutsidehatcherywarehouseid}" 
+                                                     type="{BreederModel>/defaultoutsidehatcherywarehouseidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Eggs Prediction Per Bird">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/eggspredictionperbird}" 
+                                                     type="{BreederModel>/eggspredictionperbirdtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                <form:FormElement label="Male Standard Weight">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/malestandardweight}" 
+                                                    type="{BreederModel>/malestandardweighttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            </form:formElements>
+                                        </form:FormContainer>
+                                        <form:FormContainer title="">
+					                        <form:formElements>    
+                                            <form:FormElement label="Female Standard Weight">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/femalestandardweight}" 
+                                                    type="{BreederModel>/femalestandardweighttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                             <form:FormElement label="Default Vaccine Item Group(s)">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/vaccineitemgroupids}" 
+                                                     type="{BreederModel>/vaccineitemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Vitamin Item Group(s)">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/vitaminitemgroupids}" 
+                                                     type="{BreederModel>/vitaminitemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>                                            
+                                            <form:FormElement label="Default Culls Warehouse">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/defaultcullswarehouseid}" 
+                                                    type="{BreederModel>/WIPledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Amortization">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/amortizationcoststd}" 
+                                                    type="{BreederModel>/amortizationcoststdtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Default Chicks Item Group">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/breeditemgroupids}" 
+                                                 type="{BreederModel>/breeditemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Cracked Eggs Cost">
+                                                <form:fields>
+                                               <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/crackedeggscost}" 
+                                                 type="{BreederModel>/crackedeggscosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Double Yolk Eggs Cost">
+                                                <form:fields>
+                                               <Button class="sapUiSmallMarginEnd" icon="{BreederModel>/doubleyolkeggscost}" 
+                                              type="{BreederModel>/doubleyolkeggscosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            </form:formElements>
+                                        </form:FormContainer>
+                                        </form:formContainers>
+                                    </form:Form>
+                </VBox>  
+</core:View>
+
+
+
+
+
+
+
+ 

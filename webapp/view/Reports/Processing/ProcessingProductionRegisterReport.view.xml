@@ -1,0 +1,228 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Processing.ProcessingProductionRegisterReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Production Register"/> 
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                  <form:FormContainer title="">
+                                        <form:formElements>
+                                        <form:FormElement label="{i18n>ProcessingProductionRegisterfromdate}">
+                                                <form:fields>
+                                                    <DatePicker id="txtFromDate" required="true" 
+                                                    value="{cashBookModel>/fromdate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="onDateChange"
+                                                    />
+                                                </form:fields>
+                                            </form:FormElement>   
+                                            <form:FormElement label="{i18n>ProcessingProductionRegistertodate}">
+                                                <form:fields>
+                                                    <DatePicker id="txtToDate" required="true" 
+                                                    value="{cashBookModel>/todate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="onDateChange"
+                                                    />
+                                                </form:fields>
+                                            </form:FormElement>  
+
+                                             <form:FormElement label="{i18n>ProcessingProductionRegisterinputitem}">
+                                            <form:fields>
+                                                <MultiComboBox id="inputitems"
+                                                  selectionChange="inputItemSelectionChange"
+                                                  selectionFinish = "inputitemSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'InputItemModel>/modelData',
+                                                        sorter: { path: 'inputitemid' }
+                                                    }">
+                                                    <core:Item key="{InputItemModel>inputitemid}" text="{InputItemModel>inputitemname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>   
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+
+                                         <form:FormElement label="{i18n>ProcessingProductionRegisterinputitembatch}">
+                                            <form:fields>
+                                                <MultiComboBox id="inputitembatches"
+                                                  selectionChange="inputItemSelectionChange"
+                                                  selectionFinish = "inputitemBatchSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'InputItemBatchesModel>/modelData',
+                                                        sorter: { path: 'inputitemid' }
+                                                    }">
+                                                    <core:Item key="{InputItemBatchesModel>inputitemid}" text="{InputItemBatchesModel>inputitembatch}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>   
+
+                                         <form:FormElement label="{i18n>ProcessingProductionRegisteroutputitem}">
+                                            <form:fields>
+                                                <MultiComboBox id="outputitemid"
+                                                  selectionChange="inputItemSelectionChange"
+                                                  selectionFinish = "outputitemSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'OutputItemModel>/modelData',
+                                                        sorter: { path: 'outputitemid' }
+                                                    }">
+                                                    <core:Item key="{OutputItemModel>outputitemid}" text="{OutputItemModel>outputitemname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>   
+
+                                         <form:FormElement  label="" >
+                                            <form:fields>
+                                                 <SearchField search="onSearch" width="25.5rem"  id = "onSearchId"/> 
+                                                  <Button
+                                                 width="20%"
+                                                 align="right"
+                                                tooltip="Group"
+                                                icon="sap-icon://group-2"
+                                                press="handleGroupButtonPressed"/>
+                                            </form:fields>
+                                        </form:FormElement>   
+
+
+                                          <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" tooltip="Show Records" type="Emphasized" text="{i18n>ProcessingProductionRegistershorrecords}" width="100%" press="getProcessingRegisterReport"/>
+                                                <MenuButton id="txtdownload"  tooltip="Download" text="{i18n>ProcessingProductionRegisterdownlosd}" width="100%"  align="right">
+                                                    <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="{i18n>ProcessingProductionRegistersavecsv}" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="{i18n>ProcessingProductionRegistersavepdf}" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>  
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                        <form:FormContainer title="">
+                                        <form:formElements>
+                                       </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                          
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel" width="180%"  growing="true" sticky="ColumnHeaders" growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData'
+                                                }"
+                                                mode="None" backgroundDesign="Solid">
+                               
+                                <columns>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisterproorderno}" /></Column> 
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>ProcessingProductionRegisterproducatondate}" /></Column>  
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisterbomno}" /></Column>   
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>ProcessingProductionRegisterbomname}" /></Column>  
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisterstage}" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisteroutputitem}" /></Column>  
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisteroutitembatch}" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisterplanweight}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisterproweight}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisterweightdeviation}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisterproper}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisterproqty}" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisterplanedqty}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisterprocost}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisterinputitem}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisterinputbatch}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisterinputitemweight}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingProductionRegisterinputitemqty}" /></Column> 
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+				                    <customData>
+                                    <core:CustomData key="deviationReportgroup" value="{tblModel>shed_name}" writeToDom="true"></core:CustomData>
+                                     </customData>
+                                            <cells>
+                                            <Text text="{tblModel>pocode}" />
+                                            <Text text="{tblModel>podate}" />
+                                            <Text text="{tblModel>bomcode}" />
+                                            <Text text="{tblModel>bomname}" />
+                                            <Text text="{tblModel>stagename}" />
+                                            <Text text="{tblModel>outputitemname}" />
+                                            <Text text="{tblModel>outputitembatchid}" />
+                                            <Text text="{tblModel>planweight}" />  
+                                            <Text text="{tblModel>productionweight}" />
+                                            <Text text="{tblModel>daviation}" />
+                                            <Text text="{tblModel>productionper}"/>
+                                             <Text text="{tblModel>productionqty}" />
+                                            <Text text="{tblModel>planqty}" />
+                                            <Text text="{tblModel>productioncost}" />
+                                            <Text text="{tblModel>inputitemname}" />
+                                            <Text text="{tblModel>inputitembatch}" />
+                                            <Text text="{tblModel>inputitemweight}" />
+                                            <Text text="{tblModel>inputitemqty}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+            
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

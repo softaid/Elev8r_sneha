@@ -1,0 +1,55 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Branch"
+		contentHeight="300px"
+		search="handleTestSearch"
+		confirm="handleTestClose"
+		cancel="handleTestClose"
+		items="{
+			path : 'ProductionPlanningList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="" text="{ProductionPlanningList>id}"/>
+				<Text text="{ProductionPlanningList>fromdate}" />
+                <Text text="{ProductionPlanningList>todate}" />
+                <Text text="{ProductionPlanningList>locationname}" />
+                <Text text="{ProductionPlanningList>modulename}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="ID" />
+				</header>
+			</Column>
+			<Column
+				demandPopin="true" >
+				<header>
+					<Text text="FromDate" />
+				</header>
+			</Column>
+            	<Column
+				demandPopin="true" >
+				<header>
+					<Text text="ToDate" />
+				</header>
+			</Column>
+            	<Column
+				demandPopin="true" >
+				<header>
+					<Text text="Location" />
+				</header>
+			</Column>
+            	<Column
+				demandPopin="true" >
+				<header>
+					<Text text="Operation" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

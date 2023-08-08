@@ -1,0 +1,238 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Processing.ItemStockReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>ProcessingItemStockItemTitle}"/> 
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                  <form:FormContainer title="">
+                                        <form:formElements>
+                                               <form:FormElement label="Item Group">
+                                            <form:fields>
+                                                <MultiComboBox id="txtitemgroup"
+                                                    selectionChange="handleselectionChange"
+                                                    selectionFinish="groupSelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'itemGroupList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{itemGroupList>id}" text="{itemGroupList>groupname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                
+                                      <form:FormElement label="Item Name">
+                                            <form:fields>
+                                                <MultiComboBox id="txtitemname"
+                                                    selectionChange="handleselectionChange"
+                                                    selectionFinish="itemSelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'itemList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{itemList>id}" text="{itemList>itemname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                          <form:FormElement label="{i18n>itemWiseStockLabelWareHouseName}">
+                                            <form:fields>
+                                                <MultiComboBox id="warehousetbl"
+                                                    selectionChange="handleselectionChangeWarehouse"
+                                                    selectionFinish="warehouseSelectionFinish"
+                                                    width="500px"
+                                                    forceSelection="false"
+                                                    items="{
+                                                        path: 'warehouseList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{warehouseList>id}" text="{warehouseList>warehousename}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                           <form:FormElement label="{i18n>purchaseRegisterReportLableFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromDate" required="true"          
+                                                    value="{stockModel>/fromdate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                            
+                                                    change="onDateChange"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>   
+                                        <form:FormElement label="{i18n>purchaseRegisterReportLableToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtToDate" required="true" 
+                                                value="{stockModel>/todate}" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                       
+                                                change="onDateChange"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>   
+                                          <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" tooltip="Show Records" type="Emphasized" text="{i18n>ProcessingProductionRegistershorrecords}" width="100%" press="onSearchData"/>
+                                                <MenuButton id="txtdownload"  tooltip="Download" text="{i18n>ProcessingProductionRegisterdownlosd}" width="100%"  align="right">
+                                                    <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="{i18n>ProcessingProductionRegistersavecsv}" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="{i18n>ProcessingProductionRegistersavepdf}" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>  
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                        <form:FormContainer title="">
+                                        <form:formElements>
+                                       </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                          
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel" width="200%"  growing="true" sticky="ColumnHeaders" growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData'
+                                                }"
+                                                mode="None" backgroundDesign="Solid">
+                               
+                                <columns>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockDate}" /></Column> 
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>ProcessingItemStockOpeningQuantity}" /></Column>  
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockOpeningWeight}" /></Column>   
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockRateKg}" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockAmount}" /></Column>  
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockReceiptQty}" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockReceiptWeight}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockRateKg}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockAmount}" /></Column> 
+
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockTransferIn}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockTransferInWeight}" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockRateKg}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockAmount}" /></Column> 
+
+                                      <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockTransferOut}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockTransferOutWeight}" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockRateKg}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockAmount}" /></Column> 
+
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockIssue}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockIssueWeight}" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockRateKg}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockAmount}" /></Column> 
+
+                                  
+
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockClosingQty}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockClosingWeight}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockRateKg}" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>ProcessingItemStockAmount}" /></Column> 
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+				                    <customData>
+                                    <core:CustomData key="deviationReportgroup" value="{tblModel>shed_name}" writeToDom="true"></core:CustomData>
+                                     </customData>
+                                            <cells>
+                                            <Text text="{tblModel>transactiondate}" />
+                                            <Text text="{tblModel>openingbalqty}" />
+                                            <Text text="{tblModel>openingbal}" />
+                                            <Text text="{tblModel>openingbalrate}" />
+                                            <Text text="{tblModel>openingbalamount}" />
+                                            <Text text="{tblModel>receiptqty}" />
+                                            <Text text="{tblModel>receipt}" />  
+                                            <Text text="{tblModel>receiptrate}" />
+                                            <Text text="{tblModel>receiptamount}" />
+                                            <Text text="{tblModel>transferinstockqty}"/>
+                                            <Text text="{tblModel>transferinstock}" />
+                                            <Text text="{tblModel>transferinstockrate}" />
+                                            <Text text="{tblModel>transferinstockamount}" />
+
+                                             <Text text="{tblModel>transferoutstockqty}"/>
+                                            <Text text="{tblModel>transferoutstock}" />
+                                            <Text text="{tblModel>transferoutstockrate}" />
+                                            <Text text="{tblModel>transferoutstockamount}" />
+
+                                             <Text text="{tblModel>issueqty}"/>
+                                            <Text text="{tblModel>issue}" />
+                                            <Text text="{tblModel>issuerate}" />
+                                            <Text text="{tblModel>issueamount}" />
+
+                                            
+
+                                            <Text text="{tblModel>closingbalqty}" />
+                                            <Text text="{tblModel>closingbal}" />
+                                            <Text text="{tblModel>closingbalrate}" />
+                                            <Text text="{tblModel>closingbalamount}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+            
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

@@ -1,0 +1,43 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="{i18n>branchDialogSelectBranchLabel}"	
+		contentHeight="300px"
+		search="handleBranchSearch"
+		confirm="onBranchDialogClose"
+		cancel="onBranchDialogClose"
+		items="{
+			path : 'branchList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{branchList>branchcode}" />
+                <Text text="{branchList>branchname}" />
+                <Switch valueLiveUpdate="true" state="{branchList>isactive}" enabled="false">
+                    <layoutData>
+                        <FlexItemData growFactor="1" />
+                    </layoutData>
+                </Switch>
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="{i18n>branchDialogBranchCodeLabel}" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>branchDialogBranchNameLabel}" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>branchDialogIsActiveLabel}" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

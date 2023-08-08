@@ -1,0 +1,202 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Breeder.FeedRequirementPlan" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>feedRequirementPlanReportTitle}"/>
+                </f:heading>
+                <f:actions>                           
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <VBox>
+                    <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                     <form:FormElement label="{i18n>feedRequirementPlanReportLabelModeuleName}">
+                                        <form:fields>
+                                            <Select id="txtModeule" valueLiveUpdate="true" 
+                                                selectedKey="{requiredPlanList>/moduleid}" 
+                                                enabled="true"
+                                                change="onModeuleChange"
+                                                forceSelection="false"
+                                                items="{
+                                                    path: 'moduleModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                            <core:Item key="{moduleModel>id}" text="{moduleModel>refname}" />  
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="{i18n>feedRequirementPlanReportLabelLocation}">
+                                        <form:fields>
+                                            <Select id="txtLocation" valueLiveUpdate="true" 
+                                                selectedKey="{requiredPlanList>/locationid}" 
+                                                enabled="true"
+                                                change="onLocationChange"
+                                                forceSelection="false"
+                                                items="{
+                                                    path: 'locationList>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                            <core:Item key="{locationList>id}" text="{locationList>locationname}" />  
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="{i18n>feedRequirementPlanReportLabelWarehouse}">
+                                        <form:fields>
+                                            <Select id="txtWarehouse" valueLiveUpdate="true" 
+                                                selectedKey="{requiredPlanList>/warehouseid}" 
+                                                enabled="true"
+                                                change="onWarehouseChange"
+                                                forceSelection="false"
+                                                items="{
+                                                    path: 'warehouseList>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                            <core:Item key="{warehouseList>id}" text="{warehouseList>warehousename}" />  
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer>
+                                    <form:formElements>
+                                     <form:FormElement label="{i18n>feedRequirementPlanReportLabelBatch}">
+                                            <form:fields>
+                                                <MultiComboBox id="txtbatch"
+                                                    selectionChange="breederbatchSelect"
+                                                    selectionFinish="breederbatchFinesh"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'btachList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{btachList>breederbatchid}" text="{btachList>breederbatchname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                          <form:FormElement label="{i18n>feedRequirementPlanReportLabelFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromDate" required="true"          
+                                                    value="{requiredPlanList>/fromdate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    change="onDateChange"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>   
+                                        <form:FormElement label="{i18n>feedRequirementPlanReportLabelToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtToDate" required="true" 
+                                                value="{requiredPlanList>/todate}" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                change="onDateChange"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>   
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                </VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>		
+         <Panel width="auto" class="" accessibleRole="Region">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="Order Item List"/>
+                <ToolbarSpacer />
+			        <Button icon="sap-icon://search" type="Emphasized" text="{i18n>FlockDetailReportSearchData}" press="onSearchData"/>
+                    <Button	icon="sap-icon://download" press="onDataExport" />
+			</Toolbar>
+		</headerToolbar>
+		<content>
+      
+        <!-- <HBox fitContainer="true"> -->
+          <VBox fitContainer="true">
+            <ScrollContainer
+            height="20%"
+            horizontal="true"
+            vertical="true"
+            focusable="false">
+          <Table id="tblPurchasereg" width="200%" mode="single" sticky="ColumnHeaders" backgroundDesign="Solid" enableHorizontalScrollbar= "true" growingScrollToLoad="true" items="{
+                            path: 'tblModel>/modelData',
+                                sorter: {
+                                    path: 'id'
+                                }
+                }">
+                
+             <columns>		
+                        <Column><Text text ="Supplier Name" /></Column>
+                        <Column><Text text ="Item Name" /></Column>
+                      <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Batch Number" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Bird Suppplied" /></Column>    
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Bird Balance" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Bird Palacement Date" /></Column>    
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Flock Age week/days" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Required Age" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Total Feed Required As per std" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Closing Balance Of Feed" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Required Feed" /></Column>
+                        
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{tblModel>partyname}" />
+                                <Text text="{tblModel>itemname}" />
+                                <Text text="{tblModel>breederbatchid}" />
+                                <Text text="{tblModel>quantity}" />
+                                <Text text="{tblModel>birdebalance}" />
+                                <Text text="{tblModel>scheduledate}" />
+                                <ObjectIdentifier  title="{tblModel>flockage}" text="{tblModel>firstday}" />
+                                <ObjectIdentifier  title="{tblModel>requiredage}" text="{tblModel>secondday}" />
+                                <Text text="{tblModel>totalrequerfeed}" />
+                                <Text text="{tblModel>closingbalnce}" />
+                                <Text text="{tblModel>requiredfeed}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>                          
+            </ScrollContainer> 
+             </VBox>
+        
+         </content>
+	</Panel>       
+        </f:content>             
+    </f:DynamicPage>    
+</core:View>
+
+
+
+
+ 

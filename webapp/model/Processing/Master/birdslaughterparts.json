@@ -1,0 +1,90 @@
+{   
+    "birdSlaughterParts":[
+        {
+            "code" : "4",
+            "description" : "Pre Cut",
+            "itemCode" : "BB0002",
+            "itemName" : "Cobb 430 Broiler Bird",
+            "quantity" : 1.000,
+            "totalStockPrice" : 100.00,
+            "docDate" : "31/03/2018",
+            "fromDate" : "31/03/2018",  
+            "toDate" : "30/04/2019",
+            "totalWeight" : 100.00,
+            "remark" : "No Remark",            
+            "itemDetails":[
+				{
+					"itemCode" : "PI025",
+                    "itemName": "BR Pre Cut",
+                    "quantity" : 1.000,
+                    "weight" : 70.00,
+                    "stockPrice" : 70.00
+				},
+				{
+                    "itemCode" : "PI011",
+                    "itemName": "BR Fresh Leaver",
+                    "quantity" : 1.000,
+                    "weight" : 10.00,
+                    "stockPrice" : 10.00
+				},
+				{
+                    "itemCode" : "PI012",
+                    "itemName": "BR Fresh Gizzard",
+                    "quantity" : 1.000,
+                    "weight" : 5.00,
+                    "stockPrice" : 5.00
+                },
+                {
+                    "itemCode" : "PI023",
+                    "itemName": "Wastage",
+                    "quantity" : 1.000,
+                    "weight" : 15.00,
+                    "stockPrice" : 15.00
+				}
+            ],
+            "administrationChargesDetails" : [
+                {
+                    "description" : "Electricity",
+                    "ledger": "52011004",
+                    "amount" : 1.00
+				}
+            ]
+        },
+        {
+            "code" : "5",
+            "description" : "Test",
+            "itemCode" : "BB0005",
+            "itemName" : "Cobb 432 Broiler Bird",
+            "quantity" : 2.000,
+            "totalStockPrice" : 60.00,
+            "docDate" : "31/03/2018",
+            "fromDate" : "31/03/2018",  
+            "toDate" : "30/04/2019",
+            "totalWeight" : 80.00,
+            "remark" : "test remark",
+            "itemDetails":[
+				{
+					"itemCode" : "PI025",
+                    "itemName": "BR Pre Cut",
+                    "quantity" : 1.000,
+                    "weight" : 70.00,
+                    "stockPrice" : 50.00
+				},
+				{
+                    "itemCode" : "PI011",
+                    "itemName": "BR Fresh Leaver",
+                    "quantity" : 1.000,
+                    "weight" : 10.00,
+                    "stockPrice" : 10.00
+				}
+            ],
+            "administrationChargesDetails" : [
+                {
+                    "description" : "Test",
+                    "ledger": "5401102",
+                    "amount" : 4.00
+				}
+            ]
+        }
+    ]
+}

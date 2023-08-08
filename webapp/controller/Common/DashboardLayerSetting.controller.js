@@ -1,0 +1,238 @@
+sap.ui.define([
+    "sap/ui/model/json/JSONModel",
+    'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
+    'sap/m/MessageToast',
+    'sap/ui/elev8rerp/componentcontainer/services/Common.service',
+    'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
+
+], function (JSONModel, BaseController, MessageToast, CommonService, commonFunction) {
+    "use strict";
+
+    return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.Common.DashboardLayerSetting", {
+       
+        onInit: function () {
+            this.oFlexibleColumnLayout = this.byId("fcldashboardlayersetting");
+            $("#fclLayerSettings").height(1000);
+            this.getLayerSettiongData();
+        },
+
+        getLayerSettiongData: function () {
+			var currentContext = this;
+            var modulearray =[];
+            	//layer setting data
+                CommonService.getLayerSettingForDashBoard(function (data) {
+                // If setting is partially fill up then execute if condition and if setting is totally blanck then excute else part (Disply green and red color for values) 
+                if(data[0].length != 0)
+                {
+                for(var i=0;i<data[0].length>0;i++)
+				{
+                    let finalData = data[0].slice()[0];
+					modulearray.push({ 
+                        id: finalData.id== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        idtype: finalData.id== 'yes' ? "Accept" : "Reject",
+                        shedrestperiod: finalData.shedrestperiod== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        shedrestperiodtype: finalData.shedrestperiod== 'yes' ? "Accept" : "Reject",
+                        defaultfemalechickid: finalData.defaultfemalechickid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        defaultfemalechickidtype: finalData.defaultfemalechickid== 'yes' ? "Accept" : "Reject",
+                        defaultfemalechickcost: finalData.defaultfemalechickcost== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        defaultfemalechickcosttype: finalData.defaultfemalechickcost== 'yes' ? "Accept" : "Reject",
+                        defaultwarehouseid: finalData.defaultwarehouseid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        defaultwarehouseidtype: finalData.defaultwarehouseid== 'yes' ? "Accept" : "Reject",
+                        defaultcoldroomwarehouseid: finalData.defaultcoldroomwarehouseid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        defaultcoldroomwarehouseidtype: finalData.defaultcoldroomwarehouseid== 'yes' ? "Accept" : "Reject",
+                        labourcharge: finalData.labourcharge== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        labourchargetype: finalData.labourcharge== 'yes' ? "Accept" : "Reject",
+                        overheadcost: finalData.overheadcost== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        overheadcosttype: finalData.overheadcost== 'yes' ? "Accept" : "Reject",
+                        eggspredictionperbird: finalData.eggspredictionperbird== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        eggspredictionperbirdtype: finalData.eggspredictionperbird== 'yes' ? "Accept" : "Reject",
+                        defaulttableeggsitemid: finalData.defaulttableeggsitemid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        defaulttableeggsitemidtype: finalData.defaulttableeggsitemid== 'yes' ? "Accept" : "Reject",
+                        defaultcrackedeggsitemid: finalData.defaultcrackedeggsitemid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        defaultcrackedeggsitemidtype: finalData.defaultcrackedeggsitemid== 'yes' ? "Accept" : "Reject",
+                        defaultdamageeggsitemid: finalData.defaultdamageeggsitemid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        defaultdamageeggsitemidtype: finalData.defaultdamageeggsitemid== 'yes' ? "Accept" : "Reject",
+                        defaultpulleteggsitemid: finalData.defaultpulleteggsitemid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        defaultpulleteggsitemidtype: finalData.defaultpulleteggsitemid== 'yes' ? "Accept" : "Reject",
+                        standardeggcost: finalData.standardeggcost== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        standardeggcosttype: finalData.standardeggcost== 'yes' ? "Accept" : "Reject",
+                        femalestandardweight: finalData.femalestandardweight== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        femalestandardweighttype: finalData.femalestandardweight== 'yes' ? "Accept" : "Reject",
+                        feeditemgroupids: finalData.feeditemgroupids== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        feeditemgroupidstype: finalData.feeditemgroupids== 'yes' ? "Accept" : "Reject",
+                        medicineitemgroupids: finalData.medicineitemgroupids== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        medicineitemgroupidstype: finalData.medicineitemgroupids== 'yes' ? "Accept" : "Reject",
+                        vaccineitemgroupids: finalData.vaccineitemgroupids== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        vaccineitemgroupidstype: finalData.vaccineitemgroupids== 'yes' ? "Accept" : "Reject",
+                        vitaminitemgroupids: finalData.vitaminitemgroupids== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        vitaminitemgroupidstype: finalData.vitaminitemgroupids== 'yes' ? "Accept" : "Reject",
+                        chicksitemgroupids: finalData.chicksitemgroupids== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        chicksitemgroupidstype: finalData.chicksitemgroupids== 'yes' ? "Accept" : "Reject",
+                        eggsitemgroupids: finalData.eggsitemgroupids== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        eggsitemgroupidstype: finalData.eggsitemgroupids== 'yes' ? "Accept" : "Reject",
+                        layeritemgroupids: finalData.layeritemgroupids== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        layeritemgroupidstype: finalData.layeritemgroupids== 'yes' ? "Accept" : "Reject",
+                        tableeggscost: finalData.tableeggscost== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        tableeggscosttype: finalData.tableeggscost== 'yes' ? "Accept" : "Reject",
+                        damageeggscost: finalData.damageeggscost== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        damageeggscosttype: finalData.damageeggscost== 'yes' ? "Accept" : "Reject",
+                        crackedeggscost: finalData.crackedeggscost== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        crackedeggscosttype: finalData.crackedeggscost== 'yes' ? "Accept" : "Reject",
+                        pulleteggscost: finalData.pulleteggscost== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        pulleteggscosttype: finalData.pulleteggscost== 'yes' ? "Accept" : "Reject",
+                        costofgoodsoldledgerid: finalData.costofgoodsoldledgerid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        costofgoodsoldledgeridtype: finalData.costofgoodsoldledgerid== 'yes' ? "Accept" : "Reject",
+                        cashledgerid: finalData.cashledgerid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        cashledgeridtype: finalData.cashledgerid== 'yes' ? "Accept" : "Reject",
+                        freightledgerid: finalData.freightledgerid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        freightledgeridtype: finalData.freightledgerid== 'yes' ? "Accept" : "Reject",
+                        WIPledgerid: finalData.WIPledgerid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        WIPledgeridtype: finalData.WIPledgerid== 'yes' ? "Accept" : "Reject",
+                        grpowithoutinvoiceledgerid: finalData.grpowithoutinvoiceledgerid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        grpowithoutinvoiceledgeridtype: finalData.grpowithoutinvoiceledgerid== 'yes' ? "Accept" : "Reject",
+                        discountledgerid: finalData.discountledgerid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        discountledgeridtype: finalData.discountledgerid== 'yes' ? "Accept" : "Reject",
+                        mortalityledgerid: finalData.mortalityledgerid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        mortalityledgeridtype: finalData.mortalityledgerid== 'yes' ? "Accept" : "Reject",
+                        medicineledgerid: finalData.medicineledgerid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        medicineledgeridtype: finalData.medicineledgerid== 'yes' ? "Accept" : "Reject",
+                        feedledgerid: finalData.feedledgerid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        feedledgeridtype: finalData.feedledgerid== 'yes' ? "Accept" : "Reject",
+                        vaccineledgerid: finalData.vaccineledgerid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        vaccineledgeridtype: finalData.vaccineledgerid== 'yes' ? "Accept" : "Reject",
+                        vitaminledgerid: finalData.vitaminledgerid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        vitaminledgeridtype: finalData.vitaminledgerid== 'yes' ? "Accept" : "Reject",
+                        amortizationledgerid: finalData.amortizationledgerid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        amortizationledgeridtype: finalData.amortizationledgerid== 'yes' ? "Accept" : "Reject",
+                        ctrlaccledgerid: finalData.ctrlaccledgerid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        ctrlaccledgeridtype: finalData.ctrlaccledgerid== 'yes' ? "Accept" : "Reject",
+                        inventorygainlossledgerid: finalData.inventorygainlossledgerid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        inventorygainlossledgeridtype: finalData.inventorygainlossledgerid== 'yes' ? "Accept" : "Reject",
+                        stcokledgerid: finalData.stcokledgerid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        stcokledgeridtype: finalData.stcokledgerid== 'yes' ? "Accept" : "Reject",
+                        defaultcullswhid: finalData.defaultcullswhid== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        defaultcullswhidtype: finalData.defaultcullswhid== 'yes' ? "Accept" : "Reject",
+                        amortizationcoststd: finalData.amortizationcoststd== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        amortizationcoststdtype: finalData.amortizationcoststd== 'yes' ? "Accept" : "Reject",
+                        birdcoststd: finalData.birdcoststd== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        birdcoststdtype: finalData.birdcoststd== 'yes' ? "Accept" : "Reject",
+                        amortizationcostnonprodbird: finalData.amortizationcostnonprodbird== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        amortizationcostnonprodbirdtype: finalData.amortizationcostnonprodbird== 'yes' ? "Accept" : "Reject",
+                        birdcostnonprodbird: finalData.birdcostnonprodbird== 'yes' ? "sap-icon://accept" : "sap-icon://decline",
+                        birdcostnonprodbirdtype: finalData.birdcostnonprodbird== 'yes' ? "Accept" : "Reject",
+					 });
+				}
+            }
+
+            else
+            {
+                modulearray.push({ 
+                    id:  "sap-icon://decline",
+                    idtype:  "Reject",
+                    shedrestperiod:  "sap-icon://decline",
+                    shedrestperiodtype:  "Reject",
+                    defaultfemalechickid:"sap-icon://decline",
+                    defaultfemalechickidtype:  "Reject",
+                    defaultfemalechickcost:  "sap-icon://decline",
+                    defaultfemalechickcosttype:  "Reject",
+                    defaultwarehouseid:  "sap-icon://decline",
+                    defaultwarehouseidtype:  "Reject",
+                    defaultcoldroomwarehouseid:  "sap-icon://decline",
+                    defaultcoldroomwarehouseidtype:  "Reject",
+                    labourcharge:  "sap-icon://decline",
+                    labourchargetype:  "Reject",
+                    overheadcost:  "sap-icon://decline",
+                    overheadcosttype:  "Reject",
+                    eggspredictionperbird: "sap-icon://decline",
+                    eggspredictionperbirdtype:  "Reject",
+                    defaulttableeggsitemid: "sap-icon://decline",
+                    defaulttableeggsitemidtype:"Reject",
+                    defaultcrackedeggsitemid: "sap-icon://decline",
+                    defaultcrackedeggsitemidtype:  "Reject",
+                    defaultdamageeggsitemid: "sap-icon://decline",
+                    defaultdamageeggsitemidtype:  "Reject",
+                    defaultpulleteggsitemid:  "sap-icon://decline",
+                    defaultpulleteggsitemidtype: "Reject",
+                    standardeggcost: "sap-icon://decline",
+                    standardeggcosttype:  "Reject",
+                    femalestandardweight:  "sap-icon://decline",
+                    femalestandardweighttype:  "Reject",
+                    feeditemgroupids:  "sap-icon://decline",
+                    feeditemgroupidstype:  "Reject",
+                    medicineitemgroupids:  "sap-icon://decline",
+                    medicineitemgroupidstype: "Reject",
+                    vaccineitemgroupids: "sap-icon://decline",
+                    vaccineitemgroupidstype: "Reject",
+                    vitaminitemgroupids: "sap-icon://decline",
+                    vitaminitemgroupidstype: "Reject",
+                    chicksitemgroupids: "sap-icon://decline",
+                    chicksitemgroupidstype: "Reject",
+                    eggsitemgroupids: "sap-icon://decline",
+                    eggsitemgroupidstype: "Reject",
+                    layeritemgroupids: "sap-icon://decline",
+                    layeritemgroupidstype: "Reject",
+                    tableeggscost:  "sap-icon://decline",
+                    tableeggscosttype: "Reject",
+                    damageeggscost:  "sap-icon://decline",
+                    damageeggscosttype:  "Reject",
+                    crackedeggscost: "sap-icon://decline",
+                    crackedeggscosttype: "Reject",
+                    pulleteggscost:  "sap-icon://decline",
+                    pulleteggscosttype:  "Reject",
+                    costofgoodsoldledgerid:  "sap-icon://decline",
+                    costofgoodsoldledgeridtype: "Reject",
+                    cashledgerid: "sap-icon://decline",
+                    cashledgeridtype: "Reject",
+                    freightledgerid:  "sap-icon://decline",
+                    freightledgeridtype:  "Reject",
+                    WIPledgerid:  "sap-icon://decline",
+                    WIPledgeridtype: "Reject",
+                    grpowithoutinvoiceledgerid: "sap-icon://decline",
+                    grpowithoutinvoiceledgeridtype: "Reject",
+                    discountledgerid: "sap-icon://decline",
+                    discountledgeridtype:  "Reject",
+                    mortalityledgerid:  "sap-icon://decline",
+                    mortalityledgeridtype:"Reject",
+                    medicineledgerid:  "sap-icon://decline",
+                    medicineledgeridtype:  "Reject",
+                    feedledgerid:  "sap-icon://decline",
+                    feedledgeridtype:  "Reject",
+                    vaccineledgerid:  "sap-icon://decline",
+                    vaccineledgeridtype:  "Reject",
+                    vitaminledgerid:  "sap-icon://decline",
+                    vitaminledgeridtype:  "Reject",
+                    amortizationledgerid: "sap-icon://decline",
+                    amortizationledgeridtype:  "Reject",
+                    ctrlaccledgerid:  "sap-icon://decline",
+                    ctrlaccledgeridtype:  "Reject",
+                    inventorygainlossledgerid:  "sap-icon://decline",
+                    inventorygainlossledgeridtype:  "Reject",
+                    stcokledgerid:  "sap-icon://decline",
+                    stcokledgeridtype:  "Reject",
+                    defaultcullswhid:  "sap-icon://decline",
+                    defaultcullswhidtype:  "Reject",
+                    amortizationcoststd: "sap-icon://decline",
+                    amortizationcoststdtype:  "Reject",
+                    birdcoststd: "sap-icon://decline",
+                    birdcoststdtype: "Reject",
+                    amortizationcostnonprodbird:  "sap-icon://decline",
+                    amortizationcostnonprodbirdtype: "Reject",
+                    birdcostnonprodbird:  "sap-icon://decline",
+                    birdcostnonprodbirdtype:  "Reject",
+                 });
+
+            }
+				var oModel = new sap.ui.model.json.JSONModel();
+                oModel.setData(modulearray[0]);
+                currentContext.getView().setModel(oModel, "layerModel");
+                window.scrollTo(0, document.body.scrollHeight);
+			})
+        },
+
+        onExit: function () {
+            if (this._oDialog) {
+                this._oDialog.destroy();
+            }
+        },
+    });
+}, true);

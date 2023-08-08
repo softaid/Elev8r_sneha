@@ -1,0 +1,152 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Hatchery.VaccinationDetailReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+			
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>vaccinationreporttitle}"/>
+					</f:heading>
+					<f:actions>
+					</f:actions>					
+				</f:DynamicPageTitle>
+			</f:title>
+            <f:header class="sapUiNoContentPadding">
+                <f:DynamicPageHeader pinnable="true">
+                        <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="6"
+                                        labelSpanL="6"
+                                        labelSpanM="6"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="3"
+                                        columnsM="3"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                            <form:formElements>
+                                            <form:FormElement label="{i18n>DailyBroodingGrowingLabelLocation}">
+                                            <form:fields>
+                                                <MultiComboBox id="locationtbl"
+                                                    selectionChange="handleSelectionChangebranch"
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'locationList>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{locationList>id}" text="{locationList>locationname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                            </form:formElements>
+                                            </form:FormContainer>
+                                        <form:FormContainer>
+                                            <form:formElements>
+                                            <form:FormElement label="{i18n>HatcherBatchDialogHatcherBatchNo}">
+                                            <form:fields>
+                                                <MultiComboBox id="batchid"
+                                                    selectionChange="handleSelectionChange"
+                                                    selectionFinish="hatcherbatchSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'hatcherbatchModel>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{hatcherbatchModel>hatchbatchid}" text="{hatcherbatchModel>hatchbatchid}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                     <form:FormContainer>
+                                            <form:formElements>
+                                              <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Search Data" width="100%" press="onVaccinationSearchData"/>
+                                                <MenuButton icon="sap-icon://download" width="50%" align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="{i18n>ProcessingProductionRegistersavecsv}" icon="sap-icon://save" press="onDataExport" />
+                                                            <MenuItem text="{i18n>ProcessingProductionRegistersavepdf}" icon="sap-icon://save" press="onPdfExport" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>			
+                        <VBox fitContainer="true">
+                        	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                           
+                            <Table id="tblSettingReport" width='200%' growing="true" growingScrollToLoad="true" items="{
+                                                path: 'vaccineModel>/modelData',
+                                                    sorter: {
+                                                        path: 'id'
+                                                    }
+                                                }"
+                                                mode="single" backgroundDesign="Solid">
+                                <columns>
+                                    <Column><Label text ="{i18n>VaccinatedDOCDetailVaccinationDate}" /></Column> 
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>DailyBroodingGrowingLabelLocation}" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>hatcherDailyTransactionSetterBatchLabel}" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>hatchReportHatchDate}" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>candlingTestBreederBatchLabel}" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>ProcessinglivebitrddetailBirdName}" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>vaccinationreportTotalchicks}" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>vaccinationreportVaccineName}" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>StandardChartsAndSchedulesFeedScheduleUnit}" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>vaccinationreportUsedQuantity}" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <Text text="{vaccineModel>issuedate}"  />
+                                            <Text text="{vaccineModel>locationname}"  />
+                                            <Text text="{vaccineModel>hatchbatchid}"  />  
+                                            <Text text="{vaccineModel>pulloutdate}"  />  
+                                            <Text text="{vaccineModel>breederbatchid}"  />
+                                            <Text text="{vaccineModel>itemname}"  />
+                                            <Text text="{vaccineModel>totalhatch}"  />
+                                            <Text text="{vaccineModel>vaccineitemname}"  />
+                                            <Text text="{vaccineModel>refname}"  />
+                                            <Text text="{vaccineModel>issuequantity}"  />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                             </ScrollContainer>    
+                        </VBox>  
+                    </f:content>
+			</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

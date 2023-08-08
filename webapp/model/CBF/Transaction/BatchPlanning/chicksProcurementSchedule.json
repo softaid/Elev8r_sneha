@@ -1,0 +1,148 @@
+{   
+    "chicksprocurementschedule":[
+        {
+            "docNumber" : "001",
+            "docNumber1" : "Farm 1",
+            "branch" : "Farm 1",
+            "branch1" : "Farmer 1",
+            "date" : "2018/07/15",
+            "details":[
+				{
+					"farmerCode" : "Farmer 001",
+                    "farmerName": "Farmer 1",
+                    "farmCode" : "Farm 001",
+                    "farmName": "Farm 1",
+                    "branch" : "Branch 1",
+                    "batch" : "Batch 1",
+                    "batchQty" : 200,
+                    "planQty" : 20,
+                    "own" : true,
+                    "purchase" : false,
+                    "status" : "New"
+				},
+				{
+					"farmerCode" : "Farmer 002",
+                    "farmerName": "Farmer 2",
+                    "farmCode" : "Farm 002",
+                    "farmName": "Farm 2",
+                    "branch" : "Branch 2",
+                    "batch" : "Batch 2",
+                    "batchQty" : 200,
+                    "planQty" : 20,
+                    "own" : false,
+                    "purchase" : true,
+                    "status" : "New"
+				},
+				{
+					"farmerCode" : "Farmer 003",
+                    "farmerName": "Farmer 3",
+                    "farmCode" : "Farm 003",
+                    "farmName": "Farm 3",
+                    "branch" : "Branch 3",
+                    "batch" : "Batch 3",
+                    "batchQty" : 200,
+                    "planQty" : 20,
+                    "own" : true,
+                    "purchase" : false,
+                    "status" : "New"
+				}
+        	]
+        },
+        {
+            "docNumber" : "002",
+            "docNumber1" : "Farm 2",
+            "branch" : "Farm 2",
+            "branch1" : "Farmer 2",
+            "date" : "2018/07/05",
+            "details":[
+				{
+					"farmerCode" : "Farmer 001",
+                    "farmerName": "Farmer 1",
+                    "farmCode" : "Farm 001",
+                    "farmName": "Farm 1",
+                    "branch" : "Branch 1",
+                    "batch" : "Batch 1",
+                    "batchQty" : 200,
+                    "planQty" : 20,
+                    "own" : false,
+                    "purchase" : true,
+                    "status" : "New"
+				},
+				{
+					"farmerCode" : "Farmer 002",
+                    "farmerName": "Farmer 2",
+                    "farmCode" : "Farm 002",
+                    "farmName": "Farm 2",
+                    "branch" : "Branch 2",
+                    "batch" : "Batch 2",
+                    "batchQty" : 200,
+                    "planQty" : 20,
+                    "own" : true,
+                    "purchase" : false,
+                    "status" : "New"
+				},
+				{
+					"farmerCode" : "Farmer 003",
+                    "farmerName": "Farmer 3",
+                    "farmCode" : "Farm 003",
+                    "farmName": "Farm 3",
+                    "branch" : "Branch 3",
+                    "batch" : "Batch 3",
+                    "batchQty" : 200,
+                    "planQty" : 20,
+                    "own" : true,
+                    "purchase" : false,
+                    "status" : "New"
+				}
+        	]
+        },
+        {
+            "docNumber" : "003",
+            "docNumber1" : "Farm 3",
+            "branch" : "Farm 3",
+            "branch1" : "Farmer 3",
+            "date" : "2018/07/25",
+            "details":[
+				{
+					"farmerCode" : "Farmer 001",
+                    "farmerName": "Farmer 1",
+                    "farmCode" : "Farm 001",
+                    "farmName": "Farm 1",
+                    "branch" : "Branch 1",
+                    "batch" : "Batch 1",
+                    "batchQty" : 200,
+                    "planQty" : 20,
+                    "own" : true,
+                    "purchase" : false,
+                    "status" : "New"
+				},
+				{
+					"farmerCode" : "Farmer 002",
+                    "farmerName": "Farmer 2",
+                    "farmCode" : "Farm 002",
+                    "farmName": "Farm 2",
+                    "branch" : "Branch 2",
+                    "batch" : "Batch 2",
+                    "batchQty" : 200,
+                    "planQty" : 20,
+                    "own" : false,
+                    "purchase" : true,
+                    "status" : "New"
+				},
+				{
+					"farmerCode" : "Farmer 003",
+                    "farmerName": "Farmer 3",
+                    "farmCode" : "Farm 003",
+                    "farmName": "Farm 3",
+                    "branch" : "Branch 3",
+                    "batch" : "Batch 3",
+                    "batchQty" : 200,
+                    "planQty" : 20,
+                    "own" : false,
+                    "purchase" : true,
+                    "status" : "New"
+				}
+        	]
+        }
+    ]
+}

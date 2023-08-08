@@ -1,0 +1,167 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CommercialLayer.FlockProductionSummaryReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Flock Production Summary Report"/>
+                </f:heading>
+                <f:actions>                           
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <VBox>
+                    <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                         <form:FormElement label="{i18n>FlockDetailReportBatchName}">
+                                            <form:fields>
+                                            <MultiComboBox id="txtLayerToBatch"
+                                                selectionChange="batchSelectionChange"
+                                                selectionFinish="batchSelectionFinish"
+                                                width="500px"
+                                                items="{
+                                                    path: 'batchModel>/modelData',
+                                                    sorter: { path: 'Name' }
+                                                }">
+                                                <core:Item key="{batchModel>id}" text="{batchModel>batchname}" />
+                                            </MultiComboBox>
+                                            </form:fields>
+                                         </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer>
+                                    <form:formElements>
+                                      <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Search Data" width="100%" press="onSearchData"/>
+                                                <MenuButton icon="sap-icon://download" width="50%" align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="SaveCSV" icon="sap-icon://save" press="onDataExport" />
+                                                            <MenuItem text="SavePDF" icon="sap-icon://save" press="createPDF" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                </VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        
+        <f:content>				
+            <VBox fitContainer="true">  
+            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">                                           
+                <Table id="tblFlockReport" width="400%" growingScrollToLoad="true" sticky="ColumnHeaders" items="{
+                        path: 'tblModel>/modelData',
+                            sorter: {
+                                    path: 'batchname',
+                                    group : true
+                                }
+                        }"
+                    mode="None" backgroundDesign="Solid">
+                    <columns>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Date" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="WK Of Age" /></Column>    
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Live Qty" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Mort"/></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Cum Mort" /></Column>
+                        <Column minScreenWidth="Tablet"  demandPopin="true"><Text text ="F Std" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Hen Day Pro Act" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Hen Day Pro Std" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Weekly Total Eggs" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Cum Eggs/Hen Housed Act" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Cum Eggs/Hen Housed std" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Hatching Eggs% Act" /></Column>    
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Hatching Eggs% Std" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Avg Egg Size(gm)Act" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Weekly Hat Eggs" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Cum Hat Egg Hen Housed Std" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Hatch% Act" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Hatch% Std" /></Column>
+                        <Column><Text text ="weekly chicks" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Cum Chicks"/></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Consumption"/></Column>  
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Std Item Feed Con" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Body Weight" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Std Body Weight" /></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                        <customData>
+                        </customData>
+                            <cells>
+                                <Text text="{tblModel>lastdate}"/>
+                                <Text text="{tblModel>ageinweek}"/>
+                                <Text text="{= ${tblModel>itemliveqty} > 0 ? ${tblModel>itemliveqty} : '0'}" />
+                                <Text text="{= ${tblModel>mortality} > 0 ? ${tblModel>mortality} : '0'}" />
+                                <Text text="{= ${tblModel>cummalemortality} > 0 ? ${tblModel>cummalemortality} : '0'}" />
+                                <Text text="{= ${tblModel>hensdayproact} > 0 ? ${tblModel>hensdayproact} : '0'}" />
+                                <Text text="{= ${tblModel>hensdayproact} > 0 ? ${tblModel>hensdayproact} : '0'}" />
+                                <Text text="{= ${tblModel>hdinpercent} > 0 ? ${tblModel>hdinpercent} : '0'}" />
+                                <Text text="{= ${tblModel>weeklytotaleggs} > 0 ? ${tblModel>weeklytotaleggs} : '0'}" />
+                                <Text text="{= ${tblModel>ahdinpercentct} > 0 ? ${tblModel>ahdinpercentct} : '0'}" />
+                                <Text text="{= ${tblModel>cumhhp} > 0 ? ${tblModel>cumhhp} : '0'}" />
+                                <Text text="{= ${tblModel>heinpercent} > 0 ? ${tblModel>heinpercent} : '0'}" />
+                                <Text text="{= ${tblModel>heinpercent} > 0 ? ${tblModel>heinpercent} : '0'}" />
+                                <Text text="{= ${tblModel>hatchingavgeggsize} > 0 ? ${tblModel>hatchingavgeggsize} : '0'}" />
+                                <Text text="{= ${tblModel>weeklyhatchingeggs} > 0 ? ${tblModel>weeklyhatchingeggs} : '0'}" />
+                                <Text text="{= ${tblModel>cumhhhe} > 0 ? ${tblModel>cumhhhe} : '0'}" />
+                                <Text text="{= ${tblModel>hatchact} > 0 ? ${tblModel>hatchact} : '0'}" />
+                                <Text text="{= ${tblModel>hatchinpercent} > 0 ? ${tblModel>hatchinpercent} : '0'}" />
+                                <Text text="{= ${tblModel>weeklychickd} > 0 ? ${tblModel>weeklychickd} : '0'}" />
+                                <Text text="{= ${tblModel>cumchicks} > 0 ? ${tblModel>cumchicks} : '0'}" />
+                                <Text text="{= ${tblModel>con} > 0 ? ${tblModel>con} : '0'}" />
+                                <Text text="{= ${tblModel>stditemfeedcon} > 0 ? ${tblModel>stditemfeedcon} : '0'}" />
+                                <Text text="{= ${tblModel>bodyweight} > 0 ? ${tblModel>bodyweight} : '0'}" />
+                                <Text text="{= ${tblModel>stditembodyweight} > 0 ? ${tblModel>stditembodyweight} : '0'}" />
+                                </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>     
+                  </ScrollContainer>                        
+            </VBox>             
+        </f:content>             
+    </f:DynamicPage>    
+</core:View>
+
+
+
+
+ 

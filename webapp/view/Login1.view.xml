@@ -1,0 +1,104 @@
+<mvc:View
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Login"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page showHeader="false" class="loginPage">
+
+        
+                <HBox height='100%' class="mainImg">
+                <VBox width='70%'>
+                </VBox>
+
+                <VBox width='30%' class="login-right" >
+
+                    <FlexBox class="loginForm" direction="Column">
+                        <items>
+                            <Text text="" class="headerText"></Text>
+                        </items>
+                    </FlexBox>
+
+                    <!-- <FlexBox id="vboxCmp"
+                        class="loginForm"		
+                        direction="Column">
+                        <items>
+                            <Text text="Login" class="titleText"></Text>
+                            <Text text="Please enter company code"></Text>
+                            <Input id="cmpcode" type="Password" placeholder="Company Code"></Input>
+                            <Button width="100%" text="Proceed ->" type="Emphasized" class="loginButton" press="onChkCompTap"></Button>    
+                            <Link text="Forgot company code?" press="onForgetCCLnk">
+                                <layoutData>
+                                    <FlexItemData alignSelf="End" />
+                                </layoutData>
+                            </Link>
+                        </items>
+                    </FlexBox> -->
+
+                    <FlexBox id="vboxLogin" 
+                        class="loginForm" visible="true"		
+                        direction="Column">
+                        <items>
+                            <Text text="Login" class="titleText"></Text>
+                            <Input id="umobile" placeholder="Enter Mobile Number"></Input>
+                            <Input id="pasw" placeholder="Enter Password" type="Password"></Input>	       
+                            <Button width="100%" text="Login" type="Emphasized" class="loginButton" press="onLoginTap"></Button>    
+                            <Link text="Can’t access your account?" press="onForgetPswLnk">
+                                <layoutData>
+                                    <FlexItemData alignSelf="End" />
+                                </layoutData>
+                            </Link>
+                        </items>
+                    </FlexBox>
+
+                    <FlexBox id="vboxForPsw" visible="false"
+                        class="loginForm"		
+                        direction="Column">
+                        <items>
+                            <Text text="Forgot Password" class="titleText"></Text>
+                            <Label text="Please enter your registered mobile!"></Label>
+                            <Input id="ufmobile" placeholder="Enter Mobile Number"></Input>
+                            <Input id="ufcompanycode" placeholder="Enter Company Code"></Input>
+                            <Button width="100%" text="Submit" type="Emphasized" press="onForgetPsw" class="loginButton"></Button>
+                        </items>
+                    </FlexBox>
+
+                    <FlexBox id="resetPsw" visible="false"
+                        class="loginForm"		
+                        direction="Column">
+                        <items>
+                            <Text text="Reset Password" class="titleText"></Text>
+                            <Label text="Please enter new password"></Label>
+                            <Input id="pwd" placeholder="Enter password" type="Password"></Input>
+                            <Input id="cpwd" placeholder="Confirm password" type="Password"></Input>
+                            <Button width="100%" text="Reset Password" type="Emphasized" press="onResetPsw" class="loginButton"></Button>
+                            <Link text="Go to Login" press="onGotoLoginLnk">
+                                <layoutData>
+                                    <FlexItemData alignSelf="End" />
+                                </layoutData>
+                            </Link>
+                        </items>
+                    </FlexBox>
+
+                    <FlexBox id="vboxForCompanycode" visible="false"
+                        class="loginForm"		
+                        direction="Column">
+                        <items>
+                            <Text text="Forgot Companycode" class="titleText"></Text>
+                            <Label text="Please enter your admin email id!"></Label>
+                            <Input id="ufemail" placeholder="Enter admin email id"></Input>
+                            <Button width="100%" text="Send Company Code" type="Emphasized" press="onForgetCompanyCode" class="loginButton"></Button>
+                            <Link text="Go to Login" press="onGotoCompanyCode">
+                                <layoutData>
+                                    <FlexItemData alignSelf="End" />
+                                </layoutData>
+                            </Link>
+                            <!-- <Text class="noteText" text="PLEASE NOTE: You will get your credential on registered mobile via OTP..!"></Text> -->
+                        </items>
+                    </FlexBox>
+                </VBox>
+            </HBox>
+			
+            <!-- https://sapbazar.com/articles/item/606-login-page-in-sapui5-application -->
+
+    </Page>
+</mvc:View>

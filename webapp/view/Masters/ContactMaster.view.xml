@@ -1,0 +1,141 @@
+<View displayBlock="true"    
+xmlns:f="sap.f"
+xmlns:core="sap.ui.core"
+xmlns="sap.m"
+xmlns:layout="sap.ui.layout"
+xmlns:form="sap.ui.layout.form"
+xmlns:u="sap.ui.unified"
+controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.ContactMaster" height="100%">
+
+    <f:FlexibleColumnLayout id="fclContactMaster" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+ 		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					        <Title text="{i18n>ContactTitle}"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+			    <f:content>
+	                <VBox fitContainer="true">
+                        <Panel id="pnlContactMaster" expandable="true" expanded="true" headerText="Contact List" width="100%">
+               	            <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="1"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer> 
+                                        <form:formElements >
+                                            <!-- <form:FormElement label="Lead Status" >
+                                                <form:fields>
+                                                    <SegmentedButton  accessibleName="Select Lead Status" selectionChange="handleSelectionChange">
+                                                        <items>
+                                                            <SegmentedButtonItem  width="auto" text="All({LeadsTotalCountModel>/totalleads})" press="onQulified"></SegmentedButtonItem>
+                                                            <SegmentedButtonItem width="auto"   text="Qualified({LeadsQualifiedModel>/qualified})" press="onQulified"></SegmentedButtonItem>
+                                                            <SegmentedButtonItem width="auto"  text="Unqualified({LeadsUnqualifiedModel>/unqualified})" press="onQulified"></SegmentedButtonItem>
+                                                        </items>
+                                                    </SegmentedButton>
+                                                </form:fields>
+                                            </form:FormElement>    -->
+
+                                            <form:FormElement label="Contact Type">
+                                                <form:fields>
+                                                    <SegmentedButton accessibleName="Select Contact Type" 
+                                                        items="{path: 'contactTypeModel>/modelData'}" selectionChange="handleSelectionChange">
+                                                        <items>
+                                                            <SegmentedButtonItem width="auto" text="{contactTypeModel>description}" press="onContactType"></SegmentedButtonItem>
+                                                        </items>
+                                                    </SegmentedButton>
+                                                </form:fields>
+                                            </form:FormElement>   
+                                            <form:FormElement label="Contact Category">
+                                                <form:fields>
+                                                    <SegmentedButton accessibleName="Select Contact Category"
+                                                    items="{path: 'cntCategoryModel>/modelData'}" selectionChange="handleSelectionChange">
+                                                        <items>
+                                                            <SegmentedButtonItem width="auto" text="{cntCategoryModel>description}" press="onContactCategory"></SegmentedButtonItem>
+                                                        </items>
+                                                    </SegmentedButton>
+                                                </form:fields>
+                                            </form:FormElement>   
+                                            <!-- <form:FormElement label="Contact Source">
+                                                <form:fields>
+                                                    <SegmentedButton accessibleName="Select Lead Source"
+                                                    items="{path: 'leadSourceModel>/modelData'}" selectionChange="handleSelectionChange">
+                                                        <items>
+                                                            <SegmentedButtonItem width="auto" text="{leadSourceModel>description}" press="onLeadSource"></SegmentedButtonItem>
+                                                        </items>
+                                                    </SegmentedButton>
+                                                </form:fields>
+                                            </form:FormElement>   
+                                            <form:FormElement label="Lead Stage">
+                                                <form:fields>
+                                                    <SegmentedButton  accessibleName="Select Lead Stage"
+                                                    items="{path: 'stageModel>/modelData'}" selectionChange="handleSelectionChange">
+                                                        <items>
+                                                            <SegmentedButtonItem width="auto"  text="{stageModel>description}" press="onLeadStage"></SegmentedButtonItem>
+                                                        </items>
+                                                    </SegmentedButton>
+                                                </form:fields>
+                                            </form:FormElement>    -->
+                                        </form:formElements>      
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>               
+                        </Panel>
+						<Table id="tblContact"
+                            inset="false" 
+                            items="{
+                                        path: 'contactModel>/modelData'
+                            }">
+                            <headerToolbar>
+                                <Toolbar>
+                                    <content>
+                                        <Title text="" level="H2"/>
+                                        <ToolbarSpacer />
+                                        <SearchField search="onSearch" width="17.5rem" id = "search" selectOnFocus = "true"/>
+                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNew" class=".keydown"/>
+                                    </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column><Text text ="{i18n>ContactName}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>ContactType}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>ContactCompanyName}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>ContactReference}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>ContactDesignation}" /></Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemPress">
+                                    <cells>
+                                        <Text text="{contactModel>contactname}" />
+                                        <Text text="{contactModel>contacttype}" />
+                                        <Text text="{contactModel>companyname}" />
+                                        <Text text="{contactModel>contactreference}" />
+                                        <Text text="{contactModel>designation}" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+	                </VBox>
+                </f:content>
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</View>

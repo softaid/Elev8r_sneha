@@ -1,0 +1,34 @@
+{
+	"equipmentparameters": [
+		{
+			"code" : 1,
+            "equipment": "Parameter1",
+            "requiredRatio" : "1:50",
+			"isMandatory" : true
+		},
+		{
+			"code" : 2,
+            "equipment": "Parameter2",
+            "requiredRatio" : "1:75",            
+			"isMandatory" : true		
+		},
+		{
+			"code" : 3,
+            "equipment": "Parameter3",
+            "requiredRatio" : "1:50",            
+			"isMandatory" : true			
+		},
+		{
+			"code" : 4,
+            "equipment": "Parameter4",
+            "requiredRatio" : "2:50",            
+			"isMandatory" : false			
+		},
+		{
+			"code" : 5,
+            "equipment": "Parameter5",
+            "requiredRatio" : "1:25",            
+			"isMandatory" : false			
+		}			
+	]
+}

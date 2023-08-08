@@ -1,0 +1,141 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CommercialLayer.FlockExpencesBefore19WeekReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Flock Expences Before 19 Week Report"/>
+                </f:heading>
+                <f:actions>                           
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <VBox>
+                    <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                     <form:FormElement label="{i18n>dailygodownstockreportlabelfromdate}">
+                                            <form:fields>
+                                                <DatePicker id="fromdate"  width="100%" value="{reportModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="onDateChange" />   
+                                            </form:fields>
+                                        </form:FormElement>
+                                         <form:FormElement label="{i18n>FlockDetailReportBatchName}">
+                                            <form:fields>
+                                            <MultiComboBox id="txtBreederToBatch"
+                                                selectionChange="batchSelectionChange"
+                                                selectionFinish="batchSelectionFinish"
+                                                width="500px"
+                                                items="{
+                                                    path: 'batchModel>/modelData',
+                                                    sorter: { path: 'Name' }
+                                                }">
+                                                <core:Item key="{batchModel>id}" text="{batchModel>batchname}" />
+                                            </MultiComboBox>
+                                            </form:fields>
+                                         </form:FormElement>
+
+
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer>
+                                    <form:formElements>
+                                    <form:FormElement label="{i18n>dailygodownstockreportlabeltodate}">
+                                            <form:fields>
+                                                <DatePicker id="todate"  width="100%" value="{reportModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="onDateChange" />   
+                                            </form:fields>
+                                        </form:FormElement>
+                                          <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Search Data" width="100%" press="onSearchData"/>
+                                                <MenuButton icon="sap-icon://download" width="50%" align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="SaveCSV" icon="sap-icon://save" press="onDataExport" />
+                                                            <MenuItem text="SavePDF" icon="sap-icon://save" press="createPDF" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                </VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        
+        <f:content>				
+            <VBox fitContainer="true">                  
+                <Table id="tblFlockReport" growingScrollToLoad="true" sticky="ColumnHeaders" items="{
+                        path: 'tblModel>/modelData',
+                            sorter: {
+                                    path: 'batchname',
+                                    group : true
+                                }
+                        }"
+                    mode="None" backgroundDesign="Solid">
+                    <columns>
+                         <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Date" /></Column>
+                         <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="G/L Code" /></Column>
+                         <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="G/L Description" /></Column>                                  
+                         <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Debit" /></Column>
+                         <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Credit" /></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                        <customData>
+                        </customData>
+                            <cells>
+                                    <Text text="{tblModel>jedate}"/>
+                                    <Text text="{tblModel>glcode}"/>
+                                    <Text text="{tblModel>coaname}"/>
+                                    <Text text="{tblModel>dramount}"/>
+                                    <Text text="{tblModel>cramount}"/>
+                                            
+                                </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>          
+            </VBox>             
+        </f:content>             
+    </f:DynamicPage>    
+</core:View>
+
+
+
+
+ 

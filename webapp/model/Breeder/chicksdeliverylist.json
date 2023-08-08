@@ -1,0 +1,28 @@
+{
+	"chicksdeliverylist": [
+		{
+			"binAbs" : 1,
+			"binLocation": "location 1",
+			"hatchNo": 2,
+            "hatchDocEntry": 200,
+            "itemCode" : "1",
+            "itemName" : "item 1",
+            "batch" : "1",
+            "hatchQuantity" : 100,
+            "deliveryQuantity" : 200,
+            "rate" : 4
+        },
+        {
+			"binAbs" : 2,
+			"binLocation": "location 2",
+			"hatchNo": 2,
+            "hatchDocEntry": 201,
+            "itemCode" : "2",
+            "itemName" : "item 2",
+            "batch" : "1",
+            "hatchQuantity" : 120,
+            "deliveryQuantity" : 200,
+            "rate" : 4
+        }
+    ]
+}

@@ -1,0 +1,42 @@
+{
+	"gradingactivitylist": [
+		{
+			"lineNo" : 1,
+			"age": 2,
+			"itemName": "Breeder Female",
+            "itemCode": "B002",
+            "bodyweight" : 2,
+            "noofbirds" : 900,
+            "lastweekwt" : 1.9,
+            "stdweekwt" : 0,
+            "actualweekwt" : 0.1,
+            "difference" : 0.1,
+            "stdwtgain" : 0,
+            "actwtgain" : 0.1,
+            "stdUniformality" : 98,
+            "perUniformality" : 80,
+            "stdperbirdfeed" : 0,
+            "actperbirdfeed" : 60,
+            "totalfeed" : 54000
+        },
+        {
+			"lineNo" : 2,
+			"age": 2,
+			"itemName": "Breeder Female",
+            "itemCode": "B002",
+            "bodyweight" : 2,
+            "noofbirds" : 900,
+            "lastweekwt" : 1.8,
+            "stdweekwt" : 0,
+            "actualweekwt" : 0.2,
+            "difference" : 0.2,
+            "stdwtgain" : 0,
+            "actwtgain" : 0.2,
+            "stdUniformality" : 98,
+            "perUniformality" : 80,
+            "stdperbirdfeed" : 0,
+            "actperbirdfeed" : 60,
+            "totalfeed" : 59400
+        }
+    ]
+}

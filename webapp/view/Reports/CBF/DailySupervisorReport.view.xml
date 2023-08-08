@@ -1,0 +1,195 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CBF.DailySupervisorReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>dailysupervisorreporttitle}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+
+                                        
+                                        <form:FormElement label="{i18n>dailysupervisorreportbranchnamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="branchList"
+                                                    selectionChange="batchSelectionChange"
+                                                    selectionFinish="branchSelectionFinish"
+                                                    width="500px"  
+                                                    items="{
+                                                        path: 'branchModel>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{branchModel>id}" text="{branchModel>branchname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                          <form:FormElement label="{i18n>dailysupervisorreportlinenamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="lineList"
+                                                   selectionChange="batchSelectionChange"
+                                                  selectionFinish = "lineSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'lineModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{lineModel>id}" text="{lineModel>linename}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                       
+
+                                        
+                                           
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                     <form:FormContainer>
+                                          <form:formElements>
+                                             <form:FormElement label="{i18n>readybirdsforsalereportcurdatelabel}">
+                                            <form:fields>
+                                                <DatePicker id="curdate" width="100%" value="{reportModel>/curdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate" />   
+                                            </form:fields>
+                                        </form:FormElement>
+                                         <form:FormElement label="{i18n>dailysupervisorreportsupervisornamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="supervisorList"
+                                                   selectionChange="batchSelectionChange"
+                                                  selectionFinish = "LineSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'supervisiorModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{supervisiorModel>id}" text="{supervisiorModel>employeename}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel"  width="200%"  growing="true"  growingScrollToLoad="true"    sticky="ColumnHeaders"
+
+                                                 items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'id'
+                                                    }
+                                                }"
+                                                 backgroundDesign="Solid">
+                                <headerToolbar>
+                                    <Toolbar>
+                                    <content>
+                                        <Title  level="H2"/>
+                                        <ToolbarSpacer />
+                                          <Button icon="sap-icon://search"  text="Search Data" press="onSearchReadyBirdForSaleReport"/>
+                                          <Button icon="sap-icon://download"  press="onDataExport" />
+                                    </content>
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>dailysupervisorreportfarmername}" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>dailysupervisorreportcityname}" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreportlinesupervisorname}" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreportage}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreportopeningbalance}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreportadd}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreportconsption}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreporttotalconsumption}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreportbal}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreportdailyconbir}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreportdaily}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreportculls}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreporttotalmortality}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreporttotalmper}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreportsale}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreportbalbird}" /></Column> 
+                                      <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreportavgbodywt}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>dailysupervisorreportfcr}" /></Column> 
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                            <Text text="{tblModel>farmer_name}" />
+                                            <Text text="{tblModel>cityname}" />
+                                            <Text text="{tblModel>employeename}" />
+                                            <Text text="{tblModel>age}" />
+                                            <Text text="{tblModel>openingbal}" />
+                                            <Text text="{tblModel>addqty}" />
+                                            <Text text="{tblModel>quantity}" />
+                                            <Text text="{tblModel>totalfeedconsumption}" />
+                                            <Text text="{tblModel>Bal}" />
+                                            <Text text="{tblModel>dailyconperbird}" />
+                                            <Text text="{tblModel>dailymortality}" />
+                                            <Text text="{tblModel>daailyculls}" />
+                                            <Text text="{tblModel>totalmortality}" />
+                                            <Text text="{tblModel>ptotalmortality}" />
+                                            <Text text="{tblModel>aaa}" />
+                                            <Text text="{tblModel>bbb}" />
+                                            <Text text="{tblModel>avgweight}" />
+                                            <Text text="{tblModel>fcr}" />
+                                            
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                    </f:content>
+			</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

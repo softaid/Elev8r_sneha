@@ -1,0 +1,98 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.DashboardSettingpage" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+	            <VBox fitContainer="true">
+                <form:Form editable="true">
+                  <form:toolbar>			
+			            </form:toolbar>
+                      <form:layout>
+                          <form:ResponsiveGridLayout
+                              labelSpanXL="4"
+                              labelSpanL="6"
+                              labelSpanM="4"
+                              labelSpanS="12"
+                              adjustLabelSpan="false"
+                              emptySpanXL="0"
+                              emptySpanL="0"
+                              emptySpanM="0"
+                              emptySpanS="0"
+                              columnsXL="3"
+                              columnsL="2"
+                              columnsM="2"
+                              singleContainerFullSize="false" />
+                      </form:layout>
+                          <form:formContainers>
+                          <form:FormContainer title="">
+					                            <form:formElements>    
+                                      <form:FormElement label="Breeder Setting" >
+                                        <form:fields>
+                                        <Link
+                                        id="txtlink1"
+                                        text="Breeder Setting"
+                                        press="navtoBreederSetting" />
+                                        </form:fields>
+                                      </form:FormElement>
+                                      <form:FormElement label="Layer Setting" >
+                                        <form:fields>
+                                        <Link
+                                        id="txtlink2"
+                                        text="Layer Setting"
+				                                press="navtoLayerSetting" />
+                                        </form:fields>
+                                      </form:FormElement>
+                                      <form:FormElement label="Hatchery Setting" >
+                                        <form:fields>
+                                        <Link
+                                        id="txtlink3"
+                                        text="Hatchery Setting"
+				                                press="navtoHatcherySetting" />
+                                      </form:fields>
+                                      </form:FormElement>
+                                      <form:FormElement label="FeedMill Setting" >
+                                        <form:fields>
+                                        <Link
+                                        id="txtlink4"
+                                        text="FeedMill Setting"
+				                                press="navtoFeedMillSetting" />
+                                      </form:fields>
+                                      </form:FormElement>
+                                      <form:FormElement label="Processing Setting" >
+                                        <form:fields>
+                                        <Link
+                                        id="txtlink5"
+                                        text="Processing Setting"
+				                                press="navtoProcessingSetting" />
+                                      </form:fields>
+                                      </form:FormElement>
+                                      <form:FormElement label="CBF Setting" >
+                                        <form:fields>
+                                        <Link
+                                        id="txtlink6"
+                                        text="CBF Setting"
+				                                press="navtoCBFSetting" />
+                                      </form:fields>
+                                      </form:FormElement>
+                                      <form:FormElement label="Common Setting" >
+                                        <form:fields>
+                                        <Link
+                                        id="txtlink7"
+                                        text="Common Setting"
+				                                press="navtoCommonSetting" />
+                                     </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                          </form:FormContainer>
+                       </form:formContainers>
+                </form:Form>
+              </VBox>  
+</core:View>
+
+
+
+
+
+
+
+ 

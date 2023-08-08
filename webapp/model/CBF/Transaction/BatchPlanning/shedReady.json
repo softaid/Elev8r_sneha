@@ -1,0 +1,100 @@
+{   
+    "shedreadydetails":[
+        {
+            "code" : "001",
+            "branch" : "Branch 1",
+            "farmer" : "Farmer 1",
+            "farm" : "Farm 1",
+            "shedName" : "Shed 1",
+            "shedName1" : "Shed 1",
+            "supervisor" : "supervisor 1",
+            "supervisor1" : "supervisor 1",
+            "date" : "2018/07/15",
+            "finalCleaningDate" : "2018/07/15",
+            "farmArea" : "1000 Sq ft",
+            "status" : "New",
+            "restPeriod" : "",
+            "details":[
+				{
+					"cleaningParticulars" : "Shed cleaning with caustic soda",
+                    "status": true,
+                    "remark" : true
+				},
+				{
+					"cleaningParticulars" : "White wash of floor",
+                    "status": true,
+                    "remark" : true
+				},
+				{
+					"cleaningParticulars" : "Pipeline & tank cleaning",
+                    "status": true,
+                    "remark" : true
+				}
+        	]
+        },
+        {
+            "code" : "002",
+            "branch" : "Branch 2",
+            "farmer" : "Farmer 2",
+            "farm" : "Farm 1",
+            "shedName" : "Shed 1",
+            "shedName1" : "Shed 1",
+            "supervisor" : "supervisor 1",
+            "supervisor1" : "supervisor 1",
+            "date" : "2018/07/15",
+            "finalCleaningDate" : "2018/07/15",
+            "farmArea" : "1000 Sq ft",
+            "status" : "New",
+            "restPeriod" : "",
+            "details":[
+				{
+					"cleaningParticulars" : "Shed cleaning with caustic soda",
+                    "status": true,
+                    "remark" : true
+				},
+				{
+					"cleaningParticulars" : "White wash of floor",
+                    "status": true,
+                    "remark" : true
+				},
+				{
+					"cleaningParticulars" : "Pipeline & tank cleaning",
+                    "status": true,
+                    "remark" : true
+				}
+        	]
+        },
+        {
+            "code" : "001",
+            "branch" : "Branch 1",
+            "farmer" : "Farmer 1",
+            "farm" : "Farm 1",
+            "shedName" : "Shed 1",
+            "shedName1" : "Shed 1",
+            "supervisor" : "supervisor 1",
+            "supervisor1" : "supervisor 1",
+            "date" : "2018/07/15",
+            "finalCleaningDate" : "2018/07/15",
+            "farmArea" : "1000 Sq ft",
+            "status" : "New",
+            "restPeriod" : "",
+            "details":[
+				{
+					"cleaningParticulars" : "Shed cleaning with caustic soda",
+                    "status": true,
+                    "remark" : true
+				},
+				{
+					"cleaningParticulars" : "White wash of floor",
+                    "status": true,
+                    "remark" : true
+				},
+				{
+					"cleaningParticulars" : "Pipeline & tank cleaning",
+                    "status": true,
+                    "remark" : true
+				}
+        	]
+        }
+    ]
+}

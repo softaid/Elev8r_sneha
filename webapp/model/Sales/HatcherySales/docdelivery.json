@@ -1,0 +1,134 @@
+{
+	"docdelivery": [
+		{
+			"customer" : "ABC",
+            "name" : "Test",
+            "contactPerson" : "PQR",
+            "customerRefNo":"1234",
+            "localCurrency":"ABC",
+            "placeOfSupply" : "Pune_Test",
+            "no1" : "CBF22",
+            "no2" : 53454,
+            "status" : "New",
+            "postingDate" : "01/03/2015",
+            "deliveryDate" : "01/03/2015",
+            "documentDate" : "01/03/2015",
+            "salesEmployee" : "Employee1",
+            "owner" : "test",      
+            "remark" : "test",
+            "Remark" : "test",
+            "totalBeforeDiscount" : 1000,        
+            "discount" : 5,
+            "discount1" : 980,
+            "freight"    :10,
+            "rounding": true,
+            "roundTotal" : 980,
+            "tax" : 20,
+            "total" : 900,
+			"contentDetails":[
+				{
+					"itemNo" : 1,
+                    "dispatchQty" : 20.88,
+                    "itemDescription" : "test description",
+                    "quantity" : 2.4,
+                    "unitPrice" : 899.4,
+                    "discount" : 10,
+                    "taxCode" : 424,
+                    "total" : 1200,
+                    "whse": "DGDFg"
+                    
+				},
+				{
+                    "itemNo" : 2,
+                    "dispatchQty" : 20.88,
+                    "itemDescription" : "test description",
+                    "quantity" : 2.4,
+                    "unitPrice" : 899.4,
+                    "discount" : 10,
+                    "taxCode" : 424,
+                    "total" : 1200,
+                    "whse": "DGDFg"
+                    
+                    
+				},
+				{
+                    "itemNo" : 3,
+                    "dispatchQty" : 20.88,
+                    "itemDescription" : "test description",
+                    "quantity" : 2.4,
+                    "unitPrice" : 899.4,
+                    "discount" : 10,
+                    "taxCode" : 424,
+                    "total" : 1200,
+                    "whse": "DGDFg"
+                    
+                    
+				}
+        	]
+		},
+		{
+			"customer" : "PQR",
+            "name" : "Test1",
+            "contactPerson" : "XYZ",
+            "customerRefNo":"12565",    
+            "localCurrency":"XYZ",        
+            "placeOfSupply" : "Mumbai",
+            "no1" : "CBF2432",
+            "no2" : 7565345,
+            "status" : "Open",
+            "postingDate" : "07/09/2016",
+            "deliveryDate" : "01/03/2015",
+            "documentDate" : "01/03/2015",  
+            "salesEmployee" : "Employee2",       
+            "owner" : "test",
+            "Remark" : "test",
+            "totalBeforeDiscount" : 1000,     
+            "discount" : 5,
+            "discount1" : 980,
+            "freight"    :10,
+            "rounding": true,
+            "roundTotal" : 980,
+            "tax" : 20,
+            "total" : 900,
+			"contentDetails":[
+				{
+					"itemNo" : 4,
+                    "dispatchQty" : 20.88,
+                    "itemDescription" : "description",
+                    "quantity" : 2.4,
+                    "unitPrice" : 899.4,
+                    "discount" : 10,
+                    "taxCode" : 424,
+                    "total" : 1200,
+                    "whse": "DGDFg"
+                    
+                    
+				},
+				{
+                    "itemNo" : 5,
+                    "dispatchQty" : 20.88,
+                    "itemDescription" : "test description1",
+                    "quantity" : 2.4,
+                    "unitPrice" : 899.4,
+                    "discount" : 10,
+                    "taxCode" : 424,
+                    "total" : 1200,
+                    "whse": "DGDFg"
+                    
+                    
+				},
+				{
+                    "itemNo" : 6,
+                    "dispatchQty" : 20.88,
+                    "itemDescription" : "test description2",
+                    "quantity" : 2.4,
+                    "unitPrice" : 899.4,
+                    "discount" : 10,
+                    "taxCode" : 424,
+                    "total" : 1200,
+                    "whse": "DGDFg"
+				}
+        	]
+		}
+	]
+}

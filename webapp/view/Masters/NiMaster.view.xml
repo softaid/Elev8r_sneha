@@ -1,0 +1,88 @@
+
+
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.NiMaster" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:core="sap.ui.core">
+
+    <f:FlexibleColumnLayout  id="fclLeadMaster" backgroundDesign="Solid">
+		<f:beginColumnPages>
+            <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="{i18n>niMasters}"/>
+				        </f:heading>
+                        <f:actions>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://add" type="Transparent" press="onAddIconPress" align="right"/>
+                        </f:actions>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+	                <VBox fitContainer="true">  
+                        <IconTabBar selectedKey="{view>/selectedTabKey}" expanded="true" class="sapUiResponsiveContentPadding" items ="{masterModel>/modelData}" select="onTabSelect">
+                            <items>
+                                <IconTabFilter text="{masterModel>typename}" key="{masterModel>typecode}">
+                                    <VBox fitContainer="true">
+                                        <Table 
+                                            inset="false" 
+                                            id="table"
+                                            items="{
+                                                        path: 'masterDetailModel>/modelData',
+                                                        sorter: {
+                                                            path: 'id'
+                                                        }
+                                                    }">
+                                            <headerToolbar>
+                                                <Toolbar>
+                                                    <content>
+                                                        <Title text="{masterModel>typename}" level="H2"/>
+                                                        <ToolbarSpacer />
+                                                    </content>
+                                                </Toolbar>
+                                            </headerToolbar>
+                                            <columns  id="column">
+                                                <Column><Text text ="{i18n>projectID}" /></Column>
+                                                <Column><Text text ="{i18n>projectDescription}" /></Column>
+                                                <Column minScreenWidth="Tablet"  demandPopin="true"><Text text ="{i18n>Active}" /></Column>
+                                                <Column   visible="false" minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>Default}" /></Column>
+                                               
+                                                <Column visible="{visibleModel>/visible}" minScreenWidth=""  demandPopin="false" >
+                                                <Text text ="Project Per" /></Column>
+                                               
+                                                <Column visible="{visibleModel>/visible}"><Text text ="Stage per" /></Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem  templateShareable="false" type="Navigation" press="onListItemPress">
+                                                    <cells>
+                                                        <Text text="{masterDetailModel>id}"/>
+                                                        <Text text="{masterDetailModel>description}"/>
+                                                         <Switch state="{masterDetailModel>active}"  enabled="false" id="projectactive" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                                            <layoutData>
+                                                                <FlexItemData growFactor="1" />
+                                                            </layoutData>
+                                                        </Switch> 
+                                                         <Switch   enabled="false" state="{masterDetailModel>defaultvalue}" id="projectdefault" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                                            <layoutData>
+                                                                <FlexItemData growFactor="1" />
+                                                            </layoutData>
+                                                        </Switch>
+                                                        <Text text="{masterDetailModel>projectper}"/>
+                                                        <Text text="{masterDetailModel>stageper}"/>
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>   
+                                    </VBox>  
+                                </IconTabFilter>
+                            </items>
+                        </IconTabBar>
+                    </VBox>
+                </f:content>
+			</f:DynamicPage> 
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout> 
+</core:View>

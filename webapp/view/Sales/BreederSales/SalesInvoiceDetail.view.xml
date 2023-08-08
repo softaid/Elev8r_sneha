@@ -1,0 +1,207 @@
+<mvc:View
+		xmlns:c="sap.ui.core"
+		controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.BreederSales.SalesInvoiceDetail"
+		xmlns="sap.m"
+        xmlns:f="sap.f"
+        xmlns:core="sap.ui.core"
+        xmlns:form="sap.ui.layout.form"
+        xmlns:mvc="sap.ui.core.mvc"
+        height="100%">
+		<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Egg / Bird Sales Invoice Detail"/>
+					</f:heading>
+					<f:actions>
+						<ToolbarSpacer/>
+						 <Button
+                            id="btnSave"
+							text="Save"
+                            type="Emphasized"
+							press="onAddSalesInvoiceList"/>
+						<Button
+                            id="btnDelete"
+							text="Delete"
+							type="Emphasized"
+                            press="onDelete"/>						
+					</f:actions>
+					<f:navigationActions>
+						<Button
+								icon="sap-icon://decline"
+								type="Transparent" press="onCancel" />
+					</f:navigationActions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:content>				
+   			   <form:Form editable="true">
+                    <form:title>
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="1"
+                                singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="">
+					        <form:formElements>     
+                                <form:FormElement label="Is Item Bird?">
+                                    <form:fields>
+                                        <Switch id="chkIsBird" state="{parts: [{path: 'editSalesinvoiceModel>isbird'}], formatter: '.formatter.getBooleanValue'}" customTextOn="Yes" customTextOff="No" change="checkDone">
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </form:fields>
+                                </form:FormElement> 
+                                <form:FormElement label="Batch" id = "batchEle">
+                                    <form:fields>
+                                        <Select id="txtBatch" 
+                                            showSecondaryValues= "true" forceSelection="false"
+                                            selectedKey="{editSalesinvoiceModel>/batchid}"
+                                            items="{
+                                                path: 'batchModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }" change="batchSelect">
+                                            <core:ListItem key="{batchModel>batchid}" text="{batchModel>batchname}" />                                            
+                                        </Select>
+                                    </form:fields> 
+                                </form:FormElement>
+                                <form:FormElement label="Warehouse Bin">
+                                    <form:fields>
+                                        <Input
+                                            id="txtWarehouseBin"
+                                            type="Text"
+                                            value="{editSalesinvoiceModel>/warehousebinname}"
+                                            placeholder="Select Warehouse Bin"
+                                            enabled="true"
+                                            editable="true"
+                                            showValueHelp="true"
+                                            valueHelpOnly="true"      
+					                        visible="false" 
+                                            valueHelpRequest="handleWarehouseBinValueHelp">
+                                        </Input>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Item Group" id = "itemGroupEle">
+                                    <form:fields>
+                                        <Select id="txtItemGroup" 
+                                            showSecondaryValues= "true" forceSelection="false"
+                                            selectedKey="{editSalesinvoiceModel>/itemgroupid}"
+                                            items="{
+                                                path: 'itemGroupModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }" change="itemgroupSelect">
+                                            <core:ListItem key="{itemGroupModel>id}" text="{itemGroupModel>groupname}" />                                            
+                                        </Select>
+                                    </form:fields> 
+                                </form:FormElement> 
+                                <form:FormElement label="Item Name">
+                                    <form:fields>
+                                        <Input
+                                            id="txtItemName"
+                                            type="Text"
+                                            value="{editSalesinvoiceModel>/itemname}"
+                                            placeholder="Select Item"
+                                            enabled="true"
+                                            editable="true"
+                                            showValueHelp="true"                                                
+                                            valueHelpOnly="true"       
+                                            valueHelpRequest="handleItemValueHelp">
+                                        </Input>
+                                    </form:fields>
+                                </form:FormElement> 
+                                <form:FormElement id="eleAvgWeight" label="Average Weight (in gm From Daily Transaction)">
+                                    <form:fields>
+                                        <Input id="txtAvgWeight" value="{editSalesinvoiceModel>/avgweight}" change="calcQtyonWeight" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement id="eleWeight" label="Order Weight">
+                                    <form:fields>
+                                        <Input id="txtWeight" value="{editSalesinvoiceModel>/weight}" change="calcQtyonWeight" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="In Stock">
+                                    <form:fields>
+                                        <Input id="txtStkQty" value="{editSalesinvoiceModel>/stockquantity}" enabled="false" visible="false" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Quantity">
+                                    <form:fields>
+                                        <Input id="txtQuantity" value="{editSalesinvoiceModel>/quantity}" change ="onQuantityChange"  />
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="Unit Price">
+                                    <form:fields>
+                                        <Input id="txtUnitPrice" value="{editSalesinvoiceModel>/unitprice}" liveChange ="onDiscountchange" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Discount (%)">
+                                    <form:fields>
+                                        <Input id="txtDiscount" value="{editSalesinvoiceModel>/discount}" liveChange ="onDiscountchange" />
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="Item Tax Category">
+                                    <form:fields>
+                                        <Input id="txtTaxCategory" value="{editSalesinvoiceModel>/taxcategoryname}" enabled="false" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement id="eleTaxPercent" label="Tax Code">
+                                    <form:fields>
+                                         <Input
+                                                id="txtTaxPercent"
+                                                type="Text"
+                                                value="{editSalesinvoiceModel>/taxpercent}"
+                                                placeholder="Select Tax"
+                                                enabled="true"
+                                                editable="true"
+                                                showValueHelp="true"                                                
+                                                valueHelpOnly="true"       
+                                                valueHelpRequest="handleTaxValueHelp">
+                                            </Input>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Tax Total">
+                                    <form:fields>
+                                        <Input id="txtTaxCalculation" value="{editSalesinvoiceModel>/taxcalculation}" enabled="false" />
+                                    </form:fields>
+                                </form:FormElement>
+
+
+                                <form:FormElement id="frmCalcOnUnit" label="Is calculation based on weight?">
+                                    <form:fields>
+                                        <Switch id="chkCalcOnUnit" state="{parts: [{path: 'editSalesinvoiceModel>iscalcweight'}], formatter: '.formatter.getBooleanValue'}" customTextOn="Yes" customTextOff="No"
+                                                 change="checkCalcOnUnit">
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </form:fields>
+                                </form:FormElement>
+
+
+                                <form:FormElement label="Total">
+                                    <form:fields>
+                                        <Input id="txtTotal"  value="{editSalesinvoiceModel>/linetotal}" />
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+		    </f:content>
+	    </f:DynamicPage>
+</mvc:View>

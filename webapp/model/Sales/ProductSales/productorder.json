@@ -1,0 +1,139 @@
+{   
+    "productsalesorder":[
+        {
+            "orderDate" : "2018/07/15",
+            "subject" : "Sales Product",
+            "custName" : "Aditi",
+            "quotationNumber" : "Quotation 1",
+            "againstForm" : "",
+            "salesRepresentative" : "Person 1",
+            "referredBy" : "Referance 1",
+            "referenceNumber" : "Reference 1",
+            "referencedate" : "2018/07/15",
+            "dueDate" : "2018/07/20",
+            "salesType" : "Sales 1",
+            "details":[
+				{
+					"stockName" : "Stock 1",
+                    "quantity": 10,
+                    "freeqty": 2,
+                    "unit": 100,
+                    "rate": 100,
+                    "taxName" : "GST",
+                    "amount": "1000",
+                    "otherchargesDetail" : "Charge 1"
+				},
+				{
+					"stockName" : "Stock 2",
+                    "quantity": 20,
+                    "freeqty": 2,
+                    "unit": 10,
+                    "rate": 10,
+                    "taxName" : "GST",
+                    "amount": "2000",
+                    "otherchargesDetail" : "Charge 2"
+				},
+				{
+					"stockName" : "Stock 3",
+                    "quantity": 10,
+                    "freeqty": 2,
+                    "unit": 50,
+                    "rate": 50,
+                    "taxName" : "GST",
+                    "amount": "3000",
+                    "otherchargesDetail" : "Charge 3"
+				}
+        	]
+        },
+        {
+            "orderDate" : "2018/07/16",
+            "subject" : "Sales Product",
+            "custName" : "Aditi",
+            "quotationNumber" : "Quotation 2",
+            "againstForm" : "",
+            "salesRepresentative" : "Person 2",
+            "referredBy" : "Referance 2",
+            "referenceNumber" : "Reference 2",
+            "referencedate" : "2018/07/16",
+            "dueDate" : "2018/07/20",
+            "salesType" : "Sales 2",
+            "details":[
+				{
+					"stockName" : "Stock 1",
+                    "quantity": 10,
+                    "freeQty": 2,
+                    "unit": 100,
+                    "rate": 100,
+                    "taxName" : "GST",
+                    "amount": "1000",
+                    "otherchargesDetail" : "Charge 1"
+				},
+				{
+					"stockName" : "Stock 2",
+                    "quantity": 20,
+                    "freeQty": 2,
+                    "unit": 10,
+                    "rate": 10,
+                    "taxName" : "GST",
+                    "amount": "2000",
+                    "otherchargesDetail" : "Charge 2"
+				},
+				{
+					"stockName" : "Stock 3",
+                    "quantity": 10,
+                    "freeQty": 2,
+                    "unit": 50,
+                    "rate": 50,
+                    "taxName" : "GST",
+                    "amount": "3000",
+                    "otherchargesDetail" : "Charge 3"
+				}
+        	]
+        },
+        {
+            "orderDate" : "2018/07/17",
+            "subject" : "Sales Product",
+            "custName" : "Aditi",
+            "quotationNumber" : "Quotation 3",
+            "againstForm" : "",
+            "salesRepresentative" : "Person 3",
+            "referredBy" : "Referance 3",
+            "referenceNumber" : "Reference 3",
+            "referencedate" : "2018/07/17",
+            "dueDate" : "2018/07/21",
+            "salesType" : "Sales 3",
+            "details":[
+				{
+					"stockName" : "Stock 1",
+                    "quantity": 10,
+                    "freeqty": 2,
+                    "unit": 100,
+                    "rate": 100,
+                    "taxName" : "GST",
+                    "amount": "1000",
+                    "otherchargesDetail" : "Charge 1"
+				},
+				{
+					"stockName" : "Stock 2",
+                    "quantity": 20,
+                    "freeqty": 2,
+                    "unit": 10,
+                    "rate": 10,
+                    "taxName" : "GST",
+                    "amount": "2000",
+                    "otherchargesDetail" : "Charge 2"
+				},
+				{
+					"stockName" : "Stock 3",
+                    "quantity": 10,
+                    "freeqty": 2,
+                    "unit": 50,
+                    "rate": 50,
+                    "taxName" : "GST",
+                    "amount": "3000",
+                    "otherchargesDetail" : "Charge 3"
+				}
+        	]
+        }
+    ]
+}

@@ -1,0 +1,173 @@
+<mvc:View
+    controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Accounts.ProfitAndLoss"
+    xmlns="sap.ui.table"
+    xmlns:m="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:f="sap.f">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <m:Title text="Profit and Loss Statement"/>
+                </f:heading>
+                <f:actions>                           
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <m:VBox>
+                    <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="6"
+                                    labelSpanL="6"
+                                    labelSpanM="6"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="3"
+                                    columnsM="3"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer>
+                                    <form:formElements>
+                                        <!-- <form:FormElement label="From Date">
+                                            <form:fields>
+                                                <m:DatePicker id="txtFromDate" required="true" 
+                                                value="{pnfSheet>/fromdate}" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="dd/MM/YYYY"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>  -->
+                                        <form:FormElement label="To Date">
+                                            <form:fields>
+                                                <m:DatePicker id="txtToDate" required="true" 
+                                                value="{pnfSheet>/todate}" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="dd/MM/YYYY"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement> 
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer>
+                                    <form:formElements>
+                                        <form:FormElement label="">
+                                            <form:fields>
+                                                <m:Button icon="sap-icon://search" type="Emphasized" text="Search Data" press="bindTbl"/>
+                                                 <m:MenuButton icon="sap-icon://download">
+                                                <m:menu>
+                                                    <m:Menu itemSelected="onMenuAction" >
+                                                        <m:items>
+                                                            <m:MenuItem text="SaveCSV" icon="sap-icon://save" press="onDataExport" />
+                                                            <m:MenuItem text="SavePDF" icon="sap-icon://save" press="createPDF" />
+                                                        </m:items>
+                                                    </m:Menu>
+                                                </m:menu>
+                                            </m:MenuButton>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                </m:VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>	
+            <m:HBox>
+                <!-- Revenue tree -->
+                <TreeTable
+                    id="treeTable"
+                    selectionMode="Single"
+                    enableColumnReordering="false"
+                    width="100%"
+                    expandFirstLevel="true"
+
+                    rows="{
+                        path : 'tblRevenuePnfSheet>/modelData'
+                        
+                    }">
+
+                    <extension>
+                        <m:Toolbar>
+                            <m:Title id="title" text="Revenue"/>
+                            <m:ToolbarSpacer/>
+                        </m:Toolbar>
+                    </extension>
+
+                    <columns>
+
+                        <Column label="Particulars">
+                            <template>
+                                <m:Text text="{tblRevenuePnfSheet>ledgername}" wrapping="false" />
+                            </template>
+                        </Column>
+
+                        <Column label="Amount" hAlign="End">
+                            <template>
+                                <m:Text text="{tblRevenuePnfSheet>amount}" wrapping="false"/>
+                            </template>
+                        </Column>
+
+                    </columns>
+
+                </TreeTable>
+
+                <m:VBox justifyContent="Center" class="sapUiTinyMarginBeginEnd">
+                </m:VBox>
+
+                <!-- Expenditure tree -->
+                <TreeTable
+                    id="treeTable1"
+                    selectionMode="Single"
+                    enableColumnReordering="false"
+                    width="100%"
+                    expandFirstLevel="true"
+                    rows="{
+                        path : 'tblExpensePnfSheet>/modelData'
+                        
+                    }">
+
+                    <extension>
+                        <m:Toolbar>
+                            <m:Title id="title1" text="Expenditure"/>
+                            <m:ToolbarSpacer/>
+                        </m:Toolbar>
+                    </extension>
+
+                    <columns>
+
+                        <Column label="Particulars">
+                            <template>
+                                <m:Text text="{tblExpensePnfSheet>ledgername}" wrapping="false" />
+                            </template>
+                        </Column>
+
+                        <Column label="Amount" hAlign="End">
+                            <template>
+                                <m:Text text="{tblExpensePnfSheet>amount}" wrapping="false"/>
+                            </template>
+                        </Column>
+
+                    </columns>
+
+                </TreeTable>
+            </m:HBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

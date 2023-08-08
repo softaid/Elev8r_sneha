@@ -1,0 +1,168 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivityDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+	height="100%">
+		
+	<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>projectActivityDetail}"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+					<Button
+						text="{i18n>RoleAccessButtonSave}"
+                        type="Emphasized"
+						press="onSave"
+						id="btnSave"/>
+				    <Button
+						text="{i18n>RoleAccessButtonDelete}"
+						type="Emphasized"
+						id="btnDelete"
+						press="onDelete"/>						
+				</f:actions>
+				<f:navigationActions>
+					<Button
+						icon="sap-icon://decline"
+						type="Transparent" press="onCancel" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>				
+   			<form:Form editable="true">
+                <form:title>
+                </form:title>
+                <form:layout>
+                    <form:ResponsiveGridLayout
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="2"
+                        columnsM="2"
+                        singleContainerFullSize="false" />
+                </form:layout>
+                <form:formContainers>
+                    <form:FormContainer title="{i18n>projectBasicInfoContainerLabel}">
+					    <form:formElements>
+                            <form:FormElement label="{i18n>projectManagementActivityName}">
+                                <form:fields>
+                                    <Input id="txtActivityName" valueLiveUpdate="true" value="{editProActivityModel>/activityname}"  required="true" change="onPartyNameChange"/>
+                                </form:fields>
+                            </form:FormElement>   
+                            <form:FormElement label="{i18n>projectProjectTypeLabel}">
+                                <form:fields>
+                                    <Select id="projectid"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{editProActivityModel>/projectid}" 
+                                        forceSelection="true"
+                                        width="500px"
+                                        items="{
+                                            path: 'projectModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{projectModel>id}" text="{projectModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+                             <form:FormElement label="{i18n>projectMilestoneTypeLabel}">
+                                <form:fields>
+                                    <Select id="milestoneid"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{editProActivityModel>/milestoneid}" 
+                                        forceSelection="true"
+                                        width="500px"
+                                        items="{
+                                            path: 'milestoneModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{milestoneModel>id}" text="{milestoneModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+                             <form:FormElement label="{i18n>projectActivityTypeLabel}">
+                                <form:fields>
+                                    <Select id="projectactivityid"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{editProActivityModel>/proactivitytypeid}" 
+                                        forceSelection="true"
+                                        width="500px"
+                                        items="{
+                                            path: 'projectActivityModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{projectActivityModel>id}" text="{projectActivityModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>projectStartDateLabel}">
+                                <form:fields>
+                                    <DatePicker id="startDate" value="{editProActivityModel>/startdate}" placeholder="{config>/dateFormat/placeholder}"
+                                        displayFormat="{config>/dateFormat/displayFormat}" 
+                                        valueFormat="{config>/dateFormat/valueFormat}" required="true"  />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>projectEndDateLabel}">
+                                <form:fields>
+                                    <DatePicker id="endDate" value="{editProActivityModel>/enddate}" placeholder="{config>/dateFormat/placeholder}"
+                                        displayFormat="{config>/dateFormat/displayFormat}" 
+                                        valueFormat="{config>/dateFormat/valueFormat}" required="true"  />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>projectDueDateLabel}">
+                                <form:fields>
+                                    <DatePicker id="dueDate" value="{editProActivityModel>/duedate}" placeholder="{config>/dateFormat/placeholder}"
+                                        displayFormat="{config>/dateFormat/displayFormat}" 
+                                        valueFormat="{config>/dateFormat/valueFormat}" required="true"  />
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                    </form:FormContainer>
+                    <form:FormContainer>
+                        <form:formElements>
+                            <form:FormElement label="{i18n>projectMileStoneCompletion}">
+                                <form:fields>
+                                    <Input id="milestoneCompletion" valueLiveUpdate="true" value="{editProActivityModel>/milestonecompletion}" change="onEmailChange" required="true" />
+                                </form:fields>
+                            </form:FormElement>
+                           <form:FormElement label="{i18n>projectStatusLabel}">
+                                <form:fields>
+                                    <Select id="statusid"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{editProActivityModel>/statusid}" 
+                                        forceSelection="true"
+                                        width="500px"
+                                        items="{
+                                            path: 'projectActivityStatusModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{projectActivityStatusModel>id}" text="{projectActivityStatusModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                    </form:FormContainer>
+                </form:formContainers>
+            </form:Form>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

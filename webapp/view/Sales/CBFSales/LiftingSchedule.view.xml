@@ -1,0 +1,185 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.CBFSales.LiftingSchedule" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:FlexibleColumnLayout  id="fclCBFLiftingSchedule" backgroundDesign="Solid">
+		<f:beginColumnPages>
+            <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="Lifting Schedule Approval"/>
+				        </f:heading>
+                        <f:actions>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+				            <Button icon="sap-icon://add" type="Transparent" press="onAdd"/>
+                            <Button icon="sap-icon://arrow-left" type="Transparent" press="onAdd"/>
+                            <Button icon="sap-icon://arrow-right" type="Transparent" press="onAdd"/>
+                        </f:actions>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+	                <VBox fitContainer="true">                   
+                        <form:Form editable="true">    
+                            <form:toolbar>
+			                </form:toolbar>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+					                <form:formElements>
+                                        <form:FormElement label="Schedule Date">
+                                            <form:fields>
+                                                <DatePicker id="txtTransactionDate" required="true" value="{cbfSalesModel>/orderdate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}"      
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="onDateChange"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="Branch">
+                                            <form:fields>
+                                                <Input id="txtBranchCode" />
+                                                <Input id="txtBranchName" editable="false" />                                                
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+
+                        <Table id="tblliftingSchedule" mode="MultiSelect"  backgroundDesign="Solid" inset="false"
+                                items="{
+                                    path: 'tblLiftingScheduleModel>/modelData',
+                                        sorter: {
+                                            path: 'orderNumber'
+                                        }
+                                    }">
+	                        <headerToolbar>
+			                    <Toolbar>
+				                    <content>
+					                    <Title text="" level="H2"/>
+					                    <ToolbarSpacer />
+			                            <Button icon="sap-icon://add" type="Transparent" press="onAddNewDetail"/>                                        
+				                    </content>
+			                    </Toolbar>
+		                    </headerToolbar>
+                            <columns>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Order Num" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Order Entry" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Order Date" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Customer Name" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Name" /></Column>     
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Order Qty" /></Column>                                                                                   
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Open Qty" /></Column>                            
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Rate Per Kg" /></Column>                            
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Farm Name" /></Column>                            
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Farmer Name" /></Column>   
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemPress">
+                                    <cells>
+                                        <Text text="{tblLiftingScheduleModel>orderNumber}"  />
+                                        <Text text="{tblLiftingScheduleModel>orderEntry}"  />
+                                        <Text text="{tblLiftingScheduleModel>orderDate}"  />
+                                        <Text text="{tblLiftingScheduleModel>customerName}"  />
+                                        <Text text="{tblLiftingScheduleModel>itemName}"  />
+                                        <Text text="{tblLiftingScheduleModel>orderQuantity}"  />
+                                        <Text text="{tblLiftingScheduleModel>openQuantity}"  />
+                                        <Text text="{tblLiftingScheduleModel>ratePerKg}"  />
+                                        <Text text="{tblLiftingScheduleModel>farmName}"  />
+                                        <Text text="{tblLiftingScheduleModel>farmerName}"  />                                        
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+
+                        <Panel>
+    	                    <FlexBox		
+				                alignItems="Start"
+				                justifyContent="Center">
+				                <items>
+					                <Button icon="sap-icon://arrow-bottom" type="Emphasized" class="sapUiSmallMarginEnd" press="ondownArrowPress" />
+					                <Button icon="sap-icon://arrow-top" type="Emphasized" class="sapUiSmallMarginEnd" press="onUpArrowPress" />
+				                </items>
+			                </FlexBox>
+                        </Panel>  
+
+                        <Table id="tblliftingScheduled" mode="MultiSelect" backgroundDesign="Solid" inset="false" multiselect="true"
+                               items="{
+                                    path: 'tblLiftingScheduledModel>/modelData',
+                                        sorter: {
+                                            path: 'orderNumber'
+                                        }
+                                    }">
+	                        <headerToolbar>
+			                    <Toolbar>
+				                    <content>
+					                    <Title text="" level="H2"/>
+					                    <ToolbarSpacer />
+				                    </content>
+			                    </Toolbar>
+		                    </headerToolbar>
+                            <columns>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Order Num" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Order Entry" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Order Date" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Customer Name" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Name" /></Column>     
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Order Qty" /></Column>                                                                                   
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Open Qty" /></Column>                            
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Rate Per Kg" /></Column>                            
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Farm Name" /></Column>                            
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Farmer Name" /></Column>   
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="{tblLiftingScheduledModel>orderNumber}"  />
+                                        <Text text="{tblLiftingScheduledModel>orderEntry}"  />
+                                        <Text text="{tblLiftingScheduledModel>orderDate}"  />
+                                        <Text text="{tblLiftingScheduledModel>customerName}"  />
+                                        <Text text="{tblLiftingScheduledModel>itemName}"  />
+                                        <Text text="{tblLiftingScheduledModel>orderQuantity}"  />
+                                        <Text text="{tblLiftingScheduledModel>openQuantity}"  />
+                                        <Text text="{tblLiftingScheduledModel>ratePerKg}"  />
+                                        <Text text="{tblLiftingScheduledModel>farmName}"  />
+                                        <Text text="{tblLiftingScheduledModel>farmerName}"  />                                        
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+
+                        <Panel>
+    	                    <FlexBox		
+				                alignItems="Start"
+				                justifyContent="End">
+				                <items>
+					                <Button text="Save" type="Emphasized" class="sapUiSmallMarginEnd" />
+					                <Button text="Cancel" type="Emphasized" class="sapUiSmallMarginEnd" />
+				                </items>
+			                </FlexBox>
+                        </Panel>         
+                    </VBox>  
+                </f:content>
+			</f:DynamicPage> 
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout> 
+</core:View>

@@ -1,0 +1,32 @@
+{
+	"costcollection": [
+		{
+			"id" : 1,			
+			"costCenter" : "Sugar Factory",
+			"name" : "DK",
+			"sortCode" : 34343478,
+			"dimension" : "2112x303",
+			"costCenterType" : "Type 1"
+
+		},
+		{
+			"id" : 2,			
+			"costCenter" : "Poultry Farm",
+			"name" : "Abhishek",
+			"sortCode" : 66688899,
+			"dimension" : "2345x456",
+			"costCenterType" : "Type 2"
+
+		},
+		{
+			"id" :3,			
+			"costCenter" : "Poultry Farm",
+			"name" : "DK",
+			"sortCode" : 34343478,
+			"dimension" : "2112x303",
+			"costCenterType" : "Type 3"
+
+		}
+			
+	]
+}

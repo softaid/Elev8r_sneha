@@ -1,0 +1,179 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Breeder.FlockDetailReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>FlockDetailReportTitle}"/>
+                </f:heading>
+                <f:actions>                           
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <VBox>
+                    <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>FlockDetailReportFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromDate" required="true"          
+                                                    value="{flockDetailModel>/fromdate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="ongetDate"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>   
+
+
+					<form:FormElement label="Batch Name">
+                                            <form:fields>
+                                                <Select id="txtBreederToBatch" 
+                                                        selectedKey="{batchModel>/id}" 
+                                                        enabled="true"
+                                                        change="roleSelect"
+                                                        forceSelection="false"
+                                                        items="{
+                                                            path: 'batchModel>/modelData',
+                                                            sorter: { path: 'Name' }
+                                                        }">
+                                                    <core:Item key="{batchModel>id}" text="{batchModel>batchname}" />  
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>                                      </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer>
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>FlockDetailReportToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtToDate" required="true" 
+                                                value="{flockDetailModel>/todate}" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="dd/MM/YYYY"
+                                                change="ongetDate"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>   
+                                            <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>          
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                </VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        
+        <f:content>				
+            <VBox fitContainer="true">    
+            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">                                         
+                <Table id="tblFlockReport" width="250%" sticky="ColumnHeaders" items="{
+                        path: 'tblModel>/modelData',
+                            sorter: {
+                                    path: 'batchname',
+                                    group : true
+                                }
+                        }"
+                    mode="None" backgroundDesign="Solid">
+                   
+                    <columns>
+                        <Column><Text text ="Date" /></Column>
+                         <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Age In Week" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Shed Name" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Male Opening Balance" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Female Opening Balance" /></Column>    
+			            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Male TransferIn Quantity" /></Column>  
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Male Transfer Quantity" /></Column>
+			            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Female TransferIn Quantity" /></Column>      
+                  	    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Female Transfer Quantity" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Male Culls" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Female Culls" /></Column>
+                        <Column minScreenWidth="Tablet"  demandPopin="true"><Text text ="Cummulative Male/Female Culls" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Male Mortality" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Female Mortality" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Cummulative Male/Female Mortality" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Male Closing Balance" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Female Closing Balance" /></Column>
+                        
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                        <customData>
+                        </customData>
+                            <cells>
+                                <Text text="{tblModel>date}" />
+                                 <Text text="{tblModel>weekno}" />
+                                <Text text="{tblModel>shedname}" />
+                                <Text text="{= ${tblModel>maleopeningbalance} > 0 ? ${tblModel>maleopeningbalance} : '0'}" />
+                                <Text text="{= ${tblModel>femaleopeningbalance} > 0 ? ${tblModel>femaleopeningbalance} : '0'}" />
+			                	<Text text="{= ${tblModel>maletransferedinquantity} > 0 ? ${tblModel>maletransferedinquantity} : '0'}" />    
+                                <Text text="{= ${tblModel>maletransferedquantity} > 0 ? ${tblModel>maletransferedquantity} : '0'}" />
+				                <Text text="{= ${tblModel>femaletransferedinquantity} > 0 ? ${tblModel>femaletransferedinquantity} : '0'}" />
+				                <Text text="{= ${tblModel>femaletransferedquantity} > 0 ? ${tblModel>femaletransferedquantity} : '0'}" />        
+                                                        <Text text="{= ${tblModel>maleculls} > 0 ? ${tblModel>maleculls} : '0'}" />
+                                <Text text="{= ${tblModel>femaleculls} > 0 ? ${tblModel>femaleculls} : '0'}" />
+                                <Text placeholder="{= ${tblModel>cummalefemaleculls} > 0 ? ${tblModel>cummalefemaleculls} : '0'}" text="{= ${tblModel>cummalefemaleculls} > 0 ? ${tblModel>cummalefemaleculls} : '0'}" />
+                                <Text text="{= ${tblModel>malemortality} > 0 ? ${tblModel>malemortality} : '0'}" />
+                                <Text text="{= ${tblModel>femalemortality} > 0 ? ${tblModel>femalemortality} : '0'}" />
+                                <Text placeholder="{= ${tblModel>cummalefemalemortality} > 0 ? ${tblModel>cummalefemalemortality} : '0'}" text="{= ${tblModel>cummalefemalemortality} > 0 ? ${tblModel>cummalefemalemortality} : '0'}" />
+                                <Text text="{= ${tblModel>maleclosingbalance} > 0 ? ${tblModel>maleclosingbalance} : '0'}" />
+                                <Text text="{= ${tblModel>femaleclosingbalance} > 0 ? ${tblModel>femaleclosingbalance} : '0'}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>   
+                </ScrollContainer>                          
+            </VBox>             
+        </f:content>             
+    </f:DynamicPage>    
+</core:View>
+
+
+
+
+ 

@@ -1,0 +1,56 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="{i18n>SetterDialogSelectSetter}"	
+		contentHeight="300px"
+		search="handleSetterSearch"
+		confirm="onSetterDialogClose"
+		cancel="onSetterDialogClose"
+		items="{
+			path : 'setterListModel>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text title="" text="{setterListModel>settername}" />
+                <Text text="{setterListModel>locationname}" />
+                <Text text="{setterListModel>warehousename}" />
+                <Text text="{setterListModel>capacity}" />
+                <!-- <CheckBox selected="{setterListModel>active}" enabled="false" /> -->
+				<Switch valueLiveUpdate="true" state="{setterListModel>active}" enabled="false">
+                    <layoutData>
+                        <FlexItemData growFactor="1" />
+                    </layoutData>
+                </Switch>
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="{i18n>SetterDialogSetterName}" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>SetterDialogLocation}" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>SetterDialogWarehouse}" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>SetterDialogCapacity}" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>SetterDialogActive}" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,29 @@
+{
+	"broodingparameters": [
+		{
+			"code" : 1,
+			"broodingParameter": "Parameter1",
+			"isMandatory" : true
+		},
+		{
+			"code" : 2,
+			"broodingParameter": "Parameter2",
+			"isMandatory" : true		
+		},
+		{
+			"code" : 3,
+			"broodingParameter": "Parameter3",
+			"isMandatory" : true			
+		},
+		{
+			"code" : 4,
+			"broodingParameter": "Parameter4",
+			"isMandatory" : false			
+		},
+		{
+			"code" : 5,
+			"broodingParameter": "Parameter5",
+			"isMandatory" : false			
+		}			
+	]
+}

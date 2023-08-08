@@ -1,0 +1,170 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Accounts.SLTrialBalance" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Subledger Trial Balance"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                     labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                            <form:FormElement label="Branch">
+                                                <form:fields>
+                                                    <Input
+                                                        type="Text"
+                                                        placeholder="Select Branch"
+                                                        showSuggestion="true"
+                                                        showValueHelp="true"    
+                                                        valueHelpOnly="true"
+                                                        value="{sltbModel>/branchname}"
+                                                        valueHelpRequest="handleSelectBranchList">
+                                                    </Input>
+                                                    <Input value="{sltbModel>/branchcode}" enabled="false"></Input>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Party Role">
+                                                <form:fields>
+                                                    <Select id="partyrole" valueLiveUpdate="true" 
+                                                            selectedKey="{sltbModel>/partyroleid}" 
+                                                            enabled="true"
+                                                            items="{
+                                                                path: 'PartyRole>/modelData',
+                                                                sorter: { path: 'id' }
+                                                            }">
+                                                        <core:Item key="{PartyRole>id}" text="{PartyRole>refname}" />       
+                                                    </Select>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                            <form:FormElement label="From Date">
+                                                <form:fields>
+                                                    <DatePicker id="txtFromDate" required="true" 
+                                                    value="{sltbModel>/fromdate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="onDateChange"
+                                                    />
+                                                </form:fields>
+                                            </form:FormElement>   
+                                            <form:FormElement label="To Date">
+                                                <form:fields>
+                                                    <DatePicker id="txtToDate" required="true" 
+                                                    value="{sltbModel>/todate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="onDateChange"
+                                                    />
+                                                </form:fields>
+                                            </form:FormElement>   
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="bindTbl"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport" />
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="onPdfExport" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>	
+            <VBox fitContainer="true">
+                           
+                <Table id="tblgltb" items="{
+                    path: 'tblSltbModel>/modelData',
+                        sorter: {
+                            path: 'ledger',
+                            group : true
+                        }
+                    }"
+                    sticky="ColumnHeaders" growing="true"
+                    growingThreshold="100"
+                    growingScrollToLoad="true" backgroundDesign="Solid">
+                    <columns>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Party Name" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Opening Debit" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Opening Credit" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Debit Amount" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Credit Amount" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Closing Debit" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Closing Credit" /></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                        
+                            <cells>
+                                <Text text="{tblSltbModel>partyname}" />
+                                <Text text="{tblSltbModel>openingdramount}" />
+                                <Text text="{tblSltbModel>openingcramount}" />
+                                <Text text="{tblSltbModel>dramount}" />
+                                <Text text="{tblSltbModel>cramount}" />
+                                <Text text="{tblSltbModel>closingdramount}" /> 
+                                <Text text="{tblSltbModel>closingcramount}" />                                       
+                            </cells>
+                            <customData>
+                                <core:CustomData key="settingReportgroup" value="{tblBankBookModel>partyname}" writeToDom="true"></core:CustomData>
+                            </customData>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>     
+        </f:content>
+    </f:DynamicPage>
+</core:View>
+
+
+
+
+ 

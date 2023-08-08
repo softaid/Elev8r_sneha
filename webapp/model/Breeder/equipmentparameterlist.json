@@ -1,0 +1,53 @@
+{
+	"equipmentparameterlist": [
+        {
+            "no" : 1,
+            "particular" : "T1",
+            "status" : true,
+            "remarks" : ""
+        },
+        {
+            "no" : 2,
+            "particular" : "T2",
+            "status" : true,
+            "remarks" : ""
+        },
+        {
+            "no" : 3,
+            "particular" : "T3",
+            "status" : true,
+            "remarks" : ""
+        },
+        {
+            "no" : 4,
+            "particular" : "Baby Feede",
+            "status" : true,
+            "remarks" : ""
+        },
+        {
+            "no" : 5,
+            "particular" : "Chicks Guard",
+            "status" : true,
+            "remarks" : ""
+        },
+        {
+            "no" : 6,
+            "particular" : "Chicks Tray",
+            "status" : true,
+            "remarks" : ""
+        },
+        {
+            "no" : 7,
+            "particular" : "Chicks Feeder",
+            "status" : true,
+            "remarks" : ""
+        },
+        {
+            "no" : 8,
+            "particular" : "Chicks Drinker",
+            "status" : true,
+            "remarks" : ""
+        }
+       
+    ]
+}

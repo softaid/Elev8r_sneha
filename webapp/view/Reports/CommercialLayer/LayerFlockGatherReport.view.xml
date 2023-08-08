@@ -1,0 +1,334 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CommercialLayer.LayerFlockGatherReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>layerFlockGatherReportHeader}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+
+                                        
+                                        <form:FormElement label="{i18n>layerFlockGatherReportLabelLocation}">
+                                            <form:fields>
+                                                <MultiComboBox id="locationtbl"
+                                                    selectionChange="handleSelectionChange"
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'locationList>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{locationList>id}" text="{locationList>locationname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                            <form:FormElement label="{i18n>layerFlockGatherReportLabelBatchName}">
+                                            <form:fields>
+                                            <Input
+                                                type="Text"
+                                                id = "textBatch"
+                                                placeholder="{i18n>layerFlockGatherReportLabelSelectBatch}"
+                                                showSuggestion="true"
+                                                showValueHelp="true"    
+                                                valueHelpOnly="true"
+                                                value="{floackModel>/batchname}"
+                                                valueHelpRequest="handleBrdBatchValueHelp">
+                                            </Input>
+                                         
+                                            </form:fields>
+                                         </form:FormElement>
+                                          </form:formElements>
+                                     </form:FormContainer>
+                                 <form:FormContainer title="">
+                                        <form:formElements>
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>          
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+
+                        <Panel width="auto" class="" accessibleRole="Region">
+		<content>
+          <VBox fitContainer="true">
+            <ScrollContainer
+            height="20%"
+            horizontal="true"
+            vertical="true"
+            focusable="false">
+          <Table id="tblchicks" width="100%"  sticky="ColumnHeaders" growing="true"   growingScrollToLoad="true" items="{
+                            path: 'chicksDetail>/modelData'
+                               
+                }">
+            <infoToolbar>
+			<OverflowToolbar>
+				<Label text="Chicks Detail"/>
+			</OverflowToolbar>
+		    </infoToolbar>
+             <columns>		
+                        <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="Grpo No" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Supplier Name" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Hatch Date" /></Column>    
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Purchase Date" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Placement Date" /></Column>    
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Name" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Quantity" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Place Quantity" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Rate" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Amount" /></Column>
+                    </columns>
+                    <items>   
+                        <ColumnListItem>
+                        <customData>
+                         <core:CustomData key="deviationReportgroup" value="{tblModel>itemname}" writeToDom="true"></core:CustomData>
+                        </customData>
+                            <cells>
+                                <Text text="{chicksDetail>grpono}" />
+                                <Text text="{chicksDetail>suppliername}" />
+                                <Text text="{chicksDetail>purchasedate}" />
+                                <Text text="{chicksDetail>purchasedate}" />
+                                <Text text="{chicksDetail>placementdate}" />
+                                <Text text="{chicksDetail>itemname}" />
+                                <Text text="{chicksDetail>quantity}" />
+                                <Text text="{chicksDetail>placeqty}" />
+                                <Text text="{chicksDetail>unitprice}" />
+                                <Text text="{chicksDetail>amount}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>                          
+            </ScrollContainer> 
+             <ScrollContainer
+            height="20%"
+            horizontal="true"
+            vertical="true"
+            focusable="false">
+            <Table id="tblFeedDetail" width="100%"  sticky="ColumnHeaders"  backgroundDesign="Solid" growing="true" growingScrollToLoad="true"
+                    items="{
+                    path: 'feedDetail>/modelData',
+                    sorter: {
+                        path: 'id'
+                    }
+                }"  >
+	        <infoToolbar>
+			<OverflowToolbar>
+				<Label text="Feed Detail"/>
+			</OverflowToolbar>
+		    </infoToolbar>
+            <columns>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Purchase Date" /></Column>  
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Supplier Name" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Invoice No" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Name" /></Column> 
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Total Quantity" /></Column>  
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Rate" /></Column> 
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Amount" /></Column> 
+            </columns>
+                    <items>
+                        <ColumnListItem >
+                            <cells>
+                                <Text text="{feedDetail>invoicedate}" />
+                                <Text text="{feedDetail>partyname}" />
+                                <Text text="{feedDetail>purchaseinvoiceno}" />
+                                <Text text="{feedDetail>itemname}" />
+                                <Text text="{feedDetail>quantity}" />
+                                <Text text="{feedDetail>unitprice}" />
+                                <Text text="{feedDetail>amount}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+                 </ScrollContainer> 
+                   <ScrollContainer
+                    height="20%"
+                     horizontal="true"
+                     vertical="true"
+                     focusable="false">
+                 <Table id="tblMedVacDetail" width="100%"  sticky="ColumnHeaders"  backgroundDesign="Solid" growing="true" growingScrollToLoad="true"
+                    items="{
+                    path: 'medicineDetail>/modelData',
+                    sorter: {
+                        path: 'id'
+                    }
+                }"  >
+	       <infoToolbar>
+			<OverflowToolbar>
+				<Label text="Medicine/Vaccine/Vitamin Detail"/>
+			</OverflowToolbar>
+		    </infoToolbar>
+            <columns>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Purchase Date" /></Column>  
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Supplier Name" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Invoice No" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Name" /></Column> 
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Total Quantity" /></Column>  
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Rate" /></Column> 
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Amount" /></Column> 
+            </columns>
+                    <items>
+                        <ColumnListItem >
+                            <cells>
+                                <Text text="{medicineDetail>invoicedate}" />
+                                <Text text="{medicineDetail>partyname}" />
+                                <Text text="{medicineDetail>purchaseinvoiceno}" />
+                                <Text text="{medicineDetail>itemname}" />
+                                <Text text="{medicineDetail>quantity}" />
+                                <Text text="{medicineDetail>unitprice}" />
+                                <Text text="{medicineDetail>amount}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+                 </ScrollContainer> 
+                 
+                  <ScrollContainer
+                    height="20%"
+                     horizontal="true"
+                     vertical="true"
+                     focusable="false">
+                 <Table id="tblitemDetail" width="100%"  sticky="ColumnHeaders"  backgroundDesign="Solid" growing="true" growingScrollToLoad="true"
+                    items="{
+                    path: 'itemDetail>/modelData',
+                    sorter: {
+                        path: 'id'
+                    }
+                }"  >
+	       <infoToolbar>
+			<OverflowToolbar>
+				<Label text="Item Details"/>
+			</OverflowToolbar>
+		    </infoToolbar>
+            <columns>
+                <Column minScreenWidth="Tablet" ><Text text ="Item Name" /></Column>  
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Transfer In Quantity" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Rate" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Amount" /></Column> 
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Transfer out Quantity" /></Column>  
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Rate" /></Column> 
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Amount" /></Column> 
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Consumed Quantity" /></Column> 
+            </columns>
+                    <items>
+                        <ColumnListItem >
+                            <cells>
+                                <Text text="{itemDetail>itemname}" />
+                                <Text text="{itemDetail>inquantity}" />
+                                <Text text="{itemDetail>inunitcost}" />
+                                <Text text="{itemDetail>inamount}" />
+                                <Text text="{itemDetail>outquantity}" />
+                                <Text text="{itemDetail>outunitcost}" />
+                                <Text text="{itemDetail>outamount}" />
+                                <Text text="{itemDetail>consumedqty}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+                 </ScrollContainer> 
+
+                 <ScrollContainer
+                    height="20%"
+                     horizontal="true"
+                     vertical="true"
+                     focusable="false">
+                 <Table id="tblSalDetail" width="100%"  sticky="ColumnHeaders"  backgroundDesign="Solid" growing="true" growingScrollToLoad="true"
+                    items="{
+                    path: 'saleDetail>/modelData',
+                    sorter: {
+                        path: 'id'
+                    }
+                }"  >
+	       <infoToolbar>
+			<OverflowToolbar>
+				<Label text="Bird Sale Details"/>
+			</OverflowToolbar>
+		    </infoToolbar>
+            <columns>
+                <Column minScreenWidth="Tablet" ><Text text ="Sale Date" /></Column>  
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Customer Name" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Name" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Weaight" /></Column> 
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Rate" /></Column> 
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Amount" /></Column> 
+               
+            </columns>
+                    <items>
+                        <ColumnListItem >
+                            <cells>
+                                <Text text="{saleDetail>invoicedate}" />
+                                <Text text="{saleDetail>partyname}" />
+                                <Text text="{saleDetail>itemname}" />
+                                <Text text="{saleDetail>weight}" />
+                                <Text text="{saleDetail>unitprice}" />
+                                <Text text="{saleDetail>amount}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+                 </ScrollContainer> 
+
+
+                </VBox>
+                </content>
+	            </Panel> 
+                        
+                    </f:content>
+                    
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

@@ -1,0 +1,95 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.CompanySettings.ImportMasters" height="100%" 
+    xmlns="sap.m" 
+    xmlns:f="sap.f" 
+    xmlns:core="sap.ui.core" 
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:u="sap.ui.unified">
+
+    <f:FlexibleColumnLayout id="fclImportMasters" backgroundDesign="Solid">
+        <f:beginColumnPages>
+
+            <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+                <f:title>
+                    <f:DynamicPageTitle>
+                        <f:heading>
+                            <Title text="Import Master Data"/>
+                        </f:heading>
+                    </f:DynamicPageTitle>
+                </f:title>
+
+                <f:header>
+                    <f:DynamicPageHeader pinnable="true">
+                        <VBox class="sapUiSmallMargin">
+                            <Label wrapping="true" text="Instructions :" class='label-header'></Label>
+                            <Label wrapping="true" text="Select the Master for which you want to download template and upload filledup data. [Download Master Template] button is used to download empty template for selected master. Please check all neccessary instructions described in ForYourReference tab before filling up data in template. Other tabs are used to fillup data according to tab name suggests. [Select File to Import Data] button is used to select filled up data for selected Master. After validating all the data in tabs press [Import Master Data into DATABASE] button to truncate and insert current data into database." showIcon="true" enableFormattedText="true" showCloseButton="false">
+                            </Label>
+                        </VBox>
+                    </f:DynamicPageHeader>
+                </f:header>
+
+                <f:content>
+                    <VBox class="sapUiSmallMargin">
+                        <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="Select Master">
+                                            <Select id="selImportMasters" selectedKey="{importMastersModel>/code}" items="{
+                                                    path: 'importMastersModel>/masters',
+                                                    sorter: { path: 'code' }
+                                                }" required="true">
+                                                <core:Item key="{importMastersModel>code}" text="{importMastersModel>name}" />
+                                            </Select>
+                                            <Button icon="sap-icon://download" text="Download Master Template" press="onDownloadTemplate"/>
+                                            <Button id="btnImportFile" type="Accept" icon="sap-icon://heatmap-chart" text="Select Data Template to Import" press="onImportFile"/>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer title="" id="cntrUploadExcel">
+                                    <form:formElements>
+                                        <form:FormElement label="">
+                                            <form:fields>
+                                                <u:FileUploader id="fUploadExcel" 
+                                                    name="fUploadExcel" 
+                                                    class="sapUiSmallMarginEnd" 
+                                                    uploadUrl="upload/" 
+                                                    width="400px" 
+                                                    tooltip="Upload your selected master data file" 
+                                                    uploadComplete="handleUploadComplete" 
+                                                    change="handleExcelUpload" 
+                                                    placeholder="Please Select File" 
+                                                    fileType="xlsx,xls"
+                                                    />
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+
+                        <VBox id="pnlErrMessage" visible="false" class="sapMMsgStrip sapMMsgStripError sapUiSmallMarginBottom" width="auto">
+                        </VBox>
+
+                        <HBox width="auto" alignItems="End" justifyContent="End">
+                            <Button id="btnUploadData" type="Accept" icon="sap-icon://upload" visible="false" text="Import Master Data into DATABASE" press="onUploadMasterData" hAlign="End" />
+                        </HBox>
+
+                        <TabContainer id="pnlDataTabs" visible="false" showAddNewButton="false" class="pnlDataTabs sapUiResponsiveContentPadding">
+                            <items></items>
+                        </TabContainer>
+
+                        <HBox width="auto"></HBox>
+                        <HBox id="pnlMasterData" width="auto"></HBox>
+                    </VBox>
+
+                </f:content>
+
+            </f:DynamicPage>
+        </f:beginColumnPages>
+    </f:FlexibleColumnLayout>
+</core:View>

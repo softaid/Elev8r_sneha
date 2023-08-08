@@ -1,0 +1,25 @@
+{
+	"shedsForMale": [
+		{
+			"shedNo" : 1,
+			"shedName": "Shed 2",
+			"pen": 1,
+            "quantity": 100,
+            "type": "M"
+		},
+		{
+			"shedNo" : 2,
+			"shedName": "Shed 2",
+			"pen": 2,
+            "quantity": 100,
+            "type": "M"
+		},
+		{
+			"shedNo" : 3,
+			"shedName": "Shed 3",
+			"pen": 1,
+            "quantity": 120,
+            "type": "M"
+        }
+	]
+}

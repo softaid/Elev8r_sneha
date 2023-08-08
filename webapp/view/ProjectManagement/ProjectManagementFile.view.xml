@@ -1,0 +1,1145 @@
+<!-- <core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementFile" height="100%"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table"
+    xmlns:u="sap.ui.unified">
+    
+        
+    <f:FlexibleColumnLayout  id="fclProjecttracking" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle enableScrolling="true">
+				        <f:heading>
+					       <Title text="Project Managament"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+                        <VBox fitContainer="true">
+                        
+                            <ScrollContainer
+                                height="auto"
+                                width="auto"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                              
+                                <table:Table ariaLabelledBy="title" fixedColumnCount="4" rowHeight="40px" growing="true" growingScrollToLoad="true"
+                                    rows="{ path: 'quotationModel>/modelData' }" selectionMode="None"
+                                    visibleRowCount="{rowcount_model>/rowsCount}" visibleRowCountMode="Fixed">
+                                    <table:columns>
+                                        <table:Column width="2%">
+                                            <Label text=" " />
+                                            <table:template>
+                                            <VBOX>
+                                            <Text text="Order No:  {quotationModel>Sequence_no}" wrapping="true" />
+                                            <Text text="Order Name: {quotationModel>Sequence_no}" wrapping="true" />
+                                            <Text text="Model: {quotationModel>Sequence_no}" wrapping="true" />
+                                            </VBOX>
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                          <Label text="NI ENG - SALES ENG" />
+                                            <table:template>
+                                            <VBOX>
+                                            <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotename}" />
+                                            <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotename}" />
+                                            </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+
+                                        <table:Column hAlign="End" width="6%">
+                                            <Label text="% Complete"/>
+                                            <table:template>
+                                             <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotevalue}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>quotevalue}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="Plan Days - COMP DAYS" />
+                                            <table:template>
+                                                <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="ORDER DATE - PLAN COMP DATE - ACTUAL COMP DATE" />
+                                            <table:template>
+                                                <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="FINANCE - Advance Credited" />
+                                            <table:template>
+                                            <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="Site Checked" />
+                                            <table:template>
+                                                 <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="GAD Request" />
+                                            <table:template>
+                                                 <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+
+                                          <table:Column hAlign="End" width="10%">
+                                            <Label text="GAD Request1" />
+                                            <table:template>
+                                                 <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+
+                                          <table:Column hAlign="End" width="10%">
+                                            <Label text="GAD Request2" />
+                                            <table:template>
+                                                 <VBOX>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{quotationModel>leadname}" />    
+                                             </VBOX>        
+                                            </table:template>
+                                        </table:Column>
+                                    </table:columns>
+                                </table:Table>
+                               
+                                 </ScrollContainer>
+
+                        </VBox> 
+                    </f:content>				
+			    </f:DynamicPage>
+		    </f:beginColumnPages>
+	    </f:FlexibleColumnLayout>
+</core:View> -->
+
+
+
+<mvc:View
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementFile"
+	xmlns:table="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns:c="sap.ui.core"
+	xmlns="sap.m"
+    height="100%">
+	<Page
+		showHeader="false"
+		enableScrolling="false"
+		class="sapUiContentPadding">
+        <!-- <Panel id ="pnlPrjMgnttable" width="auto">
+            <headerToolbar>
+                <Toolbar height="3rem">
+                    <Title text="Project Management"/>
+                    <ToolbarSpacer />
+                     <MenuButton text="Download Data" width="100%"  align="right">
+                        <menu>
+                            <Menu itemSelected="onMenuAction" >
+                                <items>
+                                    <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport" />
+                                    <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF" />
+                                </items>
+                            </Menu>
+                        </menu>
+                    </MenuButton>
+                </Toolbar>
+            </headerToolbar>
+            <content>
+            </content>
+        </Panel> -->
+        
+		 <content>
+			<table:Table
+                id= "MyTableId"
+				rows="{ path: 'quotationModel>/modelData' }"
+                enableSelectAll="false"
+                selectionMode="MultiToggle"
+				visibleRowCount="{rowcount_model>/rowsCount}"
+				ariaLabelledBy="title">
+				<table:extension>
+					<OverflowToolbar style="Clear">
+						<Title id="title" text="Projects"/>
+					</OverflowToolbar>
+				</table:extension>
+				<table:columns>
+					<table:Column width="11rem">
+						<VBOX>
+                            <Label text="NO OF JOBS" />
+                            <Label text="3" />
+                        </VBOX>  
+						<table:template>
+							<VBOX>
+                                <Text text="Order No:  OR0001" wrapping="true" />
+                                <Text text="Order Name: Order of Lift" wrapping="true" />
+                                <Text text="Model: MR" wrapping="true" />
+                            </VBOX>
+						</table:template>
+					</table:Column>
+					<table:Column width="11rem">
+                        <VBOX>
+                            <Label text="NI ENG" />
+                            <Label text="SALES ENG" />
+                        </VBOX>  
+						<table:template>
+							<VBOX>
+                                <Input class="customInputHeight"
+                                        editable="false" 
+                                        value="Rahul Kadam" />
+                                <Input class="customInputHeight"
+                                        editable="false" 
+                                        value="{quotationModel>quotename}" />
+                            </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="6rem" hAlign="End">
+                        <VBOX>
+                            <Label text="%" />
+                            <Label text="Complete" />
+                            <Label text="100%" />
+                        </VBOX>  
+						<table:template>
+							<VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="15%" />
+                            </VBOX>  
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+                        <VBOX>
+                            <Label text="Plan Days"/>
+                            <Label text="COMP DAYS"/>
+                        </VBOX>
+						<table:template>
+						    <VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="60" />
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="50" />    
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="10" />    
+                            </VBOX>  
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+                        <VBOX>
+                            <Label text="ORDER DATE"/>
+                            <Label text="PLAN COMP DATE"/>
+                            <Label text="ACTUAL COMP DATE"/>
+                        </VBOX>    
+						<table:template>
+							<VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />    
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                            </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+                        <VBOX>
+                            <Label text="FINANCE"/>
+                            <Label text="Advance Credited"/>
+                            <Label text="Activity : 5%"/>
+                            <Label text="No Of Jobs : 1"/>
+                        </VBOX>    
+						<table:template>
+							<VBOX>
+                               <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                                <CheckBox selected="{
+                                    path: 'Heavy',
+                                    type: 'sap.ui.model.type.String',
+                                    align: 'Center'
+                                    }"/> 
+                            </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+                        <VBOX>
+                            <Label text="SALES"/>
+                            <Label text="File Handed Over to CCD"/>
+                            <Label text="Activity : 1%"/>
+                            <Label text="No Of Jobs : 1"/>
+                        </VBOX>    
+						<table:template>
+							<VBOX>
+                               <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                                <CheckBox selected="{
+                                    path: 'Heavy',
+                                    type: 'sap.ui.model.type.String',
+                                    align: 'Center'
+                                    }"/> 
+                            </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="7rem">
+                        <VBOX>
+                            <Label text="CCD"/>
+                            <Label text="Check Siteed"/>
+                            <Label text="Activity : 1%"/>
+                            <Label text="No Of Jobs : 0"/>
+                        </VBOX>    
+						<table:template>
+						    <VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                                <CheckBox selected="{
+                                    path: 'Heavy',
+                                    type: 'sap.ui.model.type.String',
+                                    align: 'Center'
+                                    }"/> 
+                            </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                            <Label text="CCD"/>
+                            <Label text="GAD Request"/>
+                            <Label text="Activity : 1%"/>
+                            <Label text="No Of Jobs : 0"/>
+                        </VBOX>    
+						<table:template>
+                            <VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                                <CheckBox selected="{
+                                    path: 'Heavy',
+                                    type: 'sap.ui.model.type.String',
+                                    align: 'Center'
+                                    }"/> 
+                            </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                            <Label text="DESIGN"/>
+                            <Label text="GAD Ready"/>
+                            <Label text="Activity : 1%"/>
+                            <Label text="No Of Jobs : 0"/>
+                        </VBOX>    
+						<table:template>
+                            <VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                                <CheckBox selected="{
+                                    path: 'Heavy',
+                                    type: 'sap.ui.model.type.String',
+                                    align: 'Center'
+                                    }"/> 
+                            </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                            <Label text="SALES"/>
+                            <Label text="JSV Done"/>
+                            <Label text="Activity : 1%"/>
+                            <Label text="No Of Jobs : 0"/>
+                        </VBOX>    
+						<table:template>
+                            <VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                                <CheckBox selected="{
+                                    path: 'Heavy',
+                                    type: 'sap.ui.model.type.String',
+                                    align: 'Center'
+                                    }"/> 
+                            </VBOX>     
+						</table:template>
+					</table:Column>
+				    <table:Column width="12rem">
+						<VBOX>
+                            <Label text="SALES"/>
+                            <Label text="GAD Approved"/>
+                            <Label text="Activity : 1%"/>
+                            <Label text="No Of Jobs : 0"/>
+                        </VBOX>    
+						<table:template>
+                            <VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                                <CheckBox selected="{
+                                    path: 'Heavy',
+                                    type: 'sap.ui.model.type.String',
+                                    align: 'Center'
+                                    }"/> 
+                            </VBOX>     
+						</table:template>
+					</table:Column>
+                    <table:Column width="12rem">
+						<VBOX>
+                            <Label text="CCD"/>
+                            <Label text="SHipment Schduled"/>
+                            <Label text="Activity : 1%"/>
+                            <Label text="No Of Jobs : 0"/>
+                        </VBOX>    
+						<table:template>
+                            <VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                                <CheckBox selected="{
+                                    path: 'Heavy',
+                                    type: 'sap.ui.model.type.String',
+                                    align: 'Center'
+                                    }"/> 
+                            </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                            <Label text="CCD"/>
+                            <Label text="Approved GAD TO Design"/>
+                            <Label text="Activity : 1%"/>
+                            <Label text="No Of Jobs : 0"/>
+                        </VBOX>    
+						<table:template>
+                            <VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                                <CheckBox selected="{
+                                    path: 'Heavy',
+                                    type: 'sap.ui.model.type.String',
+                                    align: 'Center'
+                                    }"/> 
+                            </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                            <Label text="DESIGN"/>
+                            <Label text="Enter in Focus"/>
+                            <Label text="Activity : 1%"/>
+                            <Label text="No Of Jobs : 0"/>
+                        </VBOX>    
+						<table:template>
+                            <VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                                <CheckBox selected="{
+                                    path: 'Heavy',
+                                    type: 'sap.ui.model.type.String',
+                                    align: 'Center'
+                                    }"/> 
+                            </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                            <Label text="DESIGN"/>
+                            <Label text="BOQ Ready"/>
+                            <Label text="Activity : 1%"/>
+                            <Label text="No Of Jobs : 0"/>
+                        </VBOX>    
+						<table:template>
+                            <VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                                <CheckBox selected="{
+                                    path: 'Heavy',
+                                    type: 'sap.ui.model.type.String',
+                                    align: 'Center'
+                                    }"/> 
+                            </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+                        <VBOX>
+                            <Label text="DESIGN"/>
+                            <Label text="Production Drawing Ready"/>
+                            <Label text="Activity : 5%"/>
+                            <Label text="No Of Jobs : 1"/>
+                        </VBOX>    
+						<table:template>
+							<VBOX>
+                               <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                                <CheckBox selected="{
+                                    path: 'Heavy',
+                                    type: 'sap.ui.model.type.String',
+                                    align: 'Center'
+                                    }"/> 
+                            </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+                        <VBOX>
+                            <Label text="FACTORY"/>
+                            <Label text="PRODUCTION STAGE 1"/>
+                            <Label text="Activity : 1%"/>
+                            <Label text="No Of Jobs : 1"/>
+                        </VBOX>    
+						<table:template>
+							<VBOX>
+                               <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                                <CheckBox selected="{
+                                    path: 'Heavy',
+                                    type: 'sap.ui.model.type.String',
+                                    align: 'Center'
+                                    }"/> 
+                            </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="7rem">
+                        <VBOX>
+                            <Label text="FACTORY"/>
+                            <Label text="PROD QC STAGE 1"/>
+                            <Label text="Activity : 1%"/>
+                            <Label text="No Of Jobs : 0"/>
+                        </VBOX>    
+						<table:template>
+                            <VBOX>
+                                <Input class="customInputHeight"
+                                        editable="false" 
+                                        value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                                <CheckBox selected="{
+                                    path: 'Heavy',
+                                    type: 'sap.ui.model.type.String',
+                                    align: 'Center'
+                                    }"/> 
+                            </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                            <Label text="CCD"/>
+                            <Label text="GAD Request"/>
+                            <Label text="Activity : 1%"/>
+                            <Label text="No Of Jobs : 0"/>
+                        </VBOX>    
+						<table:template>
+                            <VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="26/05/2023" />      
+                                <CheckBox selected="{
+                                    path: 'Heavy',
+                                    type: 'sap.ui.model.type.String',
+                                    align: 'Center'
+                                    }"/> 
+                            </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                            <Label text="FINANCE"/>
+                            <Label text="PAYMENT STAGE 1"/>
+                            <Label text="Activity : 1%"/>
+                            <Label text="No Of Jobs : 0"/>
+                        </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="DELIVERY STAGE 1"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+				<table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="INSTALLATION STAGE 1"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+
+                    <table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="INSTALLATION QC STAGE 1"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+                        </table:Column>
+
+                         <table:Column width="12rem">
+						<VBOX>
+                        <Label text="FINANCE"/>
+                        <Label text="PAYMENT STAGE 2"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+                        </table:Column>
+
+                    <table:Column width="12rem">
+						<VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="PRODUCTION STAGE 2"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column> 
+
+
+                    <table:Column width="12rem">
+						<VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="PRODUCTION QC STAGE 2"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="DELIVERY STAGE 2"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="INSTALLATION STAGE 2"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="INSTALLATION STAGE 2"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="INSTALLATION QC STAGE 3"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="PRODUCTION STAGE 3"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="PRODUCTION QC STAGE 3"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="FACTORY"/>
+                        <Label text="DELIVERY STAGE 3"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="INSTALLATION STAGE 3"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="FINAL INSTALLATION QC"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column> 
+
+
+
+                      <table:Column width="12rem">
+						<VBOX>
+                        <Label text="EI"/>
+                        <Label text="INSPECTION BY EI"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                      <table:Column width="12rem">
+						<VBOX>
+                        <Label text="SALES"/>
+                        <Label text="FINAL PAYMENT"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                      <table:Column width="12rem">
+						<VBOX>
+                        <Label text="NI"/>
+                        <Label text="Handed Over to Customer"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                      <table:Column width="12rem">
+						<VBOX>
+                        <Label text="EI"/>
+                        <Label text="Job Added in Warantty"/>
+                        <Label text="Activity : 1%"/>
+                        <Label text="No Of Jobs : 0"/>
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="26/05/2023" />      
+                            <CheckBox selected="{
+                                path: 'Heavy',
+                                type: 'sap.ui.model.type.String',
+                                align: 'Center'
+                                }"/> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+				</table:columns>
+			</table:Table>
+		</content>
+
+        <Panel id ="pnlPrjMgnttable" width="auto">
+            <headerToolbar>
+                <Toolbar height="3rem">
+                    <Title text="Project Management"/>
+                    <ToolbarSpacer />
+                     <MenuButton text="Download Data" width="100%"  align="right">
+                        <menu>
+                            <Menu itemSelected="onMenuAction" >
+                                <items>
+                                    <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport" />
+                                    <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF" />
+                                </items>
+                            </Menu>
+                        </menu>
+                    </MenuButton>
+                </Toolbar>
+            </headerToolbar>
+            <content>
+            </content>
+        </Panel>
+	</Page>
+</mvc:View>

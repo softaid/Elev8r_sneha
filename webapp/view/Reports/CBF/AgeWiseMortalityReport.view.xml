@@ -1,0 +1,241 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CBF.AgeWiseMortalityReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Age Wise Mortality Report"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+
+                                           <form:FormElement label="{i18n>stockoflivebirdlabelcurdate}">
+                                            <form:fields>
+                                                <DatePicker id="curdate"  width="100%" value="{reportModel>/curdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate" />   
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                         <form:FormElement label="{i18n>agewisemortalityreportbranchnamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="branchList"
+                                                    selectionChange="branchSelectionChange"
+                                                    selectionFinish="branchSelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'branchModel>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{branchModel>id}" text="{branchModel>branchname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                         <form:FormElement label="{i18n>agewisemortalityreportlinenamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="lineList"
+                                                   selectionChange="branchSelectionChange"
+                                                  selectionFinish = "lineSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'lineModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{lineModel>id}" text="{lineModel>linename}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                         </form:formElements>
+                                         </form:FormContainer>
+
+                                        
+
+                                         <form:FormContainer>
+                                          <form:formElements>
+
+                                          <form:FormElement label="{i18n>agewisemortalityreportfarmernamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="farmerList"
+                                                   selectionChange="branchSelectionChange"
+                                                  selectionFinish = "farmerSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'farmerModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{farmerModel>id}" text="{farmerModel>farmer_name}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                         <form:FormElement label="{i18n>agewisemortalityreportfarmnamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="farmList"
+                                                   selectionChange="branchSelectionChange"
+                                                  selectionFinish = "farmSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'farmModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{farmModel>id}" text="{farmModel>farm_name}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                           <form:FormElement label="{i18n>agewisemortalityreportbatchnolabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="batchno"
+                                                   selectionChange="batchSelectionChange"
+                                                   selectionFinish = "" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'batchModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{batchModel>batch_id}" text="{batchModel>batch_number}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                         <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="getAgewiseMortalityReport"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+				                    	</form:formElements>
+                                        </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel" width="200%"  growing="true" sticky="ColumnHeaders"   growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'placement_date',
+							                            group: true
+                                                    }
+                                                }"
+                                                 backgroundDesign="Solid">
+                               
+                                <columns>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>agewisemortalityreportchilddatelabel}" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>agewisemortalityreporttblfarmernamelabel}" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>agewisemortalityreporttblfarmnamelabel}" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreporttblbatchnolabel}" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreporttbllinenamelabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreporttblplaceqtylabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreportfirstwmortalotylabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreportfirstwmortalotyperlabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreportsecondwmortalotylabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreportsecondwmortalotyperlabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreportthiredwmortalotylabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreportthiredwmortalotyperlabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreportfoutrthwmortalotylabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreportfourthwmortalotyperlabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreportfifthwmortalotylabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreportfifthwmortalotyperlabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreportsixwmortalotylabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreportsixwmortalotyperlabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreportsevenwmortalotylabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreportsevenwmortalotyperlabel}" /></Column> 
+                                      <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="8th Week Mortality" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="8th Week Mortality%" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>agewisemortalityreporttotalwmortalotylabel}" /></Column> 
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                            <Text text="" />
+                                            <Text text="{tblModel>farmer_name}" />
+                                            <Text text="{tblModel>farm_name}" />
+                                            <Text text="{tblModel>batch_number}" />
+                                            <Text text="{tblModel>linename}" />
+                                            <Text text="{tblModel>placeqty}" />
+                                            <Text text="{tblModel>fwmortality}" />
+                                            <Text text="{tblModel>fweekmorper}" />
+                                            <Text text="{tblModel>swmortality}" />
+                                            <Text text="{tblModel>sweekmorper}" />
+                                            <Text text="{tblModel>twmortality}" />
+                                            <Text text="{tblModel>tweekmorper}" />
+                                            <Text text="{tblModel>fourthwmortality}" />
+                                            <Text text="{tblModel>fourthweekmorper}" />
+                                            <Text text="{tblModel>fifthwmortality}" />
+                                            <Text text="{tblModel>fifthweekmorper}" />
+                                            <Text text="{tblModel>sixwmortality}" />
+                                            <Text text="{tblModel>sixweekmorper}" />
+                                            <Text text="{tblModel>sevenwmortality}" />
+                                            <Text text="{tblModel>sevenweekmorper}" />
+                                            <Text text="{tblModel>eightwmortality}" />
+                                            <Text text="{tblModel>eightweekmorper}" />
+                                            <Text text="{tblModel>totalmortalitydata}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+            
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

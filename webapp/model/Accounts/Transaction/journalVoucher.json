@@ -1,0 +1,100 @@
+{   
+    "journalvoucher":[
+        {
+            "voucherDate" : "2018/07/25",
+            "subject" : "Demo",
+            "subledgerName" : "SubLedger 1",
+            "fromLedger" : "Ledger 1",
+            "openingBalance" : "1000",
+            "amount" : "13000",
+            "narration" : "",
+            "details":[
+				{
+					"ledgerDetails" : "Ledger001",
+                    "subledgerName": "SubLedger 1",
+                    "amount": 1000,
+                    "crdr": "",
+                    "narration" : "Narration"
+				},
+				{
+					"ledgerDetails" : "Ledger002",
+                    "subledgerName": "SubLedger 2",
+                    "amount": 1000,
+                    "crdr": "",
+                    "narration" : "Narration"
+				},
+				{
+					"ledgerDetails" : "Ledger003",
+                    "subledgerName": "SubLedger 3",
+                    "amount": 1000,
+                    "crdr": "",
+                    "narration" : "Narration"
+				}
+        	]
+        },
+        {
+            "voucherDate" : "2018/07/27",
+            "subject" : "Demo",
+            "subledgerName" : " SubLedger 2",
+            "fromLedger" : "Ledger 2",
+            "openingBalance" : "10000",
+            "amount" : "130500",
+            "narration" : "",
+            "details":[
+				{
+					"ledgerDetails" : "Ledger001",
+                    "subledgerName": "SubLedger 1",
+                    "amount": 1000,
+                    "crdr": "",
+                    "narration" : "Narration"
+				},
+				{
+					"ledgerDetails" : "Ledger002",
+                    "subledgerName": "SubLedger 2",
+                    "amount": 1000,
+                    "crdr": "",
+                    "narration" : "Narration"
+				},
+				{
+					"ledgerDetails" : "Ledger003",
+                    "subledgerName": "SubLedger 3",
+                    "amount": 1000,
+                    "crdr": "",
+                    "narration" : "Narration"
+				}
+        	]
+        },
+        {
+            "voucherDate" : "2018/07/20",
+            "subject" : "Demo",
+            "subledgerName" : "SubLedger 3",
+            "fromLedger" : "Ledger 3",
+            "openingBalance" : "5000",
+            "amount" : "3000",
+            "narration" : "",
+            "details":[
+				{
+					"ledgerDetails" : "Ledger001",
+                    "subledgerName": "SubLedger 1",
+                    "amount": 1000,
+                    "crdr": "",
+                    "narration" : "Narration"
+				},
+				{
+					"ledgerDetails" : "Ledger002",
+                    "subledgerName": "SubLedger 2",
+                    "amount": 1000,
+                    "crdr": "",
+                    "narration" : "Narration"
+				},
+				{
+					"ledgerDetails" : "Ledger003",
+                    "subledgerName": "SubLedger 3",
+                    "amount": 1000,
+                    "crdr": "",
+                    "narration" : "Narration"
+				}
+        	]
+        }
+    ]
+}

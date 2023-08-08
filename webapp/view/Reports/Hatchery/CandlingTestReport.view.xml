@@ -1,0 +1,141 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Hatchery.CandlingTestReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+		<f:DynamicPageTitle>
+		<f:heading>
+			<Title text="{i18n>candlingtestreportTitle}"/>
+	    </f:heading>
+		<f:actions>                           
+		</f:actions>
+	</f:DynamicPageTitle>
+		</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                        <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>StandardChartsAndSchedulesFeedScheduleFromDate}">
+                                            <form:fields>
+                                            <DatePicker id="txtFromDate" value="{mPOModel>/from_date}" placeholder="{config>/dateFormat/placeholder}"
+                                            displayFormat="{config>/dateFormat/displayFormat}" 
+                                            valueFormat="{config>/dateFormat/valueFormat}" required="true"  />                                            
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer>
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>StandardChartsAndSchedulesFeedScheduleToDate}">
+                                            <form:fields>
+                                            <DatePicker id="txtToDate" value="{mPOModel>/to_date}" placeholder="{config>/dateFormat/placeholder}"
+                                            displayFormat="{config>/dateFormat/displayFormat}" 
+                                            valueFormat="{config>/dateFormat/valueFormat}" required="true" />
+                                            </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="">
+                                    <form:fields>
+                                    <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                    <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                    <menu>
+                                        <Menu itemSelected="onMenuAction" >
+                                            <items>
+                                            <MenuItem text="{i18n>ProcessingProductionRegistersavecsv}" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                            <MenuItem text="{i18n>ProcessingProductionRegistersavepdf}" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                            </items>
+                                        </Menu>
+                                    </menu>
+                                    </MenuButton>
+                                    </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                            <form:FormContainer>
+                                <form:formElements>
+                                </form:formElements>
+                            </form:FormContainer>
+                            </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>		
+            <VBox fitContainer="true">
+                <Table id="tblSettingReport" items="{
+                    path: 'candlingTestReportModel>/modelData',
+                        sorter: {
+                            path: 'id'
+                        }
+                    }"
+                    mode="single" backgroundDesign="Solid">
+                    <columns>
+                        <Column><Text text ="{i18n>hatchReportsrno}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>performanceParameterBreederPerformanceDate}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>candlingtestreportTest}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>LoadToSetterSource}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>candlingtestreportBreederBatchNo}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>candlingtestreportSetterNo}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>candlingtestreportTotalSettingEggs}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>candlingtestreportNoOfEggsTested}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>candlingtestreportInfertileEggs}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>candlingtestreportInfertileEggsPer}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>candlingtestreportClearsEggs}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>candlingtestreportExpectedChicksPer}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>candlingtestreportExpectedChicksQuantity}" /></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <customData>
+                            <core:CustomData key="candlingtestreportgroup" value="{candlingTestReportModel>setterno}" writeToDom="true"></core:CustomData>
+                            </customData>
+                            <cells>
+                                <Text text="{candlingTestReportModel>sqno}"  />
+                                <Text text="{candlingTestReportModel>testdate}"  />
+                                <Text text="{candlingTestReportModel>testno}"  />  
+                                <Text text="{candlingTestReportModel>sourcename}"  />  
+                                <Text text="{candlingTestReportModel>batchno}"  />
+                                <Text text="{candlingTestReportModel>setterno}"  />
+                                <Text text="{candlingTestReportModel>stdeggsquantity}"  />
+                                <Text text="{candlingTestReportModel>noofeggstested}"  />
+                                <Text text="{candlingTestReportModel>infertileeggs}"  />
+                                <Text text="{candlingTestReportModel>infertileeggspercent}"  />
+                                <Text text="{candlingTestReportModel>clears}"  />
+                                <Text text="{candlingTestReportModel>expectedchickspercent}"  />        
+                                <Text text="{candlingTestReportModel>chicksquantity}"  />                                      
+                            </cells>
+                        </ColumnListItem>
+                        </items>
+                    </Table>                          
+                </VBox>  
+            </f:content>
+	</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

@@ -1,0 +1,656 @@
+{
+	"_version": "1.103.0",
+	"sap.app": {
+		"id": "sap.ui.elev8rerp.componentcontainer",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_bluecrystal",
+			"sap_belize",
+			"sap_tradeshow",
+			"sap_signature"
+		]
+	},
+	"sap.ui5": {
+		"handleValidation": true,
+		"rootView": {
+			"viewName": "sap.ui.elev8rerp.componentcontainer.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.f": {},
+				"sap.tnt": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"config": {
+			"fullWidth": true
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "sap.ui.elev8rerp.componentcontainer.i18n.i18n"
+				}
+			},
+			"applicationModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {}
+			},
+			"notificationPopupModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {}
+			},
+			"notificationsTemplateModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {}
+			},
+			"notificationPlaceholderModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {}
+			},
+			"notificationCreatedForModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {}
+			},
+			"side": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "model/sideContent.json"
+			},
+			"alerts": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "model/alerts.json"
+			},
+			"customer": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "model/customers.json"
+			},
+			"config": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "config/config.json"
+			},
+			"rowcountModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "model/rowCount.json"
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"viewPath": "sap.ui.elev8rerp.componentcontainer.view",
+				"async": true,
+				"bypassed": {
+					"target": "login"
+				}
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "dashboard",
+					"target": "dashboard"
+				},
+				{
+					"pattern": "login",
+					"name": "login",
+					"target": "login"
+				},
+				{
+					"pattern": "home",
+					"name": "home",
+					"target": "home"
+				},
+				{
+					"pattern": "home1",
+					"name": "home1",
+					"target": "home1"
+				},
+				{
+					"pattern": "notifications",
+					"name": "notifications",
+					"target": "notifications"
+				},
+				{
+					"pattern": "aboutus",
+					"name": "aboutus",
+					"target": "aboutus"
+				},
+				{
+					"pattern": "leadmaster",
+					"name": "leadmaster",
+					"target": "leadmaster"
+				},
+				{
+					"pattern": "projectmaster",
+					"name": "projectmaster",
+					"target": "projectmaster"
+				},
+				{
+					"pattern": "nimaster",
+					"name": "nimaster",
+					"target": "nimaster"
+				},
+				{
+					"pattern": "subcontractor",
+					"name": "subcontractor",
+					"target": "subcontractor"
+				},
+				{
+					"pattern": "liftmaster",
+					"name": "liftmaster",
+					"target": "liftmaster"
+				},
+				{
+					"pattern": "inventory",
+					"name": "inventory",
+					"target": "inventory"
+				},
+				{
+					"pattern": "billofmateriallist",
+					"name": "billofmateriallist",
+					"target": "billofmateriallist"
+				},
+				{
+					"pattern": "billofmaterial",
+					"name": "billofmaterial",
+					"target": "billofmaterial"
+				},
+				{
+					"pattern": "materialrequestandtransfer",
+					"name": "materialrequestandtransfer",
+					"target": "materialrequestandtransfer"
+				},
+				{
+					"pattern": "warehousemaster",
+					"name": "warehousemaster",
+					"target": "warehousemaster"
+				},
+				{
+					"pattern": "employeemaster",
+					"name": "employeemaster",
+					"target": "employeemaster"
+				},
+				{
+					"pattern": "locationmaster",
+					"name": "locationmaster",
+					"target": "locationmaster"
+				},
+				{
+					"pattern": "contactmaster",
+					"name": "contactmaster",
+					"target": "contactmaster"
+				},
+				{
+					"pattern": "addcontact",
+					"name": "addcontact",
+					"target": "addcontact"
+				},
+				{
+					"pattern": "users",
+					"name": "users",
+					"target": "users"
+				},
+				{
+					"pattern": "leads",
+					"name": "leads",
+					"target": "leads"
+				},
+				{
+					"pattern": "leadsdetail",
+					"name": "leadsdetail",
+					"target": "leadsdetail"
+				},
+				{
+					"pattern": "addlead",
+					"name": "addlead",
+					"target": "addlead"
+				},
+				{
+					"pattern": "addqutation",
+					"name": "addqutation",
+					"target": "addqutation"
+				},
+				{
+					"pattern": "leaddetail",
+					"name": "leaddetail",
+					"target": "leaddetail"
+				},
+				{
+					"pattern": "qutationdetail",
+					"name": "qutationdetail",
+					"target": "qutationdetail"
+				},
+				{
+					"pattern": "leadactivities",
+					"name": "leadactivities",
+					"target": "leadactivities"
+				},
+				{
+					"pattern": "quotations",
+					"name": "quotations",
+					"target": "quotations"
+				},
+				{
+					"pattern": "orders",
+					"name": "orders",
+					"target": "orders"
+				},
+				{
+					"pattern": "addorder",
+					"name": "addorder",
+					"target": "addorder"
+				},
+				{
+					"pattern": "leadreports",
+					"name": "leadreports",
+					"target": "leadreports"
+				},
+				{
+					"pattern": "project",
+					"name": "project",
+					"target": "project"
+				},
+				{
+					"pattern": "projectmanagement",
+					"name": "projectmanagement",
+					"target": "projectmanagement"
+				},
+				{
+					"pattern": "projectmanagementaspermasterstages",
+					"name": "projectmanagementaspermasterstages",
+					"target": "projectmanagementaspermasterstages"
+				},
+				{
+					"pattern": "nimanagementaspermasterstages",
+					"name": "nimanagementaspermasterstages",
+					"target": "nimanagementaspermasterstages"
+				},
+				{
+					"pattern": "projectactivities",
+					"name": "projectactivities",
+					"target": "projectactivities"
+				},
+				{
+					"pattern": "projectactivitiesAdd",
+					"name": "projectactivitiesAdd",
+					"target": "projectactivitiesAdd"
+				},
+				{
+					"pattern": "projectctivities",
+					"name": "projectctivities",
+					"target": "projectctivities"
+				},
+				{
+					"pattern": "payments",
+					"name": "payments",
+					"target": "payments"
+				},
+				{
+					"pattern": "projectreports",
+					"name": "projectreports",
+					"target": "projectreports"
+				},
+				{
+					"pattern": "attendnce",
+					"name": "attendnce",
+					"target": "attendnce"
+				},
+				{
+					"pattern": "expenses",
+					"name": "expenses",
+					"target": "expenses"
+				},
+				{
+					"pattern": "chome",
+					"name": "chome",
+					"target": "companymaster"
+				},
+				{
+					"pattern": "manageapplication",
+					"name": "manageapplication",
+					"target":"companymaster"
+				},
+				{
+					"pattern": "usermanagement",
+					"name": "usermanagement",
+					"target": "companymaster"
+				},
+				{
+					"pattern": "companySettings",
+					"name": "companySettings",
+					"target": [
+						"detailSettings",
+						"detailSettings"
+					]
+				},
+				{
+					"pattern":"licensemanagement",
+					"name": "licensemanagement",
+					"target":"companymaster"
+				},
+				{
+					"pattern": "importmaster",
+					"name": "importmaster",
+					"target": "companymaster"
+				},
+				{
+					"pattern": "financialyearsetting",
+					"name": "financialyearsetting",
+					"target": "companymaster"
+				},
+				{
+					"pattern":"documentseries",
+					"name":"documentseries",
+					"target":"companymaster"
+				},
+				{
+					"pattern": "pageshortcutkey",
+					"name": "pageshortcutkey",
+					"target":"companymaster"
+				}
+			],
+			"targets": {
+				"dashboard": {
+					"viewId": "dashboard",
+					"viewName": "Dashboard"
+				},
+				"login": {
+					"viewId": "login",
+					"viewName": "Login1"
+				},
+				"master": {
+					"viewId": "master",
+					"viewName": "Master"
+				},
+				"home": {
+					"viewId": "home",
+					"viewName": "Home",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"home1": {
+					"viewId": "home1",
+					"viewName": "Home1",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"notifications": {
+					"viewId": "notifications",
+					"viewName": "Notification",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"test": {
+					"viewId": "test",
+					"viewName": "Test",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"aboutus": {
+					"viewId": "aboutus",
+					"viewName": "Profile/Aboutus",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"leadmaster": {
+					"viewId": "leadmaster",
+					"viewName": "Masters/LeadMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"leads": {
+					"viewId": "leads",
+					"viewName": "LeadManagement/Leads",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"leadsdetail": {
+					"viewId": "leadsdetail",
+					"viewName": "LeadManagement/LeadsDetail",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"addlead": {
+					"viewId": "addlead",
+					"viewName": "LeadManagement/AddLead",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"addqutation": {
+					"viewId": "addqutation",
+					"viewName": "LeadManagement/AddQutation",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"leaddetail": {
+					"viewId": "leaddetail",
+					"viewName": "LeadManagement/LeadsDetail",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"qutationdetail": {
+					"viewId": "qutationdetail",
+					"viewName": "LeadManagement/QuotationsDetail",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"leadactivities": {
+					"viewId": "leadactivities",
+					"viewName": "LeadManagement/LeadActivity",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"quotations" : {
+					"viewId": "quotations",
+					"viewName": "LeadManagement/Quotations",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"orders" : {
+					"viewId": "orders",
+					"viewName": "LeadManagement/Orders",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"addorder" : {
+					"viewId": "addorder",
+					"viewName": "LeadManagement/AddOrder",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"liftmaster" : {
+					"viewId" : "liftmaster",
+					"viewName" : "Masters/LiftMaster",
+					"controlId" : "mainContents",
+					"parent": "master"
+				},
+				"projectmaster" : {
+					"viewId" : "projectmaster",
+					"viewName" : "Masters/projectMaster",
+					"controlId" : "mainContents",
+					"parent": "master"
+				},
+				"nimaster" : {
+					"viewId" : "nimaster",
+					"viewName" : "Masters/NiMaster",
+					"controlId" : "mainContents",
+					"parent": "master"
+				},
+				"subcontractor" :{
+					"viewId" : "subcontractor",
+					"viewName" : "Masters/SubContractor",
+					"controlId" : "mainContents",
+					"parent": "master"
+				},
+				"inventory": {
+					"viewId": "inventory",
+					"viewName": "Masters/ItemMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"billofmateriallist" : {
+					"viewId": "billofmateriallist",
+					"viewName": "Masters/BillOfMaterialList",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"project" : {
+					"viewId": "project",
+					"viewName": "ProjectManagement/Project",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"projectactivitiesAdd" : {
+					"viewId": "projectactivitiesAdd",
+					"viewName": "ProjectManagement/ProjectActivityAdd",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"projectmanagement" : {
+					"viewId": "projectmanagement",
+					"viewName": "ProjectManagement/ProjectManagementFile",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"projectmanagementaspermasterstages" : {
+					"viewId": "projectmanagementaspermasterstages",
+					"viewName": "ProjectManagement/ProjectManagementAsPerStages",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"nimanagementaspermasterstages" : {
+					"viewId": "nimanagementaspermasterstages",
+					"viewName": "ProjectManagement/niManagementAsPerStages",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"projectactivities" : {
+					"viewId": "projectactivities",
+					"viewName": "ProjectManagement/ProjectActivity",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"billofmaterial" : {
+					"viewId": "billofmaterial",
+					"viewName": "Masters/BillOfMaterial",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"materialrequestandtransfer": {
+					"viewId": "materialrequestandtransfer",
+					"viewName": "Common/MaterialRequestAndTransferMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"warehousemaster": {
+					"viewId": "warehousemaster",
+					"viewName": "Warehouse/WarehouseMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"employeemaster": {
+					"viewId": "employeemaster",
+					"viewName": "Employee/EmployeeMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"locationmaster": {
+					"viewId": "locationmaster",
+					"viewName": "Masters/LocationMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"contactmaster": {
+					"viewId": "contactmaster",
+					"viewName": "Masters/ContactMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"addcontact": {
+					"viewId": "addcontact",
+					"viewName": "Masters/AddContact",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"manageapplication": {
+					"viewId": "manageapplication",
+					"viewName": "Application/ManageApplication",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"usermanagement": {
+					"viewId": "usermanagement",
+					"viewName": "UserManagement",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"licensemanagement": {
+					"viewId": "licensemanagement",
+					"viewName": "CompanySettings/LicenseManagement",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"importmasters": {
+					"viewId": "importmasters",
+					"viewName": "CompanySettings/ImportMasters",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"financialyearsetting": {
+					"viewId": "financialyearsetting",
+					"viewName": "ApplicationSettings/FinancialYearSetting",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"documentseries": {
+					"viewId": "documentseries",
+					"viewName": "ApplicationSettings/DocumentSeries",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"pageshortcutkey": {
+					"viewId": "pageshortcutkey",
+					"viewName": "ApplicationSettings/PageShortcutKeys",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"chome": {
+					"viewId": "chome",
+					"viewName": "Chome",
+					"controlId": "mainContents",
+					"parent": "companymaster"
+				},
+				"companymaster": {
+					"viewId": "companymaster",
+					"viewName": "CompanyMaster"
+				}
+			}
+		}
+	}
+}

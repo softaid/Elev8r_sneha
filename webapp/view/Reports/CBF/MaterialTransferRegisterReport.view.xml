@@ -1,0 +1,211 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CBF.MaterialTransferRegisterReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>materialtransferregisterreporttitle}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+
+                                         <form:FormElement label="FromDate">
+                                            <form:fields>
+                                                <DatePicker id="txtFromdate"  width="100%" value="{reportModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate" />   
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                         <form:FormElement label="{i18n>materialtransferregisterreporbranchnamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="branchList"
+                                                    selectionChange="branchSelectionChange"
+                                                    selectionFinish="branchSelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'branchModel>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{branchModel>id}" text="{branchModel>branchname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                         <form:FormElement label="{i18n>materialtransferregisterreporlinenamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="lineList"
+                                                   selectionChange="branchSelectionChange"
+                                                  selectionFinish = "lineSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'lineModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{lineModel>id}" text="{lineModel>linename}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                           <form:FormElement label="{i18n>materialtransferregisterreporfarmernamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="farmerList"
+                                                   selectionChange="branchSelectionChange"
+                                                  selectionFinish = "farmerSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'farmerModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{farmerModel>id}" text="{farmerModel>farmer_name}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                         </form:formElements>
+                                         </form:FormContainer>
+                                         <form:FormContainer>
+                                          <form:formElements>
+
+                                           <form:FormElement label="ToDate">
+                                            <form:fields>
+                                                <DatePicker id="txtTodate"  width="100%" value="{reportModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate"/>   
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                       
+                                         <form:FormElement label="{i18n>materialtransferregisterreporfarmnamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="farmList"
+                                                   selectionChange="branchSelectionChange"
+                                                  selectionFinish = "farmSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'farmModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{farmModel>id}" text="{farmModel>farm_name}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                           <form:FormElement label="{i18n>agewisemortalityreportbatchnolabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="batchno"
+                                                   selectionChange="batchSelectionChange"
+                                                   selectionFinish = "" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'batchModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{batchModel>batch_id}" text="{batchModel>batch_number}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="getbatchscheduleReport"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                          </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel"  growing="true" sticky="ColumnHeaders"   growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'id'
+                                                    }
+                                                }"
+                                                 backgroundDesign="Solid">
+                                <columns>
+                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>materialtransferregisterreporissuenolabel}" /></Column>                                  
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>materialtransferregisterreportissuedatelabel}" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>materialtransferregisterreportitemnamelabel}" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>materialtransferregisterreportunitenamelabel}" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>materialtransferregisterreportquantitylabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>materialtransferregisterreportratelabel}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>materialtransferregisterreportamountlabel}" /></Column> 
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                             <Text text="{tblModel>transactionid}" />
+                                            <Text text="{tblModel>transactiondate}" />
+                                            <Text text="{tblModel>itemname}" />
+                                            <Text text="{tblModel>itemunitname}" />
+                                            <Text text="{tblModel>quantity}" />
+                                            <Text text="{tblModel>rate}" />
+                                            <Text text="{tblModel>amount}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                    </f:content>
+			</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

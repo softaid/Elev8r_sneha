@@ -1,0 +1,2 @@
+// Copyright (c) 2009-2022 SAP SE, All Rights Reserved
+sap.ui.define(["sap/ui/core/theming/Parameters"],function(e){"use strict";function t(t){var o=e.get({name:t,callback:function(e){}});if(typeof o==="object"){for(var n in o){document.body.style.setProperty("--"+n,o[n])}}else if(typeof o==="object"){document.body.style.setProperty("--"+t[0],o)}}return t});

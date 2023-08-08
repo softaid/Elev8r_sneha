@@ -1,0 +1,50 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Vaccine Schedule"
+		contentHeight="300px"
+		search="handleSearch"
+		confirm="handleClose"
+		cancel="handleClose"
+		items="{
+			path : 'vaccineScheduleModel>/modelData',
+			sorter : {
+				path : 'code',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{vaccineScheduleModel>id}" />
+				<Text text="{vaccineScheduleModel>schedulename}" />
+                <Text text="{vaccineScheduleModel>fromdate}" />
+                <Text text="{vaccineScheduleModel>todate}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Doc No." />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Name" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="From Date" />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="To Date" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

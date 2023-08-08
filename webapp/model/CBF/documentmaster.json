@@ -1,0 +1,35 @@
+{
+	"documentmaster": [
+		{
+			"code" : 1,
+            "documentname": "Out Grower Application Form",
+            "mandatory": true
+        },
+        {
+			"code" : 2,
+            "documentname": "Flock Record Sheet",
+            "mandatory": true
+        },
+        {
+			"code" : 3,
+            "documentname": "Weekly Input Schedule",
+            "mandatory": true
+        },
+        {
+			"code" : 4,
+            "documentname": "Preslaughter Inspection Report",
+            "mandatory": true
+        },
+        {
+			"code" : 5,
+            "documentname": "Slaughter Schedule",
+            "mandatory": true
+        },
+        {
+			"code" : 6,
+            "documentname": "Out Grower Evaluation Form",
+            "mandatory": true
+        }
+		
+	]
+}

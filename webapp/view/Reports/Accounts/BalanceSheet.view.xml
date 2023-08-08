@@ -1,0 +1,164 @@
+<mvc:View
+    controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Accounts.BalanceSheet"
+    xmlns="sap.ui.table"
+    xmlns:m="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:f="sap.f">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <m:Title text="Balance Sheet"/>
+                </f:heading>
+                <f:actions>                           
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <m:VBox>
+                    <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer>
+                                    <form:formElements>
+                                        <form:FormElement label="Date">
+                                            <form:fields>
+                                                <m:DatePicker id="txtToDate" required="true" 
+                                                value="{balanceSheet>/todate}" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="dd/MM/YYYY"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement> 
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer>
+                                    <form:formElements>
+                                         <form:FormElement label="">
+                                            <form:fields>
+                                                <m:Button icon="sap-icon://search" type="Emphasized" text="Show Records" press="bindTbl"/>
+                                                 <m:MenuButton  id="txtdownload" text="Download Data" width="100%" >
+                                                <m:menu>
+                                                    <m:Menu itemSelected="onMenuAction" >
+                                                        <m:items>
+                                                            <m:MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport" />
+                                                            <m:MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF" />
+                                                        </m:items>
+                                                    </m:Menu>
+                                                </m:menu>
+                                            </m:MenuButton>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                </m:VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>	
+            <!-- Asset tree -->
+            <m:VBox fitContainer="true" text="Assets">
+
+                <m:Panel width="auto" class="" accessibleRole="Region">
+                    <TreeTable
+                        id="treeTable"
+                        selectionMode="Single"
+                        enableColumnReordering="false"
+                        expandFirstLevel="true"
+                        rows="{
+                            path : 'tblAssetBalanceSheet>/modelData'
+                            
+                        }">
+
+                         
+                        <extension>
+                            <m:Toolbar>
+                                <m:Title id="title" text="Asset"/>
+
+                                <m:ToolbarSpacer/>
+                                
+                            </m:Toolbar>
+                        </extension>
+
+                        <columns>
+                            <Column label="Particulars">
+                                <template>
+                                    <m:Text text="{tblAssetBalanceSheet>ledgername}" wrapping="false" />
+                                </template>
+                            </Column>
+
+                            <Column label="Amount" hAlign="End">
+                                <template>
+                                    <m:Text text="{tblAssetBalanceSheet>amount}" wrapping="false"/>
+                                </template>
+                            </Column>
+
+                        </columns>
+
+                    </TreeTable>
+                </m:Panel>
+
+                <m:Panel width="auto" class="" accessibleRole="Region">
+                    <!-- Liability tree -->
+                    <TreeTable
+                        id="treeTable1"
+                        selectionMode="Single"
+                        enableColumnReordering="false"
+                        expandFirstLevel="true"
+                        rows="{
+                            path : 'tblLiabBalanceSheet>/modelData'
+                            
+                        }">
+
+                        <extension>
+                            <m:Toolbar>
+                                <m:Title id="title1" text="Liability"/>
+                                <m:ToolbarSpacer/>
+                            </m:Toolbar>
+                        </extension>
+
+                        <columns>
+
+                            <Column label="Particulars">
+                                <template>
+                                    <m:Text text="{tblLiabBalanceSheet>ledgername}" wrapping="false" />
+                                </template>
+                            </Column>
+
+                            <Column label="Amount" hAlign="End">
+                                <template>
+                                    <m:Text text="{tblLiabBalanceSheet>amount}" wrapping="false"/>
+                                </template>
+                            </Column>
+
+                        </columns>
+
+                    </TreeTable>
+                </m:Panel>
+            </m:VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

@@ -1,0 +1,127 @@
+{   
+    "weightslip":[
+        {
+            "slipNumber" : 1,
+            "material" : "IN",
+            "vendorName" : "Nitinkumar Popatlal Gandhi",
+            "ackNumber" : 1,
+            "poNumber" : "PO 1",
+            "poItemRate" : "100LKR",          
+            "rstNumber" : "RST 1",
+            "date" : "2018/07/20",
+            "poDate" : "2018/07/20",
+            "itemName" : "Item 1",
+            "loadWeightKg" : "10 KG",
+            "loadWeightTon" : "5 TON",
+            "unloadWeightKg" : "5 KG",
+            "unloadWeightTon" : "1 TON",
+            "netWeightKg" : "10 KG",
+            "netWeightTon" : "10 TON",
+            "toWatehouse" : "ABC",
+            "inTime" : "10.00AM",
+            "outTime" : "04.00PM",
+            "details":[
+				{
+					"packingItemCode" : "ITM 001",
+                    "packingItemName": "Broiler Bird",
+                    "quantity": 2,
+                    "weight": 10
+				},
+				{
+					"packingItemCode" : "ITM 002",
+                    "packingItemName": "Broiler Bird Male",
+                    "quantity": 5,
+                    "weight": 10
+				},
+				{
+					"packingItemCode" : "ITM 003",
+                    "packingItemName": "Broiler Bird Female",
+                    "quantity": 2,
+                    "weight": 10
+				}
+        	]
+        },
+        {
+            "slipNumber" : 2,
+            "material" : "IN",
+            "vendorName" : "ABCD",
+            "ackNumber" : 1,
+            "poNumber" : "PO 1",
+            "poItemRate" : "250LKR",          
+            "rstNumber" : "RST 1",
+            "date" : "2018/07/10",
+            "poDate" : "2018/07/10",
+            "itemName" : "Item 2",
+            "loadWeightKg" : "20 KG",
+            "loadWeightTon" : "10 TON",
+            "unloadWeightKg" : "5 KG",
+            "unloadWeightTon" : "10 TON",
+            "netWeightKg" : "10 KG",
+            "netWeightTon" : "10 TON",
+            "toWatehouse" : "ABC",
+            "inTime" : "11.00AM",
+            "outTime" : "04.00PM",
+            "details":[
+				{
+					"packingItemCode" : "ITM 001",
+                    "packingItemName": "Broiler Bird",
+                    "quantity": 2,
+                    "weight": 10
+				},
+				{
+					"packingItemCode" : "ITM 002",
+                    "packingItemName": "Broiler Bird Male",
+                    "quantity": 5,
+                    "weight": 10
+				},
+				{
+					"packingItemCode" : "ITM 003",
+                    "packingItemName": "Broiler Bird Female",
+                    "quantity": 2,
+                    "weight": 10
+				}
+        	]
+        },
+        {
+            "slipNumber" : 3,
+            "material" : "IN",
+            "vendorName" : "Aditi",
+            "ackNumber" : 1,
+            "poNumber" : "PO 1",
+            "poItemRate" : "200lKR",          
+            "rstNumber" : "RST 1",
+            "date" : "2018/07/25",
+            "poDate" : "2018/07/15",
+            "itemName" : "Item 3",
+            "loadWeightKg" : "20 KG",
+            "loadWeighTton" : "10 TON",
+            "unloadWeightKg" : "5 KG",
+            "unloadWeightTon" : "10 TON",
+            "netWeightKg" : "10 KG",
+            "netWeightTon" : "10 TON",
+            "toWatehouse" : "ABC",
+            "inTime" : "01.00PM",
+            "outTime" : "06.00PM",
+            "details":[
+				{
+					"packingItemCode" : "ITM 001",
+                    "packingItemName": "Broiler Bird",
+                    "quantity": 2,
+                    "weight": 10
+				},
+				{
+					"packingItemCode" : "ITM 002",
+                    "packingItemName": "Broiler Bird Male",
+                    "quantity": 5,
+                    "weight": 10
+				},
+				{
+					"packingItemCode" : "ITM 003",
+                    "packingItemName": "Broiler Bird Female",
+                    "quantity": 2,
+                    "weight": 10
+				}
+        	]
+        }
+    ]
+}

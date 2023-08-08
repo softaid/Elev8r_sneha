@@ -1,0 +1,22 @@
+{
+	"breedertransfertocoldroomlist": [
+        {
+            "fromBin" : "EG0001-SYSTEM-BIN-LOCAL",
+            "itemCode" : "H001",
+            "itemName" : "Inter Company UAT-DB",
+            "batch" : "batch1",
+            "batchQuantity" : 500.000,
+            "selectedQuantity" : 70.000,
+            "toBin" : "CM001HR-SYSTEM-BIN-LOCAL"
+        },
+        {
+            "fromBin" : "EG0001-SYSTEM-BIN-LOCAL",
+            "itemCode" : "C00001",
+            "itemName" : "Packaging and Moving Material",
+            "batch" : "batch2",
+            "batchQuantity" : 180.000,
+            "selectedQuantity" : 1.000,
+            "toBin" : "CM001HR-SYSTEM-BIN-LOCAL"
+        }
+    ]
+}

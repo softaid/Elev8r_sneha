@@ -1,0 +1,102 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.DashboardCommonSetting" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+	                <VBox fitContainer="true">
+                                    <form:Form editable="true">
+                                        <form:toolbar>			
+			                            </form:toolbar>
+                                        <form:layout>
+                                            <form:ResponsiveGridLayout
+                                                labelSpanXL="4"
+                                                labelSpanL="6"
+                                                labelSpanM="4"
+                                                labelSpanS="12"
+                                                adjustLabelSpan="false"
+                                                emptySpanXL="0"
+                                                emptySpanL="0"
+                                                emptySpanM="0"
+                                                emptySpanS="0"
+                                                columnsXL="3"
+                                                columnsL="2"
+                                                columnsM="2"
+                                                singleContainerFullSize="false" />
+                                        </form:layout>
+                                        <form:formContainers>
+                                        <form:FormContainer title="">
+					                            <form:formElements>                                                    
+                                            <form:FormElement label="Cash Ledger">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{commonmoduleModel>/cashledgerid}" 
+                                                    type="{commonmoduleModel>/cashledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Inventory Gain And Loss Ledger">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{commonmoduleModel>/inventorygainandlossledgerid}" 
+                                                    type="{commonmoduleModel>/inventorygainandlossledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Good Receipt But Not Invoice Ledger">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{commonmoduleModel>/grpowithoutinvoiceledgerid}" 
+                                                    type="{commonmoduleModel>/grpowithoutinvoiceledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Discount Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{commonmoduleModel>/discountledgerid}" 
+                                                     type="{commonmoduleModel>/discountledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Cost Of Good Sold Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{commonmoduleModel>/cogsledgerid}" 
+                                                     type="{commonmoduleModel>/cogsledgeridtype}"  width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Opening Balance Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{commonmoduleModel>/opening_balance_ledger_id}" 
+                                                    type="{commonmoduleModel>/opening_balance_ledger_idtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Profit and Loss Ledger">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{commonmoduleModel>/profitandlossledgerid}" 
+                                                     type="{commonmoduleModel>/profitandlossledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Supplier Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{commonmoduleModel>/supplier_ledger_group_id}" 
+                                                     type="{commonmoduleModel>/supplier_ledger_group_idtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Customer Ledger">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{commonmoduleModel>/customer_ledger_group_id}" 
+                                                    type="{commonmoduleModel>/customer_ledger_group_idtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Control Account Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{commonmoduleModel>/controlaccountledgerid}" 
+                                                    type="{commonmoduleModel>/controlaccountledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                </form:formElements>
+                                        </form:FormContainer>
+                                        </form:formContainers>
+                                    </form:Form>
+                </VBox>  
+</core:View>
+
+
+
+
+
+
+
+ 

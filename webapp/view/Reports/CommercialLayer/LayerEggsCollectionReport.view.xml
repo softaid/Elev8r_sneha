@@ -1,0 +1,192 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CommercialLayer.LayerEggsCollectionReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>layerEggsCollectionReportHeader}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+
+                                          <form:FormElement label="{i18n>layerEggsCollectionReportLabelFrequency}"  >
+                                            <form:fields>
+                                             <Select id="statustype" selectedKey="{layereggsCollRepModel>/frequency}" change="frequChange"  
+                                                items="{
+                                                    path: 'frequemodel>/modelData',
+                                                    sorter: { path: 'key' }
+                                                }">
+                                                <core:Item key="{frequemodel>key}" text="{frequemodel>value}" />                                            
+                                            </Select>
+                                            </form:fields>
+                                            </form:FormElement>
+                                        <form:FormElement label="{i18n>layerEggsCollectionReportLabelLocation}">
+                                            <form:fields>
+                                                <MultiComboBox id="locationtbl"
+                                                    selectionChange="handleSelectionChange"
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'locationList>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{locationList>id}" text="{locationList>locationname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                            <form:FormElement label="{i18n>layerEggsCollectionReportLabelBatchName}">
+                                            <form:fields>
+                                            <MultiComboBox id="batchtb1"
+                                                selectionChange="batchSelectionChange"
+                                                selectionFinish="batchSelectionFinish"
+                                                width="500px"
+                                                items="{
+                                                    path: 'batchModel>/modelData',
+                                                    sorter: { path: 'Name' }
+                                                }">
+                                                <core:Item key="{batchModel>layerbatchid}" text="{batchModel>batchname}" />
+                                            </MultiComboBox>
+                                            </form:fields>
+                                         </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                              <form:FormElement label="{i18n>layerEggsCollectionReportLabelShedName}">
+                                            <form:fields>
+                                            <MultiComboBox id="shedtb1"
+                                                selectionChange="shedSelectionChange"
+                                                selectionFinish="shedSelectionFinish"
+                                                width="500px"
+                                                items="{
+                                                    path: 'shedModel>/modelData',
+                                                    sorter: { path: 'Name' }
+                                                }">
+                                                <core:Item key="{shedModel>Shedid}" text="{shedModel>shedname}" />
+                                            </MultiComboBox>
+                                               
+                                            </form:fields>
+                                         </form:FormElement>
+                                          <form:FormElement label="{i18n>layerEggsCollectionReportLabelFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromdate" width="100%" value="{layereggsCollRepModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" />   
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                         <form:FormElement label="{i18n>layerEggsCollectionReportLabelToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtTodate"  width="100%" value="{layereggsCollRepModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="onDateChange"/>   
+                                            </form:fields>
+                                        </form:FormElement>
+                                          <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                                <!-- <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton> -->
+                                                </form:fields>
+                                            </form:FormElement>          
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>	
+               <!-- <VBox fitContainer="true">
+                          
+                          <Panel id ="pnlEggColtable" width="auto">
+                            <headerToolbar>
+                                <Toolbar height="3rem">
+                                    <Title text="Eggs Collection Report"/>
+                                    <ToolbarSpacer />
+                                        <Button icon="sap-icon://search" type="Emphasized" text="{i18n>FlockDetailReportSearchData}" press="onSearchData"/>
+                                        <Button	icon="sap-icon://download" press="onDataExport" />
+                                </Toolbar>
+                            </headerToolbar>
+                            <content>
+                            </content>
+                            </Panel>               
+                        </VBox>   -->
+                          <VBox fitContainer="true">
+                          
+                          <Panel id ="pnlEggColtable" width="auto">
+                            <headerToolbar>
+                                <Toolbar height="3rem">
+                                    <Title text="Eggs Collection Report"/>
+                                    <ToolbarSpacer />
+                                     <MenuButton text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport" />
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                </Toolbar>
+                            </headerToolbar>
+                            <content>
+                            </content>
+                            </Panel>
+                            
+                                                   
+                        </VBox>  
+                        
+                    </f:content>
+                    
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

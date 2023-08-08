@@ -1,0 +1,62 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="Select Egg Transfer to Hatchery Entry"
+		contentHeight="300px"
+		search="handleEggsTransferToHatcherySearch"
+		confirm="handleEggsTransferToHatcheryClose"
+		cancel="handleEggsTransferToHatcheryClose"
+		items="{
+			path : 'eggTransferModel>/modelData',
+			sorter : {
+				path : 'code',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{eggTransferModel>id}" />
+				<Text text="{eggTransferModel>batchname}" />                
+				<Text text="{eggTransferModel>fromwarehousename}" />
+				<Text text="{eggTransferModel>towarehousename}" />
+                <Text text="{eggTransferModel>transferdate}" />
+				<Text text="{eggTransferModel>statusname}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Doc No." />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Breeder Batch" />
+				</header>
+			</Column>
+             <Column demandPopin="true" >
+				<header>
+					<Text text="From Warehouse" />
+				</header>
+			</Column>
+             <Column demandPopin="true" >
+				<header>
+					<Text text="To Warehouse" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Transfer Date" />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="Status" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

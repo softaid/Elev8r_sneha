@@ -1,0 +1,159 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.niMasterDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	height="100%">
+
+    <f:DynamicPage toggleHeaderOnTitleClick="false">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{editMasterModel>/typename}"/>
+                </f:heading>
+                <f:actions>
+                    <ToolbarSpacer/>
+                        <Button
+                        text="{i18n>saveButtonText}"
+                        type="Emphasized"
+                        press="onSave" id="btnSave"/>
+                    <Button
+                        text="{i18n>deleteButtonText}"
+                        type="Emphasized"
+                        press="onDelete"
+                        id= "btnDelete"/>						
+                </f:actions>
+                <f:navigationActions>
+                    <Button
+                        icon="sap-icon://decline"
+                        type="Transparent" press="onCancel" />
+                </f:navigationActions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>	
+            <VBox fitContainer="true">
+                <form:Form editable="true">
+                    <form:title>
+                        <core:Title text="" />
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                            labelSpanXL="2"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="2"
+                            columnsL="1"
+                            columnsM="1"
+                            singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer>
+                            <form:formElements>
+                                <form:FormElement label="Is Parent" id="switchEle">
+                                    <form:fields>
+                                        <Switch state="{editMasterModel>/isparent}" id="isparent" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" change="getSwitchValue" enabled="true">
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement id="parentStageEle" label="Parent Stage">
+                                    <form:fields>
+                                        <Select id="parentstage"
+                                            change=""
+                                            selectedKey="{editMasterModel>/parentid}" 
+                                            forceSelection="false"
+                                            width="500px"
+                                            items="{
+                                                path: 'parentStageModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{parentStageModel>id}" text="{parentStageModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement id="departmentEle" label="Department">
+                                    <form:fields>
+                                        <Select id="departmentid"
+                                        editable="false"
+                                            change=""
+                                            selectedKey="{editMasterModel>/departmentid}" 
+                                            forceSelection="false"
+                                            width="500px"
+                                            items="{
+                                                path: 'departmentModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{departmentModel>id}" text="{departmentModel>department}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadSequenceNo}">
+                                    <form:fields>
+                                        <Input id="sequenceno" value="{editMasterModel>/sequenceno}"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadDescription}">
+                                    <form:fields>
+                                        <Input id="description" value="{editMasterModel>/description}"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>Active}">
+                                    <form:fields>
+                                        <Switch  state="{editMasterModel>/active}" id="active" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Projct Per">
+                                <form:fields>
+                                   <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
+                                        max="100" min="0" progress="true"
+                                        showAdvancedTooltip="true" value="{editMasterModel>/projectper}">
+                                        <ResponsiveScale id="rScaleWarningLevel"
+                                            tickmarksBetweenLabels="20" />
+                                    </Slider>
+                                </form:fields>
+                            </form:FormElement> 
+                             <form:FormElement label="Stage Per">
+                                <form:fields>
+                                   <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevelOne"
+                                        max="100" min="0" progress="true"
+                                        showAdvancedTooltip="true" value="{editMasterModel>/stageper}">
+                                        <ResponsiveScale id="rScaleWarningLevelOne"
+                                            tickmarksBetweenLabels="20" />
+                                    </Slider>
+                                </form:fields>
+                            </form:FormElement> 
+                                  <!-- <form:FormElement label="" disable="true">
+                                    <form:fields>
+                                        <Switch enabled="false" state="{editMasterModel>/defaultvalue}" id="default" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </form:fields>
+                                </form:FormElement> -->
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+            </VBox>
+        </f:content>				
+	</f:DynamicPage>
+</mvc:View>

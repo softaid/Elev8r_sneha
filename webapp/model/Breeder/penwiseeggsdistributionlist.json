@@ -1,0 +1,22 @@
+{
+	"penwiseeggsdistributionlist": [
+		{
+			"pen" : "Line1",
+			"itemNo" : "C001",
+			"itemName" : "Crack Eggs",
+			"eggeType" : "Cracked Eggs",
+			"binCode" : "EG001-SYS",
+			"quantity" : 5.000,
+			"avgWeight" : 0.000
+		},
+		{
+			"pen" : "Line1",
+			"itemNo" : "H001",
+			"itemName" : "Hatching Eggs",
+			"eggeType" : "Good Eggs",
+			"binCode" : "EG001-SYS",
+			"quantity" : 115.000,
+			"avgWeight" : 0.000
+        }
+	]
+}

@@ -1,0 +1,221 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CBF.DeviationReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Deviation Report"/>
+                </f:heading>
+                <f:actions>                           
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <VBox>
+                    <form:Form editable="true">
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                            labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="2"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+                            <form:FormContainer title="">
+                                <form:formElements>
+                                  <form:FormElement label="From Date">
+                                    <form:fields>
+                                        <DatePicker id="txtFromdate" width="100%" value="{cbfdeviationModel>/fromdate}" 
+                                        displayFormat="{config>/dateFormat/displayFormat}" 
+                                        valueFormat="{config>/dateFormat/valueFormat}" 
+                                        placeholder="{config>/dateFormat/placeholder}" />   
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>agewisemortalityreportbranchnamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="branchList"
+                                                    selectionChange="branchSelectionChange"
+                                                    selectionFinish="branchSelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'branchModel>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{branchModel>id}" text="{branchModel>branchname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                 <form:FormElement label="{i18n>agewisemortalityreportlinenamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="lineList"
+                                                   selectionChange="branchSelectionChange"
+                                                  selectionFinish = "lineSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'lineModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{lineModel>id}" text="{lineModel>linename}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>agewisemortalityreportfarmernamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="farmerList"
+                                                   selectionChange="branchSelectionChange"
+                                                  selectionFinish = "farmerSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'farmerModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{farmerModel>id}" text="{farmerModel>farmer_name}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                            <form:FormContainer>
+                                <form:formElements>
+                              
+
+                                <form:FormElement label="To Date">
+                                    <form:fields>
+                                        <DatePicker id="txtTodate"  width="100%" value="{cbfdeviationModel>/todate}" 
+                                        displayFormat="{config>/dateFormat/displayFormat}" 
+                                        valueFormat="{config>/dateFormat/valueFormat}" 
+                                        placeholder="{config>/dateFormat/placeholder}"  change = "onDateChange"/>   
+                                    </form:fields>
+                                </form:FormElement>
+                                         <form:FormElement label="{i18n>agewisemortalityreportfarmnamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="farmList"
+                                                   selectionChange="branchSelectionChange"
+                                                  selectionFinish = "farmSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'farmModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{farmModel>id}" text="{farmModel>farm_name}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                          <form:FormElement label="{i18n>agewisemortalityreportbatchnolabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="batchno"
+                                                   selectionChange="batchSelectionChange"
+                                                   selectionFinish = "" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'batchModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{batchModel>batch_id}" text="{batchModel>batch_number}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                              <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                        </form:formContainers>
+                    </form:Form>
+                </VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>				
+            <VBox fitContainer="true">        
+                    <ScrollContainer
+                        height="100%"
+                        width="100%"
+                        horizontal="true"
+                        vertical="true"
+                        focusable="true">
+                <Table id="tblDailyConsumption" width="200%"  growing="true" sticky="ColumnHeaders"
+                      growingScrollToLoad="true" items="{
+                                            path: 'cbfdeviationReport>/modelData',
+                                            sorter: {
+                                                        path: 'cbf_batchid',
+                                                        group : true
+                                                    }                                           
+                                        }"
+                                          
+                                 mode="None" backgroundDesign="Solid">
+                 
+                    <columns>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Batch No" /></Column>
+                        <Column  minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Date" /></Column>
+                        <Column mergeDuplicates="true" minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Farmer Name" /></Column>
+                        <Column mergeDuplicates="true" minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Farm name" /></Column>
+                        <Column  minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Age" /></Column>
+                        <Column  minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Actual Item Name" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true" ><Text text ="Actual Consumed Quantity" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true" ><Text text ="Standared Item Name" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true" ><Text text ="Standared Consumed Quantity" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true" ><Text text ="Deviation" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Deviation%" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Supervisor Name" /></Column>                   
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                       <customData>
+                         <core:CustomData key="deviationReportgroup" value="{cbfdeviationReport>itemname}" writeToDom="true"></core:CustomData>
+                        </customData>
+                            <cells>
+                                 
+                                <Text text=" " />
+                                <Text text="{cbfdeviationReport>transactiondate}" />
+                                <Text text="{cbfdeviationReport>farmer_name}" />
+                                <Text text="{cbfdeviationReport>farm_name}" />
+                                <Text text="{cbfdeviationReport>ageindays}" />
+                                <Text text="{cbfdeviationReport>itemname}" />
+                                <Text text="{cbfdeviationReport>quantityingram}" />
+                                <Text text="{cbfdeviationReport>expitemname}" />
+                                <Text text="{cbfdeviationReport>expfeedconsumption}" />
+                                <Text text="{cbfdeviationReport>deviation}" />
+                                <Text text="{cbfdeviationReport>deviationper}" />
+                                <Text text="{cbfdeviationReport>employeename}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table> 
+                </ScrollContainer>                          
+            </VBox>                      
+        </f:content>                   
+    </f:DynamicPage>    
+</core:View>
+
+
+
+
+ 

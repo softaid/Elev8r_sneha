@@ -1,0 +1,62 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Item"	
+		contentHeight="300px"
+		search="handleprojectSearch"
+		confirm="handleProjectFragementClose"
+		cancel="handleProjectFragementClose"
+			items="{
+			path : 'projectList>/'
+			
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{projectList>id}" />
+				<Text text="{projectList>startdate}" />
+				<Text text="{projectList>enddate}" />
+                <Text text="{projectList>ordervalue}" />
+				 <!-- <Text text="{projectList>bomdate}" /> -->
+			</cells>
+		</ColumnListItem>
+		<columns>
+		<Column>
+				<header>
+					<Text text="Project Id" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Start Date" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End" >
+				<header>
+					<Text text="End Date" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End" >
+				<header>
+					<Text text="Order Value" />
+				</header>
+			</Column>
+             <!-- <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End" >
+				<header>
+					<Text text="Date" />
+				</header>
+			</Column> -->
+            
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

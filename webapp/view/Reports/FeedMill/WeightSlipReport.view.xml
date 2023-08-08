@@ -1,0 +1,142 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.FeedMill.WeightSlipReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Weight Slip Report"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                         <form:FormElement label="{i18n>purchaseRegisterReportLableFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromDate" required="true"          
+                                                    value="{WeightSlipModel>/fromdate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}" 
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="onDateChange"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>  
+                                         <form:FormElement label="{i18n>purchaseRegisterReportLableToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtToDate" required="true" 
+                                                value="{WeightSlipModel>/todate}" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="dd/MM/YYYY"
+                                                change="onDateChange"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement> 
+                                         </form:formElements>
+                                         </form:FormContainer>
+                                          <form:FormContainer>
+                                        <form:formElements>
+                                            <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="getWeightReport"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                             </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+
+                        <HBox fitContainer="true">
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel"  growing="true"  growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData'
+                                                   
+                                                }"
+                                                backgroundDesign="Solid">
+                              
+                                <columns>
+                                        <Column  minScreenWidth="Tablet" demandPopin="true" 	hAlign="End"><Text text ="Slip No" /></Column>                                  
+                                        <Column  minScreenWidth="Tablet" demandPopin="true" 	hAlign="End"><Text text ="Item Name" /></Column>
+                                        <Column   minScreenWidth="Tablet"  demandPopin="true" 	hAlign="End" ><Text text ="Slip Date" /></Column>
+                                        <Column   minScreenWidth="Tablet"  demandPopin="true" 	hAlign="End"><Text text ="loaded Weight" /></Column>
+                                        <Column   minScreenWidth="Tablet"  demandPopin="true" 	hAlign="End"><Text text ="Unloaded Weight" /></Column>
+                                        <Column   minScreenWidth="Tablet"  demandPopin="true"	hAlign="End" ><Text text ="Net Weight" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                            <Text text="{tblModel>id}" />
+                                            <Text text="{tblModel>itemname}" />
+                                            <Text text="{tblModel>weightslipdate}" />
+                                            <Text text="{tblModel>loadweightton}" />
+                                            <Text text="{tblModel>unloadweightton}" />
+                                            <Text text="{tblModel>netweightton}" />
+                                         
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                        </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+                    
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

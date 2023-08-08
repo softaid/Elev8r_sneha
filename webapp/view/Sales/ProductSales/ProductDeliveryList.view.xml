@@ -1,0 +1,96 @@
+  <mvc:View
+		xmlns:c="sap.ui.core"
+		controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.ProductSales.ProductDeliveryList"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:u="sap.ui.unified"
+		xmlns="sap.m"
+		xmlns:t="sap.ui.table"
+		xmlns:f="sap.f"
+        xmlns:core="sap.ui.core"
+		xmlns:layout="sap.ui.layout"
+		xmlns:form="sap.ui.layout.form"
+		height="100%">
+
+
+
+                        <VBox fitContainer="true">
+                        <form:Form editable="true">
+                            <form:title>
+                                <core:Title text="" />
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                    </form:Form>
+                        <VBox fitContainer="true">
+                            <Table id="tblProductDeliveryList"
+                                    inset="false"
+                                    title="Contents"
+                                    items="{
+                                            path: 'productdelivery&gt;/productdelivery',
+                                                sorter: {
+                                                path: 'challanNumber'
+                                            }
+                                        }"
+                                        class="sapFDynamicPageAlignContent"
+                                        width="auto">
+                                <headerToolbar>
+                                    <OverflowToolbar>
+                                        <Title text="Challan List" />
+                                        <ToolbarSpacer/>
+                                        <OverflowToolbarButton type="Transparent" text="Add Item" icon="sap-icon://add" press="onAddNew"/>
+                                    </OverflowToolbar>
+                                </headerToolbar>
+                                    <columns>
+                            <Column>
+                            <Text text="Challan Number" />
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Challan Date" />
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Against Challan Cum Invoice" />
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Subject" />
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Order Numbers" />
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Customer Name" />
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Status" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem type="Navigation" press="onProductDeliveryPress">
+                                <cells>
+                                    <Text text="{productdelivery&gt;challanNumber}"  />
+                                    <Text text="{productdelivery&gt;challanDate}"  />
+                                    <Text text="{productdelivery&gt;againstChallanCumInvoice}"  />
+                                    <Text text="{productdelivery&gt;subject}"  />
+                                    <Text text="{productdelivery&gt;orderNumber}"  />
+                                    <Text text="{productdelivery&gt;custName}"  />
+                                    <Text text="{productdelivery&gt;status}"  />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                                </Table>
+                            </VBox>                      
+                        </VBox>
+</mvc:View>

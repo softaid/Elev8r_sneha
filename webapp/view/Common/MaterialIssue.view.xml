@@ -1,0 +1,218 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.MaterialIssue" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+ <f:FlexibleColumnLayout  id="fclMaterialIssue" backgroundDesign="Solid">
+		<f:beginColumnPages>
+	<VBox fitContainer="true">
+        <form:Form editable="true">
+            <form:toolbar>
+				<Toolbar>
+					<Title text="Material Issue" level="H4" titleStyle="H4"/>
+					<ToolbarSpacer />
+					<Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+				    <!-- <Button icon="sap-icon://add" type="Transparent" press="onAdd"/>
+                    <Button icon="sap-icon://arrow-left" type="Transparent" press="onAdd"/>
+                    <Button icon="sap-icon://arrow-right" type="Transparent" press="onAdd"/> -->
+			    </Toolbar>
+			</form:toolbar>
+            <form:layout>
+                <form:ResponsiveGridLayout
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="3"
+                    columnsL="2"
+                    columnsM="2"
+                    singleContainerFullSize="false" />
+            </form:layout>
+            <form:formContainers>
+                <form:FormContainer title="">
+					<form:formElements>
+                        <form:FormElement label="Issue Date">
+                             <form:fields>
+                                <DatePicker id="txtissuedate" type="Text" width="100%" value="{materialissueModel>/issuedate}" valueFormat="dd/MM/yyyy" change="datechange()" />
+                               
+                            </form:fields>
+                        </form:FormElement>
+                       <form:FormElement label="Issue Type">
+                           <form:fields>
+                                <ComboBox id="txtType" valueLiveUpdate="true" valueStateText="Please Select Status." liveChange="handleUserInput" validationSuccess="handleValidationSuccess" validationError="handleValidationError" selectedKey="{materialReceiptModel>/receipttype}"
+                                    items="{
+                                    path: 'MtrIssueTypeList>/modelData',
+                                    sorter: { path: 'id' }
+                                    }" isRequired="true" selectionChange="typeSelected">
+                                    <core:Item key="{MtrIssueTypeList>id}" text="{MtrIssueTypeList>refname}" />                                            
+                                </ComboBox>
+                            </form:fields>
+                        </form:FormElement>
+                         <form:FormElement label="Batch ID">
+                           <form:fields>
+                                <Input
+                                    id="txtHatcherbatchno"
+                                    type="Text"
+                                    required="true"
+                                    value="{materialissueModel>/batchid}"
+                                    showValueHelp="true"                                                
+                                    valueHelpOnly="true"       
+                                    valueHelpRequest="handleHatcherBatchValueHelp"
+                                    valueLiveUpdate="true"
+                                    enabled="true">
+                                </Input>
+                            </form:fields>
+                        </form:FormElement>
+                        
+                    </form:formElements>
+                </form:FormContainer>
+
+                <form:FormContainer title="">
+					<form:formElements>
+                        <form:FormElement label="{i18n>MaterialReceiptStatus}">
+                            <form:fields>
+                                    <ComboBox id="txtStatus" valueLiveUpdate="true" valueStateText="Please Select Status." liveChange="handleUserInput" validationSuccess="handleValidationSuccess" validationError="handleValidationError" selectedKey="{materialReceiptModel>/statusid}"
+                                        items="{
+                                        path: 'materialIssueStatusList>/modelData',
+                                        sorter: { path: 'id' }
+                                        }" isRequired="true">
+                                        <core:Item key="{materialIssueStatusList>id}" text="{materialIssueStatusList>refname}" />                                            
+                                    </ComboBox>
+                                </form:fields>
+                        </form:FormElement>
+                        <!-- <form:FormElement label="Approved By">
+                           <form:fields>
+                                <Input id="txtapprovedby" value="" change="onQuantityChange"  required="true"/>
+                            </form:fields>
+                        </form:FormElement>
+
+                         <form:FormElement label="Approved Date">
+                           <form:fields>
+                                <Input id="txtapproveddate" value="" change="onQuantityChange"  required="true"/>
+                            </form:fields>
+                        </form:FormElement> -->
+                          <form:FormElement label="{i18n>LoadToSetterDetailLocation}">
+                                <form:fields>
+                                    <Input
+                                        id="txtLocation"
+                                        type="Text"
+                                        value="{materialissueModel>/locationname}"
+                                        placeholder="Select Location"
+                                        showValueHelp="true" 
+                                        valueHelpOnly="true"      
+                                        valueHelpRequest="handleValueHelp">
+                                    </Input> 
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>LoadToSetterDetailWarehouse}">
+                            <form:fields>
+                                <Input
+                                    id="txtWarehouse"
+                                    type="Text"
+                                    value="{materialissueModel>/warehousename}"
+                                    placeholder="Select Warehouse"
+                                    showValueHelp="true" 
+                                    valueHelpOnly="true"      
+                                    valueHelpRequest="handleWarehouseValueHelp"
+                                    enabled="false">
+                                </Input> 
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+            </form:formContainers>
+        </form:Form>
+        
+        <Table id="tblmaterialissue" mode="single" backgroundDesign="Solid" items="{
+                            path: 'tblModel>/modelData',
+                                sorter: {
+                                    path: 'id'
+                                }
+                        }">
+	        <headerToolbar>
+			    <Toolbar>
+				   <content>
+					<Title text="" level="H2"/>
+					<ToolbarSpacer />
+			        <Button icon="sap-icon://add" type="Transparent" press="onAddNewRow" id="btnAdd"/>
+				  </content>
+			    </Toolbar>
+		    </headerToolbar>
+             <columns>
+                <Column><Text text ="Item Name" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Issue Quantity" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Unit Cost" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Total Cost" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Unit" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Batch" /></Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Navigation" press="onListItemPress">
+                    <cells>        
+                        <Text text="{tblModel>hatchername}" />         
+                        <Text text="{tblModel>hatchercapacity}" />         
+                        <Text text="{tblModel>actualquantity}" />                       
+                        <Text text="{tblModel>cracked}"  />
+                        <Text text="{tblModel>burst}"  />
+                        <Text text="{tblModel>clears}"  />                                    
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+        <form:Form editable="true">
+            <form:title>
+                <core:Title text="" />
+            </form:title>
+            <form:layout>
+                <form:ResponsiveGridLayout
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="3"
+                    columnsL="2"
+                    columnsM="2"
+                    singleContainerFullSize="false" />
+            </form:layout>
+            <form:formContainers>
+                <form:FormContainer>
+                    <form:formElements>
+                    <form:FormElement label="Remark">
+                        <form:fields>
+                                <TextArea placeholder="Enter Remark" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+                        </form:fields>
+                    </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+            </form:formContainers>
+        </form:Form>
+
+        <Panel>
+    	    <FlexBox		
+				alignItems="Start"
+				justifyContent="End">
+				<items>
+					<Button text="{i18n>saveButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+					<Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
+				</items>
+			</FlexBox>
+        </Panel>
+    </VBox>  
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>
+
+
+
+
+ 

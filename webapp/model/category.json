@@ -1,0 +1,16 @@
+{
+	"categoryCollection": [
+		{
+            "categoryID" : 1,
+			"categoryName": "Category 1"
+		},
+		{
+            "categoryID" : 2,
+			"categoryName": "Category 2"
+        },
+        {
+            "categoryID" : 3,
+			"categoryName": "Category 3"
+        }
+    ]
+}

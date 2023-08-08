@@ -1,0 +1,44 @@
+{   
+    "birdGrading":[
+        {
+            "code" : "001",
+            "itemCode" : "ITEM001",
+            "itemName" : "Test Item1",
+            "date" : "09/07/2016",
+            "details":[
+				{
+					"itemCode" : "ITEM001",
+                    "itemName": "test1"
+				},
+				{
+                    "itemCode" : "ITEM002",
+                    "itemName": "test2"
+				},
+				{
+                    "itemCode" : "ITEM003",
+                    "itemName": "test3"
+				}
+        	]
+        },
+        {
+            "code" : "002",
+            "itemCode" : "ITEM002",
+            "itemName" : "Test Item2",
+            "date" : "09/07/2016",
+            "details":[
+				{
+                    "itemCode" : "ITEM004",
+                    "itemName": "test4"
+				},
+				{
+                    "itemCode" : "ITEM005",
+                    "itemName": "test5"
+				},
+				{
+                    "itemCode" : "ITEM006",
+                    "itemName": "test6"
+				}
+        	]
+        }
+    ]
+}

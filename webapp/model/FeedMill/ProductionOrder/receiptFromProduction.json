@@ -1,0 +1,172 @@
+{   
+    "receiptfromproduction":[
+        {
+            "number" : "PROD 001",
+            "series" : "Series 1",
+            "postingDate" : "2018/07/15",
+            "ref2" : "",
+            "details":[
+				{
+                    "orderNumber": "Order 001",
+                    "seriesNumber": "Series 1",
+                    "itemNumber" : "ITEM 001",
+                    "itemDescription" : "Demo",
+                    "transType" : "Complete",
+                    "quantity": 36.555,
+                    "unitPrice" : 10,
+                    "whse" : "Pune",
+                    "binLocationAllocation" : "50",
+                    "itemCost" : "INR 50.00",
+                    "planned" : 100,
+                    "completed" : 100,
+                    "uomCode" : "Manual",
+                    "uomName" : "kg"
+				},
+				{
+					"orderNumber": "Order 002",
+                    "seriesNumber": "Series 2",
+                    "itemNumber" : "ITEM 002",
+                    "itemDescription" : "Demo",
+                    "transType" : "Complete",
+                    "quantity": 36,
+                    "unitPrice" : 10,
+                    "whse" : "Mumbai",
+                    "binLocationAllocation" : "50",
+                    "itemCost" : "INR 150.00",
+                    "planned" : 10,
+                    "completed" : 10,
+                    "uomCode" : "Manual",
+                    "uomName" : "kg"
+				},
+				{
+					"orderNumber": "Order 003",
+                    "seriesNumber": "Series 3",
+                    "itemNumber" : "ITEM 003",
+                    "itemDescription" : "Test",
+                    "transType" : "Complete",
+                    "quantity": 40,
+                    "unitPrice" : 10,
+                    "whse" : "Nagpur",
+                    "binLocationAllocation" : "50",
+                    "itemCost" : "INR 20.00",
+                    "planned" : 20,
+                    "completed" : 20,
+                    "uomCode" : "Manual",
+                    "uomName" : "kg"
+				}
+        	]
+        },
+        {
+            "number" : "PROD 002",
+            "series" : "Series 2",
+            "postingDate" : "2018/07/25",
+            "ref2" : "",
+            "details":[
+				{
+                    "orderNumber": "Order 001",
+                    "seriesNumber": "Series 1",
+                    "itemNumber" : "ITEM 001",
+                    "itemDescription" : "Demo",
+                    "transType" : "Complete",
+                    "quantity": 36.555,
+                    "unitPrice" : 10,
+                    "whse" : "Pune",
+                    "binLocationAllocation" : "50",
+                    "itemCost" : "INR 50.00",
+                    "planned" : 100,
+                    "completed" : 100,
+                    "uomCode" : "Manual",
+                    "uomName" : "kg"
+				},
+				{
+					"orderNumber": "Order 002",
+                    "seriesNumber": "Series 2",
+                    "itemNumber" : "ITEM 002",
+                    "itemDescription" : "Demo",
+                    "transType" : "Complete",
+                    "quantity": 36,
+                    "unitPrice" : 10,
+                    "whse" : "Mumbai",
+                    "binLocationAllocation" : "50",
+                    "itemCost" : "INR 150.00",
+                    "planned" : 10,
+                    "completed" : 10,
+                    "uomCode" : "Manual",
+                    "uomName" : "kg"
+				},
+				{
+					"orderNumber": "Order 003",
+                    "seriesNumber": "Series 3",
+                    "itemNumber" : "ITEM 003",
+                    "itemDescription" : "Test",
+                    "transType" : "Complete",
+                    "quantity": 40,
+                    "unitPrice" : 10,
+                    "whse" : "Nagpur",
+                    "binLocationAllocation" : "50",
+                    "itemCost" : "INR 20.00",
+                    "planned" : 20,
+                    "completed" : 20,
+                    "uomCode" : "Manual",
+                    "uomName" : "kg"
+				}
+        	]
+        },
+        {
+            "number" : "PROD 003",
+            "series" : "Series 3",
+            "postingDate" : "2018/07/05",
+            "ref2" : "",
+            "details":[
+				{
+                    "orderNumber": "Order 001",
+                    "seriesNumber": "Series 1",
+                    "itemNumber" : "ITEM 001",
+                    "itemDescription" : "Demo",
+                    "transType" : "Complete",
+                    "quantity": 36.555,
+                    "unitPrice" : 10,
+                    "whse" : "Pune",
+                    "binLocationAllocation" : "50",
+                    "itemCost" : "INR 50.00",
+                    "planned" : 100,
+                    "completed" : 100,
+                    "uomCode" : "Manual",
+                    "uomName" : "kg"
+				},
+				{
+					"orderNumber": "Order 002",
+                    "seriesNumber": "Series 2",
+                    "itemNumber" : "ITEM 002",
+                    "itemDescription" : "Demo",
+                    "transType" : "Complete",
+                    "quantity": 36,
+                    "unitPrice" : 10,
+                    "whse" : "Mumbai",
+                    "binLocationAllocation" : "50",
+                    "itemCost" : "INR 150.00",
+                    "planned" : 10,
+                    "completed" : 10,
+                    "uomCode" : "Manual",
+                    "uomName" : "kg"
+				},
+				{
+					"orderNumber": "Order 003",
+                    "seriesNumber": "Series 3",
+                    "itemNumber" : "ITEM 003",
+                    "itemDescription" : "Test",
+                    "transType" : "Complete",
+                    "quantity": 40,
+                    "unitPrice" : 10,
+                    "whse" : "Nagpur",
+                    "binLocationAllocation" : "50",
+                    "itemCost" : "INR 20.00",
+                    "planned" : 20,
+                    "completed" : 20,
+                    "uomCode" : "Manual",
+                    "uomName" : "kg"
+				}
+        	]
+        }
+    ]
+}

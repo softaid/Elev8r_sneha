@@ -1,0 +1,51 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="Select Breeder Batch"	
+		contentHeight="300px"
+		search="handleBreederBatchSearch"
+		confirm="onBreederBatchDialogClose"
+		cancel="onBreederBatchDialogClose"
+		items="{
+			path : 'locationwiseBreederBatchList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{locationwiseBreederBatchList>id}" />
+                <Text text="{locationwiseBreederBatchList>batchname}" />
+                <Text text="{locationwiseBreederBatchList>locationname}" />
+                <Text text="{locationwiseBreederBatchList>warehousename}" />
+                <Text text="{locationwiseBreederBatchList>status}" />    
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Batch No." />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Batch Name" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Location" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Warehouse" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Status" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

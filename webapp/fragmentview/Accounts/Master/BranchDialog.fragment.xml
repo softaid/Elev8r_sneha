@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Branch"
+		contentHeight="300px"
+		search="handleBranchSearch"
+		confirm="handleBranchClose"
+		cancel="handleBranchClose"
+		items="{
+			path : 'branchModel>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{branchModel>id}" />
+				<Text text="{branchModel>branchname}" />
+                <Text text="{branchModel>branchcode}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="ID" />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Branch Name" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Branch Code" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

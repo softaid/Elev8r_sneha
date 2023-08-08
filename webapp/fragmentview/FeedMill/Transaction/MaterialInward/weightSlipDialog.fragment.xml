@@ -1,0 +1,48 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Weight Slip"	
+		contentHeight="300px"
+		search="handleWeightSearch"
+		confirm="handleWeightClose"
+		cancel="handleWeightClose"
+		items="{
+			path : 'weightslipListModel>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title=""  text="{weightslipListModel>ackid}" />
+				<ObjectIdentifier title="" text="{weightslipListModel>itemname}" />
+				<ObjectIdentifier title=""  text="{weightslipListModel>weightslipdate}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Ack No" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				 >
+				<header>
+					<Text text="Item Name" />
+				</header>
+			</Column>
+             <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				 >
+				<header>
+					<Text text="Date" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>
+

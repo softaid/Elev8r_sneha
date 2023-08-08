@@ -1,0 +1,28 @@
+{
+	"treatment": [
+		{
+			"code" : 1,
+            "treatmenttype": "treatment1"
+		},
+		{
+			"code" : 2,
+            "treatmenttype": "treatment2"
+		},
+		{
+			"code" : 3,
+            "treatmenttype": "treatment3"
+		},
+		{
+			"code" : 4,
+            "treatmenttype": "treatment4"
+        },
+        {
+			"code" : 5,
+            "treatmenttype": "treatment5"
+        },
+        {
+			"code" : 6,
+            "treatmenttype": "treatment6"
+		}		
+	]
+}

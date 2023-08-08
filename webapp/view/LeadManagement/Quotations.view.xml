@@ -1,0 +1,135 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Quotations" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified">
+    <f:FlexibleColumnLayout  id="fclQuotation" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					        <Title text="{i18n>quotationTitle}"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+                    <VBox fitContainer="true">
+                        <Panel id="pnlQuotationList" expandable="true" expanded="true"  headerText="Quotation List" width="100%">
+               	            <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="1"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer> 
+                                        <form:formElements >
+                                            <!-- <form:FormElement label="Quote Status" >
+                                                <form:fields>
+                                                    <SegmentedButton accessibleName="Select Lead Status" selectionChange="handleSelectionChange">
+                                                        <items>
+                                                            <SegmentedButtonItem  width="auto" text="All({LeadsTotalCountModel>/totalleads})" press="onQulified"></SegmentedButtonItem>
+                                                            <SegmentedButtonItem width="auto" text="Qualified({LeadsQualifiedModel>/qualified})" press="onQulified"></SegmentedButtonItem>
+                                                            <SegmentedButtonItem width="auto" text="Unqualified({LeadsUnqualifiedModel>/unqualified})" press="onQulified"></SegmentedButtonItem>
+                                                        </items>
+                                                    </SegmentedButton>
+                                                </form:fields>
+                                            </form:FormElement>    -->
+                                            <form:FormElement label="Quotation Type">
+                                                <form:fields>
+                                                    <SegmentedButton accessibleName="Select Quotation Type" 
+                                                        items="{path: 'quoteTypeModel>/modelData'}" selectionChange="handleSelectionChange">
+                                                        <items>
+                                                            <SegmentedButtonItem width="auto" text="{quoteTypeModel>description}" press="onQuoteType"></SegmentedButtonItem>
+                                                        </items>
+                                                    </SegmentedButton>
+                                                </form:fields>
+                                            </form:FormElement>   
+                                            <form:FormElement label="Quote Category">
+                                                <form:fields>
+                                                    <SegmentedButton accessibleName="Select Quote Category"
+                                                    items="{path: 'quoteCategoryModel>/modelData'}" selectionChange="handleSelectionChange">
+                                                        <items>
+                                                            <SegmentedButtonItem width="auto" text="{quoteCategoryModel>description}" press="onQuoteCategory"></SegmentedButtonItem>
+                                                        </items>
+                                                    </SegmentedButton>
+                                                </form:fields>
+                                            </form:FormElement>  
+                                        </form:formElements>      
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>               
+                        </Panel>
+                        <Table id="tblQuotationMaster" 
+                                inset="false"
+                                sticky="ColumnHeaders" growing="true" growingScrollToLoad="true" growingThreshold="10" 
+                                items="{
+                                path: 'QuotationMasterModel>/modelData',
+                                sorter: {
+                                    path: 'hatchername'
+                                }
+                            }">
+                            <headerToolbar>
+                                <Toolbar>
+                                    <content>
+                                        <Title text="" level="H2"/>
+                                        <ToolbarSpacer />
+                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
+                                        <!-- <Button
+                                        text="Upload template"
+                                        type="Emphasized"
+                                        press="onUploadMasterData" id="btnUploadData"/> -->
+                                    </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column><Text text ="{i18n>quotationId}" /></Column>
+                                <Column><Text text ="Quotation Name" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quotationLeadName}"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Date"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Status"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Category"/></Column> 
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Quotation Value"/></Column>      
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemPress">
+                                    <cells>
+                                    <ObjectIdentifier text="{QuotationMasterModel>id}" />  
+                                        <Text text="{QuotationMasterModel>quotename}" />
+                                        <Text text="{QuotationMasterModel>leadname}"/>
+                                        <Text text="{QuotationMasterModel>quotedate}"/>
+                                        <Text text="{QuotationMasterModel>leadstatus}"/>
+                                        <Text text="{QuotationMasterModel>quotecategory}"/> 
+                                        <Text text="{QuotationMasterModel>quotevalue}"/> 
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        <VBox id="pnlErrMessage" visible="false" class="sapMMsgStrip sapMMsgStripError sapUiSmallMarginBottom" width="auto">
+                        </VBox >
+                        <TabContainer id="pnlDataTabs" visible="false" showAddNewButton="false" class="pnlDataTabs sapUiResponsiveContentPadding">
+                            <items></items>
+                        </TabContainer>
+                        <HBox width="auto"></HBox>
+                        <HBox id="pnlMasterData" width="auto"></HBox>
+                    </VBox> 
+                </f:content>				
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>

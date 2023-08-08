@@ -1,0 +1,63 @@
+<mvc:View xmlns:commons="sap.suite.ui.commons" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    controllerName="sap.ui.elev8rerp.componentcontainer.controller.Test" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" showFooter="true">
+        <content>
+            <l:FixFlex id='chartFixFlex'>
+                <l:flexContent>
+                    <commons:ChartContainer autoAdjustHeight="true"
+                        contentChange="attachContentChange" id="chartContainer"
+                        personalizationPress="attachPersonalizationPress" showFullScreen="true"
+                        showLegendButton="true" showSelectionDetails="true"
+                        title="Week Wise Body Weight Analysis">
+                        <commons:content>
+                            <commons:ChartContainerContent>
+                                <commons:content>
+                                    <viz:VizFrame height='100%' id="idVizFrame"
+                                        uiConfig="{applicationSet:'fiori'}"
+                                        vizProperties="{ title: { text: 'Week Wise Body Weight Analysis' }, plotArea: { dataLabel: { visible: true } }, legend: { title: { visible: true } }, tooltip: { visible: true } }"
+                                        vizType='line' width="100%">
+                                        <viz:dataset>
+                                            <viz.data:FlattenedDataset data="{oBirdWeight>/}">
+                                                <viz.data:dimensions>
+                                                    <viz.data:DimensionDefinition name="Week"
+                                                        value="{week}" />
+                                                    <viz.data:DimensionDefinition
+                                                        name="Live Birds Number"
+                                                        value="{live_birds}" />
+                                                </viz.data:dimensions>
+                                                <viz.data:measures>
+                                                    <viz.data:MeasureDefinition
+                                                        name="Actual Bird Weight"
+                                                        value="{actual_bird_weight}" />
+                                                    <viz.data:MeasureDefinition
+                                                        name="Expected Bird Weight"
+                                                        value="{expected_bird_weight}" />
+                                                </viz.data:measures>
+                                            </viz.data:FlattenedDataset>
+                                        </viz:dataset>
+
+                                        <viz:feeds>
+                                            <viz.feeds:FeedItem type="Measure" uid="valueAxis"
+                                                values="Actual Bird Weight" />
+                                            <viz.feeds:FeedItem type="Measure" uid="valueAxis"
+                                                values="Expected Bird Weight" />
+                                            <viz.feeds:FeedItem type="Dimension" uid="categoryAxis"
+                                                values="Week" />
+                                            <viz.feeds:FeedItem type="Dimension" uid="categoryAxis"
+                                                values="Live Birds Number" />
+                                        </viz:feeds>
+                                    </viz:VizFrame>
+                                </commons:content>
+                            </commons:ChartContainerContent>
+                        </commons:content>
+                    </commons:ChartContainer>
+                </l:flexContent>
+            </l:FixFlex>
+
+        </content>
+    </Page>
+
+</mvc:View>

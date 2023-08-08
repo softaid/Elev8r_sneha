@@ -1,0 +1,152 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Hatchery.EggCollectinValuesWithControlValues" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Egg Collection Value Wth Control Values Report"/>
+					</f:heading>
+					<f:actions>
+					</f:actions>
+                    <f:expandedContent>
+					</f:expandedContent>
+				</f:DynamicPageTitle>
+
+                  
+			</f:title>
+            <f:header>
+				<f:DynamicPageHeader pinnable="true">
+					<VBox fitContainer="true">
+                        <form:Form editable="true" width="100%">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="6"
+                                        labelSpanL="6"
+                                        labelSpanM="6"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="3"
+                                        columnsM="3"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+
+                                <form:FormContainer title="">
+                                    <form:formElements> 
+                                      <form:FormElement label="{i18n>FlockDetailReportFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromDate" required="true"          
+                                                    value="{customerWiseSaleReport>/fromdate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="ongetDate"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>  
+                                    </form:formElements>
+                                </form:FormContainer>
+
+                                <form:FormContainer>
+                                    <form:formElements>
+                                       <form:FormElement label="{i18n>FlockDetailReportToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtToDate" required="true" 
+                                                value="{customerWiseSaleReport>/todate}" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="dd/MM/YYYY"
+                                                change="ongetDate"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement> 
+                                    </form:formElements>
+                                </form:FormContainer>
+                                   
+                                     <form:FormContainer>
+                                            <form:formElements>
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Search Data" width="100%" press="onSearchData"/>
+                                                <MenuButton icon="sap-icon://download" width="50%" align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="SaveCSV" icon="sap-icon://save" press="onDataExport" />
+                                                            <MenuItem text="SavePDF" icon="sap-icon://save" press="createPDF" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+				</f:DynamicPageHeader>
+			</f:header>
+			<f:content>				
+
+                        <VBox fitContainer="true">
+                         <ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblSettingReport" width="200%" items="{
+                                                path: 'hatchReportModel>/modelData',
+                                                    sorter: {
+                                                        path: 'sqno'
+                                                    }
+                                                }"
+                                                inset="false" 
+                                                class="sapFDynamicPageAlignContent">
+                                <columns>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Date" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Doc No" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Flock Name" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Name" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Opening Balance" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <Text text="{hatchReportModel>batchdate}"/>
+                                            <Text text="{hatchReportModel>sheduleid}"/>
+                                            <Text text="{hatchReportModel>batchname}"/>
+                                            <Text text="{hatchReportModel>itemname}"/>  
+                                            <Text text="{hatchReportModel>receivedqty}"/> 
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                            </ScrollContainer>         
+                        </VBox>  
+                    </f:content>
+                        <f:footer>
+                        <OverflowToolbar>
+                            <ToolbarSpacer/>
+                            <Button type="Accept" text="Save"/>
+                        </OverflowToolbar>
+                    </f:footer>
+			</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

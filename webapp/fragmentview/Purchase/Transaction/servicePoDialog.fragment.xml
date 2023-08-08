@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="Select Service PO"	
+		contentHeight="300px"
+		search="handleServicePoSearch"
+		confirm="handleServicePoClose"
+		cancel="handleServicePoClose"
+		items="{
+			path : 'servicepoList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{servicepoList>id}" />
+				<Text text="{servicepoList>servicepono}" />
+				<Text text="{servicepoList>servicedate}" />
+                <Text text="{servicepoList>partyname}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Doc NO." />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Service PO NO." />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Service Date" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Supplier Name" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

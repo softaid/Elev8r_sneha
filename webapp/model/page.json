@@ -1,0 +1,21 @@
+{
+	"purchase": [
+		{
+            "srno" : 1,
+            "item": "BC00004: Breeder Female",
+            "quantity": 6404,
+            "rate": 175,
+            "Tax": "NA",
+            "amount": 112000
+        },
+        {
+            "srno" : 2,
+            "item": "BC00003: Breeder Male",
+            "quantity": 8489,
+            "rate": 162,
+            "Tax": "NA",
+            "amount": 23424
+		}
+		
+    ]
+}

@@ -1,0 +1,24 @@
+{
+	"chartentry": [
+		{
+			"code" : 1,
+            "age": "1",
+            "mort": "",
+            "feedconsmp": "15",
+            "cumfeed": "15",
+            "bodyweight": "48",
+            "fcr": "0.31"
+            
+		},
+		{
+			"code" : 2,
+            "age": "2",
+            "mort": "",
+            "feedconsmp": "18",
+            "cumfeed": "33",
+            "bodyweight": "57",
+            "fcr": "0.58"
+		}
+		
+	]
+}

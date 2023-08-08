@@ -1,0 +1,133 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.BreederSales.BreederLiftingWeightDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	height="100%">
+
+	<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Lifting Weight Detail"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+					<Button
+						text="Save"
+                        type="Emphasized"
+						press="onSave"/>
+				</f:actions>
+				<f:navigationActions>
+					<Button
+						icon="sap-icon://decline"
+						type="Transparent" press="onCancel" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>				
+   			<form:Form editable="true">
+                <form:title>
+                </form:title>
+                <form:layout>
+                    <form:ResponsiveGridLayout
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="2"
+                        columnsM="1"
+                        singleContainerFullSize="false" />
+                </form:layout>
+                <form:formContainers>
+                    <form:FormContainer title="">
+					    <form:formElements>       
+                             <form:FormElement label="Bird Item">
+                                <form:fields>
+                                    <Input
+                                        id="txtBirdItem"
+                                        type="Text"
+                                        required="true"
+                                        value="{breederLfWeightDetailModel>/itemname}"
+                                        placeholder="Select Item"
+                                        enabled="true"
+                                        editable="true"
+                                        showValueHelp="true"     
+                                        valueHelpOnly="true"       
+                                        valueHelpRequest="handleItemvaluehelpValueHelp">
+                                    </Input>
+                                </form:fields>
+                            </form:FormElement>
+							<form:FormElement label="Planned Qty">
+                                <form:fields>
+                                    <Input id="plannedQty" value="{breederLfWeightDetailModel>/plannedqty}" enabled="false"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Open Qty">
+                                <form:fields>
+                                    <Input id="openqty" value="{breederLfWeightDetailModel>/openqty}"  enabled="false"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Deliver Qty">
+                                <form:fields>
+                                    <Input id="deliverQty"  value="{breederLfWeightDetailModel>/deliveredqty}"  liveChange="calculateWt"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Avg Wt(Kg)">
+                                <form:fields>
+                                    <Input id="avgwt" value="{breederLfWeightDetailModel>/avgweight}"  enabled="false"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Planned Wt(Kg)">
+                                <form:fields>
+                                    <Input id="plannedwt"  value="{breederLfWeightDetailModel>/plannedwt}" enabled="false"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Delivered Wt(Kg)">
+                                <form:fields>
+                                    <Input id="deliverWt" value="{breederLfWeightDetailModel>/deliveredwt}"  />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Rate/Kg">
+                                <form:fields>
+                                    <Input id="rateperkg"  value="{breederLfWeightDetailModel>/rateperkg}"  enabled="false"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Totalcost">
+                                <form:fields>
+                                    <Input id="totalcost"  value="{breederLfWeightDetailModel>/totalcost}"  enabled="false"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Excess Birds" id="excessbirdsEle">
+                                <form:fields>
+                                    <Input id="excessbirds" value="{breederLfWeightDetailModel>/excessbirds}" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Bird Shortage"  id="birdshortageEle">
+                                <form:fields>
+                                    <Input id="birdshortage" value="{breederLfWeightDetailModel>/birdshortage}" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Lifting Time">
+                                <form:fields>
+                                    <TimePicker id="liftingtime" valueFormat="hh:mm a" displayFormat="hh:mm a" value="{breederLfWeightDetailModel>/liftingtime}" change="handleTimeChange"/>                                                            
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                    </form:FormContainer>
+                </form:formContainers>
+            </form:Form>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

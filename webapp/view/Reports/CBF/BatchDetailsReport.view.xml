@@ -1,0 +1,247 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CBF.BatchDetailsReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>batchdetailsreporttitle}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+
+                                          <form:FormElement label="{i18n>batchdetailsreportbranchname}">
+                                            <form:fields>
+                                                <Select id="branchList" 
+                                                        selectedKey="{branchModel>/id}" 
+                                                        enabled="true"
+                                                        change="BranchSelect"
+                                                        forceSelection="false"
+                                                        items="{
+                                                            path: 'branchModel>/modelData',
+                                                            sorter: { path: 'id' }
+                                                        }">
+                                                    <core:Item key="{branchModel>id}" text="{branchModel>branchname}" />  
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                         <form:FormElement label="{i18n>batchdetailsreportlinename}">
+                                            <form:fields>
+                                                <Select id="lineList" 
+                                                        selectedKey="{lineModel>/id}" 
+                                                        enabled="true"
+                                                        change="LineSelect"
+                                                        forceSelection="false"
+                                                        items="{
+                                                            path: 'lineModel>/modelData',
+                                                            sorter: { path: 'id' }
+                                                        }">
+                                                    <core:Item key="{lineModel>id}" text="{lineModel>linename}" />  
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                         <form:FormElement label="{i18n>batchdetailsreportfarmerName}">
+                                            <form:fields>
+                                                <Select id="farmerList" 
+                                                        selectedKey="{farmerModel>/id}" 
+                                                        enabled="true"
+                                                        change="FarmerSelect"
+                                                        forceSelection="false"
+                                                        items="{
+                                                            path: 'farmerModel>/modelData',
+                                                            sorter: { path: 'id' }
+                                                        }">
+                                                    <core:Item key="{farmerModel>id}" text="{farmerModel>farmer_name}" />  
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                         </form:formElements>
+                                         </form:FormContainer>
+                                         <form:FormContainer>
+                                          <form:formElements>
+                                          <form:FormElement label="{i18n>batchdetailsreportfarmname}">
+                                            <form:fields>
+                                                <Select id="farmList" 
+                                                        selectedKey="{farmModel>/id}" 
+                                                        enabled="true"
+                                                        change="FarmSelect"
+                                                        forceSelection="false"
+                                                        items="{
+                                                            path: 'farmModel>/modelData',
+                                                            sorter: { path: 'id' }
+                                                        }">
+                                                    <core:Item key="{farmModel>id}" text="{farmModel>farm_name}" />  
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                          <form:FormElement label="{i18n>batchdetailsreportbatchno}">
+                                            <form:fields>
+                                                <Select id="batchno" 
+                                                        selectedKey="{batchModel>/batch_id}" 
+                                                        enabled="true"
+                                                        change="BatchSelect"
+                                                        forceSelection="false"
+                                                        items="{
+                                                            path: 'batchModel>/modelData',
+                                                            sorter: { path: 'id' }
+                                                        }">
+                                                    <core:Item key="{batchModel>batch_id}" text="{batchModel>batch_number}" />  
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="getbatchscheduleReport"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                          </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel" width="400%" sticky="ColumnHeaders" growing="true"   growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData'
+                                                   }"
+                                                 backgroundDesign="Solid">
+                             
+                                <columns>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Transaction Date" /></Column>    
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Bird Opening Balance" /></Column>  
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Breed Name" /></Column>                               
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Age" /></Column>   
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Mortality" /></Column>  
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Cummulative Mortality" /></Column> 
+
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Cummulative Mortality %" /></Column>  
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Culls" /></Column>     
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Cummulative Culls" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Cummulative Culls %" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Bird Sold" /></Column>    
+
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Bird Transfer Out" /></Column>  
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Bird Transfer In" /></Column>     
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Bird Closing Balance" /></Column>  
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Item Name" /></Column>             
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Opening Balance" /></Column>
+				                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Feed Inward" /></Column>
+
+
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Actual Feed Consumption" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Actual Feed Consumption Cost" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Standared Feed Consumption" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Actual Cummulative Feed" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Actual Cummulative Feed Cost" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Standared Cummulative Feed" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Actual Body Weight" /></Column> 
+
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Standared FCR" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Actual FCR" /></Column> 
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Feed Closing Stock" /></Column> 
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                            <Text text="{tblModel>transactiondate}" /> 
+                                            <Text text="{tblModel>itemopeningbal}" />
+                                             <Text text="{tblModel>birditemname}" />
+                                            <Text text="{tblModel>age}" />
+                                            <Text text="{tblModel>totalmortality}" />
+                                            <Text text="{tblModel>Cumulativemortality}" />
+
+                                            <Text text="{tblModel>Percumulativemortality}" />
+                                            <Text text="{tblModel>totalculls}" />
+                                            <Text text="{tblModel>Cumulativeculls}" />
+                                            <Text text="{tblModel>Percumulativeculls}" />
+                                            <Text text="{tblModel>totaldeliveredqty}" />
+
+                                            <Text text="{tblModel>iteminventorytransferout}" />
+                                            <Text text="{tblModel>iteminventorytransferin}" />
+                                            <Text text="{tblModel>itemclosingbal}"/>
+                                            <Text text="{tblModel>itemname}"/>
+                                            <Text text="{tblModel>openingbal}" />
+					                        <Text text="{tblModel>inventorytransferin}" />
+
+                                            <Text text="{tblModel>actualfeedconsumption}" />
+                                            <Text text="{tblModel>feedconcost}" />
+                                            <Text text="{tblModel>stdconsumption}" />
+                                            <Text text="{tblModel>cummulativeactualfeed}" />
+                                             <Text text="{tblModel>cummulativeactualfeedcost}" />
+                                            <Text text="{tblModel>cummulativestdfeed}" />
+                                            <Text text="{tblModel>avgweight}" />
+                                            
+                                            
+                                            <Text text="{tblModel>fcr}" />
+                                            <Text text="{tblModel>actualfcr}" />
+                                            <Text text="{tblModel>closingbal}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+            
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

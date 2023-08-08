@@ -1,0 +1,113 @@
+<core:View displayBlock="true" 
+  controllerName="sap.ui.elev8rerp.componentcontainer.controller.Warehouse.WarehouseBin" height="100%"
+  xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <VBox fitContainer="true">
+        <form:Form editable="true">
+            <form:toolbar>
+				<Toolbar>
+					<Title text="Warehouse Bin" level="H4" titleStyle="H4"/>
+					<ToolbarSpacer />
+			    </Toolbar>
+			</form:toolbar>
+            <form:layout>
+                <form:ResponsiveGridLayout
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="3"
+                    columnsL="2"
+                    columnsM="2"
+                    singleContainerFullSize="false" />
+            </form:layout>
+            <form:formContainers>
+                    <form:FormContainer title="">
+                    <form:formElements>
+                        <form:FormElement label="Location">
+                            <form:fields>
+                                <Input
+                                    id="txtToLocation"
+                                    required="true"
+                                    type="Text"
+                                    value="{binModel>/locationname}"
+                                    placeholder="{i18n>ShedToShedTransferLocationPlaceholder}"
+                                    showValueHelp="true"                    
+                                    valueHelpOnly="true"       
+                                    valueHelpRequest="handleLocationValueHelp"
+                                    valueLiveUpdate="true">
+                                </Input>     
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+
+                <form:FormContainer title="">
+                    <form:formElements>
+                        <form:FormElement label="{i18n>BreederBatchDetailWarehouse}">
+                            <form:fields>
+                                <Input
+                                id="cmbWarehouse"
+                                type="Text"
+                                value="{binModel>/warehousename}"
+                                placeholder="Select Warehouse"
+                                enabled="false"
+                                editable="true"
+                                showValueHelp="true"  
+                                valueHelpOnly="true"       
+                                valueHelpRequest="handleWarehouseValueHelp"
+                                required="true"
+                            >
+                                </Input>
+                            <!-- <Input id="txtItemName" valueLiveUpdate="true" value="{editFeedScheduleDetailModel>/itemname}" /> -->
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+            </form:formContainers>
+        </form:Form>
+     
+        <Table id="tblWarehouse" 
+            inset="false" 
+            items="{
+                    path: 'warehousebinModel>/modelData',
+                    sorter: {
+                        path: 'binname'
+                    }
+                }">
+            <headerToolbar>
+                <Toolbar>
+                <content>
+                    <Title text="{i18n>WarehouseBinDialogWarehouseBin}" level="H2"/>
+                    <ToolbarSpacer />
+                    <Button icon="sap-icon://add" type="Transparent" press="onAddNew" id="btnAdd" enabled="false"/>
+                </content>
+                </Toolbar>
+            </headerToolbar>
+            <columns>
+                <Column><Text text ="ID" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Warehouse Name" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Bin Code" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Bin Name" /></Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Navigation" press="onListItemPress">
+                    <cells>
+                        <Text text="{warehousebinModel>id}"  />
+                        <Text text="{warehousebinModel>warehousename}"  />
+                        <Text text="{warehousebinModel>bincode}"  />
+                        <Text text="{warehousebinModel>binname}"  />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </VBox>  
+</core:View>

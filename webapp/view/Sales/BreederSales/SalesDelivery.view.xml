@@ -1,0 +1,286 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.BreederSales.SalesDelivery" height="100%"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:t="sap.ui.table"
+  xmlns:form="sap.ui.layout.form" 
+  xmlns:core="sap.ui.core">
+    <f:FlexibleColumnLayout  id="fclBreederSalesDelivery" backgroundDesign="Solid">
+		<f:beginColumnPages>
+            <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="{i18n>SalesDelivery}"/>
+				        </f:heading>
+                        <f:actions>
+                            <ToolbarSpacer/>
+                           <Button icon="sap-icon://list" type="Transparent" press="onListIconPress" visible="false" />
+                        </f:actions>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+	                <VBox fitContainer="true">                   
+                        <form:Form editable="true">
+                            <form:toolbar>                
+                            </form:toolbar>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>SalesDeliverySelectSalesOrder}" id="salesorderEle">
+                                            <form:fields>
+                                                <Input
+                                                    id="txtSalesOrder"
+                                                    type="Text"
+                                                    value="{salesdeliveryModel>/salesorderno}"
+                                                    placeholder="{i18n>SalesDeliverySelectsalesorder}"
+                                                    enabled="true"
+                                                    editable="true"
+                                                    showValueHelp="true"                                                
+                                                    valueHelpOnly="true"       
+                                                    valueHelpRequest="handleSelectSalesOrderList"
+                                                    required="true">
+                                                </Input>
+                                                <Input id="txtSalesOrderDate" enabled="false" value="{salesdeliveryModel>/salesorderdate}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesDeliveryCustomer}" id="customerEle">
+                                            <form:fields>
+                                                <Input
+                                                    id="txtCustomer"
+                                                    type="Text"
+                                                    value="{salesdeliveryModel>/partyname}"
+                                                    placeholder="{i18n>SalesDeliverySelectCustomer}"
+                                                    enabled="true"
+                                                    editable="true"
+                                                    showValueHelp="true"                                                
+                                                    valueHelpOnly="true"       
+                                                    valueHelpRequest="handleSelectVedorList"
+                                                    required="true">
+                                                </Input>
+                                            </form:fields>
+                                        </form:FormElement>
+                                         <!--party outstanding-->
+                                        <form:FormElement label="{i18n>SalesDeliveryPartyOutstanding}">
+                                            <form:fields>
+                                                <Input id="txtPartyOutstanding" enabled="false" value="{salesdeliveryModel>/partyoutstanding}"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesDeliveryContactPerson}">
+                                            <form:fields>
+                                                <Input id="txtContactperson" enabled="true" value="{salesdeliveryModel>/contactperson}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesDeliveryBillingToAddress}">
+                                            <form:fields>
+                                                <Input
+                                                    id="txtbilltoaddress"
+                                                    type="Text"
+                                                    value="{salesdeliveryModel>/billtoaddress}"
+                                                    placeholder="{i18n>SalesDeliverySelectbilltoaddress}"
+                                                    enabled="true"
+                                                    editable="true"
+                                                    showValueHelp="true" 
+                                                    valueHelpOnly="true"       
+                                                    valueHelpRequest="handleSelectBillToAddrList"
+                                                    required="true">
+                                                </Input>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesDeliveryTransactionType}" id="selGSTInvTypeEle">
+                                            <form:fields>
+                                                <Select id="selGSTInvType"
+                                                    forceSelection  = "false" 
+                                                    showSecondaryValues= "true"
+                                                    change = "getSeelctedTransaction"
+                                                    selectedKey="{salesdeliveryModel>/transactiontypeid}"
+                                                    items="{
+                                                        path: 'gstInvTypeList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:ListItem key="{gstInvTypeList>id}" text="{gstInvTypeList>refname}" />                                            
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesDeliverySalesType}">
+                                            <form:fields>
+                                                <Select id="salestype" 
+                                                    showSecondaryValues= "true"
+                                                    selectedKey="{salesdeliveryModel>/salestypeid}"
+                                                    items="{
+                                                        path: 'moduleList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:ListItem key="{moduleList>id}" text="{moduleList>refname}" />                                            
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>SalesDeliveryDeliveryNo}">
+                                            <form:fields>
+                                                <Input id="txtSalesDeliveryNo" enabled="false" value="{docSeriesModel>/newseries}" />                                
+                                                <Input id="txtSalesDeliveryId" enabled="false" value="{salesdeliveryModel>/id}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesDeliveryDeliveryDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtSalesDeliveryDate"  width="100%" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}"
+                                                    value="{salesdeliveryModel>/deliverydate}"
+                                                    valueFormat="dd/MM/yyyy"
+                                                    required="true"   />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesDeliveryDeliveryToAddress}">
+                                            <form:fields>
+                                                <Input
+                                                    id="txtshiptoaddress"
+                                                    type="Text"
+                                                    value="{salesdeliveryModel>/deliverytoaddress}"
+                                                    placeholder="{i18n>SalesDeliveryDeliveryTo}"
+                                                    enabled="true"
+                                                    editable="true"
+                                                    showValueHelp="true"                                                
+                                                    valueHelpOnly="true"       
+                                                    valueHelpRequest="handleSelectDelToAddrList"
+                                                    required="true">
+                                                </Input>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesDeliveryDeliveryFromWarehouse}">
+                                            <form:fields>
+                                                <Input
+                                                    id="txtWarehouseAddress"
+                                                    type="Text"
+                                                    value="{salesdeliveryModel>/warehouseaddress}"
+                                                    placeholder="{i18n>SalesDeliveryDeliveryFromWarehouse}"
+                                                    enabled="true"
+                                                    editable="true"
+                                                    showValueHelp="true"                                                
+                                                    valueHelpOnly="true"       
+                                                    valueHelpRequest="handleSelectWHAddrList"
+                                                    required="true">
+                                                </Input>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesDeliveryStatus}">
+                                            <form:fields>
+                                                <Select id="selSOStatus" 
+                                                    selectedKey="{salesdeliveryModel>/statusid}"
+                                                    items="{
+                                                        path: 'SDstatusList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:ListItem key="{SDstatusList>id}" text="{SDstatusList>refname}" />                                            
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                        <Table id="tblsalesdelivery" mode="None" backgroundDesign="Solid" enableHorizontalScrollbar= "true" growingScrollToLoad="true" items="{
+                            path: 'tblModel>/modelData',
+                                sorter: {
+                                    path: 'id'
+                                }
+                            }">
+                            <headerToolbar>
+                                <Toolbar>
+                                    <content>
+                                        <Title text="{i18n>SalesDeliveryDeliveryItemList}" level="H2"/>
+                                        <ToolbarSpacer />
+                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNewContent" id="addBtn" enabled="false"/>
+                                    </content>
+                                </Toolbar>
+                            </headerToolbar>           
+                            <columns>
+                                <Column><Text text ="{i18n>SalesDeliveryItemName}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>SalesDeliveryItemCode}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text text ="{i18n>SalesDeliveryOrderQuantity}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text text ="{i18n>SalesDeliveryOrderWeight}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text text ="{i18n>SalesDeliveryDeliveredQuantity}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text text ="{i18n>SalesDeliveryDeliveredWeight}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text text ="{i18n>SalesDeliveryRate}" /></Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem type="{tblModel>navigation}" press="onListItemPress">
+                                    <cells>        
+                                        <Text text="{tblModel>itemname}" />         
+                                        <Text text="{tblModel>itemcode}" />         
+                                        <Text text="{tblModel>quantity}" />                       
+                                        <Text text="{tblModel>weight}" />                       
+                                        <Text text="{tblModel>deliveryquantity}" />  
+                                        <Text text="{tblModel>deliveryweight}" />  
+                                        <Text text="{tblModel>rate}" />                       
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+     
+                        <form:Form editable="true">
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>SalesDeliveryRemark}">
+                                            <form:fields>
+                                                <TextArea placeholder="{i18n>SalesDeliveryAddRemark}" value="{salesdeliveryModel>/remark}" 
+                                                    growing="true" rows="3" growingMaxLines="5" width="100%"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                        <Panel>
+                            <FlexBox		
+                                alignItems="Start"
+                                justifyContent="End">
+                                <items>
+                                    <Button text="{i18n>SalesDeliveryForceClose}" id="btnClose" type="Emphasized" class="sapUiSmallMarginEnd" press="onClose" visible="false" />                
+                                    <Button text="{i18n>saveButtonText}" id="btnSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+                                    <Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
+                                </items>
+                            </FlexBox>
+                        </Panel> 
+                    </VBox>  
+                </f:content>
+			</f:DynamicPage> 
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout> 
+</core:View>

@@ -1,0 +1,33 @@
+{
+	"licensemangemntcollection": [
+		{
+			"Module" : "Breeder",			
+			"Manager" : "5",
+			"Executive" : "3"
+			
+
+        },
+        {
+			"Module" : "Hatchery",			
+			"Manager" : "3",
+			"Executive" : "2"
+			
+
+        },
+        {
+			"Module" : "CBF",			
+			"Manager" : "2",
+			"Executive" : "5"
+			
+
+        },
+        {
+			"Module" : "Processing",			
+			"Manager" : "4",
+			"Executive" : "3"
+			
+
+		}
+			
+	]
+}

@@ -1,0 +1,7 @@
+<mvc:View height="100%"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.App"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:tnt="sap.tnt">
+	<App id="app"></App>
+</mvc:View>

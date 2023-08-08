@@ -1,0 +1,232 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Breeder.BatchWiseDailyProducationAndConsumptionReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>BatchWiseDailyProductionAndConsumptionHeader}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                       
+                                        <form:FormElement label="{i18n>BatchWiseDailyProductionAndConsumptionlabelLocation}">
+                                            <form:fields>
+                                                <MultiComboBox id="locationtbl"
+                                                    selectionChange="handleSelectionChange"
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'locationList>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{locationList>id}" text="{locationList>locationname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                            <form:FormElement label="{i18n>BatchWiseDailyProductionAndConsumptionBatch}">
+                                            <form:fields>
+                                            <Input
+                                               id = "textBatch"
+                                                type="Text"
+                                                placeholder="Select Batch"
+                                                showSuggestion="true"
+                                                showValueHelp="true"    
+                                                valueHelpOnly="true"
+                                                value="{dailybrodGrowModel>/batchname}"
+                                                valueHelpRequest="handleBrdBatchValueHelp">
+                                            </Input>
+                                       
+                                            </form:fields>
+                                         </form:FormElement>
+                                            <form:FormElement label="{i18n>BatchWiseDailyProductionAndConsumptionShed}">
+                                            <form:fields>
+                                            <MultiComboBox id="shedtb1"
+                                                selectionChange="shedSelectionChange"
+                                                selectionFinish="shedSelectionFinish"
+                                                width="500px"
+                                                items="{
+                                                    path: 'shedModel>/modelData',
+                                                    sorter: { path: 'Name' }
+                                                }">
+                                                <core:Item key="{shedModel>breedershedid}" text="{shedModel>shedname}" />
+                                            </MultiComboBox>
+                                               
+                                            </form:fields>
+                                         </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer>
+                                          <form:formElements>
+                                          <form:FormElement label="{i18n>BatchWiseDailyProductionAndConsumptionFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromdate"  width="100%" value="{dailybrodGrowModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate" />   
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                         <form:FormElement label="{i18n>BatchWiseDailyProductionAndConsumptionToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtTodate"  width="100%" value="{dailybrodGrowModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate"/>   
+                                            </form:fields>
+                                        </form:FormElement>
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>          
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+
+                        <HBox fitContainer="true">
+                          
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblBatchdailypriconReport"  width="400%" growing="true" growingScrollToLoad="true" sticky="ColumnHeaders"  items="{
+                                                path: 'batchwisepronconReportModel>/modelData',
+                                                    sorter: {
+                                                        path: 'date'
+                                                    }
+                                                }"
+                                    mode="None" backgroundDesign="Solid">
+                               
+                                <columns>
+                                
+                                     <Column  width="10%"  minScreenWidth="Tablet" demandPopin="true" ><Text text ="Date" /></Column>
+                                    <Column  width="10%"  minScreenWidth="Tablet" demandPopin="true" ><Text text ="Age In Days " /></Column>
+                                    <Column  width="10%"  minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Opening Stock Female" /></Column>
+                                    <Column  width="8%"  minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Transfer In Female" /></Column>
+
+                                    <Column  width="10%"  minScreenWidth="Tablet" demandPopin="true" ><Text text ="Opening Stock Male" /></Column>
+                                     <Column  width="8%"  minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Transfer In Male" /></Column>
+
+                                    <Column  width="10%"  minScreenWidth="Tablet" demandPopin="true"><Text text ="Mortality Female" /></Column>
+                                    <Column  width="6%"  minScreenWidth="Tablet" demandPopin="true"><Text text ="Culls Female" /></Column>
+
+                                    <Column  width="10%"  minScreenWidth="Tablet" demandPopin="true"><Text text ="Mortality Male" /></Column>
+                                    <Column  width="6%"  minScreenWidth="Tablet" demandPopin="true"><Text text ="Culls Male" /></Column>
+
+
+                                    <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Closing Stock Male" /></Column>
+                                    <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Closing Stock Female" /></Column>
+                                    <Column minScreenWidth="Tablet" width="10%"  demandPopin="true"><Text text ="Production Egg Quantity" /></Column>
+                                    <Column minScreenWidth="Tablet" width="10%"  demandPopin="true"><Text text ="Production Eggs %" /></Column>
+                                    <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Standared Eggs Production" /></Column>
+                                    <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Commercial Eggs" /></Column>
+                                    <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Cracked Eggs" /></Column>
+                                    <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Double Yolk Eggs" /></Column>
+                                    <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Hatching Egg" /></Column> 
+                                     <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Wastage Egg" /></Column>   
+                                    <Column minScreenWidth="Tablet"  width="10%"  demandPopin="true"><Text text ="Supervisor" /></Column>
+                                    <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Total Feed Consumption Male" /></Column>
+                                    <Column minScreenWidth="Tablet"  width="10%"  demandPopin="true"><Text text ="Total Feed Consumption Female" /></Column>
+                                    <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Feed Consumption Per Bird Male" /></Column>
+                                    <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Feed Consumption Per Bird Female" /></Column>                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+
+                                            
+                                              <Text text="{batchwisepronconReportModel>transactiondate}"/>
+
+                                             <Text text="{= ${batchwisepronconReportModel>age} > 0 ? ${batchwisepronconReportModel>age} : '0'}" />
+                                             <Text text="{= ${batchwisepronconReportModel>femaleopeningbalance} > 0 ? ${batchwisepronconReportModel>femaleopeningbalance} : '0'}" />
+                                             <Text text="{= ${batchwisepronconReportModel>inqtyfemale} > 0 ? ${batchwisepronconReportModel>inqtyfemale} : '0'}" /> 
+
+                                             <Text text="{= ${batchwisepronconReportModel>maleopeningbalance} > 0 ? ${batchwisepronconReportModel>maleopeningbalance} : '0'}" />
+                                              <Text text="{= ${batchwisepronconReportModel>inqtymale} > 0 ? ${batchwisepronconReportModel>inqtymale} : '0'}" /> 
+                                             <Text text="{= ${batchwisepronconReportModel>femalemortality} > 0 ? ${batchwisepronconReportModel>femalemortality} : '0'}" />
+                                              <Text text="{= ${batchwisepronconReportModel>femaleculls} > 0 ? ${batchwisepronconReportModel>femaleculls} : '0'}" /> 
+
+                                             <Text text="{= ${batchwisepronconReportModel>malemortality} > 0 ? ${batchwisepronconReportModel>malemortality} : '0'}" />
+                                             <Text text="{= ${batchwisepronconReportModel>maleculls} > 0 ? ${batchwisepronconReportModel>maleculls} : '0'}" /> 
+
+                                             <Text text="{= ${batchwisepronconReportModel>maleclosingbalance} > 0 ? ${batchwisepronconReportModel>maleclosingbalance} : '0'}" />
+                                             <Text text="{= ${batchwisepronconReportModel>femaleclosingbalance} > 0 ? ${batchwisepronconReportModel>femaleclosingbalance} : '0'}" />
+                                             <Text text="{= ${batchwisepronconReportModel>production} > 0 ? ${batchwisepronconReportModel>production} : '0'}" />
+                                             <Text text="{= ${batchwisepronconReportModel>productionper} > 0 ? ${batchwisepronconReportModel>productionper} : '0'}" />
+                                             <Text text="{= ${batchwisepronconReportModel>Stdeggpro} > 0 ? ${batchwisepronconReportModel>Stdeggpro} : '0'}" />
+                                             <Text text="{= ${batchwisepronconReportModel>commercial} > 0 ? ${batchwisepronconReportModel>commercial} : '0'}" />
+                                             <Text text="{= ${batchwisepronconReportModel>crtacked} > 0 ? ${batchwisepronconReportModel>crtacked} : '0'}" />
+                                             <Text text="{= ${batchwisepronconReportModel>doubleyolk} > 0 ? ${batchwisepronconReportModel>doubleyolk} : '0'}" />
+                                             <Text text="{= ${batchwisepronconReportModel>hatching} > 0 ? ${batchwisepronconReportModel>hatching} : '0'}" />
+                                             <Text text="{= ${batchwisepronconReportModel>westageegg} > 0 ? ${batchwisepronconReportModel>westageegg} : '0'}" />
+                                             <Text text="{batchwisepronconReportModel>username}"/>
+                                             <Text text="{= ${batchwisepronconReportModel>malefeedconsumption} > 0 ? ${batchwisepronconReportModel>malefeedconsumption} : '0'}" />
+                                             <Text text="{= ${batchwisepronconReportModel>femalefeedconsumption} > 0 ? ${batchwisepronconReportModel>femalefeedconsumption} : '0'}" />
+                                             <Text text="{= ${batchwisepronconReportModel>feedconperbirdM} > 0 ? ${batchwisepronconReportModel>feedconperbirdM} : '0'}" />
+                                             <Text text="{= ${batchwisepronconReportModel>feedconperbirdF} > 0 ? ${batchwisepronconReportModel>feedconperbirdF} : '0'}" />
+
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+                    
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

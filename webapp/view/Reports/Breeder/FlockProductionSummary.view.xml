@@ -1,0 +1,251 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Breeder.FlockProductionSummary" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>FlockProductionSummaryReportTitle}"/>
+                </f:heading>
+                <f:actions>                           
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <VBox>
+                    <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+
+                                 <form:formElements>
+                                         <form:FormElement label="{i18n>layerBatchLabelBatch}"  >
+                                            <form:fields>
+                                             <Select id="txtBreederToBatch" selectedKey="{batchModel>/id}" forceSelection = "false" change="frequChange"  
+                                                items="{
+                                                    path: 'batchModel>/modelData',
+                                                    sorter: { path: 'key' }
+                                                }">
+                                                <core:Item key="{batchModel>id}" text="{batchModel>batchname}" />                                            
+                                            </Select>
+                                            </form:fields>
+                                            </form:FormElement>
+                                         
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer>
+                                    <form:formElements>
+
+                                        <form:FormElement label="">
+                                                <form:fields>
+                                                    <Button icon="sap-icon://search" type="Emphasized" text="{i18n>FlockProductionSummarysearch}" press="onSearchData"/>
+                                                </form:fields>
+                                            </form:FormElement>
+
+                                              <form:FormElement label="">
+                                                <form:fields>
+                                                    <Button icon="sap-icon://save" type="Emphasized" text="Gen Csv" press="onDataExport"/>
+                                                    <Button icon="sap-icon://save" type="Emphasized" text="Create PDF" press="createPDF"/>
+                                                </form:fields>
+                                            </form:FormElement>
+
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                </VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        
+        <f:content>				
+            <VBox fitContainer="true">  
+            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">                                           
+                <Table id="tblFlockReport"  width="600%"  sticky="ColumnHeaders"  growing="true"  growingScrollToLoad="true" items="{
+                        path: 'tblModel>/modelData',
+                            sorter: {
+                                    path: 'batchname',
+                                    group : true
+                                }
+                        }"
+                    mode="None" backgroundDesign="Solid">
+                    <!-- <headerToolbar>
+                        <Toolbar>
+                        <content>
+                            <Title  level="H2"/>
+                            <ToolbarSpacer />
+                              <MenuButton icon="sap-icon://download">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="SaveCSV" icon="sap-icon://save" press="onDataExport" />
+                                                            <MenuItem text="SavePDF" icon="sap-icon://save" press="createPDF" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                        </content>
+                        </Toolbar>
+                    </headerToolbar> -->
+                    <columns>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryDate}" /></Column>
+                        <!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="WK Of Lays" /></Column> -->
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryweekofage}" /></Column>    
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryfliveqty}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarymaleliveqty}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryfmor}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryfmorper}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryfcummorper}" /></Column>
+                        <Column minScreenWidth="Tablet"  demandPopin="true"><Text text ="{i18n>FlockProductionSummaryfstd}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarymalemor}" /></Column>
+                        
+                        
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarymmorper}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarymalecummorper}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryhendayyproact}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryhendayestd}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryweekytotalegg}" /></Column>
+                        <Column><Text text ="{i18n>FlockProductionSummarycumtotalegg}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarycumeggperhenhact}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarycumeggperhenhoustd}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryhatcheggact}" /></Column>    
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryhatcheggstd}" /></Column>
+                        
+                        
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryavgeggsizeact}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryavgeggsizestd}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryweeklyhatchegg}" /></Column>
+                        <Column minScreenWidth="Tablet"  demandPopin="true"><Text text ="{i18n>FlockProductionSummarycumhatchegg}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarycumhatchegghenhact}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarycumhatchegghenhoustd}" /></Column>
+                        <!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarydifference}" /></Column> -->
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryhatchperact}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryhatchperstd}" /></Column>
+                        <Column><Text text ="{i18n>FlockProductionSummaryweeklychick}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarycumchick}" /></Column>
+
+
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarycumchickhenhouseact}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarycumchickstd}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryffeedcon}" /></Column>    
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarymalefeedcon}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarycumfeed}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryfeedperf}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarystdfeedf}" /></Column>
+                        <Column minScreenWidth="Tablet"  demandPopin="true"><Text text ="{i18n>FlockProductionSummaryfeedperm}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarystdfeedm}" /></Column>
+
+
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryfactweight}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryfstdweight}" /></Column>
+                        <!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarydifference}" /></Column> -->
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummarymaleactweight}" /></Column>
+                        <Column><Text text ="{i18n>FlockProductionSummarymalestdweight}" /></Column>
+
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryeggmassact}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryeggmassstd}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>FlockProductionSummaryfeedperhe}" /></Column>    
+                     
+                        
+                        
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                        <customData>
+                        </customData>
+                            <cells>
+                                <Text text="{tblModel>lastdate}"/>
+                                <!-- <Text text="{tblModel>weekoflays}" /> -->
+                                <Text text="{tblModel>ageinweek}" />
+                                <Text text="{= ${tblModel>femaleliveqty} > 0 ? ${tblModel>femaleliveqty} : '0'}" />
+                                <Text text="{= ${tblModel>maleliveqty} > 0 ? ${tblModel>maleliveqty} : '0'}" />
+                                <Text text="{= ${tblModel>femalemortality} > 0 ? ${tblModel>femalemortality} : '0'}" />
+                                <Text text="{= ${tblModel>femalemortalityper} > 0 ? ${tblModel>femalemortalityper} : '0'}" />
+                                <Text text="{= ${tblModel>cummalefemalemortality} > 0 ? ${tblModel>cummalefemalemortality} : '0'}" />
+                                <Text text="{= ${tblModel>stdmortality} > 0 ? ${tblModel>stdmortality} : '0'}" />
+                                <Text text="{= ${tblModel>malemortality} > 0 ? ${tblModel>malemortality} : '0'}" />
+
+                                <Text text="{= ${tblModel>malemortalityper} > 0 ? ${tblModel>malemortalityper} : '0'}" />
+                                <Text text="{= ${tblModel>cummalemalemortality} > 0 ? ${tblModel>cummalemalemortality} : '0'}" />
+                                <Text text="{= ${tblModel>hensdayproact} > 0 ? ${tblModel>hensdayproact} : '0'}" />
+                                <Text text="{= ${tblModel>hdinpercent} > 0 ? ${tblModel>hdinpercent} : '0'}" />
+                                <Text text="{= ${tblModel>weeklytotaleggs} > 0 ? ${tblModel>weeklytotaleggs} : '0'}" />
+                                <Text text="{= ${tblModel>cumulativetotaleggs} > 0 ? ${tblModel>cumulativetotaleggs} : '0'}" />
+                                <Text text="{= ${tblModel>act} > 0 ? ${tblModel>act} : '0'}" />
+
+                                <Text text="{= ${tblModel>cumhhp} > 0 ? ${tblModel>cumhhp} : '0'}" />
+                                <Text text="{= ${tblModel>hatchper} > 0 ? ${tblModel>hatchper} : '0'}" />
+                                <Text text="{= ${tblModel>heinpercent} > 0 ? ${tblModel>heinpercent} : '0'}" />
+                                <Text text="{= ${tblModel>hatchingavgeggsize} > 0 ? ${tblModel>hatchingavgeggsize} : '0'}" />
+                                <Text text="{= ${tblModel>hatchingavgeggsizestd} > 0 ? ${tblModel>hatchingavgeggsizestd} : '0'}" />
+                                <Text text="{= ${tblModel>weeklyhatchingeggs} > 0 ? ${tblModel>weeklyhatchingeggs   } : '0'}" />
+                                <Text text="{= ${tblModel>cumulativehatchingeggs} > 0 ? ${tblModel>cumulativehatchingeggs} : '0'}" />
+
+                                <Text text="{= ${tblModel>hatchingact} > 0 ? ${tblModel>hatchingact} : '0'}" />
+                                <Text text="{= ${tblModel>cumhhhe} > 0 ? ${tblModel>cumhhhe} : '0'}" />
+                                <!-- <Text text="{= ${tblModel>difference} > 0 ? ${tblModel>difference} : '0'}" /> -->
+                                <Text text="{= ${tblModel>hatchact} > 0 ? ${tblModel>hatchact} : '0'}" />
+                                <Text text="{= ${tblModel>hatchstd} > 0 ? ${tblModel>hatchstd} : '0'}" />
+                                <Text text="{= ${tblModel>weeklychickd} > 0 ? ${tblModel>weeklychickd} : '0'}" />
+                                <Text text="{= ${tblModel>cumchicks} > 0 ? ${tblModel>cumchicks} : '0'}" />
+                              
+
+                                <Text text="{= ${tblModel>Cum Chicks/Hen Housed Act} > 0 ? ${tblModel>Cum C hicks/Hen Housed Act} : '0'}" />
+                                <Text text="{= ${tblModel>Cum Chicks/Hen Housed std} > 0 ? ${tblModel>Cum Chicks/Hen Housed std} : '0'}" />
+                                <Text text="{= ${tblModel>femalecon} > 0 ? ${tblModel>femalecon} : '0'}" />
+                                <Text text="{= ${tblModel>malecon} > 0 ? ${tblModel>malecon} : '0'}" />
+                                <Text text="{= ${tblModel>cumulativemalefemalefeedcon} > 0 ? ${tblModel>cumulativemalefemalefeedcon} : '0'}" />
+                                <Text text="{= ${tblModel>feed1female} > 0 ? ${tblModel>feed1female} : '0'}" />
+                                <Text text="{= ${tblModel>stdfemalefeedcon} > 0 ? ${tblModel>stdfemalefeedcon} : '0'}" />
+
+                                <Text text="{= ${tblModel>feed1male} > 0 ? ${tblModel>feed1male} : '0'}" />
+                                <Text text="{= ${tblModel>stdmalefeedcon} > 0 ? ${tblModel>stdmalefeedcon} : '0'}" />
+                                <Text text="{= ${tblModel>femalebodyweight} > 0 ? ${tblModel>femalebodyweight} : '0'}" />
+                                <Text text="{= ${tblModel>stdfemalebodyweight} > 0 ? ${tblModel>stdfemalebodyweight} : '0'}" />
+                                <!-- <Text text="{= ${tblModel>difference} > 0 ? ${tblModel>difference} : '0'}" /> -->
+                                <Text text="{= ${tblModel>malebodyweight} > 0 ? ${tblModel>malebodyweight} : '0'}" />
+                                <Text text="{= ${tblModel>stdmalebodyweight} > 0 ? ${tblModel>stdmalebodyweight} : '0'}" />
+
+                                <Text text="{= ${tblModel>eggmass} > 0 ? ${tblModel>eggmass} : '0'}" />
+                                <Text text="{= ${tblModel>eggmassstd} > 0 ? ${tblModel>eggmassstd} : '0'}" />
+                                <Text text="{= ${tblModel>feedperHE} > 0 ? ${tblModel>feedperHE} : '0'}" />
+                             
+                                </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>     
+                  </ScrollContainer>                        
+            </VBox>             
+        </f:content>             
+    </f:DynamicPage>    
+</core:View>
+
+
+
+
+ 

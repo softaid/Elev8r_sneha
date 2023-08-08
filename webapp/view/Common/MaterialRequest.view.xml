@@ -1,0 +1,234 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.MaterialRequest" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+ 
+	<VBox fitContainer="true">
+        <form:Form editable="true">
+            <form:toolbar>
+				<Toolbar>
+					<Title text="{i18n>MaterialRequestTitle}" level="H4" titleStyle="H4"/>
+					<ToolbarSpacer />
+					<Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+			    </Toolbar>
+			</form:toolbar>
+            <form:layout>
+                <form:ResponsiveGridLayout
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="3"
+                    columnsL="2"
+                    columnsM="2"
+                    singleContainerFullSize="false" />
+            </form:layout>
+            <form:formContainers>
+                <form:FormContainer title="">
+					<form:formElements>
+                        <form:FormElement label="{i18n>MaterialRequestTarget}">
+                            <form:fields>
+                                <Select id="ddlRequestSource" 
+                                        selectedKey="{inventoryRequestModel>/requestsource}" 
+                                        enabled="true"
+                                        items="{
+					                        path: 'sourceModel>/modelData',
+					                        sorter: { path: 'id' }
+				                        }">
+				                    <core:Item key="{sourceModel>id}" text="{sourceModel>refname}" />                                                                                                                               
+			                    </Select>
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>MaterialRequestSource}">
+                            <form:fields>
+                                <Select id="ddlRequestTarget" 
+                                        selectedKey="{inventoryRequestModel>/requesttarget}" 
+                                        enabled="true"
+                                        forceSelection="false" 
+                                        change="OnSelect"
+                                        items="{
+					                        path: 'sourceModel>/modelData',
+					                        sorter: { path: 'id' }
+				                        }">
+				                    <core:Item key="{sourceModel>id}" text="{sourceModel>refname}" />                                                                                                                               
+			                    </Select>
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>MaterialRequestFromWarehouse}">
+                            <form:fields>
+                                <Input
+                                    id="txtFromWarehouseCode"
+                                    type="Text"
+                                    required="true"
+                                    value="{inventoryRequestModel>/fromwarehousename}"
+                                    placeholder="{i18n>MaterialRequestSelectWarehouse}"
+                                    showValueHelp="true"             
+                                    valueHelpOnly="true" 
+                                    valueHelpRequest="handleWarehouseValueHelp">
+                                </Input>
+                                <!-- <Input id="txtFromWarehouseName" editable="false" valueLiveUpdate="true" value="{inventoryRequestModel>/fromwarehousename}"  />        -->
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>MaterialRequestFromWarehouseBin}">
+                            <form:fields>
+                                <Input
+                                    id="txtFromWarehouseBinCode"
+                                    type="Text"
+                                    required="true"
+                                    value="{inventoryRequestModel>/fromwarehousebinname}"
+                                    placeholder="{i18n>MaterialRequestSelectWarehouseBin}"
+                                    showValueHelp="true"                                              
+                                    valueHelpOnly="true"       
+                                    valueHelpRequest="handleWarehouseBinValueHelp"
+                                    >
+                                </Input>
+                                <!-- <Input id="txtFromWarehouseBinName" editable="false" valueLiveUpdate="true" value="{inventoryRequestModel>/fromwarehousebinname}"  />                                           -->
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+
+                <form:FormContainer title="">
+					<form:formElements>                  
+                        <form:FormElement label="{i18n>MaterialRequestDate}">
+                            <form:fields>
+                                 <DatePicker id="txtRequestDate" required="true" value="{inventoryRequestModel>/requestdate}" 
+                                        placeholder="{config>/dateFormat/placeholder}"
+                                        displayFormat="dd/MM/YYYY"      
+                                        valueFormat="dd/MM/YYYY"
+                                        change="onTestDateChange"/>
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>MaterialRequestDueDate}">
+                            <form:fields>
+                                 <DatePicker id="txtDueDate" required="true" value="{inventoryRequestModel>/duedate}" 
+                                        placeholder="{config>/dateFormat/placeholder}"
+                                        displayFormat="dd/MM/YYYY"      
+                                        valueFormat="dd/MM/YYYY"
+                                        change="onTestDateChange"/>
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>MaterialRequestStatus}">
+                            <form:fields>
+                                <Select id="ddlStatus" 
+                                        selectedKey="{inventoryRequestModel>/statusid}" 
+                                        enabled="true"
+                                        items="{
+					                        path: 'statusModel>/modelData',
+					                        sorter: { path: 'id' }
+				                        }">
+				                    <core:Item key="{statusModel>id}" text="{statusModel>refname}" />                                                             
+			                    </Select>
+                            </form:fields>
+                        </form:FormElement>
+                         <form:FormElement label="{i18n>MaterialRequestToWarehouse}">
+                            <form:fields>
+                                <Input
+                                    id="txtToWarehouseCode"
+                                    type="Text"
+                                    required="true"
+                                    value="{inventoryRequestModel>/towarehousename}"
+                                    placeholder="{i18n>MaterialRequestSelectWarehouse}"
+                                    showValueHelp="true"                                              enabled="false"
+                                    valueHelpOnly="true"       
+                                    valueHelpRequest="handleWarehouseValueHelp">
+                                </Input>
+                                <!-- <Input id="txtToWarehouseName" editable="false" valueLiveUpdate="true" value="{inventoryRequestModel>/towarehousename}"  />                                           -->
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>MaterialRequestToWarehouseBin}">
+                            <form:fields>
+                                <Input
+                                    id="txtToWarehouseBinCode"
+                                    type="Text"
+                                    required="true"
+                                    value="{inventoryRequestModel>/towarehousebinname}"
+                                    placeholder="{i18n>MaterialRequestSelectWarehouseBin}"
+                                    showValueHelp="true"                                              
+                                    valueHelpOnly="true"       
+                                    valueHelpRequest="handleWarehouseBinValueHelp"
+                                    enabled="false">
+                                </Input>
+                                <!-- <Input id="txtToWarehouseBinName" editable="false" valueLiveUpdate="true" value="{inventoryRequestModel>/towarehousebinname}"  />         -->
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+            </form:formContainers>
+        </form:Form>
+     
+        <Table id="tblShed" 
+                items="{
+                    path: 'detailModel>/modelData',
+                    sorter: {
+                        path: 'id'
+                    }
+                }">
+	        <headerToolbar>
+			   <Toolbar>
+				   <content>
+					<Title text="" level="H2"/>
+					<ToolbarSpacer />
+			        <Button icon="sap-icon://add" type="Transparent" press="onAddNew" id="addBtn"/>
+				  </content>
+			    </Toolbar>
+		    </headerToolbar>
+            <columns>
+                <Column><Text text ="{i18n>MaterialRequestItemId}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>MaterialRequestItemName}" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>MaterialRequestRequestedQuantity}" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>MaterialRequestItemUnit}" /></Column>                   
+            </columns>
+            <items>
+                <ColumnListItem type="{inventoryRequestModel>/navigation}" press="onListItemPress">
+                    <cells>
+                        <Text text="{detailModel>itemid}" />
+                        <Text text="{detailModel>itemname}" />
+                        <Text text="{detailModel>requestedquantity}" />
+                        <Text text="{detailModel>unit}" />                        
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+
+        <form:SimpleForm 
+                minWidth="1024"
+                maxContainerCols="1"
+                editable="false"
+                layout="ResponsiveGridLayout"
+                title="Address"
+                labelSpanL="1"
+                labelSpanM="1"
+                emptySpanL="1"
+                emptySpanM="1"
+                columnsL="1"
+                columnsM="1">
+            <form:content>
+                <Label text="{i18n>MaterialRequestRemark}" />
+                <TextArea id="txtRemark" valueLiveUpdate="true" placeholder="{i18n>MaterialRequestEnterRemark}" growing="true" rows="4" growingMaxLines="7" width="100%" value="{inventoryRequestModel>/remark}"/>
+            </form:content>
+        </form:SimpleForm>
+
+        <Panel>
+    	    <FlexBox		
+				alignItems="Start"
+				justifyContent="End">
+				<items>
+					<Button id="btnSave" text="{i18n>saveButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+					<Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel" />
+				</items>
+			</FlexBox>
+        </Panel>
+    </VBox>  
+</core:View>
+
+
+
+
+ 

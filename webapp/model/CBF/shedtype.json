@@ -1,0 +1,18 @@
+{
+	"shedtype": [
+		{
+			"code" : 1,
+            "shedtype": "Open"
+        },
+        {
+			"code" : 2,
+            "shedtype": "Close"
+        },
+        {
+			"code" : 2,
+            "shedtype": "Slated"
+		}
+		
+			
+	]
+}

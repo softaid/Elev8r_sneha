@@ -1,0 +1,136 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Hatchery.EconomyReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+	<f:title>
+		<f:DynamicPageTitle>
+			<f:heading>
+				<Title text="{i18n>economyReport}"/>
+			</f:heading>
+			<f:actions>
+			</f:actions>
+		</f:DynamicPageTitle>
+	</f:title>
+    <f:header>
+        <f:DynamicPageHeader pinnable="true">
+            <VBox>
+                <form:Form editable="true">
+                    <form:title>
+                    </form:title>
+                    <form:layout>
+                    <form:ResponsiveGridLayout
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="2"
+                        columnsM="2"
+                        singleContainerFullSize="false"  />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="">
+                            <form:formElements>
+                                <form:FormElement label="{i18n>StandardChartsAndSchedulesFeedScheduleFromDate}">
+                                    <form:fields>
+                                        <DatePicker id="txtFromDate" value="{mPOModel>/from_date}" placeholder="{config>/dateFormat/placeholder}"
+                                        displayFormat="{config>/dateFormat/displayFormat}" 
+                                        valueFormat="{config>/dateFormat/valueFormat}" required="true"  />                                            
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+                    <form:FormContainer>
+                        <form:formElements>
+                            <form:FormElement label="{i18n>StandardChartsAndSchedulesFeedScheduleToDate}">
+                                <form:fields>
+                                    <DatePicker id="txtToDate" value="{mPOModel>/to_date}" placeholder="{config>/dateFormat/placeholder}"
+                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                    valueFormat="{config>/dateFormat/valueFormat}" required="true" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="">
+                                <form:fields>
+                                    <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                    <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                        <menu>
+                                            <Menu itemSelected="onMenuAction" >
+                                                <items>
+                                                    <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                    <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                                </items>
+                                            </Menu>
+                                        </menu>
+                                    </MenuButton>
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                    </form:FormContainer>
+                    <form:FormContainer>
+                        <form:formElements>
+                        </form:formElements>
+                    </form:FormContainer>
+                </form:formContainers>
+                </form:Form>
+            </VBox>
+        </f:DynamicPageHeader>
+        </f:header>
+		<f:content>				
+            <VBox fitContainer="true">
+                <Table id="tblSettingReport" items="{
+                        path: 'economyReportModel>/modelData',
+                            sorter: {
+                                path: 'sqno'
+                            }
+                        }"
+                        inset="false" 
+                        class="sapFDynamicPageAlignContent">  
+                        <columns>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportsrno}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>candlingTestSettingDateLabel}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportHatchDate}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>economyReportSettingNumber}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportSourceName}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>settingReportNoOfEggsReceived}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>settingReportNoOfEggsSet}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportNoOfChicksReceived}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportHatch}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>economyReportCompleteQuantity}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>economyReporSaleableper}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>economyReporDeliveredChicks}" /></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{economyReportModel>sqno}"  />
+                                    <Text text="{economyReportModel>settingdate}"  />
+                                    <Text text="{economyReportModel>hatchdate}"  />
+                                    <Text text="{economyReportModel>settingno}"  />
+                                    <Text text="{economyReportModel>sourcename}"  />  
+                                    <Text text="{economyReportModel>noofeggsreceived}"  />  
+                                    <Text text="{economyReportModel>noofeggsset}"  />  
+                                    <Text text="{economyReportModel>noofchicksreceived}"  />  
+                                    <Text text="{economyReportModel>hatchpercent}"  />
+                                    <Text text="{economyReportModel>completequantity}"  />
+                                    <Text text="{economyReportModel>saleablepercent}"  />                                      
+                                    <Text text="{economyReportModel>deliveredchicks}"  />    
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                </Table>
+            </VBox>  
+        </f:content>
+		</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

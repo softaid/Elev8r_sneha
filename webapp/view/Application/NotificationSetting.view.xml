@@ -1,0 +1,76 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Application.NotificationSetting" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:dnd="sap.ui.core.dnd">
+    
+	<VBox fitContainer="true">
+        <ScrollContainer
+            horizontal="true"
+            vertical="true"
+            focusable="false"
+            height="100%">
+            <Table id="tblNotificationSetting" sticky="ColumnHeaders" growing="true" growingScrollToLoad="true"
+                inset="false"  
+                items="{
+                    path: 'notificationModel>/modelData',
+                    sorter: {
+                        path: 'notificationtype'
+                    }
+                }">
+	            <headerToolbar>
+			        <Toolbar>
+				        <content>
+					        <Title text="Notification Setting" level="H2"/>
+					        <ToolbarSpacer />
+                            <SearchField search="onSearch" width="17.5rem"/>
+			                <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
+				        </content>
+			        </Toolbar>
+		        </headerToolbar>  
+                <columns>
+                    <Column width="30%"><Text text ="Transaction" /></Column>
+                    <Column width="15%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Module" /></Column>
+                    <Column width="15%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Role" /></Column>
+                    <!-- <Column width="10%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Action" /></Column> -->
+                    <!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Template" /></Column> -->
+                    <!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Users" /></Column> -->
+                    <Column width="10%" minScreenWidth="Tablet" demandPopin="true"><Text text ="In App" /></Column>
+                    <Column width="10%" minScreenWidth="Tablet" demandPopin="true"><Text text ="SMS" /></Column>
+                    <Column width="10%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Email" /></Column>                 
+                </columns>           	 
+                <items>
+                    <ColumnListItem type="Navigation" press="onListItemPress">
+                        <cells>
+                            <Text text="{notificationModel>transactionname}"  />
+                            <Text text="{notificationModel>modulename}"  />
+                            <Text text="{notificationModel>rolenames}"  />
+                            <!-- <Text text="{notificationModel>actionname}"  /> -->
+                            <!-- <Text text="{notificationModel>template}"  /> -->
+                            <!-- <Text text="{notificationModel>users}"  /> -->
+
+                            <Switch enabled="false" state="{parts: [{path: 'notificationModel>inapp'}], formatter: '.formatter.getBooleanValue'}" customTextOn="Yes" customTextOff="No">
+                                                   <layoutData>
+                                                     <FlexItemData growFactor="1" />
+                                                   </layoutData>
+                                            </Switch>
+
+                            <Switch enabled="false" state="{parts: [{path: 'notificationModel>sms'}], formatter: '.formatter.getBooleanValue'}" customTextOn="Yes" customTextOff="No">
+                                                   <layoutData>
+                                                     <FlexItemData growFactor="1" />
+                                                   </layoutData>
+                                            </Switch>
+
+                            <Switch enabled="false" state="{parts: [{path: 'notificationModel>email'}], formatter: '.formatter.getBooleanValue'}" customTextOn="Yes" customTextOff="No">
+                                                   <layoutData>
+                                                     <FlexItemData growFactor="1" />
+                                                   </layoutData>
+                                            </Switch>
+
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>    
+        </ScrollContainer>
+	</VBox>
+</core:View>

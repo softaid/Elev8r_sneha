@@ -1,0 +1,29 @@
+{
+	"mortalitycullsdetaillist": [
+		{
+			"itemCode" : "B001",
+            "itemDescription": "Breeder Male",
+            "penName": "Line1",
+            "quantity" : 1500.000,
+            "avgWeight" : 0.200,
+            "todayMortality" : 0.000,
+            "mortalityReason" : "",
+            "sexingError" : 0.000,
+            "todayCulls" : 0.000,
+            "cullsReason" : ""
+        },
+        {
+			"itemCode" : "B002",
+            "itemDescription": "Breeder Female",
+            "penName": "Line1",
+            "quantity" : 4500.000,
+            "avgWeight" : 0.200,
+            "todayMortality" : 10.000,
+            "mortalityReason" : "",
+            "sexingError" : 0.000,
+            "todayCulls" : 0.000,
+            "cullsReason" : ""
+		}
+				
+	]
+}

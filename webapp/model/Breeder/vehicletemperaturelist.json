@@ -1,0 +1,12 @@
+{
+	"vehicletemperaturelist": [
+        {
+            "time" : "8:20PM",
+            "temperature" : 27.000
+        },
+        {
+            "time" : "8:30PM",
+            "temperature" : 25.000
+        }
+    ]
+}

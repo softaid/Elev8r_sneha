@@ -1,0 +1,95 @@
+{
+	"breederperformance": [
+		{
+			"code" : "1001",
+			"details":[
+				{
+					"week" : 1,
+					"totalEggsHW" : 8,
+					"hatchEggsHW" : 9,
+					"mortality" : 2.5,
+                    "HEWeekly" : 3.7,
+                    "totalEggsHH" : 5,
+                    "hatchEggsHH" : 7,
+                    "weeklyHatch" : 3,
+                    "chicksHH" : 3 
+				},
+				{
+					"week" : 2,
+					"totalEggsHW" : 8,
+					"hatchEggsHW" : 9,
+					"mortality" : 2.5,
+                    "HEWeekly" : 3.7,
+                    "totalEggsHH" : 5,
+                    "hatchEggsHH" : 7,
+                    "weeklyHatch" : 3,
+                    "chicksHH" : 3 
+				}
+			]
+		},
+		{
+			"code" : "1002",
+			"details":[
+				{
+					"week" : 3,
+					"totalEggsHW" : 8,
+					"hatchEggsHW" : 9,
+					"mortality" : 2.5,
+                    "HEWeekly" : 3.7,
+                    "totalEggsHH" : 5,
+                    "hatchEggsHH" : 7,
+                    "weeklyHatch" : 3,
+                    "chicksHH" : 3 
+				}
+			]
+		},
+		{
+			"code" : "1003",
+			"details":[
+				{
+					"week" : 4,
+					"totalEggsHW" : 8,
+					"hatchEggsHW" : 9,
+					"mortality" : 2.5,
+                    "HEWeekly" : 3.7,
+                    "totalEggsHH" : 5,
+                    "hatchEggsHH" : 7,
+                    "weeklyHatch" : 3,
+                    "chicksHH" : 3 
+				}
+			]
+		},
+		{
+			"code" : "1004",
+			"details":[
+				{
+					"week" : 5,
+					"totalEggsHW" : 8,
+					"hatchEggsHW" : 9,
+					"mortality" : 2.5,
+                    "HEWeekly" : 3.7,
+                    "totalEggsHH" : 5,
+                    "hatchEggsHH" : 7,
+                    "weeklyHatch" : 3,
+                    "chicksHH" : 3 
+				}
+			]
+		},
+		{
+			"code" : "1005",
+			"details":[
+				{
+					"week" : 6,
+					"totalEggsHW" : 8,
+					"hatchEggsHW" : 9,
+					"mortality" : 2.5,
+                    "HEWeekly" : 3.7,
+                    "totalEggsHH" : 5,
+                    "hatchEggsHH" : 7,
+                    "weeklyHatch" : 3,
+                    "chicksHH" : 3 
+				}
+			]
+		}			
+	]
+}

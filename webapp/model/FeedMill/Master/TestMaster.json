@@ -1,0 +1,67 @@
+{
+	"TestMaster": [
+		{
+            "No" : "0101A0101",     
+            "NoCode" : "1",                   
+			"Description" : "Description",
+			"details":[
+				{
+				"No" : 1,
+                    "From" : "10/1/2019",
+                    "To" : "12/1/2019",
+                    "Result" : "Complete"
+                
+				},
+				{
+                    "No" : 2,
+                    "From" : "10/2/2019",
+                    "To" : "12/2/2019",
+                    "Result" : "Complete"
+				},
+				{
+                    "No" : 3,
+                    "From" : "1/1/2019",
+                    "To" : "2/1/2019",
+                    "Result" : "Complete"
+                },
+                {
+                    "No" : 4,
+                    "From" : "10/3/2019",
+                    "To" : "12/3/2019",
+                    "Result" : "Complete"
+                },
+                {
+                    "No" : 5,
+                    "From" : "15/1/2019",
+                    "To" : "18/1/2019",
+                    "Result" : "Complete"   
+				}
+        	]
+		},
+		{
+            "No" : "0101B0102",     
+            "NoCode" : "2",                   
+			"Description" : "Description",
+			"details":[
+				{
+                    "No" : 7,
+                    "From" : "20/1/2019",
+                    "To" : "22/1/2019",
+                    "Result" : "Complete"   
+				},
+				{
+                    "No" : 8,
+                    "From" : "15/1/2019",
+                    "To" : "18/1/2019",
+                    "Result" : "Complete"   
+				},
+				{
+                    "No" : 5,
+                    "From" : "10/3/2019",
+                    "To" : "12/3/2019",
+                    "Result" : "Complete"   
+                }
+        	]
+		}
+	]
+}

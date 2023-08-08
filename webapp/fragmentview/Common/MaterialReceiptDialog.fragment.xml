@@ -1,0 +1,39 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="{18n>MaterialReceiptDialogSelectMaterialReceipt}"	
+		contentHeight="300px"
+		search="handleMaterialReceiptSearch"
+		confirm="onMaterialReceiptDialogClose"
+		cancel="onMaterialReceiptDialogClose"
+		items="{
+			path : 'materialReceiptsModel>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="" text="{materialReceiptsModel>id}" />
+                <Text text="{materialReceiptsModel>receiptdate}" />
+                <Text text="{materialReceiptsModel>refname}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="{18n>MaterialReceiptDialogID}" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{18n>MaterialReceiptDialogReceiptDate}" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{18n>MaterialReceiptDialogStatus}" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

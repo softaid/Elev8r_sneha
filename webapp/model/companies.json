@@ -1,0 +1,26 @@
+{
+    "companies" : [
+
+        {
+            "companyName" : "Test company",
+            "companyDetails" : "Details of test company",
+            "email" : "testCompany@gmail.com",
+            "status" : "Demo",
+            "demoDeliveredBy" : ""
+        },
+        {
+            "companyName" : "ABC",
+            "companyDetails" : "Details of ABC company",
+            "email" : "abc@gmail.com",
+            "status" : "Demo",
+            "demoDeliveredBy" : ""
+        },
+        {
+            "companyName" : "XYZ company",
+            "companyDetails" : "Details of XYZ company",
+            "email" : "xyz@gmail.com",
+            "status" : "Paid",
+            "demoDeliveredBy" : ""
+        }
+    ]
+}

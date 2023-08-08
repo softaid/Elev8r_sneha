@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Batch"	
+		contentHeight="300px"
+		search="handleCommonBatchSearch"
+		confirm="CommonBatchDialogClose"
+		cancel="CommonBatchDialogClose"
+		items="{
+			path : 'batchModel>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text title="" text="{batchModel>batchid}" /> 
+				<Text text="{batchModel>batchname}" />   
+				<Text text="{batchModel>batchstatus}" />                
+				<Text text="{batchModel>module}" />                
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Batch No." />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Batch Name" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Status" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Module" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

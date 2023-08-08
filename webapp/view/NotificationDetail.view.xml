@@ -1,0 +1,125 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ApplicationSettings.FinancialYearSettingDetail"
+	xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+	height="100%">
+
+	<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Financial Year Detail"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+						<Button
+							text="{i18n>saveButtonText}"
+                            type="Emphasized"
+                            press="onSave"
+                            id="btnSave"/>
+						<Button
+							text="Delete"
+							type="Emphasized"
+                            id="btnDelete"
+                            press="onDelete"/>						
+				</f:actions>
+				<f:navigationActions>
+					<Button
+						icon="sap-icon://decline"
+						type="Transparent" press="onCancel" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>		
+			<form:Form editable="true">
+                <form:title>
+                </form:title>
+                <form:layout>
+                    <form:ResponsiveGridLayout
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="2"
+                        columnsM="1"
+                        singleContainerFullSize="false" />
+                </form:layout>
+                <form:formContainers>
+                    <form:FormContainer title="">
+					    <form:formElements>
+
+                            <form:FormElement label="Year Name">
+                                <form:fields>
+                                      <Input id="txtYearName"  valueLiveUpdate="true" value="{FinancialYearModel>/yearname}" />                        
+                                </form:fields>
+                            </form:FormElement> 
+
+                            <form:FormElement label="Year Code">
+                                <form:fields>
+                                      <Input id="txtYearCode"  valueLiveUpdate="true" value="{FinancialYearModel>/yearcode}" />                        
+                                </form:fields>
+                            </form:FormElement> 
+
+                            <form:FormElement label="Start Date">
+                                <form:fields>
+                                       <DatePicker id="txtFromdate" type="Text" width="100%" value="{FinancialYearModel>/startfrom}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="getDate"/>   
+                                </form:fields>
+                            </form:FormElement>  
+
+                            <form:FormElement label="End Date">
+                                <form:fields>
+                                       <DatePicker id="txtTodate" type="Text" width="100%" value="{FinancialYearModel>/endto}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="getDate"/>   
+                                </form:fields>
+                            </form:FormElement>
+
+                           
+                            <form:FormElement label="Status">
+                                <form:fields>
+                                    <ComboBox id="cmbStatus" valueLiveUpdate="true" 
+                                        valueStateText="Please Select Status." 
+                                        selectedKey="{FinancialYearModel>/statusid}"
+                                        items="{
+                                        path: 'financialyearstatusModel>/modelData',
+                                        sorter: { path: 'id' }
+                                        }" 
+                                        isRequired="true">
+                                        <core:Item key="{financialyearstatusModel>id}" text="{financialyearstatusModel>refname}" />                                            
+                                    </ComboBox>
+                                </form:fields>
+                            </form:FormElement>
+
+                             <form:FormElement label="Active?">
+                                <form:fields>
+                                 <Switch state="{FinancialYearModel>/active}" customTextOn="Yes" customTextOff="No"
+                                             valueLiveUpdate="true" change="isActiveYear">
+                                        <layoutData>
+                                            <FlexItemData growFactor="1" />
+                                        </layoutData>
+                                    </Switch>
+                                </form:fields>
+                            </form:FormElement>
+
+
+                        </form:formElements>
+                    </form:FormContainer>
+                </form:formContainers>
+            </form:Form>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

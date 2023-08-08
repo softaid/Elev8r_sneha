@@ -1,0 +1,62 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Eggs Collection"
+		contentHeight="300px"
+		search="handleEggsColtionSearch"
+		confirm="handleEggsColtionClose"
+		cancel="handleEggsColtionClose"
+		items="{
+			path : 'eggsCollectionList>/modelData',
+			sorter : {
+				path : 'code'
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="" text="{eggsCollectionList>id}" />
+				<Text text="{eggsCollectionList>collectiondate}" />
+                <Text text="{eggsCollectionList>shedname}" />
+				<!-- <tnt:InfoLabel 
+					text="{eggsCollectionList>statusname}"
+					displayOnly= "true"
+					/> -->
+					<tnt:InfoLabel 
+					text="{eggsCollectionList>statusname}"
+					displayOnly= "true"
+					colorScheme= "{parts: [{path: 'eggsCollectionList>statusname'}],
+					formatter: '.formatter.setColorEggsProcSche'}"
+					/>
+               
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Doc No" />
+				</header>
+			</Column>
+			<Column
+				demandPopin="true" >
+				<header>
+					<Text text="Collection Date" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Shed Name" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Status Name" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

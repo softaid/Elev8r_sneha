@@ -1,0 +1,128 @@
+
+{   
+    "materialreceiptfrompo":[
+        {
+            "challanDate" : "2018/08/17",
+            "supplierName": "Supplier 1",
+            "modeOfTransport" : "Mode 1",
+            "vehicleNumber" : "MH 12 NL 5555",
+            "subject" : "Subject 1",
+            "referenceNumber" : "Reference 1",
+            "referenceDate" : "2018/08/17",
+            "orderDetails" :[
+				{
+					"orderNumber" : 1,
+                    "orderDate" : "2018/08/17",
+                    "subject" : "Subject 1",
+                    "dueDate" : "2018/08/17",
+                    "quotNumber" : 100
+				},
+				{
+					"orderNumber" : 2,
+                    "orderDate" : "2018/08/27",
+                    "subject" : "Subject 2",
+                    "dueDate" : "2018/08/27",
+                    "quotNumber" : 200
+				}
+			],
+            "challanStockDetails":[
+				{
+					"orderNumber" : 2,
+                    "stockName": "Test 1",
+                    "quantity" : 10,
+                    "freeQty" : 5,
+                    "replaceQty" : 2		
+				},
+				{
+					"orderNumber" : 2,
+                    "stockName": "Test 1",
+                    "quantity" : 20,
+                    "freeQty" : 3,
+                    "replaceQty" : 1
+				}
+			]
+        },
+        {
+            "challanDate" : "2018/08/07",
+            "supplierName": "Supplier 2",
+            "modeOfTransport" : "Mode 2",
+            "vehicleNumber" : "MH 12 NL 4545",
+            "subject" : "Subject 2",
+            "referenceNumber" : "Reference 2",
+            "referenceDate" : "2018/08/17",
+            "orderDetails" :[
+				{
+					"orderNumber" : 1,
+                    "orderDate" : "2018/08/17",
+                    "subject" : "Subject 1",
+                    "dueDate" : "2018/08/17",
+                    "quotNumber" : 100
+				},
+				{
+					"orderNumber" : 2,
+                    "orderDate" : "2018/08/27",
+                    "subject" : "Subject 2",
+                    "dueDate" : "2018/08/27",
+                    "quotNumber" : 200
+				}
+			],
+            "challanStockDetails":[
+				{
+					"orderNumber" : 2,
+                    "stockName": "Test 1",
+                    "quantity" : 10,
+                    "freeQty" : 5,
+                    "replaceQty" : 2		
+				},
+				{
+					"orderNumber" : 2,
+                    "stockName": "Test 1",
+                    "quantity" : 20,
+                    "freeQty" : 3,
+                    "replaceQty" : 1
+				}
+			]
+        },
+        {
+            "challanDate" : "2018/08/17",
+            "supplierName": "Supplier 3",
+            "modeOfTransport" : "Mode 3",
+            "vehicleNumber" : "MH 12 NL 0005",
+            "subject" : "Subject 3",
+            "referenceNumber" : "Reference 3",
+            "referenceDate" : "2018/08/17",
+            "orderDetails" :[
+				{
+					"orderNumber" : 1,
+                    "orderDate" : "2018/08/17",
+                    "subject" : "Subject 1",
+                    "dueDate" : "2018/08/17",
+                    "quotNumber" : 100
+				},
+				{
+					"orderNumber" : 2,
+                    "orderDate" : "2018/08/27",
+                    "subject" : "Subject 2",
+                    "dueDate" : "2018/08/27",
+                    "quotNumber" : 200
+				}
+			],
+            "challanStockDetails":[
+				{
+					"orderNumber" : 2,
+                    "stockName": "Test 1",
+                    "quantity" : 10,
+                    "freeQty" : 5,
+                    "replaceQty" : 2		
+				},
+				{
+					"orderNumber" : 2,
+                    "stockName": "Test 1",
+                    "quantity" : 20,
+                    "freeQty" : 3,
+                    "replaceQty" : 1
+				}
+			]
+        }
+    ]
+}

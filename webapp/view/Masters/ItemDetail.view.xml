@@ -1,0 +1,219 @@
+<mvc:View
+		xmlns:c="sap.ui.core"
+		controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.ItemDetail"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:u="sap.ui.unified"
+		xmlns="sap.m"
+		xmlns:t="sap.ui.table"
+		xmlns:f="sap.f"
+		xmlns:layout="sap.ui.layout"
+		xmlns:form="sap.ui.layout.form"
+        xmlns:core="sap.ui.core"
+		height="100%">
+        
+		<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>inventoryItemMasterItemDetailHeader}"/>
+					</f:heading>
+					<f:actions>
+						<ToolbarSpacer/>
+						 <Button
+							text="{i18n>inventoryItemMasterItemDetailButtonSave}"
+                            type="Emphasized"
+							press="onSave"/>
+					</f:actions>
+					<f:navigationActions>
+						<Button
+								icon="sap-icon://decline"
+								type="Transparent" press="onCancel" />
+					</f:navigationActions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:content>				
+   			   <form:Form editable="true"  id="frmItemDetail">
+                    <form:title>
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="1"
+                                singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="">
+					        <form:formElements>
+                                <form:FormElement label="{i18n>inventoryItemMasterItemDetailItemGroup}">
+                                    <form:fields>
+                                        <Input
+                                            id="cmbItemGroupId"
+                                            type="Text"
+                                            value="{editItemModel>/groupname}"
+                                            placeholder="Select Item Group"
+                                            showValueHelp="true" 
+                                            valueHelpOnly="true"        
+                                            valueHelpRequest="handleItemGroupValueHelp"
+                                            required="true">
+                                        </Input>    
+                                     </form:fields>
+                                </form:FormElement> 
+
+                                <form:FormElement label="{i18n>inventoryItemMasterItemDetailItemCode}" id="txtItemCodeelement">
+                                    <form:fields>
+                                        <Input id="txtItemCode" valueLiveUpdate="true" value="{editItemModel>/itemcode}" required="true" enabled="False"/>
+                                    </form:fields>
+                                </form:FormElement>                             
+                                <form:FormElement label="{i18n>inventoryItemMasterItemDetailItemName}">
+                                    <form:fields>
+                                        <Input id="txtItemNmae" valueLiveUpdate="true" liveChange="handleUserInput" validationError="handleValidationError" value="{editItemModel>/itemname}" required="true"/>
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="{i18n>inventoryItemMasterItemDetailDescription}">
+                                    <form:fields>
+                                        <Input id="txtItemDescription" valueLiveUpdate="true" value="{editItemModel>/description}" />
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="{i18n>inventoryItemMasterItemDetailItemManufacturer}">
+                                    <form:fields>
+                                        <Input id="txtItemManufecturer" valueLiveUpdate="true" liveChange="handleUserInput" validationError="handleValidationError" value="{path: 'editItemModel>/manufacturer',type : 'sap.ui.model.type.String', 
+                                        constraints : { minLength : 3, maxLength: 20, search :'^[A-Za-z]+$', errorText :'Please Enter string with 3-20 characters.'}}"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>inventoryItemMasterItemDetailItemUnit}">
+                                    <form:fields>
+                                        <Select id="ddlUnit"  
+                                        selectedKey="{editItemModel>/itemunitid}" 
+                                        enabled="true"
+                                        change="onTransferNoChange"
+                                        items="{
+                                            path: 'unitList>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <c:Item key="{unitList>id}" text="{unitList>refname}" />                             
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>inventoryItemMasterItemDetailUnitCost}">
+                                    <form:fields>
+                                        <Input id="txtItemUnitCost" valueLiveUpdate="true" value="{editItemModel>/unitcost}" required="true"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>inventoryItemMasterItemDetailLedger}">
+                                    <form:fields>
+                                        <Select id="ddlLedger" 
+                                        selectedKey="{editItemModel>/ledgerid}" 
+                                        enabled="true"
+                                        change="onLedgerChange"
+                                        showSecondaryValues= "true"
+                                        items="{
+                                            path: 'ledgerList>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <c:ListItem key="{ledgerList>id}" text="{ledgerList>glcode}-{ledgerList>ledgername}" additionalText="{ledgerList>category}"/>                             
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                 <form:FormElement label="{i18n>inventoryItemMasterItemDetailItemActive}">
+                                    <form:fields>
+                                        <Switch  state="{editItemModel>/active}" customTextOn="Yes" customTextOff="No">
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Is Salable">
+                                    <form:fields>
+                                        <Switch  state="{editItemModel>/issalable}" customTextOn="Yes" customTextOff="No">
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Revenue Ledger ID">
+                                    <form:fields>
+                                        <Select id="ddlRLedger" 
+                                        selectedKey="{editItemModel>/revenueledgerid}" 
+                                        enabled="true"
+                                        change="onLedgerChange"
+                                        showSecondaryValues= "true"
+                                        items="{
+                                            path: 'revenueLedger>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <c:ListItem key="{revenueLedger>id}" text="{revenueLedger>glcode}-{revenueLedger>ledgername}" additionalText="{revenueLedger>category}"/>                             
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>inventoryItemMasterItemDetailIsGST}">
+                                    <form:fields>
+                                        <Switch  state="{editItemModel>/isgst}" change="isGSTSelect"> 
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </form:fields>
+                                </form:FormElement>
+                                 <form:FormElement label="{i18n>inventoryItemMasterItemDetailMaterialType} " >
+                                    <form:fields>
+                                        <Select id="ddlMaterialType" forceSelection="false"  
+                                        selectedKey="{editItemModel>/materialtypeid}" 
+                                        enabled="true"
+                                        required="true"
+                                        items="{
+                                            path: 'materialtypeList>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <c:Item key="{materialtypeList>id}" text="{materialtypeList>refname}" />                             
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement id="eleHSN" label="{i18n>inventoryItemMasterItemDetailHSN} ">
+                                    <form:fields>
+                                        <Select id="ddlHSN" forceSelection="false"  showSecondaryValues= "true" 
+                                        selectedKey="{editItemModel>/hsnid}" 
+                                        enabled="true"
+                                        items="{
+                                            path: 'itemHSNList>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <c:ListItem key="{itemHSNList>id}" text="{itemHSNList>chapterid} - {itemHSNList>description}" />                             
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+
+                                 <form:FormElement id="eleTaxCategory" label="{i18n>inventoryItemMasterItemDetailTaxCategory}">
+                                    <form:fields>
+                                        <Select id="ddlTaxCategory" forceSelection="false"  
+                                        selectedKey="{editItemModel>/taxcategoryid}" 
+                                        enabled="true"
+                                        items="{
+                                            path: 'taxcategoryList>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <c:Item key="{taxcategoryList>id}" text="{taxcategoryList>refname}" />                             
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+		    </f:content>
+	    </f:DynamicPage>
+</mvc:View>

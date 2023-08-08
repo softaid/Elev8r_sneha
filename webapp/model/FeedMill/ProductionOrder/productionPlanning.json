@@ -1,0 +1,194 @@
+{   
+    "productionplanning":[
+        {
+            "docNumber" : "DOC 001",
+            "docNumber1" : "1",
+            "date" : "2018/07/15",
+            "warehouse" : "Warehouse 1",
+            "feedPlanning":[
+				{
+                    "planFor": "Order 001",
+                    "planningDocNumber": "PlanningDOC 1",
+                    "startDate" : "2018/07/15",
+                    "endDate" : "2018/07/15",
+                    "totalQuantity" : 100,
+                    "totalBags": 10
+				},
+				{
+					"planFor": "Order 001",
+                    "planningDocNumber": "PlanningDOC 2",
+                    "startDate" : "2018/07/25",
+                    "endDate" : "2018/07/25",
+                    "totalQuantity" : 10,
+                    "totalBags": 10
+				},
+				{
+					"planFor": "Order 001",
+                    "planningDocNumber": "PlanningDOC 3",
+                    "startDate" : "2018/07/17",
+                    "endDate" : "2018/07/17",
+                    "totalQuantity" : 50,
+                    "totalBags": 10
+				}
+        	],
+            "selectPlanning":[
+                {
+                    "feedCode": "Feed 001",
+                    "feedName": "Feed 1",
+                    "requiredQty" : "15",
+                    "availableQty" : "25",
+                    "balanceQty" : 100,
+                    "finalQty": 10,
+                    "poNumber" : "PO 001"
+				},
+				{
+					
+                    "feedCode": "Feed 002",
+                    "feedName": "Feed 2",
+                    "requiredQty" : "15",
+                    "availableQty" : "25",
+                    "balanceQty" : 100,
+                    "finalQty": 10,
+                    "poNumber" : "PO 002"
+				},
+				{
+					
+                    "feedCode": "Feed 003",
+                    "feedName": "Feed 3",
+                    "requiredQty" : "15",
+                    "availableQty" : "25",
+                    "balanceQty" : 100,
+                    "finalQty": 10,
+                    "poNumber" : "PO 003"
+				}
+            ]
+        },
+        {
+            "docNumber" : "DOC 002",
+            "docNumber1" : "2",
+            "date" : "2018/07/05",
+            "warehouse" : "Warehouse 2",
+            "feedPlanning":[
+				{
+                    "planFor": "Order 001",
+                    "planningDocNumber": "PlanningDOC 1",
+                    "startDate" : "2018/07/15",
+                    "endDate" : "2018/07/15",
+                    "totalQuantity" : 100,
+                    "totalBags": 10
+				},
+				{
+					"planFor": "Order 001",
+                    "planningDocNumber": "PlanningDOC 2",
+                    "startDate" : "2018/07/25",
+                    "endDate" : "2018/07/25",
+                    "totalQuantity" : 10,
+                    "totalBags": 10
+				},
+				{
+					"planFor": "Order 001",
+                    "planningDocNumber": "PlanningDOC 3",
+                    "startDate" : "2018/07/17",
+                    "endDate" : "2018/07/17",
+                    "totalQuantity" : 50,
+                    "totalBags": 10
+				}
+        	],
+            "selectPlanning":[
+                {
+                    "feedCode": "Feed 001",
+                    "feedName": "Feed 1",
+                    "requiredQty" : "15",
+                    "availableQty" : "25",
+                    "balanceQty" : 100,
+                    "finalQty": 10,
+                    "poNumber" : "PO 001"
+				},
+				{
+					
+                    "feedCode": "Feed 002",
+                    "feedName": "Feed 2",
+                    "requiredQty" : "15",
+                    "availableQty" : "25",
+                    "balanceQty" : 100,
+                    "finalQty": 10,
+                    "poNumber" : "PO 002"
+				},
+				{
+					
+                    "feedCode": "Feed 003",
+                    "feedName": "Feed 3",
+                    "requiredQty" : "15",
+                    "availableQty" : "25",
+                    "balanceQty" : 100,
+                    "finalQty": 10,
+                    "poNumber" : "PO 003"
+				}
+            ]
+        },
+        {
+            "docNumber" : "DOC 003",
+            "docNumber1" : "3",
+            "date" : "2018/07/25",
+            "warehouse" : "Warehouse 3",
+            "feedPlanning":[
+				{
+                    "planFor": "Order 001",
+                    "planningDocNumber": "PlanningDOC 1",
+                    "startDate" : "2018/07/15",
+                    "endDate" : "2018/07/15",
+                    "totalQuantity" : 100,
+                    "totalBags": 10
+				},
+				{
+					"planFor": "Order 001",
+                    "planningDocNumber": "PlanningDOC 2",
+                    "startDate" : "2018/07/25",
+                    "endDate" : "2018/07/25",
+                    "totalQuantity" : 10,
+                    "totalBags": 10
+				},
+				{
+					"planFor": "Order 001",
+                    "planningDocNumber": "PlanningDOC 3",
+                    "startDate" : "2018/07/17",
+                    "endDate" : "2018/07/17",
+                    "totalQuantity" : 50,
+                    "totalBags": 10
+				}
+        	],
+            "selectPlanning":[
+                {
+                    "feedCode": "Feed 001",
+                    "feedName": "Feed 1",
+                    "requiredQty" : "15",
+                    "availableQty" : "25",
+                    "balanceQty" : 100,
+                    "finalQty": 10,
+                    "poNumber" : "PO 001"
+				},
+				{
+					
+                    "feedCode": "Feed 002",
+                    "feedName": "Feed 2",
+                    "requiredQty" : "15",
+                    "availableQty" : "25",
+                    "balanceQty" : 100,
+                    "finalQty": 10,
+                    "poNumber" : "PO 002"
+				},
+				{
+					
+                    "feedCode": "Feed 003",
+                    "feedName": "Feed 3",
+                    "requiredQty" : "15",
+                    "availableQty" : "25",
+                    "balanceQty" : 100,
+                    "finalQty": 10,
+                    "poNumber" : "PO 003"
+				}
+            ]
+        }
+    ]
+}
+

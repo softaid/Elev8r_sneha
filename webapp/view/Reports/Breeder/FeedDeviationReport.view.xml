@@ -1,0 +1,190 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Breeder.FeedDeviationReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Deviation In Actual Consumption vs Standard Consumption "/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                        
+                                        <form:FormElement label="{i18n>DailyBroodingGrowingLabelLocation}">
+                                            <form:fields>
+                                                <MultiComboBox id="locationtbl"
+                                                    selectionChange="handleSelectionChange"
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'locationList>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{locationList>id}" text="{locationList>locationname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                            <form:FormElement label="{i18n>DailyBroodingGrowingLabelBatchName}">
+                                            <form:fields>
+                                            <Input
+                                               id = "textBatch"
+                                                type="Text"
+                                                placeholder="Select Batch"
+                                                showSuggestion="true"
+                                                showValueHelp="true"    
+                                                valueHelpOnly="true"
+                                                value="{feedDeviationModel>/batchname}"
+                                                valueHelpRequest="handleBrdBatchValueHelp">
+                                            </Input>
+                                            </form:fields>
+                                         </form:FormElement>
+                                           <form:FormElement label="{i18n>DailyBroodingGrowingLabelShedName}">
+                                            <form:fields>
+                                            <MultiComboBox id="shedtb1"
+                                                selectionChange="shedSelectionChange"
+                                                selectionFinish="shedSelectionFinish"
+                                                width="500px"
+                                                items="{
+                                                    path: 'shedModel>/modelData',
+                                                    sorter: { path: 'Name' }
+                                                }">
+                                                <core:Item key="{shedModel>breedershedid}" text="{shedModel>shedname}" />
+                                            </MultiComboBox>
+                                               
+                                            </form:fields>
+                                         </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer>
+
+                                          <form:formElements>
+                                          <form:FormElement label="{i18n>DailyBroodingGrowingLabelFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromdate" width="100%" value="{feedDeviationModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change = "ongetDate"/>   
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                         <form:FormElement label="{i18n>DailyBroodingGrowingLabelToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtTodate"  width="100%" value="{feedDeviationModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change = "ongetDate"/>   
+                                            </form:fields>
+                                        </form:FormElement>
+                                              <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>          
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+
+                        <HBox fitContainer="true">
+                          
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblDeviationReport"  width="200%" growing="true" sticky="ColumnHeaders" items="{
+                                                path: 'deviationReportModel>/modelData',
+                                                    sorter: {
+                                                        path: 'breeditemname',
+                                                        group : true
+                                                    }
+                                                }"
+                                    mode="None" backgroundDesign="Solid">
+                                <columns>
+                                   <Column width="10%" ><Text text ="Shed" /></Column>
+                                    <Column  width="10%"  minScreenWidth="Tablet" demandPopin="true" ><Text text ="Week No" /></Column>
+                                    <Column  width="10%"  minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Item Name" /></Column>
+                                     <Column  width="10%"  minScreenWidth="Tablet" demandPopin="true" ><Text text ="Live Bird" /></Column>
+                                    <Column  width="10%"  minScreenWidth="Tablet" demandPopin="true"><Text text ="Weekly Standared Feed Consumption" /></Column>
+                                     <Column  width="10%"  minScreenWidth="Tablet" demandPopin="true"><Text text ="Weekly Standared Feed Consumption Per Bird" /></Column>
+                                    <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Weekly Actual Feed Consumption" /></Column>
+                                    <Column minScreenWidth="Tablet" width="10%"  demandPopin="true"><Text text ="Rrecommended Feed Consumption" /></Column>
+                                    <Column minScreenWidth="Tablet" width="10%"  demandPopin="true"><Text text ="Difference Feed Consumption" /></Column>
+                                    <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Diffference Actual And Rrecommended Feed Consumption" /></Column>
+                           
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                            <Text text="{deviationReportModel>shedname}"/>
+                                            <Text text="{deviationReportModel>weekno}"/>
+                                            <Text text="{deviationReportModel>itemname}"/>
+                                            <Text text="{deviationReportModel>livestock}" />
+                                            <Text text="{deviationReportModel>stfeedconsumed}" />
+                                            <Text text="{deviationReportModel>stfeedconsumedperbird}" />
+                                            <Text text="{deviationReportModel>atfeedconsumption}" />
+                                            <Text text="{deviationReportModel>recommendedfeed}" />
+                                            <Text text="{deviationReportModel>difffeedconsumption}" />
+                                            <Text text="{deviationReportModel>diffatandrefeed}" /> 
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                    </f:content>
+			</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

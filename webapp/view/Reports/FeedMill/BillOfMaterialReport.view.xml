@@ -1,0 +1,141 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.FeedMill.BillOfMaterialReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Bill Of Material"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                        <form:FormElement label="Item Name">
+                                            <form:fields>
+                                                <MultiComboBox id="itemList"
+                                                    selectionChange="handleSelectionChange"
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'itemList>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{itemList>id}" text="{itemList>itemname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                     <form:FormContainer>
+                                        <form:formElements>
+                                             
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="getbillofmaterialReport"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                 
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                          
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel"  width="130%"  growing="true"  growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'productname',
+                                                         group : true
+                                                    }
+                                                }"
+                                                 backgroundDesign="Solid">
+                                    <columns>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Product Name"/></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="BOM Code" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="BOM Date" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Created By" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Code" /></Column>                                  
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Name" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Quantity" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Unit Cost" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Unit" /></Column> 
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                             <Text text="{tblModel>productname}"/>
+                                             <Text text="{tblModel>bomcode}" />
+                                             <Text text="{tblModel>bomdate}" />
+                                             <Text text="{tblModel>createdby}" />
+                                             <Text text="{tblModel>itemcode}" />
+                                             <Text text="{tblModel>itemname}" />
+                                             <Text text="{tblModel>quantity}" />
+                                             <Text text="{tblModel>unitcost}" />
+                                             <Text text="{tblModel>itemunitname}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                            </ScrollContainer>                          
+                        </HBox>  
+                    </f:content>
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

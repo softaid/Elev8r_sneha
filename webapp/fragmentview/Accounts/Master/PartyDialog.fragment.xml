@@ -1,0 +1,44 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Party"
+		contentHeight="300px"
+		search="handlePartySearch"
+		confirm="handlePartyClose"
+		cancel="handlePartyClose"
+		items="{
+			path : 'partyModel>/modelData',
+			sorter : {
+				path : 'code',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{partyModel>id}" />
+				<Text text="{partyModel>partyname}" />
+                <Text text="{partyModel>partyroles}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="ID" />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Party Name" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Party Roles" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

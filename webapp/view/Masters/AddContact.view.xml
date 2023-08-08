@@ -1,0 +1,432 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.AddContact"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	height="100%">
+	<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Create Contact"/>
+                </f:heading>
+                <f:actions>
+                    <ToolbarSpacer/>
+                        <!-- <Link
+                            text="Convert to Lead"
+                            press="convertToLead" /> -->
+                        <Button id="convertBtn" text="Convert to Lead" press="convertToLead"/>
+                        <Button
+                        text="{i18n>saveButtonText}"
+                        id="btnSave"
+                        type="Emphasized"
+                        press = "onSave"/>
+                    <!-- <Button  id="pdf" text="Print" type="Emphasized" class="sapUiSmallMarginEnd" press="onPdfExport"/> -->
+                </f:actions>
+                <f:navigationActions>
+                    <!-- <layout:VerticalLayout
+                        class="sapUiContentPadding"
+                        width="100%">
+                        <layout:content> -->
+                            
+                        <!-- </layout:content>
+                    </layout:VerticalLayout> -->
+                    <Button
+                        icon="sap-icon://decline"
+                        type="Transparent" press="onCancel" />
+                </f:navigationActions>
+            </f:DynamicPageTitle>
+        </f:title>
+		<f:content>	
+            <VBox> 
+                <Panel id="pnlContactMaster" expandable="true" expanded="true" headerText="Contact Details" width="auto">
+                    <form:Form editable="true">
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="1"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+                            <form:FormContainer title="Contact Details" width="100%"> 
+                                <form:formElements>
+                                    <form:FormElement label="Contact ID">
+                                        <form:fields>
+                                            <Input id="contactid" editable="false" valueLiveUpdate="true" value="{editContactModel>/contactid}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Contact Type">
+                                        <form:fields>
+                                            <Select id="typeid" 
+                                                change=""
+                                                selectedKey="{editContactModel>/contacttypeid}" 
+                                                forceSelection="true"
+                                                width="500px"
+                                                items="{
+                                                    path: 'leadCntTypeModel>/modelData'
+                                                }">
+                                                <core:Item key="{leadCntTypeModel>id}" text="{leadCntTypeModel>description}" />
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Contact Name">
+                                        <form:fields>
+                                            <Input id="contactname" valueLiveUpdate="true" value="{editContactModel>/contactname}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Date">
+                                        <form:fields>
+                                            <DatePicker id="date" width="100%" 
+                                            placeholder="{config>/dateFormat/placeholder}"
+                                            displayFormat="{config>/dateFormat/displayFormat}"
+                                            value="{editContactModel>/date}"
+                                            valueFormat="dd/MM/yyyy"
+                                            />
+                                        </form:fields>
+                                    </form:FormElement> 
+                                    <form:FormElement label="Contact Company ID">
+                                        <form:fields>
+                                            <Input id="companyid" valueLiveUpdate="true" value="{editContactModel>/contactcompanyid}" change=""/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Company Name">
+                                        <form:fields>
+                                            <Input id="companyname" valueLiveUpdate="true" value="{editContactModel>/companyname}" change=""/>
+                                        </form:fields>
+                                    </form:FormElement> 
+                                    <form:FormElement label="Business Card1">
+                                        <form:fields>
+                                            <Input id="businesscardone" valueLiveUpdate="true" value="{editContactModel>/buisnesscardone}" change=""/>
+                                        </form:fields>
+                                    </form:FormElement> 
+                                    <form:FormElement label="Business Card2">
+                                        <form:fields>
+                                            <Input id="businesscardtwo" valueLiveUpdate="true" value="{editContactModel>/buisnesscardtwo}" change=""/>
+                                        </form:fields>
+                                    </form:FormElement> 
+                                    <form:FormElement label="Business Card3">
+                                        <form:fields>
+                                            <Input id="businesscardthree" valueLiveUpdate="true" value="{editContactModel>/buisnesscardthree}" change=""/>
+                                        </form:fields>
+                                    </form:FormElement> 
+                                    <form:FormElement label="Contact Category">
+                                        <form:fields>
+                                            <Select id="categoryid"                                                 
+                                                change=""
+                                                selectedKey="{editContactModel>/contactcategoryid}" 
+                                                forceSelection="true"
+                                                width="500px"
+                                                items="{
+                                                    path: 'leadCategoryModel>/modelData'                                                    
+                                                }">
+                                                <core:Item key="{leadCategoryModel>id}" text="{leadCategoryModel>description}" />
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Contact SubCategory">
+                                        <form:fields>
+                                            <Select id="subcategoryid"
+                                                change=""
+                                                selectedKey="{editContactModel>/contactsubcategoryid}" 
+                                                forceSelection="true"
+                                                width="500px"
+                                                items="{
+                                                    path: 'leadSubCategoryModel>/modelData'                                                    
+                                                }">
+                                                <core:Item key="{leadSubCategoryModel>id}" text="{leadSubCategoryModel>description}" />
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="{i18n>leadSiteAddress}">
+                                        <form:fields>
+                                            <Input id="siteaddress" valueLiveUpdate="true" value="{editContactModel>/waddress}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="{i18n>leadCountry}">
+                                        <form:fields>
+                                            <Select id="ddlCountry1" selectedKey="{editContactModel>/wcountryid}" forceSelection="true"
+                                                items="{
+                                                    path: 'partyCountryModel>/modelData'                                                    
+                                                }" change="onStatusChange">
+                                                <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="{i18n>leadState}">
+                                        <form:fields>
+                                            <Select id="ddlState1" selectedKey="{editContactModel>/wstateid}" forceSelection="true"
+                                                items="{
+                                                    path: 'partyStateModel>/modelData'                                                    
+                                                }" change="onSiteStateChange">
+                                                <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>                                
+                                    <form:FormElement label="{i18n>leadCity}">
+                                        <form:fields>
+                                            <Select id="ddlCity1" selectedKey="{editContactModel>/wcityid}" 
+                                                items="{
+                                                    path: 'wCityModel>/modelData'                                                    
+                                                }" change="">
+                                                <core:Item key="{wCityModel>id}" text="{wCityModel>cityname}" />                                            
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="{i18n>leadPinCode}">
+                                        <form:fields>
+                                            <Input id="txtPinCode1" type="number" maxLength="6" valueLiveUpdate="true" value="{editContactModel>/wpincode}" change="onNumberInputChange"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Residential Address">
+                                        <form:fields>
+                                            <Input id="residentialaddress" valueLiveUpdate="true" value="{editContactModel>/residentialaddress}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Country(R)">
+                                        <form:fields>
+                                            <Select id="ddlCountryr" selectedKey="{editContactModel>/rcountryid}" forceSelection="true"
+                                                items="{
+                                                    path: 'partyCountryModel>/modelData'                                                    
+                                                }" change="onStatusChange">
+                                                <core:Item key="{partyCountryModel>id}" text="{partyCountryModel>countryname}" />                                            
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="State(R)">
+                                        <form:fields>
+                                            <Select id="ddlStater" selectedKey="{editContactModel>/rstateid}" forceSelection="true"
+                                                items="{
+                                                    path: 'partyStateModel>/modelData'                                                    
+                                                }" change="onResidentialStateChange">
+                                                <core:Item key="{partyStateModel>id}" text="{partyStateModel>statename}" />                                            
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>                                
+                                    <form:FormElement label="City(R)">
+                                        <form:fields>
+                                            <Select id="ddlCityr" selectedKey="{editContactModel>/rcityid}" 
+                                                items="{
+                                                    path: 'rCityModel>/modelData'                                                    
+                                                }" change="">
+                                                <core:Item key="{rCityModel>id}" text="{rCityModel>cityname}" />                                            
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="PinCode(R)">
+                                        <form:fields>
+                                            <Input id="PinCodeR" maxLength="6" valueLiveUpdate="true" value="{editContactModel>/rpincode}" change="onNumberInputChange"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Mobile1">
+                                        <form:fields>
+                                            <Input id="mobile1" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/phoneno}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <!-- <form:FormElement label="Mobile2">
+                                        <form:fields>
+                                            <Input id="mobile2" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/mobilep}"/>
+                                        </form:fields>
+                                    </form:FormElement> -->
+                                    <form:FormElement label="Official Email1">
+                                        <form:fields>
+                                            <Input id="email1" valueLiveUpdate="true" value="{editContactModel>/email}" change=""  />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <!-- <form:FormElement label="Official Email2">
+                                        <form:fields>
+                                            <Input id="email2" valueLiveUpdate="true" value="{editContactModel>/email}" change=""  />
+                                        </form:fields>
+                                    </form:FormElement> -->
+                                    <form:FormElement label="Branches in city1">
+                                        <form:fields>
+                                            <Input id="branch1" valueLiveUpdate="true" value="{editContactModel>/branch1}" change=""  />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Branches in city2">
+                                        <form:fields>
+                                            <Input id="branch2" valueLiveUpdate="true" value="{editContactModel>/branch2}" change=""  />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Branches in city3">
+                                        <form:fields>
+                                            <Input id="branch3" valueLiveUpdate="true" value="{editContactModel>/branch3}" change=""  />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="GSTN">
+                                        <form:fields>
+                                            <Input id="gstn" maxLength="15" valueLiveUpdate="true" value="{editContactModel>/gstno}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="PanNo">
+                                        <form:fields>
+                                            <Input id="panno" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/panno}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                        </form:formContainers>
+                    </form:Form>
+                    <form:Form editable="true"> 
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="1"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+                            <form:FormContainer title="Websites and Social Links" width="100%">
+                                <form:formElements>
+                                    <form:FormElement label="Facebook">
+                                        <form:fields>
+                                            <Input id="facebook" valueLiveUpdate="true" value="{editContactModel>/linkfacebook}" change=""  />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="LinkedIN">
+                                        <form:fields>
+                                            <Input id="linkedin" valueLiveUpdate="true" value="{editContactModel>/linklinkedin}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="YouTube">
+                                        <form:fields>
+                                            <Input id="twitter" valueLiveUpdate="true" value="{editContactModel>/linkyoutube}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Instagram">
+                                        <form:fields>
+                                            <Input id="instagram" valueLiveUpdate="true" value="{editContactModel>/linkinstagram}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Notes">
+                                        <form:fields>
+                                            <Input id="remark" valueLiveUpdate="true" value="{editContactModel>/remark}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Contact Source1">
+                                        <form:fields>
+                                            <Input id="source1" valueLiveUpdate="true" value="{editContactModel>/contactsourceone}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Contact Source2">
+                                        <form:fields>
+                                            <Input id="source2" valueLiveUpdate="true" value="{editContactModel>/contactsourcetwo}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Sneha Sales Contact">
+                                        <form:fields>
+                                            <Input id="salescontact" valueLiveUpdate="true" value="{editContactModel>/salecontact}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Sneha NI Contact">
+                                        <form:fields>
+                                            <Input id="nicontact" valueLiveUpdate="true" value="{editContactModel>/nicontact}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Sneha EI Contact">
+                                        <form:fields>
+                                            <Input id="eicontact" valueLiveUpdate="true" value="{editContactModel>/eicontact}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Email(P)">
+                                        <form:fields>
+                                            <Input id="emailp" valueLiveUpdate="true" value="{editContactModel>/emailp}" change=""  />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Email(W)">
+                                        <form:fields>
+                                            <Input id="emailw" valueLiveUpdate="true" value="{editContactModel>/emailw}" change=""  />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Contact Reference">
+                                        <form:fields>
+                                            <Input id="contactreference" valueLiveUpdate="true" value="{editContactModel>/contactreference}" change=""  />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Designation">
+                                        <form:fields>
+                                            <Input id="designation" valueLiveUpdate="true" value="{editContactModel>/designation}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="DOB">
+                                        <form:fields>
+                                            <DatePicker id="dob" width="100%" 
+                                            placeholder="{config>/dateFormat/placeholder}"
+                                            displayFormat="{config>/dateFormat/displayFormat}"
+                                            value="{editContactModel>/DOB}"
+                                            valueFormat="dd/MM/yyyy"
+                                            />
+                                        </form:fields>
+                                    </form:FormElement> 
+                                    <form:FormElement label="DOM">
+                                        <form:fields>
+                                            <DatePicker id="dom" width="100%" 
+                                            placeholder="{config>/dateFormat/placeholder}"
+                                            displayFormat="{config>/dateFormat/displayFormat}"
+                                            value="{editContactModel>/DOM}"
+                                            valueFormat="dd/MM/yyyy"
+                                            />
+                                        </form:fields>
+                                    </form:FormElement> 
+                                    <form:FormElement label="Social Link1">
+                                        <form:fields>
+                                            <Input id="sociallink1" valueLiveUpdate="true" value="{editContactModel>/sociallink1}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Social Link2">
+                                        <form:fields>
+                                            <Input id="sociallink2" valueLiveUpdate="true" value="{editContactModel>/sociallink2}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Social Link3">
+                                        <form:fields>
+                                            <Input id="sociallink3" valueLiveUpdate="true" value="{editContactModel>/sociallink3}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Mobile(P)">
+                                        <form:fields>
+                                            <Input id="mobilep" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/mobilep}"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Mobile(W)">
+                                        <form:fields>
+                                            <Input id="mobilew" maxLength="10" valueLiveUpdate="true" value="{editContactModel>/mobilew}"/>
+                                        </form:fields>
+                                    </form:FormElement>                                    
+                                </form:formElements>      
+                            </form:FormContainer>
+                        </form:formContainers>
+                    </form:Form> 
+                </Panel>              
+            </VBox>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

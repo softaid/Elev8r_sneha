@@ -1,0 +1,117 @@
+{
+	"liftingweight": [
+		{
+			"branchName" : "CBF Pashyala",
+            "farmName" : "SAHARA FARM",
+            "customerCode" : "0101A0101",
+            "customerName" : "M.S. Ahemad",
+            "scheduleCode" : "1",       
+			"details":[
+				{
+					"selected" : true,
+                    "lineId" : 1,
+                    "orderNumber" : "970004",
+                    "orderEntry" : "130",
+                    "orderDate" : "09/03/2017",
+                    "customerCode" : "0101A0101",
+                    "customerName" : "M.S. Ahemad",
+                    "itemCode" : "COB001",
+                    "itemName": "Coob Bird",
+                    "totalWeight" : 200.00,
+                    "openQuantity" : 200.00,
+                    "toRelease" : 100.00,
+                    "ratePerKg" : 50.00,
+                    "farmCode" : 6,
+                    "farmName" : "SAHARA FARM",
+                    "farmerCode" : 8,
+                    "farmerName" : "Test"
+				},
+				{
+                    "selected" : false,
+                    "lineId" : 2,
+                    "orderNumber" : "970004",
+                    "orderEntry" : "130",
+                    "orderDate" : "09/03/2017",
+                    "customerCode" : "0101A0101",
+                    "customerName" : "M.S. Ahemad",
+                    "itemCode" : "COB001",
+                    "itemName": "Coob Bird",
+                    "totalWeight" : 200.00,
+                    "openQuantity" : 200.00,
+                    "toRelease" : 100.00,
+                    "ratePerKg" : 50.00,
+                    "farmCode" : 6,
+                    "farmName" : "SAHARA FARM",
+                    "farmerCode" : 8,
+                    "farmerName" : "Test"
+				},
+				{
+                    "selected" : false,
+                    "lineId" : 3,
+                    "orderNumber" : "970004",
+                    "orderEntry" : "130",
+                    "orderDate" : "09/03/2017",
+                    "customerCode" : "0101A0101",
+                    "customerName" : "M.S. Ahemad",
+                    "itemCode" : "COB001",
+                    "itemName": "Coob Bird",
+                    "totalWeight" : 200.00,
+                    "openQuantity" : 200.00,
+                    "toRelease" : 100.00,
+                    "ratePerKg" : 50.00,
+                    "farmCode" : 6,
+                    "farmName" : "SAHARA FARM",
+                    "farmerCode" : 8,
+                    "farmerName" : "Test"
+				}
+        	]
+		},
+		{
+			"branchName" : "CBF Test",
+            "farmName" : "Test FARM",
+            "customerCode" : "02201B0101",
+            "customerName" : "Patil",
+            "scheduleCode" : "2",
+			"details":[
+				{
+					"selected" : false,
+                    "lineId" : 4,
+                    "orderNumber" : "970004",
+                    "orderEntry" : "130",
+                    "orderDate" : "09/03/2017",
+                    "customerCode" : "0101A0101",
+                    "customerName" : "Patil",
+                    "itemCode" : "COB001",
+                    "itemName": "Coob Bird",
+                    "totalWeight" : 200.00,
+                    "openQuantity" : 200.00,
+                    "toRelease" : 100.00,
+                    "ratePerKg" : 50.00,
+                    "farmCode" : 6,
+                    "farmName" : "Test FARM",
+                    "farmerCode" : 8,
+                    "farmerName" : "Test"
+				},
+				{
+                    "selected" : false,
+                    "lineId" : 5,
+                    "orderNumber" : "970004",
+                    "orderEntry" : "130",
+                    "orderDate" : "09/03/2017",
+                    "customerCode" : "0101A0101",
+                    "customerName" : "Patil",
+                    "itemCode" : "COB001",
+                    "itemName": "Coob Bird",
+                    "totalWeight" : 200.00,
+                    "openQuantity" : 200.00,
+                    "toRelease" : 100.00,
+                    "ratePerKg" : 50.00,
+                    "farmCode" : 6,
+                    "farmName" : "Test FARM",
+                    "farmerCode" : 8,
+                    "farmerName" : "Test"
+				}
+        	]
+		}
+	]
+}

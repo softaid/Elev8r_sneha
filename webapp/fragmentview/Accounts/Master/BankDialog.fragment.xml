@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Party"
+		contentHeight="300px"
+		search="handleBankSearch"
+		confirm="handleBankClose"
+		cancel="handleBankClose"
+		items="{
+			path : 'bankModel>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{bankModel>id}" />
+				<Text text="{bankModel>bankname}" />
+                <Text text="{bankModel>ifsccode}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="ID" />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Bank Name" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="IFSC Code" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

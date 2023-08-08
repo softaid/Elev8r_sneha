@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Quality Check No"	
+		contentHeight="300px"
+		search="handleQualitySearch"
+		confirm="handleQualityClose"
+		cancel="handleQualityClose"
+		items="{
+			path : 'qualitycheckListModel>/modelData'
+			
+		}">
+		<ColumnListItem>
+			<cells>
+			 	<Text text="{qualitycheckListModel>id}" />
+				<Text text="{qualitycheckListModel>checkedby}" />
+				<Text text="{qualitycheckListModel>ackid}" />
+               
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="ID" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Checked By" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				 >
+				<header>
+					<Text text="Acknowledgement Number" />
+				</header>
+			</Column>
+            
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

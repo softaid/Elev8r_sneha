@@ -1,0 +1,13 @@
+{
+	"eggsgradingactivitygradedetaillist": [
+		{
+			"no" : 1,
+			"batch": "ABBC",
+			"fromBatch": "EG0001-SYSTEM-BIN-LOCATION",
+			"batchQuantity": 401.000,
+			"grade": "ABBC",
+			"selectedQuantity" : 200.000,
+			"binCode": "EG0001-SYSTEM-BIN-LOCATION"
+        }
+    ]
+}

@@ -1,0 +1,100 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.Item" height="100%"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:core="sap.ui.core"
+  xmlns:u="sap.ui.unified">
+
+	<VBox fitContainer="true">
+        <Table id="tblItem" 
+               inset="false" 
+               growing="true"
+               growingThreshold="100"
+               growingScrollToLoad="true"
+               items="{
+                    path: 'itemModel>/modelData',
+                    sorter: {
+                        path: 'itemcode'
+                    }
+                }">
+	        <headerToolbar>
+			    <Toolbar>
+				   <content>
+					<Title text="{i18n>inventoryItemMasterItemTitle}" level="H2"/>
+					<ToolbarSpacer />
+                    <SearchField search="onSearch" width="17.5rem" id ="search"/>
+			        <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
+                    <u:FileUploader 
+                    id="fileUploader"
+                    name="myFileUpload"
+                    buttonText = ""
+                    placeholder = "Please Select File"
+                    icon="sap-icon://attachment"
+                    uploadUrl="upload/"
+                    tooltip="Import Data."
+                    change="handleExcelUpload" 
+                    uploadComplete="handleUploadComplete"/>
+                    <Button
+                    text="Upload template"
+                    type="Emphasized"
+                    press="onUploadMasterData" id="btnUploadData"/>
+                    <MenuButton icon="sap-icon://download">
+                        <menu>
+                            <Menu itemSelected="onMenuAction" >
+                                <items>
+                                    <MenuItem text="Item List" icon="sap-icon://download" press="onItemExport" />
+                                    <MenuItem text="Import Item List" icon="sap-icon://download" press="onItemImport" />
+                                </items>
+                            </Menu>
+                        </menu>
+                    </MenuButton>
+				  </content>
+			    </Toolbar>
+		    </headerToolbar>
+            <columns>
+                <Column><Text text ="{i18n>inventoryItemMasterItemItemGroup}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>inventoryItemMasterItemItemCode}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>inventoryItemMasterItemItemName}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>inventoryItemMasterItemItemDescription}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>inventoryItemMasterItemItemManufacturer}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>inventoryItemMasterItemItemActive}"/></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>inventoryItemMasterItemItemIsGST}"/></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>inventoryItemMasterItemItemMaterialType}"/></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>inventoryItemMasterItemItemHSN}"/></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>inventoryItemMasterItemItemTaxCategory}"/></Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Navigation" press="onListItemPress">
+                    <cells>
+                        <Text text="{itemModel>groupname}"  />
+                        <Text text="{itemModel>itemcode}"  />
+                        <Text text="{itemModel>itemname}"  />
+                        <Text text="{itemModel>description}"  />
+                        <Text text="{itemModel>manufacturer}"  />
+                        <Switch state="{parts: [{path: 'itemModel>active'}], formatter: '.formatter.getBooleanValue'}" customTextOn="Yes" customTextOff="No" enabled="false">
+                            <layoutData>
+                                <FlexItemData growFactor="1" />
+                            </layoutData>
+                        </Switch>
+
+                        <Switch state="{parts: [{path: 'itemModel>isgst'}], formatter: '.formatter.getBooleanValue'}" customTextOn="Yes" customTextOff="No" enabled="false">
+                            <layoutData>
+                                <FlexItemData growFactor="1" />
+                            </layoutData>
+                        </Switch>
+
+                        <Text text="{itemModel>materialtypename}"  />
+                        <Text text="{itemModel>chapterid}"  />
+                        <Text text="{itemModel>taxcategoryname}"  />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+        <VBox id="pnlErrMessage" visible="false" class="sapMMsgStrip sapMMsgStripError sapUiSmallMarginBottom" width="auto">
+        </VBox >
+        <TabContainer id="pnlDataTabs" visible="false" showAddNewButton="false" class="pnlDataTabs sapUiResponsiveContentPadding">
+            <items></items>
+        </TabContainer>
+        <HBox width="auto"></HBox>
+        <HBox id="pnlMasterData" width="auto"></HBox>
+	</VBox>
+</core:View>

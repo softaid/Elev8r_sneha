@@ -1,0 +1,23 @@
+{
+	"feedschedule": [
+		{
+			"code" : 1,
+            "itemname": "Booster",
+            "fromage": "1",
+            "toage": "10",
+            "feedqty": "300",
+            "unit": "g",
+            "location": ""
+		},
+		{
+			"code" : 1,
+            "itemname": "Booster",
+            "fromage": "1",
+            "toage": "10",
+            "feedqty": "300",
+            "unit": "g",
+            "location": ""
+		}
+		
+	]
+}

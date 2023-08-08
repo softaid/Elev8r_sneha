@@ -1,0 +1,94 @@
+{
+	"schemeCostStructure": [
+		{
+            "code" : "0101A0101",     
+            "name" : "test1",                   
+            "chickCost" : 23423.45,
+			"administrationCost" : 534564.45,
+            "changeFormula" : false,
+            "fromDate" : "09/03/2015",
+            "toDate" : "03/07/2016",
+            "feedCost" : 343.43,
+            "medicineCost" : 55.343,
+            "birdIncentivePerKg" : 435,
+            "birdIncentivePerBird" : 43,
+            "percentage" : 10,
+            "productionIncentive" : 4,
+			"standardGrowingChargesStructure":[
+				{
+					"fromAvgBodyWeight" : 182,
+                    "toAvgBodyWeight" : 199,
+                    "productionCost" : 22,
+                    "rearingCharge" : 534,
+                    "fcr" : 32
+				},
+				{
+                    "fromAvgBodyWeight" : 182,
+                    "toAvgBodyWeight" : 199,
+                    "productionCost" : 22,
+                    "rearingCharge" : 534,
+                    "fcr" : 32
+				},
+				{
+                    "fromAvgBodyWeight" : 182,
+                    "toAvgBodyWeight" : 199,
+                    "productionCost" : 22,
+                    "rearingCharge" : 534,
+                    "fcr" : 32
+                },
+                {
+                    "fromAvgBodyWeight" : 182,
+                    "toAvgBodyWeight" : 199,
+                    "productionCost" : 22,
+                    "rearingCharge" : 534,
+                    "fcr" : 32
+                },
+                {
+                    "fromAvgBodyWeight" : 182,
+                    "toAvgBodyWeight" : 199,
+                    "productionCost" : 22,
+                    "rearingCharge" : 534,
+                    "fcr" : 32
+				}
+        	]
+		},
+		{
+            "code" : "0101A0101",     
+            "name" : "test1",                   
+            "chickCost" : 23423.45,
+			"administrationCost" : 534564.45,
+            "changeFormula" : true,
+            "fromDate" : "09/03/2015",
+            "toDate" : "03/07/2016",
+            "feedCost" : 343.43,
+            "medicineCost" : 55.343,
+            "birdIncentivePerKg" : 435,
+            "birdIncentivePerBird" : 43,
+            "percentage" : 10,
+            "productionIncentive" : 4,
+			"standardGrowingChargesStructure":[
+				{
+					"fromAvgBodyWeight" : 182,
+                    "toAvgBodyWeight" : 199,
+                    "productionCost" : 22,
+                    "rearingCharge" : 534,
+                    "fcr" : 32
+				},
+				{
+                    "fromAvgBodyWeight" : 182,
+                    "toAvgBodyWeight" : 199,
+                    "productionCost" : 22,
+                    "rearingCharge" : 534,
+                    "fcr" : 32
+				},
+				{
+                    "fromAvgBodyWeight" : 182,
+                    "toAvgBodyWeight" : 199,
+                    "productionCost" : 22,
+                    "rearingCharge" : 534,
+                    "fcr" : 32
+                }
+        	]
+		}
+	]
+}

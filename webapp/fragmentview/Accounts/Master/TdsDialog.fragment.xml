@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select TDS"	
+		contentHeight="300px"
+		search="handleTdsSearch"
+		confirm="onTdsDialogClose"
+		cancel="onTdsDialogClose"
+		items="{
+			path : 'tdsList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="" text="{tdsList>section}" />
+                <Text text="{tdsList>description}" />
+                <Text text="{tdsList>rate}" />
+				
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Section" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Description" />
+				</header>
+			</Column>
+			 <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="TDS(%)" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,459 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.BreederSales.SalesInvoice" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:t="sap.ui.table"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:FlexibleColumnLayout  id="fclBreederSalesInvoice" backgroundDesign="Solid">
+		<f:beginColumnPages>
+            <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="{i18n>SalesInvoice}"/>
+				        </f:heading>
+                         <f:actions>
+                            <ToolbarSpacer/>
+                           <Button icon="sap-icon://list" type="Transparent" press="onListIconPress" visible="false"/>
+                        </f:actions>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+                    <VBox fitContainer="true">                   
+                        <form:Form editable="true">
+                            <form:toolbar>
+                            </form:toolbar>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>SalesInvoiceSalesOrder}" id="salesOrderEle">
+                                            <form:fields>
+                                                <Input
+                                                    id="txtSalesOrder"
+                                                    type="Text"
+                                                    value="{salesinvoiceModel>/salesorderno}"
+                                                    placeholder="Select sales order"
+                                                    enabled="true"
+                                                    editable="true"
+                                                    showValueHelp="true"                                                
+                                                    valueHelpOnly="true"       
+                                                    valueHelpRequest="handleSelectSalesOrderList"
+                                                    required="true">
+                                                </Input>
+                                                <Input id="txtSalesOrderDate" enabled="false" value="{salesinvoiceModel>/salesorderdate}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesInvoiceSalesDelivery}" id = "salesDeliveryEle">
+                                            <form:fields>
+                                                <MultiComboBox
+                                                    id="cmbSalesDelivery"
+                                                    showSecondaryValues= "true"
+                                                    selectedKeys="{salesinvoiceModel>/salesdeliveryids}"
+                                                    selectionFinish="SalesDeliveryChange"
+                                                    items="{
+                                                        path: 'salesdeliveryList>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:ListItem key="{salesdeliveryList>id}" text="{salesdeliveryList>salesdeliveryno}" additionalText="{salesdeliveryList>deliverydate}"/>
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesInvoiceCustomer}">
+                                            <form:fields>
+                                                <Input
+                                                    id="txtCustomer"
+                                                    type="Text"
+                                                    value="{salesinvoiceModel>/partyname}"
+                                                    placeholder="Select Customer"
+                                                    enabled="true"
+                                                    editable="true"
+                                                    showValueHelp="true"                                                
+                                                    valueHelpOnly="true"       
+                                                    valueHelpRequest="handleSelectVedorList"
+                                                    required="true">
+                                                </Input>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <!--party outstanding-->
+                                        <form:FormElement label="{i18n>SalesInvoicePartyOutstanding}">
+                                            <form:fields>
+                                                <Input id="txtPartyOutstanding" enabled="false" value="{salesinvoiceModel>/partyoutstanding}"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesInvoiceContactPerson}">
+                                            <form:fields>
+                                                <Input id="txtContactperson" enabled="false" value="{salesinvoiceModel>/contactperson}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesInvoiceReferenceNo}">
+                                            <form:fields>
+                                                <Input id="txtCustomerRefNo" value="{salesinvoiceModel>/referenceno}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesInvoiceDeliveryFromWarehouse}">
+                                            <form:fields>
+                                                <Input
+                                                    id="txtWarehouseAddress"
+                                                    type="Text"
+                                                    value="{salesinvoiceModel>/warehouseaddress}"
+                                                    placeholder="Delivery From Warehouse"
+                                                    enabled="true"
+                                                    editable="true"
+                                                    showValueHelp="true"                                                
+                                                    valueHelpOnly="true"       
+                                                    valueHelpRequest="handleSelectWHAddrList"
+                                                    required="true">
+                                                </Input>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesInvoiceSalesType}">
+                                            <form:fields>
+                                                <Select id="salestype" 
+                                                    showSecondaryValues= "true"
+                                                    selectedKey="{salesinvoiceModel>/salestypeid}"
+                                                    items="{
+                                                        path: 'moduleList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:ListItem key="{moduleList>id}" text="{moduleList>refname}" />                                            
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>SalesInvoiceInvoiceNo}">
+                                            <form:fields>
+                                                <Input id="txtSalesInvoiceNo" enabled="false" value="{docSeriesModel>/newseries}" />                                
+                                                <Input id="txtSalesInvoiceId" enabled="false" value="{salesinvoiceModel>/id}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesInvoiceSalesInvoiceDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtSalesInvoiceDate" width="100%" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}"
+                                                    value="{salesinvoiceModel>/salesinvoicedate}"
+                                                    valueFormat="dd/MM/yyyy"
+                                                    required="true"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesInvoiceBillingToAddress}">
+                                            <form:fields>
+                                                <Input
+                                                    id="txtbilltoaddress"
+                                                    type="Text"
+                                                    value="{salesinvoiceModel>/billtoaddress}"
+                                                    placeholder="Select bill to address"
+                                                    enabled="true"
+                                                    editable="true"
+                                                    showValueHelp="true"                                                
+                                                    valueHelpOnly="true"       
+                                                    valueHelpRequest="handleSelectBillToAddrList"
+                                                    required="true">
+                                                </Input>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesInvoiceDeliveryToAddress}">
+                                            <form:fields>
+                                                <Input
+                                                    id="txtshiptoaddress"
+                                                    type="Text"
+                                                    value="{salesinvoiceModel>/deliverytoaddress}"
+                                                    placeholder="Delivery To"
+                                                    enabled="true"
+                                                    editable="true"
+                                                    showValueHelp="true"                                                
+                                                    valueHelpOnly="true"       
+                                                    valueHelpRequest="handleSelectDelToAddrList"
+                                                    required="true">
+                                                </Input>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label = "{i18n>SalesInvoiceTransactionType}">
+                                            <form:fields>
+                                                <Select id="selGSTInvType"
+                                                    forceSelection  = "false" 
+                                                    showSecondaryValues= "true"
+                                                    selectedKey="{salesinvoiceModel>/transactiontypeid}"
+                                                    items="{
+                                                        path: 'gstInvTypeList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:ListItem key="{gstInvTypeList>id}" text="{gstInvTypeList>refname}" />                                            
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesInvoiceStatus}">
+                                            <form:fields>
+                                                <Select id="status" 
+                                                    showSecondaryValues= "true"
+                                                    selectedKey="{salesinvoiceModel>/statusid}"
+                                                    items="{
+                                                        path: 'SOStatusList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:ListItem key="{SOStatusList>id}" text="{SOStatusList>refname}" />                                            
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                        <Panel width="auto" class="" accessibleRole="Region">
+                            <headerToolbar>
+                                <Toolbar height="3rem">
+                                    <Title text="{i18n>SalesInvoiceInvoiceItemList}"/>		        
+                                </Toolbar>
+                            </headerToolbar>
+                    		<content>
+                                <ScrollContainer
+                                    height="100%"
+                                    width="100%"
+                                    horizontal="true"
+                                    vertical="true"
+                                    focusable="true">
+        
+                                    <Table id="tblsalesinvoice" width="200%" mode="None" backgroundDesign="Solid" growingScrollToLoad="true" items="{
+                                        path: 'tblModel>/modelData',
+                                            sorter: {
+                                                path: 'id'
+                                            }
+                                    }">
+                                        <headerToolbar>
+                                            <Toolbar>
+                                                <content>
+                                                    <Title text="{i18n>SalesInvoiceInvoiceItemList}" level="H2"/>
+                                                    <ToolbarSpacer />
+                                                    <Button icon="sap-icon://add" type="Transparent" press="onAddNewContent" id="addBtn"/>
+                                                </content>
+                                            </Toolbar>
+                                        </headerToolbar>  
+                                        <columns>
+                                            <!-- <Column><Text text ="PO No." /></Column> -->
+                                            <Column width="25%" minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>purchaseOrderLabelItemName}" /></Column>
+
+                                            <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text text ="Weight" /></Column>
+                                            <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text text ="Quantity" /></Column>
+                                            <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text text ="Item Price" /></Column>                
+                                            <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="Center"><Text text ="Discount"/></Column>
+
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="CGST %" /></Column>                            
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="CGST Amt" /></Column>                            
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="SGST %" /></Column>                            
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="SGST Amt" /></Column>                            
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="IGST %" /></Column>                            
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="IGST Amt" /></Column>                            
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="UTGST %" /></Column>                            
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="UTGST Amt" /></Column>                            
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" ><Text text ="VAT %" /></Column>
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" ><Text text ="VAT Amount" /></Column>
+                                            <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Text text ="{i18n>purchaseOrderLabelLineTotal}" /></Column>
+                                            
+                                            
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem type="{salesinvoiceModel>/navigation}" press="onListItemPress">
+                                                <cells>        
+                                                    <!-- <Text text="{tblModel>purchaseorderid}" />          -->
+                                                    <Text text="{tblModel>itemname}" />         
+                                                    <Text text="{tblModel>weight}" />                       
+                                                    <Text text="{tblModel>quantity}" />                       
+                                                    <Text text="{tblModel>unitprice}"  />
+                                                    <Text text="{tblModel>discount}"  /> 
+                                                    <Text text="{tblModel>cgstpercent}"  />  
+                                                    <Text text="{tblModel>cgstamount}"  />  
+                                                    <Text text="{tblModel>sgstpercent}"  />  
+                                                    <Text text="{tblModel>sgstamount}"  />  
+                                                    <Text text="{tblModel>igstpercent}"  />  
+                                                    <Text text="{tblModel>igstamount}"  />  
+                                                    <Text text="{tblModel>utgstpercent}"  />  
+                                                    <Text text="{tblModel>utgstamount}"  />  
+                                                    <Text text="{tblModel>vatpercent}"  />  
+                                                    <Text text="{tblModel>vatamount}"  />
+                                                    <Text text="{tblModel>linetotal}"  />                                  
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                </ScrollContainer>    
+                            </content>
+	                    </Panel>
+                        <Table id="tblFreight" backgroundDesign="Solid" growingScrollToLoad="true" items="{
+                                path: 'tblfreightModel>/modelData',
+                                    sorter: {
+                                        path: 'id'
+                                    }
+                            }">
+                            <headerToolbar>
+                                <Toolbar>
+                                    <content>
+                                        <Title text="{i18n>SalesInvoiceFreightList}" level="H2"/>
+                                        <ToolbarSpacer />
+                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNewFreight"/>
+                                    </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column width="15%"><Text text ="Freight Name" /></Column>
+                                <Column width="15%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Amount" /></Column>
+                                <!-- <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="End"><Text text ="Tax Percent" /></Column>                            
+                                <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="End"><Text text ="Tax Amount" /></Column>                             -->
+                                <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="CGST %" /></Column>                            
+                                <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="CGST Amt" /></Column>                            
+                                <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="SGST %" /></Column>                            
+                                <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="SGST Amt" /></Column>                            
+                                <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="IGST %" /></Column>                            
+                                <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="IGST Amt" /></Column>                            
+                                <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="UTGST %" /></Column>                            
+                                <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="UTGST Amt" /></Column>                            
+                                <Column width="10%" minScreenWidth="Tablet" demandPopin="true" ><Text text ="VAT %" /></Column>
+                                <Column width="10%" minScreenWidth="Tablet" demandPopin="true" ><Text text ="VAT Amount%" /></Column> 
+                                <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center"><Text text ="Line Total" /></Column>                            
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemFreightPress">
+                                    <cells>        
+                                        <Text text="{tblfreightModel>freightname}" />         
+                                        <Text text="{tblfreightModel>amount}"  />                                  
+                                        <Text text="{tblfreightModel>cgstpercent}"  />  
+                                        <Text text="{tblfreightModel>cgstamount}"  />  
+                                        <Text text="{tblfreightModel>sgstpercent}"  />  
+                                        <Text text="{tblfreightModel>sgstamount}"  />  
+                                        <Text text="{tblfreightModel>igstpercent}"  />  
+                                        <Text text="{tblfreightModel>igstamount}"  />  
+                                        <Text text="{tblfreightModel>utgstpercent}"  />  
+                                        <Text text="{tblfreightModel>utgstamount}"  />  
+                                        <Text text="{tblfreightModel>vatpercent}"  />  
+                                        <Text text="{tblfreightModel>vatamount}"  />
+                                        <Text text="{tblfreightModel>linetotal}"  />  
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+
+                        <form:Form editable="true">
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>SalesInvoiceSalesEmployee}">
+                                            <form:fields>
+                                                <Select id="selEmployees" 
+                                                    selectedKey="{employeeList>/salespersonid}"
+                                                    items="{
+                                                        path: 'employeeList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:ListItem key="{employeeList>id}" text="{employeeList>employeename}" />                                            
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesInvoiceOwner}">
+                                            <form:fields>
+                                                <Input id="txtOwner" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesInvoiceRemark}">
+                                            <form:fields>
+                                                <TextArea placeholder="Add Remark" id="remark"  value="{salesinvoiceModel>/remark}" 
+                                                    growing="true" rows="3" growingMaxLines="5" width="100%"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>SalesInvoiceGrossTotal}">
+                                            <form:fields>
+                                                <Input id="txtGrosstotal" value="{salesinvoiceModel>/grosstotal}" enabled="false" />
+                                            </form:fields>
+                                        </form:FormElement> 
+                                        <form:FormElement label="{i18n>SalesInvoiceSubtotal}">
+                                            <form:fields>
+                                                <Input id="txtItemtotal" value="{salesinvoiceModel>/itemtotal}" enabled="false" />
+                                            </form:fields>
+                                        </form:FormElement> 
+                                        <form:FormElement label="{i18n>SalesInvoiceDiscount}">
+                                            <form:fields>
+                                                <Input id="txtDiscountPercent" placeholder="%" change="onCalcChange"  
+                                                            value="{salesinvoiceModel>/discountpercent}" />
+                                                <Input id="txtDiscount" value="{salesinvoiceModel>/discount}"/>
+                                            </form:fields>
+                                        </form:FormElement> 
+                                        <form:FormElement label="{i18n>SalesInvoiceFreightTotal}">
+                                            <form:fields>
+                                                <Input id="txtFreightAmt" value="{salesinvoiceModel>/freighttotal}" enabled="false" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesInvoiceRounding}">
+                                            <form:fields>
+                                                <Input id="txtRoundTotal" value="{salesinvoiceModel>/roundoff}" change="onRoundOffChange" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesInvoiceDiscountedAmount}">
+                                            <form:fields>
+                                                <Input id="txtTotalDiscount" value="{salesinvoiceModel>/discountedamount}" enabled="false"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesInvoiceNetTotal}">
+                                            <form:fields>
+                                                <Input id="txtTotal" value="{salesinvoiceModel>/grandtotal}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                        <Panel>
+                            <FlexBox		
+                                alignItems="Start"
+                                justifyContent="End">
+                                <items>
+                                    <Button text="{i18n>saveButtonText}" id="btnSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+                                    <Button text="Delete" id="btnDelete" type="Emphasized" class="sapUiSmallMarginEnd" press="onDelete"/>
+                                    <Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="clearData"/>
+                                    <Button  icon="sap-icon://print" id="btnprint" type="Emphasized" class="sapUiSmallMarginEnd" press="createPDF"/>
+                                </items>
+                            </FlexBox>
+                        </Panel> 
+                    </VBox>  
+                </f:content>
+			</f:DynamicPage> 
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout> 
+</core:View>

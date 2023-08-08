@@ -1,0 +1,44 @@
+<View xmlns:c="sap.ui.core" controllerName="sap.ui.elev8rerp.componentcontainer.controller.CompanySettings.StateMasterDetail" xmlns:mvc="sap.ui.core.mvc" xmlns:u="sap.ui.unified" xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:f="sap.f" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" height="100%">
+	<DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<title>
+			<DynamicPageTitle>
+				<heading>
+					<Title text="{i18n>State Master Detail}" />
+				</heading>
+				<actions>
+					<ToolbarSpacer />
+					<Button text="{i18n>BreederBatchDetailSave}" type="Emphasized" press="onSave" />
+					<Button text="{i18n>BreederBatchDetailDelete}" type="Emphasized" press="onDelete" />
+				</actions>
+				<navigationActions>
+					<Button icon="sap-icon://decline" type="Transparent" press="onCancel" />
+				</navigationActions>
+			</DynamicPageTitle>
+		</title>
+		<content>
+			<Form editable="true">
+				<title>
+				</title>
+				<layout>
+					<ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="1" singleContainerFullSize="false" />
+				</layout>
+				<formContainers>
+					<FormContainer title="">
+						<formElements>
+							<FormElement label="{i18n>Code}">
+								<fields>
+									<Input id="Managername" valueLiveUpdate="true" value="{editBatchModel>/Code}" />
+								</fields>
+							</FormElement>
+							<FormElement label="{i18n>Name}">
+								<fields>
+									<Input id="Executive" valueLiveUpdate="true" value="{editBatchModel>/Name}" />
+								</fields>
+							</FormElement>
+						</formElements>
+					</FormContainer>
+				</formContainers>
+			</Form>
+		</content>
+	</DynamicPage>
+</View>

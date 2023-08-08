@@ -1,0 +1,148 @@
+{   
+    "acknowledgementslip":[
+        {
+            "ackmentNumber" : 1,
+            "date" : "2018/07/15",
+            "vehicleNumber" : "MH 12 NL 5455",
+            "vehicleweight" : "48",
+            "receivedby" : "AAA",
+            "companyid" : "1",
+            "poNumber" : "PO 1",
+            "vendor" : "Vendor 1",
+            "status" : "Open",
+            "custName" : "Aditi",
+            "inTime" : "10:00 AM",
+            "transporter" : "ABC",
+            "brokerName" : "Person 1",
+            "location" : "Pune",
+            "challanDate" : "2018/07/15",
+            "poDate" : "2018/07/20",
+            "mobileNumber" : "1231231230",
+            "details":[
+				{
+					"itemCode" : "ITM 001",
+                    "itemName": "Broiler Bird",
+                    "poQty": 2,
+                    "uomCode": 100,
+                    "challanQty": 100,
+                    "exFactoryWeight" : 10,
+                    "remark": "101"
+				},
+				{
+					"itemCode" : "ITM 002",
+                    "itemName": "Broiler Bird Male",
+                    "poQty": 5,
+                    "uomCode": 105,
+                    "challanQty": 100,
+                    "exFactoryWeight" : 20,
+                    "remark": "200"
+				},
+				{
+					"itemCode" : "ITM 003",
+                    "itemName": "Broiler Bird Female",
+                    "poQty": 2,
+                    "uomCode": 100,
+                    "challanQty": 100,
+                    "exFactoryWeight" : 10,
+                    "remark": "105"
+				}
+        	]
+        },
+        {
+            "ackmentNumber" : 2,
+            "date" : "2018/07/19",
+            "vehicleNumber" : "MH 12 NL 5005",
+            "driverName" : "Mahesh",
+            "challanNumber" : "Challan 2",
+            "gatePassNumber" : "Pass 2",
+            "poNumber" : "PO 1",
+            "vendor" : "Vendor 1",
+            "status" : "Open",
+            "custName" : "XYZ",
+            "inTime" : "10:20 AM",
+            "transporter" : "ABC",
+            "brokerName" : "Person 2",
+            "location" : "Pune",
+            "challanDate" : "2018/07/15",
+            "poDate" : "2018/07/20",
+            "mobileNumber" : "1231231230",
+            "details":[
+				{
+					"itemCode" : "ITM 001",
+                    "itemName": "Broiler Bird",
+                    "poQty": 2,
+                    "uomCode": 100,
+                    "challanQty": 100,
+                    "exFactoryWeight" : 10,
+                    "remark": "101"
+				},
+				{
+					"itemCode" : "ITM 002",
+                    "itemName": "Broiler Bird Male",
+                    "poQty": 5,
+                    "uomCode": 105,
+                    "challanQty": 100,
+                    "exFactoryWeight" : 20,
+                    "remark": "200"
+				},
+				{
+					"itemCode" : "ITM 003",
+                    "itemName": "Broiler Bird Female",
+                    "poQty": 2,
+                    "uomCode": 100,
+                    "challanQty": 100,
+                    "exFactoryWeight" : 10,
+                    "remark": "105"
+				}
+        	]
+        },
+        {
+            "ackmentNumber" : 1,
+            "date" : "2018/07/18",
+            "vehicleNumber" : "MH 12 NL 4546",
+            "vehicleweight" : "Yogesh",
+            "receivedby" : "Challan 3",
+            "companyid" : "Pass 3",
+            "poNumber" : "PO 1",
+            "vendor" : "Vendor 1",
+            "status" : "Open",
+            "custName" : "Aditi",
+            "inTime" : "11:00 AM",
+            "transporter" : "ABC",
+            "brokerName" : "Person 3",
+            "location" : "Mumbai",
+            "challanDate" : "2018/07/15",
+            "poDate" : "2018/07/20",
+            "mobileNumber" : "1231231230",
+            "details":[
+				{
+					"itemCode" : "ITM 001",
+                    "itemName": "Broiler Bird",
+                    "poQty": 2,
+                    "uomCode": 100,
+                    "challanQty": 100,
+                    "exFactoryWeight" : 10,
+                    "remark": "101"
+				},
+				{
+					"itemCode" : "ITM 002",
+                    "itemName": "Broiler Bird Male",
+                    "poQty": 5,
+                    "uomCode": 105,
+                    "challanQty": 100,
+                    "exFactoryWeight" : 20,
+                    "remark": "200"
+				},
+				{
+					"itemCode" : "ITM 003",
+                    "itemName": "Broiler Bird Female",
+                    "poQty": 2,
+                    "uomCode": 100,
+                    "challanQty": 100,
+                    "exFactoryWeight" : 10,
+                    "remark": "105"
+				}
+        	]
+        }
+    ]
+}

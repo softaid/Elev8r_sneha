@@ -1,0 +1,34 @@
+{
+	"cleaningparameterlist": [
+		{
+            "no" : 1,
+            "particular" : "Fooging",
+            "status" : true,
+            "remarks" : ""
+        },
+        {
+            "no" : 2,
+            "particular" : "Spray",
+            "status" : true,
+            "remarks" : ""
+        },
+        {
+            "no" : 3,
+            "particular" : "Washing Floor",
+            "status" : true,
+            "remarks" : ""
+        },
+        {
+            "no" : 4,
+            "particular" : "Spraying / Fumigation",
+            "status" : true,
+            "remarks" : ""
+        },
+        {
+            "no" : 5,
+            "particular" : "Equipments & Accessories Cleaning",
+            "status" : true,
+            "remarks" : ""
+        }
+    ]
+}

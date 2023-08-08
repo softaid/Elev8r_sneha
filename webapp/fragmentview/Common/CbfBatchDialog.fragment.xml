@@ -1,0 +1,69 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select CBF Batch"	
+		contentHeight="300px"
+		search="handleCbfBatchSearch"
+		confirm="onCbfBatchDialogClose"
+		cancel="onCbfBatchDialogClose"
+		items="{
+			path : 'cbfBatchList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text title="" text="{cbfBatchList>id}" />
+                <Text text="{cbfBatchList>branchname}" /> 
+				<Text text="{cbfBatchList>batch_number}" />
+				<Text text="{cbfBatchList>farmer_name}" />
+				<Text text="{cbfBatchList>farm_name}" />
+				<Text text="{cbfBatchList>cbfshedid}" />
+				<Text text="{cbfBatchList>shed_name}" />
+				<Text text="{cbfBatchList>refname}" />                
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="ID" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Branch Name" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Batch Number" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Farmer Name" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Farm Name" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Shed ID" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Shed Name" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Status" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

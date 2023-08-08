@@ -1,0 +1,76 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Orders" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified">
+    <f:FlexibleColumnLayout  id="fclOrder" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="Order"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+                        <VBox fitContainer="true">
+                        <Table id="tblOrderMaster" 
+                                inset="false"
+                                sticky="ColumnHeaders" growing="true" growingScrollToLoad="true" growingThreshold="10" 
+                                items="{
+                                path: 'orderMasterModel>/modelData',
+                                sorter: {
+                                    path: 'hatchername'
+                                }
+                            }">
+                            <headerToolbar>
+                                <Toolbar>
+                                    <content>
+                                        <Title text="" level="H2"/>
+                                        <ToolbarSpacer />
+                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
+                                        <!-- <Button
+                                        text="Upload template"
+                                        type="Emphasized"
+                                        press="onUploadMasterData" id="btnUploadData"/> -->
+                                    </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column><Text text ="{i18n>quotationId}" /></Column>
+                                <Column><Text text ="Quotation Name" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>quotationLeadName}"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Date"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Status"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Category"/></Column> 
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Quotation Value"/></Column>      
+                            </columns>
+                            <items>
+                                <ColumnListItem type="{= ${orderMasterModel>status} === 'Confirmed' ? 'Inactive' : 'Navigation' }" press="onListItemPress">
+
+                                    <cells>
+                                    <ObjectIdentifier text="{orderMasterModel>id}" />  
+                                        <Text text="{orderMasterModel>quotename}" />
+                                        <Text text="{orderMasterModel>leadname}"/>
+                                        <Text text="{orderMasterModel>quotedate}"/>
+                                        <Text text="{orderMasterModel>status}"/>
+                                        <Text text="{orderMasterModel>quotecategory}"/> 
+                                        <Text text="{orderMasterModel>quotevalue}"/> 
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        <VBox id="pnlErrMessage" visible="false" class="sapMMsgStrip sapMMsgStripError sapUiSmallMarginBottom" width="auto">
+                        </VBox >
+                        <TabContainer id="pnlDataTabs" visible="false" showAddNewButton="false" class="pnlDataTabs sapUiResponsiveContentPadding">
+                            <items></items>
+                        </TabContainer>
+                        <HBox width="auto"></HBox>
+                        <HBox id="pnlMasterData" width="auto"></HBox>
+                    </VBox> 
+                </f:content>				
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>

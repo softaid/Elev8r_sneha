@@ -1,0 +1,353 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.DashBoardHatcherySetting" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+	                <VBox fitContainer="true">
+                                    <form:Form editable="true">
+                                        <form:toolbar>			
+			                            </form:toolbar>
+                                        <form:layout>
+                                            <form:ResponsiveGridLayout
+                                                labelSpanXL="4"
+                                                labelSpanL="6"
+                                                labelSpanM="4"
+                                                labelSpanS="12"
+                                                adjustLabelSpan="false"
+                                                emptySpanXL="0"
+                                                emptySpanL="0"
+                                                emptySpanM="0"
+                                                emptySpanS="0"
+                                                columnsXL="3"
+                                                columnsL="2"
+                                                columnsM="2"
+                                                singleContainerFullSize="false" />
+                                        </form:layout>
+                                        <form:formContainers>
+                                        <form:FormContainer title="">
+					                            <form:formElements>                                                    
+                                            <form:FormElement label="{i18n>hatcherySettingsDefaultEggsItemLabel}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/defaulteggsitemid}" 
+                                                    type="{hatcheryModel>/defaulteggsitemidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsDefaultCrackedEggsItemLabel}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/defaultcrackedeggsitemid}" 
+                                                    type="{hatcheryModel>/defaultcrackedeggsitemidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsDefaultBurstEggsItemLabel}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/defaultbursteggsitemid}" 
+                                                    type="{hatcheryModel>/defaultbursteggsitemidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsDefaultDOCItemLabel}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/defaultdocitemid}" 
+                                                     type="{hatcheryModel>/defaultdocitemidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsDefaultClearEggsItemLabel}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/defaultcleareggsitemid}" 
+                                                     type="{hatcheryModel>/defaultcleareggsitemidtype}"  width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Broiler Chicks Group">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/broilerChicksGroupIds}" 
+                                                    type="{hatcheryModel>/discountledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Medicine Group">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/medicineGroupIds}" 
+                                                     type="{hatcheryModel>/medicineGroupIdstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>HatcherySettingsDefaultVaccineItemGroupText}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/vaccineitemgroupids}" 
+                                                     type="{hatcheryModel>/vaccineitemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+
+                                             <form:FormElement label="Fumigation Group">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/fumigationGroupIds}" 
+                                                     type="{hatcheryModel>/fumigationGroupIdstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Hatching Eggs Group">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/hatchingEggsGroupIds}" 
+                                                     type="{hatcheryModel>/hatchingEggsGroupIdstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                </form:formElements>
+                                        </form:FormContainer>
+
+                                        
+
+
+                                         <form:FormContainer title="">
+					                            <form:formElements>                                                    
+                                            <form:FormElement label="{i18n>hatcherySettingsWarehouseLocationLabel}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/warehouselocationid}" 
+                                                    type="{hatcheryModel>/warehouselocationidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsDefaultWarehouseForEggsLabel}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/defaulthatcherywhforeggs}" 
+                                                    type="{hatcheryModel>/defaulthatcherywhforeggstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsDefaultWarehouseForDOCLabel}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/defaulthatcherywhfordoc}" 
+                                                    type="{hatcheryModel>/defaulthatcherywhfordoctype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Cold Room">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/coldroom}" 
+                                                     type="{hatcheryModel>/inventoryindrledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Grading Warehouse">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/gradingwhid}" 
+                                                     type="{hatcheryModel>/gradingwhidtype}"  width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Setting Warehouse">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/settingwhid}" 
+                                                    type="{hatcheryModel>/settingwhidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Hatching Warehouse">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/hatchingwhid}" 
+                                                     type="{hatcheryModel>/overheadledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Open Area Warehouse">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/openareawhid}" 
+                                                     type="{hatcheryModel>/openareawhidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+
+                                             <form:FormElement label="Fumigation Warehouse">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/fumigationwhid}" 
+                                                     type="{hatcheryModel>/fumigationwhidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Vendor Warehouse">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/vendorwhid}" 
+                                                     type="{hatcheryModel>/vendorwhidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                </form:formElements>
+                                        </form:FormContainer>
+
+
+
+                                        
+                                         <form:FormContainer title="">
+					                            <form:formElements>         
+                                              <form:FormElement label="{i18n>hatcherySettingsOverheadCostPerEggLabel}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/overheadcostperegg}" 
+                                                    type="{hatcheryModel>/overheadcostpereggtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                             <form:FormElement label="{i18n>hatcherySettingsCrackedEggStandardCostLabel}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/overheadcostperegg}" 
+                                                    type="{hatcheryModel>/overheadcostpereggtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+
+                                            <form:FormElement label="{i18n>hatcherySettingsDOCStandardCostLabel}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/docstandardcost}" 
+                                                    type="{hatcheryModel>/docstandardcosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsVaccinatedDOCStandardCostLabel}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/vaccinateddoccost}" 
+                                                    type="{hatcheryModel>/vaccinateddoccosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsLoadChargePerEggLabel}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/loadchargeperegg}" 
+                                                     type="{hatcheryModel>/loadchargepereggtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsServiceChargesLabel}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/servicecharges}" 
+                                                     type="{hatcheryModel>/servicechargestype}"  width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsGapInSettingLabel}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/gapinsetting}" 
+                                                    type="{hatcheryModel>/gapinsettingtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsSettingDaysPeriodLabel}">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/settingdaysperiod}" 
+                                                     type="{hatcheryModel>/settingdaysperiodtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsCandlingDaysPeriodLabel}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/candlingdaysperiod}" 
+                                                     type="{hatcheryModel>/candlingdaysperiodtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+
+                                             <form:FormElement label="{i18n>hatcherySettingsHatchingDaysPeriodLabel}">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/hatchingdaysperiod}" 
+                                                     type="{hatcheryModel>/hatchingdaysperiodtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsBiProductLabel}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/hatchingdaysperiod}" 
+                                                     type="{hatcheryModel>/hatchingdaysperiodtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                              <form:FormElement label="{i18n>hatcherySettingsFertilityPercentLabel}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/Asfertilityinpercent}" 
+                                                     type="{hatcheryModel>/Asfertilityinpercenttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                <form:FormElement label="{i18n>hatcherySettingsARTax}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/ARtaxid}" 
+                                                     type="{hatcheryModel>/ARtaxidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                <form:FormElement label="Doc Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/ARinvoiceledgerid}" 
+                                                     type="{hatcheryModel>/ARinvoiceledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                </form:formElements>
+                                        </form:FormContainer>
+
+
+
+                                          <form:FormContainer title="">
+					                            <form:formElements>                                                    
+                                            <form:FormElement label="{i18n>hatcherySettingsOverheadExpenseGLLabel}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/overheadexpenseglid}" 
+                                                    type="{hatcheryModel>/overheadexpenseglidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsCashLedger}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/cashledgerid}" 
+                                                    type="{hatcheryModel>/cashledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsFreightLedger}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/freightledgerid}" 
+                                                    type="{hatcheryModel>/freightledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsDiscountLedger}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/discountledgerid}" 
+                                                     type="{hatcheryModel>/discountledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsCostOfGoodSoldLedger}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/costofgoodsoldledgerid}" 
+                                                     type="{hatcheryModel>/costofgoodsoldledgeridtype}"  width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsWIPEggLedger}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/WIPeggledgerid}" 
+                                                    type="{hatcheryModel>/WIPeggledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsGRPOWithoutInvoice}">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/grpowithoutinvoiceledgerid}" 
+                                                     type="{hatcheryModel>/grpowithoutinvoiceledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsMedicineConsumptionLedger}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/medicineconsumptionledgerid}" 
+                                                     type="{hatcheryModel>/medicineconsumptionledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+
+                                             <form:FormElement label="{i18n>hatcherySettingsctrlAccLedger}">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/ctrlaccledgerid}" 
+                                                     type="{hatcheryModel>/ctrlaccledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsOutsideHatchingProcessLedger}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/outsidehatchingprocessledgerid}" 
+                                                     type="{hatcheryModel>/outsidehatchingprocessledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                              <form:FormElement label="{i18n>hatcherySettingsFumigationOwnSettingLedger}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/fumigationledgeridforownsetting}" 
+                                                     type="{hatcheryModel>/fumigationledgeridforownsettingtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+
+                                            <form:FormElement label="{i18n>hatcherySettingsFumigationCustomeSettingLedger}">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/fumigationledgeridforcustomesetting}" 
+                                                     type="{hatcheryModel>/fumigationledgeridforcustomesettingtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>hatcherySettingsARInvoiceLedger}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{hatcheryModel>/ARinvoiceledgerid}" 
+                                                     type="{hatcheryModel>/ARinvoiceledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                </form:formElements>
+                                        </form:FormContainer>
+                                        </form:formContainers>
+                                    </form:Form>
+                </VBox>  
+</core:View>
+
+
+
+
+
+
+
+ 

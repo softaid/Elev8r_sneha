@@ -1,0 +1,197 @@
+
+{   
+    "purchasebill":[
+        {
+            "billDate" : "2018/08/17",
+            "custName": "Aditi",
+            "orderNumber" : "Order 1",
+            "subject" : "Production",
+            "againstForm" : "Person 1",
+            "salesRepresentative" : "Employee 1",
+            "referredBy" : "Reference 1",
+            "addressTo" : "Pune",
+			"creditPeriod" : "2",
+			"salesType" : "ONE",
+			"netTotal" : "100.00",
+			"discount" : "10%",
+			"taxTotal" : "2000",
+			"otherCharges" : "100",
+			"subTotal" : "3000",
+			"roundOff" : "3000",
+            "challanDetails" :[
+				{
+					"challanNo" : 1,
+					"challanDate": "2018/08/17"
+				},
+				{
+					"challanNo" : 2,
+					"challanDate": "2018/08/17"
+				}
+			],
+            "stockDetails":[
+				{
+					"stockName" : "Stock 1",
+					"quantity": 10,
+					"freeqty": 2,
+					"unit": 100,
+					"rate": 100				
+				},
+				{
+					"stockName" : "Stock 2",
+					"quantity": 10,
+					"freeqty": 2,
+					"unit": 100,
+					"rate": 100
+				}
+			],
+			"taxDetails" : [
+				{
+					"taxName" : "VAT",
+					"amount": 200
+				},
+				{
+					"taxName" : "GST",
+					"amount": 200
+				}
+			],
+			"otherDetails" :[
+				{
+					"otherchargesDetail" : "Charge 1",
+					"otherAmount": "100"
+				},
+				{
+					"otherchargesDetail" : "Charge 2",
+					"otherAmount": "1000"
+				}
+			]
+        },
+        {
+            "billDate" : "2018/08/17",
+            "custName": "Aditi",
+            "orderNumber" : "Order 1",
+            "subject" : "Production",
+            "againstForm" : "Person 1",
+            "salesRepresentative" : "Employee 1",
+            "referredBy" : "Reference 1",
+            "addressTo" : "Pune",
+            "creditPeriod" : "2",
+			"salesType" : "ONE",
+			"netTotal" : "100.00",
+			"discount" : "10%",
+			"taxTotal" : "2000",
+			"otherCharges" : "100",
+			"subTotal" : "3000",
+			"roundOff" : "3000",
+			"challanDetails" :[
+				{
+					"challanNo" : 1,
+					"challanDate": "2018/08/17"
+				},
+				{
+					"challanNo" : 2,
+					"challanDate": "2018/08/17"
+				}
+			],
+            "stockDetails":[
+				{
+					"stockName" : "Stock 1",
+					"quantity": 10,
+					"freeqty": 2,
+					"unit": 100,
+					"rate": 100				
+				},
+				{
+					"stockName" : "Stock 2",
+					"quantity": 10,
+					"freeqty": 2,
+					"unit": 100,
+					"rate": 100
+				}
+			],
+			"taxDetails" : [
+				{
+					"taxName" : "VAT",
+					"amount": 200
+				},
+				{
+					"taxName" : "GST",
+					"amount": 200
+				}
+			],
+			"otherDetails" :[
+				{
+					"otherchargesDetail" : "Charge 1",
+					"otherAmount": "100"
+				},
+				{
+					"otherchargesDetail" : "Charge 2",
+					"otherAmount": "1000"
+				}
+			]
+        },
+        {
+            "billDate" : "2018/08/17",
+            "custName": "Aditi",
+            "orderNumber" : "Order 1",
+            "subject" : "Production",
+            "againstForm" : "Person 1",
+            "salesRepresentative" : "Employee 1",
+            "referredBy" : "Reference 1",
+            "addressTo" : "Pune",
+            "creditPeriod" : "2",
+			"salesType" : "ONE",
+			"netTotal" : "100.00",
+			"discount" : "10%",
+			"taxTotal" : "2000",
+			"otherCharges" : "100",
+			"subTotal" : "3000",
+			"roundOff" : "3000",
+            "challanDetails" :[
+				{
+					"challanNo" : 1,
+					"challanDate": "2018/08/17"
+				},
+				{
+					"challanNo" : 2,
+					"challanDate": "2018/08/17"
+				}
+			],
+            "stockDetails":[
+				{
+					"stockName" : "Stock 1",
+					"quantity": 10,
+					"freeqty": 2,
+					"unit": 100,
+					"rate": 100				
+				},
+				{
+					"stockName" : "Stock 2",
+					"quantity": 10,
+					"freeqty": 2,
+					"unit": 100,
+					"rate": 100
+				}
+			],
+			"taxDetails" : [
+				{
+					"taxName" : "VAT",
+					"amount": 200
+				},
+				{
+					"taxName" : "GST",
+					"amount": 200
+				}
+			],
+			"otherDetails" :[
+				{
+					"otherchargesDetail" : "Charge 1",
+					"otherAmount": "100"
+				},
+				{
+					"otherchargesDetail" : "Charge 2",
+					"otherAmount": "1000"
+				}
+			]
+        }
+    ]
+}

@@ -1,0 +1,91 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.ApplicationSettings.DocumentSeries" height="100%"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:core="sap.ui.core">
+
+ <f:FlexibleColumnLayout  id="fclDocumentSeries" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage showFooter="true" toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+ 				        <f:heading>
+					        <Title text="Financial Year Document Series"/>
+				        </f:heading>
+                        <f:actions>
+						    <ToolbarSpacer/>
+						    <!-- <Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/> -->
+                            
+						    <!-- <Button icon="sap-icon://add" type="Transparent" press="onAdd"/>
+                            <Button icon="sap-icon://arrow-left" type="Transparent" press="onAdd"/>
+                            <Button icon="sap-icon://arrow-right" type="Transparent" press="onAdd"/> -->
+					    </f:actions>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>    
+
+
+                        <VBox fitContainer="true">
+                            <Table id="tblDocumentSeries" 
+                                inset="false" 
+                                items="{
+                                        path: 'documentseriesModel>/modelData',
+                                        sorter: {
+                                            path: 'yearname'
+                                        }
+                                    }">
+                                <headerToolbar>
+                                    <Toolbar>
+                                    <content>
+                                        <Title text="Document Series List" level="H2"/>
+                                        <ToolbarSpacer />
+                                        <ComboBox id="cmbFinancialYear" 
+                                                    valueLiveUpdate="true" 
+                                                    selectedKeys="{searchDocSeriesModel>/yearid}"
+                                                    width="40%"
+                                                    placeholder="Select Financial Year" 
+                                                    change="financialYearChange"
+                                                    items="{
+                                                    path: 'financialyearList>/modelData',
+                                                    sorter: { path: 'id' }
+                                                    }" 
+                                                    isRequired="true">
+                                            <core:Item key="{financialyearList>id}" text="{financialyearList>yearname}  ( {financialyearList>startfrom} to {financialyearList>endto} )" />
+                                        </ComboBox>
+
+                                        <!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/> -->
+                                    </content>
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column width="30%"><Text text ="Doc Name" /></Column>
+                                    <Column width="10%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Doc Code" /></Column>
+                                    <Column width="10%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Prefix"/></Column>
+                                    <Column width="15%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Start Number"/></Column>
+                                    <Column width="15%" minScreenWidth="Tablet" demandPopin="true"><Text text ="End Number"/></Column>
+                                    <Column width="10%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Length" /></Column>
+                                    <Column width="10%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Default"/></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem type="{documentseriesModel>Navigation}" press="onListItemPress">
+                                        <cells>
+                                            
+                                            <Text text="{documentseriesModel>docname}"  />
+                                            <Text text="{documentseriesModel>doccode}"  />
+                                            <Text text="{documentseriesModel>prefix}"  />
+                                            <Text text="{documentseriesModel>startwith}"  />
+                                            <Text text="{documentseriesModel>endto}"  />
+                                            <Text text="{documentseriesModel>length}"  />
+                                            <Text text="{documentseriesModel>default}"  />
+                                            
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
+
+                </f:content>
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+
+</core:View>

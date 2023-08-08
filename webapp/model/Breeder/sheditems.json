@@ -1,0 +1,59 @@
+{
+	"items": [
+		{
+			"currentShed" : true,
+			"branchCode" : 4,
+			"branchName" : "Horana",
+			"shedCode" : 7,
+			"shedName" : "Horana UAT2",
+			"itemNo" : 1,
+			"itemName": "item 1",
+			"quantity": 2,
+			"rate": 200
+		},
+		{
+			"currentShed" : false,
+			"branchCode" : 5,
+			"branchName" : "test1",
+			"shedCode" : 7,
+			"shedName" : "test1 UAT2",
+			"itemNo" : 2,
+			"itemName": "item 2",
+			"quantity": 2,
+			"rate": 300
+		},
+		{
+			"currentShed" : false,
+			"branchCode" : 6,
+			"branchName" : "test2",
+			"shedCode" : 7,
+			"shedName" : "test2 UAT2",
+			"itemNo" : 3,
+			"itemName": "item 3",
+			"quantity": 2,
+			"rate": 150
+		},
+		{
+			"currentShed" : false,
+			"branchCode" : 7,
+			"branchName" : "test3",
+			"shedCode" : 7,
+			"shedName" : "test3 UAT2",
+			"itemNo" : 4,
+			"itemName": "item 4",
+			"quantity": 2,
+			"rate": 400
+		},
+		{
+			"currentShed" : false,
+			"branchCode" : 8,
+			"branchName" : "test4",
+			"shedCode" : 7,
+			"shedName" : "test4 UAT2",
+			"itemNo" : 5,
+			"itemName": "item 5",
+			"quantity": 2,
+			"rate": 100
+		}			
+	]
+}

@@ -1,0 +1,188 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.BreederSales.BreederLiftingSchedule" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:FlexibleColumnLayout  id="fclBreederLiftingSchedule" backgroundDesign="Solid">
+		<f:beginColumnPages>
+            <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="Lifting Schedule Approval"/>
+				        </f:heading>
+                        <f:actions>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+				            <!-- <Button icon="sap-icon://add" type="Transparent" press="onAdd"/> -->
+                        </f:actions>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+	                <VBox fitContainer="true">                   
+                        <form:Form editable="true">    
+                            <form:toolbar>
+			                </form:toolbar>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+					                <form:formElements>
+                                         <form:FormElement label="Schedule Date">
+                                            <form:fields>
+                                                <DatePicker id="txtTransactionDate"  value="{breederLfsModel>/scheduledate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}"      
+                                                    valueFormat="dd/MM/YYYY"/>
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                        <form:FormElement label="Module">
+                                            <form:fields>
+                                                <Select id="txtModuleid" forceSelection="false" selectedKey="{breederLfsModel>/moduleid}" change = "moduleChange"
+									                items="{
+					                                    path: 'moduleList>/modelData',
+					                                    sorter: { path: 'id' }
+				                                    }" >
+				                                    <core:Item key="{moduleList>id}" text="{moduleList>refname}" />                                            
+			                                    </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="Location">
+                                            <form:fields>
+                                                <Select id="branch" forceSelection="false" selectedKey="{breederLfsModel>/locationid}" 
+									                items="{
+					                                    path: 'locationList>/modelData',
+					                                    sorter: { path: 'id' }
+				                                    }">
+				                                    <core:Item key="{locationList>id}" text="{locationList>locationname}" />                                            
+			                                    </Select>
+                                            </form:fields>
+                                        </form:FormElement> 
+                                        
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer title="">
+					                <form:formElements>
+                                         <form:FormElement label="Status">
+                                            <form:fields>
+                                                <Select id="txtStatus" 
+                                                forceSelection  = "false" selectedKey="{breederLfsModel>/statusid}" 
+                                                    items="{
+                                                            path: 'statusModel>/modelData',
+                                                            sorter: { path: 'id' }
+                                                        }"
+                                                    >
+                                                    <core:Item key="{statusModel>id}" text="{statusModel>refname}" />                       
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    <form:FormElement label="">
+                                            <form:fields>
+                                                <Button type="Emphasized" text="Get Batches" press="getBatches"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                        <Table 
+                            id="tblliftingSchedule" 
+                            backgroundDesign="Solid" 
+                            inset="false"
+                            items="{
+                                    path: 'tblbreederLfsModel>/modelData',
+                                        sorter: {
+                                            path: 'orderNumber'
+                                        }
+                                    }"
+                            sticky="HeaderToolbar,InfoToolbar,ColumnHeaders"
+                            growingScrollToLoad="true"
+                            growing="true"
+                        >
+                            <headerToolbar>
+                                <Toolbar>
+                                    <content>
+                                        <Title text="" level="H2"/>
+                                    </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Order Num" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="party Name" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Batch Weight(Kg)" />
+                                </Column>   
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Planned Weight(Kg)" />
+                                </Column>   
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Rate Per Kg" />
+                                </Column> 
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Approved Weight(Kg)" />
+                                </Column> 
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Batch Cost" />
+                                </Column> 
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Lifting Supervisor" />
+                                </Column> 
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="{tblbreederLfsModel>breederbirdsalesorderid}"  />
+                                        <Text text="{tblbreederLfsModel>partyname}"  />
+                                        <Text text="{tblbreederLfsModel>batchweight}"  />
+                                        <Text text="{tblbreederLfsModel>plannedweight}"  />
+                                        <Text text="{tblbreederLfsModel>rateperkg}"  />
+                                        <Input value="{tblbreederLfsModel>approvedweight}" change="calculateBatchCost" />
+                                        <Text text="{tblbreederLfsModel>batchcost}"  />
+                                        <Select id="txtSupervisor"
+                                         selectedKey="{tblbreederLfsModel>linesupervisorid}" 
+                                            items="{
+                                                    path: 'roleEmployeeList>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }"
+                                            
+                                            >
+                                            <core:Item key="{roleEmployeeList>id}" text="{roleEmployeeList>employeename}" />                       
+                                        </Select>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        <Panel>
+                            <FlexBox alignItems="Start" justifyContent="End">
+                                <items>
+                                    <Button text="Save" id="btnSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+                                    <Button text="Clear" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
+                                </items>
+                            </FlexBox>
+                        </Panel>  
+                    </VBox>  
+                </f:content>
+			</f:DynamicPage> 
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout> 
+</core:View>

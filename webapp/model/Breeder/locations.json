@@ -1,0 +1,29 @@
+{
+	"locations": [
+		{
+			"code" : 1,
+			"locationName": "Pune",
+			"locationType" : "Type1"
+		},
+		{
+			"code" : 2,
+			"locationName": "Mumbai",
+			"locationType" : "Type2"		
+		},
+		{
+			"code" : 3,
+			"locationName": "Hyderabad",
+			"locationType" : "Type3"			
+		},
+		{
+			"code" : 4,
+			"locationName": "Chennai",
+			"locationType" : "Type4"			
+		},
+		{
+			"code" : 5,
+			"locationName": "Ahemadnagar",
+			"locationType" : "Type5"			
+		}			
+	]
+}

@@ -1,0 +1,57 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Item"	
+		contentHeight="300px"
+		search="handleJournalEntrySearch"
+		confirm="handleJournalEntryClose"
+		cancel="handleJournalEntryClose"
+		items="{
+			path : 'JEModel>/modelData',
+			sorter : {
+				path : 'no',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="" text="{JEModel>jeno}" />
+                <Text text="{JEModel>voucherdate}" />
+                <Text text="{JEModel>refname}" />
+                <Text text="{JEModel>narration}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Doc No." />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="JE Date" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Voucher Type" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Narration" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

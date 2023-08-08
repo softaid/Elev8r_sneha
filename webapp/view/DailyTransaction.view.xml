@@ -1,0 +1,414 @@
+<mvc:View controllerName="sap.ui.elev8rerp.componentcontainer.controller.DailyTransaction" 
+xmlns="sap.uxap" 
+xmlns:f="sap.ui.layout.form" 
+xmlns:m="sap.m" 
+xmlns:core="sap.ui.core" 
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns:html="http://www.w3.org/1999/xhtml">
+
+    <m:Page title="{i18n&gt;systemSettingsTitle}" showHeader="{device&gt;/system/phone}" showNavButton="{device&gt;/system/phone}" navButtonPress="onNavButtonPress">
+        <ObjectPageLayout id="objectPageLayout">
+            <headerTitle>
+                <ObjectPageHeader objectTitle="Daily Transaction" objectSubtitle="elev8rerp daily transaction details">
+                    <actions>
+                        <ObjectPageHeaderActionButton id="save" text="{i18n&gt;save}" hideText="false" press="onValidate" type="Emphasized" />
+                        <ObjectPageHeaderActionButton id="cancel" text="{i18n&gt;cancel}" press="onCancelPressed" hideText="false" />
+                    </actions>
+                </ObjectPageHeader>
+            </headerTitle>
+            <headerContent>
+            </headerContent>
+            <sections>
+
+                <ObjectPageSection>
+                    <subSections>
+                        <ObjectPageSubSection id="TransactionDetails" title="Transaction Details">
+                            <blocks>
+                                <ObjectPageLazyLoader id="transactionDetailsLazyLoader">
+
+                                     <f:SimpleForm id="frmTransactionDetails" title="Transaction Details -" columnsL="2" columnsM="2" editable="true" layout="ResponsiveGridLayout">
+
+                                        <f:content>
+                                            <core:Title text="" />
+                                            <!-- <m:Label text="DocNum" labelFor="DocNum" required="true" />
+                                            <m:Input id="DocNum" value="{path : '/number', type : 'sap.ui.model.type.Integer',formatOptions : {groupingEnabled : true},constraints : {minimum : 50,maximum : 10000000}}" /> -->
+                                            <m:Label labelFor="FarmerName" text="Farmer Name"  />
+                                            <!-- <m:Input id="FarmerName" type="Text" width="100%" 
+                                                showSuggestion="true" 
+                                                showValueHelp="true"
+                                                suggest="handleSuggest" /> -->
+
+                                            <m:ComboBox
+                                                id ="selFarmers"
+                                                forceSelection="false"
+                                                selectedKey="{categoryList>/categoryID}"
+                                                autoAdjustWidth="true"
+                                                change = "selFarmerChange"
+                                                items="{
+                                                    path: 'categoryList&gt;/categoryCollection',
+                                                    sorter: { path: 'categoryName' }
+                                                }">
+                                                <core:Item key="{categoryList&gt;categoryID}" text="{categoryList&gt;categoryName}" />
+                                            </m:ComboBox>
+
+                                            <!-- <m:Select
+                                                forceSelection="false"
+                                                selectedKey="{customers>/customers/customerID}"
+                                                autoAdjustWidth="true"
+                                                change = "selFarmerChange"
+                                                items="{
+                                                    path: 'customer&gt;/customers',
+                                                    sorter: { path: 'name' }
+                                                }">
+                                                <core:Item key="{customer&gt;customerID}" text="{customer&gt;name}" />
+                                            </m:Select> -->
+
+                                            <m:Label labelFor="FarmName" text="Farm Name" />
+                                            <!-- <m:Select id="FarmName" items="{/FarmName}" selectedKey="{myModel>/selectedKey}">
+                                                 <core:Item text="{CategoryName}" key="{CategoryID}"></core:Item> 
+                                                <core:Item text="test 1" key="1"></core:Item>
+                                                <core:Item text="test 2" key="2"></core:Item>
+                                            </m:Select> -->
+
+                                            <m:ComboBox
+                                                id="selFarms"
+                                                forceSelection="false"
+                                                selectedKey="{productList>/productID}"
+                                                autoAdjustWidth="true"
+                                                items="{
+                                                    path: 'productList&gt;/productCollection',
+                                                    sorter: { path: 'productName' }
+                                                }">
+                                                <core:Item key="{productList&gt;productID}" text="{productList&gt;productName}" />
+                                            </m:ComboBox>
+
+                                            <m:Label labelFor="BatchCode" text="Batch Code" />
+                                           
+                                            <m:ComboBox
+                                                id="selBatchCode"
+                                                forceSelection="false"
+                                                selectedKey="{productList>/productID}"
+                                                autoAdjustWidth="true"
+                                                items="{
+                                                    path: 'productList&gt;/productCollection',
+                                                    sorter: { path: 'productName' }
+                                                }">
+                                                <core:Item key="{productList&gt;productID}" text="{productList&gt;productName}" />
+                                            </m:ComboBox>
+
+                                            <m:Label labelFor="Date" text="Date" />
+                                            <m:DatePicker id="Date" type="Text" width="100%" value="" valueFormat="dd/MM/yyyy" />
+                                            <m:Label labelFor="TimeIn" text="Time In" />
+                                            <m:TimePicker id="TimeIn" type="Text" width="100%" value="" valueFormat="hh:mm a" displayFormat="hh:mm a" />
+                                            <m:Label labelFor="TimeOut" text="Time Out" />
+                                            <m:TimePicker id="TimeOut" type="Text" width="100%" value="" valueFormat="hh:mm a" displayFormat="hh:mm a" />
+
+                                            <core:Title text="" />
+                                            <m:Label labelFor="Supervisor" text="Supervisor" />
+                                            <m:Input id="Supervisor" type="Text" width="100%" value="" />
+                                            <m:Label labelFor="Location" text="Location" />
+                                            <m:Input id="Location" type="Text" width="100%" value="" />
+                                            <m:Label labelFor="Age" text="Age" />
+                                            <m:Input id="Age" type="Text" width="100%" value="" />
+                                            <m:Label labelFor="LogisticBirds" text="Logistic Birds" />
+                                            <m:Input id="LogisticBirds" type="Text" width="100%" value="" />
+                                            <m:Label labelFor="Management" text="Management" />
+                                            <m:Input id="Management" type="Text" width="100%" value="" />
+                                            <!-- <m:Button text="Validate form" type="Accept" press="onValidate" /> -->
+                                        </f:content>
+                                    </f:SimpleForm>
+
+                                </ObjectPageLazyLoader>
+                            </blocks>
+                        </ObjectPageSubSection>
+                    </subSections>
+                </ObjectPageSection>
+
+                <ObjectPageSection>
+                    <subSections>
+                        <ObjectPageSubSection id="DailyDetailsSection" title="Daily Details">
+                            <blocks>
+                                <ObjectPageLazyLoader id="DailyDetailsLazyLoader">
+                                    <f:SimpleForm title="Daily Details" columnsL="2" columnsM="2" editable="true" layout="ResponsiveGridLayout">
+                                        <f:content>
+                                            <core:Title text="" />
+                                            <m:Label text="Mortality" labelFor="Mortality" />
+                                            <m:Input id="Mortality" type="Text" width="100%" value="" />
+                                            <m:Label labelFor="AccidentalMortality" text="Accidental Mortality" />
+                                            <m:Input id="AccidentalMortality" type="Text" width="100%" value="" />
+                                            <m:Label labelFor="TotalMortality" text="Total Mortality" />
+                                            <m:Input id="TotalMortality" type="Text" width="100%" value="" />
+                                            <m:Label labelFor="CommulativeMortality" text="Commulative Mortality" />
+                                            <m:Input id="CommulativeMortality" type="Text" width="100%" value="" />
+                                            <m:Label labelFor="WaterUsage" text="Water Usage" />
+                                            <m:Input id="WaterUsage" type="Text" width="100%" value="" />
+                                            <core:Title text="" />
+                                            <m:Label labelFor="AvgBodyWeight" text="Avg Body Weight (In Grams)" />
+                                            <m:Input id="AvgBodyWeight" type="Text" width="100%" value="" />
+                                            <m:Label labelFor="RemFeedInFeeder" text="Remaining Feed In Feeder" />
+                                            <m:Input id="RemFeedInFeeder" type="Text" width="100%" value="" />
+                                            <m:Label labelFor="FCR" text="FCR" />
+                                            <m:Input id="FCR" type="Text" width="100%" value="" />
+                                            <m:Label labelFor="MaxTemperture" text="Max Temperture" />
+                                            <m:Input id="MaxTemperture" type="Text" width="100%" value="" />
+                                            <m:Label labelFor="MinTemperture" text="Min Temperture" />
+                                            <m:Input id="MinTemperture" type="Text" width="100%" value="" />
+                                        </f:content>
+                                    </f:SimpleForm>
+                                </ObjectPageLazyLoader>
+                            </blocks>
+                        </ObjectPageSubSection>
+                    </subSections>
+                </ObjectPageSection>
+                <ObjectPageSection>
+                    <subSections>
+                        <ObjectPageSubSection id="tabStripContainerSection" title="Tab Strip">
+                            <blocks>
+                                <ObjectPageLazyLoader id="tabStripContainerLazyLoader">
+                                    <html:div ID="tabStripContainer"></html:div>
+                                </ObjectPageLazyLoader>
+                            </blocks>
+                        </ObjectPageSubSection>
+                    </subSections>
+                </ObjectPageSection>
+                <ObjectPageSection>
+                    <subSections>
+                        <ObjectPageSubSection id="FeedDetailsSection" title="Feed Details">
+                            <blocks>
+                                <ObjectPageLazyLoader id="FeedDetailsLazyLoader">
+                                    <html:div ID="FeedDetailTableContainer"></html:div>
+                                    <!-- <m:Button text="Get Orders" type="button" press="onLoadOrders" />	 -->
+                                </ObjectPageLazyLoader>
+                            </blocks>
+                        </ObjectPageSubSection>
+                    </subSections>
+                </ObjectPageSection>
+                <ObjectPageSection>
+                    <subSections>
+                        <ObjectPageSubSection id="MedicineDetailsSection" title="Medicine Details">
+                            <blocks>
+                                <ObjectPageLazyLoader id="MedicineDetailsLazyLoader">
+                                    <m:Table items="{path:'customer&gt;/customers', templateShareable: false}">
+                                        <!-- <m:headerToolbar>
+                                            <m:Toolbar design="Transparent">
+                                                <m:Title text="{i18n&gt;customerOverviewTitle}" />
+                                            </m:Toolbar>
+                                        </m:headerToolbar> -->
+                                        <m:columns>
+                                            <m:Column>
+                                                <m:Text text="{i18n&gt;customerName}" />
+                                            </m:Column>
+                                            <m:Column minScreenWidth="Tablet">
+                                                <m:Text text="{i18n&gt;productId}" />
+                                            </m:Column>
+                                            <m:Column minScreenWidth="Desktop" hAlign="End">
+                                                <m:Text text="{i18n&gt;lastPurchase}" />
+                                            </m:Column>
+                                            <m:Column hAlign="Center">
+                                                <m:Text text="{i18n&gt;payment}" />
+                                            </m:Column>
+                                            <m:Column hAlign="End">
+                                                <m:Text text="{i18n&gt;amount}" />
+                                            </m:Column>
+                                        </m:columns>
+                                        <m:items>
+                                            <m:ColumnListItem>
+                                                <m:cells>
+                                                    <m:Text text="{customer&gt;name}" />
+                                                    <m:Text text="{customer&gt;productId}" />
+                                                    <m:Text text="{customer&gt;lastPurchase}" />
+                                                    <m:ObjectNumber number="{customer&gt;payment}" state="{customer&gt;state}" />
+                                                    <m:ObjectNumber number="{             parts:[{path:'customer&gt;amount'},{path:'customer&gt;currencyCode'}],             type: 'sap.ui.model.type.Currency',             formatOptions: {showMeasure: false}            }" unit="{customer&gt;currencyCode}" />
+                                                </m:cells>
+                                            </m:ColumnListItem>
+                                        </m:items>
+                                    </m:Table>
+                                </ObjectPageLazyLoader>
+                            </blocks>
+                        </ObjectPageSubSection>
+                    </subSections>
+                </ObjectPageSection>
+                <ObjectPageSection>
+                    <subSections>
+                        <ObjectPageSubSection id="VaccineDetailsSection" title="Vaccine Details">
+                            <blocks>
+                                <ObjectPageLazyLoader id="VaccineDetailsLazyLoader">
+                                    <m:Table items="{path:'customer&gt;/customers', templateShareable: false}">
+                                        <!-- <m:headerToolbar>
+                                            <m:Toolbar design="Transparent">
+                                                <m:Title text="{i18n&gt;customerOverviewTitle}" />
+                                            </m:Toolbar>
+                                        </m:headerToolbar> -->
+                                        <m:columns>
+                                            <m:Column>
+                                                <m:Text text="{i18n&gt;customerName}" />
+                                            </m:Column>
+                                            <m:Column minScreenWidth="Tablet">
+                                                <m:Text text="{i18n&gt;productId}" />
+                                            </m:Column>
+                                            <m:Column minScreenWidth="Desktop" hAlign="End">
+                                                <m:Text text="{i18n&gt;lastPurchase}" />
+                                            </m:Column>
+                                            <m:Column hAlign="Center">
+                                                <m:Text text="{i18n&gt;payment}" />
+                                            </m:Column>
+                                            <m:Column hAlign="End">
+                                                <m:Text text="{i18n&gt;amount}" />
+                                            </m:Column>
+                                        </m:columns>
+                                        <m:items>
+                                            <m:ColumnListItem>
+                                                <m:cells>
+                                                    <m:Text text="{customer&gt;name}" />
+                                                    <m:Text text="{customer&gt;productId}" />
+                                                    <m:Text text="{customer&gt;lastPurchase}" />
+                                                    <m:ObjectNumber number="{customer&gt;payment}" state="{customer&gt;state}" />
+                                                    <m:ObjectNumber number="{             parts:[{path:'customer&gt;amount'},{path:'customer&gt;currencyCode'}],             type: 'sap.ui.model.type.Currency',             formatOptions: {showMeasure: false}            }" unit="{customer&gt;currencyCode}" />
+                                                </m:cells>
+                                            </m:ColumnListItem>
+                                        </m:items>
+                                    </m:Table>
+                                </ObjectPageLazyLoader>
+                            </blocks>
+                        </ObjectPageSubSection>
+                    </subSections>
+                </ObjectPageSection>
+                <ObjectPageSection>
+                    <subSections>
+                        <ObjectPageSubSection id="DisinfectionDetailsSection" title="Disinfection Details">
+                            <blocks>
+                                <ObjectPageLazyLoader id="DisinfectionDetailsLazyLoader">
+                                    <m:Table items="{path:'customer&gt;/customers', templateShareable: false}">
+                                        <!-- <m:headerToolbar>
+                                            <m:Toolbar design="Transparent">
+                                                <m:Title text="{i18n&gt;customerOverviewTitle}" />
+                                            </m:Toolbar>
+                                        </m:headerToolbar> -->
+                                        <m:columns>
+                                            <m:Column>
+                                                <m:Text text="{i18n&gt;customerName}" />
+                                            </m:Column>
+                                            <m:Column minScreenWidth="Tablet">
+                                                <m:Text text="{i18n&gt;productId}" />
+                                            </m:Column>
+                                            <m:Column minScreenWidth="Desktop" hAlign="End">
+                                                <m:Text text="{i18n&gt;lastPurchase}" />
+                                            </m:Column>
+                                            <m:Column hAlign="Center">
+                                                <m:Text text="{i18n&gt;payment}" />
+                                            </m:Column>
+                                            <m:Column hAlign="End">
+                                                <m:Text text="{i18n&gt;amount}" />
+                                            </m:Column>
+                                        </m:columns>
+                                        <m:items>
+                                            <m:ColumnListItem>
+                                                <m:cells>
+                                                    <m:Text text="{customer&gt;name}" />
+                                                    <m:Text text="{customer&gt;productId}" />
+                                                    <m:Text text="{customer&gt;lastPurchase}" />
+                                                    <m:ObjectNumber number="{customer&gt;payment}" state="{customer&gt;state}" />
+                                                    <m:ObjectNumber number="{             parts:[{path:'customer&gt;amount'},{path:'customer&gt;currencyCode'}],             type: 'sap.ui.model.type.Currency',             formatOptions: {showMeasure: false}            }" unit="{customer&gt;currencyCode}" />
+                                                </m:cells>
+                                            </m:ColumnListItem>
+                                        </m:items>
+                                    </m:Table>
+                                </ObjectPageLazyLoader>
+                            </blocks>
+                        </ObjectPageSubSection>
+                    </subSections>
+                </ObjectPageSection>
+                <ObjectPageSection>
+                    <subSections>
+                        <ObjectPageSubSection id="VitaminDetailsSection" title="Vitamin Details">
+                            <blocks>
+                                <ObjectPageLazyLoader id="VitaminDetailsLazyLoader">
+                                    <m:Table items="{path:'customer&gt;/customers', templateShareable: false}">
+                                        <!-- <m:headerToolbar>
+                                            <m:Toolbar design="Transparent">
+                                                <m:Title text="{i18n&gt;customerOverviewTitle}" />
+                                            </m:Toolbar>
+                                        </m:headerToolbar> -->
+                                        <m:columns>
+                                            <m:Column>
+                                                <m:Text text="{i18n&gt;customerName}" />
+                                            </m:Column>
+                                            <m:Column minScreenWidth="Tablet">
+                                                <m:Text text="{i18n&gt;productId}" />
+                                            </m:Column>
+                                            <m:Column minScreenWidth="Desktop" hAlign="End">
+                                                <m:Text text="{i18n&gt;lastPurchase}" />
+                                            </m:Column>
+                                            <m:Column hAlign="Center">
+                                                <m:Text text="{i18n&gt;payment}" />
+                                            </m:Column>
+                                            <m:Column hAlign="End">
+                                                <m:Text text="{i18n&gt;amount}" />
+                                            </m:Column>
+                                        </m:columns>
+                                        <m:items>
+                                            <m:ColumnListItem>
+                                                <m:cells>
+                                                    <m:Text text="{customer&gt;name}" />
+                                                    <m:Text text="{customer&gt;productId}" />
+                                                    <m:Text text="{customer&gt;lastPurchase}" />
+                                                    <m:ObjectNumber number="{customer&gt;payment}" state="{customer&gt;state}" />
+                                                    <m:ObjectNumber number="{             parts:[{path:'customer&gt;amount'},{path:'customer&gt;currencyCode'}],             type: 'sap.ui.model.type.Currency',             formatOptions: {showMeasure: false}            }" unit="{customer&gt;currencyCode}" />
+                                                </m:cells>
+                                            </m:ColumnListItem>
+                                        </m:items>
+                                    </m:Table>
+                                </ObjectPageLazyLoader>
+                            </blocks>
+                        </ObjectPageSubSection>
+                    </subSections>
+                </ObjectPageSection>
+                <ObjectPageSection>
+                    <subSections>
+                        <ObjectPageSubSection id="DiseaseDetailsSection" title="Disease Details">
+                            <blocks>
+                                <ObjectPageLazyLoader id="DiseaseDetailsLazyLoader">
+                                    <m:Table items="{path:'customer&gt;/customers', templateShareable: false}">
+                                        <!-- <m:headerToolbar>
+                                            <m:Toolbar design="Transparent">
+                                                <m:Title text="{i18n&gt;customerOverviewTitle}" />
+                                            </m:Toolbar>
+                                        </m:headerToolbar> -->
+                                        <m:columns>
+                                            <m:Column>
+                                                <m:Text text="{i18n&gt;customerName}" />
+                                            </m:Column>
+                                            <m:Column minScreenWidth="Tablet">
+                                                <m:Text text="{i18n&gt;productId}" />
+                                            </m:Column>
+                                            <m:Column minScreenWidth="Desktop" hAlign="End">
+                                                <m:Text text="{i18n&gt;lastPurchase}" />
+                                            </m:Column>
+                                            <m:Column hAlign="Center">
+                                                <m:Text text="{i18n&gt;payment}" />
+                                            </m:Column>
+                                            <m:Column hAlign="End">
+                                                <m:Text text="{i18n&gt;amount}" />
+                                            </m:Column>
+                                        </m:columns>
+                                        <m:items>
+                                            <m:ColumnListItem>
+                                                <m:cells>
+                                                    <m:Text text="{customer&gt;name}" />
+                                                    <m:Text text="{customer&gt;productId}" />
+                                                    <m:Text text="{customer&gt;lastPurchase}" />
+                                                    <m:ObjectNumber number="{customer&gt;payment}" state="{customer&gt;state}" />
+                                                    <m:ObjectNumber number="{             parts:[{path:'customer&gt;amount'},{path:'customer&gt;currencyCode'}],             type: 'sap.ui.model.type.Currency',             formatOptions: {showMeasure: false}            }" unit="{customer&gt;currencyCode}" />
+                                                </m:cells>
+                                            </m:ColumnListItem>
+                                        </m:items>
+                                    </m:Table>
+                                </ObjectPageLazyLoader>
+                            </blocks>
+                        </ObjectPageSubSection>
+                    </subSections>
+                </ObjectPageSection>
+            </sections>
+        </ObjectPageLayout>
+    </m:Page>
+</mvc:View>

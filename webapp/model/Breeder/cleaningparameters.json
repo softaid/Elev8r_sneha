@@ -1,0 +1,29 @@
+{
+	"cleaningparameters": [
+		{
+			"code" : 1,
+			"cleaningParameter": "Parameter1",
+			"isMandatory" : true
+		},
+		{
+			"code" : 2,
+			"cleaningParameter": "Parameter2",
+			"isMandatory" : true		
+		},
+		{
+			"code" : 3,
+			"cleaningParameter": "Parameter3",
+			"isMandatory" : true			
+		},
+		{
+			"code" : 4,
+			"cleaningParameter": "Parameter4",
+			"isMandatory" : false		
+		},
+		{
+			"code" : 5,
+			"cleaningParameter": "Parameter5",
+			"isMandatory" : false			
+		}			
+	]
+}

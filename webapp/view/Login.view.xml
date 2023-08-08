@@ -1,0 +1,30 @@
+<mvc:View
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Login"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page showHeader="false">
+
+    <HBox  fitContainer="true" justifyContent="Center" alignItems="Center" alignContent="Center">
+        
+        <items>
+            <VBox class="login" id="vboxLogin">
+                <Label text="SAP Administration Login"></Label>
+                <Input id="umobile" placeholder="Mobile"></Input>
+                <Input id="pasw" placeholder="Password" type="Password"></Input>
+                <Button width="12rem" text="Login" type="Emphasized" press="onLoginTap"></Button>
+                <Link text="Forgot Password?" press="onForgetPswLnk" />
+            </VBox>
+            <VBox class="login" id="vboxForPsw" visible="false">
+                <Label text="Enter mobile number"></Label>
+                <Label text="You will get your details on your registered mobile!"></Label>
+                <Input id="ufmobile" placeholder="Mobile"></Input>
+                <Button width="12rem" text="Send OTP" type="Emphasized" press="onForgetPsw"></Button>
+                <Link text="Go to Login" press="onGotoLoginLnk" />
+            </VBox>
+        </items>
+        
+    </HBox>
+
+    </Page>
+</mvc:View>

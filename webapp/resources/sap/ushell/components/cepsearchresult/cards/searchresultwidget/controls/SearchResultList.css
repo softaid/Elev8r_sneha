@@ -1,0 +1,140 @@
+/* Styles to apply a 2 column list */
+.sapUiCEPCatListTwoColumn .sapMListUl {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sapUiCEPCatListTwoColumn:not(.sapUiCEPCatListNoData) .sapMListUl>.sapMLIB {
+  width: calc(50%);
+  min-width: 300px;
+  border-bottom: 1px solid var(--sapUiListBorderColor) !important;
+}
+
+.sapUiCEPCatListTwoColumn .sapMListUl>.sapMLIB:nth-child(odd) {
+  border-right: 1px solid var(--sapUiListBorderColor);
+}
+
+.sapUiCEPCatListTwoColumn.currentCols1 .sapMListUl>.sapMLIB {
+  width: calc(100%);
+  border-right: none;
+}
+
+/* Styles to apply a 3 column card layout */
+.sapUiCEPCatListCard .sapMListUl {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+}
+
+.sapUiCEPCatListCard .sapMListUl>.sapMLIB {
+  border-bottom: none;
+  margin: 0.5rem;
+  width: calc(33% - (0.5rem * 2.5));
+  min-width: 300px;
+}
+
+.sapUiCEPCatListCard .sapMListUl>.sapMLIB>.sapMLIBContent {
+  height: 10rem;
+  overflow: hidden;
+  border-radius: var(--sapUiElementBorderCornerRadius);
+  box-shadow: var(--sapUiShadowLevel0);
+}
+
+.sapUiCEPCatListCard .sapMLIBFocusable:focus {
+  border-radius: 0.7rem !important;
+}
+
+/* Styles to apply a tile layout */
+
+.sapUiCEPCatListTile:not(.sapUiCEPCatListNoData) .sapMListUl {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+.sapUiCEPCatListTile .sapMListUl>.sapMLIB {
+  border-bottom: none;
+  max-width: 12rem;
+  min-width: 12rem;
+  background: transparent !important;
+}
+
+.sapUiCEPCatListTile .sapMListUl>.sapMLIB .infoText {
+  display: none;
+}
+
+.sapUiCEPCatListTile .sapMListUl>.sapMLIB .titleAvatar {
+  position: absolute;
+  top: 5rem;
+  margin-left: 1rem !important;
+  font-size: 2.2rem !important;
+  background: transparent !important;
+  color: var(--sapUiContentLabelColor) !important;
+}
+
+.sapUiCEPCatListTile .sapMListUl>.sapMLIB .titleAvatarLayout {
+  margin-left: 0rem !important;
+  margin-right: 1rem !important;
+}
+
+.sapUiCEPCatListTile .sapMListUl>.sapMLIB>.sapMLIBContent {
+  height: 12rem;
+  overflow: hidden;
+  /*
+  border-radius: var(--sapUiElementBorderCornerRadius);
+  box-shadow: var(--sapUiShadowLevel0);
+  */
+}
+
+/*
+.sapUiCEPCatListTile .sapMListUl>.sapMLIB>.sapMLIBContent:hover {
+  box-shadow: var(--sapUiShadowLevel1);
+  cursor: pointer;
+}
+*/
+
+.sapUiCEPCatListTile .sapMListUl>.sapMLIB>.sapMLIBContent .sapMObjectIdentifierTitle .sapMLnk,
+.sapUiCEPCatListTile .sapMListUl>.sapMLIB>.sapMLIBContent .sapMObjectIdentifierTitle .sapMLnk:hover {
+  color: var(--sapUiBaseText);
+  font-size: var(--sapMFontMediumSize);
+  text-decoration: none;
+}
+
+.sapUiCEPCatListTile .sapMLIBFocusable:focus {
+  border-radius: 0.7rem !important;
+}
+.sapUiCEPCatListTile .sapMGT {
+  position: absolute;
+}
+
+/* Override the focus of items */
+.sapUiCEPCatList:not(.sapUiCEPCatListCard) .sapMLIBFocusable:focus {
+  border-radius: 0.2rem !important;
+}
+
+.sapUiCEPCatList .sapMTB.sapMTBStandard {
+  border-bottom-color: var(--sapUiListBorderColor);
+}
+
+.sapUiCEPCatList .sapFAvatarImageHolder {
+  background-size: contain;
+}
+
+.sapUiCEPCatList .sapMListNoData {
+  justify-content: start;
+  border: none !important;
+  min-width: 100% !important;
+  padding: 0 1rem !important
+}
+
+.sapUiCEPCatList .sapMListNoData .sapMListNoDataText {
+  padding: 0 .7rem;
+  font-size: var(--sapMFontMediumSize);
+
+}
+
+.sapUiCEPCatList H1.sapMTitleTB {
+  font-size: var(--sapMFontHeader4Size) !important;
+}

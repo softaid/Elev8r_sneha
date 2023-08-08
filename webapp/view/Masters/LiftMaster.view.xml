@@ -1,0 +1,80 @@
+
+
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.LiftMaster" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:core="sap.ui.core">
+
+    <f:FlexibleColumnLayout  id="fclLiftMaster" backgroundDesign="Solid">
+		<f:beginColumnPages>
+            <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="Lift Master"/>
+				        </f:heading>
+                        <f:actions>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://add" type="Transparent" press="onAddIconPress" align="right"/>
+                        </f:actions>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+	                <VBox fitContainer="true">  
+                        <IconTabBar selectedKey="{view>/selectedTabKey}" expanded="true" class="sapUiResponsiveContentPadding" items ="{masterModel>/modelData}" select="onTabSelect">
+                            <items>
+                                <IconTabFilter text="{masterModel>typename}" key="{masterModel>typecode}">
+                                    <VBox fitContainer="true">
+                                        <Table id="leadMasterTbl"
+                                            inset="false" 
+                                            items="{
+                                                        path: 'masterDetailModel>/modelData',
+                                                        sorter: {
+                                                            path: 'id'
+                                                        }
+                                                    }">
+                                            <headerToolbar>
+                                                <Toolbar>
+                                                    <content>
+                                                        <Title text="{masterModel>typename}" level="H2"/>
+                                                        <ToolbarSpacer />
+                                                    </content>
+                                                </Toolbar>
+                                            </headerToolbar>
+                                            <columns>
+                                                <Column><Text text ="{i18n>leadID}" /></Column>
+                                                <Column><Text text ="{i18n>leadDescription}" /></Column>
+                                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>Active}" /></Column>
+                                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>Default}" /></Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem type="Navigation" press="onListItemPress">
+                                                    <cells>
+                                                        <Text text="{masterDetailModel>id}"/>
+                                                        <Text text="{masterDetailModel>description}"/>
+                                                        <Switch state="{masterDetailModel>active}" id="active" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                                            <layoutData>
+                                                                <FlexItemData growFactor="1" />
+                                                            </layoutData>
+                                                        </Switch>
+                                                         <Switch state="{masterDetailModel>defaultvalue}" id="default" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                                            <layoutData>
+                                                                <FlexItemData growFactor="1" />
+                                                            </layoutData>
+                                                        </Switch>
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>   
+                                    </VBox>  
+                                </IconTabFilter>
+                            </items>
+                        </IconTabBar>
+                    </VBox>
+                </f:content>
+			</f:DynamicPage> 
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout> 
+</core:View>

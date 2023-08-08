@@ -1,0 +1,43 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Cost Structure"
+		contentHeight="300px"
+		search="handleLineSearch"
+		confirm="handleLineClose"
+		cancel="handleLineClose"
+		items="{
+			path : 'lineList>/modelData',
+			sorter : {
+				path : 'id',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+			    <Text text="{lineList>id}" />
+				<Text text="{lineList>linename}" />
+                <Text text="{lineList>branchname}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="ID" />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Line Name" />
+				</header>
+			</Column>
+            <Column demandPopin="true" >
+				<header>
+					<Text text="Branch Name" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

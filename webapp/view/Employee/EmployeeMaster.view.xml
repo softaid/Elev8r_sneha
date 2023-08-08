@@ -1,0 +1,72 @@
+
+
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Employee.EmployeeMaster" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:core="sap.ui.core">
+
+    <f:FlexibleColumnLayout  id="fclEmployeeMaster" backgroundDesign="Solid">
+		<f:beginColumnPages>
+            <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="{i18n>employeeMasterTitle}"/>
+				        </f:heading>
+                        <f:actions>
+                            <ToolbarSpacer/>
+                        </f:actions>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+	                <VBox fitContainer="true">  
+
+                <Table id="userTable"
+                    inset="false" 
+                    items="{
+                                path: 'employeeModel>/modelData',
+                                sorter: {
+                                    path: 'id'
+                                }
+                            }">
+	        <headerToolbar>
+			    <Toolbar>
+				    <content>
+					    <Title text="{i18n>employeeMasterTitle}" level="H2"/>
+					    <ToolbarSpacer />
+                        <SearchField search="onSearch" width="17.5rem" id = "searchId"/>
+			            <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
+                        <Button icon="sap-icon://sort" type="Transparent" press="onSort"/>
+
+				    </content>
+			    </Toolbar>
+		    </headerToolbar>
+            <columns>
+				<Column><Text text ="{i18n>employeeMasterLabelEmployeename}" /></Column>
+                <Column><Text text ="{i18n>employeeMasterLabelEmailId}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>employeeMasterLabelMobileNo}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>employeeMasterLabelActive}" /></Column>		
+			</columns>
+            <items>
+                <ColumnListItem type="Navigation" press="onListItemPress">
+                    <cells>
+						<Text text="{employeeModel>employeename}"/>
+                        <Text text="{employeeModel>emailid}"/>
+                        <Text text="{employeeModel>mobileno}" />
+						<Switch state="{parts: [{path: 'employeeModel>isactive'}], formatter: '.formatter.getBooleanValue'}" customTextOn="Yes" customTextOff="No" enabled="false">
+                            <layoutData>
+                                <FlexItemData growFactor="1" />
+                            </layoutData>
+                        </Switch>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>   
+         </VBox>  
+                </f:content>
+			</f:DynamicPage> 
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout> 
+</core:View>

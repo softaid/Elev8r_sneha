@@ -1,0 +1,76 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Feed Schedule"
+		contentHeight="300px"
+		search="handleSearch"
+		confirm="handleClose"
+		cancel="handleClose"
+		items="{
+			path : '/fumigationprocess',
+			sorter : {
+				path : 'code',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="" text="{docNo}" />
+				<Text text="{location}" />
+                <Text text="{eggWarehouse}" />
+                <Text text="{docDate}" />
+                <Text text="{approve}" />
+                <Text text="{fumigationIssueRemark}" />
+                <Text text="{eggsIssueRemark}" />
+                <Text text="{receiptRemark}" />                
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Doc No" />
+				</header>
+			</Column>
+			<Column
+				demandPopin="true" >
+				<header>
+					<Text text="Location" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Egg Warehouse" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Doc Date" />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="Approve" />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="Fumigation Issue Remark" />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="Eggs Issue Remark" />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="Receipt Remark" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

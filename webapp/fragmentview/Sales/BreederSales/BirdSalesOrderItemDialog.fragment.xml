@@ -1,0 +1,61 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Bird Sales Order Item"
+		contentHeight="300px"
+		search="handleBirdSalesOrderItemSearch"
+		confirm="handleBirdSalesOrderItemClose"
+		cancel="handleBirdSalesOrderItemClose"
+		items="{
+			path : 'birdItemModel>/modelData',
+			sorter : {
+				path : 'itemname'
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+		     	<ObjectIdentifier title="" text="{birdItemModel>shedname}" />
+				 <ObjectIdentifier title="" text="{birdItemModel>warehousename}" />
+				<ObjectIdentifier title="" text="{birdItemModel>itemname}" />
+				<Text text="{birdItemModel>pendingqty}" />
+                 <Text text="{birdItemModel>pendingweight}" />
+                <Text text="{birdItemModel>liveqty}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Shed" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="warehouse" />
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Item" />
+				</header>
+			</Column>
+			<Column
+				demandPopin="true" >
+				<header>
+					<Text text="Pending Quantity" />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="Pending Weight" />
+				</header>
+			</Column>
+             <Column>
+				<header>
+					<Text text="Live Quantity" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

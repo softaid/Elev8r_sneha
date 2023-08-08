@@ -1,0 +1,167 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Purchase.PartywisePurschaseOrderStatusReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>partywisepurchaseorderstatusreporttitle}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                          <form:FormElement label="{i18n>partywisepurchaseorderstatusreportlabelfromdate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromdate"  width="100%" value="{reportModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate" />   
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>partywisepurchaseorderstatusreportlabelpartyname}">
+                                            <form:fields>
+                                                <MultiComboBox id="partyList"
+                                                    selectionChange="partySelectionChange"
+                                                    selectionFinish="partySelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'vendorModel>/modelData',
+                                                        sorter: { path: 'partname' }
+                                                    }">
+                                                    <core:Item key="{vendorModel>id}" text="{vendorModel>partyname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>   
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                     <form:FormContainer>
+                                       <form:formElements>
+                                         <form:FormElement label="{i18n>partywisepurchaseorderstatusreportlabeltodate}">
+                                            <form:fields>
+                                                <DatePicker id="txtTodate"  width="100%" value="{reportModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate"/>   
+                                            </form:fields>
+                                        </form:FormElement>
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchBirdSalesRegisterReport"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                          
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"    
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel" width="200%"   growing="true"  growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'id'
+                                                    }
+                                                }"
+                                                 backgroundDesign="Solid">
+                                <columns>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Party Code" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Party Name" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Purchase Order No" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Purchase Order Status" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Purchase Order Date" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>partywisepurchaseorderstatusreportlabelitemname}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Unit" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>partywisepurchaseorderstatusreportquantity}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>partywisepurchaseorderstatusreportrate}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Discount(%)" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="SGST Amount" /></Column>
+                                      <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="CGST Amount" /></Column> 
+                                       <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="IGST Amount" /></Column>  
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Total" /></Column> 
+                                    
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                             <Text text="{tblModel>partycode}" />
+                                            <Text text="{tblModel>partyname}" />
+                                            <Text text="{tblModel>purchaseorderno}" />
+                                            <Text text="{tblModel>statusname}" />
+                                            <Text text="{tblModel>podate}" />
+                                            <Text text="{tblModel>itemname}" />
+                                            <Text text="{tblModel>itemunitname}" />
+                                            <Text text="{tblModel>quantity}" />
+                                            <Text text="{tblModel>unitprice}" />
+                                            <Text text="{tblModel>itemdiscount}" />
+                                             <Text text="{tblModel>sgstamount}" />
+                                            <Text text="{tblModel>cgstamount}" />
+                                            <Text text="{tblModel>igstamount}" />
+                                            <Text text="{tblModel>total}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+            
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

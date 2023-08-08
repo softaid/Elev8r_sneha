@@ -1,0 +1,100 @@
+{   
+    "billofmaterial":[
+        {
+            "productNumber" : 1,
+            "quantity": 4,
+            "productDescription" : "Chicken Meat Balls",
+            "bomType" : "Production",
+            "productStdCost" : "100.00 LKR",
+            "avgSize" : "1.0000",
+            "warehouse" : "01",
+            "priceList" : "PriceList 1",
+            "distRule" : "Rule 1",
+            "project" : "ABC",
+            "details":[
+				{
+					"type" : "ITEM",
+                    "number": "KG001",
+                    "description": "Khima Process",
+                    "quantity": 10,
+                    "uomNumber": 100,
+                    "warehouse" : "HR001",
+                    "issued": "Manual"
+				},
+				{
+					"type" : "ITEM",
+                    "number": "KG001",
+                    "description": "Packing Material",
+                    "quantity": 10,
+                    "uomNumber": 100,
+                    "warehouse" : "NS0040",
+                    "issued": "Manual"
+				}
+        	]
+        },
+        {
+            "productNumber" : 2,
+            "quantity": 4,
+            "productDescription" : "Chicken",
+            "bomType" : "Production",
+            "productStdCost" : "200.00 LKR",
+            "avgSize" : "1.0000",
+            "warehouse" : "01",
+            "priceList" : "PriceList 4",
+            "distRule" : "Rule 2",
+            "project" : "ABC",
+            "details":[
+				{
+					"type" : "ITEM",
+                    "number": "KG001",
+                    "description": "Khima Process",
+                    "quantity": 10,
+                    "uomNumber": 100,
+                    "warehouse" : "HR001",
+                    "issued": "Manual"
+				},
+				{
+					"type" : "ITEM",
+                    "number": "KG001",
+                    "description": "Packing Material",
+                    "quantity": 10,
+                    "uomNumber": 100,
+                    "warehouse" : "NS0040",
+                    "issued": "Manual"
+				}
+        	]
+        },
+        {
+            "productNumber" : 1,
+            "quantity": 4,
+            "productDescription" : "Chicken Meat Balls",
+            "bomType" : "Production",
+            "productStdCost" : "100.00 LKR",
+            "avgSize" : "1.0000",
+            "warehouse" : "01",
+            "priceList" : "PriceList 1",
+            "distRule" : "Rule 1",
+            "project" : "ABC",
+            "details":[
+				{
+					"type" : "ITEM",
+                    "number": "KG001",
+                    "description": "Khima Process",
+                    "quantity": 10,
+                    "uomNumber": 100,
+                    "warehouse" : "HR001",
+                    "issued": "Manual"
+				},
+				{
+					"type" : "ITEM",
+                    "number": "KG001",
+                    "description": "Packing Material",
+                    "quantity": 10,
+                    "uomNumber": 100,
+                    "warehouse" : "NS0040",
+                    "issued": "Manual"
+				}
+        	]
+        }
+    ]
+}

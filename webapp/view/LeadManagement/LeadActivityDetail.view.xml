@@ -1,0 +1,224 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.LeadActivityDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+	height="100%">
+	
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+						<Title text="{i18n>leadActivityDetailTitle}"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+					<Button
+						text="{i18n>saveButtonText}"
+                        type="Emphasized"
+						press="onSave"/>
+					<Button
+						text="{i18n>deleteButtonText}"
+						type="Emphasized"
+                        press="onDelete"
+                        id = "btnDelete"/>						
+				</f:actions>
+				<f:navigationActions>
+					<Button
+						icon="sap-icon://decline"
+						type="Transparent" press="onCancel" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>				
+   			<form:Form editable="true">
+                <form:title>
+                </form:title>
+                <form:layout>
+                    <form:ResponsiveGridLayout
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="2"
+                        columnsM="1"
+                        singleContainerFullSize="false" />
+                </form:layout>
+                <form:formContainers>
+                    <form:FormContainer title="">
+					    <form:formElements>
+                            <form:FormElement label="{i18n>leadActivitySubject}">
+                                <form:fields>
+                                    <Input id="subject" valueLiveUpdate="true" value="{editLeadActivityModel>/subject}"/>
+                                </form:fields>
+                            </form:FormElement>  
+                            <form:FormElement label="{i18n>leadActivityLeadName}">
+                                <form:fields>
+                                    <Select id="leadname"
+                                        
+                                        change=""
+                                        selectedKey="{editLeadActivityModel>/leadid}" 
+                                        forceSelection="true"
+                                        width="500px"
+                                        items="{
+                                            path: 'LeadsModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{LeadsModel>id}" text="{LeadsModel>leadname}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>                          
+                            <form:FormElement label="{i18n>leadActivityAssignedTo}">
+                                <form:fields>
+                                    <Select id="assignedto"
+                                        
+                                        change=""
+                                        selectedKey="{editLeadActivityModel>/assignedto}" 
+                                        forceSelection="true"
+                                        width="500px"
+                                        items="{
+                                            path: 'employeeModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{employeeModel>id}" text="{employeeModel>employeename}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>leadActivityAssignedBy}">
+                                <form:fields>
+                                    <Select id="assignedby"
+                                        
+                                        change=""
+                                        selectedKey="{editLeadActivityModel>/assignedby}" 
+                                        forceSelection="true"
+                                        width="500px"
+                                        items="{
+                                            path: 'employeeModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{employeeModel>id}" text="{employeeModel>employeename}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>leadActivityCreatedDate}">
+                                <form:fields>
+                                    <DatePicker id="createddate" width="100%" 
+                                    placeholder="{config>/dateFormat/placeholder}"
+                                    displayFormat="{config>/dateFormat/displayFormat}"
+                                    value="{editLeadActivityModel>/createddate}"
+                                    valueFormat="dd/MM/yyyy"
+                                     
+                                    />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>leadActivityDueDate}">
+                                <form:fields>
+                                    <DatePicker id="duedate" width="100%" 
+                                        placeholder="{config>/dateFormat/placeholder}"
+                                        displayFormat="{config>/dateFormat/displayFormat}"
+                                        value="{editLeadActivityModel>/duedate}"
+                                        valueFormat="dd/MM/yyyy"
+                                         
+                                        />
+                                </form:fields>
+                            </form:FormElement> 
+                            <form:FormElement label="{i18n>leadActivityStatus}">
+                                <form:fields>
+                                    <Select id="status"
+                                        
+                                        change=""
+                                        selectedKey="{editLeadActivityModel>/statusid}" 
+                                        forceSelection="true"
+                                        width="500px"
+                                        items="{
+                                            path: 'statusModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{statusModel>id}" text="{statusModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>leadActivityRemark}">
+                                <form:fields>
+                                    <Input id="remark" valueLiveUpdate="true" value="{editLeadActivityModel>/remark}"/>
+                                </form:fields>
+                            </form:FormElement> 
+                            <form:FormElement label="{i18n>leadActivityAttachment}" visible="false">
+                                <form:fields>
+                                    <!-- <Input id="attachment" valueLiveUpdate="true" value="{editLeadActivityModel>/attachment}"/> -->
+                                    <u:FileUploader
+                                        id="fileUploader"
+                                        name="myFileUpload"
+                                        uploadUrl="upload/"
+                                        tooltip="Upload your file to the local server"
+                                        uploadComplete="handleUploadComplete"/>
+                                </form:fields>
+                            </form:FormElement> 
+                             <!-- <form:FormElement label="">
+                                <form:fields>
+                                
+                                </form:fields>
+                            </form:FormElement>  -->
+                            <form:FormElement label="{i18n>leadActivityProgress}">
+                                <form:fields>
+                                   <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
+                                        max="100" min="0" progress="true"
+                                        showAdvancedTooltip="true" value="{editLeadActivityModel>/progress}">
+                                        <ResponsiveScale id="rScaleWarningLevel"
+                                            tickmarksBetweenLabels="20" />
+                                    </Slider>
+                                </form:fields>
+                            </form:FormElement> 
+
+                            
+                            <form:FormElement label="{i18n>leadActivityType}">
+                                <form:fields>
+                                    <Select id="type"
+                                        
+                                        change=""
+                                        selectedKey="{editLeadActivityModel>/typeid}" 
+                                        forceSelection="true"
+                                        width="500px"
+                                        items="{
+                                            path: 'typeModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{typeModel>id}" text="{typeModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>leadActivityPriority}">
+                                <form:fields>
+                                    <Select id="priority"
+                                        
+                                        change=""
+                                        selectedKey="{editLeadActivityModel>/priorityid}" 
+                                        forceSelection="true"
+                                        width="500px"
+                                        items="{
+                                            path: 'priorityModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{priorityModel>id}" text="{priorityModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                    </form:FormContainer>
+                </form:formContainers>
+            </form:Form>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

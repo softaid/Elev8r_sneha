@@ -1,0 +1,66 @@
+
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select CBF Daily Transaction"	
+		contentHeight="300px"
+		search="handleCbfDailyTransactionSearch"
+		confirm="onCbfDailyTransactionDialogClose"
+		cancel="onCbfDailyTransactionDialogClose"
+		items="{
+			path : 'cbfDailyTrnListModel>/modelData',
+			sorter : {
+				path : 'id',
+				descending : true
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{cbfDailyTrnListModel>id}" />
+                <Text text="{cbfDailyTrnListModel>batch_number}" />
+                <Text text="{cbfDailyTrnListModel>transactiondate}" />   								
+                <Text text="{cbfDailyTrnListModel>shedname}" />
+                <Text text="{cbfDailyTrnListModel>status}" />                                     
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Id" />
+				</header>
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Batch Number" />
+				</header>
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Transaction Date" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Shed Name" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Status" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

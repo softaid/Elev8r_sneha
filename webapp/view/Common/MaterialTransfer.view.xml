@@ -1,0 +1,272 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.MaterialTransfer" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+ 
+	<VBox fitContainer="true">
+        <form:Form editable="true">
+            <form:toolbar>
+				<Toolbar>
+					<Title text="{i18n>MaterialTransferTitle}" level="H4" titleStyle="H4"/>
+					<ToolbarSpacer />
+					<Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+				    <Button id="btnDelete" icon="sap-icon://delete" type="Transparent" press="onDelete" visible="false"/>
+			    </Toolbar>
+			</form:toolbar>
+            <form:layout>
+                <form:ResponsiveGridLayout
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="3"
+                    columnsL="2"
+                    columnsM="2"
+                    singleContainerFullSize="false" />
+            </form:layout>
+            <form:formContainers>
+                <form:FormContainer title="">
+					<form:formElements>
+                        <form:FormElement label="{i18n>MaterialTransferDate}">
+                            <form:fields>
+                                 <DatePicker id="txtRequestDate" required="true" value="{materialTransferModel>/transferdate}" 
+                                        placeholder="{config>/dateFormat/placeholder}"
+                                        displayFormat="{config>/dateFormat/displayFormat}"      
+                                        valueFormat="dd/MM/YYYY"
+                                        />
+                            </form:fields>
+                        </form:FormElement>
+                         <form:FormElement label="{i18n>MaterialTransferWithMaterialRequest}">
+                            <form:fields>
+                                <Switch  state="true" id="chkWithRequest" customTextOn="Yes" customTextOff="No" change ="OnCheckBoxSelect" >
+                                    <layoutData>
+                                        <FlexItemData growFactor="1" />
+                                    </layoutData>
+                                </Switch>
+                                <Input
+                                    id="txtRequestNo"
+                                    required="true"
+                                    type="Text"
+                                    placeholder="{i18n>MaterialTransferSelectMaterialRequest}"
+                                    value="{materialTransferModel>/requestid}"
+                                    showValueHelp="true"
+                                    valueHelpOnly="true"       
+                                    valueHelpRequest="handleMaterialRequestValueHelp"
+                                    valueLiveUpdate="true">
+                                </Input> 
+                            </form:fields>
+                        </form:FormElement>                                        
+                        <form:FormElement label="{i18n>MaterialTransferSource}">
+                            <form:fields>
+                                <Select id="ddlRequestSource" 
+                                        selectedKey="{materialTransferModel>/transfersourceid}" 
+                                        enabled="false"
+                                        items="{
+					                        path: 'sourceModel>/modelData',
+					                        sorter: { path: 'id' }
+				                        }">
+				                    <core:Item key="{sourceModel>id}" text="{sourceModel>refname}" />       
+			                    </Select>
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>MaterialTransferTarget}">
+                            <form:fields>
+                                <Select id="ddlRequestTarget" 
+                                        selectedKey="{materialTransferModel>/transfertargetid}" 
+                                        enabled="false"
+                                        change="OnSelect"
+                                        items="{
+					                        path: 'targetModel>/modelData',
+					                        sorter: { path: 'id' }
+				                        }">
+				                    <core:Item key="{targetModel>id}" text="{targetModel>refname}" />                                                                                                                               
+			                    </Select>
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>MaterialRequestLocation}" id="layerlocationEle" visible="false">
+                            <form:fields>
+                                <Input id="txtlayerLocationName" editable="false" valueLiveUpdate="true" value="{materialTransferModel>/locationname}" />  
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>MaterialTransferUsageType}">
+                            <form:fields>
+                                <Select id="ddlUsageType"
+                                        selectedKey="{materialTransferModel>/usagetypeid}" 
+                                        enabled="true"
+                                        items="{
+					                        path: 'usageTypeModel>/modelData',
+					                        sorter: { path: 'id' }
+				                        }">
+				                    <core:Item key="{usageTypeModel>id}" text="{usageTypeModel>refname}" />                                                                                                                               
+			                    </Select>
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+
+                <form:FormContainer title="">
+					<form:formElements>  
+                        <form:FormElement label="{i18n>MaterialTransferDueDate}">
+                            <form:fields>
+                                 <DatePicker id="txtDueDate" required="true" value="{materialTransferModel>/duedate}" 
+                                    placeholder="{config>/dateFormat/placeholder}"
+                                    displayFormat="{config>/dateFormat/displayFormat}"      
+                                    valueFormat="dd/MM/YYYY"
+                                    change="onDueDateChange"/>
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>MaterialTransferFromWarehouse}">
+                            <form:fields>
+                                <Input
+                                    id="txtFromWarehouseCode"
+                                    type="Text"
+                                    required="true"
+                                    value="{materialTransferModel>/fromwarehousename}"
+                                    placeholder="{i18n>MaterialTransferSelectWarehouse}"
+                                    showValueHelp="true"
+                                    valueHelpOnly="true"       
+                                    valueHelpRequest="handleWarehouseValueHelp"
+                                    enabled="false">
+                                </Input>                                         
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>MaterialRequestFromWarehouseBin}">
+                            <form:fields>
+                                <Input
+                                    id="txtFromWarehouseBinCode"
+                                    type="Text"
+                                    required="true"
+                                    value="{materialTransferModel>/fromwarehousebinname}"
+                                    placeholder="{i18n>MaterialRequestSelectWarehouseBin}"
+                                    showValueHelp="true"                                              
+                                    valueHelpOnly="true"       
+                                    valueHelpRequest="handleWarehouseBinValueHelp"
+                                    >
+                                </Input>                                         
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>MaterialTransferToWarehouse}">
+                            <form:fields>
+                                <Input
+                                    id="txtToWarehouseCode"
+                                    type="Text"
+                                    required="true"
+                                    value="{materialTransferModel>/towarehousename}"
+                                    placeholder="{i18n>MaterialTransferSelectWarehouse}"
+                                    showValueHelp="true"
+                                    valueHelpOnly="true"       
+                                    valueHelpRequest="handleWarehouseValueHelp" enabled="true">
+                                </Input>                                     
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>MaterialRequestToWarehouseBin}">
+                            <form:fields>
+                                <Input
+                                    id="txtToWarehouseBinCode"
+                                    type="Text"
+                                    required="true"
+                                    value="{materialTransferModel>/towarehousebinname}"
+                                    placeholder="{i18n>MaterialRequestSelectWarehouseBin}"
+                                    showValueHelp="true"                                              
+                                    valueHelpOnly="true"       
+                                    valueHelpRequest="handleWarehouseBinValueHelp"
+                                    enabled="true">
+                                </Input>     
+                            </form:fields>
+                        </form:FormElement>
+                         <form:FormElement label="{i18n>MaterialTransferStatus}">
+                            <form:fields>
+                                <Select id="ddlStatus"  
+                                        selectedKey="{materialTransferModel>/statusid}" 
+                                        enabled="true"
+                                        items="{
+					                        path: 'statusModel>/modelData',
+					                        sorter: { path: 'id' }
+				                        }">
+				                    <core:Item key="{statusModel>id}" text="{statusModel>description}" />                                                                                                                               
+			                    </Select>
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+            </form:formContainers>
+        </form:Form>
+     
+        <Table id="tblMaterialTransferDetail" 
+                items="{
+                    path: 'itemDetailModel>/modelData',
+                    sorter: {
+                        path: 'id'
+                    }
+                }">
+	        <headerToolbar>
+			   <Toolbar>
+				   <content>
+					<Title text="" level="H2"/>
+					<ToolbarSpacer />
+			        <Button icon="sap-icon://add" type="Transparent" id="btnAdd" press="onAddNew" enabled="false"/>
+				  </content>
+			    </Toolbar>
+		    </headerToolbar>
+            <columns>
+                <Column><Text text ="{i18n>MaterialTransferItemId}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>MaterialTransferItemName}" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>MaterialTransferUnit}" /></Column>                                   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>MaterialTransferRequestedQuantity}" /></Column>  
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>MaterialTransferTransferedQuantity}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>MaterialTransferTransferedWeight}" /></Column>                    
+            </columns>
+            <items>
+                <ColumnListItem type="{materialTransferModel>/navigation}" press="onListItemPress">
+                    <cells>
+                        <Text text="{itemDetailModel>itemid}" />
+                        <Text text="{itemDetailModel>itemname}" />
+                        <Text text="{itemDetailModel>unit}" />                        
+                        <Text text="{itemDetailModel>requestedquantity}" />
+                        <Text text="{itemDetailModel>transferedquantity}" />
+                        <Text text="{itemDetailModel>transferedweight}" />                        
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+        <form:SimpleForm 
+                minWidth="1024"
+                maxContainerCols="1"
+                editable="false"
+                layout="ResponsiveGridLayout"
+                title="Address"
+                labelSpanL="1"
+                labelSpanM="1"
+                emptySpanL="1"
+                emptySpanM="1"
+                columnsL="1"
+                columnsM="1">
+            <form:content>
+                <Label text="{i18n>MaterialTransferRemark}" />
+                <TextArea id="txtRemark" valueLiveUpdate="true" placeholder="{i18n>MaterialTransferEnterRemark}" growing="true" rows="4" growingMaxLines="7" width="100%" value="{materialTransferModel>/remark}"/>
+            </form:content>
+        </form:SimpleForm>
+
+        <Panel>
+    	    <FlexBox		
+				alignItems="Start"
+				justifyContent="End">
+				<items>
+					<Button id="btnSave" text="{i18n>saveButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave" enabled="false"/>
+					<Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel" />
+				</items>
+			</FlexBox>
+        </Panel>
+    </VBox>  
+</core:View>
+
+
+
+
+ 

@@ -1,0 +1,186 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Hatchery.HatchReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>hatchReportTitle}"/>
+                </f:heading>
+                <f:actions>
+                </f:actions>
+                <f:expandedContent>
+                </f:expandedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <VBox fitContainer="true">
+                    <form:Form editable="true" width="100%">
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="2"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="">
+                            <form:formElements>
+                                <form:FormElement label="{i18n>StandardChartsAndSchedulesFeedScheduleFromDate}">
+                                    <form:fields>
+                                        <DatePicker id="txtFromDate" value="{mPOModel>/from_date}" placeholder="{config>/dateFormat/placeholder}"
+                                        displayFormat="{config>/dateFormat/displayFormat}" 
+                                        valueFormat="{config>/dateFormat/valueFormat}" required="true"  />                                            
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+                        <form:FormContainer>
+                            <form:formElements>
+                                <form:FormElement label="{i18n>StandardChartsAndSchedulesFeedScheduleToDate}">
+                                    <form:fields>
+                                        <DatePicker id="txtToDate" value="{mPOModel>/to_date}" placeholder="{config>/dateFormat/placeholder}"
+                                        displayFormat="{config>/dateFormat/displayFormat}" 
+                                        valueFormat="{config>/dateFormat/valueFormat}" required="true" />
+                                    </form:fields>
+                                </form:FormElement>
+                            <form:FormElement label="">
+                                <form:fields>
+                                    <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                    <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                    <menu>
+                                        <Menu itemSelected="onMenuAction" >
+                                            <items>
+                                                <MenuItem text="{i18n>ProcessingProductionRegistersavecsv}" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                <MenuItem text="{i18n>ProcessingProductionRegistersavepdf}" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                            </items>
+                                        </Menu>
+                                    </menu>
+                                    </MenuButton>
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                    </form:FormContainer>
+                    <form:FormContainer>
+                        <form:formElements>
+                        </form:formElements>
+                    </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+            </VBox>
+        </f:DynamicPageHeader>
+        </f:header>
+        <f:content>				
+            <VBox fitContainer="true">
+                <ScrollContainer
+                    height="100%"
+                    width="100%"
+                    horizontal="true"
+                    vertical="true"
+                    focusable="true">    
+                <Table id="tblSettingReport" width="250%" growing="true" growingScrollToLoad="true" growingThreshold="75" sticky="ColumnHeaders" items="{
+                        path: 'hatchReportModel>/modelData',
+                            sorter: {
+                                path: 'sqno'
+                            }
+                        }"
+                        inset="false" 
+                        class="sapFDynamicPageAlignContent">
+                    <columns>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportsrno}" /></Column>
+			            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportLocation}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportHatchDate}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportHatcherName}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportSetterName}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportSlotName}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportSourceName}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportHatcherBatchNo}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportNoOfEggsSet}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportNoOfChicksReceived}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportHatch}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportCulls}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportCullsPer}" /></Column>
+			            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportInfertile}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportInfertileper}" /></Column>
+			            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportDeadInGram}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportDeadInGramPer}" /></Column>
+			            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportEarlyChicksMortality}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportEarlyChicksMortalityPer}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportMiddleChicksMortality}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportMiddleChicksMortalityPer}" /></Column>
+			            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportDeadInShell}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportDeadInShellPer}" /></Column>
+			            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportLCM}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportLCMPer}" /></Column>
+			            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportBurst}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportBurstPer}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportSaleableChicks}" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>hatchReportSaleableChicksPer}" /></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{hatchReportModel>sqno}"  />
+				                <Text text="{hatchReportModel>locationname}"  />
+                                <Text text="{hatchReportModel>hatcherbatchdate}"  />
+                                <Text text="{hatchReportModel>hatchername}"  />  
+                                <Text text="{hatchReportModel>settername}"  />  
+                                <Text text="{hatchReportModel>slotname}"  />  
+                                <Text text="{hatchReportModel>sourcename}"  />  
+                                <Text text="{hatchReportModel>hatcherbatchid}"  />
+                                <Text text="{hatchReportModel>noofeggsset}"  />
+                                <Text text="{hatchReportModel>noofchicksreceived}"  />                                      
+                                <Text text="{hatchReportModel>noofchicksreceivedpercent}"  />                                      
+                                <Text text="{hatchReportModel>culls}"  />                                      
+                                <Text text="{hatchReportModel>cullspercent}"  /> 
+			                    <Text text="{hatchReportModel>infertile}"  />  
+				                <Text text="{hatchReportModel>infertilepercent}"  />  
+                                <Text text="{hatchReportModel>deadingerm}"  />  
+                                <Text text="{hatchReportModel>deadingrampercent}"  />  
+                                <Text text="{hatchReportModel>earlymortality}"  />
+                                <Text text="{hatchReportModel>earlymortalitypercent}"  />
+                                <Text text="{hatchReportModel>middlemortality}"  />                                      
+                                <Text text="{hatchReportModel>middlemortalitypercent}"  />                                      
+                                <Text text="{hatchReportModel>deadinshell}"  />                                      
+                                <Text text="{hatchReportModel>deadinshellpercent}"  /> 
+				                <Text text="{hatchReportModel>LCM}"  />                                      
+                                <Text text="{hatchReportModel>lcmpercent}"  />                                      
+                                <Text text="{hatchReportModel>burst}"  />                                      
+                                <Text text="{hatchReportModel>burstpercent}"  />                                    
+                                <Text text="{hatchReportModel>sellable}"  />                                      
+                                <Text text="{hatchReportModel>sellablepercent}"  />                                      
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+		 </ScrollContainer>  
+            </VBox>  
+        </f:content>
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button type="Accept" text="Save"/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</core:View>
+
+
+
+
+ 

@@ -1,0 +1,186 @@
+{
+	"feedstandardchart": [
+		{
+			"code" : 1,
+			"name": "Entry1",
+			"breederCode" : "5435",
+			"breederName" : "Breeder1",
+			"fromDate" : "01/05/2017",
+			"toDate" : "09/07/2018",
+			"feedDetails":[
+				{
+					"week" : 1,
+					"itemCode" : 1001,
+					"itemName" : "Item1",
+					"feedConsumed" : 2.5,
+					"cumulativeFeed" : 3.7 
+				},
+				{
+					"week" : 2,
+					"itemCode" : 1002,
+					"itemName" : "Item2",
+					"feedConsumed" : 2.5,
+					"cumulativeFeed" : 3.7 
+				},
+				{
+					"week" : 3,
+					"itemCode" : 1003,
+					"itemName" : "Item3",
+					"feedConsumed" : 6.5,
+					"cumulativeFeed" : 3.9 
+				}
+			],
+			"locationDetails" :[
+                {
+					"locationName" : "Hillcountry",
+					"locationCode" : 2
+                },
+                {
+					"locationName" : "Hillcountry2",
+					"locationCode" : 3
+				}
+
+            ]
+		},
+		{
+			"code" : 2,
+			"name": "Entry2",
+			"breederCode" : "546546",
+			"breederName" : "Breeder2",
+			"fromDate" : "01/05/2017",
+			"toDate" : "09/07/2018",
+			"feedDetails":[
+				{
+					"week" : 1,
+					"itemCode" : 1004,
+					"itemName" : "Item1",
+					"feedConsumed" : 2.5,
+					"cumulativeFeed" : 3.7 
+				},
+				{
+					"week" : 2,
+					"itemCode" : 1005,
+					"itemName" : "Item2",
+					"feedConsumed" : 2.5,
+					"cumulativeFeed" : 3.7 
+				}
+			],
+			"locationDetails" :[
+                {
+					"locationName" : "Hillcountry",
+					"locationCode" : 2
+                },
+                {
+					"locationName" : "Hillcountry2",
+					"locationCode" : 3
+				}
+
+            ]
+		},
+		{
+			"code" : 3,
+			"name": "Entry3",
+			"breederCode" : 656456,
+			"breederName" : "Breeder3",
+			"fromDate" : "01/05/2017",
+			"toDate" : "09/07/2018",
+			"feedDetails":[
+				{
+					"week" : 1,
+					"itemCode" : 1006,
+					"itemName" : "Item1",
+					"feedConsumed" : 2,
+					"cumulativeFeed" : 3 
+				},
+				{
+					"week" : 2,
+					"itemCode" : 1007,
+					"itemName" : "Item2",
+					"feedConsumed" : 9.5,
+					"cumulativeFeed" : 6.7 
+				}
+			],
+			"locationDetails" :[
+                {
+					"locationName" : "Hillcountry",
+					"locationCode" : 2
+                },
+                {
+					"locationName" : "Hillcountry2",
+					"locationCode" : 3
+				}
+
+            ]
+		},
+		{
+			"code" : 4,
+			"name": "Entry4",
+			"breederCode" : 765765,
+			"breederName" : "Breeder4",
+			"fromDate" : "01/05/2017",
+			"toDate" : "09/07/2018",
+			"feedDetails":[
+				{
+					"week" : 1,
+					"itemCode" : 1008,
+					"itemName" : "Item1",
+					"feedConsumed" : 9.5,
+					"cumulativeFeed" : 2.7 
+				},
+				{
+					"week" : 2,
+					"itemCode" : 1009,
+					"itemName" : "Item2",
+					"feedConsumed" : 3.25,
+					"cumulativeFeed" : 3.7 
+				}
+			],
+			"locationDetails" :[
+                {
+					"locationName" : "Hillcountry",
+					"locationCode" : 2
+                },
+                {
+					"locationName" : "Hillcountry2",
+					"locationCode" : 3
+				}
+
+            ]
+		},
+		{
+			"code" : 5,
+			"name": "Entry5",
+			"breederCode" : 54645,
+			"breederName" : "Breeder5",
+			"fromDate" : "01/05/2017",
+			"toDate" : "09/07/2018",
+			"feedDetails":[
+				{
+					"week" : 1,
+					"itemCode" : 1010,
+					"itemName" : "Item1",
+					"feedConsumed" : 2.55,
+					"cumulativeFeed" : 4.7 
+				},
+				{
+					"week" : 2,
+					"itemCode" : 1011,
+					"itemName" : "Item2",
+					"feedConsumed" : 1.5,
+					"cumulativeFeed" : 2.7 
+				}
+			],
+			"locationDetails" :[
+                {
+					"locationName" : "Hillcountry",
+					"locationCode" : 2
+                },
+                {
+					"locationName" : "Hillcountry2",
+					"locationCode" : 3
+				}
+
+            ]
+		}			
+	]
+}

@@ -1,0 +1,197 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.UserDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+    xmlns:common="sap.ui.commons"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	height="100%">
+	
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+						<Title text="Register / Update User"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+					<Button
+						text="Save"
+                        type="Emphasized"
+						press="onSave"/>
+					<Button
+						text="Delete"
+						type="Emphasized"
+                        press="onDelete"/>						
+				</f:actions>
+				<f:navigationActions>
+					<Button
+						icon="sap-icon://decline"
+						type="Transparent" press="onCancel" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>	
+
+            <FlexBox
+					direction="Column">
+					<items>
+
+                        <Panel width="auto" accessibleRole="Region">
+                            <headerToolbar>
+                                <Toolbar height="3rem">
+                                    <Title text="User Detail"/>
+                                </Toolbar>
+                            </headerToolbar>
+                            <content>
+
+                                <form:Form editable="true">
+                                    <form:title>
+                                    </form:title>
+                                    <form:layout>
+                                        <form:ResponsiveGridLayout
+                                            labelSpanXL="4"
+                                            labelSpanL="4"
+                                            labelSpanM="4"
+                                            labelSpanS="12"
+                                            adjustLabelSpan="false"
+                                            emptySpanXL="0"
+                                            emptySpanL="0"
+                                            emptySpanM="0"
+                                            emptySpanS="0"
+                                            columnsXL="3"
+                                            columnsL="2"
+                                            columnsM="1"
+                                            singleContainerFullSize="false" />
+                                    </form:layout>
+                                    <form:formContainers>
+                                        <form:FormContainer title="">
+                                            <form:formElements>
+                                                <form:FormElement label="User Name">
+                                                    <form:fields>
+                                                        <Input id="txtUserName" valueLiveUpdate="true" value="{userDetailModel>/username}"  placeholder="Enter user name" />
+                                                    </form:fields>
+                                                </form:FormElement> 
+                                                
+                                                <form:FormElement label="Mobile">
+                                                    <form:fields>
+                                                        <Input id="txtMobile" valueLiveUpdate="true" maxLength="20" value="{userDetailModel>/mobile}" placeholder="Enter mobile" />
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                
+                                                <form:FormElement label="IMEI">
+                                                    <form:fields>
+                                                        <Input id="txtIMEI" valueLiveUpdate="true" maxLength="20" value="{userDetailModel>/imei}" placeholder="Enter IMEI number" />
+                                                    </form:fields>
+                                                </form:FormElement>
+
+                                                <form:FormElement label="Email">
+                                                    <form:fields>
+                                                        <Input id="txtEmail" valueLiveUpdate="true" maxLength="200" value="{userDetailModel>/email}" placeholder="Enter email" />
+                                                    </form:fields>
+                                                </form:FormElement>
+
+                                                <form:FormElement label="Password">
+                                                    <form:fields>
+                                                        <Input id="txtPwd" type="Password" maxLength="50" valueLiveUpdate="true"  value="{userDetailModel>/pwd}" placeholder="Enter password" />
+                                                    </form:fields>
+                                                </form:FormElement>                            
+                                                <form:FormElement label="Confirm Password">
+                                                    <form:fields>
+                                                        <Input id="txtConfPwd" type="Password" maxLength="50" valueLiveUpdate="true"  value="{userDetailModel>/confpwd}" placeholder="Enter re-enter password" />
+                                                    </form:fields>
+                                                </form:FormElement>    
+
+                                                <form:FormElement label="Active?">
+                                                    <form:fields>
+
+                                                        <Switch valueLiveUpdate="true" state="{userDetailModel>/active}" customTextOn="Yes" customTextOff="No">
+                                                                    <layoutData>
+                                                                        <FlexItemData growFactor="1" />
+                                                                    </layoutData>
+                                                                    </Switch>
+
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="Locked?">
+                                                    <form:fields>
+
+                                                    <Switch valueLiveUpdate="true" state="{userDetailModel>/locked}" customTextOn="Yes" customTextOff="No">
+                                                                    <layoutData>
+                                                                        <FlexItemData growFactor="1" />
+                                                                    </layoutData>
+                                                                    </Switch>
+
+                                                    </form:fields>
+                                                </form:FormElement>
+                                            
+                                            </form:formElements>
+                                        </form:FormContainer>
+
+                                    </form:formContainers>
+                                </form:Form>
+          	                    </content>
+	                        </Panel>
+
+                        	<Panel id="pnlEntityTree" width="auto" accessibleRole="Region">
+                            <headerToolbar>
+                                <Toolbar height="3rem">
+                                    <Title text="User Modules And Permissions"/>
+                                </Toolbar>
+                            </headerToolbar>
+                            <content>
+
+                        <t:TreeTable
+                            id="trTblEntity"
+                            rows="{path:'entityListModel>/modelData', parameters: {arrayNames:['entity']}}"
+                            selectionMode="Single"
+                            enableSelectAll="false"
+                            expandFirstLevel="true"
+                            rowSelectionChange="attachRowSelectionChange"
+                            visibleRowCount="100"
+                            ariaLabelledBy="title">
+                                        <t:columns>
+                                            <t:Column width="40%">
+                                                <Label text="Module / Pages"/>
+                                                <t:template templateShareable="true">
+
+                                                    <common:TriStateCheckBox 
+                                                        text="{entityListModel>displayname}" 
+                                                        change="checkOnChange"
+                                                        enabled="false"
+                                                        selectionState="{entityListModel>checked}">
+                                                    </common:TriStateCheckBox>
+                                                    
+                                                </t:template>
+                                            </t:Column>
+                                                <t:Column width="10%">
+                                                <Label text="Type"/>
+                                                <t:template>
+                                                    <Text text="{entityListModel>entitytype}" wrapping="false"/>   
+                                                </t:template>
+                                            </t:Column>
+
+                                            <t:Column width="40%">
+                                                <Label text="Permission"/>
+                                                <t:template templateShareable="true">
+                                                
+                                                    <Text text="{entityListModel>permissionnames}" wrapping="false"/>   
+
+                                                </t:template>
+                                            </t:Column>
+                                        
+                                            
+                                        </t:columns>
+                                    </t:TreeTable>
+                            	</content>
+	                        </Panel>
+		
+                </items>
+        </FlexBox>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

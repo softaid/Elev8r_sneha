@@ -1,0 +1,103 @@
+{   
+    "stockadjustment":[
+        {
+            "adjustmentDate" : "2018/07/15",
+            "adjustmentType" : "Increase",
+            "details":[
+				{
+					"stockCode" : "ITM 001",
+                    "stockName": "Broiler Bird",
+                    "Qty": 2,
+                    "unit": 100,
+                    "rate": 100,
+                    "stockStatus" : "Open",
+                    "batchNumber": "101"
+				},
+				{
+					"stockCode" : "ITM 002",
+                    "stockName": "Broiler Bird Male",
+                    "Qty": 20,
+                    "unit": 10,
+                    "rate": 200,
+                    "stockStatus" : "Open",
+                    "batchNumber": "102"
+				},
+				{
+					"stockCode" : "ITM 003",
+                    "stockName": "Broiler Bird Female",
+                    "Qty": 5,
+                    "unit": 100,
+                    "rate": 100,
+                    "stockStatus" : "Open",
+                    "batchNumber": "103"
+				}
+        	]
+        },
+        {
+            "adjustmentDate" : "2018/07/25",
+            "adjustmentType" : "Increase",
+            "details":[
+				{
+					"stockCode" : "ITM 001",
+                    "stockName": "Broiler Bird",
+                    "Qty": 2,
+                    "unit": 100,
+                    "rate": 100,
+                    "stockStatus" : "Open",
+                    "batchNumber": "101"
+				},
+				{
+					"stockCode" : "ITM 002",
+                    "stockName": "Broiler Bird Male",
+                    "Qty": 20,
+                    "unit": 10,
+                    "rate": 200,
+                    "stockStatus" : "Open",
+                    "batchNumber": "102"
+				},
+				{
+					"stockCode" : "ITM 003",
+                    "stockName": "Broiler Bird Female",
+                    "Qty": 5,
+                    "unit": 100,
+                    "rate": 100,
+                    "stockStatus" : "Open",
+                    "batchNumber": "103"
+				}
+        	]
+        },
+        {
+            "adjustmentDate" : "2018/07/10",
+            "adjustmentType" : "Decrease",
+            "details":[
+				{
+					"stockCode" : "ITM 001",
+                    "stockName": "Broiler Bird",
+                    "Qty": 2,
+                    "unit": 100,
+                    "rate": 100,
+                    "stockStatus" : "Open",
+                    "batchNumber": "101"
+				},
+				{
+					"stockCode" : "ITM 002",
+                    "stockName": "Broiler Bird Male",
+                    "Qty": 20,
+                    "unit": 10,
+                    "rate": 200,
+                    "stockStatus" : "Open",
+                    "batchNumber": "102"
+				},
+				{
+					"stockCode" : "ITM 003",
+                    "stockName": "Broiler Bird Female",
+                    "Qty": 5,
+                    "unit": 100,
+                    "rate": 100,
+                    "stockStatus" : "Open",
+                    "batchNumber": "103"
+				}
+        	]
+        }
+    ]
+}

@@ -1,0 +1,195 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Sale.SaleSummaryReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Sale Summary Report"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                          <form:FormElement label="{i18n>partywisepurchaseorderstatusreportlabelfromdate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromdate"  width="100%" value="{reportModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate" />   
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>partywisepurchaseorderstatusreportlabelpartyname}">
+                                            <form:fields>
+                                                <MultiComboBox id="partyList"
+                                                    selectionChange="partySelectionChange"
+                                                    selectionFinish="partySelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'vendorModel>/modelData',
+                                                        sorter: { path: 'partname' }
+                                                    }">
+                                                    <core:Item key="{vendorModel>id}" text="{vendorModel>partyname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>   
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                     <form:FormContainer>
+                                       <form:formElements>
+                                         <form:FormElement label="{i18n>partywisepurchaseorderstatusreportlabeltodate}">
+                                            <form:fields>
+                                                <DatePicker id="txtTodate"  width="100%" value="{reportModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate"/>   
+                                            </form:fields>
+                                        </form:FormElement>
+                                              <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onsalesummaryreportOne"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExportone" />
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDFOne" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                       
+                         <VBox>
+                        <VBox id="singlesupplier">
+                            <ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">     
+                            <Table class="secondGrid" sticky="ColumnHeaders"
+                                inset="false" 
+                                items="{
+                                path: 'tblModelOne>/modelData'
+                                
+                            }">
+                                 <columns>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Date" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Customer Name" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Name" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Quantity" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Weight" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Price" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Total Value" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="SGST Amount" /></Column>  
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="CGST Amount" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="IGST Amount" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="UTGST Amount" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Gross Total" /></Column> 
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <Text text="{tblModelOne>salesinvoicedate}"/>
+                                            <Text text="{tblModelOne>partyname}"/>
+                                            <Text text="{tblModelOne>itemname}"/>
+                                            <Text text="{tblModelOne>quantity}"/>
+                                            <Text text="{tblModelOne>weight}"/>
+                                            <Text text="{tblModelOne>price}"/>
+                                            <Text text="{tblModelOne>nettotal}"/>
+                                            <Text text="{tblModelOne>sgstamount}"/>
+                                            <Text text="{tblModelOne>cgstamount}"/>
+                                            <Text text="{tblModelOne>igstamount}"/>
+                                            <Text text="{tblModelOne>utgstamount}"/>
+                                            <Text text="{tblModelOne>grosstotal}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                            </ScrollContainer>
+                        </VBox>
+
+                        <!-- <VBox id="batchWise">
+
+                                 <ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true"> 
+
+                                <Table id="multiplesupplier" width="200%"  
+                                inset="false" 
+                                items="{
+                                path: 'tblModel>/modelData'
+                              
+                            }">
+                          
+                                 <columns>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Date" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Customer Name" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Check No" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Amount" /></Column> 
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                         <cells>
+                                            <Text text="{tblModel>partygroupname}"/>
+                                            <Text text="{tblModel>partyname}"/>
+                                            <Text text="{tblModel>itemname}"/>
+                                            <Text text="{tblModel>weight}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                              </ScrollContainer>
+                        </VBox>-->
+                        </VBox> 
+                    </f:content>
+			</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

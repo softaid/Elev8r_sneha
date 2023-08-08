@@ -1,0 +1,43 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Bird Sales Order"
+		contentHeight="300px"
+		search="handleBirdSalesOrderSearch"
+		confirm="handleBirdSalesOrderClose"
+		cancel="handleBirdSalesOrderClose"
+		items="{
+			path : 'birdsalesorderModel>/modelData',
+			sorter : {
+				path : 'customer'
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="" text="{birdsalesorderModel>partyname}" />
+				<Text text="{birdsalesorderModel>refname}" />
+                <Text text="{birdsalesorderModel>orderdate}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Party" />
+				</header>
+			</Column>
+			<Column
+				demandPopin="true" >
+				<header>
+					<Text text="Status" />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="Order Date" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

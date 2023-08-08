@@ -1,0 +1,73 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.BreederSales.SalesReturn" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core">
+    <f:FlexibleColumnLayout  id="fclSalesReturn" backgroundDesign="Solid">
+		<f:beginColumnPages>
+            <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+                <f:title>
+                    <f:DynamicPageTitle>
+                        <f:heading>
+                            <Title text="Sales Return"/>
+                        </f:heading>
+                    </f:DynamicPageTitle>
+                </f:title>
+                <f:content>	
+                    <VBox fitContainer="true">
+                        <Table id="SalesReturn" items="{
+                                    path: 'SalesReturnModel>/modelData',
+                                        sorter: {
+                                            path: 'lineId'
+                                        }
+                                    }"
+                                    mode="single" backgroundDesign="Solid">
+                            <headerToolbar>
+                                <Toolbar>
+                                <content>
+                                    <Title  level="H2"/>
+                                    <ToolbarSpacer />
+                                    <Button icon="sap-icon://add" type="Transparent" press="onAddNewRow"/>
+                                </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Date" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Warehouse" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Warehousebin" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Name" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Quantity" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="unit" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Rate" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Amount" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Status" /></Column>
+								<Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Remark" /></Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem type="{SalesReturnModel>navigation}" press="onListItemPress">
+                                    <cells>
+                                        <Text text="{SalesReturnModel>date}"  /> 
+                                        <Text text="{SalesReturnModel>warehousename}"  /> 
+                                        <Text text="{SalesReturnModel>binname}"  /> 
+                                        <Text text="{SalesReturnModel>itemname}"  />  
+                                        <Text text="{SalesReturnModel>quantity}"  />  
+                                        <Text text="{SalesReturnModel>unitname}"  />  
+                                        <Text text="{SalesReturnModel>unitcost}"  />
+                                        
+                                        <Text text="{SalesReturnModel>amount}"  />   
+                                        <Text text="{SalesReturnModel>status}"  />
+										<Text text="{SalesReturnModel>remark}"  />           
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </VBox>  
+                </f:content>
+			</f:DynamicPage>
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>
+
+
+
+
+ 

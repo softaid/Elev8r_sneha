@@ -1,0 +1,206 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.CBFSales.BirdSalesOrderList" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+    <f:DynamicPage  preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>BirdSalesOrderList}"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+        <f:DynamicPageHeader pinnable="true">
+            <VBox>
+                <form:Form editable="true">
+                    <form:title>
+                    </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="4"
+                                columnsL="4"
+                                columnsM="4"
+                                singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+
+                                        <form:FormElement label="{i18n>DateSelection}">
+                                            <form:fields>
+                                                <Select id="dateselection"
+                                                        change="handleDateSelection"
+                                                        forceSelection="false"
+                                                        enabled="true">
+                                                    <core:Item key="current_month" text="Current Month" />  
+                                                    <core:Item key="last_month" text="Last Month" />  
+                                                    <core:Item key="current_quarter" text="Current Quarter" />  
+                                                    <core:Item key="current_financial_year" text="Current Financial Year" />  
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer title="">
+                                    <form:formElements>                                       
+                                        <form:FormElement label="{i18n>FromDate}">
+                                            <form:fields>
+                                                <DatePicker id="fromDate" value="{mPOModel>/from_date}" placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" required="true"  />                                            
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>ToDate}">
+                                            <form:fields>
+                                                <DatePicker id="toDate" value="{mPOModel>/to_date}" placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" required="true" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="">
+                                            <form:fields>
+                                                <Button id="btnSearchData" icon="sap-icon://search" type="Emphasized" text="Search Data" press="handleSearchData"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+            
+			<f:content>	 
+                <VBox fitContainer="true">
+                    <ScrollContainer
+                    height="100%"
+                    width="100%"
+                    horizontal="true"
+                    vertical="true"
+                    focusable="flase">
+                        <Panel id ="pnlGrpotable" width="auto">
+                            <headerToolbar>
+                                <Toolbar>
+                                    <content>
+                                        <Title text="" level="H2"/>
+                                        <ToolbarSpacer />
+                                        <SearchField search="search" width="17.5rem" id = "onSearchId"/>
+                                        <Button icon="sap-icon://sort" type="Transparent" press="sort"/>
+                                    <Button icon="sap-icon://add" type="Transparent" press="Add" id="onAdd" tooltip="Add New"/>
+                                    </content>
+                                </Toolbar>
+                            </headerToolbar>
+                        </Panel> 
+                        <Table id="tblPOList" width="100%"
+                            inset="false" 
+                            items="{
+                            path: 'oBirdSalesOrderList>/modelData',
+                            sorter: {
+                                path: 'id',
+                                descending: true
+                            }
+                        }">
+                            
+                            <columns>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true" >
+                                    <header>
+                                        <Text text="{i18n>ID}" />
+                                    </header>
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true" >
+                                    <header>
+                                        <Text text="{i18n>OrderDate}" />
+                                    </header>
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true" >
+                                    <header>
+                                        <Text text="{i18n>totalsaleweight}" />
+                                    </header>
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true" >
+                                    <header>
+                                        <Text text="{i18n>PartyName}" />
+                                    </header>
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true" >
+                                    <header>
+                                        <Text text="{i18n>rateperkg}" />
+                                    </header>
+                                </Column>
+                               
+        
+                                
+                                
+                               
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Action"/></Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Inactive" press="onListItemPress">
+                                    <cells>
+                                        <Text text="{oBirdSalesOrderList>id}" />
+                                        <Text text="{oBirdSalesOrderList>orderdate}" />
+                                        <Text text="{oBirdSalesOrderList>totalsaleweight}" />
+                                        <Text text="{oBirdSalesOrderList>partyname}" />
+                                        <Text text="{oBirdSalesOrderList>rateperkg}" />
+                                       
+                                        <HBox>                    
+                                            <Button class="sapUiTinyMargin" text="View" press="show"/>
+                                            <Button class="sapUiTinyMargin" text="Edit" press="edit"/>
+                                        </HBox>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        <HBox class="pagination">
+						   <HBox id ="btp1"></HBox>
+							<HBox id ="btp2">
+							  <ComboBox id="cmbTransactionType" 
+									selectedKey="{paginationModel>/pagination_count}"
+									width="5%"
+									placeholder="Select Row Count" 
+									change="changeRowCount"
+									items="{
+									path: 'rowcountModel>/rowcount',
+									sorter: { path: 'id' }
+									}" >
+								<core:Item key="{rowcountModel>id}" text="{rowcountModel>count}" />
+								</ComboBox>
+							</HBox>
+						</HBox>
+                    </ScrollContainer> 
+                </VBox>
+                    
+            </f:content>	
+            
+		</f:DynamicPage>
+</core:View>

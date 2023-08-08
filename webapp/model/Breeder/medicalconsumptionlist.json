@@ -1,0 +1,25 @@
+{
+	"medicalconsumptionlist": [
+		{
+            "herbal" : true,
+			"itemCode" : "B001",
+            "itemDescription": "Breeder Female",
+            "availableQuantity" : 0.000,
+            "quantityFemale" : 0.000,
+            "quantityMale" : 0.000,
+            "quantity" : 0.000,
+            "unit" : ""
+        },
+        {
+			"herbal" : true,
+			"itemCode" : "B002",
+            "itemDescription": "Breeder Male",
+            "availableQuantity" : 0.000,
+            "quantityFemale" : 0.000,
+            "quantityMale" : 0.000,
+            "quantity" : 0.000,
+            "unit" : ""
+		}
+				
+	]
+}

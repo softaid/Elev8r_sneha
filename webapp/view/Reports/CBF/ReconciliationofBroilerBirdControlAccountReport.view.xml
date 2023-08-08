@@ -1,0 +1,207 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CBF.ReconciliationofBroilerBirdControlAccountReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Reconciliation of Broiler Bird Control Account Report"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+
+                             <form:FormContainer title="">
+                                <form:formElements>  
+                                <form:FormElement label="Farmer Name">
+                                            <form:fields>
+                                                <MultiComboBox id="allFarmList"
+                                                    selectionChange="farmSelectionChange"
+                                                    selectionFinish="farmSelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'farmModel>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{farmModel>id}" text="{farmModel>farm_name}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                         <form:FormElement label="{i18n>FlockDetailReportBatchName}">
+                                            <form:fields>
+                                            <MultiComboBox id="txtbatch"
+                                                selectionChange="batchSelectionChange"
+                                                selectionFinish="batchSelectionFinish"
+                                                width="500px"
+                                                items="{
+                                                    path: 'batchModel>/modelData',
+                                                    sorter: { path: 'Name' }
+                                                }">
+                                                <core:Item key="{batchModel>batch_id}" text="{batchModel>batch_number}" />
+                                            </MultiComboBox>
+                                            </form:fields>
+                                         </form:FormElement>
+                                          <form:FormElement label="From Date">
+                                            <form:fields>
+                                                <DatePicker id="curdate"  width="100%" value="{reportModel>/curdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate" />   
+                                            </form:fields>
+                                        </form:FormElement>
+                                  </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer>
+                                    <form:formElements>
+                                            <form:FormElement label="To Date">
+                                            <form:fields>
+                                                <DatePicker id="todate"  width="100%" value="{reportModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate" />   
+                                            </form:fields>
+                                        </form:FormElement>
+                                            <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="getRecncilationOFBroilerBirdControAccountReport"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="reconcilationOFBroilerBircontrolAccountcreatePDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                                </form:formContainers>
+                    </form:Form>
+                    </VBox>
+            </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel" width="300%"  growing="true" sticky="ColumnHeaders"   growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'id'
+                                                    }
+                                                }"
+                                                 backgroundDesign="Solid">
+                                <columns>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>broilerbirdbalancereportlocation}" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Farm Name" /></Column>  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Farmer Name" /></Column>                                
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>broilerbirdbalanceperreportbatchname}" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>broilerbirdbalanceperreportplacedate}" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereporttbllivedate}" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereportage}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereporttblstatus}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Placed Chicks" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereportchickcost}" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Feed Consumed" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereporttblfeedcost}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereporttblmedicinecost}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereporttblvaccinecost}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereporttblvitmincost}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereporttbladmincost}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereporttbltotalcost}" /></Column> 
+                                      <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Growing charges" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Sale Quantity" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Sale Weight" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Average Size" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Bird Sold Cost" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="FCR" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="BPI/EEF" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Cost/Kg" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereporttblcostperbird}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Profit/Loss" /></Column> 
+                                     
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                            <Text text="{tblModel>locationname}"/>
+                                            <Text text="{tblModel>farm_name}"/>
+                                            <Text text="{tblModel>farmer_name}"/>
+                                            <Text text="{tblModel>batch_number}"/>
+                                            <Text text="{tblModel>placementdate}"/>
+                                            <Text text="{tblModel>live_batch_date}"/>
+                                            <Text text="{tblModel>ageindays}"/>
+                                            <Text text="{tblModel>batchstatus}"/>
+                                            <Text text="{tblModel>batch_place_qty}"/>
+                                            <Text text="{tblModel>purvalue}"/>
+                                            <Text text="{tblModel>actfeedcon}"/>
+                                            <Text text="{tblModel>feedconcost}"/>
+                                            <Text text="{tblModel>medconcost}" />
+                                            <Text text="{tblModel>vaccconcost}"/>
+                                            <Text text="{tblModel>vitconcost}"/>
+                                            <Text text="{tblModel>administrationcost}"/>
+                                            <Text text="{tblModel>totalcost}"/>
+                                             <Text text="{tblModel>rearingchargepayable}"/>
+                                            <Text text="{tblModel>totalbirdsold}"/>
+                                            <Text text="{tblModel>deliveredwt}"/>
+                                            <Text text="{tblModel>avgsize}"/>
+                                            <Text text="{tblModel>deliveredwtcost}"/>
+                                            <Text text="{tblModel>fcr}"/>
+                                            <Text text="{tblModel>bpieef}"/>
+                                            <Text text="{tblModel>costperkg}"/>
+                                            <Text text="{tblModel>costperbird}"/>
+                                            <Text text="{tblModel>profitloss}"/>
+                                             </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+            
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

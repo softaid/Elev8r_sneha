@@ -1,0 +1,13 @@
+{
+	"farmtype": [
+		{
+			"code" : 1,
+			"farmtype": "Own"
+		},
+		{
+			"code" : 2,
+			"farmtype": "Contract Growing"
+		}
+			
+	]
+}

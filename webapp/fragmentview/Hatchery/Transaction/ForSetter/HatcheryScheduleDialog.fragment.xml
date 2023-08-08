@@ -1,0 +1,46 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="{i18n>HatcheryScheduleDialogSelectHatcherySchedule}"	
+		contentHeight="300px"
+		search="handleHatcheryScheduleSearch"
+		confirm="onHatcheryScheduleDialogClose"
+		cancel="onHatcheryScheduleDialogClose"
+		items="{
+			path : 'hatcheryScheduleModel>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text title="" text="{hatcheryScheduleModel>id}" />
+				<Text text="{hatcheryScheduleModel>scheduledfordate}" />
+               		        <Text text="{hatcheryScheduleModel>locationname}" />
+				<Text text="{hatcheryScheduleModel>sourcename}" />
+                <!-- <Text text="{approve}" /> -->
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="{i18n>HatcheryScheduleDialogDocNo}" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>HatcheryScheduleDialogScheduledDate}" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>HatcheryScheduleDialogLocationName}" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>HatcheryScheduleDialogSource}" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

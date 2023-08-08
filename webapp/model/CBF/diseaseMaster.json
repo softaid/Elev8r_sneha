@@ -1,0 +1,64 @@
+{
+	"diseasemaster": [
+		{
+			"code" : 1,
+            "diesesname": "Coccidiosis",
+            "lesion": "Blood in Intestine",
+            "Sympton": "Bloody Diarrhoea",
+            "Diagnosis": "Coccidiosis",
+            "Organ": "Intestine",
+            "Remark": "",
+            "TretmentName": "Coxid"
+		},
+		{
+			"code" : 2,
+            "diesesname": "Gumboro",
+            "lesion": "Oedematous Bursa",
+            "Sympton": "Fever/Whitish Diarrhoea",
+            "Diagnosis": "IBD",
+            "Organ": "Bursa",
+            "Remark": "",
+            "TretmentName": "Aspirin"
+		},
+		{
+			"code" : 3,
+            "diesesname": "Colibacilosis",
+            "lesion": "Pericarditis",
+            "Sympton": "Whitish diarrhoea",
+            "Diagnosis": "Ecoli",
+            "Organ": "Liver,Heart",
+            "Remark": "",
+            "TretmentName": "ABST"
+		},
+		{
+			"code" : 4,
+            "diesesname": "Proventricular",
+            "lesion": "Haemorrhages",
+            "Sympton": "Greenish Diarrhoea/Sdden Death",
+            "Diagnosis": "",
+            "Organ": "Intestine",
+            "Remark": "",
+            "TretmentName": ""
+        },
+        {
+			"code" : 5,
+            "diesesname": "Peritonium cavity",
+            "lesion": "Blood in peritonial cavitty",
+            "Sympton": "Bloody vomit",
+            "Diagnosis": "",
+            "Organ": "Intestine",
+            "Remark": "",
+            "TretmentName": "Coxid"
+        },
+        {
+			"code" : 6,
+            "diesesname": "Lungs",
+            "lesion": "Fluid/pus",
+            "Sympton": "Dyspnoea,Caughing",
+            "Diagnosis": "",
+            "Organ": "Liungs",
+            "Remark": "",
+            "TretmentName": "Nexymix"
+		}		
+	]
+}

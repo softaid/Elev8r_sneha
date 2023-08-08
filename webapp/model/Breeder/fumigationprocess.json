@@ -1,0 +1,151 @@
+{
+	"fumigationprocess": [
+		{
+			"docNo" : 1,
+            "location": "Hillcountry",
+            "eggWarehouse" : "Eggs Collection",
+            "docDate" : "01/08/17",
+            "approve" : true,
+            "fumigationIssueRemark" : "Remark",
+            "eggsIssueRemark" : "Remark",
+            "receiptRemark" : "Remark",
+			"itemDetails":[
+				{
+					"itemCode" : "V001",
+					"itemName" : "Vaccine",
+                    "binCode" : 1,
+                    "binName" : "EG0001",
+                    "balanceQuantity" : 21.000,
+                    "consumeQuantity" : 5.000,
+                    "UOM" : "KG"
+                },
+                {
+					"itemCode" : "V002",
+					"itemName" : "Medicine",
+                    "binCode" : 2,
+                    "binName" : "EG0002",
+                    "balanceQuantity" : 22.000,
+                    "consumeQuantity" : 4.000,
+                    "UOM" : "KG"
+                },
+                {
+					"itemCode" : "V003",
+					"itemName" : "Vaccine",
+                    "binCode" : 1,
+                    "binName" : "EG0003",
+                    "balanceQuantity" : 18.000,
+                    "consumeQuantity" : 7.000,
+                    "UOM" : "KG"
+				}
+            ],
+            "eggDetails" :[
+                {
+					"itemCode" : "H0001",
+					"itemName" : "Hatching Eggs",
+                    "batchNo" : "HL13",
+                    "quantity" : 200.000,
+                    "UOM" : "KG"
+                },
+                {
+					"itemCode" : "H0002",
+					"itemName" : "Hatching Eggs",
+                    "batchNo" : "HL14",
+                    "quantity" : 100.000,
+                    "UOM" : "KG"
+                }
+            ]
+        },
+        {
+			"docNo" : 2,
+            "location": "Hillcountry 2",
+            "eggWarehouse" : "Eggs Warehouse",
+            "docDate" : "07/09/18",
+            "approve" : false,
+            "fumigationIssueRemark" : "Remark",
+            "eggsIssueRemark" : "Remark",
+            "receiptRemark" : "Remark",
+			"itemDetails":[
+				{
+					"itemCode" : "V003",
+					"itemName" : "Medicine",
+                    "binCode" : 2,
+                    "binName" : "EG0002",
+                    "balanceQuantity" : 22.000,
+                    "consumeQuantity" : 9.000,
+                    "UOM" : "KG"
+                },
+                {
+					"itemCode" : "V004",
+					"itemName" : "Medicine",
+                    "binCode" : 4,
+                    "binName" : "EG0004",
+                    "balanceQuantity" : 18.000,
+                    "consumeQuantity" : 6.000,
+                    "UOM" : "KG"
+                }
+            ],
+            "eggDetails" :[
+                {
+					"itemCode" : "H0001",
+					"itemName" : "Hatching Eggs",
+                    "batchNo" : "HL13",
+                    "quantity" : 200.000,
+                    "UOM" : "KG"
+                },
+                {
+					"itemCode" : "H0002",
+					"itemName" : "Hatching Eggs",
+                    "batchNo" : "HL14",
+                    "quantity" : 100.000,
+                    "UOM" : "KG"
+                }
+            ]
+        },
+        {
+			"docNo" : 3,
+            "location": "Hillcountry 3",
+            "eggWarehouse" : "Eggs Warehouse 3",
+            "docDate" : "03/06/18",
+            "approve" : false,
+            "fumigationIssueRemark" : "Remark",
+            "eggsIssueRemark" : "Remark",
+            "receiptRemark" : "Remark",
+			"itemDetails":[
+				{
+					"itemCode" : "V005",
+					"itemName" : "Vaccine",
+                    "binCode" : 5,
+                    "binName" : "EG0005",
+                    "balanceQuantity" : 15.000,
+                    "consumeQuantity" : 3.000,
+                    "UOM" : "KG"
+                },
+                {
+					"itemCode" : "V005",
+					"itemName" : "Medicine",
+                    "binCode" : 5,
+                    "binName" : "EG0005",
+                    "balanceQuantity" : 13.000,
+                    "consumeQuantity" : 2.000,
+                    "UOM" : "KG"
+                }
+            ],
+            "eggDetails" :[
+                {
+					"itemCode" : "H0002",
+					"itemName" : "Hatching Eggs",
+                    "batchNo" : "HL15",
+                    "quantity" : 170.000,
+                    "UOM" : "KG"
+                },
+                {
+					"itemCode" : "H0003",
+					"itemName" : "Hatching Eggs",
+                    "batchNo" : "HL17",
+                    "quantity" : 116.000,
+                    "UOM" : "KG"
+                }
+            ]
+        }     
+	]
+}

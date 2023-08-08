@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Dimension"
+		contentHeight="300px"
+		search="handleDimensionSearch"
+		confirm="handleDimensionClose"
+		cancel="handleDimensionClose"
+		items="{
+			path : 'dimensionModel>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{dimensionModel>id}" />
+				<Text text="{dimensionModel>dimensionname}" />
+                <Text text="{dimensionModel>dimensioncode}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="ID" />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Dimension Name" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Dimension Code" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

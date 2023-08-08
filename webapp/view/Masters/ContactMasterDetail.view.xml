@@ -1,0 +1,177 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.ContactMasterDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+	height="100%">
+		
+	<f:DynamicPage id="dynamicPageId" preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>ContactDetailTitle}"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+					<Button
+						text="{i18n>saveButtonText}"
+                        type="Emphasized"
+						press="onSave"
+						id="btnSave"/>
+				    <Button
+						text="{i18n>deleteButtonText}"
+						type="Emphasized"
+						id="btnDelete"
+						press="onDelete"/>						
+				</f:actions>
+				<f:navigationActions>
+					<Button
+						icon="sap-icon://decline"
+						type="Transparent" press="onCancel" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>				
+   			<form:Form editable="true">
+                <form:title>
+                </form:title>
+                <form:layout>
+                    <form:ResponsiveGridLayout
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="2"
+                        columnsM="1"
+                        singleContainerFullSize="false" />
+                </form:layout>
+                <form:formContainers>
+                    <form:FormContainer title="">
+					    <form:formElements> 
+                            <form:FormElement label="{i18n>ContactDetailContactType}">
+                                <form:fields>
+                                    <Select id="contacttype"
+                                        required="true" 
+                                        change=""
+                                        selectedKey="{editMasterModel>/contacttypeid}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'contactTypeModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{contactTypeModel>id}" text="{contactTypeModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>ContactDetailContactCategory}">
+                                <form:fields>
+                                    <Select id="category"
+                                        required="true" 
+                                        change=""
+                                        selectedKey="{editMasterModel>/contactcategoryid}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'categoryModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{categoryModel>id}" text="{categoryModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>                            
+                            <form:FormElement label="{i18n>ContactDetailContactName}">
+                                <form:fields>
+                                    <Input id="txtContactName"  valueLiveUpdate="true" value="{editContactModel>/contactname}" type="Text" required="true"/>
+                                </form:fields>
+                            </form:FormElement>   
+                            <form:FormElement label="{i18n>ContactDetailCompanyName}">
+                                <form:fields>
+                                    <Input id="txtCompanyName"  valueLiveUpdate="true" value="{editContactModel>/companyname}" type="Text" required="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>ContactDetailEmailP}">
+                                <form:fields>
+                                    <Input id="emailp" valueLiveUpdate="true" value="{editContactModel>/emailp}" type="Text" required="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>ContactDetailEmailW}">
+                                <form:fields>
+                                    <Input id="emailw" valueLiveUpdate="true" value="{editContactModel>/emailw}" type="Text"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>ContactDetailMobileP}">
+                                <form:fields>
+                                    <Input id="mobilep"  valueLiveUpdate="true" value="{editContactModel>/mobilep}" type="Number" required="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>ContactDetailMobileW}">
+                                <form:fields>
+                                    <Input id="mobilew"  valueLiveUpdate="true" value="{editContactModel>/mobilew}" type="Text"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>ContactDetailDOB}">
+                                <form:fields>
+                                    <DatePicker id="txtdatedob" width="100%" 
+                                        placeholder="{config>/dateFormat/placeholder}"
+                                        displayFormat="{config>/dateFormat/displayFormat}"
+                                        value="{editContactModel>/DOB}"
+                                        valueFormat="dd/MM/yyyy"
+                                        required="true"  
+                                        />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>ContactDetailDOM}">
+                                <form:fields>
+                                    <DatePicker id="txtdatedom" width="100%" 
+                                        placeholder="{config>/dateFormat/placeholder}"
+                                        displayFormat="{config>/dateFormat/displayFormat}"
+                                        value="{editContactModel>/DOM}"
+                                        valueFormat="dd/MM/yyyy"
+                                        />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>ContactDetailContactReference}">
+                                <form:fields>
+                                    <Input id="contactreference"  valueLiveUpdate="true" value="{editContactModel>/contactreference}" type="Text" required="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>ContactDetailDesignation}">
+                                <form:fields>
+                                    <Input id="designation"  valueLiveUpdate="true" value="{editContactModel>/designation}" type="Text" required="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>ContactDetailSocialLink1}">
+                                <form:fields>
+                                    <Input id="sociallink1"  valueLiveUpdate="true" value="{editContactModel>/sociallink1}" type="Text" required="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>ContactDetailSocialLink2}">
+                                <form:fields>
+                                    <Input id="sociallink2"  valueLiveUpdate="true" value="{editContactModel>/sociallink2}" type="Text" required="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>ContactDetailSocialLink3}">
+                                <form:fields>
+                                    <Input id="sociallink3"  valueLiveUpdate="true" value="{editContactModel>/sociallink3}" type="Text" required="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                    </form:FormContainer>
+                </form:formContainers>
+            </form:Form>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

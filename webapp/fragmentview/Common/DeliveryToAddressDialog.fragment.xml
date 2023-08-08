@@ -1,0 +1,46 @@
+
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="Partner Address List"	
+		contentHeight="300px"
+		search="_handleDelToAddrSearch"
+		confirm="onDelToAddrDialogClose"
+		cancel="onDelToAddrDialogClose"
+		items="{
+			path : 'deliverytoaddressList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+                <Text text="{deliverytoaddressList>address} {deliverytoaddressList>cityname} {deliverytoaddressList>statename} {deliverytoaddressList>countryname} {deliverytoaddressList>pincode}" />
+				<Text text="{deliverytoaddressList>statecode}" />
+				<Text text="{deliverytoaddressList>isunionterritory}" />
+				<Text text="{deliverytoaddressList>gstno}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+            <Column>
+				<header width="40%" >
+					<Text text="address" />
+				</header>
+			</Column>
+			<Column width="15%" minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="State Code" />
+				</header>
+			</Column>
+			<Column width="15%" minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Union Territory?" />
+				</header>
+			</Column>
+			<Column width="30%" minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="GST NO" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

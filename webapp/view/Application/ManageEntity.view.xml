@@ -1,0 +1,55 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Application.ManageEntity" height="100%"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:form="sap.ui.layout.form" 
+  xmlns:core="sap.ui.core">
+	
+    <VBox fitContainer="true"> 
+           
+
+        <Table id="manageEntityTable" mode="single" backgroundDesign="Solid"
+               inset="false" 
+               items="{
+                    path: 'manageEntityModel>/modelData',
+                    sorter: {
+                        path: 'id'
+                    }
+                }">
+	        <headerToolbar>
+			    <Toolbar>
+				    <content>
+					    <Title text="" level="H2"/>
+					    <ToolbarSpacer />
+                        <SearchField placeholder="Entity" search="onSearch" width="17.5rem"/>
+                        <SearchField placeholder="Parent Entity" search="onParentSearch" width="17.5rem"/>
+			            <!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/> -->
+				    </content>
+			    </Toolbar>
+		    </headerToolbar>
+            <columns>
+                <Column width="10%"><Text text ="Id" /></Column>
+                <Column width="20%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Display Name" /></Column>
+                <Column width="10%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Entity Type" /></Column>
+                <Column width="20%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Page Key" /></Column>
+                <Column width="20%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Parent Entity" /></Column>  
+                <Column width="10%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Display Order" /></Column>  
+                <Column width="10%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Description" /></Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{manageEntityModel>id}"/>
+                        <ObjectIdentifier title="{manageEntityModel>displayname}" text="{manageEntityModel>entityname}" />
+                        <Text text="{manageEntityModel>entitytype}"/>
+                        <Text text="{manageEntityModel>pagekey}"/>
+                        <ObjectIdentifier title="{manageEntityModel>parent}" text="{manageEntityModel>parentcode}" />
+                        <Text text="{manageEntityModel>displayorder}"/>
+                        <Text text="{manageEntityModel>description}"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+
+        </Table>
+        		           
+    </VBox>
+</core:View>

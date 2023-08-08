@@ -1,0 +1,43 @@
+{   
+    "users":[
+        {
+            "userId" : "892929",
+            "firstName" : "Dwivendu",
+            "lastName" : "Kumar",
+            "email" : "dwivendu@logicaldna.com",            
+            "phone" : "9822283055",
+            "imei" : "919191919",
+            "module" : "Breeder",
+            "role" : "Manager",           
+            "available" : "8",
+            "active" : "true"
+          
+        },
+        {
+            "userId" : "892930",
+            "firstName" : "Abhishek ",
+            "lastName" : "Despande",
+            "email" : "abhishek.d@logicaldna.com",            
+            "phone" : "9812345678",
+            "imei" : "44566767",
+            "module" : "Hatchery",
+            "role" : "Manager",           
+            "available" : "8",
+            "active" : "true"
+          
+        },
+        {
+            "userId" : "892931",
+            "firstName" : "Jitendra",
+            "lastName" : "Sonawane",
+            "email" : "jitendra.s@logicaldna.com",            
+            "phone" : "9812345678",
+            "imei" : "44566767",
+            "module" : "CBF",
+            "role" : "Executive",           
+            "available" : "9",
+            "active" : "true"
+          
+        }
+    ]  
+}

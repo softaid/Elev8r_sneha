@@ -1,0 +1,169 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Breeder.DailyConsumptionReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>DailyConsumptionReportHeader}"/>
+                </f:heading>
+                <f:actions>                           
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <VBox>
+                    <form:Form editable="true">
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                            labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="2"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+                            <form:FormContainer title="">
+                                <form:formElements>
+                                <form:FormElement label="{i18n>DailyConsumptionReportlabelLocation}">
+                                    <form:fields>
+                                        <MultiComboBox id="locationtbl"
+                                            selectionChange="handleSelectionChange"
+                                            selectionFinish="handleSelectionFinish"
+                                            width="500px"
+                                            items="{
+                                                path: 'locationList>/modelData',
+                                                sorter: { path: 'Name' }
+                                            }">
+                                            <core:Item key="{locationList>id}" text="{locationList>locationname}" />
+                                        </MultiComboBox>
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="{i18n>DailyConsumptionReportlabelBatchName}">
+                                    <form:fields>
+                                    <MultiComboBox id="batchtb1"
+                                        selectionChange="batchSelectionChange"
+                                        selectionFinish="batchSelectionFinish"
+                                        width="500px"
+                                        items="{
+                                            path: 'batchModel>/modelData',
+                                            sorter: { path: 'Name' }
+                                        }">
+                                        <core:Item key="{batchModel>id}" text="{batchModel>batchname}" />
+                                    </MultiComboBox>
+                                    </form:fields>
+                                </form:FormElement>
+                                    
+                                </form:formElements>
+                            </form:FormContainer>
+                            <form:FormContainer>
+                                <form:formElements>
+                                <form:FormElement label="{i18n>DailyConsumptionReportlabelFromDate}">
+                                    <form:fields>
+                                        <DatePicker id="txtFromdate"  width="100%" value="{dailyconsumptionModel>/fromdate}" 
+                                        displayFormat="{config>/dateFormat/displayFormat}" 
+                                        valueFormat="{config>/dateFormat/valueFormat}" 
+                                        placeholder="{config>/dateFormat/placeholder}" change="ongetDate"/>   
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="{i18n>DailyConsumptionReportlabelToDate}">
+                                    <form:fields>
+                                        <DatePicker id="txtTodate"  width="100%" value="{dailyconsumptionModel>/todate}" 
+                                        displayFormat="{config>/dateFormat/displayFormat}" 
+                                        valueFormat="{config>/dateFormat/valueFormat}" 
+                                        placeholder="{config>/dateFormat/placeholder}" change="ongetDate"/>   
+                                    </form:fields>
+                                </form:FormElement>
+                                              <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>          
+                                </form:formElements>
+                            </form:FormContainer>
+                        </form:formContainers>
+                    </form:Form>
+                </VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>				
+            <VBox fitContainer="true">        
+                    <ScrollContainer
+                        height="100%"
+                        width="100%"
+                        horizontal="true"
+                        vertical="true"
+                        focusable="true">
+                <Table id="tblDailyConsumption" width="100%"  growing="true" growingScrollToLoad="true" sticky="ColumnHeaders"  items="{
+                                            path: 'dailyconsumpReportModel>/modelData',
+                                            sorter: {
+                                            path: 'batchname',
+                                            group : true
+                                        }                                           
+                                        }"
+                                 mode="None" backgroundDesign="Solid">
+                    <columns>
+                        <Column mergeDuplicates="true" width="10%"><Text text ="Group Name" /></Column>
+                        <Column mergeDuplicates="true" minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Item Name" /></Column>            
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Date" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Opening Balance" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true" ><Text text ="Recived Quantity" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true" ><Text text ="Out Quantity" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true" ><Text text ="Consume Quantity" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Cumulative Consumption" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%"  demandPopin="true"><Text text ="Closing Balance" /></Column>                   
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                        <customData>
+                        </customData>
+                            <cells>
+                                <Text text="{dailyconsumpReportModel>groupname}" />
+                                <Text text="{dailyconsumpReportModel>itemname}" />
+                                <Text text="{dailyconsumpReportModel>date}" />
+                                <Text text="{dailyconsumpReportModel>openingbalance}" />
+                                <Text text="{dailyconsumpReportModel>receivedquantity}" />
+                                <Text text="{dailyconsumpReportModel>outquantity}" />
+                                <Text text="{dailyconsumpReportModel>consumedquantity}" />
+                                <Text text="{dailyconsumpReportModel>cumconsumedquantity}" />
+                                <Text text="{dailyconsumpReportModel>closingbalancefinal}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table> 
+                </ScrollContainer>                          
+            </VBox>                      
+        </f:content>                   
+    </f:DynamicPage>    
+</core:View>
+
+
+
+
+ 

@@ -1,0 +1,101 @@
+{
+	"shed": [
+		{
+			"code" : 1,
+            "locationCode" : "101",
+            "locationName" : "Pune",
+            "shedName" : "Pune_Test",
+            "status" : "New",
+			"details":[
+				{
+					"penNumber" : 1,
+					"penDescription" : "Pen1"
+				},
+				{
+                    "penNumber" : 2,
+					"penDescription" : "Pen2"
+				},
+				{
+                    "penNumber" : 3,
+					"penDescription" : "Pen3"
+				}
+        	]
+		},
+		{
+			"code" : 2,
+            "locationCode" : "102",
+            "locationName" : "Mumbai",
+            "shedName" : "Mumbai_Test",
+            "status" : "Closed",
+			"details":[
+				{
+					"penNumber" : 4,
+					"penDescription" : "Pen4"
+				},
+				{
+                    "penNumber" : 5,
+					"penDescription" : "Pen5"
+				},
+				{
+                    "penNumber" : 6,
+					"penDescription" : "Pen6"
+				}
+        	]
+		},
+		{
+			"code" : 3,
+            "locationCode" : "103",
+            "locationName" : "Chennai",
+            "shedName" : "Chennai_Test",
+            "status" : "New",
+			"details":[
+				{
+					"penNumber" : 1,
+					"penDescription" : "Pen1"
+				},
+				{
+                    "penNumber" : 2,
+					"penDescription" : "Pen2"
+				}
+        	]
+		},
+		{
+			"code" : 4,
+            "locationCode" : "104",
+            "locationName" : "Hyderabad",
+            "shedName" : "Hyderabad_Test",
+            "status" : "New",
+			"details":[
+				{
+					"penNumber" : 1,
+					"penDescription" : "Pen1"
+				},
+				{
+                    "penNumber" : 2,
+					"penDescription" : "Pen2"
+				}
+        	]
+		},
+		{
+			"code" : 5,
+            "locationCode" : "105",
+            "locationName" : "Ahemadnagar",
+            "shedName" : "Ahemadnagar_Test",
+            "status" : "New",
+			"details":[
+				{
+					"penNumber" : 1,
+					"penDescription" : "Pen1"
+				},
+				{
+                    "penNumber" : 2,
+					"penDescription" : "Pen2"
+				},
+				{
+                    "penNumber" : 3,
+					"penDescription" : "Pen3"
+				}
+        	]
+		}			
+	]
+}

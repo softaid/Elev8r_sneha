@@ -1,0 +1,79 @@
+{   
+    "documentcollection":[
+        {
+            "code" : "001",
+            "farm" : "Farm 1",
+            "farm1" : "Farm 1",
+            "firmFarmer" : "Farmer 1",
+            "firmFarmer1" : "Farmer 1",
+            "status" : "New",
+            "details":[
+				{
+					"document" : "Document 1",
+                    "docCode": "DOC 001",
+                    "mandatory": "True"
+				},
+				{
+					"document" : "Document 2",
+                    "docCode": "DOC 002",
+                    "mandatory": "True"
+				},
+				{
+					"document" : "Document 3",
+                    "docCode": "DOC 003",
+                    "mandatory": "False"
+				}
+        	]
+        },
+        {
+            "code" : "002",
+            "farm" : "Farm 2",
+            "farm1" : "Farm 2",
+            "firmFarmer" : "Farmer 2",
+            "firmFarmer1" : "Farmer 2",
+            "status" : "New",
+            "details":[
+				{
+					"document" : "Document 1",
+                    "docCode": "DOC 001",
+                    "mandatory": "True"
+				},
+				{
+					"document" : "Document 2",
+                    "docCode": "DOC 002",
+                    "mandatory": "True"
+				},
+				{
+					"document" : "Document 3",
+                    "docCode": "DOC 003",
+                    "mandatory": "False"
+				}
+        	]
+        },
+        {
+            "code" : "003",
+            "farm" : "Farm 3",
+            "farm1" : "Farm 3",
+            "firmFarmer" : "Farmer 3",
+            "firmFarmer1" : "Farmer 3",
+            "status" : "New",
+            "details":[
+				{
+					"document" : "Document 1",
+                    "docCode": "DOC 001",
+                    "mandatory": "True"
+				},
+				{
+					"document" : "Document 2",
+                    "docCode": "DOC 002",
+                    "mandatory": "True"
+				},
+				{
+					"document" : "Document 3",
+                    "docCode": "DOC 003",
+                    "mandatory": "False"
+				}
+        	]
+        }
+    ]
+}

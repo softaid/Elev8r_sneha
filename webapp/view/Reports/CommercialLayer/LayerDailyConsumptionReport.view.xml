@@ -1,0 +1,177 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CommercialLayer.LayerDailyConsumptionReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>layerDailyConsumptionReportHeader}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                        <form:FormElement label="{i18n>layerDailyConsumptionReportlabelLocation}">
+                                            <form:fields>
+                                                <MultiComboBox id="locationtbl"
+                                                    selectionChange="handleSelectionChange"
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'locationList>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{locationList>id}" text="{locationList>locationname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                            </form:FormElement>
+                                             <form:FormElement label="{i18n>layerDailyConsumptionReportlabelBatchName}">
+                                                <form:fields>
+                                                <MultiComboBox id="batchtb1"
+                                                    selectionChange="batchSelectionChange"
+                                                    selectionFinish="batchSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'layerBatchList>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{layerBatchList>id}" text="{layerBatchList>batchname}" />
+                                                </MultiComboBox>
+                                                </form:fields>
+                                            </form:FormElement>
+                                             <form:FormElement label="{i18n>layerDailyConsumptionReportlabelFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromdate" type="Text" width="100%" value="{layerDailyconsumptionModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="getDate"/>   
+                                            </form:fields>
+                                        </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                         <form:FormElement label="{i18n>layerDailyConsumptionReportlabelToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtTodate" type="Text" width="100%" value="{layerDailyconsumptionModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="onDateChange"/>   
+                                            </form:fields>
+                                        </form:FormElement>
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>          
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+
+                        <VBox fitContainer="true">
+                          
+                        <ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblDailyConsumption" width="100%"  growing="true"
+                             enableHorizontalScrollbar= "true" growingScrollToLoad="true" sticky="ColumnHeaders"
+                              visibleRowCount="5" items="{
+                                                path: 'dailyconsumpReportModel>/modelData',
+                                                    sorter: {
+                                                    path: 'batchname',
+                                                    group : true
+                                                }                                           
+                                                           
+
+                                                }"
+                                                mode="single" backgroundDesign="Solid">
+                            
+                        <columns>
+                        <Column mergeDuplicates="true" width="10%"><Text text ="{i18n>DailyConsumptionReportlabelGroupName}" /></Column>
+                        <Column mergeDuplicates="true" minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="{i18n>DailyConsumptionReportlabelItemName}" /></Column>            
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="{i18n>DailyConsumptionReportlabelDate}" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="{i18n>DailyConsumptionReportlabelOpeningBalance}" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true" ><Text text ="{i18n>DailyConsumptionReportlabelRecivedQuantity}" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true" ><Text text ="{i18n>DailyConsumptionReportlabelOutQty}" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true" ><Text text ="{i18n>DailyConsumptionReportlabelConsumeQuantity}" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="{i18n>DailyConsumptionReportlabelCumulConsu}" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%"  demandPopin="true"><Text text ="{i18n>DailyConsumptionReportlabelClosingBalance}" /></Column>                   
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                        <customData>
+                        </customData>
+                            <cells>
+                                <Text text="{dailyconsumpReportModel>groupname}" />
+                                <Text text="{dailyconsumpReportModel>itemname}" />
+                                <Text text="{dailyconsumpReportModel>date}" />
+                                <Text text="{dailyconsumpReportModel>openingbalance}" />
+                                <Text text="{dailyconsumpReportModel>receivedquantity}" />
+                                <Text text="{dailyconsumpReportModel>outquantity}" />
+                                <Text text="{dailyconsumpReportModel>consumedquantity}" />
+                                <Text text="{dailyconsumpReportModel>cumconsumedquantity}" />
+                                <Text text="{dailyconsumpReportModel>closingbalance}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table> 
+                </ScrollContainer>                          
+                        </VBox>  
+                        
+                    </f:content>
+                    
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

@@ -1,0 +1,220 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CBF.Growingchargereport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>growingchargereportgrochargereport}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+
+                             <form:FormContainer title="">
+                                <form:formElements>  
+                                         <form:FormElement label="{i18n>broilerbirdbalancereportfarmname}">
+                                            <form:fields>
+                                                <MultiComboBox id="allFarmList"
+                                                    selectionChange="farmSelectionChange"
+                                                    selectionFinish="farmSelectionFinish"
+
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'farmModel>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{farmModel>id}" text="{farmModel>farm_name}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                  </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer>
+                                    <form:formElements>
+                                         <form:FormElement label="{i18n>broilerbirdbalancereportbatchname}">
+                                            <form:fields>
+                                                <MultiComboBox id="batchno"
+                                                   selectionChange="batchSelectionChange"
+                                                   selectionFinish = "batchSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'batchModel>/modelData',
+                                                        sorter: { path: 'batch_id' }
+                                                    }">
+                                                    <core:Item key="{batchModel>batch_id}" text="{batchModel>batch_number}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                         </form:FormElement>
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="{i18n>shwrecords}" width="100%" press="getcbfGrowingchargeReport"/>
+                                                <MenuButton id="txtdownload" text="{i18n>downloaddata}" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="{i18n>saveascsv}" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="{i18n>saveaspdf}" icon="sap-icon://pdf-attachment" press="getGrowingchargesReportPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                                </form:formContainers>
+                    </form:Form>
+                    </VBox>
+            </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel" width="300%"  growing="true" sticky="ColumnHeaders"   growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'id'
+                                                    }
+                                                }"
+                                                 backgroundDesign="Solid">
+                           
+                                <columns>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>broilerbirdbalancereporttblfarmname}" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>broilerbirdbalanceperreportbatchname}" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>growingchargereportshed}" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportsceme}" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportplaceqty}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereporttoatalmor}" /></Column> 
+                                     <!-- <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Total Culls" /></Column>  -->
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalanceperreporttblfeedconsumed}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereporttblfeedcost}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereporttblmedicinecost}" /></Column> 
+				                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereporttblvaccinecost}" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereporttblvitmincost}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>broilerbirdbalancereporttbladmincost}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportactprocost}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportprocostperkg}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportprocostperbird}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportsoldbird}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportsoldweight}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportavgsize}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportavgage}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportavgsalerate}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportfcr}"/></Column> 
+
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportcfcr}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportaddincentive}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportmorincentive}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportmordeduction}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportexcessbird}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportexcessbirdincetive}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereporteefbpi}" /></Column> 
+                                     <!-- <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="FCR Incentive" /></Column>  -->
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportfcrdeduction}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportshortage}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportcompensate}"/></Column> 
+                                      <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportrearechargepayble}" /></Column>
+
+                                      <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportdownpayment}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportfreightmt}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereporttds}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>growingchargereportnetpayamt}"/></Column> 
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                            <Text text="{tblModel>farm_name}" />
+                                            <Text text="{tblModel>batch_number}" />
+                                            <Text text="{tblModel>shed_name}" />
+                                            <Text text="{tblModel>name}" />
+                                            <Text text="{tblModel>batchplaceqty}" />
+                                            <Text text="{tblModel>totalmortality}" />
+                                            <!-- <Text text="{tblModel>culls}" /> -->
+                                            <Text text="{tblModel>totalfeedconsumed}" />
+                                            <Text text="{tblModel>totalfeedcost}" />
+                                            <Text text="{tblModel>totalmedicinecost}" />
+
+                                            <Text text="{tblModel>totalvaccinecost}" />
+                                            <Text text="{tblModel>vitmineconcost}" />
+                                            <Text text="{tblModel>administrationcost}" />
+                                            <Text text="{tblModel>actualproductioncost}" />
+                                            <Text text="{tblModel>productioncostperkg}" />
+                                            <Text text="{tblModel>productioncostperbird}" />
+                                            <Text text="{tblModel>totalsaleqty}" />
+                                            <Text text="{tblModel>totalsaleweight}" />
+                                            <Text text="{tblModel>avgweightofbird}" />
+                                            <Text text="{tblModel>avgliftingage}" />
+
+                                            <Text text="{tblModel>avgsellingrate}" />
+                                            <Text text="{tblModel>fcr}" />
+                                            <Text text="{tblModel>cfcr}" />
+                                            <Text text="{tblModel>additionalincentive}" />
+                                            <Text text="{tblModel>mortalityincentive}" />
+                                            <Text text="{tblModel>totalmortalitydeduction}" />
+                                            <Text text="{tblModel>excessbirds}" />
+                                            <Text text="{tblModel>excessbirdincentive}" />
+                                            <Text text="{tblModel>eefvalue}" />
+                                            <!-- <Text text="{tblModel>fcrincentive}" /> -->
+
+                                            <Text text="{tblModel>fcrdeduction}" />
+                                            <Text text="{tblModel>birdshortage}" />
+                                            <Text text="{tblModel>compensateamt}" />
+                                            <Text text="{tblModel>rearingchargepayable}" />
+                                            <Text text="{tblModel>totaldownpayment}" />
+                                            <Text text="{tblModel>freightamt}" />
+                                            <Text text="{tblModel>tds}" />
+                                            <Text text="{tblModel>netpayableamt}" />
+                                           
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+            
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

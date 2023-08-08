@@ -1,0 +1,92 @@
+
+{   
+    "purchasereturn":[
+        {
+            "number" : 1,
+            "date": "2018/08/17",
+            "nuSupplierName" : "Person 1",
+            "orderNumber" : "Order 1",
+            "againstForm" : "Person 1",
+            "subject" : "Return",
+            "addressTo" : "Pune",
+            "details":[
+				{
+					"challanNo" : 1,
+                    "stockname": "Broiler Bird",
+                    "unit": 1,
+                    "quantity": 10,
+                    "stockstatus": true,
+                    "batchno": 11,
+                    "status": "Good"
+				},
+				{
+					"challanNo" : 2,
+                    "stockname": "Broiler Male",
+                    "unit": 10,
+                    "quantity": 20,
+                    "stockstatus": true,
+                    "batchno": 12,
+                    "status": "Good"
+				}
+        	]
+        },
+        {
+            "number" : 2,
+            "date": "2018/08/20",
+            "nuSupplierName" : "Person 2",
+            "orderNumber" : "Order 2",
+            "againstForm" : "Person 1",
+            "subject" : "Return",
+            "addressTo" : "Mumbai",
+            "details":[
+				{
+					"challanNo" : 1,
+                    "stockname": "Broiler Bird",
+                    "unit": 1,
+                    "quantity": 10,
+                    "stockstatus": true,
+                    "batchno": 11,
+                    "status": "Good"
+				},
+				{
+					"challanNo" : 2,
+                    "stockname": "Broiler Male",
+                    "unit": 10,
+                    "quantity": 20,
+                    "stockstatus": true,
+                    "batchno": 12,
+                    "status": "Good"
+				}
+        	]
+        },
+        {
+            "number" : 3,
+            "date": "2018/08/25",
+            "nuSupplierName" : "Person 3",
+            "orderNumber" : "Order 3",
+            "againstForm" : "Person 1",
+            "subject" : "Return",
+            "addressTo" : "Nagpur",
+            "details":[
+				{
+					"challanNo" : 1,
+                    "stockname": "Broiler Bird",
+                    "unit": 1,
+                    "quantity": 10,
+                    "stockstatus": true,
+                    "batchno": 11,
+                    "status": "Good"
+				},
+				{
+					"challanNo" : 2,
+                    "stockname": "Broiler Male",
+                    "unit": 10,
+                    "quantity": 20,
+                    "stockstatus": true,
+                    "batchno": 12,
+                    "status": "Good"
+				}
+        	]
+        }
+    ]
+}

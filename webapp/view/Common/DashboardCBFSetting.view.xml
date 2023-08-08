@@ -1,0 +1,184 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.DashboardCBFSetting" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+	                <VBox fitContainer="true">
+                                    <form:Form editable="true">
+                                        <form:toolbar>			
+			                            </form:toolbar>
+                                        <form:layout>
+                                            <form:ResponsiveGridLayout
+                                                labelSpanXL="4"
+                                                labelSpanL="6"
+                                                labelSpanM="4"
+                                                labelSpanS="12"
+                                                adjustLabelSpan="false"
+                                                emptySpanXL="0"
+                                                emptySpanL="0"
+                                                emptySpanM="0"
+                                                emptySpanS="0"
+                                                columnsXL="3"
+                                                columnsL="2"
+                                                columnsM="2"
+                                                singleContainerFullSize="false" />
+                                        </form:layout>
+                                        <form:formContainers>
+                                        <form:FormContainer title="">
+					                            <form:formElements>                                                    
+                                            <form:FormElement label="{i18n>cbfSettingLabelDefaultChicksItem}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/defaultchickitemid}" 
+                                                    type="{cbfModel>/defaultchickitemidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>cbfSettingLabelDOCItem}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/DOCitemid}" 
+                                                    type="{cbfModel>/DOCitemidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>cbfSettingLabelDefaultFeedItemGroup}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/feeditemgroupids}" 
+                                                    type="{cbfModel>/feeditemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>cbfSettingLabelDefaultMedicineItemGroup}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/medicineitemgroupids}" 
+                                                     type="{cbfModel>/medicineitemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>cbfSettingLabelDefaultBreedItemGroup}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/breeditemgroupids}" 
+                                                     type="{cbfModel>/breeditemgroupidstype}"  width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>cbfSettingLabelDefaultVaccineItemGroup}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/vaccineitemgroupids}" 
+                                                    type="{cbfModel>/vitaminitemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>cbfSettingLabelDefaultVitaminItemGroup}">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/vitaminitemgroupids}" 
+                                                     type="{cbfModel>/finishgoodwarehouseidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>cbfSettingLabelShedRestPeriod}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/shedrestperiod}" 
+                                                     type="{cbfModel>/shedrestperiodtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>cbfSettingLabelchicksCost}">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/defaultchickcost}" 
+                                                    type="{cbfModel>/defaultchickcosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>cbfSettingLabelLabourCharges}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/labourcharge}" 
+                                                    type="{cbfModel>/labourchargetype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                  <form:FormElement label="{i18n>BreederSettingsWIPBirdLedger}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/WIPledgerid}" 
+                                                     type="{cbfModel>/WIPledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="KM Charge Ledger">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/supervisorkmledgerid}" 
+                                                    type="{cbfModel>/supervisorkmledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                </form:formElements>
+                                        </form:FormContainer>
+                                         <form:FormContainer title="">
+					                            <form:formElements>                                                    
+                                            <form:FormElement label="{i18n>cbfSettingLabelOverheadCost}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/overheadcost}" 
+                                                    type="{cbfModel>/overheadcosttype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>cbfSettingLabelCBFWarehouse}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/defaultcbfwarehouseid}" 
+                                                    type="{cbfModel>/defaultcbfwarehouseidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>cbfSettingLabelDefaultChicksItemGroup}">
+                                                <form:fields>
+                                                    <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/chicksitemgroupids}" 
+                                                    type="{cbfModel>/chicksitemgroupidstype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>partyDetailPartyGroupLabel}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/partygroupid}" 
+                                                     type="{cbfModel>/partygroupidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>cbfSettingSupplierLedger}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/supplierledgerid}" 
+                                                     type="{cbfModel>/supplierledgeridtype}"  width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>cbfSettingTax}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/taxid}" 
+                                                    type="{cbfModel>/taxidtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>BreederSettingsDiscount}">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/discountledgerid}" 
+                                                     type="{cbfModel>/discountledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>BreederSettingsFreight}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/freightledgerid}" 
+                                                     type="{cbfModel>/freightledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>BreederSettingsCtrlAcc}">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/ctrlaccledgerid}" 
+                                                    type="{cbfModel>/ctrlaccledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>BreederSettingsCash}">
+                                                <form:fields>
+                                                     <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/cashledgerid}" 
+                                                    type="{cbfModel>/cashledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                              <form:FormElement label="{i18n>BreederSettingsGRPOWithoutInvoice}">
+                                                <form:fields>
+                                                   <Button class="sapUiSmallMarginEnd" icon="{cbfModel>/grpowithoutinvoiceledgerid}" 
+                                                     type="{cbfModel>/grpowithoutinvoiceledgeridtype}" width="10%"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                                </form:formElements>
+                                        </form:FormContainer>
+                                        </form:formContainers>
+                                    </form:Form>
+                </VBox>  
+</core:View>
+
+
+
+
+
+
+
+ 

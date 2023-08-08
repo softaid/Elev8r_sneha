@@ -1,0 +1,160 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Accounts.BankBookRegister" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Bank Book Register"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false"/>
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                        <form:FormElement label="From Date">
+                                                <form:fields>
+                                                    <DatePicker id="txtFromDate" required="true" 
+                                                    value="{bankBookModel>/fromdate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="onDateChange"
+                                                    />
+                                                </form:fields>
+                                            </form:FormElement>   
+                                            <form:FormElement label="To Date">
+                                                <form:fields>
+                                                    <DatePicker id="txtToDate" required="true" 
+                                                    value="{bankBookModel>/todate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="onDateChange"
+                                                    />
+                                                </form:fields>
+                                            </form:FormElement>   
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                            <form:FormElement label="Bank">
+                                            <form:fields>
+                                                <Select id="bankList" showSecondaryValues= "true"
+                                                        forceSelection="false"
+                                                        selectedKey="{bankModel>/accountledgerid}" 
+                                                        items="{
+                                                            path: 'bankModel>/modelData',
+                                                            sorter: { path: 'accountledgerid' }
+                                                        }">
+                                                    <core:ListItem key="{bankModel>accountledgerid}" text="{bankModel>bankname}" additionalText="{bankModel>id}"/>  
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                    <Button type="Emphasized" text="Show Records" width="65%" press="bindTbl"/>
+                                                    <Button id="bankReco" text="Bank Reco" width="100%" press="goToBankReco" />
+                                                    <MenuButton id="txtdownload"  icon="sap-icon://download" width="60%" align="right">
+                                                        <menu>
+                                                            <Menu itemSelected="onMenuAction" >
+                                                                <items>
+                                                                    <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport" />
+                                                                    <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="onPdfExport" />
+                                                                </items>
+                                                            </Menu>
+                                                        </menu>
+                                                    </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>	
+            <VBox fitContainer="true">
+                           
+                <Table id="tblSettingReport" items="{
+                    path: 'tblBankBookModel>/modelData',
+                        sorter: {
+                            path: 'id'
+                        }
+                    }"
+                    sticky="ColumnHeaders" growing="true"
+                    growingThreshold="100"
+                    growingScrollToLoad="true" backgroundDesign="Solid">
+                    <columns>
+                        <Column><Label text ="Voucher Date" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Journal Entry No" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Voucher Type" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Cheque No" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Cheque Date" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="General Ledger Code" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" ><Label text ="Party" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Narration" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Debit Amount" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Credit Amount" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Closing Balance" /></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <customData>
+                                <core:CustomData key="bankBookRegister" value="{tblBankBookModel>narration}" writeToDom="true"></core:CustomData>
+                            </customData>
+                            <cells>
+                                <Text text="{tblBankBookModel>voucherdate}" />
+                                <Text text="{tblBankBookModel>jeid}" />
+                                <Text text="{tblBankBookModel>refname}" />
+                                <Text text="{tblBankBookModel>chequeno}" />
+                                <Text text="{tblBankBookModel>chequedate}" />
+                                <Text text="{tblBankBookModel>glcode}" />
+                                <Text text="{tblBankBookModel>partyname}" /> 
+                                <Text text="{tblBankBookModel>narration}" /> 
+                                <Text text="{tblBankBookModel>dramount}" />
+                                <Text text="{tblBankBookModel>cramount}" />
+                                <Text text="{tblBankBookModel>closingbalance}" />                                       
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>  
+                        
+        </f:content>
+    </f:DynamicPage>
+</core:View>
+
+
+
+
+ 

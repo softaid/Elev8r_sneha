@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .tableheader 
+       {
+            /* border: 1px solid black; */
+            border-collapse: collapse;
+            padding: 15px;
+            font-family: "sans-serif";
+            font-size: 14px;
+            line-height: 1;
+            margin: 0;
+           
+        
+        }
+        .tableheader td
+        {
+            padding-left: 8px;
+            font-size: 11px;
+            height: 5px;
+        
+        }
+        .tableheader tr
+        {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+        .logo
+        {
+            margin-left:100px;
+        }
+
+
+        .billofmaterial td
+        {
+            
+            padding-left: 8px;
+            font-family: Arial;
+            font-size: 12px;
+
+        
+        }
+        .billofmaterial tr
+        {
+            
+            padding-top: 8px;
+            padding-bottom: 8px;
+        
+        }
+        .udrline
+                    {
+                        border-bottom: 1px solid black;
+                    }
+
+        #purchase
+                {
+                    margin-left:100px;
+                    font-family: 'Times New Roman', Times, serif;
+                    
+                } 
+
+        .tablebdr     
+
+        {
+                border: 1px solid black;
+                /* border-top: 0px solid black!important;
+                border-bottom: 0px solid black!important; */
+            }   
+
+            .tablebdr th
+            {
+                border-top: 0px solid black;
+                border-bottom: 1px solid black;
+                font-family: Arial;
+                font-size: 6px;
+                /* border-left: 1px solid black;
+                border-right: 1px solid black; */
+            }
+            .tablebdr th
+            {
+                font-family: Arial;
+                font-size: 6px;
+            }
+            .tablebdr th{
+                border-right: 1px solid black;
+            }
+            .tablebdr th:last-child{
+                border-right: 0px solid black!important;
+            }
+            .tablebdr th:first-child{
+                border-left: 0px solid black!important;
+                width:100px;
+                /* border-right: 0px solid black!important; */ 
+            }
+            .tablebdr th:nth-child(2){
+               
+                width:100px;
+               
+            }
+            .tablebdr th:nth-child(5){
+               
+               width:100px;
+              
+           }
+           .tablebdr th:nth-child(6){
+               
+               width:60px;
+              
+           }
+          
+
+
+            .tablebdr th:last-child{
+                /* border-left: 0px solid black!important; */
+                border-right: 0px solid black!important;
+            }
+            .tablebdr tr{
+                border-bottom: 1px solid black;
+
+            }
+            .tablebdr tr:last-child{
+                border-bottom: 0px solid black!important;
+            }
+            .tablebdr td{
+                border-right: 1px solid black;
+                font-size: 12px;
+            }
+            .tablebdr th{
+                font-size: 12px;
+            }
+            .tablebdr td:last-child{
+                border-right: 0px solid black!important;
+            }
+           
+
+     /* .bodyborder
+            {
+                
+                border: 1px solid #000;
+                width: 745px;
+                height: 1100px;
+                float:left;
+                padding: 5px;
+                margin-bottom: 2%;
+                
+            }  */
+
+    </style>
+</head>
+
+<body class="bodyborder">
+
+<div  class="bodyborder">
+
+
+    <table style="width:750" class="tableheader" cellpadding="0" cellspacing="0">
+        <div>
+        <tr>
+            <td style="width:400;font-family: Arial;font-size: 12px"><b>##CompanyName##</b></td>
+            <!-- <td style="width:330" rowspan="6" id="img">
+                    <img src="../images/logical.png" width="250px" height="120px" class="logo"   >
+            </td> -->
+        </tr>
+
+        <tr>
+            <td><b>company name: </b>##CompanyName##</td>
+        </tr>
+        <tr>
+            <td><b>Address: </b>##Address##</td>
+        </tr>
+        <tr>
+            <td><b>Pincode: </b>##PinCode##</td>
+        </tr>
+        <tr>
+            <td><b>Mobile No: </b>##CompanyContact##</td>
+        </tr>
+        <tr>
+            <td><b>Email Id: </b>##CompanyEmail##</td>
+        </tr>
+    </div>
+        
+        
+    </table>
+
+    <br>
+
+    
+    
+    <table style="width:750" class="billofmaterial">
+        <tr>
+            <td style="width:400;text-align:left"> <b>From Date:</b>##FromDate##</td>
+            <td style="width:400;text-align:left"> <b>To Date:</b>##ToDate##</td>
+     </tr>
+    
+      
+       
+        
+    </table>
+<table style="width:730" class="purchasetable">
+    <tr>
+        <div id="">
+        <th style="width:800;text-decoration: underline;font-family: Arial;font-size: 16px;"  colspan="2" >
+            <b><span><u> Purchase Order Report</u></span></b>
+        </th>
+        </div>
+    </tr>
+</br>
+</br>
+</table>
+</table>
+      
+    <table style="width:730;margin-top:25px !important;" class="tablebdr" cellpadding="3" cellspacing="0">
+        <tr>         
+            <th>Po Number</th>
+            <th>Party Name</th>
+            <th>Po Date</th>
+            <th>Item Name</th>
+            <th>Unit Name	</th>
+            <th>Quantity</th>
+            <th>unit Cost</th>
+            <th>Discount(%)</th>
+            <th>Line Total</th>
+            <th>SGST</th>
+            <th>CGST</th>
+            <th>IGST</th>
+            <th>Total</th>
+        </tr>
+
+        ##ItemList##
+
+    </table>
+    
+
+    <table style="width:730" class="purchasetable">
+        <tr>
+            <td style="width:400;"></td>
+            <td style="width:330; text-align: right;font-family: Arial;font-size: 12px"> <b>##CompanyName##<br><br><br>Authorised By</b></td>
+        </tr>
+     
+    </table>
+
+   
+</div>
+</body>
+
+</html>

@@ -1,0 +1,198 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.BreederSales.BreederLiftingWeight" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:FlexibleColumnLayout  id="fclbreederliftingweight" backgroundDesign="Solid">
+		<f:beginColumnPages>
+            <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="Lifting Weight"/>
+				        </f:heading>
+                        <f:actions>
+                            <ToolbarSpacer/>
+                            
+                            <Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+                        </f:actions>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+	                <VBox fitContainer="true">                   
+                        <form:Form editable="true">    
+                            <form:toolbar>
+			                </form:toolbar>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+					                <form:formElements>
+                                        <form:FormElement label="Lifting Schedule">
+                                            <form:fields>
+                                                <Select id="txtLfSchedule" 
+                                                forceSelection ="false" selectedKey="{breederLiftingWeightModel>/liftingscheduleid}" 
+                                                    items="{
+                                                            path: 'brLiftingModel>/modelData',
+                                                            sorter: { path: 'id' }
+                                                        }"
+                                                    change = "changeLfSchedule">
+                                                    <core:Item key="{brLiftingModel>id}" text="{brLiftingModel>id}" />
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="Sales order">
+                                            <form:fields>
+                                                <Select id="txtSalesOrder" forceSelection="false" selectedKey="{breederLiftingWeightModel>/breederbirdsalesorderid}" 
+                                                    items="{
+                                                            path: 'orderModel>/modelData',
+                                                            sorter: { path: 'id' }
+                                                        }"
+                                                    change="getSalesOrderDetail">
+                                                    <core:Item key="{orderModel>breederbirdsalesorderid}" text="{orderModel>breederbirdsalesorderid}" />    
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="Customer">
+                                            <form:fields>
+                                                <Input value="{breederLiftingWeightModel>/partyname}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="Lifting Date">
+                                            <form:fields>
+                                                <DatePicker id="txtTransactionDate" required="true" value="{breederLiftingWeightModel>/liftingdate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}"      
+                                                    valueFormat="dd/MM/YYYY"/>
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                         <form:FormElement label="Warehouse">
+                                            <form:fields>
+                                                <Select id="txtwarehouse" forceSelection="false" selectedKey="{breederLiftingWeightModel>/warehouseid}" change = "changeWarehouse"
+									                items="{
+					                                    path: 'warehouseList>/modelData',
+					                                    sorter: { path: 'id' }
+				                                    }">
+				                                    <core:Item key="{warehouseList>warehouseid}" text="{warehouseList>warehousename}" />                                            
+			                                    </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+
+                                <form:FormContainer title="">
+					                <form:formElements>
+
+                                     <form:FormElement label="Batch">
+                                            <form:fields>
+                                                <Select id="txtbatch" forceSelection="false" selectedKey="{breederLiftingWeightModel>/batchid}" 
+									                items="{
+					                                    path: 'batchList>/modelData',
+					                                    sorter: { path: 'id' }
+				                                    }">
+				                                    <core:Item key="{batchList>batchid}" text="{batchList>batchname}" />                                            
+			                                    </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="Total Qty">
+                                            <form:fields>
+                                                <Input value="{breederLiftingWeightModel>/totaldeliveredqty}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="Total Weight">
+                                            <form:fields>
+                                                <Input value="{breederLiftingWeightModel>/totaldeliveredwt}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="Total Cost">
+                                            <form:fields>
+                                                <Input value="{breederLiftingWeightModel>/totaldeliverycost}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="Is Last Delivery">
+                                            <form:fields>
+                                                <Switch id="deliverycheck" state="{cbfdailyTransactionModel>/islastdelivery}" change="checkdone" customTextOff="No" customTextOn="Yes">
+                                                    <layoutData>
+                                                        <FlexItemData growFactor="1" />
+                                                    </layoutData>
+                                                </Switch>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+
+                        <Table id="tblliftingWeight" mode="None" backgroundDesign="Solid" inset="false" 
+                               items="{
+                                    path: 'tblbreederLiftingWeightModel>/modelData',
+                                        sorter: {
+                                            path: 'lineId'
+                                        }
+                                    }">
+	                        <headerToolbar>
+			                    <Toolbar>
+				                    <content>
+					                    <Title text="" level="H2"/>
+					                    <ToolbarSpacer />
+			                            <Button icon="sap-icon://add" type="Transparent" press="onAddNewDetail" id="addBtn" enabled="false"/>
+				                    </content>
+			                    </Toolbar>
+		                    </headerToolbar>
+
+                            <columns>
+                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Name" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Planned Qty" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Delivery Qty" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Planned Wt" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Delivery Wt" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Time" /></Column>     
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Total Cost" /></Column>       
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemPress">
+                                    <cells>                                   
+                                        <Text text="{tblbreederLiftingWeightModel>itemname}"  />
+                                        <Text text="{tblbreederLiftingWeightModel>plannedqty}"  />
+                                        <Text text="{tblbreederLiftingWeightModel>deliveredqty}"  />
+                                        <Text text="{tblbreederLiftingWeightModel>plannedwt}"  />
+                                        <Text text="{tblbreederLiftingWeightModel>deliveredwt}"  />
+                                        <Text text="{tblbreederLiftingWeightModel>liftingtime}"  />
+                                        <Text text="{tblbreederLiftingWeightModel>totalcost}"  />                                     
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+
+                        <Panel>
+    	                    <FlexBox		
+				                alignItems="Start"
+				                justifyContent="End">
+				                <items>
+					                <Button text="Save" id = "btnSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+					                <Button text="Clear" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
+				                </items>
+			                </FlexBox>
+                        </Panel>         
+                    </VBox>  
+                </f:content>
+			</f:DynamicPage> 
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout> 
+</core:View>

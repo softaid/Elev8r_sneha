@@ -1,0 +1,188 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.MaterialReceipt" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+ <f:FlexibleColumnLayout  id="fclMaterialReceipt" backgroundDesign="Solid">
+		<f:beginColumnPages>
+	<VBox fitContainer="true">
+        <form:Form editable="true">
+            <form:toolbar>
+				<Toolbar>
+					<Title text="{i18n>MaterialReceiptTitle}" level="H4" titleStyle="H4"/>
+					<ToolbarSpacer />
+					<Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+				    <!-- <Button icon="sap-icon://add" type="Transparent" press="onAdd"/>
+                    <Button icon="sap-icon://arrow-left" type="Transparent" press="onAdd"/>
+                    <Button icon="sap-icon://arrow-right" type="Transparent" press="onAdd"/> -->
+			    </Toolbar>
+			</form:toolbar>
+            <form:layout>
+                <form:ResponsiveGridLayout
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="3"
+                    columnsL="2"
+                    columnsM="2"
+                    singleContainerFullSize="false" />
+            </form:layout>
+            <form:formContainers>
+                <form:FormContainer title="">
+					<form:formElements>
+                        <form:FormElement label="Receipt Type">
+                           <form:fields>
+                                <ComboBox id="txtType" valueLiveUpdate="true" valueStateText="Please Select Status." liveChange="handleUserInput" validationSuccess="handleValidationSuccess" validationError="handleValidationError" selectedKey="{materialReceiptModel>/receipttype}"
+                                    items="{
+                                    path: 'materialReceiptTypeList>/modelData',
+                                    sorter: { path: 'id' }
+                                    }" required="true" selectionChange="typeSelected">
+                                    <core:Item key="{materialReceiptTypeList>id}" text="{materialReceiptTypeList>refname}" />              
+                                </ComboBox>
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="Hatcher Batch">
+                           <form:fields>
+                                <Input
+                                    id="txtHatcherBatch"
+                                    type="Text"
+                                    value="{materialReceiptModel>/batchid}"
+                                    placeholder="Select Hatcher Batch"
+                                    showValueHelp="true" 
+                                    valueHelpOnly="true"         
+                                    valueHelpRequest="handleHatcherBatchValueHelp"
+                                    required="true">
+                                </Input>    
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+
+                <form:FormContainer title="">
+					<form:formElements>
+                        <form:FormElement label="{i18n>MaterialReceiptStatus}">
+                           <form:fields>
+                                <ComboBox id="txtStatus" valueLiveUpdate="true" valueStateText="Please Select Status." liveChange="handleUserInput" validationSuccess="handleValidationSuccess" validationError="handleValidationError" selectedKey="{materialReceiptModel>/statusid}"
+                                    items="{
+                                    path: 'materialReceiptStatusList>/modelData',
+                                    sorter: { path: 'id' }
+                                    }" required="true">
+                                    <core:Item key="{materialReceiptStatusList>id}" text="{materialReceiptStatusList>refname}" />                     
+                                </ComboBox>
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>MaterialReceiptPostingDate}">
+                            <form:fields>
+                                <DatePicker id="txtPostingDate" type="Text" width="100%"  value="{materialReceiptModel>/receiptdate}" 
+                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                placeholder="{config>/dateFormat/placeholder}" required="true"/>
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>MaterialReceiptDocumentDate}">
+                              <form:fields>
+                                <DatePicker id="txtDocDate" type="Text" width="100%"  value="{materialReceiptModel>/batchdate}" 
+                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                placeholder="{config>/dateFormat/placeholder}"/>
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+            </form:formContainers>
+        </form:Form>
+        
+        <Table id="tb1transferto" mode="single" backgroundDesign="Solid" items="{
+                            path: 'tblModel>/modelData',
+                                sorter: {
+                                    path: 'itemCode'
+                                }
+                        }">
+	        <headerToolbar>
+			    <Toolbar>
+				   <content>
+					<Title text="" level="H2"/>
+					<ToolbarSpacer />
+			        <Button icon="sap-icon://add" type="Transparent" press="onAddNewRow" id="btnAdd"/>
+				  </content>
+			    </Toolbar>
+		    </headerToolbar>
+             <columns>
+                <Column><Text text ="{i18n>MaterialReceiptItemName}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>MaterialReceiptUnitPrice}" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>MaterialReceiptQuantity}" /></Column>
+                
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>MaterialReceiptTotal}" /></Column>
+                <!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>MaterialReceiptTotal}" /></Column> -->
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>MaterialReceiptWarehouse}" /></Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Navigation" press="onListItemPress">
+                    <cells>        
+                        <Text text="{tblModel>itemname}" />         
+                        <Text text="{tblModel>unitcost}" />         
+                        <Text text="{tblModel>receiptquantity}" />                       
+                        <Text text="{tblModel>totalcost}"  />
+                        <Text text="{tblModel>warehousename}"  />                              
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+        <form:Form editable="true">
+            <form:title>
+                <core:Title text="" />
+            </form:title>
+            <form:layout>
+                <form:ResponsiveGridLayout
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="3"
+                    columnsL="2"
+                    columnsM="2"
+                    singleContainerFullSize="false" />
+            </form:layout>
+            <form:formContainers>
+                <form:FormContainer>
+                    <form:formElements>
+                    <form:FormElement label="Remark">
+                        <form:fields>
+                                <TextArea placeholder="Enter Remark" growing="true" rows="4" growingMaxLines="7" width="100%" id="txtRemark" value="{materialReceiptModel>/remark}"/>
+                        </form:fields>
+                    </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+            </form:formContainers>
+        </form:Form>
+
+        <Panel>
+    	    <FlexBox		
+				alignItems="Start"
+				justifyContent="End">
+				<items>
+					<Button text="{i18n>saveButtonText}" id="btnSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+					<Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
+				</items>
+			</FlexBox>
+        </Panel>
+    </VBox>  
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>
+
+
+
+
+ 

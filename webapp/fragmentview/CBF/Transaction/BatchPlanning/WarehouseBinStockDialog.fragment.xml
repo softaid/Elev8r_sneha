@@ -1,0 +1,44 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="Shed Stock"
+		contentHeight="300px"
+		search=""
+		confirm="closeStockDialog"
+		cancel="closeStockDialog"
+		items="{
+			path : 'shedStockModel>/modelData',
+			sorter : {
+				path : 'code',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{shedStockModel>binname}" />
+				<Text text="{shedStockModel>itemname}" />
+				<Text text="{shedStockModel>instock}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Warehouse Bin" />
+				</header>
+			</Column>
+            <Column demandPopin="true" >
+				<header>
+					<Text text="Item Name" />
+				</header>
+			</Column>
+			 <Column demandPopin="true" >
+				<header>
+					<Text text="Instock Qty" />
+				</header>
+			</Column>
+			</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

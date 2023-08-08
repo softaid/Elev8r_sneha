@@ -1,0 +1,22 @@
+------------------------------------------------------------------------
+Please note before creating template -
+------------------------------------------------------------------------
+
+ - Tab name by text - 'ForYourReference', 'FYR', 'For Your Reference' will be skipped from mapping and reading data. It's will be used to get extra information and instructions in creating template in other tabs.
+
+ - Other tabs will be treated as actual data templates.
+
+ - Data template's tab name will be treated as name of the table of database in script. (so please verify the tab name with table name, Tab name is not case sensitive).
+
+ - Data template's first row will be treated as column name of table of database in script. It will exclude all columns name, which will have [] (opening closing brackets) enclosed to column names string.
+
+ - Please populate/fill data whereever required in [column] columns.
+
+Information -
+---------------------
+ - Download master template button for download Excel file template for master.
+ - It selects and reads Excel file with multiple sheets.
+ - It displays excelsheets in tabbed List
+ - Sheets columns and data mapping happens dynamically (Each tab's first row will be treated as column names, and below data will be mapped as table data, Each tab name will be treated as table name for dynamic query builder)
+ - Queries will be executed in Bulk statement and it will be validated before insert and flags errors on page to know error.
+ - Tables will be truncated before insert statements are executed.

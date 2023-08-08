@@ -1,0 +1,280 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CBF.FarmPerformanceReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>farmperformancereporttitle}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                         <form:FormElement label="{i18n>chickplacementreportfromdatelabel}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromdate"  width="100%" value="{reportModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate" />   
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                         
+                                         <form:FormElement label="{i18n>farmperformancereportbranchnamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="branchList"
+                                                    selectionChange="batchSelectionChange"
+                                                    selectionFinish="branchSelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'branchModel>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{branchModel>id}" text="{branchModel>branchname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                         <form:FormElement label="{i18n>farmperformancereportlinenamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="lineList"
+                                                   selectionChange="batchSelectionChange"
+                                                  selectionFinish = "lineSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'lineModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{lineModel>id}" text="{lineModel>linename}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                         </form:formElements>
+                                         </form:FormContainer>
+                                         <form:FormContainer>
+                                          <form:formElements>
+                                           <form:FormElement label="{i18n>chickplacementreporttodatelabel}">
+                                            <form:fields>
+                                                <DatePicker id="txtTodate"  width="100%" value="{reportModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate"/>   
+                                            </form:fields>
+                                        </form:FormElement> 
+
+                                          <form:FormElement label="{i18n>farmperformancereportfarmernamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="farmerList"
+                                                   selectionChange="batchSelectionChange"
+                                                  selectionFinish = "farmerSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'farmerModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{farmerModel>id}" text="{farmerModel>farmer_name}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                       <form:FormElement label="{i18n>farmperformancereportfarmnamelabel}">
+                                            <form:fields>
+                                                <MultiComboBox id="farmList"
+                                                   selectionChange="batchSelectionChange"
+                                                  selectionFinish = "farmSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'farmModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{farmModel>id}" text="{farmModel>farm_name}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                          
+                                        </form:formElements>
+                                          </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel" width="400%"  growing="true"   growingScrollToLoad="true"         sticky="ColumnHeaders"
+
+                                                items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'id'
+                                                    }
+                                                }"
+                                                 backgroundDesign="Solid">
+                                <headerToolbar>
+                                    <Toolbar>
+                                    <content>
+                                        <Title  level="H2"/>
+                                        <ToolbarSpacer />
+                                          <Button icon="sap-icon://search" type="Emphasized" text="Search Data" press="getFarmPerFormanceReport"/>
+                                           <MenuButton icon="sap-icon://download">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="SaveCSV" icon="sap-icon://save" press="onDataExport" />
+                                                            <MenuItem text="SavePDF" icon="sap-icon://save" press="createPDF" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                          
+                                    </content>
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>farmperformancereportfarmername}" /></Column>                                  
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>farmperformancereportfarmname}" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>farmperformancereportbatchno}" /></Column>
+                                    <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportbranchname}" /></Column>
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportplacementdate}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportlastliftingdate}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportfeedtransferreturn}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportbatchcloasedate}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportchickplaceqty}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportchickrate}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportchickamt}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportaccidentalmortality}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereporttotalmortality}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportmortalityper}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportculls}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportcullsper}" /></Column> 
+                                      <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportproducationqty}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportshortageexcess}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportbirdsold}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportavglifitingage}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereporttotalweight}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportacgbw}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportfeedconinkg}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportfeedconinkgfeedrate}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportfeedcost}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportFCR}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportcfcr}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportvcr}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportbpi}" /></Column> 
+                                      <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportgrade}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportactualrckg}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportrebird}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportcompensation}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportrcpayable}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportmedicinecost}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportadmistrationcot}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportproducationcost}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportproducationcostperkg}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportsellingamount}" /></Column> 
+                                      <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportavgsellingamt}" /></Column> 
+                                     <Column minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>farmperformancereportprofitloss}" /></Column> 
+                                    
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                            <Text text="{tblModel>farmer_name}" />
+                                            <Text text="{tblModel>farm_name}" />
+                                            <Text text="{tblModel>batch_id}" />
+                                            <Text text="{tblModel>branchname}" />
+                                            <Text text="{tblModel>placement_date}" />
+                                            <Text text="{tblModel>liftingdate}" />
+                                            <Text text="{tblModel>Percumulativemortality}" />
+                                            <Text text="{tblModel>liftingdate}" />
+                                            <Text text="{tblModel>chick_qty}" />
+                                            <Text text="{tblModel>chickcost}" />
+                                            <Text text="{tblModel>chickamt}" />
+                                            <Text text="{tblModel>cummulativeactualfeed}" />
+                                            <Text text="{tblModel>totalmortality}" />
+                                            <Text text="{tblModel>ptotalmortality}" />
+                                            <Text text="{tblModel>totalculls}" />
+                                            <Text text="{tblModel>Percentageculls}" />
+                                            <Text text="{tblModel>itemname}" />
+                                            <Text text="{tblModel>inventorytransferin}" />
+                                            <Text text="{tblModel>totaldeliveredqty}" />
+                                            <Text text="{tblModel>quantity}" />
+                                            <Text text="{tblModel>totalwt}" />
+
+                                             <Text text="{tblModel>quantity}" />
+                                            <Text text="{tblModel>totalwt}" />
+                                            <Text text="{tblModel>Cumulativemortality}" />
+                                            <Text text="{tblModel>Percumulativemortality}" />
+                                            <Text text="{tblModel>fcr}" />
+                                            <Text text="{tblModel>chick_qty}" />
+                                            <Text text="{tblModel>actualfeedconsumption}" />
+                                            <Text text="{tblModel>cummulativestdfeed}" />
+                                            <Text text="{tblModel>cummulativeactualfeed}" />
+                                            <Text text="{tblModel>totalmortality}" />
+                                            <Text text="{tblModel>ptotalmortality}" />
+                                            <Text text="{tblModel>totalculls}" />
+                                            <Text text="{tblModel>Percentageculls}" />
+                                            <Text text="{tblModel>medicinecost}" />
+                                            <Text text="{tblModel>administrationcost}" />
+                                            <Text text="{tblModel>totaldeliveredqty}" />
+                                            <Text text="{tblModel>quantity}" />
+                                            <Text text="{tblModel>totalwt}" />
+                                            <Text text="{tblModel>totalwt}" />
+                                            <Text text="{tblModel>totaldeliveredqty}" />
+
+
+
+
+
+
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+            
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

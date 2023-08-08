@@ -1,0 +1,202 @@
+{
+	"vaccineschedule": [
+		{
+			"code" : 1,
+            "name": "Feed Schedule Male",
+            "breedName" : "Breeder Male",
+            "fromDate" : "01/08/17",
+            "toDate" : "31/01/18",
+			"vaccineDetails":[
+				{
+					"code" : "FEG0100",
+					"name" : "Gold coin - Breeder Layer2",
+                    "weekNumber" : 2,
+                    "method" : 0.300,
+                    "quantity" : 1.300,
+                    "unit" : "KG"
+				},
+				{
+					"code" : "FEG0100",
+					"name" : "Gold coin - Breeder Layer2",
+                    "weekNumber" : 2,
+                    "method" : 0.300,
+                    "quantity" : 1.300,
+                    "unit" : "KG"
+				},
+				{
+					"code" : "FEG0100",
+					"name" : "Gold coin - Breeder Layer2",
+                    "weekNumber" : 2,
+                    "method" : 0.300,
+                    "quantity" : 1.300,
+                    "unit" : "KG"
+				}
+            ],
+            "locationDetails" :[
+                {
+					"locationName" : "Hillcountry",
+					"locationCode" : 2,
+					"isApplicable" : true
+                },
+                {
+					"locationName" : "Hillcountry2",
+					"locationCode" : 3,
+					"isApplicable" : false
+				}
+
+            ]
+		},
+		{
+            "code" : 2,
+            "name": "Feed Schedule Female",
+            "breedName" : "Breeder Female",
+            "fromDate" : "07/09/17",
+            "toDate" : "09/03/18",
+			"vaccineDetails":[
+				{
+					"code" : "FEG0100",
+					"name" : "Gold coin - Breeder Layer2",
+                    "weekNumber" : 2,
+                    "method" : 0.300,
+                    "quantity" : 1.300,
+                    "unit" : "KG"
+				},
+				{
+					"code" : "FEG0100",
+					"name" : "Gold coin - Breeder Layer2",
+                    "weekNumber" : 2,
+                    "method" : 0.300,
+                    "quantity" : 1.300,
+                    "unit" : "KG"
+				}
+            ],
+            "locationDetails" :[
+                {
+					"locationName" : "Hillcountry",
+					"locationCode" : 2,
+					"isApplicable" : true
+                }
+            ]
+		},
+		{
+			"code" : 3,
+            "name": "Feed Schedule Male",
+            "breedName" : "Breeder Male",
+            "fromDate" : "01/08/17",
+            "toDate" : "31/01/18",
+			"vaccineDetails":[
+				{
+					"code" : "FEG0100",
+					"name" : "Gold coin - Breeder Layer2",
+                    "weekNumber" : 2,
+                    "method" : 0.300,
+                    "quantity" : 1.300,
+                    "unit" : "KG"
+				},
+				{
+					"code" : "FEG0100",
+					"name" : "Gold coin - Breeder Layer2",
+                    "weekNumber" : 2,
+                    "method" : 0.300,
+                    "quantity" : 1.300,
+                    "unit" : "KG"
+				},
+				{
+					"code" : "FEG0100",
+					"name" : "Gold coin - Breeder Layer2",
+                    "weekNumber" : 2,
+                    "method" : 0.300,
+                    "quantity" : 1.300,
+                    "unit" : "KG"
+				}
+            ],
+            "locationDetails" :[
+                {
+					"locationName" : "Hillcountry",
+					"locationCode" : 2,
+					"isApplicable" : true
+                }
+            ]
+		},
+		{
+			"code" : 4,
+            "name": "Feed Schedule Male",
+            "breedName" : "Breeder Male",
+            "fromDate" : "01/08/17",
+            "toDate" : "31/01/18",
+			"vaccineDetails":[
+				{
+					"code" : "FEG0100",
+					"name" : "Gold coin - Breeder Layer2",
+                    "weekNumber" : 2,
+                    "method" : 0.300,
+                    "quantity" : 1.300,
+                    "unit" : "KG"
+				},
+				{
+					"code" : "FEG0100",
+					"name" : "Gold coin - Breeder Layer2",
+                    "weekNumber" : 2,
+                    "method" : 0.300,
+                    "quantity" : 1.300,
+                    "unit" : "KG"
+				},
+				{
+					"code" : "FEG0100",
+					"name" : "Gold coin - Breeder Layer2",
+                    "weekNumber" : 2,
+                    "method" : 0.300,
+                    "quantity" : 1.300,
+                    "unit" : "KG"
+				}
+            ],
+            "locationDetails" :[
+                {
+					"locationName" : "Hillcountry",
+					"locationCode" : 2,
+					"isApplicable" : true
+                }
+            ]
+		},
+		{
+			"code" : 5,
+            "name": "Feed Schedule Male",
+            "breedName" : "Breeder Male",
+            "fromDate" : "01/08/17",
+            "toDate" : "31/01/18",
+			"vaccineDetails":[
+				{
+					"code" : "FEG0100",
+					"name" : "Gold coin - Breeder Layer2",
+                    "weekNumber" : 2,
+                    "method" : 0.300,
+                    "quantity" : 1.300,
+                    "unit" : "KG"
+				},
+				{
+					"code" : "FEG0100",
+					"name" : "Gold coin - Breeder Layer2",
+                    "weekNumber" : 2,
+                    "method" : 0.300,
+                    "quantity" : 1.300,
+                    "unit" : "KG"
+				},
+				{
+					"code" : "FEG0100",
+					"name" : "Gold coin - Breeder Layer2",
+                    "weekNumber" : 2,
+                    "method" : 0.300,
+                    "quantity" : 1.300,
+                    "unit" : "KG"
+				}
+            ],
+            "locationDetails" :[
+                {
+					"locationName" : "Hillcountry",
+					"locationCode" : 2,
+					"isApplicable" : true
+                }
+            ]
+		}			
+	]
+}

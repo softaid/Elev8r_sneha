@@ -1,0 +1,26 @@
+{
+	"eggstransfertohatcherylist": [
+        {
+            "itemCode" : "H001",
+            "itemName" : "Hatching Eggs",
+            "batchNo" : "PS1_FLOOR_EGGS_2018",
+            "fromBin" : "EG0001-SYSTEM",
+            "onHandQuantity" : 500.000,
+            "transferQuantity" : 500.000,
+            "cracksEggs" : 0.000,
+            "brustingEggs" : 0.000,
+            "stollenEggs" : 0.000
+        },
+        {
+            "itemCode" : "C00001",
+            "itemName" : "Packing Moving material",
+            "batchNo" : "PS1_FLOOR_EGGS_2018",
+            "fromBin" : "EG0001-SYSTEM",
+            "onHandQuantity" : 1577.000,
+            "transferQuantity" : 10.000,
+            "cracksEggs" : 0.000,
+            "brustingEggs" : 0.000,
+            "stollenEggs" : 0.000
+        }
+    ]
+}

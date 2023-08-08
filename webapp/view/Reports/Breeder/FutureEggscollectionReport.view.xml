@@ -1,0 +1,189 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Breeder.FutureEggsCollectionReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Future Eggs Collection Report"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                        <form:FormElement label="{i18n>eggsCollectionReportLabelLocation}">
+                                            <form:fields>
+                                                <MultiComboBox id="locationtbl"
+                                                    selectionChange="handleSelectionChange"
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'locationList>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{locationList>id}" text="{locationList>locationname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                            <form:FormElement label="{i18n>eggsCollectionReportLabelBatchName}">
+                                            <form:fields>
+                                             <Select id="batchtb1" selectedKey="{eggsCollRepModel>/breederbatchid}" forceSelection = "false" change="batchChange"  
+                                                items="{
+                                                    path: 'batchModel>/modelData',
+                                                    sorter: { path: 'key' }
+                                                }">
+                                                <core:Item key="{batchModel>breederbatchid}" text="{batchModel>batchname}" />                                            
+                                            </Select>
+                                            </form:fields>
+                                         </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                              <form:FormElement label="{i18n>eggsCollectionReportLabelShedName}">
+                                            <form:fields>
+                                              <Select id="shedtb1" selectedKey="{eggsCollRepModel>/Shedid}" forceSelection = "false" 
+                                                items="{
+                                                    path: 'shedModel>/modelData',
+                                                    sorter: { path: 'key' }
+                                                }">
+                                                <core:Item key="{shedModel>Shedid}" text="{shedModel>shedname}" />                                            
+                                            </Select>
+                                          
+                                            </form:fields>
+                                         </form:FormElement>
+                                           <form:FormElement label="{i18n>eggsCollectionReportLabelFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromdate" width="100%" value="{eggsCollRepModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="onDateChange"/> 
+                                                 <Input id="txtFromweek" required="true"  value="{eggsCollRepModel>/weeknowithdays}" />  
+                                            </form:fields>
+                                        </form:FormElement>
+                                           <form:FormElement label="To Date">
+                                            <form:fields>
+                                                <DatePicker id="txtTodate" width="100%" value="{eggsCollRepModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="onFromDateChange"/> 
+                                                 <Input id="txtToWeek" required="true"  value="{eggsCollRepModel>/toweeknowithdays}"/>  
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="">
+                                                <form:fields>
+                                                    <!-- <Button icon="sap-icon://search" type="Emphasized" text="Search Data" press="onSearchData"/> -->
+                                                    <Button icon="sap-icon://search" type="Emphasized" text="Search Data" press="onSearchData"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>	
+            		
+    <VBox fitContainer="true">   
+         	<Panel width="auto" class="sapUiResponsiveMargin">
+                <MessageStrip
+                id = "msgStrip"
+                text = "Current Week : {currentEggscollectionModel>/weekno},  Total Eggs Collection: {currentEggscollectionModel>/eggscollectionQty},  Total Hatching Eggs: {currentEggscollectionModel>/hatchingQty},  Total Hatching Eggs: {currentEggscollectionModel>/hatchingeggsper}%, Live Stock: {currentEggscollectionModel>/instock}"
+                type="Information"
+                showIcon="true"
+                class="sapUiTinyMarginBottom">
+                </MessageStrip>
+	        </Panel>	     
+                    <ScrollContainer
+                        height="100%"
+                        width="100%"
+                        horizontal="true"
+                        vertical="true"
+                        focusable="true">
+                <Table id="tblEggscollection" width="100%"  growing="true"
+                      growingScrollToLoad="true" items="{
+                                            path: 'eggscollectionReport>/modelData'                                           
+                                        }"
+                                 mode="None" backgroundDesign="Solid">
+                    <headerToolbar>
+                        <Toolbar>
+                            <content>
+                                <Title  level="H2"/>
+                                <ToolbarSpacer />
+                                  <MenuButton icon="sap-icon://download">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="SaveCSV" icon="sap-icon://save" press="onDataExport" />
+                                                            <MenuItem text="SavePDF" icon="sap-icon://save" press="onPdfExport" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                <!-- <Button icon="sap-icon://search" type="Emphasized" text="Search Data" press="onSearchData"/>
+                                <Button icon="sap-icon://download" press="onDataExport" /> -->
+                            </content>
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column  width="10%"><Text text ="Week No" /></Column>
+                        <Column  minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Expected Eggs Collection" /></Column>            
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Expected Hatching Eggs" /></Column>
+                        <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Exp Hatching Eggs %" /></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                        <customData>
+                        </customData>
+                            <cells>
+                                <Text text="{eggscollectionReport>weekno}" />
+                                <Text text="{eggscollectionReport>expeggscollection}" />
+                                <Text text="{eggscollectionReport>exphatchingeggs}" />
+                                <Text text="{eggscollectionReport>exphatchingeggsper}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table> 
+                </ScrollContainer>                          
+            </VBox>    
+                        
+                    </f:content>
+                    
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

@@ -1,0 +1,145 @@
+{
+	"liftingschedule": [
+		{
+            "scheduleCode" : "1",       
+            "branchCode" : "BRC001",
+			"branchName" : "CBF Pashyala",
+            "date" : "03/06/2018",
+            "status" : "Open",
+			"details":[
+				{
+                    "id" : 1,
+                    "orderNumber" : "970001",
+                    "orderEntry" : "130",
+                    "orderDate" : "09/03/2017",
+                    "customerCode" : "0101A0101",
+                    "customerName" : "M.S. Ahemad",
+                    "itemCode" : "COB001",
+                    "itemName": "Coob Bird",
+                    "orderQuantity" : 200.00,
+                    "openQuantity" : 200.00,
+                    "ratePerKg" : 50.00,
+                    "farmCode" : 6,
+                    "farmName" : "SAHARA FARM",
+                    "farmerCode" : 8,
+                    "farmerName" : "Test"
+				},
+				{
+                    "id" : 2,                    
+                    "orderNumber" : "970002",
+                    "orderEntry" : "130",
+                    "orderDate" : "09/03/2017",
+                    "customerCode" : "0101A0101",
+                    "customerName" : "M.S. Ahemad",
+                    "itemCode" : "COB001",
+                    "itemName": "Coob Bird",
+                    "orderQuantity" : 200.00,
+                    "openQuantity" : 200.00,
+                    "ratePerKg" : 50.00,
+                    "farmCode" : 6,
+                    "farmName" : "SAHARA FARM",
+                    "farmerCode" : 8,
+                    "farmerName" : "Test"
+				},
+				{
+                    "id" : 3,                    
+                    "orderNumber" : "970003",
+                    "orderEntry" : "130",
+                    "orderDate" : "09/03/2017",
+                    "customerCode" : "0101A0101",
+                    "customerName" : "M.S. Ahemad",
+                    "itemCode" : "COB001",
+                    "itemName": "Coob Bird",
+                    "orderQuantity" : 200.00,
+                    "openQuantity" : 200.00,
+                    "ratePerKg" : 50.00,
+                    "farmCode" : 6,
+                    "farmName" : "SAHARA FARM",
+                    "farmerCode" : 8,
+                    "farmerName" : "Test"
+				}
+            ],
+            "scheduledDetails" : [
+                {      
+                    "id" : 4,                    
+                    "orderNumber" : "970004",
+                    "orderEntry" : "130",
+                    "orderDate" : "09/03/2017",
+                    "customerCode" : "0101A0101",
+                    "customerName" : "M.S. Ahemad",
+                    "itemCode" : "COB001",
+                    "itemName": "Coob Bird",
+                    "orderQuantity" : 200.00,
+                    "openQuantity" : 200.00,
+                    "ratePerKg" : 50.00,
+                    "farmCode" : 6,
+                    "farmName" : "SAHARA FARM",
+                    "farmerCode" : 8,
+                    "farmerName" : "Test" 
+                }
+            ]
+		},
+		{
+            "scheduleCode" : "2",
+            "branchCode" : "BRC002",            
+			"branchName" : "CBF Test",
+            "date" : "09/04/2018",
+            "status" : "Open",
+			"details":[
+				{
+                    "id" : 1,                    
+                    "orderNumber" : "970001",
+                    "orderEntry" : "130",
+                    "orderDate" : "09/03/2017",
+                    "customerCode" : "0101A0101",
+                    "customerName" : "Patil",
+                    "itemCode" : "COB001",
+                    "itemName": "Coob Bird",
+                    "orderQuantity" : 200.00,
+                    "openQuantity" : 200.00,
+                    "ratePerKg" : 50.00,
+                    "farmCode" : 6,
+                    "farmName" : "Test FARM",
+                    "farmerCode" : 8,
+                    "farmerName" : "Test"
+				},
+				{
+                    "id" : 2,                    
+                    "orderNumber" : "970002",
+                    "orderEntry" : "130",
+                    "orderDate" : "09/03/2017",
+                    "customerCode" : "0101A0101",
+                    "customerName" : "Patil",
+                    "itemCode" : "COB001",
+                    "itemName": "Coob Bird",
+                    "orderQuantity" : 200.00,
+                    "openQuantity" : 200.00,
+                    "ratePerKg" : 50.00,
+                    "farmCode" : 6,
+                    "farmName" : "Test FARM",
+                    "farmerCode" : 8,
+                    "farmerName" : "Test"
+				}
+            ],
+            "scheduledDetails" : [
+                {  
+                    "id" : 3,                    
+                    "orderNumber" : "970003",
+                    "orderEntry" : "130",
+                    "orderDate" : "09/03/2017",
+                    "customerCode" : "0101A0101",
+                    "customerName" : "Patil",
+                    "itemCode" : "COB001",
+                    "itemName": "Coob Bird",
+                    "orderQuantity" : 200.00,
+                    "openQuantity" : 200.00,
+                    "ratePerKg" : 50.00,
+                    "farmCode" : 6,
+                    "farmName" : "Test FARM",
+                    "farmerCode" : 8,
+                    "farmerName" : "Test"
+                }                    
+            ]
+		}
+    ]
+}

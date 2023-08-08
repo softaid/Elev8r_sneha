@@ -1,0 +1,161 @@
+<mvc:View
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Accounts.ReceivableBalance"
+    xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form"   
+    xmlns:core="sap.ui.core"	
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:tnt="sap.tnt"
+	xmlns:l="sap.ui.layout"
+	xmlns:common="sap.ui.commons"
+    height="100%"
+    >
+
+    <f:FlexibleColumnLayout id="fclCbfDashboard" backgroundDesign="Solid">
+        <f:beginColumnPages>
+            <f:DynamicPage showFooter="true" toggleHeaderOnTitleClick="false">
+                <f:title>
+                    <f:DynamicPageTitle>
+                        <f:heading>
+                            <Title text="Receivable Balance Report"/>
+                        </f:heading>
+                        <f:actions>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+                        </f:actions>
+                    </f:DynamicPageTitle>
+                </f:title>
+                <f:content>
+                    <VBox fitContainer="true">
+                        <form:Form editable="true">
+                            <form:title>
+                                <core:Title text="" />
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+					                <form:formElements> 
+                                      
+
+                                         <form:FormElement label="From Date">
+                                            <form:fields>
+                                                <DatePicker id="txtFromDate" required="true" 
+                                                value="{payableModel>/fromdate}" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="dd/MM/YYYY"
+                                                change="onDateChange"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="To Date">
+                                            <form:fields>
+                                                <DatePicker id="txtToDate" required="true" 
+                                                value="{payableModel>/todate}" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="dd/MM/YYYY"
+                                                change="onDateChange"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer id="secondContainer">
+                                    <form:formElements>
+                                      <form:FormElement label="Party">
+                                            <form:fields>
+                                                 <MultiComboBox id="partyList"
+                                                selectionChange="partySelectionChange"
+                                                selectionFinish = "partySelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'partyModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{partyModel>id}" text="{partyModel>partyname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        
+                                          <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="bindTbl"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="80%" align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport" />
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="onPdfExport" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+
+                        <VBox id="payble">
+                        <ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="paybletable"  sticky="ColumnHeaders"
+                                inset="false" 
+                                items="{
+                                path: 'tblpayableModel>/modelData',
+                                sorter: {
+                                       path: 'partyname',
+                                       group : true
+                                }
+                            }">
+                                
+                        <columns>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Party Code" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="Party Name" /></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Opening Amount" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Debit Amount" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Credit Amount" /></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End"><Label text ="Closing Balance" /></Column>                
+                        </columns>
+                                <items>
+                                    <ColumnListItem>
+                                <cells>
+                                <Text text="{tblpayableModel>partycode}" />
+                                <Text text="{tblpayableModel>partyname}" />
+                                <Text text="{tblpayableModel>openingbal}" />
+                                <Text text="{tblpayableModel>dramount}" />
+								<Text text="{tblpayableModel>cramount}" />
+								<Text text="{tblpayableModel>closingbal}" />
+                                </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                            </ScrollContainer>   
+                        </VBox>
+                    </VBox>   
+                </f:content>                
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</mvc:View>

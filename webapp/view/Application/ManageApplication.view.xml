@@ -1,0 +1,57 @@
+<mvc:View displayBlock="true"    
+   xmlns:f="sap.f"
+   xmlns:mvc="sap.ui.core.mvc" 
+   xmlns="sap.m"
+   controllerName="sap.ui.elev8rerp.componentcontainer.controller.Application.ManageApplication" height="100%">
+
+    
+	<!-- <Page id="masterSettingsPage"
+		showHeader="false">
+		<List
+			id="masterSettingsList"
+			items="{side>/masterSettings}"
+			mode="SingleSelectMaster"
+			selectionChange="onMasterPressed">
+			<StandardListItem
+				title="{side>title}"
+				type="Navigation"
+				selected="{= ${device>/system/phone} ? false : ${side>selected}}"/>
+		</List>
+	</Page> -->
+	<f:FlexibleColumnLayout  id="fclManageApplication" backgroundDesign="Solid">
+		
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="{i18n>manageEntityPageTitle}"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>
+
+	                <IconTabBar 
+                    selectedKey="{view>/selectedTabKey}" 
+                    expanded="{= !${device>/system/phone} }" 
+                    expandable="{device>/system/phone}" 
+                    class="sapUiResponsiveContentPadding" 
+                    select="onTabSelect">
+
+	                    <items>
+
+							<IconTabFilter text="{i18n>manageEntityTabRolePermissions}" key="rolepermissions">
+								<mvc:XMLView viewName="sap.ui.elev8rerp.componentcontainer.view.Application.RolePermissions"></mvc:XMLView>
+                            </IconTabFilter>
+
+						    <IconTabFilter text="Notification Setting" key="notificationsetting">
+		                   </IconTabFilter>
+
+	                    </items>
+                    </IconTabBar>
+                    
+                </f:content>
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</mvc:View>

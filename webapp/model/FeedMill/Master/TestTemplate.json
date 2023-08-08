@@ -1,0 +1,59 @@
+{
+	"TestTemplate": [
+		{
+            "Item No" : "0101A0101",     
+            "NoCode" : "1",                   
+			"ItemName" : "ItemName",
+			"details":[
+				{
+				"TestNo" : 4,
+                    "TestName" : "aaa",
+                    "Deduction" : "20"
+                    
+                
+				},
+				{
+                    "TestNo" : 5,
+                    "TestName" : "aaa",
+                    "Deduction" : "20"
+				},
+				{
+                    "TestNo" : 6,
+                    "TestName" : "aaa",
+                    "Deduction" : "20"
+                },
+                {
+                    "TestNo" : 7,
+                    "TestName" : "aaa",
+                    "Deduction" : "20"
+                },
+                {
+                    "TestNo" : 8,
+                    "TestName" : "aaa",
+                    "Deduction" : "20"  
+				}
+        	]
+		},
+		{    "Item No" : "0101A0102",     
+            "NoCode" : "2",                   
+			"ItemName" : "ItemName",
+			"details":[
+				{
+                    "TestNo" : 1,
+                    "TestName" : "aaa",
+                    "Deduction" : "20"
+				},
+				{
+                    "TestNo" : 2,
+                    "TestName" : "aaa",
+                    "Deduction" : "20"  
+				},
+				{
+                    "TestNo" : 3,
+                    "TestName" : "aaa",
+                    "Deduction" : "20" 
+                }
+        	]
+		}
+	]
+}

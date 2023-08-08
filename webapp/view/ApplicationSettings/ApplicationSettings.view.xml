@@ -1,0 +1,493 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ApplicationSettings.ApplicationSettings"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form"   
+    xmlns:core="sap.ui.core"	
+    xmlns:mvc="sap.ui.core.mvc"
+    height="100%">
+
+    <f:DynamicPage showFooter="true" toggleHeaderOnTitleClick="false">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>applicationSettingsPageHeader}"/>
+                </f:heading>
+                <f:actions>
+                    <ToolbarSpacer/>
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+            <VBox fitContainer="true">   
+                <IconTabBar selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
+                    <items>
+                        <IconTabFilter text="{i18n>applicationSettingsGeneralTabText}">
+                            <VBox fitContainer="true">
+                                <form:Form editable="true">
+                                    <form:title>
+                                        <core:Title text="" />
+                                    </form:title>
+                                    <form:layout>
+                                        <form:ResponsiveGridLayout
+                                            labelSpanXL="4"
+                                            labelSpanL="4"
+                                            labelSpanM="4"
+                                            labelSpanS="12"
+                                            adjustLabelSpan="false"
+                                            emptySpanXL="0"
+                                            emptySpanL="0"
+                                            emptySpanM="0"
+                                            emptySpanS="0"
+                                            columnsXL="3"
+                                            columnsL="2"
+                                            columnsM="1"
+                                            singleContainerFullSize="false" />
+                                    </form:layout>
+                                    <form:formContainers>
+                                        <form:FormContainer title="">
+                                            <form:formElements>
+                                                <form:FormElement label="{i18n>applicationSettingsPartyWithMultipleRolesLabel}">
+                                                    <form:fields>
+                                                        <RadioButtonGroup id="rbgPartyWithMultipleRoles" selectedIndex="{appSettingsModel>/partywithmultipleroles}" columns="2" class="sapUiMediumMarginBottom">
+                                                            <buttons>
+                                                                <RadioButton id="RBY_PartyWithMultipleRoles" text="Yes"/>                                                            
+                                                                <RadioButton id="RBN_PartyWithMultipleRoles" text="No"/>                                                                                                                                    
+                                                            </buttons>
+                                                        </RadioButtonGroup>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                    <form:FormElement label="{i18n>applicationSettingsShowDisplayPrefixLabel}">
+                                                    <form:fields>
+                                                        <RadioButtonGroup id="rbgShowDisplayPrefix" columns="2" selectedIndex="{appSettingsModel>/showdisplayprefix}" class="sapUiMediumMarginBottom">
+                                                            <buttons>
+                                                                <RadioButton id="RBY_ShowDisplayPrefix" text="Yes"/>
+                                                                <RadioButton id="RBN_ShowDisplayPrefix" text="No"/>                                                                        
+                                                            </buttons>
+                                                        </RadioButtonGroup>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsRecordPerPageLabel}">
+                                                    <form:fields>
+                                                        <Select id="ddlRecordPerPage" selectedKey="{appSettingsModel>/recordsperpage}" >
+                                                            <core:Item key="10" text="10" />  
+                                                            <core:Item key="20" text="20" />                                            
+                                                            <core:Item key="30" text="30" />                                            
+                                                            <core:Item key="40" text="40" />                                            
+                                                            <core:Item key="50" text="50" />                                            
+                                                            <core:Item key="100" text="100" />                                                                                                                                                          
+                                                        </Select>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsPDCReminderLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtPDCReminder" description="Days" valueLiveUpdate="true" value="{appSettingsModel>/pdcreminder}" change="onNumberInputChange"/> 
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsCreditPeriodReminderLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtCreditPeriodReminder" description="Days" valueLiveUpdate="true" value="{appSettingsModel>/creditperiodreminder}" change="onNumberInputChange"/> 
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsFinancialYearDetailLabel}">
+                                                    <form:fields>
+                                                        <DatePicker id="txtFinancialYear" value="{appSettingsModel>/financialyear}" 
+                                                            placeholder="{config>/dateFormat/placeholder}"
+                                                            displayFormat="dd/MM"      
+                                                            valueFormat="dd/MM/YYYY"
+                                                            change="onDateChange"/>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsDateDisplayFormatLabel}">
+                                                    <form:fields>
+                                                        <Select id="ddlDateDisplayFormat" selectedKey="{appSettingsModel>/datedisplayformat}" >
+                                                            <core:Item key="dd/MM/yyyy" text="dd/mm/yyyy (ex:25/12/1999)" />                                                                
+                                                            <core:Item key="dd.MM.yyyy" text="dd.mm.yyyy (ex:25.12.1999)" />  
+                                                            <core:Item key="dd-MM-yyyy" text="dd-mm-yyyy (ex:25-12-1999)" />                                            
+                                                            <core:Item key="dd MMM yyyy" text="dd mmm yyyy (ex:25 Dec 1999)" />                                            
+                                                            <core:Item key="dd/MM/yy" text="dd/mm/yy (ex:25/12/99)" />                                            
+                                                            <core:Item key="MM.dd.yyyy" text="mm.dd.yyyy (ex:12.25.1999)" />      
+                                                            <core:Item key="MM/dd/yyyy" text="mm/dd/yyyy (ex:12/25/1999)" />                                                                                                                                                          
+                                                            <core:Item key="MM-dd-yyyy" text="mm-dd-yyyy (ex:12-25-1999)" />                                                                                                                                                          
+                                                            <core:Item key="MMM dd yyyy" text="mmm dd yyyy (ex:Dec 25 1999)" />                                                                                                                                                          
+                                                            <core:Item key="MM/dd/yy" text="mm/dd/yy (ex:12/25/99)" />                                                                                                                                                          
+                                                            <core:Item key="yyyy-MM-dd" text="yyyy-mm-dd (ex:1999-12-25)" />                                                                                                                                                          
+                                                            <core:Item key="yyyy/MM/dd" text="yyyy/mm/dd (ex:1999/12/25)" />                                                                                                                                                          
+                                                            <core:Item key="yy/MM/dd" text="yy/mm/dd (ex:99/12/25)" />                                                                                                                 
+                                                        </Select>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsStockNameConfigLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtStockNameConfig" valueLiveUpdate="true" value="{appSettingsModel>/stocknamefields}"/> 
+                                                    </form:fields>
+                                                </form:FormElement>
+                                            </form:formElements>
+                                        </form:FormContainer>
+                                    </form:formContainers>
+                                </form:Form>  
+                            </VBox>    
+                        </IconTabFilter>
+
+                        <IconTabFilter	text="{i18n>applicationSettingsPurchaseTabText}">
+                            <VBox fitContainer="true">
+                                    <form:Form editable="true">
+                                    <form:title>
+                                        <core:Title text="" />
+                                    </form:title>
+                                    <form:layout>
+                                        <form:ResponsiveGridLayout
+                                            labelSpanXL="4"
+                                            labelSpanL="4"
+                                            labelSpanM="4"
+                                            labelSpanS="12"
+                                            adjustLabelSpan="false"
+                                            emptySpanXL="0"
+                                            emptySpanL="0"
+                                            emptySpanM="0"
+                                            emptySpanS="0"
+                                            columnsXL="3"
+                                            columnsL="2"
+                                            columnsM="1"
+                                            singleContainerFullSize="false" />
+                                    </form:layout>
+                                    <form:formContainers>
+                                        <form:FormContainer title="">
+                                            <form:formElements>
+                                                <form:FormElement label="{i18n>applicationSettingsRequisitionApprovalLabel}">
+                                                    <form:fields>
+                                                        <RadioButtonGroup id="rbgRequisionApproval" selectedIndex="{appSettingsModel>/requisitionapproval}"  columns="2" class="sapUiMediumMarginBottom">
+                                                            <buttons>
+                                                                <RadioButton id="RBY_RequisionApproval" text="Yes"/>
+                                                                <RadioButton id="RBN_RequisionApproval" text="No"/>                                                                        
+                                                            </buttons>
+                                                        </RadioButtonGroup>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                    <form:FormElement label="{i18n>applicationSettingsPOApprovalLabel}">
+                                                    <form:fields>
+                                                        <RadioButtonGroup id="rbgPOApproval" selectedIndex="{appSettingsModel>/poapproval}" columns="2" class="sapUiMediumMarginBottom">
+                                                            <buttons>
+                                                                <RadioButton id="RBY_POApproval" text="Yes"/>
+                                                                <RadioButton id="RBN_POApproval" text="No"/>                                                                        
+                                                            </buttons>
+                                                        </RadioButtonGroup>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsShowMRPAssessmentLabel}">
+                                                    <form:fields>
+                                                        <RadioButtonGroup id="rbgShowMRPAndAssessment" selectedIndex="{appSettingsModel>/showmrpandassessment}" columns="2" class="sapUiMediumMarginBottom">
+                                                            <buttons>
+                                                                <RadioButton id="RBY_ShowMRPAndAssessmen" text="Yes"/>
+                                                                <RadioButton id="RBN_ShowMRPAndAssessmen" text="No"/>                                                                        
+                                                            </buttons>
+                                                        </RadioButtonGroup>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsPurchaseEnquiryPrefixLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtPurchaseEnquiryPrefix" valueLiveUpdate="true" value="{appSettingsModel>/purchaseenquiryprefix}"/> 
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsPurchaseOrderPrefixLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtPurchaseOrderPrefix" valueLiveUpdate="true" value="{appSettingsModel>/purchaseorderprefix}"/> 
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsPurchaseReturnPrefixLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtPurchaseReturnPrefix"  valueLiveUpdate="true" value="{appSettingsModel>/purchasereturnprefix}"/>                                                                
+                                                    </form:fields>
+                                                </form:FormElement>
+                                            </form:formElements>
+                                        </form:FormContainer>
+                                    </form:formContainers>
+                                </form:Form>
+                            </VBox>                                
+                        </IconTabFilter>
+                
+                        <IconTabFilter	text="Sales">
+                            <VBox fitContainer="true">
+                                <form:Form editable="true">
+                                    <form:title>
+                                        <core:Title text="" />
+                                    </form:title>
+                                    <form:layout>
+                                        <form:ResponsiveGridLayout
+                                            labelSpanXL="4"
+                                            labelSpanL="4"
+                                            labelSpanM="4"
+                                            labelSpanS="12"
+                                            adjustLabelSpan="false"
+                                            emptySpanXL="0"
+                                            emptySpanL="0"
+                                            emptySpanM="0"
+                                            emptySpanS="0"
+                                            columnsXL="3"
+                                            columnsL="2"
+                                            columnsM="1"
+                                            singleContainerFullSize="false" />
+                                    </form:layout>
+                                    <form:formContainers>
+                                        <form:FormContainer title="">
+                                            <form:formElements>
+                                                <form:FormElement label="{i18n>applicationSettingsQuotationApprovalLabel}">
+                                                    <form:fields>
+                                                        <RadioButtonGroup id="rbgQuotationApproval" selectedIndex="{appSettingsModel>/quotationapproval}" columns="2" class="sapUiMediumMarginBottom">
+                                                            <buttons>
+                                                                <RadioButton id="RBY_QuotationApproval" text="Yes"/>
+                                                                <RadioButton id="RBN_QuotationApproval" text="No"/>                                                                        
+                                                            </buttons>
+                                                        </RadioButtonGroup>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsBillApprovalLabel}">
+                                                    <form:fields>
+                                                        <RadioButtonGroup id="rbgBillApproval" selectedIndex="{appSettingsModel>/billapproval}" columns="2" class="sapUiMediumMarginBottom">
+                                                            <buttons>
+                                                                <RadioButton id="RBY_BillApproval" text="Yes"/>
+                                                                <RadioButton id="RBN_BillApproval" text="No"/>                                                                        
+                                                            </buttons>
+                                                        </RadioButtonGroup>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsProformaInvoiceApprovalLabel}">
+                                                    <form:fields>
+                                                        <RadioButtonGroup id="rbgProformaInvoiceApproval" selectedIndex="{appSettingsModel>/proformainvoiceapproval}" columns="2" class="sapUiMediumMarginBottom">
+                                                            <buttons>
+                                                                <RadioButton id="RBY_ProformaInvoiceApproval" text="Yes"/>
+                                                                <RadioButton id="RBN_ProformaInvoiceApproval" text="No"/>                                                                        
+                                                            </buttons>
+                                                        </RadioButtonGroup>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsSalesChallanApprovalLabel}">
+                                                    <form:fields>
+                                                        <RadioButtonGroup id="rbgSalesChallanApproval" selectedIndex="{appSettingsModel>/saleschallanapproval}" columns="2" class="sapUiMediumMarginBottom">
+                                                            <buttons>
+                                                                <RadioButton id="RBY_SaleschallanApproval" text="Yes"/>
+                                                                <RadioButton id="RBN_SaleschallanApproval" text="No"/>                                                                        
+                                                            </buttons>
+                                                        </RadioButtonGroup>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsSalesQuotationPrefixLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtSalesQuotationPrefix" valueLiveUpdate="true" value="{appSettingsModel>/salesquotationprefix}"/> 
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsSalesChallanPrefixLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtSalesChallanPrefix" valueLiveUpdate="true" value="{appSettingsModel>/saleschallanprefix}"/> 
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsSalesBillPrefixLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtSalesBillPrefix" valueLiveUpdate="true" value="{appSettingsModel>/salesbillprefix}"/> 
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsServiceBillPrefixLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtServiceBillPrefix" valueLiveUpdate="true" value="{appSettingsModel>/servicebillprefix}"/> 
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsProformaInvoicePrefixLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtProformaInvoicePrefix" valueLiveUpdate="true" value="{appSettingsModel>/proformainvoiceprefix}"/> 
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsBatchOrderLabel}">
+                                                    <form:fields>
+                                                        <Select id="ddlBatchOrder" selectedKey="{appSettingsModel>/batchoutorder}" >
+                                                            <core:Item key="MANUAL" text="MANUAL" />  
+                                                            <core:Item key="FIFO" text="FIFO" />                                            
+                                                            <core:Item key="LIFO" text="LIFO" />                                            
+                                                        </Select>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsTaxCalculationFormulaLabel}">
+                                                    <form:fields>
+                                                        <RadioButtonGroup id="rbgTaxCalculationFormula" columns="2" selectedIndex="{appSettingsModel>/calculatetaxbeforediscount}" class="sapUiMediumMarginBottom">
+                                                            <buttons>
+                                                                <RadioButton id="RB_ConsideringDiscOnProduct" text="Apply Tax without considering discount on product"/>
+                                                                <RadioButton id="RB_AfterConsideringDiscOnProduct" text="Apply Tax after considering discount on product"/>                                                                        
+                                                            </buttons>
+                                                        </RadioButtonGroup>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                            </form:formElements>
+                                        </form:FormContainer>
+                                    </form:formContainers>
+                                </form:Form> 
+                            </VBox>                            
+                        </IconTabFilter>
+
+                        <IconTabFilter	text="{i18napplicationSettingsFinanceTabText}">
+                            <VBox fitContainer="true">
+                                    <form:Form editable="true">
+                                    <form:title>
+                                        <core:Title text="" />
+                                    </form:title>
+                                    <form:layout>
+                                        <form:ResponsiveGridLayout
+                                            labelSpanXL="4"
+                                            labelSpanL="4"
+                                            labelSpanM="4"
+                                            labelSpanS="12"
+                                            adjustLabelSpan="false"
+                                            emptySpanXL="0"
+                                            emptySpanL="0"
+                                            emptySpanM="0"
+                                            emptySpanS="0"
+                                            columnsXL="3"
+                                            columnsL="2"
+                                            columnsM="1"
+                                            singleContainerFullSize="false" />
+                                    </form:layout>
+                                    <form:formContainers>
+                                        <form:FormContainer title="">
+                                            <form:formElements>
+                                                <form:FormElement label="{i18n>applicationSettingsReceiptVoucherApprovalLabel}">
+                                                    <form:fields>
+                                                        <RadioButtonGroup id="rbgReceiptVoucherApproval" columns="2" selectedIndex="{appSettingsModel>/receiptvoucherapproval}" class="sapUiMediumMarginBottom">
+                                                            <buttons>
+                                                                <RadioButton id="RBY_ReceiptVoucherApproval" text="Yes"/>
+                                                                <RadioButton id="RBN_ReceiptVoucherApproval" text="No"/>                                                                        
+                                                            </buttons>
+                                                        </RadioButtonGroup>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsPaymentVoucherApprovalLabel}">
+                                                    <form:fields>
+                                                        <RadioButtonGroup id="rbgPaymentVoucherApproval" selectedIndex="{appSettingsModel>/paymentvoucherapproval}" columns="2" class="sapUiMediumMarginBottom">
+                                                            <buttons>
+                                                                <RadioButton id="RBY_PaymentVoucherApproval" text="Yes"/>
+                                                                <RadioButton id="RBN_PaymentVoucherApproval" text="No" />                                                                        
+                                                            </buttons>
+                                                        </RadioButtonGroup>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsContraVoucherApprovalLabel}">
+                                                    <form:fields>
+                                                        <RadioButtonGroup id="rbgContraVoucherApproval" columns="2" selectedIndex="{appSettingsModel>/contravoucherapproval}" class="sapUiMediumMarginBottom">
+                                                            <buttons>
+                                                                <RadioButton id="RBY_ContraVoucherApproval" text="Yes"/>
+                                                                <RadioButton id="RBN_ContraVoucherApproval" text="No"/>                                                                        
+                                                            </buttons>
+                                                        </RadioButtonGroup>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsJournalVoucherApprovalLabel}">
+                                                    <form:fields>
+                                                        <RadioButtonGroup id="rbgJournalVoucherApproval" columns="2" selectedIndex="{appSettingsModel>/journalvoucherapproval}" class="sapUiMediumMarginBottom">
+                                                            <buttons>
+                                                                <RadioButton id="RBY_JournalVoucherApproval" text="Yes"/>
+                                                                <RadioButton id="RBN_JournalVoucherApproval" text="No"/>                                                                        
+                                                            </buttons>
+                                                        </RadioButtonGroup>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsReceiptVoucherPrefixLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtReceiptVoucherPrefix" valueLiveUpdate="true" value="{appSettingsModel>/receiptvoucherprefix}"/> 
+                                                    </form:fields>
+                                                </form:FormElement>
+                                            </form:formElements>
+                                        </form:FormContainer>
+                                    </form:formContainers>
+                                </form:Form> 
+                            </VBox>                             
+                        </IconTabFilter>
+
+                        <IconTabFilter	text="{i18n>applicationSettingsEmailServerTabText}">
+                            <VBox fitContainer="true">
+                                <form:Form editable="true">
+                                    <form:title>
+                                        <core:Title text="" />
+                                    </form:title>
+                                    <form:layout>
+                                        <form:ResponsiveGridLayout
+                                            labelSpanXL="4"
+                                            labelSpanL="4"
+                                            labelSpanM="4"
+                                            labelSpanS="12"
+                                            adjustLabelSpan="false"
+                                            emptySpanXL="0"
+                                            emptySpanL="0"
+                                            emptySpanM="0"
+                                            emptySpanS="0"
+                                            columnsXL="3"
+                                            columnsL="2"
+                                            columnsM="2"
+                                            singleContainerFullSize="false" />
+                                    </form:layout>
+                                    <form:formContainers>
+                                        <form:FormContainer title="">
+                                            <form:formElements>
+                                                <form:FormElement label="{i18n>applicationSettingsSMTPServerLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtSmtpServer" valueLiveUpdate="true" value="{appSettingsModel>/smtpserver}"/> 
+                                                    </form:fields>
+                                                </form:FormElement>                                             
+                                                <form:FormElement label="{i18n>applicationSettingsPortNoLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtPortNo" valueLiveUpdate="true" value="{appSettingsModel>/portno}" change="onNumberInputChange"/> 
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsHostLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtHost" valueLiveUpdate="true" value="{appSettingsModel>/host}"/> 
+                                                    </form:fields>
+                                                </form:FormElement>                                              
+                                                <form:FormElement label="{i18n>applicationSettingsEmailIdLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtEmailId" valueLiveUpdate="true" value="{appSettingsModel>/emailid}" change="onDecimalInputChange"/> 
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsPasswordLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtPassword" valueLiveUpdate="true" value="{appSettingsModel>/password}" change="onDecimalInputChange"/> 
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsEmailRetryCountLabel}">
+                                                    <form:fields>
+                                                        <Input id="txtEmailRetryCount" description="Attempts " valueLiveUpdate="true" value="{appSettingsModel>/emailretrycount}" change="onNumberInputChange"/> 
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="{i18n>applicationSettingsRequiredSSLLabel}">
+                                                    <form:fields>
+                                                        <RadioButtonGroup id="rbgRequiredSSL" columns="2" selectedIndex="{appSettingsModel>/requiredssl}" class="sapUiMediumMarginBottom">
+                                                            <buttons>
+                                                                <RadioButton id="RBY_RequiredSSL" text="Yes"/>
+                                                                <RadioButton id="RBN_RequiredSSL" text="No"/>                                                                        
+                                                            </buttons>
+                                                        </RadioButtonGroup>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                            </form:formElements>
+                                        </form:FormContainer>
+                                    </form:formContainers>
+                                </form:Form>    
+                            </VBox>   
+                        </IconTabFilter>
+                    </items>
+
+                    <layoutData>
+                        <FlexItemData growFactor="1" baseSize="0%"/>
+                    </layoutData>
+                </IconTabBar>
+
+                <Panel>
+                    <FlexBox		
+                        alignItems="Start"
+                        justifyContent="End">
+                        <items>
+                            <Button id="btnSave" text="{i18n>breederdailytransactionSaveButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+                        </items>
+                    </FlexBox>
+                </Panel>
+            </VBox>   
+        </f:content>                
+    </f:DynamicPage>
+</mvc:View>

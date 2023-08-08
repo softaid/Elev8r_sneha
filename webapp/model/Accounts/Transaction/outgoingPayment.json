@@ -1,0 +1,127 @@
+{   
+    "outgoingpayment":[
+        {
+            "voucherMode" : "Cash",
+            "voucherDate" : "2018/07/25",
+            "subject" : "Demo",
+            "ledgerName" : "Ledger 1",
+            "openingBalance" : "1000",
+            "paymentTo" : "Person 1",
+            "selectParty" : "Party 1",
+            "payableAmount" : "13000",
+            "byHand" : "",
+            "narration" : "",
+            "details":[
+				{
+					"billNumber" : "001",
+                    "bllDate": "2018/07/25",
+                    "orderNumber": 2,
+                    "billAmount": 1000,
+                    "paidAmount": 500,
+                    "pendingAmount" : 500,
+                    "voucherAmount": 500
+				},
+				{
+					"billNumber" : "002",
+                    "bllDate": "2018/08/15",
+                    "orderNumber": 5,
+                    "billAmount": 10000,
+                    "paidAmount": 3000,
+                    "pendingAmount" : 7000,
+                    "voucherAmount": 3000
+				},
+				{
+					"billNumber" : "003",
+                    "bllDate": "2018/07/27",
+                    "orderNumber": 10,
+                    "billAmount": 2000,
+                    "paidAmount": 700,
+                    "pendingAmount" : 300,
+                    "voucherAmount": 700
+				}
+        	]
+        },
+        {
+            "voucherMode" : "Cheque",
+            "voucherDate" : "2018/07/30",
+            "subject" : "Demo",
+            "ledgerName" : "Ledger 2",
+            "openingBalance" : "1000",
+            "paymentTo" : "Person 2",
+            "selectParty" : "Party 2",
+            "payableAmount" : "20000",
+            "byHand" : "",
+            "narration" : "",
+            "details":[
+				{
+					"billNumber" : "001",
+                    "bllDate": "2018/07/25",
+                    "orderNumber": 2,
+                    "billAmount": 10000,
+                    "paidAmount": 5000,
+                    "pendingAmount" : 5000,
+                    "voucherAmount": 5000
+				},
+				{
+					"billNumber" : "002",
+                    "bllDate": "2018/08/15",
+                    "orderNumber": 5,
+                    "billAmount": 5000,
+                    "paidAmount": 3000,
+                    "pendingAmount" : 2000,
+                    "voucherAmount": 3000
+				},
+				{
+					"billNumber" : "003",
+                    "bllDate": "2018/07/27",
+                    "orderNumber": 10,
+                    "billAmount": 5000,
+                    "paidAmount": 700,
+                    "pendingAmount" : 4300,
+                    "voucherAmount": 700
+				}
+        	]
+        },
+        {
+            "voucherMode" : "cash",
+            "voucherDate" : "2018/07/15",
+            "subject" : "Demo",
+            "ledgerName" : "Ledger 3",
+            "openingBalance" : "1000",
+            "paymentTo" : "Person 3",
+            "selectParty" : "Party 3",
+            "payableAmount" : "2000",
+            "byHand" : "",
+            "narration" : "",
+            "details":[
+				{
+					"billNumber" : "001",
+                    "bllDate": "2018/07/25",
+                    "orderNumber": 2,
+                    "billAmount": 1000,
+                    "paidAmount": 500,
+                    "pendingAmount" : 500,
+                    "voucherAmount": 500
+				},
+				{
+					"billNumber" : "002",
+                    "bllDate": "2018/08/15",
+                    "orderNumber": 5,
+                    "billAmount": 10000,
+                    "paidAmount": 3000,
+                    "pendingAmount" : 7000,
+                    "voucherAmount": 3000
+				},
+				{
+					"billNumber" : "003",
+                    "bllDate": "2018/07/27",
+                    "orderNumber": 10,
+                    "billAmount": 2000,
+                    "paidAmount": 700,
+                    "pendingAmount" : 300,
+                    "voucherAmount": 700
+				}
+        	]
+        }
+    ]
+}

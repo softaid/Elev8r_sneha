@@ -1,0 +1,25 @@
+{
+	"sheds": [
+		{
+			"shedNo" : 1,
+			"shedName": "Shed 1",
+			"pen": 1,
+            "quantity": 400,
+            "type": "F"
+		},
+		{
+			"shedNo" : 2,
+			"shedName": "Shed 1",
+			"pen": 2,
+            "quantity": 300,
+            "type": "F"
+		},
+		{
+			"shedNo" : 3,
+			"shedName": "Shed 2",
+			"pen": 1,
+            "quantity": 200,
+            "type": "F"
+        }
+	]
+}

@@ -1,0 +1,61 @@
+<View displayBlock="true"    
+xmlns:f="sap.f"
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns="sap.m"
+xmlns:core="sap.ui.core"
+controllerName="sap.ui.elev8rerp.componentcontainer.controller.ApplicationSettings.PageShortcutKeys" height="100%">
+
+    <f:FlexibleColumnLayout id="fclPageShortCut" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+ 		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					        <Title text="Page Shortcut Keys"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+			    <f:content>
+	                <VBox fitContainer="true">
+						<Table id="tblBatch"
+                            inset="false" 
+                            items="{
+                                path: 'pageKeyModel>/modelData'
+                            }">
+                            <headerToolbar>
+                                <Toolbar>
+                                    <content>
+                                        <Title text="" level="H2"/>
+                                        <ToolbarSpacer />
+                                        <SearchField search="onSearch" width="17.5rem"/>
+                                    </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column><Text text ="Role" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Key" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Page" /></Column>	
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemPress">
+                                    <cells>
+                                        <Text text="{pageKeyModel>description}"  />
+                                        <Text text="{pageKeyModel>key}"  />
+                                        <Text text="{pageKeyModel>pagename}"  />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        <!-- <Panel>
+                            <FlexBox alignItems="Start" justifyContent="End">
+                                <items>
+                                    <Button text="Save" id="btnSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+                                </items>
+                            </FlexBox>
+                        </Panel>   -->
+	                </VBox>
+                </f:content>
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</View>

@@ -1,0 +1,248 @@
+<mvc:View height="100%"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.CompanyMaster"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:tnt="sap.tnt">
+	
+	<tnt:ToolPage
+		id="app"
+		class="sapUiDemoToolPage">
+		<tnt:header>
+			<tnt:ToolHeader>
+				<Button
+					id="sideNavigationToggleButton"
+					icon="sap-icon://menu2"
+					type="Transparent"
+					press="onSideNavButtonPress"
+					tooltip="{i18n>navigationToggleButtonTooltip}">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</layoutData>
+				</Button>
+				<Button
+					id="appButton"
+					text="{i18n>appTitle}"
+					type="Transparent"
+					press="onAppPress">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</layoutData>
+				</Button>
+
+				<Title text="{userDataModel>/companyname}" class="company-title">
+				    <layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</layoutData>
+				</Title>
+
+				<ToolbarSpacer>
+                    <!-- <layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</layoutData> -->
+               </ToolbarSpacer>
+
+			    <Panel id="searchPanel"  visible="false">
+    	            <FlexBox		
+				        alignItems="Start"
+				        justifyContent="End">
+				        <items>
+				            <!-- <SearchField 
+					           liveChange="onGlobalSearch"
+					           showRefreshButton="false"
+					           placeholder="Search"
+					           tooltip="Search">
+					           <layoutData>
+						          <OverflowToolbarLayoutData priority="NeverOverflow"/>
+					           </layoutData>
+				            </SearchField> -->
+                            
+							<SearchField
+								id="searchField"
+								placeholder="search page..."
+								enableSuggestions="true"
+								search="onSearch"
+								suggest="onSuggest"
+								suggestionItems="{
+									path: 'userPageModel>/modelData',
+									sorter: { path: 'dn' }
+								}">
+								<suggestionItems>
+									<SuggestionItem text="{path:'userPageModel>dn'}" key="{path:'userPageModel>pk'}"/>
+								</suggestionItems>
+							</SearchField>
+
+							<Button 
+					            text="Close"
+					            type="Transparent"
+					            press="onClosePress">
+					            <layoutData>
+						            <OverflowToolbarLayoutData priority="NeverOverflow"/>
+					            </layoutData>
+				            </Button>
+				        </items>
+			        </FlexBox>
+                </Panel>
+
+                <Panel id="toolPanel">
+    	            <FlexBox		
+				        alignItems="Start"
+				        justifyContent="End">
+				        <items>
+					        <Button
+					            icon="sap-icon://search"
+					            type="Transparent"
+					            press="onSearchButtonPress"
+					            tooltip="Search">
+					           <layoutData>
+						           <OverflowToolbarLayoutData priority="NeverOverflow"/>
+					           </layoutData>
+				            </Button>
+
+                            <Button
+					            id="notificationButton"
+					            icon="sap-icon://ui-notifications"
+					            visible="{= ${notificationPopupModel>/modelData}.length === 0 ? false : true }"
+					            type="Transparent"
+					            press="onNotificationPress"
+					            tooltip="{i18n>notificationButtonTooltip}">
+					            <layoutData>
+						            <OverflowToolbarLayoutData priority="NeverOverflow"/>
+					            </layoutData>
+				            </Button>
+
+							<tnt:InfoLabel id="notificationcount" class="notificationCount"
+								visible="{= ${notificationPopupModel>/modelData}.length === 0 ? false : true }"
+							 	text="0" renderMode="Narrow" colorScheme="1" displayOnly= "true" />
+
+				            <Button
+					            id="userButton"
+					            text="{userDataModel>/username}"
+					            type="Transparent"
+					            press="onUserNamePress">
+					            <layoutData>
+						           <OverflowToolbarLayoutData priority="NeverOverflow"/>
+					            </layoutData>
+				            </Button>
+				        </items>
+			        </FlexBox>
+                </Panel>  
+			</tnt:ToolHeader>
+		</tnt:header>
+		<tnt:sideContent>
+
+			<HBox>
+                <Button 
+					text="Close"
+					type="Transparent">	        
+				</Button>
+            </HBox>
+
+			<tnt:SideNavigation
+				expanded="true"
+				id="oSideNavigation"
+				itemSelect="onItemSelect">
+				<tnt:NavigationList id="oNavigationList">
+				</tnt:NavigationList>
+				<tnt:fixedItem>
+
+				<tnt:NavigationList id="oFixedNavigationList">
+				</tnt:NavigationList>
+
+					<!-- <tnt:NavigationList
+						items="{
+							path: 'side>/fixedNavigation',
+							templateShareable: false
+						}">
+						<tnt:NavigationListItem
+							text="{side>title}"
+							icon="{side>icon}"
+							key="{side>key}">
+						</tnt:NavigationListItem>
+					</tnt:NavigationList> -->
+				</tnt:fixedItem>
+			</tnt:SideNavigation>
+		</tnt:sideContent>
+		<tnt:mainContents>
+			<App id="mainContents"/>
+		</tnt:mainContents>
+	</tnt:ToolPage>
+</mvc:View>
+
+
+
+
+	<!-- <Page showHeader="true" >
+
+		    	<headerContent>
+				<Button
+					id="sideNavigationToggleButton"
+					icon="sap-icon://menu2"
+					type="Transparent"
+					press="onSideNavButtonPress"
+					tooltip="{i18n>navigationToggleButtonTooltip}">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</layoutData>
+				</Button>
+				<Title text="{i18n>appTitle}"/>
+
+				<ToolbarSpacer/>
+				<Button
+					id="searchButton"
+					icon="sap-icon://search"
+					type="Transparent"
+					press=""
+					tooltip="Search">
+					<layoutData>
+						<OverflowToolbarLayoutData closeOverflowOnInteraction="false"/>
+					</layoutData>
+				</Button>
+
+                <Button
+					id="notificationButton"
+					icon="sap-icon://ui-notifications"
+					visible="{= ${alerts>/alerts/notifications}.length === 0 ? false : true }"
+					type="Transparent"
+					press="onNotificationPress"
+					tooltip="{i18n>notificationButtonTooltip}">
+					<layoutData>
+						<OverflowToolbarLayoutData closeOverflowOnInteraction="false"/>
+					</layoutData>
+				</Button>
+
+				<Button
+					id="userButton"
+					text="{i18n>userName}"
+					type="Transparent"
+					press="onUserNamePress">
+					<layoutData>
+						<OverflowToolbarLayoutData closeOverflowOnInteraction="false"/>
+					</layoutData>
+				</Button>
+				</headerContent>
+		<subHeader>
+			<Toolbar>
+				<SearchField
+					liveChange="onSearch"
+					width="100%" />
+			</Toolbar>
+		</subHeader>
+		<content>
+
+
+				<App id="mainContents"/>
+		</content>
+	</Page> -->
+
+<!-- <subHeader>
+			<Toolbar id="searchBar33343">
+				<SearchField
+					id="searchField"
+					liveChange="onSearch"
+					showRefreshButton="{=!${device>/support/touch}}"
+					placeholder="{i18n>homeSearchPlaceholder}"
+					tooltip="{i18n>homeSearchTooltip}"
+					width="100%">
+				</SearchField>
+			</Toolbar>
+		</subHeader> -->

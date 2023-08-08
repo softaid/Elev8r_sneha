@@ -1,0 +1,62 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Disease"
+		contentHeight="300px"
+		search="handleDiseaseSearch"
+		confirm="handleDiseaseClose"
+		cancel="handleDiseaseClose"
+		items="{
+			path : 'diseaseListModel>/modelData',
+			sorter : {
+				path : 'id',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{diseaseListModel>id}" />
+		<Text text="{diseaseListModel>diseasename}" />
+		<Text text="{diseaseListModel>diagnosis}" />
+                <Text text="{diseaseListModel>organname}" />
+                <Text text="{diseaseListModel>lesionname}" />
+                <Text text="{diseaseListModel>symptomsname}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Doc No." />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Disease" />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Diagnosis" />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Organ Name" />
+				</header>
+			</Column>
+            		<Column demandPopin="true" >
+				<header>
+					<Text text="Lesion Name" />
+				</header>
+			</Column>
+			 <Column demandPopin="true" >
+				<header>
+					<Text text="Symptoms Name" />
+				</header>
+			</Column>
+			
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

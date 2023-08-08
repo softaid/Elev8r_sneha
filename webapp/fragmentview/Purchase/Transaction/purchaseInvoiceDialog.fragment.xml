@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="Select Purchase Invoice"	
+		contentHeight="300px"
+		search="handlePurchaseInvoiceSearch"
+		confirm="handlePurchaseInvoiceClose"
+		cancel="handlePurchaseInvoiceClose"
+		items="{
+			path : 'invoiceListModel>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="" text="{invoiceListModel>purchaseinvoiceno}" />
+				<Text text="{invoiceListModel>invoicedate}" />
+				<Text text="{invoiceListModel>grpodocseriesno}" />
+                <Text text="{invoiceListModel>remark}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Doc No" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Invoice Date" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="GRPO NO." />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Remark" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

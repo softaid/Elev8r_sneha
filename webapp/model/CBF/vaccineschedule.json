@@ -1,0 +1,29 @@
+{
+	"vaccineschedule": [
+		{
+			"code" : 1,
+            "name": "Day   IBD  Intermediate plus by Drinking water",
+            "mail": "1",
+            "femail": "10",
+            "itemname": "300",
+            "fromage": "g",
+            "toage": "",
+            "feedqty": "",
+            "unit": "",
+            "location": ""
+		},
+		{
+			"code" : 2,
+            "name": "Day 21-B1 Lasota  Drinking water",
+            "mail": "1",
+            "femail": "10",
+            "itemname": "300",
+            "fromage": "g",
+            "toage": "",
+            "feedqty": "",
+            "unit": "",
+            "location": ""
+		}
+		
+	]
+}

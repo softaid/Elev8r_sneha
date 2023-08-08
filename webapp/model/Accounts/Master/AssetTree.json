@@ -1,0 +1,70 @@
+[
+	{
+		"text": "11000-Non Current Assets",
+		"ref": "sap-icon://attachment-audio",
+		"nodes":
+		[
+			{
+				"text": "115000-Property-plants $ Euipment",
+				"ref": "sap-icon://attachment-e-pub",
+				"nodes":[
+					{
+						"text": "16000-Gross Carrying Amounts",
+                        "ref": "sap-icon://attachment-html",
+                        "nodes":[
+							{
+								"text": "11100-16-land(GEN)",
+								"ref": "sap-icon://attachment-text-file"
+                            },
+                            {
+								"text": "16060-00-Breeder Feed(GEN)",
+								"ref": "sap-icon://attachment-text-file"
+                            },
+                            {
+								"text": "16080-00-Poultry Sheds (GEN)",
+								"ref": "sap-icon://attachment-text-file"
+                            },
+                            {
+								"text": "16100-00-Plant and Machinery (GEN)",
+								"ref": "sap-icon://attachment-text-file"
+                            },
+                            {
+								"text": "16100-00-Plant and Machinery (GEN)",
+								"ref": "sap-icon://attachment-text-file"
+                            }
+							
+						]
+                    },
+                    {
+						"text": "117000-Work In Progrss",
+                        "ref": "sap-icon://attachment-html",
+                        "nodes":[
+							{
+                                "text": "117010-00-Advance Imports PPE(GEN)",
+                                "ref": "sap-icon://attachment-video"
+                            },
+                            {
+                                "text": "117010-00-WIP Building(GEN)",
+                                "ref": "sap-icon://attachment-zip-file"
+                            },
+                            {
+                                "text": "117090-00-Poultry Sheds(GEN)",
+                                "ref": "sap-icon://course-program"
+                            },
+                            {
+                                "text": "117090-00-WIP Plant & Machinery(GEN)",
+                                "ref": "sap-icon://course-program"
+                            },
+                            {
+								"text": "117090-00-Plant and Machinery (GEN)",
+								"ref": "sap-icon://attachment-text-file"
+                            }
+							
+						]
+					}
+				]
+			}	
+			
+		]
+	}
+]

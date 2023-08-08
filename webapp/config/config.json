@@ -1,0 +1,16 @@
+
+{
+	"dateFormat": {
+		"valueFormat": "yyyy-MM-dd",
+        "displayFormat" : "dd/MM/yyyy",
+        "placeholder" : "DD/MM/YYYY"
+	},
+
+	"webapi" : {
+		"url" : "http://staging.poultryos.com:7500/",
+		"docurl" : "http://staging.poultryos.com:7500/documentImage/",
+		"emailurl" : "http://207.180.221.147:3500/"
+	}
+}
+
+

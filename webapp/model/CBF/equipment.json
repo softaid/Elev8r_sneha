@@ -1,0 +1,33 @@
+{
+	"equipment": [
+		{
+			"code" : 1,
+            "equipment": "Feeders",
+            "requiredRatio" : "1:50",
+            "isMandatory" : true
+		},
+		{
+            "code" : 1,
+            "equipment": "Nipples",
+            "requiredRatio" : "1:12",
+            "isMandatory" : false
+		},
+		{	"code" : 1,
+            "equipment": "Drinkers",
+            "requiredRatio" : "1;100",
+            "isMandatory" : true
+		},
+		{
+            "code" : 1,
+            "equipment": "Baby Drinkers",
+            "requiredRatio" : "1;100",
+            "isMandatory" : true
+		},
+		{
+            "code" : 1,
+            "equipment": "Chick Trays",
+            "requiredRatio" : "1;100",
+            "isMandatory" : true
+		}			
+	]
+}

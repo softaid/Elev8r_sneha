@@ -1,0 +1,116 @@
+{
+	"performanceobjectives": [
+		{
+            "code" : "1001",
+            "itemCode" : "B001",
+            "itemName" : "Breeder Male",
+            "date" : "01/06/2017",
+			"details":[
+				{
+					"age" : 24,
+					"livability" : 1.00,
+					"HD" : 1.00,
+					"HE" : 2.5,
+                    "HHP" : 3.7,
+                    "CUMHHP" : 5,
+                    "HHHE" : 7,
+                    "CUMHHHE" : 3,
+                    "hatch" : 1.000,
+                    "chicks" : 1.000
+				},
+				{
+					"age" : 28,
+					"livability" : 1.00,
+					"HD" : 1.00,
+					"HE" : 2.5,
+                    "HHP" : 3.7,
+                    "CUMHHP" : 5,
+                    "HHHE" : 7,
+                    "CUMHHHE" : 3,
+                    "hatch" : 1.000,
+                    "chicks" : 1.000
+				}
+			]
+		},
+		{
+            "code" : "1002",
+            "itemCode" : "B002",
+            "itemName" : "Breeder Female",
+            "date" : "11/10/2017",
+			"details":[
+				{
+					"age" : 20,
+					"livability" : 1.00,
+					"HD" : 1.00,
+					"HE" : 2.5,
+                    "HHP" : 3.7,
+                    "CUMHHP" : 5,
+                    "HHHE" : 7,
+                    "CUMHHHE" : 3,
+                    "hatch" : 1.000,
+                    "chicks" : 1.000
+				}
+			]
+		},
+		{
+            "code" : "1003",
+            "itemCode" : "B003",
+            "itemName" : "Breeder Male",
+            "date" : "05/07/2018",
+			"details":[
+				{
+					"age" : 15,
+					"livability" : 1.00,
+					"HD" : 1.00,
+					"HE" : 2.5,
+                    "HHP" : 3.7,
+                    "CUMHHP" : 5,
+                    "HHHE" : 7,
+                    "CUMHHHE" : 3,
+                    "hatch" : 1.000,
+                    "chicks" : 1.000
+				}
+			]
+		},
+		{
+            "code" : "1004",
+            "itemCode" : "B004",
+            "itemName" : "Breeder Male",
+            "date" : "21/04/2017",
+			"details":[
+				{
+					"age" : 21,
+					"livability" : 1.00,
+					"HD" : 1.00,
+					"HE" : 2.5,
+                    "HHP" : 3.7,
+                    "CUMHHP" : 5,
+                    "HHHE" : 7,
+                    "CUMHHHE" : 3,
+                    "hatch" : 1.000,
+                    "chicks" : 1.000
+				}
+			]
+		},
+		{
+            "code" : "1005",
+            "itemCode" : "B005",
+            "itemName" : "Breeder Male",
+            "date" : "03/09/2018",
+			"details":[
+				{
+					"age" : 27,
+					"livability" : 1.00,
+					"HD" : 1.00,
+					"HE" : 2.5,
+                    "HHP" : 3.7,
+                    "CUMHHP" : 5,
+                    "HHHE" : 7,
+                    "CUMHHHE" : 3,
+                    "hatch" : 1.000,
+                    "chicks" : 1.000
+				}
+			]
+		}			
+	]
+}

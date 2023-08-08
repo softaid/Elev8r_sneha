@@ -1,0 +1,54 @@
+{
+	"TileCollection" : [
+		{
+            "number" : "Flock No: kt01  Prelying",
+            "Flock" : "Flock Number: KT 0001  BirdLive Quantity: 11,000 Bird Mortality Quantity: 1,000 Bird Avgerage Weight: 500 Bird Avgerage Feed: 5.4 Gm Bird Total Mortality: 12000 Male/Female Total Cost: 10,000 Male/Female Male Quantity: 1000 ",
+            "info" : "M/F 4300hijjjokgskglkgkglkj",
+            "contentText" : "Details"
+		},
+		{   "number" : "Flock No : kt02 Prelying",
+            "Flock" : "Flock Number: KT 0001  BirdLive Quantity: 11,000 Bird Mortality Quantity: 1,000 Bird Avgerage Weight: 500 Bird Avgerage Feed: 5.4 Gm Bird Total Mortality: 12000 Male/Female Total Cost: 10,000 Male/Female Male Quantity: 1000 ",
+            "contentText" : "Overdue",
+            "info" : "M/F 4300"
+			
+		},
+		{
+            "number" : "Flock No : kt03 Prelying",
+            "Flock" : "Flock Number: KT 0001  BirdLive Quantity: 11,000 Bird Mortality Quantity: 1,000 Bird Avgerage Weight: 500 Bird Avgerage Feed: 5.4 Gm Bird Total Mortality: 12000 Male/Female Total Cost: 10,000 Male/Female Male Quantity: 1000 ",
+            "contentText" : "Overdue",
+            "info" : "M/F 4300"
+			
+		},
+        {
+            "Flock" : "Flock No: KT 0001   Age: 170 Live: 11,000   Mortality M/F: 120 AvgWeight: 12 Avg Feed: 2.4Kg  Avg Feed: 2.8 Kg  Bird Cost: 500 ",
+            "contentText" : "Overdue",
+            "info" : "M/F 4300",
+			"infoState" : "Error"
+        },
+        {
+            "Flock" : "Flock No: KT 0001   Age: 170 Live: 11,000   Mortality M/F: 120 AvgWeight: 12 Avg Feed: 2.4Kg  Avg Feed: 2.8 Kg  Bird Cost: 500 ",
+            "contentText" : "Overdue",
+            "info" : "M/F 4300",
+			"infoState" : "Error"
+        },
+        {
+            "Flock" : "Flock No: KT 0001   Age: 170 Live: 11,000   Mortality M/F: 120 AvgWeight: 12 Avg Feed: 2.4Kg  Avg Feed: 2.8 Kg  Bird Cost: 500 ",
+            "contentText" : "Overdue",
+            "info" : "M/F 4300",
+			"infoState" : "Error"
+        },
+        {
+            "Flock" : "Flock No: KT 0001   Age: 170 Live: 11,000   Mortality M/F: 120 AvgWeight: 12 Avg Feed: 2.4Kg  Avg Feed: 2.8 Kg  Bird Cost: 500 ",
+            "contentText" : "Overdue",
+            "info" : "M/F 4300",
+			"infoState" : "Error"
+        },
+        {
+            "Flock" : "Flock No: KT 0001   Age: 170 Live: 11,000   Mortality M/F: 120 AvgWeight: 12 Avg Feed: 2.4Kg  Avg Feed: 2.8 Kg  Bird Cost: 500 ",
+            "contentText" : "Overdue",
+            "info" : "M/F 4300",
+			"infoState" : "Error"
+		}
+	
+	]
+}

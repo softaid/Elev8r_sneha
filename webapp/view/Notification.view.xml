@@ -1,0 +1,100 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Notification" height="100%"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:core="sap.ui.core"
+  xmlns:tnt="sap.tnt">
+
+ <f:FlexibleColumnLayout  id="fclNotification" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage showFooter="true" toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+ 				        <f:heading>
+					        <Title text="Notifications"/>
+				        </f:heading>
+                        <f:actions>
+						    <ToolbarSpacer/>
+						    <!-- <Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/> -->
+                            
+						    <!-- <Button icon="sap-icon://add" type="Transparent" press="onAdd"/>
+                            <Button icon="sap-icon://arrow-left" type="Transparent" press="onAdd"/>
+                            <Button icon="sap-icon://arrow-right" type="Transparent" press="onAdd"/> -->
+					    </f:actions>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>    
+
+
+                        <VBox fitContainer="true">
+                            <Table id="tblNotification" 
+                                inset="false" 
+                                mode="MultiSelect"
+                                items="{
+                                        path: 'notificationHistoryModel>/modelData',
+                                        sorter: {
+                                            path: 'yearname'
+                                        }
+                                    }">
+                                <headerToolbar>
+                                    <Toolbar>
+                                    <content>
+                                        <Title text="Notification History" level="H2"/>
+                                        <Button icon="sap-icon://complete" text="Mark as read" press="checkAllChange" class="sapUiMediumMarginBegin">
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                            </layoutData>
+                                        </Button>
+
+                                         <!-- <Button icon="sap-icon://delete" text="Delete" press="checkAllChange">
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                            </layoutData>
+                                        </Button> -->
+                                        <ToolbarSpacer />
+                                    </content>
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column width="7%"><Text text ="Id" /></Column>
+                                    <Column width="13%"><Text text ="Period" /></Column>
+                                    <Column width="15%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Transaction Type" /></Column>
+                                    <Column width="55%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Message" /></Column>
+                                    <Column width="20%" hAlign="Center" minScreenWidth="Tablet" demandPopin="true"><Text text ="In App / Email / SMS" /></Column>
+                                    <!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="For Roles" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Push Notification Users"/></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Viewed by Users"/></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="In app enabled?"/></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Email enabled?"/></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="SMS enabled?"/></Column> -->
+                                </columns>
+                                <items>
+                                    <ColumnListItem id="clm" type="Navigation"  press="onListItemPress">
+                                        <customData>
+                                            <core:CustomData key="mydata" value="{= ${notificationHistoryModel>isread} === 0 ? 'unread-notification' : 'read-notification' }" writeToDom="true"></core:CustomData>
+                                        </customData>
+                                        <cells>
+                                            <Text text="{notificationHistoryModel>id}"  />    
+                                            <Text text="{notificationHistoryModel>date}"  />
+                                            <Text text="{notificationHistoryModel>title}" />
+                                            <Text text="{notificationHistoryModel>description}" />
+                                            <HBox justifyContent="Center" >
+                                            <tnt:InfoLabel text="A" renderMode="Loose" class="sapUiSmallMarginBegin"
+                                            colorScheme="{= ${notificationHistoryModel>inapp} === 1 ? 8 : 9 }" displayOnly= "true" />
+                                            <tnt:InfoLabel text="E" renderMode="Loose" class="sapUiSmallMarginBegin"
+                                            colorScheme="{= ${notificationHistoryModel>email} === 1 ? 8 : 9 }" displayOnly= "true" />
+                                            <tnt:InfoLabel text="S" renderMode="Loose" class="sapUiSmallMarginBegin"
+                                            colorScheme="{= ${notificationHistoryModel>sms} === 1 ? 8 : 9 }" displayOnly= "true" />
+                                            </HBox>
+                                            
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
+
+                </f:content>
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+
+</core:View>

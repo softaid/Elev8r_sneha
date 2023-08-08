@@ -1,0 +1,24 @@
+{
+	"brooding": [
+		{
+		    "code" : 1,
+            "parameter": "Gas Brooding",
+            "isMandatory" : true
+		},
+		{
+            "code" : 1,
+            "parameter": "Electric brooding",
+            "isMandatory" : false
+		},
+		{	
+            "code" : 1,
+            "parameter": "Charcoal Brooding",
+            "isMandatory" : false
+		},
+		{
+            "code" : 1,
+            "parameter": "Firewood Brooding",
+            "isMandatory" : false
+		}		
+	]
+}

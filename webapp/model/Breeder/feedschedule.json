@@ -1,0 +1,202 @@
+{
+	"feedschedule": [
+		{
+			"code" : 1,
+            "name": "Feed Schedule Male",
+            "breedName" : "Breeder Male",
+            "fromDate" : "01/08/17",
+            "toDate" : "31/01/18",
+			"feedDetails":[
+				{
+					"itemCode" : "FEG0100",
+					"itemName" : "Gold coin - Breeder Layer2",
+					"fromWeek" : 1,
+                    "toWeek" : 2,
+                    "feedQuantity" : 0.300,
+                    "unit" : "KG"
+				},
+				{
+					"itemCode" : "FEG0040",
+					"itemName" : "Fortune Agro",
+					"fromWeek" : 3,
+                    "toWeek" : 4,
+                    "feedQuantity" : 0.500,
+                    "unit" : "KG"
+				},
+				{
+					"itemCode" : "FEG0080",
+					"itemName" : "Gold Coin - Breeder Grower",
+					"fromWeek" : 5,
+                    "toWeek" : 7,
+                    "feedQuantity" : 0.700,
+                    "unit" : "KG"
+				}
+            ],
+            "locationDetails" :[
+                {
+					"locationName" : "Hillcountry",
+					"locationCode" : 2,
+					"isApplicable" : true
+                },
+                {
+					"locationName" : "Hillcountry2",
+					"locationCode" : 3,
+					"isApplicable" : false
+				}
+
+            ]
+		},
+		{
+            "code" : 2,
+            "name": "Feed Schedule Female",
+            "breedName" : "Breeder Female",
+            "fromDate" : "07/09/17",
+            "toDate" : "09/03/18",
+			"feedDetails":[
+				{
+					"itemCode" : "FEG0100",
+					"itemName" : "Gold coin",
+					"fromWeek" : 1,
+                    "toWeek" : 2,
+                    "feedQuantity" : 0.300,
+                    "unit" : "KG"
+				},
+				{
+					"itemCode" : "FEG0040",
+					"itemName" : "Fortune Agro",
+					"fromWeek" : 3,
+                    "toWeek" : 4,
+                    "feedQuantity" : 0.500,
+                    "unit" : "KG"
+				}
+            ],
+            "locationDetails" :[
+                {
+					"locationName" : "Hillcountry",
+					"locationCode" : 2,
+					"isApplicable" : true
+                }
+            ]
+		},
+		{
+			"code" : 3,
+            "name": "Feed Schedule Male",
+            "breedName" : "Breeder Male",
+            "fromDate" : "01/08/17",
+            "toDate" : "31/01/18",
+			"feedDetails":[
+				{
+					"itemCode" : "FEG0100",
+					"itemName" : "Gold coin - Breeder Layer2",
+					"fromWeek" : 1,
+                    "toWeek" : 2,
+                    "feedQuantity" : 0.300,
+                    "unit" : "KG"
+				},
+				{
+					"itemCode" : "FEG0040",
+					"itemName" : "Fortune Agro",
+					"fromWeek" : 3,
+                    "toWeek" : 4,
+                    "feedQuantity" : 0.500,
+                    "unit" : "KG"
+				},
+				{
+					"itemCode" : "FEG0080",
+					"itemName" : "Gold Coin - Breeder Grower",
+					"fromWeek" : 5,
+                    "toWeek" : 7,
+                    "feedQuantity" : 0.700,
+                    "unit" : "KG"
+				}
+            ],
+            "locationDetails" :[
+                {
+					"locationName" : "Hillcountry",
+					"locationCode" : 2,
+					"isApplicable" : true
+                }
+            ]
+		},
+		{
+			"code" : 4,
+            "name": "Feed Schedule Male",
+            "breedName" : "Breeder Male",
+            "fromDate" : "01/08/17",
+            "toDate" : "31/01/18",
+			"feedDetails":[
+				{
+					"itemCode" : "FEG0100",
+					"itemName" : "Gold coin - Breeder Layer2",
+					"fromWeek" : 1,
+                    "toWeek" : 2,
+                    "feedQuantity" : 0.300,
+                    "unit" : "KG"
+				},
+				{
+					"itemCode" : "FEG0040",
+					"itemName" : "Fortune Agro",
+					"fromWeek" : 3,
+                    "toWeek" : 4,
+                    "feedQuantity" : 0.500,
+                    "unit" : "KG"
+				},
+				{
+					"itemCode" : "FEG0080",
+					"itemName" : "Gold Coin - Breeder Grower",
+					"fromWeek" : 5,
+                    "toWeek" : 7,
+                    "feedQuantity" : 0.700,
+                    "unit" : "KG"
+				}
+            ],
+            "locationDetails" :[
+                {
+					"locationName" : "Hillcountry",
+					"locationCode" : 2,
+					"isApplicable" : true
+                }
+            ]
+		},
+		{
+			"code" : 5,
+            "name": "Feed Schedule Male",
+            "breedName" : "Breeder Male",
+            "fromDate" : "01/08/17",
+            "toDate" : "31/01/18",
+			"feedDetails":[
+				{
+					"itemCode" : "FEG0100",
+					"itemName" : "Gold coin - Breeder Layer2",
+					"fromWeek" : 1,
+                    "toWeek" : 2,
+                    "feedQuantity" : 0.300,
+                    "unit" : "KG"
+				},
+				{
+					"itemCode" : "FEG0040",
+					"itemName" : "Fortune Agro",
+					"fromWeek" : 3,
+                    "toWeek" : 4,
+                    "feedQuantity" : 0.500,
+                    "unit" : "KG"
+				},
+				{
+					"itemCode" : "FEG0080",
+					"itemName" : "Gold Coin - Breeder Grower",
+					"fromWeek" : 5,
+                    "toWeek" : 7,
+                    "feedQuantity" : 0.700,
+                    "unit" : "KG"
+				}
+            ],
+            "locationDetails" :[
+                {
+					"locationName" : "Hillcountry",
+					"locationCode" : 2,
+					"isApplicable" : true
+                }
+            ]
+		}			
+	]
+}

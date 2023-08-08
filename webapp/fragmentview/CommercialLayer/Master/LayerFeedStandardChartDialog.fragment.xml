@@ -1,0 +1,50 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Layer Feed Standard Chart"
+		contentHeight="300px"
+		search="handleFeedDialogSearch"
+		confirm="handleFeedDialogClose"
+		cancel="handleFeedDialogClose"
+		items="{
+			path : 'layerfeedstandardModel>/modelData',
+			sorter : {
+				path : 'code',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{layerfeedstandardModel>id}" />
+				<Text text="{layerfeedstandardModel>standardname}" />
+                <Text text="{layerfeedstandardModel>fromdate}" />
+                <Text text="{layerfeedstandardModel>todate}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Doc No." />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Name" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="From Date" />
+				</header>
+			</Column>
+            <Column>
+				<header>
+					<Text text="To Date" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,23 @@
+{
+	"vendors": [
+		{
+			"vendorNo" : 1,
+			"vendorName": "Vendor 1"
+		},{
+			"vendorNo" : 2,
+			"vendorName": "Vendor 2"
+		},{
+			"vendorNo" : 3,
+			"vendorName": "Vendor 3"
+		},{
+			"vendorNo" : 4,
+			"vendorName": "Vendor 4"
+		},{
+			"vendorNo" : 5,
+			"vendorName": "Vendor 5"
+		},{
+			"vendorNo" : 6,
+			"vendorName": "Vendor 6"
+		}
+	]
+}

@@ -1,0 +1,137 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.Project" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified"
+    xmlns:form="sap.ui.layout.form">    
+    <f:FlexibleColumnLayout  id="fclProjecttracking" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="{i18n>project}"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+                    <VBox fitContainer="true">
+                        <Panel id="pnlLeadMaster" expandable="true" expanded="true"  headerText="Lead List" width="100%">
+               	            <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="1"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer> 
+                                        <form:formElements >  
+                                            <form:FormElement label="Lead Type">
+                                                <form:fields>
+                                                    <SegmentedButton accessibleName="Select Lead Type" 
+                                                        items="{path: 'leadTypeModel>/modelData'}" selectionChange="handleSelectionChange">
+                                                        <items>
+                                                            <SegmentedButtonItem width="auto" text="{leadTypeModel>description}" press="onLeadType"></SegmentedButtonItem>
+                                                        </items>
+                                                    </SegmentedButton>
+                                                </form:fields>
+                                            </form:FormElement>   
+                                            <form:FormElement label="Lead Category">
+                                                <form:fields>
+                                                    <SegmentedButton accessibleName="Select Lead Category"
+                                                    items="{path: 'leadCategoryModel>/modelData'}" selectionChange="handleSelectionChange">
+                                                        <items>
+                                                            <SegmentedButtonItem width="auto" text="{leadCategoryModel>description}" press="onLeadCategory"></SegmentedButtonItem>
+                                                        </items>
+                                                    </SegmentedButton>
+                                                </form:fields>
+                                            </form:FormElement>   
+                                            <form:FormElement label="Lead Source">
+                                                <form:fields>
+                                                    <SegmentedButton accessibleName="Select Lead Source"
+                                                    items="{path: 'leadSourceModel>/modelData'}" selectionChange="handleSelectionChange">
+                                                        <items>
+                                                            <SegmentedButtonItem width="auto" text="{leadSourceModel>description}" press="onLeadSource"></SegmentedButtonItem>
+                                                        </items>
+                                                    </SegmentedButton>
+                                                </form:fields>
+                                            </form:FormElement>   
+                                            <form:FormElement label="Lead Stage">
+                                                <form:fields>
+                                                    <SegmentedButton  accessibleName="Select Lead Stage"
+                                                    items="{path: 'stageModel>/modelData'}" selectionChange="handleSelectionChange">
+                                                        <items>
+                                                            <SegmentedButtonItem width="auto"  text="{stageModel>description}" press="onLeadStage"></SegmentedButtonItem>
+                                                        </items>
+                                                    </SegmentedButton>
+                                                </form:fields>
+                                            </form:FormElement>   
+                                        </form:formElements>      
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>               
+                        </Panel>
+                        <Table id="tblProjectMaster" 
+                                inset="false"
+                                sticky="ColumnHeaders" growing="true" growingScrollToLoad="true" growingThreshold="10" 
+                                items="{
+                                path: 'projectModel>/modelData'
+                               
+                            }">
+                            <headerToolbar>
+                                <Toolbar>
+                                    <content>
+                                        <Title text="" level="H2"/>
+                                        <ToolbarSpacer />
+                                        <SearchField search="onSearch" width="17.5rem" id = "searchId"/>
+                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
+                                    </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column><Text text ="{i18n>projectname}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>projectStartDateLabel}"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>projectEndDateLabel}"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>projectMileStoneCompletion}"/></Column>
+                                <!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>projectStatusLabel}"/></Column>                                
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>remark}"/></Column> -->
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemPress">
+                                    <cells>
+                                    <ObjectIdentifier text="{projectModel>quotename}" />
+                                        <Text text="{projectModel>startdate}"/>
+                                        <Text text="{projectModel>enddate}"/>
+                                        <Text text="{projectModel>completiondays}"/>  
+                                        <!-- <Text text="{projectModel>status}"/> 
+                                        <Text text="{projectModel>remark}"/>      -->
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        <VBox id="pnlErrMessage" visible="false" class="sapMMsgStrip sapMMsgStripError sapUiSmallMarginBottom" width="auto">
+                        </VBox >
+                        <TabContainer id="pnlDataTabs" visible="false" showAddNewButton="false" class="pnlDataTabs sapUiResponsiveContentPadding">
+                            <items></items>
+                        </TabContainer>
+                        <HBox width="auto"></HBox>
+                        <HBox id="pnlMasterData" width="auto"></HBox>
+                    </VBox> 
+                </f:content>				
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>

@@ -1,0 +1,256 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CommercialLayer.LayerDailyBrodGrowReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Layer Daily Brooding Growing Report"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                         <form:FormElement label="Frequency"  >
+                                            <form:fields>
+                                             <Select id="Frequency" selectedKey="{layerdailybrodGrowModel>/frequency}" forceSelection = "false" change="frequChange"  
+                                                items="{
+                                                    path: 'frequemodel>/modelData',
+                                                    sorter: { path: 'key' }
+                                                }">
+                                                <core:Item key="{frequemodel>key}" text="{frequemodel>value}" />                                            
+                                            </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>DailyBroodingGrowingLabelLocation}">
+                                            <form:fields>
+                                                <MultiComboBox id="locationtbl"
+                                                    selectionChange="handleSelectionChange"
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'locationList>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{locationList>id}" text="{locationList>locationname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                            <form:FormElement label="{i18n>DailyBroodingGrowingLabelBatchName}">
+                                            <form:fields>
+                                            <Input
+                                                type="Text"
+                                                id = "textBatch"
+                                                placeholder="Select Batch"
+                                                showSuggestion="true"
+                                                showValueHelp="true"    
+                                                valueHelpOnly="true"
+                                                value="{layerdailybrodGrowModel>/batchname}"
+                                                valueHelpRequest="handleLyrBatchValueHelp">
+                                            </Input>
+                                       
+                                            </form:fields>
+                                         </form:FormElement>
+                                          <form:FormElement label="{i18n>DailyBroodingGrowingLabelShedName}">
+                                            <form:fields>
+                                            <MultiComboBox id="shedtb1"
+                                                selectionChange="shedSelectionChange"
+                                                selectionFinish="shedSelectionFinish"
+                                                width="500px"
+                                                items="{
+                                                    path: 'shedModel>/modelData',
+                                                    sorter: { path: 'Name' }
+                                                }">
+                                                <core:Item key="{shedModel>layershedid}" text="{shedModel>shedname}" />
+                                            </MultiComboBox>
+                                               
+                                            </form:fields>
+                                         </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer>
+
+                                          <form:formElements>
+                                             
+                                          <form:FormElement label="{i18n>DailyBroodingGrowingLabelFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromdate" width="100%" value="{layerdailybrodGrowModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change = "ongetDate"/>   
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                         <form:FormElement label="{i18n>DailyBroodingGrowingLabelToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtTodate"  width="100%" value="{layerdailybrodGrowModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change = "ongetDate"/>   
+                                            </form:fields>
+                                        </form:FormElement>
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="OnSearchData"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>             
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+
+                        <HBox fitContainer="true">
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblEggsCollReport"  width="300%" growing="true" growingScrollToLoad="true" sticky="ColumnHeaders" items="{
+                                                path: 'dailybrodgrowReportModel>/modelData',
+                                                    sorter: {
+                                                        path: 'shedname',
+							                            group : true
+                                                    }
+                                                }"
+                                                mode="None" backgroundDesign="Solid">
+                                
+                                <columns>
+                                     <Column visible="{layerdailybrodGrowModel>/showdate}"  width="10%"  minScreenWidth="Tablet"  demandPopin="true"><Text text ="Date" /></Column>
+                                     <Column visible="{layerdailybrodGrowModel>/showweek}" width="10%"  minScreenWidth="Tablet"  demandPopin="true"><Text text ="Week NO" /></Column>
+                                     <Column visible="{layerdailybrodGrowModel>/showweek}" width="10%"  minScreenWidth="Tablet"  demandPopin="true"><Text text ="Week Start" /></Column>
+                                     <Column visible="{layerdailybrodGrowModel>/showweek}" width="10%"  minScreenWidth="Tablet"  demandPopin="true"><Text text ="Week End" /></Column>
+                                     <Column visible="{layerdailybrodGrowModel>/showmonth}" width="10%"  minScreenWidth="Tablet"  demandPopin="true"><Text text ="Month No" /></Column>
+                                     <Column visible="{layerdailybrodGrowModel>/showmonth}" width="10%"  minScreenWidth="Tablet"  demandPopin="true"><Text text ="Month Start" /></Column>
+                                     <Column visible="{layerdailybrodGrowModel>/showmonth}" width="10%"  minScreenWidth="Tablet"  demandPopin="true"><Text text ="Month End" /></Column>
+
+                                     <Column  width="10%"  minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Opening Balance Female" /></Column>
+                                     <Column  width="10%"  minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Transfer In Quantity" /></Column>
+                                     <Column  width="10%"  minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Transfer Out Quantity" /></Column>
+				                     <Column  width="10%"  minScreenWidth="Tablet"  demandPopin="true" ><Text text ="Closing Balance Female" /></Column> 
+        
+                                     <Column  width="10%"  minScreenWidth="Tablet" demandPopin="true"><Text text ="Female Mortalty" /></Column>
+                                     <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Cummulative Female Mortalty" /></Column>
+                                     <Column minScreenWidth="Tablet" width="10%"  demandPopin="true"><Text text ="Cummulative Female Mortalty %" /></Column>
+
+                                     <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Female Culls" /></Column>
+                                     <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Cummulative Female Culls" /></Column>
+                                     <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Sexing Error Quantity" /></Column>
+                                     <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Cummulative SexingError Quantity" /></Column>
+
+                                     <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Feed Opening Balance" /></Column>
+                                     <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Received Feed" /></Column>       
+                           
+                                     <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Female Feed Use" /></Column>
+                                     <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Cummulative Feed" /></Column>
+
+                                     <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Per Bird Feed Female" /></Column>
+
+
+
+                                     <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Body Weight FemaleF Actual" /></Column>
+                                     <Column minScreenWidth="Tablet"  width="10%"  demandPopin="true"><Text text ="Transfered Feed" /></Column>
+                                     <Column minScreenWidth="Tablet"  width="10%" demandPopin="true"><Text text ="Feed Closing Balance" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                      
+                                    </customData>
+                                        <cells>
+                                            <Text text="{dailybrodgrowReportModel>transactiondate}" />
+                                            <Text text="{dailybrodgrowReportModel>weekno}"/>
+                                            <Text text="{dailybrodgrowReportModel>week_start}"/>
+                                            <Text text="{dailybrodgrowReportModel>week_end}"/>
+                                            <Text text="{dailybrodgrowReportModel>monthno}"/>
+                                            <Text text="{dailybrodgrowReportModel>month_start}"/>
+                                            <Text text="{dailybrodgrowReportModel>month_end}"/>
+
+                                            <Text text="{dailybrodgrowReportModel>femaleopeningbalancefinal}" />
+                                            <Text text="{dailybrodgrowReportModel>femaletransferedinquantity}" />
+                                            <Text text="{dailybrodgrowReportModel>femaletransferedquantity}" />
+                    					    <Text text="{dailybrodgrowReportModel>femaleclosingbalancefinal}" />
+
+                                            <Text text="{dailybrodgrowReportModel>femalemortality}" />
+                                            <Text text="{dailybrodgrowReportModel>cumulativefemalemortality}" />
+					                        <Text text="{= ${dailybrodgrowReportModel>cumufemalemortalityper} > 0 ? ${dailybrodgrowReportModel>cumufemalemortalityper} : '0'}" />	
+
+				   	                        <Text text="{dailybrodgrowReportModel>femaleculls}" />
+					                        <Text text="{dailybrodgrowReportModel>cumulativefemaleculls}" />
+                                            <Text text="{dailybrodgrowReportModel>sexingerrorquantity}" />
+                                            <Text text="{dailybrodgrowReportModel>cumsexingerrorquantity}" />
+
+                                            <Text text="{dailybrodgrowReportModel>femalefeedopeningbalancefinal}" />
+                                            <Text text="{dailybrodgrowReportModel>receivedfeed}" />
+
+                                            <Text text="{dailybrodgrowReportModel>femalefeedconsumption}" />
+                                            <Text text="{dailybrodgrowReportModel>cummulativefeedconsumption}" />
+
+ 					                        <Text text="{= ${dailybrodgrowReportModel>perbirdfeedfemale} > 0 ? ${dailybrodgrowReportModel>perbirdfeedfemale} : '0'}" />                       
+                                            <!-- <Text text="{dailybrodgrowReportModel>femalestandardweight}" /> -->
+                                            
+                                            <Text text="{dailybrodgrowReportModel>femaleactualweightingram}" />
+                                            <Text text="{dailybrodgrowReportModel>transferedfeedfemale}" />
+                                          
+
+                                            <Text text="{dailybrodgrowReportModel>feedclosingbalance}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+                    
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

@@ -1,0 +1,122 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.MaterialTransferDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+	height="100%">
+        
+	<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>MaterialTransferDetailTitle}"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+				    	<Button
+                            id="btnSave"
+							text="{i18n>saveButtonText}"
+                            type="Emphasized"
+							press="onSave"/>
+				</f:actions>
+				<f:navigationActions>
+					<Button
+						icon="sap-icon://decline"
+						type="Transparent" press="onCancel" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>				
+   			<form:Form editable="true">
+                <form:title>
+                </form:title>
+                <form:layout>
+                    <form:ResponsiveGridLayout
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="2"
+                        columnsM="1"
+                        singleContainerFullSize="false" />
+                </form:layout>
+                <form:formContainers>
+                    <form:FormContainer title="">
+					    <form:formElements>
+                            <form:FormElement label="Item Group" id="itemGrpEle">
+                                <form:fields>
+                                <Select id="txtItemGroup"
+                                  forceSelection  = "false" selectedKey="{materialTransferDetailModel>/itemgroupid}"
+                                    change = "itemgroupSelect"
+									items="{
+					                    path: 'itemGroupModel>/modelData',
+					                    sorter: { path: 'id' }
+				                    }" enabled="true">
+				                    <core:Item key="{itemGroupModel>id}" text="{itemGroupModel>groupname}" />                                            
+			                    </Select>
+                                </form:fields> 
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>MaterialTransferDetailItemName}">
+                                <form:fields>
+                                    <Input
+                                        id="txtItemId"
+                                        type="Text"
+                                        required="true"
+                                        value="{materialTransferDetailModel>/itemname}"
+                                        placeholder="{i18n>MaterialTransferDetailSelectItem}"
+                                        showValueHelp="true"          
+                                        valueHelpOnly="true"       
+                                        valueHelpRequest="handleItemValueHelp"
+                                        enabled="true">
+                                    </Input>
+                                </form:fields>
+                            </form:FormElement> 
+                            <form:FormElement label="In Stock">
+                                <form:fields>
+                                    <Input id="txtStockQty" required="true" value="{materialTransferDetailModel>/instock}" enabled="false"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>MaterialTransferDetailItemUnit}">
+                                <form:fields>
+                                    <Input id="txtItemUnit" required="true"  value="{materialTransferDetailModel>/unit}" enabled="false"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>MaterialTransferDetailRequestedQuantity}" id="txtRequestedQuantityEle">
+                                <form:fields>
+                                    <Input id="txtRequestedQuantity" required="true" valueLiveUpdate="true" value="{materialTransferDetailModel>/requestedquantity}" type="Text" maxLength="9" change="onQuantityChange"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>MaterialTransferDetailTransferedQuantity}">
+                                <form:fields>
+                                    <Input id="txtTransferedQuantity" required="true" valueLiveUpdate="true" value="{materialTransferDetailModel>/transferedquantity}" type="Text" maxLength="9" change="onQuantityChange"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>MaterialTransferDetailTransferedWeight}">
+                                <form:fields>
+                                    <Input id="txtTransferedWt" valueLiveUpdate="true" value="{materialTransferDetailModel>/transferedweight}" type="Text" maxLength="9" change="onWeightChange"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>MaterialTransferDetailAvgWeight}">
+                                <form:fields>
+                                    <Input id="txtAvgWt" valueLiveUpdate="true" value="{materialTransferDetailModel>/avgweight}" type="Text" maxLength="9" enabled="false"/>
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                    </form:FormContainer>
+                </form:formContainers>
+            </form:Form>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="{i18n>ChicksPullOutDialogSelectChicksPullOutEntry}"	
+		contentHeight="300px"
+		search="handleChicksPullOutSearch"
+		confirm="handleChicksPullOutClose"
+		cancel="handleChicksPullOutClose"
+		items="{
+			path : 'chicksPullOutList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{chicksPullOutList>materialreceiptdetailid}" />
+                <Text text="{chicksPullOutList>itembatch}" />
+                <Text text="{chicksPullOutList>warehousename}" />
+                <Text text="{chicksPullOutList>receiptquantity}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Doc No." />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true">
+				<header>
+					<Text text="Item Batch" />
+				</header>
+			</Column> 
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Warehouse" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Batch Quantity" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

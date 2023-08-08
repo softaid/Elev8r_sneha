@@ -1,0 +1,1633 @@
+{
+	"navigation": [
+		{
+			"title": "Dashboard",
+			"icon": "sap-icon://area-chart",
+			"expanded": true,
+			"key": "home",
+			"eid": [],
+			"items": []
+		},
+		{
+			"title": "Common",
+			"icon": "sap-icon://dimension",
+			"expanded": false,
+			"key": "home",
+			"eid": [9],
+			"items": [
+				{
+					"title": "Master",
+					"icon": "sap-icon://database",
+					"expanded": false,
+					"key": "commonmaster",
+					"eid": [221],
+					"items": [
+						{
+							"title": "Location",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "locationmaster",
+							"eid": [3601],
+							"items": []
+						},
+						{
+							"title": "Item",
+							"icon": "sap-icon://area-chart",
+							"expanded": true,
+							"key": "itemmaster",
+							"eid": [3602],
+							"items": []
+						},
+						{
+							"title": "Warehouse",
+							"icon": "sap-icon://area-chart",
+							"expanded": true,
+							"key": "warehousemaster",
+							"eid": [3603],
+							"items": []
+						}
+					]
+				}
+			]
+		},				
+		{
+			"title": "Breeder",
+			"icon": "sap-icon://basket",
+			"expanded": false,
+			"key": "breederdashboard",
+			"eid": [1],
+            "items": [
+				{
+				  "title": "Master",
+				  "icon": "sap-icon://database",
+				  "expanded": false,
+				  "key": "",
+				  "eid": [51],
+				  "items": [
+					    {  
+  						    "title": "Common Breeder Master",
+						    "icon": "sap-icon://create-form",
+						    "expanded": false,
+							"key": "breedermaster",
+							"eid": [501],
+						    "items": []
+						},				    
+						{
+							"title": "Shed Parameter",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "shedparameter",
+							"eid": [502],
+							"items": []
+						},
+						{
+							"title": "Standard Charts & Schedules",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "standardchartsandschedules",
+							"eid": [503],
+							"items": []
+						},
+                        {
+							"title": "Performance Parameters",
+							"icon": "sap-icon://line-chart",
+							"expanded": false,
+							"key": "performanceparameters",
+							"eid": [504],
+							"items": []
+						},
+						{
+							"title": "Breeder Batch(Flock)",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "flock",
+							"eid": [505],
+							"items": []
+						},
+						{
+							"title": "Breeder Settings",
+							"icon": "sap-icon://settings",
+							"expanded": false,
+							"key": "breedersettings",
+							"eid": [506],
+							"items": []
+						}
+		     	    ]			  
+			    },
+			   
+                {
+	                "title": "Transaction",
+	                "icon": "sap-icon://activities",
+	                "expanded": false,
+					"key": "housereadydetail",
+					"eid": [52],
+	                "items": [
+					    {
+						    "title": "Flock Planning and Procurement",
+						    "icon": "sap-icon://legend",
+						    "expanded": false,
+							"key": "housereadydetail",
+							"eid": [701,702,703,704,705],
+						    "items": [
+								{
+									"title": "Shed Ready Detail",
+									"icon": "sap-icon://functional-location",
+									"expanded": false,
+									"key": "housereadydetail",
+									"eid": [701],
+									"items": []
+								},
+								{
+									"title": "Breeder Placement Schedule",
+									"icon": "sap-icon://date-time",
+									"expanded": false,
+									"key": "placementschedule",
+									"eid": [702],
+									"items": []
+								 },
+								 {
+									"title": "Chicks Procurement",
+									"icon": "sap-icon://cart-3",
+									"expanded": false,
+									"key": "chicksprocurementmaster",
+									"eid": [703],
+									"items": []
+								},
+								{
+									"title": "Chicks Received",
+									"icon": "sap-icon://cart-4",
+									"expanded": false,
+									"key": "chicksreceivedmaster",
+									"eid": [704],
+									"items": []
+								},
+								{
+								 "title": "Batch(Flock) Placement",
+								 "icon": "sap-icon://checklist",
+								 "expanded": false,
+								 "key": "breederbatchplacement",
+								 "eid": [705],
+								 "items": []
+							   }
+							]
+						},
+						{
+							"title": "Flock Transactions",
+							"icon": "sap-icon://activities",
+							"expanded": false,
+							"key": "breederdailytransaction",
+							"eid": [706],
+							"items": [
+								{
+									"title": "Daily Transaction",
+									"icon": "sap-icon://activity-individual",
+									"expanded": false,
+									"key": "breederdailytransaction",
+									"eid": [706],
+									"items": []
+								},
+								{
+									"title": "Material Request and Transfer",
+									"icon": "sap-icon://activity-individual",
+									"expanded": false,
+									"key": "materialrequestandtransfer",
+									"eid": [707],
+									"items": []
+								},
+								{
+									"title": "Egg Collection",
+									"icon": "sap-icon://activity-individual",
+									"expanded": false,
+									"key": "eggscollection",
+									"eid": [708],
+									"items": []
+								},
+								{
+									"title": "Batch Detail",
+									"icon": "sap-icon://checklist-item",
+									"expanded": false,
+									"key": "breederbatchdetail",
+									"eid": [709],
+									"items": []
+								}
+							]
+						},			   
+						{
+								"title": "Bird Valuation Method",
+								"icon": "sap-icon://chart-axis",
+								"expanded": false,
+								"key": "amortization",
+								"eid": [710],
+								"items": [
+									{
+										"title": "Amortization",
+										"icon": "sap-icon://collections-insight",
+										"expanded": false,
+										"key": "amortization",
+										"eid": [710],
+										"items": []
+									}
+								]
+						},
+						{
+							"title": "Eggs Transfer Activity",
+							"icon": "sap-icon://instance",
+							"expanded": false,
+							"key": "eggstransfertooutsidehatchery",
+							"eid": [711],
+							"items": [
+								{
+									"title": "Eggs Transfer To Hatchery",
+									"icon": "sap-icon://bus-public-transport",
+									"expanded": false,
+									"key": "eggstransfertooutsidehatchery",
+									"eid": [711],
+									"items": []
+								}
+							]
+						},
+						{
+							"title": "Shed To Shed Transfer",
+							"icon": "sap-icon://bus-public-transport",
+							"expanded": false,
+							"key": "shedtoshedtransfer",
+							"eid": [712],
+							"items": []
+						}
+	        		]			  
+				},
+				
+				{
+					"title": "Reports",
+					"icon": "sap-icon://manager-insight",
+					"expanded": false,
+					"key": "home",
+					"eid": [901,902,903,904,905],
+					"items": [
+						{
+							"title": "Eggs Collection Report",
+							"icon": "sap-icon://manager-insight",
+							"expanded": false,
+							"key": "eggscollectionreport",
+							"eid": [901],
+							"items": []
+						},
+						{
+							"title": "Daily Brooding And Growing Report",
+							"icon": "sap-icon://manager-insight",
+							"expanded": false,
+							"key": "DailyBrodGrowreport",
+							"eid": [902],
+							"items": []
+						},
+						{
+							"title": "Flock Gather Report",
+							"icon": "sap-icon://manager-insight",
+							"expanded": false,
+							"key": "flockgatherreport",
+							"eid": [903],
+							"items": []
+						},
+						{
+							"title": "Daily Consumption Report",
+							"icon": "sap-icon://manager-insight",
+							"expanded": false,
+							"key": "dailyconsumptionreport",
+							"eid": [904],
+							"items": []
+						},
+						{
+							"title": "Flock Detail Report",
+							"icon": "sap-icon://manager-insight",
+							"expanded": false,
+							"key": "flockdetailreport",
+							"eid": [905],
+							"items": []
+						}
+					]
+				}			   
+			]			
+		},
+		{
+			"title": "Commercial Layer",
+			"icon": "sap-icon://dimension",
+			"expanded": false,
+			"key": "home",
+			"eid": [3],
+			"items": [
+				{
+					"title": "Master",
+					"icon": "sap-icon://database",
+					"expanded": false,
+					"key": "layermaster",
+					"eid": [101],
+					"items": [
+						{
+							"title": "Common Layer Master",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "layermaster",
+							"eid": [1501],
+							"items": []
+						},
+						{
+							"title": "Shed Parameter",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "layershedparameter",
+							"eid": [1502],
+							"items": []
+						},
+						{
+							"title": "Standard Charts & Schedules",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "layerStandardchartandschedules",
+							"eid": [1503],
+							"items": []
+						},
+						{
+							"title": "Performance Objective",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "layerperformanceobjective",
+							"eid": [1504],
+							"items": []
+						},
+						{
+							"title": "Eggs Standard Weight & Rate",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "eggsstdweightandrate",
+							"eid": [1507],
+							"items": []
+						},
+						{
+							"title": "Commercial Layer Batch",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "layerbatch",
+							"eid": [1505],
+							"items": []
+						},
+						{
+							"title": "Commercial Layer Setting",
+							"icon": "sap-icon://settings",
+							"expanded": false,
+							"key": "layersetting",
+							"eid": [1506],
+							"items": []
+						}
+					]
+				},
+				{
+					"title": "Transactions",
+					"icon": "sap-icon://activities",
+					"expanded": false,
+					"key": "home",
+					"eid": [102],
+					"items": [
+						{
+							"title": "Batch Planning & Procurement",
+							"icon": "sap-icon://legend",
+							"expanded": false,
+							"key": "layershedreadydetail",
+							"eid": [1601,1602,1603,1604,1605],
+							"items": [
+								{
+									"title": "Shed Ready Detail",
+									"icon": "sap-icon://functional-location",
+									"expanded": false,
+									"key": "layershedreadydetail",
+									"eid": [1601],
+									"items": []
+								},
+								{
+									"title": "Placement Schedule",
+									"icon": "sap-icon://date-time",
+									"expanded": false,
+									"key": "layerplacementschedule",
+									"eid": [1602],
+									"items": []
+								},
+								{
+									"title": "Chicks Procurement",
+									"icon": "sap-icon://date-time",
+									"expanded": false,
+									"key": "chicksprocurementmaster",
+									"eid": [1603],
+									"items": []
+								},
+								{
+									"title": "Chicks Received",
+									"icon": "sap-icon://date-time",
+									"expanded": false,
+									"key": "layerchicksreceived",
+									"eid": [1604],
+									"items": []
+								},
+								{
+									"title": "Batch Placement",
+									"icon": "sap-icon://checklist",
+									"expanded": false,
+									"key": "layerbatchplacement",
+									"eid": [1605],
+									"items": []
+								}
+							]
+						},
+						{
+							"title": "Batch Transactions",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "home",
+							"eid": [1606,1607,1608,1609],
+							"items": [
+								{
+									"title": "Daily Transaction",
+									"icon": "sap-icon://activity-individual",
+									"expanded": false,
+									"key": "layerdailytransaction",
+									"eid": [1606],
+									"items": []
+								},
+								{
+									"title": "Material Request & Transfer",
+									"icon": "sap-icon://activity-individual",
+									"expanded": false,
+									"key": "materialrequestandtransfer",
+									"eid": [1607],
+									"items": []
+								},
+								{
+									"title": "Egg Collection & Grading",
+									"icon": "sap-icon://activity-individual",
+									"expanded": false,
+									"key": "layereggscollection",
+									"eid": [1608],
+									"items": []
+								},
+								{
+									"title": "Batch Detail",
+									"icon": "sap-icon://activity-individual",
+									"expanded": false,
+									"key": "layerbatchdetail",
+									"eid": [1609],
+									"items": []
+								}
+							]
+						},
+						{
+							"title": "Amortization",
+							"icon": "sap-icon://collections-insight",
+							"expanded": true,
+							"key": "layeramortization",
+							"eid": [1610],
+							"items": []
+						},
+						{
+							"title": "Shed To Shed Transfer",
+							"icon": "sap-icon://bus-public-transport",
+							"expanded": false,
+							"key": "layershedtoshedtransfer",
+							"eid": [1611],
+							"items": []
+						}
+					]
+				},
+				{
+					"title": "Reports",
+					"icon": "sap-icon://manager-insight",
+					"expanded": true,
+					"key": "home",
+					"eid": [103],
+					"items": [
+						{
+							"title": " Layer Eggs Collection Report",
+							"icon": "sap-icon://activity-individual",
+							"expanded": false,
+							"key": "layereggscollectionreport",
+							"eid": [1751],
+							"items": []
+						},
+						{
+							"title": " Layer Flock Gather Report",
+							"icon": "sap-icon://activity-individual",
+							"expanded": false,
+							"key": "layerflockgatherreport",
+							"eid": [1752],
+							"items": []
+						}
+					]
+				}
+			]
+		},	
+		{
+			"title": "Hatchery",
+			"icon": "sap-icon://addresses",
+			"expanded": false,
+			"key": "hatcherydashboard",
+			"eid": [2],
+			"items": [
+				{
+					"title": "Master",
+					"icon": "sap-icon://shield",
+					"expanded": false,
+					"key": "",
+					"eid": [71],
+					"items": [
+						{
+							"title": "Setter Master",
+							"icon": "sap-icon://fridge",
+							"expanded": false,
+							"key": "settermaster",
+							"eid": [1101],
+							"items": []
+						},
+						{
+							"title": "Hatcher Master",
+							"icon": "sap-icon://it-host",
+							"expanded": false,
+							"key": "hatchermaster",
+							"eid": [1102],
+							"items": []
+						},
+						{
+							"title": "Hatchery Settings",
+							"icon": "sap-icon://settings",
+							"expanded": false,
+							"key": "hatcherysettings",
+							"eid": [1103],
+							"items": []
+						}
+					]
+				},
+				{
+					"title": "Transaction",
+					"icon": "sap-icon://create-form",
+					"expanded": false,
+					"key": "",
+					"eid": [72],
+					"items": [
+						{
+							"title": "For Setter",
+							"icon": "sap-icon://fridge",
+							"expanded": false,
+							"key": "",
+							"eid": [1201,1202,1203,1204,1205],
+							"items": [
+								{
+									"title": "Hatchery Schedule",
+									"icon": "sap-icon://create-entry-time",
+									"expanded": false,
+									"key": "eggsprocurementschedule",
+									"eid": [1201],
+									"items": []
+								},
+								{
+									"title": "Create Setter Batch",
+									"icon": "sap-icon://shelf",
+									"expanded": false,
+									"key": "loadeggstosetter",
+									"eid": [1202],
+									"items": []
+								},
+								{
+									"title": "Setter Daily Transaction",
+									"icon": "sap-icon://activity-individual",
+									"expanded": false,
+									"key": "setterdailytransaction",
+									"eid": [1203],
+									"items": []
+								},
+								{
+									"title": "Candling Test",
+									"icon": "sap-icon://electronic-medical-record",
+									"expanded": false,
+									"key": "candlingtest",
+									"eid": [1204],
+									"items": []
+								},
+								{
+									"title": "Transfer to Hatcher",
+									"icon": "sap-icon://add-coursebook",
+									"expanded": false,
+									"key": "transfertohatcher",
+									"eid": [1205],
+									"items": []
+								}
+							]
+						},
+						{
+							"title": "For Hatcher",
+							"icon": "sap-icon://it-host",
+							"expanded": false,
+							"key": "",
+							"eid": [1206,1207,1208,1209],
+							"items": [
+								{
+									"title": "Hatcher Daily Transaction",
+									"icon": "sap-icon://activity-individual",
+									"expanded": false,
+									"key": "hatcherdailytransaction",
+									"eid": [1206],
+									"items": []
+								},
+								{
+									"title": "Chicks Pull Out",
+									"icon": "sap-icon://measure",
+									"expanded": false,
+									"key": "chickspullout",
+									"eid": [1207],
+									"items": []
+								},
+								{
+									"title": "Chicks Vaccination",
+									"icon": "sap-icon://syringe",
+									"expanded": false,
+									"key": "vaccinateddoc",
+									"eid": [1208],
+									"items": []
+								},
+								{
+									"title": "Material Request & Transfer",
+									"icon": "sap-icon://manager-insight",
+									"expanded": false,
+									"key": "materialrequestandtransfer",
+									"eid": [1209],
+									"items": []
+								}		
+							]
+						}
+					]
+				},
+				{
+					"title": "Report",
+					"icon": "sap-icon://manager-insight",
+					"expanded": false,
+					"key": "",
+					"eid": [1351,1352,1353,1354],
+					"items": [
+						{
+							"title": "Setting Report",
+							"icon": "sap-icon://settings",
+							"expanded": false,
+							"key": "hatcherysettingreport",
+							"eid": [1351],
+							"items": []
+						},
+						{
+							"title": "Hatch Report",
+							"icon": "sap-icon://settings",
+							"expanded": false,
+							"key": "hatcheryhatchreport",
+							"eid": [1352],
+							"items": []
+						},
+						{
+							"title": "Economy Report",
+							"icon": "sap-icon://settings",
+							"expanded": false,
+							"key": "hatcheryecomomyreport",
+							"eid": [1353],
+							"items": []
+						},
+						{
+							"title": "Candling Test Report",
+							"icon": "sap-icon://settings",
+							"expanded": false,
+							"key": "hatcherycandlingtestreport",
+							"eid": [1354],
+							"items": []
+						}
+						
+					]
+				}
+				
+			]
+		 },
+		 {
+			"title": "Contract Broiler Farming",
+			"icon": "sap-icon://activities",
+			"expanded": false,
+			"key": "",
+			"eid": [0],
+			"items": [
+				{
+					"title": "Master",
+					"icon": "sap-icon://create-form",
+					"expanded": false,
+					"key": "",
+					"eid": [0],
+					"items": [
+						{
+							"title": "Farm Parameter Master",
+							"icon": "sap-icon://addresses",
+							"expanded": false,
+							"key": "farmparametermaster",
+							"eid": [0],
+							"items": []
+						},
+						{
+							"title": "Farm Master",
+							"icon": "sap-icon://addresses",
+							"expanded": false,
+							"key": "farmmaster",
+							"eid": [0],
+							"items": []
+						},
+						{
+							"title": "Diagnosis Master",
+							"icon": "sap-icon://addresses",
+							"expanded": false,
+							"key": "diagnosismaster",
+							"eid": [0],
+							"items": []
+						},
+						{
+							"title": "Schedule Master",
+							"icon": "sap-icon://addresses",
+							"expanded": false,
+							"key": "schedulemaster",
+							"eid": [0],
+							"items": []
+						},
+						{
+							"title": "Scheme Management",
+							"icon": "sap-icon://manager-insight",
+							"expanded": false,
+							"key": "schememanagement",
+							"eid": [0],
+							"items": []
+						},
+						{
+							"title": "Supervisor Allocation",
+							"icon": "sap-icon://addresses",
+							"expanded": false,
+							"key": "supervisorallocaion",
+							"eid": [0],
+							"items": []
+						 },
+						 {
+							"title": "Schedule Master",
+							"icon": "sap-icon://addresses",
+							"expanded": false,
+							"key": "schedulemaster",
+							"eid": [0],
+							"items": [
+								{
+									"title": "Feed Schedule",
+									"icon": "sap-icon://addresses",
+									"expanded": false,
+									"key": "cbffeedschedule",
+									"eid": [0],
+									"items": []
+								 },
+								 {
+									"title": "Vaccine Schedule",
+									"icon": "sap-icon://addresses",
+									"expanded": false,
+									"key": "cbfvaccineschedule",
+									"eid": [0],
+									"items": []
+								 },
+								 {
+									"title": "Medicine Schedule ",
+									"icon": "sap-icon://addresses",
+									"expanded": false,
+									"key": "cbfmedicineschedule",
+									"eid": [0],
+									"items": []
+								 },
+								 {
+									"title": "Standard Chart Entry ",
+									"icon": "sap-icon://addresses",
+									"expanded": false,
+									"key": "cbfstandardchartentry",
+									"eid": [0],
+									"items": []
+								 }
+							]
+						 }
+					]
+				},
+				{
+					"title": "Transaction",
+					"icon": "sap-icon://create-form",
+					"expanded": false,
+					"key": "",
+					"eid": [0],
+					"items": [
+						{
+							"title": "Farmer Agreement",
+							"icon": "sap-icon://addresses",
+							"expanded": false,
+							"key": "",
+							"eid": [0],
+							"items": [
+								{
+									"title": "Process Agreement",
+									"icon": "sap-icon://addresses",
+									"expanded": false,
+									"key": "processagreement",
+									"eid": [0],
+									"items": []
+								},
+								{
+									"title": "Document Collection",
+									"icon": "sap-icon://addresses",
+									"expanded": false,
+									"key": "documentcollection",
+									"eid": [0],
+									"items": []
+								},
+								{
+									"title": "Farmer Enquiry",
+									"icon": "sap-icon://addresses",
+									"expanded": false,
+									"key": "farmerenquiry",
+									"eid": [0],
+									"items": []
+								}
+							]
+						 },
+						 {
+							"title": "Batch Transactions",
+							"icon": "sap-icon://addresses",
+							"expanded": false,
+							"key": "",
+							"eid": [0],
+							"items": [
+								{
+									"title": "Batch Details",
+									"icon": "sap-icon://addresses",
+									"expanded": false,
+									"key": "cbfbatchdetail",
+									"eid": [0],
+									"items": []
+								},
+								{
+									"title": "Material Transfer",
+									"icon": "sap-icon://addresses",
+									"expanded": false,
+									"key": "cbfmaterialtransfer",
+									"eid": [0],
+									"items": []
+								}
+							]
+						},
+						{
+							"title": "Batch Planning",
+							"icon": "sap-icon://addresses",
+							"expanded": false,
+							"key": "",
+							"eid": [0],
+							"items": [
+								{
+									"title": "Chick Placement",
+									"icon": "sap-icon://addresses",
+									"expanded": false,
+									"key": "chickplacement",
+									"eid": [0],
+									"items": []
+								},
+								{
+									"title": "Shed Ready Details",
+									"icon": "sap-icon://addresses",
+									"expanded": false,
+									"key": "shedreadydetails",
+									"eid": [0],
+									"items": []
+								},
+								{
+									"title": "Batch Schedule",
+									"icon": "sap-icon://addresses",
+									"expanded": false,
+									"key": "farmerenquiry",
+									"eid": [0],
+									"items": []
+								},
+								{
+									"title": "Chicks Procurement Schedule",
+									"icon": "sap-icon://addresses",
+									"expanded": false,
+									"key": "chicksprocurementschedule",
+									"eid": [0],
+									"items": []
+								}
+							]
+						 }
+					]
+				}
+			]
+		 },
+		 {
+			"title": "Processing",
+			"icon": "sap-icon://process",
+			"expanded": false,
+			"key": "",
+			"eid": [0],
+			"items": [
+				{
+					"title": "Master",
+					"icon": "sap-icon://manager-insight",
+					"expanded": false,
+					"key": "",
+					"eid": [0],
+					"items": [
+						{
+							"title": "Bird Slaughter Parts / BOM",
+							"icon": "sap-icon://manager-insight",
+							"expanded": false,
+							"key": "birdslaughterparts",
+							"eid": [0],
+							"items": []
+						},
+						{
+							"title": "Bird Grading",
+							"icon": "sap-icon://manager-insight",
+							"expanded": false,
+							"key": "birdgrading",
+							"eid": [0],
+							"items": []
+						}		
+					]
+				},
+				{
+					"title": "Transaction",
+					"icon": "sap-icon://manager-insight",
+					"expanded": false,
+					"key": "",
+					"eid": [0],
+					"items": [
+						{
+							"title": "Bird Receipt",
+							"icon": "sap-icon://manager-insight",
+							"expanded": false,
+							"key": "",
+							"eid": [0],
+							"items": [
+								{
+									"title": "Receipt From Own Farm",
+									"icon": "sap-icon://manager-insight",
+									"expanded": false,
+									"key": "receiptfromownfarm",
+									"eid": [0],
+									"items": []
+								}	
+							]
+						}
+					]
+				}		
+			]
+		 },
+		 {
+			"title": "Feedmill",
+			"icon": "sap-icon://add-process",
+			"expanded": false,
+			"key": "",
+			"eid": [0],
+			"items": [
+				{
+					"title": "Master",
+					"icon": "sap-icon://basket",
+					"expanded": false,
+					"key": "",
+					"eid": [0],
+					"items": [
+						{
+							"title": "Bill Of Materials",
+							"icon": "sap-icon://account",
+							"expanded": false,
+							"key": "billofmaterial",
+							"eid": [0],
+							"items": []
+						 }
+					]
+				},
+				{
+					"title": "Transaction",
+					"icon": "sap-icon://basket",
+					"expanded": false,
+					"key": "",
+					"eid": [0],
+					"items": [
+						{
+							"title": "Material Inward",
+							"icon": "sap-icon://account",
+							"expanded": false,
+							"key": "",
+							"eid": [0],
+							"items": [
+								{
+									"title": "Acknowledgement Slip",
+									"icon": "sap-icon://account",
+									"expanded": false,
+									"key": "acknowledgementslip",
+									"eid": [0],
+									"items": []
+								},
+								{
+									"title": "Weight Slip",
+									"icon": "sap-icon://account",
+									"expanded": false,
+									"key": "weightslip",
+									"eid": [0],
+									"items": []
+								}
+							]
+						 }
+					]
+				},{
+					"title": "Production Order",
+					"icon": "sap-icon://account",
+					"expanded": false,
+					"key": "",
+					"eid": [0],
+					"items": [
+						{
+							"title": "Production Order",
+							"icon": "sap-icon://account",
+							"expanded": false,
+							"key": "productionorder",
+							"eid": [0],
+							"items": []
+						 },
+						 {
+							"title": "Production Planning",
+							"icon": "sap-icon://account",
+							"expanded": false,
+							"key": "productionplanning",
+							"eid": [0],
+							"items": []
+						 },
+						 {
+							"title": "Issue for Production",
+							"icon": "sap-icon://account",
+							"expanded": false,
+							"key": "issueforproduction",
+							"eid": [0],
+							"items": []
+						 },
+						 {
+							"title": "Receipt from Production",
+							"icon": "sap-icon://account",
+							"expanded": false,
+							"key": "receiptfromproduction",
+							"eid": [0],
+							"items": []
+						 },
+						 {
+							"title": "Quality Check",
+							"icon": "sap-icon://account",
+							"expanded": false,
+							"key": "feedmillqualitycheck",
+							"eid": [0],
+							"items": []
+						 }
+					]
+				} 
+			]
+		 },
+		 {
+			"title": "Purchase",
+			"icon": "sap-icon://credit-card",
+			"expanded": false,
+			"key": "",
+			"eid": [7],
+			"items": [
+				{
+					"title": "Master",
+					"icon": "sap-icon://add-process",
+					"expanded": false,
+					"key": "",
+					"eid": [181],
+					"items": [
+						{
+							"title": "Quality Parameters",
+							"icon": "sap-icon://credit-card",
+							"expanded": false,
+							"key": "qualityparameters",
+							"eid": [3001],
+							"items": []
+						},
+						{
+							"title": "Test Template",
+							"icon": "sap-icon://credit-card",
+							"expanded": false,
+							"key": "testtemplate",
+							"eid": [3002],
+							"items": []
+						 }
+					]
+				 },
+				 {
+					"title": "Transaction",
+					"icon": "sap-icon://add-process",
+					"expanded": false,
+					"key": "",
+					"eid": [182],
+					"items": [
+						{
+							"title": "Purchase Request",
+							"icon": "sap-icon://credit-card",
+							"expanded": false,
+							"key": "purchaserequest",
+							"eid": [3101],
+							"items": []
+						 },
+						{
+							"title": "Purchase Order",
+							"icon": "sap-icon://credit-card",
+							"expanded": false,
+							"key": "purchaseorder",
+							"eid": [3102],
+							"items": []
+						 },
+						 {
+							"title": "Service PO",
+							"icon": "sap-icon://credit-card",
+							"expanded": false,
+							"key": "servicepo",
+							"eid": [3103],
+							"items": []
+						 },
+						
+						{
+							"title": "Material Receipt From PO",
+							"icon": "sap-icon://credit-card",
+							"expanded": false,
+							"key": "materialreceiptfrompo",
+							"eid": [3104],
+							"items": []
+						 },
+						 {
+							"title": "Purchase Invoice",
+							"icon": "sap-icon://credit-card",
+							"expanded": false,
+							"key": "purchaseinvoice",
+							"eid": [3105],
+							"items": []
+						 },
+						 {
+							"title": "Quality Check",
+							"icon": "sap-icon://credit-card",
+							"expanded": false,
+							"key": "qualitycheck",
+							"eid": [3106],
+							"items": []
+						 },
+						 {
+							"title": "Stock Adjustment",
+							"icon": "sap-icon://credit-card",
+							"expanded": false,
+							"key": "stockadjustment",
+							"eid": [3107],
+							"items": []
+						 }
+						
+					]
+				 }
+			]
+		 },
+		 {
+			"title": "Sales",
+			"icon": "sap-icon://sales-order",
+			"expanded": false,
+			"key": "home",
+			"items": [
+				{
+					"title": "CBF Sales",
+					"icon": "sap-icon://sales-order",
+					"expanded": false,
+					"key": "",
+					"items": [
+						{
+							"title": "Bird Sales Order",
+							"icon": "sap-icon://my-sales-order",
+							"expanded": false,
+							"key": "cbfbirdsalesorder",
+							"items": []
+						},
+						{
+							"title": "Lifting Schedule",
+							"icon": "sap-icon://compare-2",
+							"expanded": false,
+							"key": "cbfliftingschedule",
+							"items": []
+						},
+						{
+							"title": "Lifting Weight",
+							"icon": "sap-icon://compare-2",
+							"expanded": false,
+							"key": "cbfliftingweight",
+							"items": []
+						},
+						{
+							"title": "Bird Delivery",
+							"icon": "sap-icon://my-sales-order",
+							"expanded": false,
+							"key": "cbfbirddelivery",
+							"items": []
+						},
+						{
+							"title": "Sales Invoice",
+							"icon": "sap-icon://my-sales-order",
+							"expanded": false,
+							"key": "cbfsalesinvoice",
+							"items": []
+						}
+					]
+				 },
+				{
+					"title": "Breeder Sales",
+					"icon": "sap-icon://sales-order",
+					"expanded": false,
+					"key": "breedersalesorder",
+					"items": [
+						{
+							"title": "Sales Order",
+							"icon": "sap-icon://my-sales-order",
+							"expanded": false,
+							"key": "breedersalesorder",
+							"items": []
+						},
+						{
+							"title": "Egg Delivery",
+							"icon": "sap-icon://shipping-status",
+							"expanded": false,
+							"key": "eggdelivery",
+							"items": []
+						 },
+						 {
+							"title": "Invoice Generations",
+							"icon": "sap-icon://my-sales-order",
+							"expanded": false,
+							"key": "invoicegenerations",
+							"items": []
+						 }
+					]
+				 },
+				 {
+					"title": "Hatchery Sales",
+					"icon": "sap-icon://sales-order",
+					"expanded": false,
+					"key": "hatcherydocorder",
+					"items": [
+						{
+							"title": "DOC Order",
+							"icon": "sap-icon://credit-card",
+							"expanded": false,
+							"key": "hatcherydocorder",
+							"items": []
+						 },
+						 {
+							"title": "DOC Delivery",
+							"icon": "sap-icon://credit-card",
+							"expanded": false,
+							"key": "hatcherydocdelivery",
+							"items": []
+						 },
+						 {
+							"title": "DOC Invoice",
+							"icon": "sap-icon://my-sales-order",
+							"expanded": false,
+							"key": "hatcherydocinvoice",
+							"items": []
+						 }
+					]
+				 },
+				 {
+					"title": "Product Sales",
+					"icon": "sap-icon://my-sales-order",
+					"expanded": false,
+					"key": "",
+					"items": [
+						{
+							"title": "Product Order",
+							"icon": "sap-icon://my-sales-order",
+							"expanded": false,
+							"key": "productorder",
+							"items": []
+						 },
+						 {
+							"title": "Product Delivery",
+							"icon": "sap-icon://credit-card",
+							"expanded": false,
+							"key": "productdelivery",
+							"items": []
+						},
+						{
+							"title": "Product Invoice",
+							"icon": "sap-icon://credit-card",
+							"expanded": false,
+							"key": "purchasebilllist",
+							"items": []
+						},
+						{
+							"title": "Product Return",
+							"icon": "sap-icon://credit-card",
+							"expanded": false,
+							"key": "purchasereturnlist",
+							"items": []
+						},
+						{
+							"title": "Credit Memo",
+							"icon": "sap-icon://credit-card",
+							"expanded": false,
+							"key": "creditmemo",
+							"items": []
+						}
+					]
+				 }
+			]
+		 },
+		 {
+			"title": "Accounts",
+			"icon": "sap-icon://account",
+			"expanded": false,
+			"key": "home",
+			"eid": [8],
+			"items": [
+				{
+					"title": "Master",
+					"icon": "sap-icon://create-form",
+					"expanded": false,
+					"key": "",
+					"eid": [201],
+					"items": [
+						{
+							"title": "Party",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "party",
+							"eid": [3301],
+							"items": []
+						},
+						{
+							"title": "COA Category",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "coacategory",
+							"eid": [3302],
+							"items": []
+						},
+						{
+							"title": "Chart of Accounts",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "chartofaccounts",
+							"eid": [3303],
+							"items": []
+						},
+						{
+							"title": "Opening Balance For Ledgers",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "openingbalanceforledgers",
+							"eid": [3304],
+							"items": []
+						},
+						{
+							"title": "Bank",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "bankmaster",
+							"eid": [3305],
+							"items": []
+						},
+						{
+							"title": "Projects",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "projects",
+							"eid": [3306],
+							"items": []
+						},
+						{
+							"title": "Branch",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "branchmaster",
+							"eid": [3307],
+							"items": []
+						},
+						{
+							"title": "Tax",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "taxmaster",
+							"eid": [3308],
+							"items": []
+						},
+						{
+							"title" : "Cost Center",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "costcentermaster",
+							"eid": [3309],
+							"items": []
+						},
+						{
+							"title" : "Party Opening Balance",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "partyopeningbalance",
+							"eid": [3310],
+							"items": []
+						}
+					]
+				 },
+				 {
+					"title": "Transaction",
+					"icon": "sap-icon://create-form",
+					"expanded": false,
+					"key": "",
+					"eid": [202],
+					"items": [
+						{
+							"title": "Journal Entry",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "journalentry",
+							"eid": [3401],
+							"items": []
+						 },
+						 {
+							"title": "Journal Vouchar",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "journalvoucher",
+							"eid": [3402],
+							"items": []
+						 },
+						 {
+							"title": "Incoming payment",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "incomingpayment",
+							"eid": [3403],
+							"items": []
+						 },
+						 {
+							"title": "Outgoing payment",
+							"icon": "sap-icon://create-form",
+							"expanded": false,
+							"key": "outgoingpayment",
+							"eid": [3404],
+							"items": []
+						 }
+					]
+				 },
+				 {
+					"title": "Report",
+					"icon": "sap-icon://manager-insight",
+					"expanded": false,
+					"key": "",
+					"eid": [203],
+					"items": []
+				 }
+			]
+		 },
+		 
+		
+		{
+			"title": "Reports",
+			"icon": "sap-icon://manager-insight",
+			"expanded": false,
+			"key": "home",
+			"items": [
+				{
+					"title": "Breeder",
+					"icon": "sap-icon://basket",
+					"expanded": false,
+					"key": "",
+					"items": [
+						
+					]
+				},
+				{
+					"title": "Hatchery",
+					"icon": "sap-icon://addresses",
+					"expanded": false,
+					"key": "",
+					"items": []
+				},
+				{
+					"title": "Farming",
+					"icon": "sap-icon://activities",
+					"expanded": false,
+					"key": "",
+					"items": []
+				},
+				{
+					"title": "Processing",
+					"icon": "sap-icon://process",
+					"expanded": false,
+					"key": "",
+					"items": []
+				 },
+				 {
+					"title": "Feedmill",
+					"icon": "sap-icon://add-process",
+					"expanded": false,
+					"key": "",
+					"items": []
+				 },
+				 {
+					"title": "Purchase",
+					"icon": "sap-icon://credit-card",
+					"expanded": false,
+					"key": "",
+					"items": []
+				 },
+				 {
+					"title": "Sales",
+					"icon": "sap-icon://sales-order",
+					"expanded": false,
+					"key": "",
+					"items": []
+				 },
+				 {
+					"title": "Inventory",
+					"icon": "sap-icon://inventory",
+					"expanded": false,
+					"key": "",
+					"items": []
+				 },
+				 {
+					"title": "Accounts",
+					"icon": "sap-icon://account",
+					"expanded": false,
+					"key": "",
+					"items": []
+				 }
+			]
+		 }
+	],
+
+	"fixedNavigation": [
+		{
+			"title": "Company Settings",
+			"icon": "sap-icon://settings",
+			"eid": [251],
+			"key": "companySettings"
+		},
+		{
+			"title": "Application Settings",
+			"icon": "sap-icon://settings",
+			"eid": [252],
+			"key": "manageapplication"
+		},
+		{
+			"title": "About Us",
+			"icon": "sap-icon://business-card",
+			"expanded": false,
+			"key": "aboutus",
+			"items": []
+		},
+		{
+			"title": "Support",
+			"icon": "sap-icon://headset",
+			"key": "home"
+		}
+	],
+
+	"masterSettings": [
+		{
+			"title": "Company Initialization",
+			"key": "companySettings",
+			"selected": true
+		},
+		{
+			"title": "User Management",
+			"key": "usermanagement",
+			"selected": false
+		},
+		{
+			"title": "License Management",
+			"key": "licensemanagement",
+			"selected": false
+		},
+		{
+			"title": "Approval Templates",
+			"key": "supplierSettings",
+			"selected": false
+		},
+		{
+			"title": "Email Settings",
+			"key": "supplierSettings",
+			"selected": false
+		},
+		{
+			"title": "SMS Settings",
+			"key": "supplierSettings",
+			"selected": false
+		},
+		{
+			"title": "Notification Settings",
+			"key": "supplierSettings",
+			"selected": false
+		}
+	]
+}

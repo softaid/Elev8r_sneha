@@ -1,0 +1,447 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivityAdd" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core"
+	xmlns:dnd="sap.ui.core.dnd"
+   xmlns:k= "jQuery.sap.ui.event.keyCodes"
+         xmlns:tnt="sap.tnt">
+ <f:FlexibleColumnLayout  id="fclBillOfMaterial" backgroundDesign="Solid">
+		<f:beginColumnPages>
+
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+	
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Project"/>
+					</f:heading>
+					<f:actions>
+                        <Button id = "btnList" icon="sap-icon://list" type="Transparent" press="onListIconPress" visible="true" />
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:content>			
+                <VBox fitContainer="true">
+                    <form:Form editable="true">
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                             labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="2"
+                            singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+                            <form:FormContainer title="">
+                                <form:formElements>
+                                  <form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMCOde}">
+                                        <form:fields>
+                                            <Input id="textbmcode"  editable="false" value="{projectModel>/id}" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="{i18n>feedMillBillOfMaterialLabelProductName}">
+                                        <form:fields>
+                                            <Input
+                                                id="txtitemname"
+                                                type="Text"
+                                                value="{projectModel>/leadname}"
+                                                enabled="true"
+                                                required="true"
+                                                editable="true">
+                                            </Input>
+                                        </form:fields>
+                                    </form:FormElement>
+                                     <form:FormElement label="Order Value">
+                                        <form:fields>
+                                            <Input id="quantity"  value="{projectModel>/ordervalue}" editable="false"/>
+                                        </form:fields>
+                                    </form:FormElement>
+
+                                    <form:FormElement label="NI Engineer">
+                                       <form:fields>
+                                            <MultiComboBox id="eng"
+                                                    required="true" 
+                                                    selectionChange=""
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                           path: 'engRoleModel>/',
+                                                           sorter: { path: 'createdby' }
+                                                           }">
+                                                    <core:Item key="{engRoleModel>createdby}" text="{engRoleModel>createdbyname}" />
+                                                </MultiComboBox>
+                                        </form:fields>
+                                    </form:FormElement>
+
+                                    <form:FormElement label="NI Manager ">
+                                       <form:fields>
+                                            <MultiComboBox id="manager"
+                                                    required="true" 
+                                                    selectionChange=""
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                           path: 'managerRoleModel>/',
+                                                           sorter: { path: 'createdby' }
+                                                           }">
+                                                    <core:Item key="{managerRoleModel>createdby}" text="{managerRoleModel>createdbyname}" />
+                                                </MultiComboBox>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    
+                                        <form:FormElement label="Sales Engineer">
+                                       <form:fields>
+                                            <MultiComboBox id="salesenginner"
+                                                    required="true" 
+                                                    selectionChange=""
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                           path: 'managerRoleModel>/',
+                                                           sorter: { path: 'createdby' }
+                                                           }">
+                                                    <core:Item key="{managerRoleModel>createdby}" text="{managerRoleModel>createdbyname}" />
+                                                </MultiComboBox>
+                                        </form:fields>
+                                    </form:FormElement>
+                                        <form:FormElement label="Sales Manager ">
+                                       <form:fields>
+                                            <MultiComboBox id="salesmanager"
+                                                    required="true" 
+                                                    selectionChange=""
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                           path: 'managerRoleModel>/',
+                                                           sorter: { path: 'createdby' }
+                                                           }">
+                                                    <core:Item key="{managerRoleModel>createdby}" text="{managerRoleModel>createdbyname}" />
+                                                </MultiComboBox>
+                                        </form:fields>
+                                    </form:FormElement>
+
+                                </form:formElements>
+                            </form:FormContainer>
+
+                            <form:FormContainer title="">
+                                <form:formElements>
+                                    <form:FormElement id="subcontractorEle1" label="Subcontractor 1">
+                                        <form:fields>
+                                            <Select id="subcontractor1"
+                                                change=""
+                                                selectedKey="{editMasterModel>/subcontractorid1}" 
+                                                forceSelection="false"
+                                                width="500px"
+                                                items="{
+                                                    path: 'subcontractorModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                                <core:Item key="{subcontractorModel>id}" text="{subcontractorModel>subconname}" />
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement id="subcontractorEle2" label="Subcontractor 2">
+                                        <form:fields>
+                                            <Select id="subcontractor2"
+                                                change=""
+                                                selectedKey="{editMasterModel>/subcontractorid2}" 
+                                                forceSelection="false"
+                                                width="500px"
+                                                items="{
+                                                    path: 'subcontractorModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                                <core:Item key="{subcontractorModel>id}" text="{subcontractorModel>subconname}" />
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMStartDate}">
+                                        <form:fields>
+                                            <DatePicker id="txtStartdate" width="100%" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}"
+                                                value="{projectModel>/startdate}"
+                                                valueFormat="dd/MM/yyyy"
+                                                required="true"
+                                                editable="true" />
+                                        </form:fields>
+                                    </form:FormElement>
+
+                                    <form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMEndDate}">
+                                        <form:fields>
+                                            <DatePicker id="txtenddate" width="100%" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}"
+                                                value="{projectModel>/enddate}"
+                                                valueFormat="dd/MM/yyyy"
+                                                required="true"
+                                               editable="true"
+                                               change="dayCalculation"
+                                                />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="{i18n>feedMillBillOfMaterialLabelCompleteDay}">
+                                        <form:fields>
+                                          <Input id="CompleteDay"  value="{projectModel>/completiondays}"
+                                            change="dayCalculation" editable="true"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                   
+                                     <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
+                                       <form:fields>
+                                            <Switch  state="{projectModel>/isactive}" id="chkwithrequest" customTextOn="Yes" customTextOff="No"  >
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </Switch>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    
+                                </form:formElements>
+                                
+                            </form:FormContainer>
+                        </form:formContainers>
+                    </form:Form>
+            
+                    <IconTabBar selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
+                            <items>
+                    <IconTabFilter text="{i18n>feedMillBillOfMaterialLabelTabBillOfMaterialList}">
+                                    <VBox fitContainer="true">
+                                   
+                        <Table id="tblBillOfMaterial" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
+                            path: 'tblModel>/',
+                                sorter: {
+                                    path: 'id'
+                                }
+                              }">
+                                <headerToolbar>
+                                    <Toolbar>
+                                    <content>
+                                        <Title text="{i18n>feedMillBillOfMaterialTitle}" level="H2"/>
+                                        <ToolbarSpacer />
+                                            
+                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNewRow" id ="add" visible="false"/>
+                                    </content>
+                                    </Toolbar>
+                                </headerToolbar>
+                                    <columns>
+                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Id" /></Column>
+                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" /></Column>
+                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" /></Column>
+                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" /></Column>
+                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" /></Column>
+                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelStage}" />
+                                        </Column>
+                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelProject}" />
+                                        </Column>
+                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Active status" />
+                                        </Column>
+                                    </columns>
+                                <items>
+                                    <ColumnListItem type="Navigation" press="onListItemPress">
+                                        <cells>        
+                                            <Text text="{tblModel>count}" /> 
+                                            <Text text="{tblModel>stagename}" />         
+                                            <Text text="{tblModel>startdate}" />   
+                                            <Text text="{tblModel>enddate}"/>
+                                            <Text text="{tblModel>completiondays}"/> 
+                                            <Text text="{tblModel>stagecompletionpercentage}"/>
+                                            <Text text="{tblModel>projectweightage}"/> 
+                                            <tnt:InfoLabel 
+                                                    text="1"
+                                                    displayOnly= "false"
+                                                    class="sapMInfoLabelSmall" 
+                                                    colorScheme= "{parts: [{path: 'tblModel>isactive'}],
+                                                    formatter: '.formatter.setItemStockColor'}"
+                                                    />  
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                        </Table>
+                    </VBox>   
+                    <form:Form editable="true">
+                        <form:title>
+                            <core:Title text="" />
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="2"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer>
+                                    <form:formElements>
+                                    <form:FormElement label="Note">
+                                        <form:fields>
+                                            <TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{projectModel>/note}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer title="">
+                                                <form:formElements>
+                                                <form:FormElement label="">
+                                                        <form:fields>
+                                                            <Button text="Generate schedule" id="btnschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onclick"/>
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                    </form:Form>
+                    <Panel>
+                        <FlexBox		
+                        alignItems="Start"
+                        justifyContent="End">
+                            <items>
+                                <Button text="{i18n>saveButtonText}" id="btnSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+                                <Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
+                            </items>
+                            </FlexBox>
+                    </Panel> 
+                    </IconTabFilter>
+                    <IconTabFilter text="{i18n>NIManagementList}">
+                        <VBox fitContainer="true">
+                            <Table id="tblNIStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
+                                path: 'nitblmodel>/',
+                                    sorter: {
+                                        path: 'id'
+                                    }
+                                }">
+                            <headerToolbar>
+                                <Toolbar>
+                                <content>
+                                    <Title text="{i18n>NITitle}" level="H2"/>
+                                    <ToolbarSpacer />
+                                        
+                                    <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="niadd" visible="false"/>
+                                </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Id" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelStage}" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelProject}" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Active status" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemPressNI">
+                                    <cells>        
+                                        <Text text="{nitblmodel>count}" /> 
+                                        <Text text="{nitblmodel>stagename}" />         
+                                        <Text text="{nitblmodel>startdate}" />   
+                                        <Text text="{nitblmodel>enddate}"/>
+                                        <Text text="{nitblmodel>completiondays}"/> 
+                                        <Text text="{nitblmodel>stagecompletionpercentage}"/>
+                                        <Text text="{nitblmodel>projectweightage}"/> 
+                                        <tnt:InfoLabel 
+                                                text="1"
+                                                displayOnly= "false"
+                                                class="sapMInfoLabelSmall" 
+                                                colorScheme= "{parts: [{path: 'nitblmodel>isactive'}],
+                                                formatter: '.formatter.setItemStockColor'}"
+                                                />  
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </VBox>   
+                          <form:Form editable="true">
+                            <form:title>
+                                <core:Title text="" />
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                        <form:FormElement label="Note">
+                                            <form:fields>
+                                                <TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{projectModel>/note}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    
+                                    <form:FormContainer title="">
+                                                    <form:formElements>
+                                                    <form:FormElement label="">
+                                                            <form:fields>
+                                                    <Button text="Generate schedule" id="btnnischedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onniclick"/>
+                                                            </form:fields>
+                                                        </form:FormElement>
+                                                    </form:formElements>
+                                                </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                            <Panel>
+                                <FlexBox		
+                                    alignItems="Start"
+                                    justifyContent="End">
+                                    <items>
+                                        <Button text="{i18n>saveButtonText}" id="btnniSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+                                        <Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
+                                    </items>
+                                </FlexBox>
+                            </Panel> 
+                    </IconTabFilter>
+                    </items>
+                    <layoutData>
+                        <FlexItemData growFactor="1" baseSize="0%"/>
+                    </layoutData>
+                </IconTabBar>
+                </VBox>  
+                </f:content>
+			</f:DynamicPage>
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>
+
+
+
+
+

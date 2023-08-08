@@ -1,0 +1,49 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Issue For Production"	
+		contentHeight="300px"
+		search="handleIssueSearch"
+		confirm="handleIssueClose"
+		cancel="handleIssueClose"
+			items="{
+			path : 'productionIssueList>/modelData',
+			sorter : {
+				path : 'id'
+			}
+		}">
+		
+		<ColumnListItem>
+			<cells>
+				<Text text="{productionIssueList>production_issue_no}" />
+				<Text text="{productionIssueList>issue_date}" />
+				<Text text="{productionIssueList>status}" />
+				
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="PO issue No" />
+				</header>
+			</Column>
+			 <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="Po Issue Date" />
+				</header>
+			</Column>
+            <Column
+				minScreenWidth="Tablet"
+				demandPopin="true" >
+				<header>
+					<Text text="status" />
+				</header>
+			</Column>
+		</columns>
+		
+	</TableSelectDialog>
+</core:FragmentDefinition>

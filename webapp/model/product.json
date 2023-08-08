@@ -1,0 +1,29 @@
+{
+	"productCollection": [
+		{
+			"productID" : 1,
+            "productName": "Product 1",
+            "categoryID" : 1
+		},
+		{
+			"productID" : 2,
+            "productName": "Product 2",
+            "categoryID" : 1
+        },
+        {
+			"productID" : 3,
+            "productName": "Product 3",
+            "categoryID" : 2
+        },
+        {
+			"productID" : 4,
+            "productName": "Product 4",
+            "categoryID" : 2
+        },
+        {
+			"productID" : 5,
+            "productName": "Product 5",
+            "categoryID" : 3
+        }
+    ]
+}

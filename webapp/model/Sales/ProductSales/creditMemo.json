@@ -1,0 +1,172 @@
+{   
+    "creditmemo":[
+        {
+            "vendor" : "001",
+            "name" : "Vendor 1",
+            "contactPerson" : "Contact 1",
+            "vendorReferenceNumber" : "Reference 1",
+            "localCurrency" : "INR",
+            "transactionType" : "Bill of Supply",
+            "shipFrom" : "Pune",
+            "number" : "100",
+            "status" : "Open",
+            "postingDate" : "2018/07/15",
+            "dueDate" : "2018/07/20",
+            "documentDate" : "2018/07/20",
+            "buyer" : "Buyer 1",
+            "owner" : "owner 1",
+            "totalBeforeDiscount" : 1000.00,
+            "discount" : "10%",
+            "totalDownPayment" : "10000",
+            "freight" : "",
+            "dTax" : "10%",
+            "totalCredit" : "1000.00",
+            "appliedAmount" : "1000.00",
+            "totalBalance" : "2000.00",
+            "details":[
+				{
+					"itemServiceType" : "Item",
+                    "summaryType": "Summary",
+                    "description": "Demo",
+                    "sac": "",
+                    "glAccount": "17035-00",
+                    "glAccountName": "Discount-Broiler Debit",
+                    "tax" : "GST",
+                    "total": "1000"
+				},
+				{
+					"itemServiceType" : "Item 2",
+                    "summaryType": "No Summary",
+                    "description": "TEST",
+                    "sac": "",
+                    "glAccount": "17255-00",
+                    "glAccountName": "Discount-Broiler Debit",
+                    "tax" : "VAT",
+                    "total": "5000"
+				},
+				{
+					"itemServiceType" : "Item 2",
+                    "summaryType": "No Summary",
+                    "description": "Demo",
+                    "sac": "",
+                    "glAccount": "17125-00",
+                    "glAccountName": "Discount-Broiler Debit",
+                    "tax" : "GST",
+                    "total": "10000"
+				}
+        	]
+        },
+        {
+            "vendor" : "002",
+            "name" : "Vendor 2",
+            "contactPerson" : "Contact 2",
+            "vendorReferenceNumber" : "Reference 2",
+            "localCurrency" : "LKR",
+            "transactionType" : "Bill of Supply",
+            "shipFrom" : "Mumbai",
+            "number" : "100",
+            "status" : "Open",
+            "postingDate" : "2018/07/25",
+            "dueDate" : "2018/07/26",
+            "documentDate" : "2018/07/27",
+            "buyer" : "Buyer 1",
+            "owner" : "owner 1",
+            "totalBeforeDiscount" : 1000.00,
+            "discount" : "10%",
+            "totalDownPayment" : "10000",
+            "freight" : "",
+            "dTax" : "12%",
+            "totalCredit" : "1000.00",
+            "appliedAmount" : "1000.00",
+            "totalBalance" : "2000.00",
+            "details":[
+				{
+					"itemServiceType" : "Item",
+                    "summaryType": "Summary",
+                    "description": "Demo",
+                    "sac": "",
+                    "glAccount": "17035-00",
+                    "glAccountName": "Discount-Broiler Debit",
+                    "tax" : "GST",
+                    "total": "1000"
+				},
+				{
+					"itemServiceType" : "Item 2",
+                    "summaryType": "No Summary",
+                    "description": "TEST",
+                    "sac": "",
+                    "glAccount": "17255-00",
+                    "glAccountName": "Discount-Broiler Debit",
+                    "tax" : "VAT",
+                    "total": "5000"
+				},
+				{
+					"itemServiceType" : "Item 2",
+                    "summaryType": "No Summary",
+                    "description": "Demo",
+                    "sac": "",
+                    "glAccount": "17125-00",
+                    "glAccountName": "Discount-Broiler Debit",
+                    "tax" : "GST",
+                    "total": "10000"
+				}
+        	]
+        },
+        {
+            "vendor" : "003",
+            "name" : "Vendor 3",
+            "contactPerson" : "Contact 3",
+            "vendorReferenceNumber" : "Reference 3",
+            "localCurrency" : "USD",
+            "transactionType" : "Bill of Supply",
+            "shipFrom" : "Solapur",
+            "number" : "100",
+            "status" : "Open",
+            "postingDate" : "2018/07/16",
+            "dueDate" : "2018/07/27",
+            "documentDate" : "2018/07/28",
+            "buyer" : "Buyer 1",
+            "owner" : "owner 1",
+            "totalBeforeDiscount" : 1000.00,
+            "discount" : "10%",
+            "totalDownPayment" : "10000",
+            "freight" : "",
+            "dTax" : "11%",
+            "totalCredit" : "1000.00",
+            "appliedAmount" : "1000.00",
+            "totalBalance" : "2000.00",
+            "details":[
+				{
+					"itemServiceType" : "Item",
+                    "summaryType": "Summary",
+                    "description": "Demo",
+                    "sac": "",
+                    "glAccount": "17035-00",
+                    "glAccountName": "Discount-Broiler Debit",
+                    "tax" : "GST",
+                    "total": "1000"
+				},
+				{
+					"itemServiceType" : "Item 2",
+                    "summaryType": "No Summary",
+                    "description": "TEST",
+                    "sac": "",
+                    "glAccount": "17255-00",
+                    "glAccountName": "Discount-Broiler Debit",
+                    "tax" : "VAT",
+                    "total": "5000"
+				},
+				{
+					"itemServiceType" : "Item 2",
+                    "summaryType": "No Summary",
+                    "description": "Demo",
+                    "sac": "",
+                    "glAccount": "17125-00",
+                    "glAccountName": "Discount-Broiler Debit",
+                    "tax" : "GST",
+                    "total": "10000"
+				}
+        	]
+        }
+    ]
+}

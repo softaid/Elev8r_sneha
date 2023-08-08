@@ -1,0 +1,1041 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddQutation"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"   
+	height="100%">
+	<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Create Quotation"/>
+				</f:heading>
+				<f:actions>
+                    <ToolbarSpacer/>
+                    <Button
+                    text="{i18n>saveButtonText}"
+                    id="btnSave"
+                    type="Emphasized"
+                    press = "onSave"/>
+                </f:actions>
+                <f:navigationActions>
+                    <Button
+                            icon="sap-icon://decline"
+                            type="Transparent" press="onCancel" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>	
+            <VBox> 
+                <Panel id="pnlShedMaster" expandable="true" expanded="true"  headerText="Qutation Details" width="auto">
+               	    <form:Form editable="true">
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="1"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+                            <form:FormContainer title="Quotation Details" width="100%"> 
+                                <form:formElements>
+                                    <form:FormElement label="ID">
+                                        <form:fields>
+                                            <Input id="quotationid" editable="false" valueLiveUpdate="true" value="{editQutationModel>/quotationid}"  required="false" />
+                                        </form:fields>
+                                    </form:FormElement> 
+                                    <form:FormElement label="Quotation Name">
+                                        <form:fields>
+                                            <Input id="txtQutationName" valueLiveUpdate="true" value="{editQutationModel>/quotename}"  required="false" />
+                                        </form:fields>
+                                    </form:FormElement>   
+                                    <form:FormElement label="Category">
+                                        <form:fields>
+                                            <Select id="txtCategory"
+                                                required="false" 
+                                                change=""
+                                                selectedKey="{editQutationModel>/quotecategory}" 
+                                                forceSelection="true"
+                                                width="500px"
+                                                items="{
+                                                    path: 'QuoteCategoryModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                                <core:Item key="{QuoteCategoryModel>id}" text="{QuoteCategoryModel>description}" />
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Quotation Date">
+                                        <form:fields>
+                                            <DatePicker id="createddate" width="100%" 
+                                            placeholder="{config>/dateFormat/placeholder}"
+                                            displayFormat="{config>/dateFormat/displayFormat}"
+                                            value="{editQutationModel>/quotedate}"
+                                            valueFormat="dd/MM/yyyy"
+                                            required="false"  
+                                            />
+                                        </form:fields>
+                                    </form:FormElement>  
+                                    <form:FormElement label="Quotation Status">
+                                        <form:fields>
+                                            <Select id="txtstatus"
+                                                required="false" 
+                                                change=""
+                                                selectedKey="{editQutationModel>/quotestatusid}" 
+                                                forceSelection="true"
+                                                width="500px"
+                                                items="{
+                                                    path: 'QuoteStatusModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                                <core:Item key="{QuoteStatusModel>id}" text="{QuoteStatusModel>description}" />
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Quotation Type">
+                                        <form:fields>
+                                            <Select id="txtQutationType"
+                                                required="false" 
+                                                change=""
+                                                selectedKey="{editQutationModel>/quotetype}" 
+                                                forceSelection="true"
+                                                width="500px"
+                                                items="{
+                                                    path: 'quoteTypeModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                                <core:Item key="{quoteTypeModel>id}" text="{quoteTypeModel>description}" />
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="SubCategory">
+                                        <form:fields>
+                                            <Select id="txtSubCategory"
+                                                required="false" 
+                                                change=""
+                                                selectedKey="{editQutationModel>/quotesubcategory}" 
+                                                forceSelection="true"
+                                                width="500px"
+                                                items="{
+                                                    path: 'QuoteSubCategoryModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                                <core:Item key="{QuoteSubCategoryModel>id}" text="{QuoteSubCategoryModel>description}" />
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Lead">
+                                        <form:fields>
+                                            <Select id="txtLead"
+                                                required="false" 
+                                                change="LeadChange"
+                                                selectedKey="{editQutationModel>/leadid}" 
+                                                forceSelection="true"
+                                                width="500px"
+                                                items="{
+                                                    path: 'LeadsMasterModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+                                                <core:Item key="{LeadsMasterModel>id}" text="{LeadsMasterModel>leadname}" />
+                                            </Select>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Quotation Value">
+                                        <form:fields>
+                                            <Input id="txtQutationValue" valueLiveUpdate="true" value="{editQutationModel>/quotevalue}" required="false" change="onPartyNameChange"/>
+                                          
+                                        </form:fields>
+                                    </form:FormElement> 
+                                      <form:FormElement label=" With GST">
+                                        <form:fields>
+                                              <Switch state="{editQutationModel>/withgst}" id="active" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </Switch>
+                                        </form:fields>
+                                    </form:FormElement>  
+                                    <form:FormElement label="Quotation Description">
+                                        <form:fields>
+                                            <Input id="txtQutationDescription" valueLiveUpdate="true" value="{editQutationModel>/quotediscription}"  required="false" change="onPartyNameChange"/>
+                                        </form:fields>
+                                    </form:FormElement>  
+                                </form:formElements>
+                            </form:FormContainer>
+                        </form:formContainers>
+                    </form:Form>               
+                </Panel>
+				<form:Form editable="true">
+                    <form:title>
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                            labelSpanXL="4"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="3"
+                            columnsL="2"
+                            columnsM="1"
+                            singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="Lead Details" width="100%">
+					        <form:formElements>
+                                <form:FormElement label="{i18n>leadSourceLabel}">
+                                    <form:fields>
+                                        <Select id="sourceid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/sourceid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'leadSourceModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                        <core:Item key="{leadSourceModel>id}" text="{leadSourceModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadCategory}">
+                                    <form:fields>
+                                        <Select id="categoryid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/leadscategory}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'leadCategoryModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{leadCategoryModel>id}" text="{leadCategoryModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadStageLabel}">
+                                    <form:fields>
+                                        <Select id="txtStageid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/stageid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'stageModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{stageModel>id}" text="{stageModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadContactPerson}">
+                                    <form:fields>
+                                        <Input id="contactPerson"  valueLiveUpdate="true" value="{editQutationModel>/contactperson}"  required="false" change="onPartyNameChange"/>
+                                    </form:fields>
+                                </form:FormElement>  
+                                <form:FormElement label="{i18n>leadsalerep}">
+                                    <form:fields>
+                                        <Input id="txtsalesrep"  valueLiveUpdate="true" value="{editQutationModel>/salesrep}"  required="false" change="onPartyNameChange"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Quote Score">
+                                    <form:fields>
+                                        <Input id="txtLeadScore"  valueLiveUpdate="true" value="{editQutationModel>/quotescore}" required="false" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadStatus}">
+                                    <form:fields>
+                                        <Select id="leadstatusid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/leadstatus}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'leadStatusModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{leadStatusModel>id}" text="{leadStatusModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Description">
+                                    <form:fields>
+                                        <Input id="txtdiscription"   valueLiveUpdate="true" value="{editQutationModel>/leaddescription}"  required="false" change="onPartyNameChange"/>
+                                    </form:fields>
+                                </form:FormElement>   
+                                <!-- <form:FormElement label="{i18n>leadlocation}">
+                                    <form:fields>
+                                        <Select id="leadlocationid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/locationid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'locationModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{locationModel>id}" text="{locationModel>locationname}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement> -->
+                                  <form:FormElement label="{i18n>leadlocation}">
+                                         <form:fields>
+                                        <Input id="leadlocationid"  valueLiveUpdate="true" value="{editQutationModel>/siteaddress}" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Over Head">
+                                    <form:fields>
+                                        <Input id="txtoverhead"  valueLiveUpdate="true" value="{editQutationModel>/overhead}" />
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+                <form:Form editable="true">
+                    <form:title>
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                            labelSpanXL="4"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="3"
+                            columnsL="2"
+                            columnsM="1"
+                            singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="Lift Details">
+					        <form:formElements>
+                                <form:FormElement label="{i18n>leadnooflift}">
+                                    <form:fields>
+                                        <Input id="txtnooflifts"  valueLiveUpdate="true" value="{editQutationModel>/nooflifts}"  required="false" change="onPartyNameChange"/>
+                                    </form:fields>
+                                </form:FormElement> 
+                                <form:FormElement label="{i18n>leadtypeoflift}">
+                                    <form:fields>
+                                        <Select id="typeofliftid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/typeoflift}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'liftTypeModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{liftTypeModel>id}" text="{liftTypeModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadcapacity}">
+                                    <form:fields>
+                                        <Select id="capacityid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/capacityid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'leadCapacityModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{leadCapacityModel>id}" text="{leadCapacityModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadModel}">
+                                    <form:fields>
+                                        <Select id="modelid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/modelid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'leadmodelModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{leadmodelModel>id}" text="{leadmodelModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Unit">
+                                    <form:fields>
+                                        <Select id="unitid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/unitid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'unitModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{unitModel>id}" text="{unitModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadDrive}">
+                                    <form:fields>
+                                        <Select id="driveid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/driveid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'leadDriveModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{leadDriveModel>id}" text="{leadDriveModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadMachine}">
+                                    <form:fields>
+                                        <Select id="machineid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/machineid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'MachineModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{MachineModel>id}" text="{MachineModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadControl}">
+                                    <form:fields>
+                                        <Select id="controlid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/controlid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'leadControlModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{leadControlModel>id}" text="{leadControlModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadOperation}">
+                                    <form:fields>
+                                        <Select id="operationid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/operationid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'leadOperationModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{leadOperationModel>id}" text="{leadOperationModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadSpeed}">
+                                    <form:fields>
+                                        <Select id="speedid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/speedid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'leadSpeedModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{leadSpeedModel>id}" text="{leadSpeedModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadTypesodDoor}">
+                                    <form:fields>
+                                        <Select id="typesofdoorid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/typeofdoorid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'leadDoorTypeModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{leadDoorTypeModel>id}" text="{leadDoorTypeModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Stop">
+                                    <form:fields>
+                                        <Input id="txtstopid"  valueLiveUpdate="true" value="{editQutationModel>/stopsid}"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Floor Marking">
+                                    <form:fields>
+                                        <Input id="txtfloormarking"  valueLiveUpdate="true" value="{editQutationModel>/floormarking}"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Shaft Width">
+                                    <form:fields>
+                                        <Input id="txtshaftwidth"  valueLiveUpdate="true" value="{editQutationModel>/shaftwidth}" description="mm"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Shaft Depth">
+                                    <form:fields>
+                                        <Input id="txtshaftdepth"  valueLiveUpdate="true" value="{editQutationModel>/shaftdepth}"
+                                        description="mm"/>
+                                    </form:fields>
+                                </form:FormElement> 
+                                <form:FormElement label="Shaft Condition">
+                                    <form:fields>
+                                        <Select id="shaftconditionid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/shaftconditionid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'shaftConditionModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{shaftConditionModel>id}" text="{shaftConditionModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Mr Width">
+                                    <form:fields>
+                                        <Input id="txtmrwidth"  valueLiveUpdate="true" value="{editQutationModel>/mrwidth}"
+                                        description="mm"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Mr Depth">
+                                    <form:fields>
+                                        <Input id="txtmrdepth"  valueLiveUpdate="true" value="{editQutationModel>/mrdepth}"
+                                        description="mm"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Mr Height">
+                                    <form:fields>
+                                        <Input id="txtmrheight"  valueLiveUpdate="true" value="{editQutationModel>/mrheight}" 
+                                        description="mm"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Car Depth">
+                                    <form:fields>
+                                        <Input id="txtcardepth"  valueLiveUpdate="true" value="{editQutationModel>/cardepth}" 
+                                        description="mm"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadLandingDoors}">
+                                    <form:fields>
+                                        <Select id="landingdoorsid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/landingdoorid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'landingDoorModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{landingDoorModel>id}" text="{landingDoorModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadCarDoor}">
+                                    <form:fields>
+                                        <Select id="leadcarid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/cardoorid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'CarDoorModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{CarDoorModel>id}" text="{CarDoorModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Car Panel">    
+                                    <form:fields>
+                                        <Select id="carpanelid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/carpanelid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'carPanelModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{carPanelModel>id}" text="{carPanelModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="False Ceiling">
+                                    <form:fields>
+                                        <Select id="falseceilingid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/falseceilingid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'falseCeilingModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{falseCeilingModel>id}" text="{falseCeilingModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Ventilation">
+                                    <form:fields>
+                                        <Select id="ventilationid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/ventilationid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'ventilationModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{ventilationModel>id}" text="{ventilationModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Flooring">
+                                    <form:fields>
+                                        <Select id="flooringid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/flooringid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'flooringModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{flooringModel>id}" text="{flooringModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Car Position Indicator">
+                                    <form:fields>
+                                        <Select id="carpositionindicatorid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/carpositionindicatorid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'carPositionIndicatorModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{carPositionIndicatorModel>id}" text="{carPositionIndicatorModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Traction Media">
+                                    <form:fields>
+                                        <Select id="tractionmediaid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/tractionmediaid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'tractionMediaModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{tractionMediaModel>id}" text="{tractionMediaModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Main Power System">
+                                    <form:fields>
+                                        <Select id="mainpowersystemid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/mainpowersystemid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'mainPowerSystemModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{mainPowerSystemModel>id}" text="{mainPowerSystemModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Auxilary Supply System">
+                                    <form:fields>
+                                        <Select id="auxilarysupplysystemid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/auxilarysupplysystemid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'auxilarySupplySystemModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{auxilarySupplySystemModel>id}" text="{auxilarySupplySystemModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>laedLowestFloorMarking}">
+                                    <form:fields>
+                                        <Select id="landingfloorsid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/lowestfloorid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'LowestFloorModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{LowestFloorModel>id}" text="{LowestFloorModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                               </form:FormElement>
+                               <form:FormElement label="{i18n>leadCWTPosition}">
+                                    <form:fields>
+                                        <Select id="landingcwdpositionid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/cwtpositionid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'CWTPositionModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{CWTPositionModel>id}" text="{CWTPositionModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadStandardFloorHeight}">
+                                    <form:fields>
+                                        <Select id="landingfloorid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/floorheaightid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'standaredFloorHeightModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{standaredFloorHeightModel>id}" text="{standaredFloorHeightModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadArchitect}">
+                                    <form:fields>
+                                        <Select id="landarchitectid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/architectidid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'leadCntCategoryModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{leadCntCategoryModel>id}" text="{leadCntCategoryModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="{i18n>leadConsultant}">
+                                    <form:fields>
+                                        <Select id="landconsaltantid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/leadconsaltantid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'leadCntTypeModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{leadCntTypeModel>id}" text="{leadCntTypeModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement> 
+                                <form:FormElement label="All Opening Same Side">
+                                    <form:fields>
+                                        <Select id="txtallopeningsameside"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/allopeningsameside}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'openingSameSideModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{openingSameSideModel>id}" text="{openingSameSideModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Front Opening">
+                                    <form:fields>
+                                        <Select id="txtFrontOpening"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/frontopening}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'frontOpeningModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{frontOpeningModel>id}" text="{frontOpeningModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Back Opening">
+                                    <form:fields>
+                                        <Select id="txtbackopening"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/backopening}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'backOpeningModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{backOpeningModel>id}" text="{backOpeningModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Left Opening">
+                                    <form:fields>
+                                        <Select id="txtLeftOpening"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/leftopening}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'leftOpeningModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{leftOpeningModel>id}" text="{leftOpeningModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Right Opening">
+                                    <form:fields>
+                                        <Select id="txtRightOpening"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editQutationModel>/rightopening}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'rightOpeningModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{rightOpeningModel>id}" text="{rightOpeningModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Car Width">
+                                    <form:fields>
+                                        <Input id="txtcarwidth"  valueLiveUpdate="true" value="{editQutationModel>/carwidth}" description="mm"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Car Height">
+                                    <form:fields>
+                                        <Input id="txtcarheight"  valueLiveUpdate="true" value="{editQutationModel>/carheight}" description="mm"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Door Width">
+                                    <form:fields>
+                                        <Input id="txtdoorwidth"  valueLiveUpdate="true" value="{editQutationModel>/doorwidth}" description="mm"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Door Height">
+                                    <form:fields>
+                                        <Input id="txtdoorheight"  valueLiveUpdate="true" value="{editQutationModel>/doorheight}"
+                                        description="mm"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Travel">
+                                    <form:fields>
+                                        <Input id="txttravel"  valueLiveUpdate="true" value="{editQutationModel>/travel}"  description="mts"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Pit Depth">
+                                    <form:fields>
+                                        <Input id="txtpitdepth"  valueLiveUpdate="true" value="{editQutationModel>/pitdepth}"
+                                        description="mm"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Completion Days">
+                                    <form:fields>
+                                        <Input id="completiondays" value="{editQutationModel>/completiondays}" 
+                                        description="Days"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Remark 1">
+                                    <form:fields>
+                                        <Input id="remark1" value="{editQutationModel>/remark1}" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Remark 2">
+                                    <form:fields>
+                                        <Input id="remark2" value="{editQutationModel>/remark2}" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Remark 3">
+                                    <form:fields>
+                                        <Input id="remark3" value="{editQutationModel>/remark3}" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Remark 4">
+                                    <form:fields>
+                                        <Input id="remark4" value="{editQutationModel>/remark4}" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Remark 5">
+                                    <form:fields>
+                                        <Input id="remark5" value="{editQutationModel>/remark5}" />
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+                <form:Form editable="true">
+                    <form:title>
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                            labelSpanXL="4"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="3"
+                            columnsL="2"
+                            columnsM="1"
+                            singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="Payment Terms" width="100%">
+					        <form:formElements>
+                                <form:FormElement label="Advance on Order Reception">
+                                    <form:fields>
+                                        <Input id="advanceonorderreception" value="{editQutationModel>/advanceonorderreception}" description="%" required="false" change="onPartyNameChange"/>
+                                    </form:fields>
+                                </form:FormElement>  
+                                <form:FormElement label="For Request of Mechanical Material">
+                                    <form:fields>
+                                        <Input id="forrequestofmechanicalmaterial" value="{editQutationModel>/forrequestofmechanicalmaterial}" description="%" required="false" change="onPartyNameChange"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="For Request of Electrical Material">
+                                    <form:fields>
+                                        <Input id="forrequestofelectricalmaterial" value="{editQutationModel>/forrequestofelectricalmaterial}" description="%" required="false" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="On Customer Handover">
+                                    <form:fields>
+                                        <Input id="oncustomerhandover" value="{editQutationModel>/oncustomerhandover}" description="%" required="false" />
+                                    </form:fields>
+                                </form:FormElement>  
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+            </VBox>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

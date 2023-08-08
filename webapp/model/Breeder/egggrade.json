@@ -1,0 +1,24 @@
+{
+	"egggrade": [
+		{
+		   "code" : 1,
+            "name": "A"
+		},
+		{
+            "code" : 2,
+            "name": "B"
+		},
+		{
+            "code" : 3,
+            "name": "C"
+		},
+		{
+            "code" : 4,
+            "name": "D"
+		},
+		{
+            "code" : 5,
+            "name": "E"
+		}	
+	]    
+}

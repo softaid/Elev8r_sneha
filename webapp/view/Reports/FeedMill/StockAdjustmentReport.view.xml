@@ -1,0 +1,190 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.FeedMill.StockAdjustmentReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>stockadjustmentreporttitle}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                              <form:FormElement label="{i18n>stockadjustmentreportlocation}">
+                                            <form:fields>
+                                                <MultiComboBox id="branchList"
+                                                   selectionChange="batchSelectionChange"
+                                                  selectionFinish = "branchSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'branchModel>/modelData',                       
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{branchModel>id}" text="{branchModel>branchname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>   
+                                       
+                                        <form:FormElement label="{i18n>stockadjustmentreportwarehouse}">
+                                            <form:fields>
+                                                <MultiComboBox id="warehouseList"
+                                                    selectionChange="warehouseSelectionChange"
+                                                    selectionFinish="warehouseSelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'WarehouseModel>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{WarehouseModel>id}" text="{WarehouseModel>warehousename}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                     <form:FormContainer>
+                                        <form:formElements>
+                                 
+                                         <form:FormElement label="{i18n>stockadjustmentreportwarehosebin}">
+                                            <form:fields>
+                                                <MultiComboBox id="warehousebinid"
+                                                   selectionChange="batchSelectionChange"
+                                                  selectionFinish = "warehousebinSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'WarehousebinModel>/modelData',                       
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{WarehousebinModel>id}" text="{WarehousebinModel>binname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>   
+                                         <form:FormElement label="{i18n>stockadjustmentreportitem}">
+                                            <form:fields>
+                                                <MultiComboBox id="itemList"
+                                                   selectionChange="batchSelectionChange"
+                                                  selectionFinish = "itemSelectionFinish" 
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'itemModel>/modelData',                       
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{itemModel>itemid}" text="{itemModel>itemname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement> 
+                                            <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchStockAdjustmentReport"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="onPdfExport"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>          
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+                        <HBox fitContainer="true">
+                          
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblModel"  width="200%" growing="true"  growingScrollToLoad="true"  items="{
+                                                path: 'tblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'adjustmentdate',
+								                        group : true
+                                                    }
+                                                }"
+                                                 backgroundDesign="Solid">
+                                <columns>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>stockadjustmentreportitem}" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>stockadjustmentreportunit}" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>stockadjustmentreportwarehouse}" /></Column>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>stockadjustmentreportwarehousebin}" /></Column>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>stockadjustmentreportadjustmenttype}" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>stockadjustmentreportpreviousqty}" /></Column>   
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>stockadjustmentreportadjustedqty}" /></Column>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>stockadjustmentreportclosingqty}" /></Column>
+                                     <Column  minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>stockadjustmentreportrate}" /></Column>
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>stockadjustmentreportamt}" /></Column>                                  
+                                     <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>stockadjustmentreportstatus}" /></Column>    
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                         <core:CustomData key="settingReportgroup" value="{tblModel>productionorderno}" writeToDom="true"></core:CustomData>
+                        </customData>
+                                        <cells>
+                                            <Text text="{tblModel>itemname}" />
+                                            <Text text="{tblModel>unit}" />
+                                            <Text text="{tblModel>warehousename}" />
+                                            <Text text="{tblModel>binname}" />
+                                            <Text text="{tblModel>refnameone}" />
+                                            <Text text="{tblModel>previousqty}" />
+                                            <Text text="{tblModel>adjustedqty}" />
+                                            <Text text="{tblModel>closingqty}" />
+                                            <Text text="{tblModel>unitcost}" />
+                                            <Text text="{tblModel>amount}" />
+                                            <Text text="{tblModel>refname}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                        
+                    </f:content>
+            
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

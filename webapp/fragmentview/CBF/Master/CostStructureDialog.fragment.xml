@@ -1,0 +1,49 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Cost Structure"
+		contentHeight="300px"
+		search="handleStructureSearch"
+		confirm="handleStructureClose"
+		cancel="handleStructureClose"
+		items="{
+			path : 'costStructureListModel>/modelData',
+			sorter : {
+				path : 'id',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+			    <Text text="{costStructureListModel>id}" />
+				<Text text="{costStructureListModel>name}" />
+                <Text text="{costStructureListModel>fromdate}" />
+                <Text text="{costStructureListModel>todate}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Doc No." />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Name" />
+				</header>
+			</Column>
+            <Column demandPopin="true" >
+				<header>
+					<Text text="From Date" />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="To Date" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

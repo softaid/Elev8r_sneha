@@ -1,0 +1,109 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Chome" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+ <f:FlexibleColumnLayout  id="fclcompanyDetail" backgroundDesign="Solid">
+		<f:beginColumnPages>
+
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="company Detail"/>
+					</f:heading>
+					<f:actions>
+                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:content>	
+            <VBox fitContainer="true">
+             <IconTabBar selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
+                            <items>
+        <IconTabFilter id="companysettingtb" text="Company Detail">
+        <form:Form editable="true">
+                    <form:title>
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                            labelSpanXL="4"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="3"
+                            columnsL="2"
+                            columnsM="2"
+                            singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="">
+                            <form:formElements>
+                             <form:FormElement label=" Company Name">
+                                    <form:fields>
+                                        <Input value="{view>/companyname}" enabled="false" />
+                                    </form:fields>
+                                </form:FormElement>
+                                
+                                <form:FormElement label="Company Address">
+                                    <form:fields>
+                                        <Input value="{view>/companyaddress}" enabled="false" />
+                                    </form:fields>
+                                </form:FormElement>
+                                 <form:FormElement label="Company Contact">
+                                    <form:fields>
+                                        <Input value="{view>/companycontact}" enabled="false" />
+                                    </form:fields>
+                                </form:FormElement>
+                                 <form:FormElement label="Company Email">
+                                    <form:fields>
+                                        <Input value="{view>/companyemail}" enabled="false" />
+                                    </form:fields>
+								</form:FormElement>
+							
+								<form:FormElement label="Pin Code">
+                                    <form:fields>
+                                        <Input value="{view>/pincode}" enabled="false" />
+                                    </form:fields>
+                                </form:FormElement> <form:FormElement label="fax">
+                                    <form:fields>
+                                        <Input value="{view>/faxnumber}" enabled="false" />
+                                    </form:fields>
+                                </form:FormElement>
+                                </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+                    </IconTabFilter>
+                    </items>
+
+                    <layoutData>
+                        <FlexItemData growFactor="1" baseSize="0%"/>
+                    </layoutData>
+                </IconTabBar>
+
+                <Panel>
+                    <FlexBox		
+                        alignItems="Start"
+                        justifyContent="End">
+                        <items>
+                            <Button text="Save" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+                            <Button text="Clear" type="Emphasized" class="sapUiSmallMarginEnd" press="onClear"/>
+                        </items>
+                    </FlexBox>
+                </Panel>
+            </VBox>   
+                        
+        </f:content>
+
+    </f:DynamicPage>
+    </f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>

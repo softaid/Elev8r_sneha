@@ -1,0 +1,381 @@
+  <mvc:View
+		xmlns:c="sap.ui.core"
+		controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.ProductSales.PurchaseBillList"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:u="sap.ui.unified"
+		xmlns="sap.m"
+		xmlns:t="sap.ui.table"
+		xmlns:f="sap.f"
+        xmlns:core="sap.ui.core"
+		xmlns:layout="sap.ui.layout"
+		xmlns:form="sap.ui.layout.form"
+		height="100%">
+
+
+
+        <f:FlexibleColumnLayout  id="fclPurchaseBillMaster" backgroundDesign="Solid">
+            <f:beginColumnPages>
+            <f:DynamicPage showFooter="true" toggleHeaderOnTitleClick="false">
+                <f:title>
+                    <f:DynamicPageTitle>
+                        <f:heading>
+                            <Title text="Purchase Bill List"/>
+                        </f:heading>
+
+                        <f:actions>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+                            <Button icon="sap-icon://add" type="Transparent" press="onAddNewRow"/>
+                            <Button icon="sap-icon://arrow-left" type="Transparent" press="onAdd"/>
+                            <Button icon="sap-icon://arrow-right" type="Transparent" press="onAdd"/>
+                        </f:actions>
+
+                    </f:DynamicPageTitle>
+                </f:title>
+                    <f:content>
+
+                      <VBox fitContainer="true">
+
+            <form:Form editable="true">
+                        <form:title>
+                            <core:Title text="" />
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="2"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+                             <form:FormContainer title="">
+					            <form:formElements>
+                                    <form:FormElement label="Bill Date">
+                                        <form:fields>
+                                             <DatePicker id="billDate" type="Text" value="" valueFormat="dd/MM/yyyy" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Customer Name">
+                                        <form:fields>
+                                            <ComboBox id="custName" selectedKey="0">
+                                                <core:Item key="0" text="Aditi" />
+                                                <core:Item key="ABC" text="Customer 1" />
+                                            </ComboBox>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Order Number">
+                                        <form:fields>
+                                            <Input id="orderNumber" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Against Form">
+                                        <form:fields>
+                                            <ComboBox id="againstForm" selectedKey="0">
+                                                <core:Item key="0" text="Person 1" />
+                                                <core:Item key="ABC" text="Person 2" />
+                                            </ComboBox>
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                            <form:FormContainer title="">
+					            <form:formElements>
+                                     <form:FormElement label="Sales Representative">
+                                        <form:fields>
+                                            <ComboBox id="salesRepresentative" selectedKey="0">
+                                                <core:Item key="0" text="Employee 1" />
+                                                <core:Item key="ABC" text="Employee 2" />
+                                            </ComboBox>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Referred By">
+                                        <form:fields>
+                                            <ComboBox id="referredBy" selectedKey="0">
+                                                <core:Item key="0" text="Reference 1" />
+                                                <core:Item key="ABC" text="Reference 2" />
+                                            </ComboBox>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Address To">
+                                        <form:fields>
+                                             <Input
+                                                id="addressTo" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Credit Period">
+                                        <form:fields>
+                                             <Input
+                                                id="creditPeriod" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Sales type">
+                                        <form:fields>
+                                            <ComboBox id="salesType" selectedKey="0">
+                                                <core:Item key="0" text="One" />
+                                                <core:Item key="ABC" text="Two" />
+                                            </ComboBox>
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                        </form:formContainers>
+                    </form:Form>
+                        <VBox fitContainer="true">
+                                <Table id="itemTable"
+                                        items="{
+                                                path: 'itemTableModel>/modelData',
+                                                    sorter: {
+                                                        path: 'lineId'
+                                                    }
+                                                }"
+                                        inset="false"
+                                        title="Contents"
+                                            class="sapFDynamicPageAlignContent"
+                                            width="auto">
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <Title text="Challan List" />
+                                            <ToolbarSpacer/>
+                                            <OverflowToolbarButton type="Transparent" text="Add Item" icon="sap-icon://add" press="onAddNewRow"/>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                        <columns>
+                                            <Column>
+                                            <Text text="Challan Number" />
+                                            </Column>
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                            <Text text="Challan Date" />
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem type="Navigation" press="onChallanListPress">
+                                                <cells>
+                                                    <Text text="{itemTableModel>challanNo}"  />
+                                                    <Text text="{itemTableModel>challanDate}"  />                                      
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                            </Table>
+
+
+                                   
+                                </VBox>
+                        <!-- </IconTabFilter>
+
+                        <IconTabFilter	text="Stock List"> -->
+                            <VBox fitContainer="true">
+                                <Table id="stkTable"
+                                        items="{
+                                                path: 'stkTableModel>/modelData',
+                                                    sorter: {
+                                                        path: 'lineId'
+                                                    }
+                                                }"
+                                        inset="false"
+                                        title="Contents"
+                                            class="sapFDynamicPageAlignContent"
+                                            width="auto">
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <Title text="Stock List" />
+                                            <ToolbarSpacer/>
+                                            <OverflowToolbarButton type="Transparent" text="Add Item" icon="sap-icon://add" press="onAddNewRow1"/>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                        <columns>
+                                            <Column>
+                                            <Text text="Stock Name" />
+                                            </Column>
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                            <Text text="Quantity" />
+                                            </Column>
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                            <Text text="Free Qty" />
+                                            </Column>
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                            <Text text="Unit" />
+                                            </Column>
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                            <Text text="Price" />
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem type="Navigation" press="onStockListPress">
+                                                <cells>
+                                                    <Text text="{stkTableModel>stockName}"  />
+                                                    <Text text="{stkTableModel>quantity}"  />
+                                                    <Text text="{stkTableModel>freeqty}"  />
+                                                    <Text text="{stkTableModel>unit}"  />
+                                                    <Text text="{stkTableModel>rate}"  />                                       
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                            </Table>
+                                
+                                
+                               
+                                </VBox>
+                            <VBox fitContainer="true">
+                                <Table id="tblTax"
+                                        items="{
+                                                path: 'tblTaxModel>/modelData',
+                                                    sorter: {
+                                                        path: 'lineId'
+                                                    }
+                                                }"
+                                        inset="false"
+                                        title="Contents"
+                                            class="sapFDynamicPageAlignContent"
+                                            width="auto">
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <Title text="Tax Description" />
+                                            <ToolbarSpacer/>
+                                            <OverflowToolbarButton type="Transparent" text="Add Item" icon="sap-icon://add" press="onAddNewRow2"/>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                        <columns>
+                                            <Column>
+                                            <Text text="Tax Name" />
+                                            </Column>
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                            <Text text="Amount" />
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem type="Navigation" press="onTaxPress">
+                                                <cells>
+                                                    <Text text="{tblTaxModel>taxName}"  />
+                                                    <Text text="{tblTaxModel>amount}"  />                                      
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                            </Table>
+                                
+                                
+                                
+                                </VBox>
+                        <!-- </IconTabFilter>
+
+                        <IconTabFilter	text="Other Charges"> -->
+                            <VBox fitContainer="true">
+                                <Table id="tblOtherCharges"
+                                        items="{
+                                                path: 'tblOtherChargesModel>/modelData',
+                                                    sorter: {
+                                                        path: 'lineId'
+                                                    }
+                                                }"
+                                        inset="false"
+                                        title="Contents"
+                                            class="sapFDynamicPageAlignContent"
+                                            width="auto">
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <Title text="Other Charges" />
+                                            <ToolbarSpacer/>
+                                            <OverflowToolbarButton type="Transparent" text="Add Item" icon="sap-icon://add" press="onAddNewRow3"/>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                        <columns>
+                                            <Column>
+                                            <Text text="Other Charges" />
+                                            </Column>
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                            <Text text="Amount" />
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem type="Navigation" press="onOtherChargesPress">
+                                                <cells>
+                                                    <Text text="{tblOtherChargesModel>otherchargesDetail}"  />
+                                                    <Text text="{tblOtherChargesModel>otherAmount}"  />                                      
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                            </Table>
+                                <form:Form editable="true">
+                                        <form:title>
+                                            <core:Title text="" />
+                                        </form:title>
+                                        <form:layout>
+                                            <form:ResponsiveGridLayout
+                                                labelSpanXL="4"
+                                                labelSpanL="4"
+                                                labelSpanM="4"
+                                                labelSpanS="12"
+                                                adjustLabelSpan="false"
+                                                emptySpanXL="0"
+                                                emptySpanL="0"
+                                                emptySpanM="0"
+                                                emptySpanS="0"
+                                                columnsXL="3"
+                                                columnsL="2"
+                                                columnsM="2"
+                                                singleContainerFullSize="false" />
+                                        </form:layout>
+                                        <form:formContainers>
+                                            <form:FormContainer>
+                                                <form:formElements>
+                                                    <form:FormElement label="Net Total">
+                                                        <form:fields>
+                                                            <Input placeholder="0.00" id="netTotal" />
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                    <form:FormElement label="Discount">
+                                                        <form:fields>
+                                                            <Input placeholder="0.00" id="discount"/>
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                    <form:FormElement label="Tax Total">
+                                                        <form:fields>
+                                                            <Input placeholder="0.00" id="taxTotal" />
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                    <form:FormElement label="Other Charges">
+                                                        <form:fields>
+                                                            <Input placeholder="0.00" id="otherCharges"/>
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                    <form:FormElement label="Sub Total">
+                                                        <form:fields>
+                                                            <Input placeholder="0.00" id="subTotal"/>
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                    <form:FormElement label="Round Off">
+                                                        <form:fields>
+                                                            <Input placeholder="0.00" id="roundOff"/>
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                </form:formElements>
+                                            </form:FormContainer>
+                                        </form:formContainers>
+                                            
+                                    </form:Form>
+                                    </VBox>
+                      
+                        </VBox>
+                    </f:content>
+
+                     <f:footer>
+                        <OverflowToolbar>
+                            <ToolbarSpacer/>
+                            <Button type="Accept" text="Save"/>
+                        </OverflowToolbar>
+                    </f:footer>
+                    
+
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+
+</mvc:View>

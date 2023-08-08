@@ -1,0 +1,124 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ApplicationSettings.DocumentSeriesDetail"
+	xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+	height="100%">
+
+	<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Document Series Detail"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+						<Button
+							text="{i18n>saveButtonText}"
+                            type="Emphasized"
+                            press="onSave"
+                            id="btnSave"/>
+						<!-- <Button
+							text="Delete"
+							type="Emphasized"
+                            id="btnDelete"
+                            press="onDelete"/>						 -->
+				</f:actions>
+				<f:navigationActions>
+					<Button
+						icon="sap-icon://decline"
+						type="Transparent" press="onCancel" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>	
+
+           
+
+			<form:Form editable="true">
+                <form:title>
+                </form:title>
+                <form:layout>
+                    <form:ResponsiveGridLayout
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="2"
+                        columnsM="1"
+                        singleContainerFullSize="false" />
+                </form:layout>
+                <form:formContainers>
+                    <form:FormContainer title="">
+					    <form:formElements>
+
+                            <form:FormElement label="">
+                                <form:fields>
+                                      <MessageStrip
+                                            text="Document Series number is generated depends upon Prefix, Start Number, End Number and total Length. For Example - Prefix = CS, Length = 10, Start Number = 1, End Number = 999999. Here, document series will be starting with as CS00000001 and ending with CS00999999."
+                                            showIcon="true"
+                                            class="sapUiMediumMarginBottom">
+                                        </MessageStrip>
+                                </form:fields>
+                            </form:FormElement> 
+
+                            <form:FormElement label="Doc Name">
+                                <form:fields>
+                                      <Input id="txtDocName" enabled="false" valueLiveUpdate="true" value="{edtDocumentseriesModel>/docname}" />                        
+                                </form:fields>
+                            </form:FormElement> 
+
+                            <form:FormElement label="Doc Code">
+                                <form:fields>
+                                      <Input id="txtDocCode" enabled="false" valueLiveUpdate="true" value="{edtDocumentseriesModel>/doccode}" />                        
+                                </form:fields>
+                            </form:FormElement> 
+
+                            <form:FormElement label="Prefix">
+                                <form:fields>
+                                      <Input id="txtPrefix"  valueLiveUpdate="true" value="{edtDocumentseriesModel>/prefix}" />                        
+                                </form:fields>
+                            </form:FormElement> 
+
+                            <form:FormElement label="Start Number">
+                                <form:fields>
+                                      <Input id="txtStartWith"  valueLiveUpdate="true" value="{edtDocumentseriesModel>/startwith}" />                        
+                                </form:fields>
+                            </form:FormElement> 
+
+                            <form:FormElement label="End Number">
+                                <form:fields>
+                                      <Input id="txtEndTo"  valueLiveUpdate="true" value="{edtDocumentseriesModel>/endto}" />                        
+                                </form:fields>
+                            </form:FormElement> 
+
+                            <form:FormElement label="Length">
+                                <form:fields>
+                                      <Input id="txtLength"  valueLiveUpdate="true" value="{edtDocumentseriesModel>/length}" />                        
+                                </form:fields>
+                            </form:FormElement> 
+
+                            <form:FormElement label="Default">
+                                <form:fields>
+                                      <Input id="txtDefault"  valueLiveUpdate="true" value="{edtDocumentseriesModel>/default}" />                        
+                                </form:fields>
+                            </form:FormElement> 
+
+                            
+                        </form:formElements>
+                    </form:FormContainer>
+                </form:formContainers>
+            </form:Form>
+           
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

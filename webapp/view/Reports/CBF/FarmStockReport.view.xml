@@ -1,0 +1,278 @@
+<mvc:View displayBlock="true"
+    controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CBF.FarmStockReport"
+    height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+    <f:title>
+        <f:DynamicPageTitle>
+            <f:heading>
+                <Title text="Farmer Stock Report" />
+            </f:heading>
+            <f:actions>
+            </f:actions>
+        </f:DynamicPageTitle>
+    </f:title>
+    <f:header>
+        <f:DynamicPageHeader pinnable="true">
+            <VBox>
+                <form:Form editable="true">
+                    <form:title>
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                            labelSpanXL="4"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="3"
+                            columnsL="2"
+                            columnsM="2"
+                            singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="">
+                            <form:formElements>
+                                <form:FormElement
+                                    label="{i18n>batchwisebirdcostreportlabelbranchname}">
+                                    <form:fields>
+                                        <MultiComboBox id="branchList"
+                                            selectionChange="shedSelectionChange"
+                                            selectionFinish="branchSelectionFinish"
+                                            width="500px"
+                                            items="{
+                                                        path: 'branchModel>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                            <core:Item key="{branchModel>id}"
+                                                text="{branchModel>branchname}" />
+                                        </MultiComboBox>
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="{i18n>farmerstockreportfarmer}">
+                                    <form:fields>
+                                        <MultiComboBox id="farmerList"
+                                            selectionChange="shedSelectionChange"
+                                            selectionFinish="farmerSelectionFinish"
+                                            width="500px"
+                                            items="{
+                                                        path: 'FarmerModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                            <core:Item key="{FarmerModel>id}"
+                                                text="{FarmerModel>farmer_name}" />
+                                        </MultiComboBox>
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="{i18n>farmerstockreportfarm}">
+                                    <form:fields>
+                                        <MultiComboBox id="farmList"
+                                            selectionChange="shedSelectionChange"
+                                            selectionFinish="farmSelectionFinish"
+                                            width="500px"
+                                            items="{
+                                                        path: 'FarmModel>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                            <core:Item key="{FarmModel>id}"
+                                                text="{FarmModel>farm_name}" />
+                                        </MultiComboBox>
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+                        <form:FormContainer title="">
+                            <form:formElements>
+                                <form:FormElement label="{i18n>farmerstockreportshed}">
+                                    <form:fields>
+                                        <MultiComboBox id="txtshed"
+                                            selectionChange="shedSelectionChange"
+                                            selectionFinish="shedSelectionFinish "
+                                            width="500px"
+                                            items="{
+                                                        path: 'ShedModel>/modelData',
+                                                        sorter: { path: 'shedid' }
+                                                    }">
+                                            <core:Item key="{ShedModel>shedid}"
+                                                text="{ShedModel>shed_name}" />
+                                        </MultiComboBox>
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="{i18n>farmerstockreportbatch}">
+                                    <form:fields>
+                                        <MultiComboBox id="txtbatch"
+                                            selectionChange="shedSelectionChange"
+                                            selectionFinish=" "
+                                            width="500px"
+                                            items="{
+                                                        path: 'BatchModel>/modelData'
+                                                    }">
+                                            <core:Item key="{BatchModel>cbfbatchid}"
+                                                text="{BatchModel>batch_number}" />
+                                        </MultiComboBox>
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="">
+                                    <form:fields>
+                                        <Button icon="sap-icon://search" type="Emphasized"
+                                            text="Show Records" width="100%"
+                                            press="onSearchFarmerstockReport" />
+                                        <MenuButton id="txtdownload" text="Download Data"
+                                            width="100%">
+                                            <menu>
+                                                <Menu itemSelected="onMenuAction">
+                                                    <items>
+                                                        <MenuItem text="Save as CSV"
+                                                            icon="sap-icon://excel-attachment"
+                                                            press="onDataExport" />
+                                                        <MenuItem text="Save as PDF"
+                                                            icon="sap-icon://pdf-attachment"
+                                                            press="createPDF" />
+                                                    </items>
+                                                </Menu>
+                                            </menu>
+                                        </MenuButton>
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+            </VBox>
+        </f:DynamicPageHeader>
+    </f:header>
+    <f:content>
+        <HBox fitContainer="true">
+            <ScrollContainer
+                height="100%"
+                width="100%"
+                horizontal="true"
+                vertical="true"
+                focusable="true">
+                <Table id="tblModel" width="200%" growing="true"
+                    growingScrollToLoad="true"
+                    items=" {
+                        path: 'tblModel>/modelData' ,
+                        sorter: {
+                        path: 'farmer_name' ,
+                        group: true
+                        }
+                        }"
+                    backgroundDesign="Solid">
+
+                    <columns>
+                        <Column minScreenWidth=" Tablet" demandPopin="true">
+                            <Text text=" Farmer Name" />
+                        </Column>
+                        <Column minScreenWidth=" Tablet" demandPopin="true">
+                            <Text text=" Shed Name" />
+                        </Column>
+                        <Column minScreenWidth=" Tablet" demandPopin="true">
+                            <Text text=" Warehousebin Name" />
+                        </Column>
+                        <Column minScreenWidth=" Tablet" demandPopin="true">
+                            <Text text=" {i18n>farmerstockreportitem}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>farmerstockreportunit}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>farmerstockreportopening}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>farmerstockreportrateperunit}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>farmerstockreporttotalamt}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>farmerstockreportinward}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>farmerstockreportrateperunit}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>farmerstockreporttotalamt}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>farmerstockreportoutward}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Cummulative Outward" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>farmerstockreportrateperunit}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>farmerstockreporttotalamt}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>farmerstockreportclosing}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>farmerstockreportrateperunit}" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="{i18n>farmerstockreporttotalamt}" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <customData>
+                            </customData>
+                            <cells>
+                                <Text text="" />
+                                <Text text="{tblModel>shed_name}" />
+                                <Text text="{tblModel>binname}" />
+                                <Text text="{tblModel>itemname}" />
+                                <Text text="{tblModel>itemunitname}" />
+                                <Text text="{tblModel>openingstock}" />
+                                <Text text="{tblModel>opeavgrate}" />
+                                <Text text="{tblModel>openingrate}" />
+                                <Text text="{tblModel>inventorytransferin}" />
+                                <Text text="{tblModel>inwardavgrate}" />
+                                <Text text="{tblModel>inwardrate}" />
+                                <Text text="{tblModel>inventorytransferout}" />
+                                <Text text="{tblModel>cuminventorytransferout}" />
+                                <Text text="{tblModel>outwardavgrate}" />
+                                <Text text="{tblModel>outwardrate}" />
+                                <Text text="{tblModel>closingbal}" />
+                                <Text text="{tblModel>closavgrate}" />
+                                <Text text="{tblModel>cloamt}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </ScrollContainer>
+        </HBox>
+    </f:content>
+</f:DynamicPage>
+</mvc:View>

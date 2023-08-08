@@ -1,0 +1,46 @@
+
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="Delivery From Address List"	
+		contentHeight="300px"
+		search="_handleDelFrmAddrSearch"
+		confirm="onDelFrmAddrDialogClose"
+		cancel="onDelFrmAddrDialogClose"
+		items="{
+			path : 'deliveryfromaddressList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+                <Text text="{deliveryfromaddressList>address} {deliveryfromaddressList>cityname} {deliveryfromaddressList>statename} {deliveryfromaddressList>countryname} {deliveryfromaddressList>pincode}" />
+				<Text text="{deliveryfromaddressList>statecode}" />
+				<Text text="{deliveryfromaddressList>isunionterritory}" />
+				<Text text="{deliveryfromaddressList>gstno}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+            <Column>
+				<header width="40%" >
+					<Text text="address" />
+				</header>
+			</Column>
+			<Column width="15%" minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="State Code" />
+				</header>
+			</Column>
+			<Column width="15%" minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Union Territory?" />
+				</header>
+			</Column>
+			<Column width="30%" minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="GST NO" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

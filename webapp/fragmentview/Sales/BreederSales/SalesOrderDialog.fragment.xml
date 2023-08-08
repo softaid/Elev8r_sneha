@@ -1,0 +1,51 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="Sales Order List"	
+		contentHeight="300px"
+		search="handleSalesOrderSearch"
+		confirm="handleSalesOrderClose"
+		cancel="handleSalesOrderClose"
+		items="{
+			path : 'salesorderList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{salesorderList>id}" />
+				<Text text="{salesorderList>salesorderno}" />
+				<Text text="{salesorderList>salesorderdate}" />
+                <Text text="{salesorderList>partyname}" />
+				<Text text="{salesorderList>statusname}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Doc No." />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Sales Order No" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Sales Order Date" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Partner Name" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="Status" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

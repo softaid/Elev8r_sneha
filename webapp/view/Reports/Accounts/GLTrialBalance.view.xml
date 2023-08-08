@@ -1,0 +1,176 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Accounts.GLTrialBalance" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="General Ledger Trial Balance"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                          <form:FormElement label="From Date">
+                                                <form:fields>
+                                                    <DatePicker id="txtFromDate" required="true" 
+                                                    value="{gltbModel>/fromdate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="onDateChange"
+                                                    />
+                                                </form:fields>
+                                            </form:FormElement>   
+                                            <form:FormElement label="To Date">
+                                                <form:fields>
+                                                    <DatePicker id="txtToDate" required="true" 
+                                                    value="{gltbModel>/todate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    valueFormat="dd/MM/YYYY"
+                                                    change="onDateChange"
+                                                    />
+                                                </form:fields>
+                                            </form:FormElement>  
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                           <form:FormElement label="Branch">
+                                                <form:fields>
+                                                    <Input
+                                                        id="branch"
+                                                        type="Text"
+                                                        placeholder="Select Branch"
+                                                        showSuggestion="true"
+                                                        showValueHelp="true"    
+                                                        valueHelpOnly="true"
+                                                        value="{gltbModel>/branchname}"
+                                                        valueHelpRequest="handleSelectBranchList">
+                                                    </Input>
+                                                    <Input value="{gltbModel>/branchcode}" enabled="false"></Input>
+                                                </form:fields>
+                                            </form:FormElement>
+                                              <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="bindTbl"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport" />
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="onPdfExport" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>	
+            <VBox fitContainer="true">
+                           
+                            <Table id="tblgltb" items="{
+                                                path: 'tblGltbModel>/modelData',
+                                                    sorter: {
+                                                        path: 'id'
+                                                    }
+                                                }"
+                                                sticky="ColumnHeaders" growing="true"
+                                                growingThreshold="100"
+                                                growingScrollToLoad="true" backgroundDesign="Solid">
+                                <columns>
+                                 <Column>
+                                    <Text text="General Ledger Code" />
+                                </Column>
+                                <Column>
+                                    <Text text="Ledger" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="Opening Debit"/>
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="Opening Credit"/>
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="Debit Amount" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="Credit Amount" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="Closing Debit" />
+                                </Column>
+                                <Column hAlign="End">
+                                    <Text text="Closing Credit" />
+                                </Column>
+                            </columns>
+
+                            <items>
+                            <ColumnListItem>
+                             <customData>
+                                    <core:CustomData key="settingReportgroup" value="{tblGltbModel>ledgername}" writeToDom="true"></core:CustomData>
+                                    </customData>
+                                <cells>
+                                    <Text text="{tblGltbModel>glcode}" />
+                                    <Text text="{tblGltbModel>ledgername}" />
+                                    <Text text="{tblGltbModel>openingdramount}" />
+                                    <Text text="{tblGltbModel>openingcramount}" />
+                                    <Text text="{tblGltbModel>dramount}" />
+                                    <Text text="{tblGltbModel>cramount}" />
+                                    <Text text="{tblGltbModel>closingdramount}" />
+                                    <Text text="{tblGltbModel>closingcramount}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+
+                            </Table>
+                        </VBox>  
+        </f:content>
+    </f:DynamicPage>
+</core:View>
+
+
+
+
+ 

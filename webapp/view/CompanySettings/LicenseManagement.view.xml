@@ -1,0 +1,94 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.CompanySettings.LicenseManagement" height="100%"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:core="sap.ui.core"
+  xmlns:u="sap.ui.unified">
+
+   <f:FlexibleColumnLayout id="fclLicenseDetail" backgroundDesign="Solid">
+		<f:beginColumnPages>
+ <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="License Management"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>				
+				<f:content>	
+	<VBox fitContainer="true">
+        <Table id="tblPhase"
+               inset="false" 
+               items="{
+                        path: 'activeLicenseModel>/modelData',
+                        sorter: {
+                            path: ''
+                        }
+                    }">
+	        <headerToolbar>
+			    <Toolbar>
+				    <content>
+					    <Title text="Active Licenses" level="H2"/>
+					    <ToolbarSpacer />
+		
+				    </content>
+			    </Toolbar>
+		    </headerToolbar>
+            <columns>                
+                <Column width="25%"><Text text ="Title" /></Column>
+                <Column width="20%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Licenses Used / Total Count " /></Column>
+				<Column width="15%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Frequency" /></Column>
+                <Column width="15%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Activation Date" /></Column>
+				<Column width="15%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Expiry Date" /></Column>
+              		
+            </columns>
+            <items>
+                <ColumnListItem type="" press="showtable">
+                    <cells>                        
+                        <Text text="{activeLicenseModel>licensetypename}"  />                        
+						<Text text="{activeLicenseModel>licenseused} / {activeLicenseModel>value}" />							
+						<Text text="{activeLicenseModel>frequencytypename}" />							
+                        <Text text="{activeLicenseModel>activationdate}"  />
+						<Text text="{activeLicenseModel>expirydate}"  />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+ <Title text="" level="H2"/>
+ <Title text="" level="H2"/>
+
+        <Table id="tblUserLicenses"
+               inset="false" 
+               items="{
+                        path: 'userLicenseModel>/modelData',
+                        sorter: {
+                            path: ''
+                        }
+                    }">
+	        <headerToolbar>
+			    <Toolbar>
+				    <content>
+					    <Title text="User License Details" level="H2"/>
+						 <ToolbarSpacer />
+                        <SearchField search="onSearch" width="17.5rem"/>
+				    </content>
+			    </Toolbar>
+		    </headerToolbar>
+            <columns>                
+                <Column width="30%"><Text text ="User" /></Column>
+                <Column width="70%" minScreenWidth="Tablet" demandPopin="true"><Text text ="Licenses" /></Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Navigation" press="onListItemPress">
+                    <cells>                        
+                        <Text text="{userLicenseModel>username}"  />
+                        <Text text="{userLicenseModel>licenses}"  />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+	</VBox>
+     </f:content>				
+			</f:DynamicPage>
+            	</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>

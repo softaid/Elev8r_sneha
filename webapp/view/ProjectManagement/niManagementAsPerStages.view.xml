@@ -1,0 +1,2857 @@
+
+<mvc:View
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.niManagementAsPerStages"
+	xmlns:table="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns:c="sap.ui.core"
+	xmlns="sap.m"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    height="100%">
+	<Page
+		showHeader="false"
+		enableScrolling="false"
+		class="sapUiContentPadding">
+		<content>
+             
+			<table:Table
+                id= "MyTableId"
+                class="projectTbl"
+				rows="{ path: 'projectModel>/modelData' }"
+                enableSelectAll="false"
+                selectionMode="None"
+				visibleRowCount="2"
+				ariaLabelledBy="title">
+				<table:extension>
+					<OverflowToolbar style="Clear">
+						<Title id="title" text="NI Status"/>
+                        <ToolbarSpacer />
+                        <HBOX>
+                        <SearchField search="filterGlobally" width="17.5rem" id = "onSearchId"/>
+                        <Button
+                        text="{i18n>saveButtonText}"
+                        id="btnSave"
+                        type="Emphasized"
+                        align="right"
+                        press = "onSave"/>	
+                        </HBOX>
+					</OverflowToolbar>
+				</table:extension>
+				<table:columns>
+					<table:Column width="11rem">
+                        <VBOX>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+
+						<Label text="NO OF JOBS: {DepartmentModel>/projectcount}"/>
+                        <Text text="  " wrapping="true" />
+                        </VBOX>  
+						<table:template>
+							<VBOX>
+                                <Text text="Order No:  {projectModel>orderno}" wrapping="true" />
+                                <Text text="Order Name: {projectModel>projectname}" wrapping="true" />
+                                <Text text="Model: {projectModel>modelname}" wrapping="true" />
+                            </VBOX>
+						</table:template>
+					</table:Column>
+					<table:Column width="11rem">
+                        <VBOX>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+						<Label text="NI ENG" />
+                        <Label text="SALES ENG" />
+                        </VBOX>  
+						<table:template>
+							  <VBOX>
+                                <!-- <Input
+                                id="line"
+                                class="customInputHeight"
+                                        editable="false" 
+                                        value="{projectModel>niengineer}" />
+                                <Input class="customInputHeight"
+                                        editable="false" 
+                                        value="{projectModel>saleengineer}" /> -->
+                                          <Select id="typeid" 
+                                            change="handleEnginnerChange"
+                                            selectedKey="{projectModel>niengineer}" 
+                                            width="500px"
+                                            items="{
+                                                path: 'RoleModel>/modelData'
+                                            }">
+                                            <c:Item key="{RoleModel>createdby}" text="{RoleModel>createdbyname}" />
+                                        </Select>
+                                      
+                                        <Select id="typeengineerid" 
+                                            change="handleEnginnerChange"
+                                            selectedKey="{projectModel>saleengineer}" 
+                                            width="500px"
+                                            items="{
+                                                path: 'RoleModel>/modelData'
+                                            }">
+                                            <c:Item key="{RoleModel>createdby}" text="{RoleModel>createdbyname}" />
+                                        </Select>
+                                        <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="" />
+
+                                </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="6rem" hAlign="End">
+                      <VBOX>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <Label text="Complete %" />
+                        <Label text="100%" />
+                        </VBOX>  
+						<table:template>
+							  <VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>nicompletionper}" />
+                                    <Input class="customInputHeight"
+                                    editable="false" 
+                                    value=" " />
+                                     <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="" />
+                                </VBOX> 
+                                 
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+                        <VBOX>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+						<Label text="Plan Days"/>
+                        <Label text="COMP DAYS"/>
+                        </VBOX>
+						<table:template>
+						   <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>plandays}" />
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>actualdays}" />    
+                           <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="" />
+                            </VBOX>  
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+                    <VBOX>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+						<Label text="ORDER DATE"/>
+                        <Label text="PLAN COMP DATE"/>
+                        <Label text="ACTUAL COMP DATE"/>
+                    </VBOX>    
+						<table:template>
+							 <VBOX>
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>orderdate}" />    
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>projectcomdate}" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>projectactdate}" />      
+                                </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+                        <VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence1department}-Department"/> -->
+                        </VBOX> 
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <Label text="{stageModel>/Sequence1stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence1weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence1jobs}"/>
+                        </VBOX> 
+                        </VBOX>    
+						<table:template>
+							<VBOX>
+                               <Input 
+                               class="customInputHeight"
+                                   editable="false" 
+                                    value="{projectModel>Sequence1startdate}" 
+                                     />        
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>Sequence1enddate}"/>     
+                                 <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="1_{projectModel>orderno}"
+                               displayOnly="{
+                                        path: 'projectModel>Sequence1weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                             editable="{
+                                        path: 'projectModel>Sequence1enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+
+                             selected="{
+                                   path: 'projectModel>Sequence1enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                           /> 
+                            </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+					 <VBOX>
+                    <VBOX>
+                     <!-- <Label text="{DepartmentModel>/Sequence2department}-Department"/> -->
+                    </VBOX>    
+                    <VBOX>
+                        <Label text=" " />
+                    </VBOX>
+                        <Label text="{stageModel>/Sequence2stagename}"/>
+                         <Text text=" " wrapping="true" />
+                     <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence2weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence2jobs}"/>
+                        </VBOX>      
+                    </VBOX>  
+						<table:template>
+							<VBOX>
+                               <Input class="customInputHeight"
+                                   editable="false" 
+                                    value="{projectModel>Sequence2startdate}" 
+                                    submit="oninputSelect" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>Sequence2enddate}" />      
+                            <CheckBox 
+                             select="onCheckBoxSelect"
+                            app:mySuperExtraData="2_{projectModel>orderno}" 
+                            displayOnly="{
+                                        path: 'projectModel>Sequence2weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                              editable="{
+                                        path: 'projectModel>Sequence2enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                               selected="{
+                                   path: 'projectModel>Sequence2enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                            </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="7rem">
+                     <VBOX>
+                    <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence3department}-Department"/> -->
+                    </VBOX>    
+                    <VBOX>
+                        <Label text=" " />
+                    </VBOX>
+                     <Label text="{stageModel>/Sequence3stagename}"/>   
+                      <Text text=" " wrapping="true" />
+                    <VBOX>
+                    <Label text=" " />
+                    </VBOX> 
+                    <VBOX>
+                        <Label text="Activity : {proWeaightagePerModel>/Sequence3weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence3jobs}"/>
+                    </VBOX>      
+                    </VBOX>
+						<table:template>
+						 <VBOX>
+                               <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>Sequence3startdate}" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>Sequence3enddate}" 
+                                    submit="oninputSelect"
+                                    />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="3_{projectModel>orderno}"
+                              displayOnly="{
+                                        path: 'projectModel>Sequence3weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                              editable="{
+                                        path: 'projectModel>Sequence3enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                             selected="{
+                                   path: 'projectModel>Sequence3enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                            </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                         <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence4department}-Department"/> -->
+                        </VBOX>  
+                         <VBOX>
+                        <Label text=" " />
+                        </VBOX>  
+                        <Label text="{stageModel>/Sequence4stagename}"/>
+                        <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence4weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence4jobs}"/>
+                        </VBOX>      
+                        </VBOX>
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence4startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence4enddate}" />      
+                             <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="4_{projectModel>orderno}"
+                              displayOnly="{
+                                        path: 'projectModel>Sequence4weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                              editable="{
+                                        path: 'projectModel>Sequence4enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                               selected="{
+                                   path: 'projectModel>Sequence4enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                         <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence5department}-Department"/> -->
+                        </VBOX>   
+                         <VBOX>
+                        <Label text=" " />
+                        </VBOX>  
+                         <Label text="{stageModel>/Sequence5stagename}"/>
+                          <Text text=" " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence5weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence5jobs}"/>
+                        </VBOX>      
+                        </VBOX>   
+					<table:template>
+						<VBOX>
+                              <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence5startdate}" />  
+                              <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence5enddate}" />      
+                            <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="5_{projectModel>orderno}"
+                              displayOnly="{
+                                        path: 'projectModel>Sequence5weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                              editable="{
+                                        path: 'projectModel>Sequence5enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence5enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />   
+                        </VBOX>     
+					</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence6department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence6stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity :{proWeaightagePerModel>/Sequence6weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence6jobs}"/>
+                        </VBOX>      
+                    </VBOX>  
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence6startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence6enddate}" />      
+                             <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="6_{projectModel>orderno}"
+                              displayOnly="{
+                                        path: 'projectModel>Sequence6weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                              editable="{
+                                        path: 'projectModel>Sequence6enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                               selected="{
+                                   path: 'projectModel>Sequence6enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+				<table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence7department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence7stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence7weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence7jobs}"/>
+                        </VBOX>      
+                    </VBOX>  
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence7startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence7enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="7_{projectModel>orderno}"
+                              displayOnly="{
+                                        path: 'projectModel>Sequence7weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                              editable="{
+                                        path: 'projectModel>Sequence7enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence7enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                    	<table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence8department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence8stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence8weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence8jobs}"/>
+                        </VBOX>      
+                    </VBOX>  
+                        </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence8startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence8enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="8_{projectModel>orderno}"
+                              displayOnly="{
+                                        path: 'projectModel>Sequence8weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                              editable="{
+                                        path: 'projectModel>Sequence8enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                               selected="{
+                                   path: 'projectModel>Sequence8enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence9department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence9stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence9weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence9jobs}"/>
+                        </VBOX>      
+                    </VBOX>  
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence9startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence9enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="9_{projectModel>orderno}"
+                              displayOnly="{
+                                        path: 'projectModel>Sequence9weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                              editable="{
+                                        path: 'projectModel>Sequence9enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                               selected="{
+                                   path: 'projectModel>Sequence9enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence10department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence10stagename}"/>
+                        <Text text="  " wrapping="true" />
+                          <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence10weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence10jobs}"/>
+                        </VBOX>      
+                    </VBOX>  
+                        </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence10startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence10enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="10_{projectModel>orderno}"
+                              displayOnly="{
+                                        path: 'projectModel>Sequence10weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                              editable="{
+                                        path: 'projectModel>Sequence10enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                                selected="{
+                                   path: 'projectModel>Sequence10enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence11department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence11stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence11weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence11jobs}"/>
+                        </VBOX>      
+                    </VBOX>  
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence11startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence11enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="11_{projectModel>orderno}"
+                              displayOnly="{
+                                        path: 'projectModel>Sequence11weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                              editable="{
+                                        path: 'projectModel>Sequence11enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                               selected="{
+                                   path: 'projectModel>Sequence11enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+                        <VBOX>
+                            <VBOX>
+                            <!-- <Label text="{DepartmentModel>/Sequence12department}-Department"/> -->
+                            <VBOX>
+                            <Label text=" " />
+                            </VBOX>
+                            <Label text="{stageModel>/Sequence12stagename}"/>
+                        <Text text="  " wrapping="true" />
+                            <VBOX>
+                            <Label text=" " />
+                            </VBOX> 
+                            <VBOX>
+                            <Label text="Activity : {proWeaightagePerModel>/Sequence12weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence12jobs}"/>
+                            </VBOX>      
+                            </VBOX>  
+                        </VBOX>    
+						<table:template>
+							<VBOX>
+                               <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>Sequence12startdate}" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>Sequence12enddate}" />      
+                                   <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="12_{projectModel>orderno}"
+                               displayOnly="{
+                                        path: 'projectModel>Sequence12weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence12enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                               selected="{
+                                   path: 'projectModel>Sequence12enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                            </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="9rem">
+					<VBOX>
+                    <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence13department}-Department"/> -->
+                     <VBOX>
+                    <Label text=" " />
+                    </VBOX>
+                    <Label text="{stageModel>/Sequence13stagename}"/>
+                        <Text text="  " wrapping="true" />
+                    <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence13weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence13jobs}"/>
+                        </VBOX>      
+                    </VBOX>      
+                    </VBOX>    
+						<table:template>
+							<VBOX>
+                               <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>Sequence13startdate}" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>Sequence13enddate}" />      
+                                   <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="13_{projectModel>orderno}"
+                               displayOnly="{
+                                        path: 'projectModel>Sequence13weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence13enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                             selected="{
+                                   path: 'projectModel>Sequence13enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                            </VBOX>        
+						</table:template>
+					</table:Column>
+					<table:Column width="7rem">
+                    <VBOX>
+                    <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence14department}-Department"/> -->
+                    <VBOX>
+                    <Label text=" " />
+                    </VBOX>
+                    <Label text="{stageModel>/Sequence14stagename}"/>
+                        <Text text="  " wrapping="true" />
+                    <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence14weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence14jobs}"/>
+                        </VBOX>      
+                    </VBOX>                              
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                               <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>Sequence14startdate}" />  
+                                <Input class="customInputHeight"
+                                    editable="false" 
+                                    value="{projectModel>Sequence14enddate}" />      
+                                   <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="14_{projectModel>orderno}"
+                               displayOnly="{
+                                        path: 'projectModel>Sequence14weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence14enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                                selected="{
+                                   path: 'projectModel>Sequence14enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                            </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence15department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence15stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity :  {proWeaightagePerModel>/Sequence15weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence15jobs}"/>
+                        </VBOX>      
+                        </VBOX>                                  
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence15startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence15enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="15_{projectModel>orderno}"
+                               displayOnly="{
+                                        path: 'projectModel>Sequence15weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence15enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                             selected="{
+                                   path: 'projectModel>Sequence15enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+					<table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence16department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence16stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence16weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence16jobs}"/>
+                        </VBOX>      
+                        </VBOX>                                  
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence16startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence16enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                             app:mySuperExtraData="16_{projectModel>orderno}"
+                              displayOnly="{
+                                        path: 'projectModel>Sequence16weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence16enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                             selected="{
+                                   path: 'projectModel>Sequence16enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+				<table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence17department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence17stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence17weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence17jobs}"/>
+                        </VBOX>      
+                        </VBOX>                         
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence17startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence17enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="17_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence17weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence17enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                               selected="{
+                                   path: 'projectModel>Sequence17enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+
+                    <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence18department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence18stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence18weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence18jobs}"/>
+                        </VBOX>      
+                        </VBOX>                         
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence18startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence18enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="18_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence19weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence18enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                                selected="{
+                                   path: 'projectModel>Sequence18enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+                        </table:Column>
+
+                         <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence19department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence19stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence19weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence19jobs}"/>
+                        </VBOX>      
+                        </VBOX>                         
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence19startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence19enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="19_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence19weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence19enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence19enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+                        </table:Column>
+
+                    <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence20department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence20stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence20weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence20jobs}"/>
+                        </VBOX>      
+                        </VBOX>                         
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence20startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence20enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="20_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence20weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence20enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence20enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column> 
+
+
+                    <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence21department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence21stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence21weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence21jobs}"/>
+                        </VBOX>      
+                        </VBOX>                         
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence21startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence21enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="21_{projectModel>orderno}"
+                                   displayOnly="{
+                                        path: 'projectModel>Sequence21weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence21enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence21enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence22department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence22stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence22weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence22jobs}"/>
+                        </VBOX>      
+                        </VBOX>                         
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence22startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence22enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="22_{projectModel>orderno}"
+                                   displayOnly="{
+                                        path: 'projectModel>Sequence22weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence22enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence22enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence23department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence23stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence23weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence23jobs}"/>
+                        </VBOX>      
+                        </VBOX>                         
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence23startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence23enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="23_{projectModel>orderno}"
+                                   displayOnly="{
+                                        path: 'projectModel>Sequence23weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence23enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence23enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence24department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence24stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence24weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence24jobs}"/>
+                        </VBOX>      
+                        </VBOX>                   
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence24startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence24enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="24_{projectModel>orderno}"
+                                   displayOnly="{
+                                        path: 'projectModel>Sequence24weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence24enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence24enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                       <!-- <Label text="{DepartmentModel>/Sequence25department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence25stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence25weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence25jobs}"/>
+                        </VBOX>      
+                        </VBOX>                   
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence25startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence25enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="25_{projectModel>orderno}"
+                                   displayOnly="{
+                                        path: 'projectModel>Sequence25weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence25enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                               selected="{
+                                   path: 'projectModel>Sequence25enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence26department}-Department"/> -->
+                         <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence26stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence26weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence26jobs}"/>
+                        </VBOX>      
+                        </VBOX>                   
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence26startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence26enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="26_{projectModel>orderno}"
+                                   displayOnly="{
+                                        path: 'projectModel>Sequence26weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence26enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                               selected="{
+                                   path: 'projectModel>Sequence26enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence27department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence27stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence27weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence27jobs}"/>
+                        </VBOX>      
+                        </VBOX>                   
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence27startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence27enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="27_{projectModel>orderno}"
+                                   displayOnly="{
+                                        path: 'projectModel>Sequence27weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence27enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                               selected="{
+                                   path: 'projectModel>Sequence27enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence28department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence28stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence28weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence28jobs}"/>
+                        </VBOX>      
+                        </VBOX>                   
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence28startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence28enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="28_{projectModel>orderno}"
+                                   displayOnly="{
+                                        path: 'projectModel>Sequence28weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence28enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                             selected="{
+                                   path: 'projectModel>Sequence28enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence29department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence29stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence29weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence29jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence29startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence29enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="29_{projectModel>orderno}"
+                                   displayOnly="{
+                                        path: 'projectModel>Sequence29weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence29enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                               selected="{
+                                   path: 'projectModel>Sequence29enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column> 
+                      <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence30department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence30stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence30weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence30jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence30startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence30enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="30_{projectModel>orderno}"
+                                   displayOnly="{
+                                        path: 'projectModel>Sequence30weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence30enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence30enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                      <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence31department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence31stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence31weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence31jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence31startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence31enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="31_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence31weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence31enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                               selected="{
+                                   path: 'projectModel>Sequence31enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                      <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence32department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence32stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence32weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence32jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence32startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence32enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="32_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence32weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence32enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence32enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                      <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence33department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text="{stageModel>/Sequence33stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence33weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence33jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence33startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence33enddate}" />      
+                              <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="33_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence33weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence33enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                                selected="{
+                                   path: 'projectModel>Sequence33enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    /> 
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence34department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence34stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence34weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence34jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence34startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence34enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="34_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence34weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence34enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence34enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence35department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence35stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence35weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence35jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence35startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence35enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="35_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence35weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence35enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence35enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column> <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence36department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence36stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence36weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence36jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence36startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence36enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="36_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence36weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence36enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence36enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                     <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence37department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence37stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence37weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence37jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence37startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence37enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="37_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence37weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence37enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence37enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                      <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence38department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence38stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence38weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence38jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence38startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence38enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="38_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence38weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence38enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence38enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence39department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence39stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence39weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence39jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence39startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence39enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="39_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence39weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence39enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence39enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence40department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence40stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence40weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence40jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence40startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence40enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="40_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence40weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence40enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence40enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence41department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence41stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence41weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence41jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence41startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence41enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="41_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence41weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence41enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence41enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence42department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence42stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence42weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence42jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence42startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence42enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="42_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence42weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence42enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence42enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence43department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence43stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence43weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence43jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence43startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence43enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="43_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence43weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence43enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence43enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence44department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence44stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence44weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence44jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence44startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence44enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="44_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence44weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence44enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence44enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence45department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence45stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence45weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence45jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence45startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence45enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="45_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence45weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence45enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence45enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence46department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence46stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence46weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence46jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence46startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence46enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="46_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence46weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence46enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence46enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence47department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence47stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence47weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence47jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence47startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence47enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="47_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence47weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence47enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence47enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence48department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence48stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence48weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence48jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence48startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence48enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="48_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence48weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence48enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence48enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence49department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence49stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence49weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence49jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence49startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence49enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="49_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence49weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence49enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence49enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence50department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence50stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence50weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence50jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence50startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence50enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="50_{projectModel>orderno}"
+                                displayOnly="{
+                                        path: 'projectModel>Sequence50weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence50enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence50enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence51department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence51stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence51weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence51jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence51startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence51enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="51_{projectModel>orderno}"
+                                  displayOnly="{
+                                        path: 'projectModel>Sequence51weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence51enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence51enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence52department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence52stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence52weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence52jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence52startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence52enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="52_{projectModel>orderno}"
+                                  displayOnly="{
+                                        path: 'projectModel>Sequence52weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence52enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence52enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <!-- <Label text="{DepartmentModel>/Sequence53department}-Department"/> -->
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{stageModel>/Sequence53stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/Sequence53weightage}%"/>
+                          <Label text="No Of Jobs :{jobModel>/Sequence53jobs}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence53startdate}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>Sequence53enddate}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="53_{projectModel>orderno}"
+                                  displayOnly="{
+                                        path: 'projectModel>Sequence53weightage',
+                                        formatter: '.formatter.setDisplayOnly'
+                                    }"
+                               editable="{
+                                        path: 'projectModel>Sequence53enddate',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>Sequence53enddate',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>
+                      <!-- <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/HandedOverCustomerDepartment1}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{projectModel>Sequence1stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/HandedOverCustomerComPer1}%"/>
+                          <Label text="No Of Jobs :{jobModel>/HandedOverCustomerjobs1}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>HandedOverCustomer1}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>HandedOverCustomerenddate1}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="31_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>HandedOverCustomerenddate1',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>HandedOverCustomerenddate1',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/HandedOverCustomerDepartment1}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{projectModel>Sequence1stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/HandedOverCustomerComPer1}%"/>
+                          <Label text="No Of Jobs :{jobModel>/HandedOverCustomerjobs1}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>HandedOverCustomer1}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>HandedOverCustomerenddate1}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="31_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>HandedOverCustomerenddate1',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>HandedOverCustomerenddate1',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/HandedOverCustomerDepartment1}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{projectModel>Sequence1stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/HandedOverCustomerComPer1}%"/>
+                          <Label text="No Of Jobs :{jobModel>/HandedOverCustomerjobs1}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>HandedOverCustomer1}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>HandedOverCustomerenddate1}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="31_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>HandedOverCustomerenddate1',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>HandedOverCustomerenddate1',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/HandedOverCustomerDepartment1}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{projectModel>Sequence1stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/HandedOverCustomerComPer1}%"/>
+                          <Label text="No Of Jobs :{jobModel>/HandedOverCustomerjobs1}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>HandedOverCustomer1}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>HandedOverCustomerenddate1}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="31_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>HandedOverCustomerenddate1',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>HandedOverCustomerenddate1',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column>  <table:Column width="12rem">
+						<VBOX>
+                        <VBOX>
+                        <Label text="{DepartmentModel>/HandedOverCustomerDepartment1}-Department"/>
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX>
+                        <Label text=" "/>
+                        <Label text="{projectModel>Sequence1stagename}"/>
+                        <Text text="  " wrapping="true" />
+                        <VBOX>
+                        <Label text=" " />
+                        </VBOX> 
+                        <VBOX>
+                          <Label text="Activity : {proWeaightagePerModel>/HandedOverCustomerComPer1}%"/>
+                          <Label text="No Of Jobs :{jobModel>/HandedOverCustomerjobs1}"/>
+                        </VBOX>      
+                        </VBOX>                
+                    </VBOX>    
+						<table:template>
+						 <VBOX>
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>HandedOverCustomer1}" />  
+                            <Input class="customInputHeight"
+                                editable="false" 
+                                value="{projectModel>HandedOverCustomerenddate1}" />      
+                                <CheckBox 
+                             select="onCheckBoxSelect"
+                              app:mySuperExtraData="31_{projectModel>orderno}"
+                               editable="{
+                                        path: 'projectModel>HandedOverCustomerenddate1',
+                                        formatter: '.formatter.setCheckboxEnable'
+                                    }"
+                              selected="{
+                                   path: 'projectModel>HandedOverCustomerenddate1',
+                                   formatter: '.formatter.setCheckbox',
+                                   align: 'Center'
+                                    }"
+                                    />  
+                        </VBOX>     
+						</table:template>
+					</table:Column> -->
+                    
+				</table:columns>
+			</table:Table>
+		</content> 
+	</Page>
+</mvc:View>

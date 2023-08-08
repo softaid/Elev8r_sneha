@@ -1,0 +1,186 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CommercialLayer.LayerFeedDeviationReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>lyerFeedDeviationReportTitle}"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                        
+                                        <form:FormElement label="{i18n>lyerFeedDeviationtLabelLocation}">
+                                            <form:fields>
+                                                <MultiComboBox id="locationtbl"
+                                                    selectionChange="handleSelectionChange"
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'locationList>/modelData',
+                                                        sorter: { path: 'Name' }
+                                                    }">
+                                                    <core:Item key="{locationList>id}" text="{locationList>locationname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                            <form:FormElement label="{i18n>lyerFeedDeviationtLabelBatchName}">
+                                            <form:fields>
+                                            <Input
+                                               id = "textBatch"
+                                                type="Text"
+                                                placeholder="Select Batch"
+                                                showSuggestion="true"
+                                                showValueHelp="true"    
+                                                valueHelpOnly="true"
+                                                value="{layerfeedDeviationModel>/batchname}"
+                                                valueHelpRequest="handleLyrBatchValueHelp">
+                                            </Input>
+                                            </form:fields>
+                                         </form:FormElement>
+                                           <form:FormElement label="{i18n>lyerFeedDeviationtLabelShedName}">
+                                            <form:fields>
+                                            <MultiComboBox id="shedtb1"
+                                                selectionChange="shedSelectionChange"
+                                                selectionFinish="shedSelectionFinish"
+                                                width="500px"
+                                                items="{
+                                                    path: 'shedModel>/modelData',
+                                                    sorter: { path: 'Name' }
+                                                }">
+                                                <core:Item key="{shedModel>layershedid}" text="{shedModel>shedname}" />
+                                            </MultiComboBox>
+                                               
+                                            </form:fields>
+                                         </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer>
+
+                                          <form:formElements>
+                                          <form:FormElement label="{i18n>lyerFeedDeviationtLabelFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromdate" width="100%" value="{layerfeedDeviationModel>/fromdate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change = "ongetDate"/>   
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                         <form:FormElement label="{i18n>lyerFeedDeviationtLabelToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtTodate"  width="100%" value="{layerfeedDeviationModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change = "ongetDate"/>   
+                                            </form:fields>
+                                        </form:FormElement>
+                                              <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>             
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+
+                        <HBox fitContainer="true">
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblDeviationReport"  width="200%" growing="true" growingScrollToLoad="true" sticky="ColumnHeaders" items="{
+                                                path: 'layerdeviationReportModel>/modelData',
+                                                    sorter: {
+                                                        path: 'itemname',
+                                                        group : true
+                                                    }
+                                                }"
+                                    mode="None" backgroundDesign="Solid">
+                                <columns>
+                                   <Column width="10%" ><Text text ="{i18n>lyerFeedDeviationtLabelShedName}" /></Column>
+                                   <Column  width="10%"  minScreenWidth="Tablet" demandPopin="true" ><Text text ="{i18n>lyerFeedDeviationtLabelWeekNo}" /></Column>
+                                   <Column  width="10%"  minScreenWidth="Tablet"  demandPopin="true" ><Text text ="{i18n>lyerFeedDeviationtLabelItemName}" /></Column>
+                                   <Column  width="10%"  minScreenWidth="Tablet" demandPopin="true" ><Text text ="{i18n>lyerFeedDeviationtLabelLiveBird}" /></Column>
+                                   <Column  width="10%"  minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>lyerFeedDeviationtLabelWeeklyStFeedCons}" /></Column>
+                                   <Column  width="10%"  minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>lyerFeedDeviationtLabelWeeklyStFeeCsPerBird}" /></Column>
+                                   <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="{i18n>lyerFeedDeviationtLabelWeeklyAtFeedConsum}" /></Column>
+                                    <Column minScreenWidth="Tablet" width="10%" demandPopin="true"><Text text ="Weekly Actual Feed Consumption Per Bird" /></Column>
+                                   <Column minScreenWidth="Tablet" width="10%"  demandPopin="true"><Text text ="{i18n>lyerFeedDeviationtLabelDiffeFeedCons}" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <Text text="{layerdeviationReportModel>shedname}"/>
+                                            <Text text="{layerdeviationReportModel>weekno}"/>
+                                            <Text text="{layerdeviationReportModel>itemname}"/>
+                                            <Text text="{layerdeviationReportModel>livestock}" />
+                                            <Text text="{layerdeviationReportModel>stfeedconsumed}" />
+                                            <Text text="{layerdeviationReportModel>stfeedconsumedperbird}" />
+                                            <Text text="{layerdeviationReportModel>atfeedconsumption}" />
+                                             <Text text="{layerdeviationReportModel>actfeedconsumedperbird}" />
+                                            <Text text="{layerdeviationReportModel>difffeedconsumption}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox>  
+                    </f:content>
+                    
+			</f:DynamicPage>
+      
+</core:View>
+
+
+
+
+ 

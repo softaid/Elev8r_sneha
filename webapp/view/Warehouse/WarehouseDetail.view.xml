@@ -1,0 +1,167 @@
+<mvc:View
+		xmlns:c="sap.ui.core"
+		controllerName="sap.ui.elev8rerp.componentcontainer.controller.Warehouse.WarehouseDetail"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:u="sap.ui.unified"
+		xmlns="sap.m"
+		xmlns:t="sap.ui.table"
+		xmlns:f="sap.f"
+		xmlns:layout="sap.ui.layout"
+		xmlns:form="sap.ui.layout.form"
+        xmlns:core="sap.ui.core"
+		height="100%">
+		<f:DynamicPage id="dynamicPageId" preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Warehouse Detail"/>
+					</f:heading>
+					<f:actions>
+						<ToolbarSpacer/>
+						 <Button
+							text="Save"
+                            type="Emphasized"
+							press="onSave"/>
+					</f:actions>
+					<f:navigationActions>
+						<Button
+							icon="sap-icon://decline"
+							type="Transparent" press="onCancel" />
+					</f:navigationActions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:content>				
+   			   <form:Form editable="true">
+                    <form:title>
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="2"
+                                singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="">
+					        <form:formElements>                            
+                                <form:FormElement label="Code">
+                                    <form:fields>
+                                        <Input id="txtWarehouseCode" valueLiveUpdate="true" valueStateText="Please Enter Warehouse Code." liveChange="handleUserInput" validationSuccess="handleValidationSuccess" validationError="handleValidationError" value="{warehouseDetailModel>/warehousecode}" />
+                                    </form:fields>
+                                </form:FormElement>
+								<form:FormElement label="Name">
+                                    <form:fields>
+                                        <Input id="txtWarehouseName" valueLiveUpdate="true" valueStateText="Please Enter Warehouse Name." liveChange="handleUserInput" validationSuccess="handleValidationSuccess" validationError="handleValidationError" value="{warehouseDetailModel>/warehousename}" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Description">
+                                    <form:fields>
+                                        <Input id="txtWarehouseDescription" valueLiveUpdate="true" value="{warehouseDetailModel>/description}" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Location">
+                                    <form:fields>
+                                        <Input
+                                        id="txtLocation"
+                                        type="Text"
+                                        placeholder="Select Location"
+                                        showSuggestion="true"
+                                        showValueHelp="true"
+                                        valueHelpOnly="true"
+                                        valueHelpRequest="handleLocationValueHelp"
+                                        value="{warehouseDetailModel>/locationname}">
+                                        </Input>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Module Type">
+                                    <form:fields>
+                                        <MultiComboBox id="ddlMtxtModuleNameodule"
+									    selectionChange="handleSelectionChange"
+										selectionFinish="handleSelectionFinish"
+										width="500px"
+										items="{
+											path: 'moduleModel>/modelData',
+											sorter: { path: 'Name' }
+										}">
+										<core:Item key="{moduleModel>id}" text="{moduleModel>refname}" />
+									</MultiComboBox>
+                                    </form:fields>
+                                </form:FormElement>
+								<form:FormElement label="Ship to Name">
+                                    <form:fields>
+                                        <Input id="txtShiptoName" valueLiveUpdate="true" value="{warehouseDetailModel>/shiptoname}" />
+                                    </form:fields>
+                                </form:FormElement>
+								<form:FormElement label="Address">
+                                    <form:fields>
+                                        <Input id="txtAddress" valueLiveUpdate="true" valueStateText="Please Enter Street value." liveChange="handleUserInput" validationSuccess="handleValidationSuccess" validationError="handleValidationError" value="{warehouseDetailModel>/address}" />
+                                    </form:fields>
+                                </form:FormElement>
+								<form:FormElement label="Gln">
+                                    <form:fields>
+                                        <Input id="txtGln" valueLiveUpdate="true" value="{warehouseDetailModel>/gln}" />
+                                    </form:fields>
+                                </form:FormElement>
+								<form:FormElement label="Country">
+                                    <form:fields>
+                                        <Select id="txtcountry" forceSelection = "false" selectedKey="{warehouseDetailModel>/countryid}" 
+                                            items="{
+                                                path: 'countryModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }" change="getCountry">
+                                                <core:Item key="{countryModel>id}" text="{countryModel>countryname}"/>             
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="State">
+                                    <form:fields>
+                                        <Select id="txtstate" selectedKey="{warehouseDetailModel>/stateid}"   forceSelection = "false"
+                                            items="{
+                                                path: 'stateModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }" change="getState">
+                                                <core:Item key="{stateModel>id}" text="{stateModel>statename}"/>             
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                 <form:FormElement label="City">
+                                    <form:fields>
+                                        <Select id="txtcity" selectedKey="{warehouseDetailModel>/cityid}"  forceSelection = "false" change = "getcity"
+                                            items="{
+                                                path: 'cityModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                                <core:Item key="{cityModel>id}" text="{cityModel>cityname}"/>             
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Zipcode">
+                                    <form:fields>
+                                        <Input id="txtzipcode" valueLiveUpdate="true"  value="{warehouseDetailModel>/zipcode}" change = "zipcodechange" />
+                                    </form:fields>
+                                </form:FormElement>
+								<form:FormElement label="Active">
+                                    <form:fields>
+                                        <Switch state="{warehouseDetailModel>/active}">
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+		    </f:content>
+	    </f:DynamicPage>
+</mvc:View>

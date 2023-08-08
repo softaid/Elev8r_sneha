@@ -1,0 +1,43 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Clicnical Sign/Symptoms"
+		contentHeight="300px"
+		search="handleSymptomsSearch"
+		confirm="handleSymptomsClose"
+		cancel="handleSymptomsClose"
+		items="{
+			path : 'symptomsListModel>/modelData',
+			sorter : {
+				path : 'id',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{symptomsListModel>id}" />
+                <Text text="{symptomsListModel>organname}" />
+                <Text text="{symptomsListModel>lesionname}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Doc No." />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Organ Name" />
+				</header>
+			</Column>
+            <Column demandPopin="true" >
+				<header>
+					<Text text="Lesion Name" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

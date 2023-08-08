@@ -1,0 +1,102 @@
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.MaterialRequestDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	height="100%">
+
+	<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>MaterialRequestDetailTitle}"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+						<Button
+                            id="btnSave"
+							text="{i18n>saveButtonText}"
+                            type="Emphasized" press="onSave"/>
+						<Button
+                            id="btnDelete"
+							text="{i18n>deleteButtonText}"
+							type="Emphasized" press="onDelete"/>						
+				</f:actions>
+				<f:navigationActions>
+					<Button
+						icon="sap-icon://decline"
+						type="Transparent" press="onCancel" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>		
+			<form:Form editable="true">
+                <form:title>
+                </form:title>
+                <form:layout>
+                    <form:ResponsiveGridLayout
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="2"
+                        columnsM="1"
+                        singleContainerFullSize="false" />
+                </form:layout>
+                <form:formContainers>
+                    <form:FormContainer title="">
+					    <form:formElements>
+                            <form:FormElement label="{i18n>MaterialRequestDetailItemGroup}">
+                                <form:fields>
+                                <Select id="txtItemGroup" 
+                                  forceSelection  = "false" selectedKey="{inventoryRequestDetailModel>/itemgroupid}"
+                                    change = "itemgroupSelect"
+									items="{
+					                    path: 'itemGroupModel>/modelData',
+					                    sorter: { path: 'id' }
+				                    }">
+				                    <core:Item key="{itemGroupModel>id}" text="{itemGroupModel>groupname}" />                                            
+			                    </Select>
+                                </form:fields> 
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>MaterialRequestDetailItem}" >
+                                <form:fields>
+                                    <Input
+                                        id="txtItem"
+                                        type="Text"
+                                        required="true"
+                                        placeholder="{i18n>MaterialRequestDetailSelectItem}"
+                                        value="{inventoryRequestDetailModel>/itemname}"
+                                        showValueHelp="true"                                                
+                                        valueHelpOnly="true"       
+                                        valueHelpRequest="handleItemValueHelp">
+                                    </Input> 
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>MaterialRequestDetailItemUnit}">
+                                <Input id="txtUnit" value="{inventoryRequestDetailModel>/unit}" enabled="false" />                                      
+                            </form:FormElement>
+                            <form:FormElement label="{i18n>MaterialRequestDetailQuantity}">
+                                <form:fields>
+                                    <Input id="txtQuantity" required="true" valueLiveUpdate="true" value="{inventoryRequestDetailModel>/requestedquantity}" />
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                    </form:FormContainer>
+                </form:formContainers>
+            </form:Form>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

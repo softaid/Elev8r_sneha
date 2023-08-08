@@ -1,0 +1,46 @@
+{   
+    "productdelivery":[
+        {
+            "challanNumber" : "Challan 1",
+            "challanDate" : "2018/07/15",
+            "subject" : "Sales Product",
+            "custName" : "Aditi",
+            "addressTo" : "Pune",
+            "modeOfTransport" : "",
+            "vehicleNumber" : "MH 12 NL 5455",
+            "totalWeight" : "100 kg",
+            "shippingAddress" : "Pune",
+            "orderNumber" : "Order 1",
+            "status" : "Open",
+            "againstChallanCumInvoice" : ""
+        },
+        {
+            "challanNumber" : "Challan 2",
+            "challanDate" : "2018/07/15",
+            "subject" : "Telephone",
+            "custName" : "Aditi",
+            "addressTo" : "Mumbai",
+            "modeOfTransport" : "",
+            "vehicleNumber" : "MH 13 NL 6555",
+            "totalWeight" : "10 kg",
+            "shippingAddress" : "Pune",
+            "orderNumber" : "Order 6",
+            "status" : "Open",
+            "againstChallanCumInvoice" : ""
+        },
+        {
+            "challanNumber" : "Challan 3",
+            "challanDate" : "2018/07/18",
+            "subject" : "Sales Product",
+            "custName" : "Aditi",
+            "addressTo" : "Pune",
+            "modeOfTransport" : "",
+            "vehicleNumber" : "MH12 NL 5478",
+            "totalWeight" : "100 kg",
+            "shippingAddress" : "Solapur",
+            "orderNumber" : "Order 5",
+            "status" : "Open",
+            "againstChallanCumInvoice" : ""
+        }
+    ]
+}

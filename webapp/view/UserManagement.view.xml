@@ -1,0 +1,30 @@
+<View displayBlock="true"    
+   xmlns:f="sap.f"
+   xmlns:mvc="sap.ui.core.mvc" 
+   xmlns="sap.m"
+   controllerName="sap.ui.elev8rerp.componentcontainer.controller.UserManagement" height="100%">
+    <f:FlexibleColumnLayout  id="fclUserManagement" backgroundDesign="Solid">
+		<f:beginColumnPages>
+		    <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="User Management"/>
+				        </f:heading>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+	                <IconTabBar selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
+	                    <items>
+						   <IconTabFilter text="Manage User" key="user">
+		                   <mvc:XMLView viewName="sap.ui.elev8rerp.componentcontainer.view.User"></mvc:XMLView>                          						   
+					       </IconTabFilter>	 
+						   <!-- <IconTabFilter text="User Roles" key="role">
+                           </IconTabFilter>			    -->
+			  	    </items>
+                    </IconTabBar>				
+                </f:content>				
+			</f:DynamicPage>
+		</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</View>

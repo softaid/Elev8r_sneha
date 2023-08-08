@@ -1,0 +1,167 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.ProductSales.PurchaseReturnList" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+ <f:FlexibleColumnLayout  id="fclPurchaseReturnList" backgroundDesign="Solid">
+		<f:beginColumnPages>
+
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Purchase Return List"/>
+					</f:heading>
+					<f:actions>
+                            <Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+                            <Button icon="sap-icon://add" type="Transparent" press="onAdd"/>
+                            <Button icon="sap-icon://arrow-left" type="Transparent" press="onAdd"/>
+                            <Button icon="sap-icon://arrow-right" type="Transparent" press="onAdd"/>				
+					</f:actions>
+					
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:content>				
+
+
+                        <VBox fitContainer="true">
+                           <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                               <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                            <form:FormElement label="Number">
+                                                <form:fields>
+                                                    <Input id="number" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Date">
+                                                <form:fields>
+                                                    <DatePicker id="date" value="" valueFormat="dd/MM/yyyy" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Supplier Name">
+                                                <form:fields>
+                                                    <!-- <Input id="nuSupplierName" /> -->
+                                                    <ComboBox id="nuSupplierName" selectedKey="0">
+                                                        <core:Item key="0" text="Supplier 1" />                                
+                                                        <core:Item key="ABC" text="Supplier 2" />
+                                                        <core:Item key="PQR" text="Supplier 3" />
+                                                    </ComboBox>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Order Number">
+                                                <form:fields>
+                                                    <!-- <Input id="orderNumber" /> -->
+                                                    <ComboBox id="orderNumber" selectedKey="0">
+                                                        <core:Item key="0" text="Order 1" />                                
+                                                        <core:Item key="ABC" text="Order 2" />
+                                                        <core:Item key="PQR" text="Order 3" />
+                                                    </ComboBox>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Action on Returned Stock">
+                                                <form:fields>
+                                                    <CheckBox text="Create Placement Challan"  selected="true"/>
+                                                    <CheckBox text="Refund" />
+                                                    <CheckBox text="Not defined" />
+                                                </form:fields>
+                                            </form:FormElement>                                            
+                                        </form:formElements>
+                                    </form:FormContainer>
+
+                                   <form:FormContainer title="">
+                                        <form:formElements>
+                                            <form:FormElement label="Against Form">
+                                                <form:fields>
+                                                    <Input id="againstForm" />
+                                                </form:fields>
+                                            </form:FormElement> 
+                                            <form:FormElement label="Subject">
+                                                <form:fields>
+                                                    <Input id="subject" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Address To">
+                                                <form:fields>
+                                                    <Input id="addressTo" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                            <Table id="tblPurchaseReturnList" mode="single" backgroundDesign="Solid">
+                                <headerToolbar>
+                                    <Toolbar>
+                                    <content>
+                                        <Title  level="H2"/>
+                                        <ToolbarSpacer />
+                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNewRow"/>
+                                    </content>
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column><Text text ="Challan Number" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Stock Name" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="unit" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Quantity" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Stock Status" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Batch Number" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Status" /></Column>
+                                    <Column minScreenWidth="Tablet"><Text text ="Action" /></Column>
+                                </columns>
+                            </Table>
+
+                            <Panel>
+                                <FlexBox		
+                                    alignItems="Start"
+                                    justifyContent="End">
+                                    <items>
+                                        <Button text="Save" type="Emphasized" class="sapUiSmallMarginEnd" />
+                                        <Button text="Cancel" type="Emphasized" class="sapUiSmallMarginEnd" />
+                                    </items>
+                                </FlexBox>
+                            </Panel>
+                           
+                        </VBox>   
+                        
+                    </f:content>
+                    
+                    
+                        <f:footer>
+                        <OverflowToolbar>
+                            <ToolbarSpacer/>
+                            <Button type="Accept" text="Save"/>
+                        </OverflowToolbar>
+                    </f:footer>
+                    
+
+			</f:DynamicPage>
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>
+
+
+
+
+ 

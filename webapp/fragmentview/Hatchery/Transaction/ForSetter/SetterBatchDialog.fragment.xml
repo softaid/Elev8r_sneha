@@ -1,0 +1,57 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="{i18n>SetterBatchDialogSelectSetterBatch}"	
+		contentHeight="300px"
+		search="handleSetterBatchSearch"
+		confirm="handleSetterBatchClose"
+		cancel="handleSetterBatchClose"
+		items="{
+			path : 'setterBatchList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+                <Text text="{setterBatchList>settingno}" />
+                <Text text="{setterBatchList>locationname}" />
+                <Text text="{setterBatchList>breederbatchname}" />
+                <Text text="{setterBatchList>settername}" />		
+                <Text text="{setterBatchList>settingdate}" />
+				<Text text="{setterBatchList>refname}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="{i18n>SetterBatchDialogSettingNo}" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>SetterBatchDialogLocation}" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>SetterBatchDialogBreederBatch}" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>SetterBatchDialogSetter}" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>SetterBatchDialogSettingDate}" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>SetterBatchDialogStatus}" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

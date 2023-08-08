@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Supervisor"
+		contentHeight="300px"
+		search="handleSupervisorAlloSearch"
+		confirm="handleSupervisorAlloClose"
+		cancel="handleSupervisorAlloClose"
+		items="{
+			path : 'supervisorAllocation>/modelData',
+			sorter : {
+				path : 'branchCode',
+				descending : false
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{supervisorAllocation>id}" />
+				<Text text="{supervisorAllocation>branchcode}" />
+				<Text text="{supervisorAllocation>branchname}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="ID" />
+				</header>
+			</Column>
+			<Column
+				demandPopin="true" >
+				<header>
+					<Text text="Branch Code" />
+				</header>
+			</Column>
+			<Column
+				demandPopin="true" >
+				<header>
+					<Text text="Branch Name" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

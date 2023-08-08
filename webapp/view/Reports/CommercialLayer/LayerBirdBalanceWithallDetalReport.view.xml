@@ -1,0 +1,185 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.CommercialLayer.ParentBirdBalanceWithDetailReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Parent Bird Stock Balance With All Detail Report"/>
+                </f:heading>
+                <f:actions>                           
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <VBox>
+                    <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                         <form:FormElement label="{i18n>FlockDetailReportBatchName}">
+                                            <form:fields>
+                                            <MultiComboBox id="txtBreederToBatch"
+                                                selectionChange="batchSelectionChange"
+                                                selectionFinish="batchSelectionFinish"
+                                                width="500px"
+                                                items="{
+                                                    path: 'batchModel>/modelData',
+                                                    sorter: { path: 'Name' }
+                                                }">
+                                                <core:Item key="{batchModel>id}" text="{batchModel>batchname}" />
+                                            </MultiComboBox>
+                                            </form:fields>
+                                         </form:FormElement>
+                                          <form:FormElement label="{i18n>dailygodownstockreportlabeltodate}">
+                                            <form:fields>
+                                                <DatePicker id="todate"  width="100%" value="{reportModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="onDateChange" />   
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer>
+                                 <form:formElements>
+                                                <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>        
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                </VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        
+        <f:content>				
+            <VBox fitContainer="true">  
+            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">                                           
+                <Table id="tblFlockReport" width="400%"   growingScrollToLoad="true" sticky="ColumnHeaders" items="{
+                        path: 'tblModel>/modelData',
+                            sorter: {
+                                    path: 'batchname',
+                                    group : true
+                                }
+                        }"
+                    mode="None" backgroundDesign="Solid">
+                    <columns>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Flock Name" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Status" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Age" /></Column>    
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Live Qty" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Total Bird Cost" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Cost/Bird" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Feed Qty" /></Column>
+                        <Column minScreenWidth="Tablet"  demandPopin="true"><Text text ="Feed Value" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Medicine Value" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Vaccine Value" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Vitmin Value" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Other Value" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Sale Value" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Mortality" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Total Mortality Value" /></Column>    
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Feed Qty" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Feed Value Af 19 Week" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Med Qty " /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Med Value Af 19 Week" /></Column>
+                        <Column minScreenWidth="Tablet"  demandPopin="true"><Text text ="Vaccine Qty" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Vaccine Value Af 19 Week " /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Vitmine Qty" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Vitmine Value Af 19 Week" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Sale Qty Af 19 Week" /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Sale Value Af 19 Week" /></Column>
+                        <Column><Text text ="Other Value Af 19 Week " /></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Amortization Value" /></Column>
+                        
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                        <customData>
+                        </customData>
+                            <cells>
+                                <Text text="{tblModel>batchname}"/>
+                                <Text text="{tblModel>statusforbatch}"/>
+                                <Text text="{tblModel>ageindays}"/>
+                                <Text text="{tblModel>liveqty}"/>
+                                <Text text="{tblModel>purval}"/>
+                                <Text text="{tblModel>costperbird}"/>
+                                <Text text="{tblModel>feedqty}" />
+                                <Text text="{tblModel>feedcost}"/>
+                                <Text text="{tblModel>Medcost}"/>
+
+                                <Text text="{tblModel>vacccost}"/>
+                                <Text text="{tblModel>vitcost}"/>
+                                <Text text="{tblModel>othercost}"/>
+                                <Text text="{tblModel>salevalue}"/>
+                                <Text text="{tblModel>mor}" />
+                                <Text text="{tblModel>mor}"/>
+                                <Text text="{tblModel>after19feedqty}"/>
+
+                                <Text text="{tblModel>feedcostafter19week}"/>
+                                <Text text="{tblModel>after19medqty}"/>
+                                <Text text="{tblModel>medcostafter19week}"/>
+                                <Text text="{tblModel>after19vaccineqty}"/>
+                                <Text text="{tblModel>vaccinecostafter19week}"/>
+                                <Text text="{tblModel>after19vitqty}" />
+                                <Text text="{tblModel>vitcostafter19week}"/>
+                                <Text text="{tblModel>after19weeksalevalue}"/>
+                                <Text text="{tblModel>after19weeksalevalue}"/>
+                                <Text text="{tblModel>after19weekothercost}"/>
+                                <Text text="{tblModel>after19weekamotization}"/>
+                                </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>     
+                  </ScrollContainer>                        
+            </VBox>             
+        </f:content>             
+    </f:DynamicPage>    
+</core:View>
+
+
+
+
+ 

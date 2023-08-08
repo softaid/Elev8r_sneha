@@ -1,0 +1,177 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Breeder.EggStockReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Egg Stock Rport"/>
+					</f:heading>
+					<f:actions>                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+           <f:header>
+                <f:DynamicPageHeader pinnable="true">
+                    <VBox>
+                      <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                       labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                            <form:FormElement label="{i18n>eggsCollectionReportLabelLocation}">
+                                                <form:fields>
+                                                    <MultiComboBox id="locationtbl"
+                                                        selectionChange="handleLocationSelectionChange"
+                                                        selectionFinish="handleLocationSelectionFinish"
+                                                        width="500px"
+                                                        items="{
+                                                            path: 'locationList>/modelData',
+                                                            sorter: { path: 'Name' }
+                                                        }">
+                                                        <core:Item key="{locationList>id}" text="{locationList>locationname}" />
+                                                    </MultiComboBox>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="{i18n>eggsCollectionReportLabelBatchName}">
+                                                <form:fields>
+                                                    <MultiComboBox id="batchtb"
+                                                        selectionChange="batchBatchSelectionChange"
+                                                        selectionFinish="batchBatchSelectionFinish"
+                                                        width="500px"
+                                                        items="{
+                                                            path: 'batchModel>/modelData',
+                                                            sorter: { path: 'Name' }
+                                                        }">
+                                                        <core:Item key="{batchModel>breederbatchid}" text="{batchModel>batchname}" />
+                                                    </MultiComboBox>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="From Date">
+                                                <form:fields>
+                                                    <DatePicker id="txtFromdate"  width="100%" value="{eggStockModel>/fromdate}" 
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                                    valueFormat="{config>/dateFormat/valueFormat}" 
+                                                    placeholder="{config>/dateFormat/placeholder}" change="ongetDate" />   
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    <form:FormContainer>
+
+                                          <form:formElements>
+                                            
+                                          <form:FormElement label="To Date">
+                                            <form:fields>
+                                                <DatePicker id="txtTodate"  width="100%" value="{eggStockModel>/todate}" 
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                                valueFormat="{config>/dateFormat/valueFormat}" 
+                                                placeholder="{config>/dateFormat/placeholder}" change="ongetDate" />   
+                                            </form:fields>
+                                        </form:FormElement>
+                                          <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Search Data" width="100%" press="onSearchData"/>
+                                                <MenuButton icon="sap-icon://download" width="50%" align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="SaveCSV" icon="sap-icon://save" press="onDataExport" />
+                                                            <MenuItem text="SavePDF" icon="sap-icon://save" press="createPDF" />
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                         </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                    </VBox>
+                </f:DynamicPageHeader>
+            </f:header>
+			<f:content>				
+
+                        <HBox fitContainer="true">
+                            	<ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                vertical="true"
+                                focusable="true">
+                            <Table id="tblEggsCollReport"  width="400%" growing="true" growingScrollToLoad="true" growingThreshold="75" sticky="ColumnHeaders"  items="{
+                                                path: 'eggStockTblModel>/modelData',
+                                                    sorter: {
+                                                        path: 'date'
+                                                    }
+                                                }"
+                                    mode="None" backgroundDesign="Solid">
+                                <columns>
+                                    <Column width="10%"><Label text ="Batch" /></Column>
+                                    <Column width="10%"><Label text ="Production Qty" /></Column>
+                                    <Column width="10%"><Label text ="Production Rate" /></Column>
+                                    <Column width="10%"><Label text ="Production Amount" /></Column>
+                                    <Column width="10%"><Label text ="Transfer Qty" /></Column>
+                                    <Column width="10%"><Label text ="Transfer Rate" /></Column>
+                                    <Column width="10%"><Label text ="Transfer Amount" /></Column>
+                                    <Column width="10%"><Label text ="Sold Qty" /></Column>
+                                    <Column width="10%"><Label text ="Sold Rate" /></Column>
+                                    <Column width="10%"><Label text ="Sold Amount" /></Column>
+                                    <Column width="10%"><Label text ="Closing Qty" /></Column>
+                                    <Column width="10%"><Label text ="Closing Rate" /></Column>
+                                    <Column width="10%"><Label text ="Closing Amount" /></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                    <customData>
+                                    </customData>
+                                        <cells>
+                                            <Text text="{eggStockTblModel>batchname}"/>
+                                            <Text text="{eggStockTblModel>productionstock}"/>
+                                            <Text text="{eggStockTblModel>productionrate}"/>
+                                            <Text text="{eggStockTblModel>productionamount}"/>
+                                            <Text text="{eggStockTblModel>transferstock}"/>
+                                            <Text text="{eggStockTblModel>transferrate}"/>
+                                            <Text text="{eggStockTblModel>transferamount}"/>
+                                            <Text text="{eggStockTblModel>soldstock}"/>
+                                            <Text text="{eggStockTblModel>salerate}"/>
+                                            <Text text="{eggStockTblModel>saleamount}"/>
+                                            <Text text="{eggStockTblModel>closingstock}"/>
+                                            <Text text="{eggStockTblModel>closingrate}"/>
+                                            <Text text="{eggStockTblModel>closingamount}"/>  
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table> 
+                            </ScrollContainer>                          
+                        </HBox> 
+                    </f:content>
+			</f:DynamicPage>      
+</core:View>
+
+
+
+
+ 

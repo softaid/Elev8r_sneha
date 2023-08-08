@@ -1,0 +1,40 @@
+
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="{i18n>PurchaseRequestForStatusDialogSelectPurchaseRequest}"	
+		contentHeight="300px"
+		search="_handlePurchaseoderSearch"
+		confirm="onPurchaseoderDialogClose"
+		cancel="onPurchaseoderDialogClose"
+		items="{
+			path : 'vendorModel>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="" text="{vendorModel>partnercode}" />
+                <Text text="{vendorModel>partyname}" />
+				<Text text="{vendorModel>contactperson}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>PurchaseRequestForStatusDialogRefNo}" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>PurchaseRequestForStatusDialogName}" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>PurchaseRequestForStatusDialogContactPerson}" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

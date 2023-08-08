@@ -1,0 +1,263 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.BillOfMaterial" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core"
+   xmlns:k= "jQuery.sap.ui.event.keyCodes" >
+    <f:FlexibleColumnLayout  id="fclBillOfMaterial" backgroundDesign="Solid">
+		<f:beginColumnPages>
+            <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+                <f:title>
+                    <f:DynamicPageTitle>
+                        <f:heading>
+                            <Title text="{i18n>feedMillBillOfMaterialTitle}"/>
+                        </f:heading>
+                        <f:actions>
+                            <Button id = "btnList" icon="sap-icon://list" type="Transparent" press="onListIconPress" visible="false" />
+                            
+                        </f:actions>
+                    </f:DynamicPageTitle>
+                </f:title>
+                <f:content>			
+                    <VBox fitContainer="true">
+                        <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                    <form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMCOde}">
+                                            <form:fields>
+                                                <Input id="textbmcode"  value="{billofmaterialModel>/bomcode}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                    <form:FormElement label="{i18n>feedMillBillOfMaterialLabelProductGroup}">
+                                            <form:fields>
+                                                <Select id="txtItemGroup"
+                                                    forceSelection  = "false" selectedKey="{billofmaterialModel>/itemgroupid}"
+                                                        change = "itemgroupSelect"
+                                                        items="{
+                                                            path: 'itemGroupModel>/modelData',
+                                                            sorter: { path: 'id' }
+                                                        }">
+                                                        <core:Item key="{itemGroupModel>id}" text="{itemGroupModel>groupname}" />                                            
+                                                    </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>feedMillBillOfMaterialLabelProductName}">
+                                            <form:fields>
+                                                <Input
+                                                    id="txtitemname"
+                                                    type="Text"
+                                                    value="{billofmaterialModel>/itemname}"
+                                                    placeholder="{i18n>selectItem}"
+                                                    enabled="true"
+                                                    showValueHelp="true"                                                
+                                                    valueHelpOnly="true"       
+                                                    valueHelpRequest="handleItemValueHelp"
+                                                    required="true"
+                                                    editable="true">
+                                                </Input>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>feedMillBillOfMaterialLabelItemUnit}">
+                                            <form:fields>
+                                                <Input id="textunit"  value="{billofmaterialModel>/itemunitname}" editable="false" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>feedMillBillOfMaterialLabelQuantity}">
+                                            <form:fields>
+                                                <Input id="quantity"  value="{billofmaterialModel>/quantity}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+
+                                <form:FormContainer title="">
+                                    <form:formElements>
+
+                                        <form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMNo}">
+                                            <form:fields>
+                                            <Input id="txtbomno" enabled="false" value="{docSeriesModel>/newseries}" editable="false" />                                
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtdate" width="100%" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}"
+                                                    value="{billofmaterialModel>/bomdate}"
+                                                    valueFormat="dd/MM/yyyy"
+                                                    required="true"  
+                                                    />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        
+                                        <form:FormElement label="{i18n>feedMillBillOfMaterialLabelCreatedBy}">
+                                            <form:fields>
+                                                <Select id="txtCreatedBy" forceSelection="false"  selectedKey="{billofmaterialModel>/createdby}" 
+                                                        items="{
+                                                            path: 'employeeList>/modelData',
+                                                            sorter: { path: 'id' }
+                                                        }">
+                                                    <core:Item key="{employeeList>id}" text="{employeeList>employeename}" />                                            
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    
+                                        <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
+                                        <form:fields>
+                                                <Switch  state="{billofmaterialModel>/isactive}" id="chkwithrequest" customTextOn="Yes" customTextOff="No"  >
+                                                    <layoutData>
+                                                        <FlexItemData growFactor="1" />
+                                                    </layoutData>
+                                                </Switch>
+                                                <Button text="{i18n>copyPaste}" id="btnDuplicate" type="Emphasized" class="sapUiSmallMarginEnd" press="onCopyPaste"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                
+                        <IconTabBar selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
+                            <items>
+                                <IconTabFilter text="{i18n>feedMillBillOfMaterialLabelTabBillOfMaterialList}">
+                                    <VBox fitContainer="true">
+                                    
+                                    <Table id="tblBillOfMaterial" width="100%" mode="None" backgroundDesign="Solid" growingScrollToLoad="true" items="{
+                                        path: 'tblModel>/modelData',
+                                            sorter: {
+                                                path: 'id'
+                                            }
+                                        }">
+                                        <headerToolbar>
+                                            <Toolbar>
+                                            <content>
+                                                <Title text="{i18n>feedMillBillOfMaterialTitle}" level="H2"/>
+                                                <ToolbarSpacer />
+                                                
+                                                <Button icon="sap-icon://add" type="Transparent" press="onAddNewRow"/>
+                                            </content>
+                                            </Toolbar>
+                                        </headerToolbar>
+                                        <columns>
+                                            <Column><Text text ="{i18n>feedMillBillOfMaterialLabelItemName}" /></Column>
+                                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" /></Column>
+                                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" /></Column>
+                                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" /></Column>
+                                        
+                                            <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" /></Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem type="Navigation" press="onListItemPress">
+                                                <cells>        
+                                                    <Text text="{tblModel>itemname}" />         
+                                                    <Text text="{tblModel>quantity}" />   
+                                                    <Text text="{tblModel>itemunitname}"/>
+                                                    <Text text="{tblModel>unitcost}"/> 
+                                                    <Text text="{tblModel>materialtype}"/>   
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                </VBox>   
+                                <form:Form editable="true">
+                                    <form:title>
+                                        <core:Title text="" />
+                                    </form:title>
+                                        <form:layout>
+                                            <form:ResponsiveGridLayout
+                                                labelSpanXL="4"
+                                                labelSpanL="4"
+                                                labelSpanM="4"
+                                                labelSpanS="12"
+                                                adjustLabelSpan="false"
+                                                emptySpanXL="0"
+                                                emptySpanL="0"
+                                                emptySpanM="0"
+                                                emptySpanS="0"
+                                                columnsXL="3"
+                                                columnsL="2"
+                                                columnsM="2"
+                                                singleContainerFullSize="false" />
+                                        </form:layout>
+                                        <form:formContainers>
+                                            <form:FormContainer>
+                                                <form:formElements>
+                                                <form:FormElement label="Note">
+                                                    <form:fields>
+                                                        <TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{billofmaterialModel>/note}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                </form:formElements>
+                                            </form:FormContainer>
+                                            <form:FormContainer>
+                                                <form:formElements>
+                                                <form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMUnitCost}">
+                                                    <form:fields>
+                                                        <Input id="txtItemTotal"  value="{billofmaterialModel>/unitcost}" editable="false"/>
+                                                    </form:fields>
+                                                </form:FormElement>
+
+                                                <form:FormElement label="Item Total quantity">
+                                                    <form:fields>
+                                                        <Input id="txttotalQty"  value="{billofmaterialModel>/itemtotalqty}" editable="false"/>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                </form:formElements>
+                                            </form:FormContainer>
+                                        </form:formContainers>
+                                    </form:Form>
+                                    <Panel>
+                                        <FlexBox		
+                                            alignItems="Start"
+                                            justifyContent="End">
+                                            <items>
+                                                <Button text="{i18n>saveButtonText}" id="btnSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+                                                <Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
+                                            </items>
+                                        </FlexBox>
+                                    </Panel> 
+                                </IconTabFilter>
+                                <IconTabFilter id="catTab" text="{i18n>feedMillBillOfMaterialLabelBillOfMaterialView}" key="{categoryModel>id}">
+                                    <Tree
+                                        id="Tree"
+                                        expandFirstLevel="true"
+                                        items="{bomTreeModel>/modelData}">
+                                        <StandardTreeItem id="txtItem" title="{bomTreeModel>itemname}" 
+                                            expanded="true"/>
+                                    </Tree>
+                                </IconTabFilter>
+                            </items>
+                            <layoutData>
+                                <FlexItemData growFactor="1" baseSize="0%"/>
+                            </layoutData>
+                        </IconTabBar>
+                    </VBox>  
+                </f:content>
+			</f:DynamicPage>
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>
+
+
+
+
+ 

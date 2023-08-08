@@ -1,0 +1,74 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Eggs Collection"
+		contentHeight="300px"
+		search="handleEggsColtionSearch"
+		confirm="handleEggsColtionClose"
+		cancel="handleEggsColtionClose"
+		items="{
+			path : 'eggscollectionModel>/modelData',
+			sorter : {
+				path : 'code'
+			}
+		}">
+		<ColumnListItem>
+			<cells>
+				<!-- <ObjectIdentifier title="" text="{eggscollectionModel>eggscollectionid}"/> -->
+				<Text text="{eggscollectionModel>eggscollectionid}" />
+				<Text text="{eggscollectionModel>collectiondate}" />
+				<ObjectIdentifier title="{eggscollectionModel>shedname}" text="{eggscollectionModel>totalquantity}" />
+				<tnt:InfoLabel 
+					text="{eggscollectionModel>statusname}"
+					displayOnly= "true"
+					colorScheme= "{parts: [{path: 'eggscollectionModel>statusname'}],
+					formatter: '.formatter.setColorEggsProcSche'}"
+					/>
+					<tnt:InfoLabel 
+					text="{eggscollectionModel>edstatusname}"
+					displayOnly= "true"
+					colorScheme= "{parts: [{path: 'eggscollectionModel>edstatusname'}],
+					formatter: '.formatter.setColorEggsProcSche'}"
+					/>
+               
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column width="10%"
+				demandPopin="true" >
+				<header >
+					<Text text="No." />
+				</header>
+			</Column>
+			<Column width="20%"
+				demandPopin="true" >
+				<header>
+					<Text text="Collection Date" />
+				</header>
+			</Column>
+
+			 <Column width="30%"
+				demandPopin="true" >
+				<header>
+					<Text text="Shed Name / Collection Quantity" />
+				</header>
+			</Column>
+			<Column width="30%"
+				demandPopin="true" >
+				<header>
+					<Text text="Collection Status" />
+				</header>
+			</Column>
+
+			<Column width="30%"
+				demandPopin="true" >
+				<header>
+					<Text text="Distribution Status" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,185 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.ProductSales.ProductOrder" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+ <f:FlexibleColumnLayout  id="fclProductSalesOrder" backgroundDesign="Solid">
+		<f:beginColumnPages>
+
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+			<!-- DynamicPage Title -->
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Product Sales Order List"/>
+					</f:heading>
+					<f:actions>
+                            <Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+                            <Button icon="sap-icon://add" type="Transparent" press="onAdd"/>
+                            <Button icon="sap-icon://arrow-left" type="Transparent" press="onAdd"/>
+                            <Button icon="sap-icon://arrow-right" type="Transparent" press="onAdd"/>				
+					</f:actions>
+					<!-- <f:navigationActions>
+						<Button
+								icon="sap-icon://decline"
+								type="Transparent" press="onCancel" />
+					</f:navigationActions> -->
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:content>				
+
+
+                        <VBox fitContainer="true">
+                            <form:Form editable="true">
+                                <form:title>
+                                </form:title>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="3"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                            <form:FormElement label="Order Date">
+                                                <form:fields>
+                                                    <DatePicker id="txtOrderdate" value="" valueFormat="dd/MM/yyyy" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Subject">
+                                                <form:fields>
+                                                    <Input id="txtSubject" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Customer Name">
+                                                <form:fields>
+                                                    <Input id="txtCustName" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Order Type">
+                                                <form:fields>
+                                                    <CheckBox text="With Quotation"  selected="true"/>
+                                                    <CheckBox text="Without Quotation" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Quotation Number">
+                                                <form:fields>
+                                                    <Input id="txtQuotationNumber" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="againstForm">
+                                                <form:fields>
+                                                    <Input id="txtAgainstForm" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+
+                                    <form:FormContainer title="">
+                                        <form:formElements>
+                                            <form:FormElement label="Sales Representative">
+                                                <form:fields>
+                                                    <Input id="txtSalesRepresentative" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Referred By">
+                                                <form:fields>
+                                                    <Input id="txtReferredBy" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Reference Number">
+                                                <form:fields>
+                                                    <Input id="txtReferenceNumber" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Reference Date">
+                                                <form:fields>
+                                                    <DatePicker id="txtReferencedate" value="" valueFormat="dd/MM/yyyy" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Due Date">
+                                                <form:fields>
+                                                    <DatePicker id="txtDueDate" value="" valueFormat="dd/MM/yyyy" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Sales Type">
+                                                <form:fields>
+                                                    <Input id="txtSalesType" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                            
+                            <Table id="tblProductSalesOrder" mode="single" backgroundDesign="Solid">
+                                <headerToolbar>
+                                    <Toolbar>
+                                    <content>
+                                        <Title  level="H2"/>
+                                        <ToolbarSpacer />
+                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNewRow"/>
+                                    </content>
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column><Text text ="Stock Name" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Quantity" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Free Quantity" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Unit" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Rate" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Tax Name" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Amount" /></Column>
+                                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Other Charges" /></Column>
+                                    <Column minScreenWidth="Tablet"><Text text ="Action" /></Column>
+                                </columns>
+                            </Table>
+
+                            <Panel>
+                                <FlexBox		
+                                    alignItems="Start"
+                                    justifyContent="End">
+                                    <items>
+                                        <Button text="Save" type="Emphasized" class="sapUiSmallMarginEnd" />
+                                        <Button text="Cancel" type="Emphasized" class="sapUiSmallMarginEnd" />
+                                    </items>
+                                </FlexBox>
+                            </Panel>
+                            <!-- <form:content>
+                                <Label text="Remark" />
+                                <TextArea placeholder="Enter Remark" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+                            </form:content> -->
+                        </VBox>  
+                        
+                    </f:content>
+                    
+                    
+                        <f:footer>
+                        <OverflowToolbar>
+                            <ToolbarSpacer/>
+                            <Button type="Accept" text="Save"/>
+                        </OverflowToolbar>
+                    </f:footer>
+                    
+
+			</f:DynamicPage>
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>
+
+
+
+
+ 

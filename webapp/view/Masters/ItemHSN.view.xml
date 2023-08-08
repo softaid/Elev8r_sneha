@@ -1,0 +1,59 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Masters.ItemHSN" height="100%"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:core="sap.ui.core">
+<!-- 
+	<VBox fitContainer="true"> -->
+        <Table id="tblItemHSN" 
+               inset="false" 
+               growing="true"
+               growingThreshold="100"
+               growingScrollToLoad="true"
+               items="{
+                    path: 'itemHSNModel>/modelData',
+                    sorter: {
+                        path: 'groupname'
+                    }
+                }">
+	        <headerToolbar>
+			    <Toolbar>
+				   <content>
+					<Title text="Item HSN" level="H2"/>
+					<ToolbarSpacer />
+                    <SearchField search="onSearch" width="17.5rem" id="search"/>
+			        <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>
+                    <MenuButton icon="sap-icon://download">
+                        <menu>
+                            <Menu itemSelected="onMenuAction" >
+                                <items>
+                                    <MenuItem text="HNS Master List" icon="sap-icon://download" press="onHsnMasterExport" />
+                                </items>
+                            </Menu>
+                        </menu>
+                    </MenuButton>
+				  </content>
+			    </Toolbar>
+		    </headerToolbar>
+            <columns>
+                <Column><Text text ="ID" /></Column>
+                <Column><Text text ="Chapter" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Heading" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Sub Heading" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Description" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Chapter ID" /></Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Navigation" press="onListItemPress">
+                    <cells>
+                        <Text text="{itemHSNModel>id}"  />
+                        <Text text="{itemHSNModel>chapter}"  />
+                        <Text text="{itemHSNModel>heading}"  />
+                        <Text text="{itemHSNModel>subheading}"  />
+                        <Text text="{itemHSNModel>description}"  />
+                        <Text text="{itemHSNModel>chapterid}"  />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+	<!-- </VBox> -->
+</core:View>

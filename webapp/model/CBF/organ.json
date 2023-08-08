@@ -1,0 +1,28 @@
+{
+	"organ": [
+		{
+			"code" : 1,
+			"organname": "Intestine"
+		},
+		{
+			"code" : 2,
+			"organname": "Bursa"
+		},
+		{
+			"code" : 3,
+			"organname": "Heart/Liver"
+		},
+		{
+			"code" : 4,
+			"organname": "Proventricular"
+        },
+        {
+			"code" : 5,
+			"organname": "Peritonium cavity"
+        },
+        {
+			"code" : 6,
+			"organname": "Lungs"
+		}		
+	]
+}

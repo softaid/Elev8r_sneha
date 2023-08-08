@@ -1,0 +1,38 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:integration="sap.ui.integration.widgets"
+  xmlns:wp="sap.ushell.components.workPageBuilder.controls"
+  width="100%"
+  controllerName="sap.ushell.components.cepsearchresult.app.Main"
+  visible="false"
+  class="sapUiCEPSRApp">
+  <!-- the view is initially invisible -->
+  <Toolbar design="Solid" >
+    <IconTabHeader id="searchCategoriesTabs" backgroundDesign="Transparent" mode="Inline" items="{manager>/categories}" visible="{= Object.keys(${manager>/categories}).length > 1}" select=".tabSelectionChange">
+      <items>
+        <IconTabFilter visible="{= ${manager>level === 1}}" key="{manager>name}" text="{manager>shortTitle}" icon="{manager>icon}" />
+      </items>
+    </IconTabHeader>
+    <ToolbarSpacer/>
+    <Button visible="false" tooltip="{AppI18n>SEARCHRESULTAPP.Config.ButtonTooltip}" icon="sap-icon://settings" text="{AppI18n>SEARCHRESULTAPP.Config.ButtonText}"></Button>
+  </Toolbar>
+  <wp:WorkPage>
+    <wp:WorkPageRow>
+      <wp:WorkPageColumn columnWidth="24">
+        <wp:WorkPageCell>
+          <wp:widgetContainers>
+            <wp:WorkPageWidgetContainer>
+              <wp:widget>
+                <integration:Card id="searchResultWidget" action="_handleCardAction">
+                </integration:Card>
+              </wp:widget>
+            </wp:WorkPageWidgetContainer>
+          </wp:widgetContainers>
+        </wp:WorkPageCell>
+      </wp:WorkPageColumn>
+      <wp:WorkPageColumn columnWidth="0">
+      </wp:WorkPageColumn>
+    </wp:WorkPageRow>
+  </wp:WorkPage>
+
+</mvc:View>

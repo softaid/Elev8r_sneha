@@ -1,0 +1,289 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Common.CommonSetting" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+ <f:FlexibleColumnLayout  id="fclCommonSetting" backgroundDesign="Solid">
+		<f:beginColumnPages>
+
+
+<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Common Setting"/>
+					</f:heading>
+					<f:actions>
+                           
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:content>	
+                <VBox fitContainer="true">
+                    <IconTabBar selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
+                        <items>
+                            <IconTabFilter id="acountsatingtab" text="Common Setting">
+                                <form:Form editable="true">
+                                    <form:title>
+                                    </form:title>
+                                    <form:layout>
+                                        <form:ResponsiveGridLayout
+                                            labelSpanXL="4"
+                                            labelSpanL="4"
+                                            labelSpanM="4"
+                                            labelSpanS="12"
+                                            adjustLabelSpan="false"
+                                            emptySpanXL="0"
+                                            emptySpanL="0"
+                                            emptySpanM="0"
+                                            emptySpanS="0"
+                                            columnsXL="3"
+                                            columnsL="2"
+                                            columnsM="2"
+                                            singleContainerFullSize="false" />
+                                    </form:layout>
+                                    <form:formContainers>
+                                        <form:FormContainer title="">
+                                            <form:formElements>
+                                                <form:FormElement label="Cash Ledger">
+                                                    <form:fields>
+                                                        <Input
+                                                            id="cashledgerid"
+                                                            type="Text"
+                                                            value="{commonSettingModel>/cashledgername}"
+                                                            placeholder="Select Ledger"
+                                                            enabled="true"
+                                                            showValueHelp="true"                                                
+                                                            valueHelpOnly="true"       
+                                                            valueHelpRequest="handleLedgerValueHelp"
+                                                            required="true">
+                                                        </Input>
+                                                        <Input value="{commonSettingModel>/cashledgercode}" enabled="false" />
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="Inventory Gain And Loss Ledger">
+                                                    <form:fields>
+                                                        <Input
+                                                            id="inventoryindrledgerid"
+                                                            type="Text"
+                                                            value="{commonSettingModel>/inventoryledgername}"
+                                                            placeholder="Select Ledger"
+                                                            enabled="true"
+                                                            showValueHelp="true"                                                
+                                                            valueHelpOnly="true"       
+                                                            valueHelpRequest="handleLedgerValueHelp"
+                                                            required="true">
+                                                        </Input>
+                                                        <Input value="{commonSettingModel>/inventoryledgercode}" enabled="false" />
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="Good Receipt But Not Invoice Ledger">
+                                                    <form:fields>
+                                                        <Input
+                                                            id="grpowithoutinvoiceledgerid"
+                                                            type="Text"
+                                                            value="{commonSettingModel>/grpolegdgername}"
+                                                            placeholder="Select Ledger"
+                                                            enabled="true"
+                                                            showValueHelp="true"                                                
+                                                            valueHelpOnly="true"       
+                                                            valueHelpRequest="handleLedgerValueHelp"
+                                                            required="true">
+                                                        </Input>
+                                                        <Input value="{commonSettingModel>/grpoledgercode}" enabled="false" />
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="Discount Ledger">
+                                                    <form:fields>
+                                                        <Input
+                                                            id="discountledgerid"
+                                                            type="Text"
+                                                            value="{commonSettingModel>/discountledgername}"
+                                                            placeholder="Select Ledger"
+                                                            enabled="true"
+                                                            showValueHelp="true"                                                
+                                                            valueHelpOnly="true"       
+                                                            valueHelpRequest="handleLedgerValueHelp"
+                                                            required="true">
+                                                        </Input>
+                                                        <Input value="{commonSettingModel>/discountledgercode}" enabled="false" />
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="Cost Of Good Sold Ledger">
+                                                    <form:fields>
+                                                        <Input
+                                                            id="costofgoodsoldledgerid"
+                                                            type="Text"
+                                                            value="{commonSettingModel>/cogsledgername}"
+                                                            placeholder="Select Ledger"
+                                                            enabled="true"
+                                                            showValueHelp="true"                                                
+                                                            valueHelpOnly="true"       
+                                                            valueHelpRequest="handleLedgerValueHelp"
+                                                            required="true">
+                                                        </Input>
+                                                        <Input value="{commonSettingModel>/cogsledgercode}" enabled="false" />
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="GRPO without PO">
+                                                    <form:fields>
+                                                        <Switch state="{commonSettingModel>/grpowithoutpo}" id="gwp" customTextOn="Yes" customTextOff="No"  >
+                                                            <layoutData>
+                                                                <FlexItemData growFactor="1" />
+                                                            </layoutData>
+                                                        </Switch>
+                                                    </form:fields>
+                                                </form:FormElement>                            
+                                                <form:FormElement label="Purchase Invoice without GRPO">
+                                                    <form:fields>
+                                                        <Switch state="{commonSettingModel>/purchaseinvoicewithoutgrpo}" id="piwg" customTextOn="Yes" customTextOff="No">
+                                                            <layoutData>
+                                                                <FlexItemData growFactor="1" />
+                                                            </layoutData>
+                                                        </Switch>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="Purchase Invoice without PO">
+                                                    <form:fields>
+                                                        <Switch state="{commonSettingModel>/purchaseinvoicewithoutpo}" id="piwp" customTextOn="Yes" customTextOff="No" >
+                                                            <layoutData>
+                                                                <FlexItemData growFactor="1" />
+                                                            </layoutData>
+                                                        </Switch>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                            </form:formElements>
+                                        </form:FormContainer>
+                                        <form:FormContainer>
+                                            <form:formElements>
+                                                
+                                                <form:FormElement label="Opening Balance Ledger">
+                                                    <form:fields>
+                                                        <ComboBox 
+                                                            id="txtopeningBalanceLeger" 
+                                                            valueStateText="Select Opening ledger" 
+                                                            showSecondaryValues = "true"
+                                                            selectedKey="{commonSettingModel>/opening_balance_ledger_id}"
+                                                            items="{
+                                                            path: 'equetyledgerList>/modelData',
+                                                            sorter: { path: 'category' }
+                                                            }" required="true">
+                                                            <core:ListItem key="{equetyledgerList>id}" text="{equetyledgerList>glcode}-{equetyledgerList>ledgername}" additionalText = "{equetyledgerList>category}"/>
+                                                        </ComboBox>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="Profit and Loss Ledger">
+                                                    <form:fields>
+                                                        <ComboBox 
+                                                            id="profitandlossledgertxt" 
+                                                            valueStateText="Select Profit and loss ledger" 
+                                                            showSecondaryValues = "true"
+                                                            selectedKey="{commonSettingModel>/profitandlossledgerid}"
+                                                            items="{
+                                                            path: 'equetyledgerList>/modelData',
+                                                            sorter: { path: 'id' }
+                                                            }" required="true">
+                                                            <core:ListItem key="{equetyledgerList>id}" text="{equetyledgerList>glcode}-{equetyledgerList>ledgername}" additionalText = "{equetyledgerList>category}"/>
+                                                        </ComboBox>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="Supplier Ledger">
+                                                    <form:fields>
+                                                        <ComboBox 
+                                                            id="txtsupplier" 
+                                                            valueStateText="Select ledger" 
+                                                            showSecondaryValues = "true"
+                                                            selectedKey="{commonSettingModel>/supplier_ledger_group_id}"
+                                                            items="{
+                                                            path: 'libledgerList>/modelData',
+                                                            sorter: { path: 'category' }
+                                                            }" required="true">
+                                                            <core:ListItem key="{libledgerList>id}" text="{libledgerList>glcode}-{libledgerList>ledgername}" additionalText = "{libledgerList>category}"/>
+                                                        </ComboBox>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="Customer Ledger">
+                                                    <form:fields>
+                                                        <ComboBox 
+                                                            id="txtcustomerledger" 
+                                                            valueStateText="Select ledger" 
+                                                            showSecondaryValues = "true"
+                                                            selectedKey="{commonSettingModel>/customer_ledger_group_id}"
+                                                            items="{
+                                                            path: 'assetledgerList>/modelData',
+                                                            sorter: { path: 'category' }
+                                                            }" required="true">
+                                                            <core:ListItem key="{assetledgerList>id}" text="{assetledgerList>glcode}-{assetledgerList>ledgername}" additionalText = "{assetledgerList>category}"/>
+                                                        </ComboBox>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="Control Account Ledger">
+                                                    <form:fields>
+                                                        <Input
+                                                            id="controlaccountledgerid"
+                                                            type="Text"
+                                                            value="{commonSettingModel>/controlaccountledger}"
+                                                            placeholder="Select Ledger"
+                                                            enabled="true"
+                                                            showValueHelp="true"                                                
+                                                            valueHelpOnly="true"       
+                                                            valueHelpRequest="handleLedgerValueHelp"
+                                                            required="true">
+                                                        </Input>
+                                                        <Input value="{commonSettingModel>/controlaccountledgercode}" enabled="false" />
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="Delivery without SO">
+                                                    <form:fields>
+                                                        <Switch state="{commonSettingModel>/deliverywithoutso}" id="dws" customTextOn="Yes" customTextOff="No"  >
+                                                            <layoutData>
+                                                                <FlexItemData growFactor="1" />
+                                                            </layoutData>
+                                                        </Switch>
+                                                    </form:fields>
+                                                </form:FormElement>                            
+                                                <form:FormElement label="Sales Invoice without Delivery">
+                                                    <form:fields>
+                                                        <Switch state="{commonSettingModel>/salesinvoicewithoutdelivery}" id="siwd" customTextOn="Yes" customTextOff="No">
+                                                            <layoutData>
+                                                                <FlexItemData growFactor="1" />
+                                                            </layoutData>
+                                                        </Switch>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                                <form:FormElement label="Sales Invoice without SO">
+                                                    <form:fields>
+                                                        <Switch state="{commonSettingModel>/salesinvoicewithoutso}" id="siws" customTextOn="Yes" customTextOff="No" >
+                                                            <layoutData>
+                                                                <FlexItemData growFactor="1" />
+                                                            </layoutData>
+                                                        </Switch>
+                                                    </form:fields>
+                                                </form:FormElement>
+                                            </form:formElements>
+                                        </form:FormContainer>
+                                    </form:formContainers>
+                                </form:Form>
+                            </IconTabFilter>
+                        </items>
+                        <layoutData>
+                            <FlexItemData growFactor="1" baseSize="0%"/>
+                        </layoutData>
+                    </IconTabBar>
+                    <Panel>
+                        <FlexBox		
+                            alignItems="Start"
+                            justifyContent="End">
+                            <items>
+                                <Button text="Save" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+                                <Button text="Clear" type="Emphasized" class="sapUiSmallMarginEnd" press="onClear"/>
+                            </items>
+                        </FlexBox>
+                    </Panel>
+                </VBox>     
+            </f:content>
+        </f:DynamicPage>
+    </f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>

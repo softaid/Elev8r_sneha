@@ -1,0 +1,117 @@
+<mvc:View
+		xmlns:c="sap.ui.core"
+		controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.ProductSales.ProductDeliveryListDetail"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:u="sap.ui.unified"
+		xmlns="sap.m"
+		xmlns:t="sap.ui.table"
+		xmlns:f="sap.f"
+		xmlns:layout="sap.ui.layout"
+		xmlns:form="sap.ui.layout.form"
+
+		height="100%">
+		<f:DynamicPage id="dynamicPageId1" preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Product Delivery Detail"/>
+					</f:heading>
+					<f:actions>
+						<ToolbarSpacer/>
+						 <Button
+							text="Save"
+                            type="Emphasized"
+							press="onSave"/>
+						<Button
+							text="Delete"
+							type="Emphasized"
+							press="onDelete"/>						
+					</f:actions>
+					<f:navigationActions>
+						<Button
+							icon="sap-icon://decline"
+							type="Transparent" press="onCancel" />
+					</f:navigationActions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:content>				
+   			   <form:Form editable="true">
+                    <form:title>
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="2"
+                                singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer title="">
+					        <form:formElements>                            
+                                <form:FormElement label="Challan Number">
+                                    <form:fields>
+                                        <Input id="txtChallanNumber"/>
+                                    </form:fields>
+                                </form:FormElement>
+								<form:FormElement label="Challan Date">
+                                    <form:fields>
+                                        <DatePicker id="txtChallandate" value="" valueFormat="dd/MM/yyyy" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Subject">
+                                    <form:fields>
+                                        <Input id="txtSubject" />
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Customer Name">
+                                    <form:fields>
+										<ComboBox id="pCust"/>
+                                    </form:fields>
+                                </form:FormElement>
+								<form:FormElement label="Challan Type">
+                                    <form:fields>
+                                        <CheckBox text="With Order"  selected="true"/>
+                                        <CheckBox text="Without Order" />
+                                    </form:fields>
+                                </form:FormElement>
+								<form:FormElement label="Address To">
+                                    <form:fields>
+                                        <Input id="pAddressTo"/>
+                                    </form:fields>
+                                </form:FormElement>
+								<form:FormElement label="Mode of Transport">
+                                    <form:fields>
+                                        <Input id="pMode"/>
+                                    </form:fields>
+                                </form:FormElement>
+								<form:FormElement label="Vehicle Number">
+                                    <form:fields>
+                                        <Input id="pVehicle"/>
+                                    </form:fields>
+                                </form:FormElement>
+								<form:FormElement label="Total Weight">
+                                    <form:fields>
+                                        <Input id="pWeight"/>
+                                    </form:fields>
+                                </form:FormElement>
+								<form:FormElement label="Shipping Address">
+                                    <form:fields>
+                                        <Input id="pShipAddr"/>
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+		    </f:content>
+	    </f:DynamicPage>
+</mvc:View>

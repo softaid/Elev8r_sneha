@@ -1,0 +1,317 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.SalesOrder" height="100%" 
+    xmlns="sap.m" 
+    xmlns:f="sap.f" 
+    xmlns:t="sap.ui.table" 
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:FlexibleColumnLayout id="fclBreederSalesOrder" backgroundDesign="Solid">
+        <f:beginColumnPages>
+
+            <f:DynamicPage toggleHeaderOnTitleClick="false">
+                <f:title>
+                    <f:DynamicPageTitle>
+                        <f:heading>
+                            <Title text="{i18n>SalesOrder}"/>
+                        </f:heading>
+                        <f:actions>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://list" type="Transparent" press="onListIconPress" visible="false"/>
+                        </f:actions>
+                    </f:DynamicPageTitle>
+                </f:title>
+                <f:content>
+                    <VBox fitContainer="true">
+                        <form:Form editable="true">
+                            <form:toolbar>
+                            </form:toolbar>
+                            <form:layout>
+                                <form:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2" singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>SalesOrderModule}">
+                                            <form:fields>
+                                                <Select id="salesType" change = "moduleChange"
+                                                    forceSelection  = "false" showSecondaryValues= "true"  selectedKey="{salesorderModel>/salestypeid}" items="{
+                                                        path: 'moduleList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:ListItem key="{moduleList>id}" text="{moduleList>refname}" />
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesOrderCustomer}">
+                                            <form:fields>
+                                                <Input id="txtVendor" type="Text" value="{salesorderModel>/partyname}" placeholder="Select customer" enabled="true" editable="true" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="handleSelectVedorList" required="true">
+                                                </Input>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <!--party outstanding-->
+                                        <form:FormElement label="{i18n>SalesOrderPartyOutstanding}">
+                                            <form:fields>
+                                                <Input id="txtPartyOutstanding" enabled="false" value="{salesorderModel>/partyoutstanding}"/>
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                        <form:FormElement label="{i18n>SalesOrderContactPerson}">
+                                            <form:fields>
+                                                <Input id="txtContactperson" enabled="false" value="{salesorderModel>/contactperson}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesOrderReferenceNo}">
+                                            <form:fields>
+                                                <Input id="txtCustomerRefNo" value="{salesorderModel>/referenceno}" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesOrderBillingToAddress}">
+                                            <form:fields>
+                                                <Input id="txtbilltoaddress" type="Text" value="{salesorderModel>/billtoaddress}" placeholder="Select bill to address" enabled="true" editable="true" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="handleSelectBillToAddrList" required="true">
+                                                </Input>
+                                            </form:fields>
+                                        </form:FormElement>
+                                         <form:FormElement label="{i18n>SalesOrderTransactionType}">
+                                            <form:fields>
+                                                <Select id="selGSTInvType"
+                                                    forceSelection  = "false" showSecondaryValues= "true"  selectedKey="{salesorderModel>/transactiontypeid}" items="{
+                                                        path: 'gstInvTypeList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:ListItem key="{gstInvTypeList>id}" text="{gstInvTypeList>refname}" />
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>SalesOrderOrderNo}">
+                                            <form:fields>
+                                                <Input id="txtSalesOrderNo" enabled="false" value="{docSeriesModel>/newseries}" />
+                                                <Input id="txtSalesOrderId" enabled="false" value="{salesorderModel>/id}" />
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                        <form:FormElement label="{i18n>SalesOrderSalesOrderDate}">
+                                            <form:fields>
+
+                                                <DatePicker id="txtSalesOrderDate"  width="100%" placeholder="{config>/dateFormat/placeholder}" displayFormat="{config>/dateFormat/displayFormat}" value="{salesorderModel>/salesorderdate}" valueFormat="dd/MM/yyyy" required="true" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesOrderDeliveryDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtDeliveryDate"  width="100%" placeholder="{config>/dateFormat/placeholder}" displayFormat="{config>/dateFormat/displayFormat}" value="{salesorderModel>/deliverydate}" valueFormat="dd/MM/yyyy" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesOrderDeliveryToAddress}">
+                                            <form:fields>
+                                                <Input id="txtshiptoaddress" type="Text" value="{salesorderModel>/deliverytoaddress}" placeholder="Delivery To" enabled="true" editable="true" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="handleSelectDelToAddrList" required="true">
+                                                </Input>
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                        <form:FormElement label="{i18n>SalesOrderDeliveryFromWarehouse}">
+                                            <form:fields>
+                                                <Input id="txtWarehouseAddress" type="Text" value="{salesorderModel>/warehouseaddress}" placeholder="Delivery From Warehouse" enabled="true" editable="true" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="handleSelectWHAddrList" required="true">
+                                                </Input>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesOrderStatus}">
+                                            <form:fields>
+                                                <Select id="selSOStatus" selectedKey="{salesorderModel>/statusid}" items="{
+                                                        path: 'SOStatusList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:ListItem key="{SOStatusList>id}" text="{SOStatusList>refname}" />
+                                                </Select>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                        <Panel width="auto" class="" accessibleRole="Region">
+                            <headerToolbar>
+                                <Toolbar height="3rem">
+                                    <Title text="{i18n>SalesOrderOrderItemList}"/>
+                                    <ToolbarSpacer />
+                                    <Button icon="sap-icon://add" type="Transparent" id="btnNewOrderItem" press="onAddNewContent"/>
+                                </Toolbar>
+                            </headerToolbar>
+                            <content>
+
+                                <ScrollContainer height="100%" width="100%" horizontal="true" vertical="true" focusable="true">
+
+                                    <Table id="tblsalesorder" width="200%" mode="None" backgroundDesign="Solid" enableHorizontalScrollbar= "true" growingScrollToLoad="true" items="{
+                                            path: 'tblModel>/modelData',
+                                                sorter: {
+                                                    path: 'id'
+                                                }
+                                        }">
+                                        <columns>
+                                            <!-- <Column><Text text ="PO No." /></Column> -->
+                                            <Column width="25%" minScreenWidth="Tablet" demandPopin="true">
+                                                <Text text ="{i18n>PurchaseOrderLabelItemName}" />
+                                            </Column>
+
+                                            <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                                                <Text text ="{i18n>SalesOrderWeight}" />
+                                            </Column>
+                                            <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                                                <Text text ="{i18n>SalesOrderQuantity}" />
+                                            </Column>
+                                            <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                                                <Text text ="{i18n>SalesOrderItemPrice}" />
+                                            </Column>
+                                            <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                                                <Text text ="{i18n>SalesOrderDiscount}"/>
+                                            </Column>
+
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center">
+                                                <Text text ="{i18n>SalesOrderCGST}" />
+                                            </Column>
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center">
+                                                <Text text ="{i18n>SalesOrderCGSTAmt}" />
+                                            </Column>
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center">
+                                                <Text text ="{i18n>SalesOrderSGST}" />
+                                            </Column>
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center">
+                                                <Text text ="{i18n>SalesOrderSGSTAmt}" />
+                                            </Column>
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center">
+                                                <Text text ="{i18n>SalesOrderIGST}" />
+                                            </Column>
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center">
+                                                <Text text ="{i18n>SalesOrderIGSTAmt}" />
+                                            </Column>
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center">
+                                                <Text text ="{i18n>SalesOrderUTGST}" />
+                                            </Column>
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" hAlign ="Center">
+                                                <Text text ="{i18n>SalesOrderUTGSTAmt}" />
+                                            </Column>
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" ><Text text ="VAT %" /></Column>
+                                            <Column width="10%" minScreenWidth="Tablet" demandPopin="true" ><Text text ="VAT Amt%" /></Column>
+                                            <Column width="15%" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                                                <Text text ="{i18n>PurchaseOrderLabelLineTotal}" />
+                                            </Column>
+
+
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem type="{salesorderModel>/navigation}" press="onListItemPress">
+                                                <cells>
+                                                    <!-- <Text text="{tblModel>purchaseorderid}" />          -->
+                                                    <Text text="{tblModel>itemname}" />
+                                                    <Text text="{tblModel>weight}" />
+                                                    <Text text="{tblModel>quantity}" />
+                                                    <Text text="{tblModel>unitprice}" />
+                                                    <Text text="{tblModel>discount}" />
+                                                    <Text text="{tblModel>cgstpercent}" />
+                                                    <Text text="{tblModel>cgstamount}" />
+                                                    <Text text="{tblModel>sgstpercent}" />
+                                                    <Text text="{tblModel>sgstamount}" />
+                                                    <Text text="{tblModel>igstpercent}" />
+                                                    <Text text="{tblModel>igstamount}" />
+                                                    <Text text="{tblModel>utgstpercent}" />
+                                                    <Text text="{tblModel>utgstamount}" />
+                                                    <Text text="{tblModel>vatpercent}"  />  
+                                                    <Text text="{tblModel>vatamount}"  />
+                                                    <Text text="{tblModel>linetotal}" />
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                </ScrollContainer>
+                            </content>
+                        </Panel>
+
+                        <form:Form editable="true">
+                            <form:layout>
+                                <form:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2" singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>SalesOrderSalesEmployee}">
+                                            <form:fields>
+
+                                                <Select id="selEmployees"  selectedKey="{employeeList>/salespersonid}" items="{
+                                                path: 'employeeList>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                                    <core:ListItem key="{employeeList>id}" text="{employeeList>employeename}" />
+                                                </Select>
+
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesOrderOwner}">
+                                            <form:fields>
+                                                <Input id="txtOwner" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesOrderRemark}">
+                                            <form:fields>
+                                                <TextArea placeholder="Add Remark" value="{salesorderModel>/remark}" growing="true" rows="3" growingMaxLines="5" width="100%"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="{i18n>SalesOrderGrossTotal}">
+                                            <form:fields>
+                                                <Input id="txtGrosstotal" value="{salesorderModel>/grosstotal}" enabled="false" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesOrderSubtotal}">
+                                            <form:fields>
+                                                <Input id="txtItemtotal" value="{salesorderModel>/itemtotal}" enabled="false" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesOrderDiscount}">
+                                            <form:fields>
+                                                <Input id="txtDiscountPercent" placeholder="%" change="onCalcChange" value="{salesorderModel>/discountpercent}" />
+                                                <Input id="txtDiscount" value="{salesorderModel>/discount}"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesOrderRounding}">
+                                            <form:fields>
+                                                <Input id="txtRoundTotal" value="{salesorderModel>/roundoff}" change="onRoundOffChange" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesOrderDiscountedAmount}">
+                                            <form:fields>
+                                                <Input id="txtTotalDiscount" value="{salesorderModel>/discountedamount}" enabled="false"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="{i18n>SalesOrderNetTotal}">
+                                            <form:fields>
+                                                <Input id="txtTotal" value="{salesorderModel>/grandtotal}" enabled="false"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+
+                        <Panel>
+                            <FlexBox alignItems="Start" justifyContent="End">
+                                <items>
+                                    <Button text="Force Close" id="btnClose" type="Emphasized" class="sapUiSmallMarginEnd" press="onClose" visible="false" />
+                                    <Button text="{i18n>saveButtonText}" id="btnSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+                                    <Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="clearData"/>
+                                </items>
+                            </FlexBox>
+                        </Panel>
+
+                    </VBox>
+                </f:content>
+            </f:DynamicPage>
+        </f:beginColumnPages>
+    </f:FlexibleColumnLayout>
+</core:View>

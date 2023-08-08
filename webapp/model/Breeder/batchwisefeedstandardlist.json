@@ -1,0 +1,33 @@
+{
+
+"batchwisefeedstandardlist":[
+    {
+        "week" : 2,
+        "itemCode" : "FEF0020",
+        "itemName" : "Fortune Agro-Breeder Starter",
+        "feedConsumed" : 0.25,
+        "cumulativeFeed" : 0.25,
+        "weeklyBodyWt" : 0.500,
+        "weightGain" :0.500
+    },
+    {
+        "week" : 2,
+        "itemCode" : "FEF0040",
+        "itemName" : "Fortune Agro -Breeder Grower",
+        "feedConsumed" : 0.25,
+        "cumulativeFeed" : 0.25,
+        "weeklyBodyWt" : 0.500,
+        "weightGain" :0.500
+    },
+    {
+        "week" : 2,
+        "itemCode" : "FEF0020",
+        "itemName" : "Fortune Agro-Breeder Starter",
+        "feedConsumed" : 0.3,
+        "cumulativeFeed" : 0.8,
+        "weeklyBodyWt" : 0.600,
+        "weightGain" :0.600
+    }
+]
+
+}

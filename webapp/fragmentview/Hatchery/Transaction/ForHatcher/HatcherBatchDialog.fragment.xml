@@ -1,0 +1,52 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="{i18n>noDataFound}"
+		title="{i18n>HatcherBatchDialogSelectHatcherBatch}"	
+		contentHeight="300px"
+		search="handleSearch"
+		confirm="handleClose"
+		cancel="handleClose"
+		items="{
+			path : 'hatcherBatchList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+                <Text text="{hatcherBatchList>hatcherbatchno}" />
+                <!-- <Text text="{hatcherBatchList>locationname}" /> -->
+				<ObjectIdentifier title="{hatcherBatchList>locationname}" text="{hatcherBatchList>hatchername}" />
+                <!-- <Text text="{hatcherBatchList>hatchername}" />		 -->
+                <Text text="{hatcherBatchList>hatcherbatchdate}" />
+                <Text text="{hatcherBatchList>status}" />			
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column width="15%">
+				<header>
+					<Text text="{i18n>HatcherBatchDialogHatcherBatchNo}" />
+				</header>
+			</Column> 
+			<Column width="35%">
+				<header>
+					<Text text="{i18n>HatcherBatchDialogLocation} / {i18n>HatcherBatchDialogHatcher}" />
+				</header>
+			</Column>
+			<!-- <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>HatcherBatchDialogHatcher}" />
+				</header>
+			</Column> -->
+            <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>HatcherBatchDialogHatcherBatchDate}" />
+				</header>
+			</Column> 
+			 <Column minScreenWidth="Tablet" demandPopin="true" >
+				<header>
+					<Text text="{i18n>HatcherBatchDialogStatus}" />
+				</header>
+			</Column> 
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

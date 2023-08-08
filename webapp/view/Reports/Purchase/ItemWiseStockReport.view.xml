@@ -1,0 +1,204 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Purchase.ItemWiseStockReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>itemWiseStockTitle}"/>
+                </f:heading>
+                <f:actions>                           
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <VBox>
+                    <form:Form editable="true">
+                            <form:title>
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+                                    <form:formElements>
+                                        <form:FormElement label="Item Group">
+                                            <form:fields>
+                                                <MultiComboBox id="txtitemgroup"
+                                                    selectionChange="handleselectionChange"
+                                                    selectionFinish="groupSelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'itemGroupList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{itemGroupList>id}" text="{itemGroupList>groupname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                
+                                      <form:FormElement label="Item Name">
+                                            <form:fields>
+                                                <MultiComboBox id="txtitemname"
+                                                    selectionChange="handleselectionChange"
+                                                    selectionFinish="itemSelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'itemList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{itemList>id}" text="{itemList>itemname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+
+
+                                    <form:FormElement label="Location Name">
+                                            <form:fields>
+                                                <MultiComboBox id="txtLocation"
+                                                    selectionChange="handleselectionChange"
+                                                    selectionFinish="locationSelectionFinish"
+                                                    width="500px" 
+                                                    items="{
+                                                        path: 'locationList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{locationList>id}" text="{locationList>locationname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+
+                                 
+                                        <form:FormElement label="{i18n>itemWiseStockLabelWareHouseName}">
+                                            <form:fields>
+                                                <MultiComboBox id="warehousetbl"
+                                                    selectionChange="handleselectionChangeWarehouse"
+                                                    selectionFinish="warehouseSelectionFinish"
+                                                    width="500px"
+                                                    forceSelection="false"
+                                                    items="{
+                                                        path: 'warehouseList>/modelData',
+                                                        sorter: { path: 'id' }
+                                                    }">
+                                                    <core:Item key="{warehouseList>id}" text="{warehouseList>warehousename}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                                <form:FormContainer>
+                                    <form:formElements>
+                                      <form:FormElement label="{i18n>purchaseRegisterReportLableFromDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtFromDate" required="true"          
+                                                    value="{stockModel>/fromdate}" 
+                                                    placeholder="{config>/dateFormat/placeholder}"
+                                                    displayFormat="{config>/dateFormat/displayFormat}" 
+                                            
+                                                    change="onDateChange"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>   
+                                        <form:FormElement label="{i18n>purchaseRegisterReportLableToDate}">
+                                            <form:fields>
+                                                <DatePicker id="txtToDate" required="true" 
+                                                value="{stockModel>/todate}" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}" 
+                                       
+                                                change="onDateChange"
+                                                />
+                                            </form:fields>
+                                        </form:FormElement>   
+                                             <form:FormElement label="">
+                                                <form:fields>
+                                                <Button icon="sap-icon://search" type="Emphasized" text="Show Records" width="100%" press="onSearchData"/>
+                                                <MenuButton id="txtdownload" text="Download Data" width="100%"  align="right">
+                                                <menu>
+                                                    <Menu itemSelected="onMenuAction" >
+                                                        <items>
+                                                            <MenuItem text="Save as CSV" icon="sap-icon://excel-attachment" press="onDataExport"/>
+                                                            <MenuItem text="Save as PDF" icon="sap-icon://pdf-attachment" press="createPDF"/>
+                                                        </items>
+                                                    </Menu>
+                                                </menu>
+                                            </MenuButton>
+                                                </form:fields>
+                                            </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+                </VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>		
+          <VBox fitContainer="true">
+            <ScrollContainer
+            height="100%"
+            horizontal="true"
+            vertical="true"
+            focusable="false">
+      
+        <Table id="tblItemWietock" mode="single"  sticky="ColumnHeaders" backgroundDesign="Solid" items="{
+                        path: 'tblModel>/modelData',
+                            sorter: {
+                                path: 'id'
+                            }
+                    }">
+             <columns>		
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Location Name" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Warehouse Name" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Group Name " /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Name" /></Column>   
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Opening Balance" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Receipt Quantity" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Transfer In Quantity" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Transfer Out Quantity" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Issue Quantity" /></Column>
+                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Closing Balance"/></Column>
+                </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>  
+                               <Text text="{tblModel>locationname}"/>
+                               <Text text="{tblModel>warehousename}"/>
+                               <Text text="{tblModel>groupname}"/>
+                               <Text text="{tblModel>itemname}"/>
+                               <Text text="{tblModel>openingbal}"/>
+                               <Text text="{tblModel>receipt}"/>
+                               <Text text="{tblModel>transferinstock}"/>
+                               <Text text="{tblModel>transferoutstock}"/>
+                               <Text text="{tblModel>issue}"/>
+                               <Text text="{tblModel>closingbal}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>   
+                </ScrollContainer>
+                </VBox>
+        </f:content>             
+    </f:DynamicPage>    
+</core:View>
+
+
+
+
+ 

@@ -1,0 +1,146 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Sales.CBFSales.LiftingWeight" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:FlexibleColumnLayout  id="fclCBFLiftingWeight" backgroundDesign="Solid">
+		<f:beginColumnPages>
+            <f:DynamicPage toggleHeaderOnTitleClick="false">
+			    <f:title>
+		    	    <f:DynamicPageTitle>
+				        <f:heading>
+					       <Title text="Lifting Weight"/>
+				        </f:heading>
+                        <f:actions>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://list" type="Transparent" press="onListIconPress"/>
+				            <Button icon="sap-icon://add" type="Transparent" press="onAdd"/>
+                            <Button icon="sap-icon://arrow-left" type="Transparent" press="onAdd"/>
+                            <Button icon="sap-icon://arrow-right" type="Transparent" press="onAdd"/>
+                        </f:actions>
+			        </f:DynamicPageTitle>
+		        </f:title>
+				<f:content>	
+	                <VBox fitContainer="true">                   
+                        <form:Form editable="true">    
+                            <form:toolbar>
+			                </form:toolbar>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                            <form:formContainers>
+                                <form:FormContainer title="">
+					                <form:formElements>
+                                        <form:FormElement label="Branch">
+                                            <form:fields>
+                                                <Input id="txtBranch" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="Farm">
+                                            <form:fields>
+                                                <Input id="txtFarm" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+
+                                <form:FormContainer title="">
+					                <form:formElements>
+                                        <form:FormElement label="Customer Code">
+                                            <form:fields>
+                                                <Input id="txtCustomerCode" />
+                                                <Input id="txtCustomerName" editable="false"  />                                
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement label="Schedule Code">
+                                            <form:fields>
+                                                <Input id="txtScheduleCode" />
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                </form:FormContainer>
+                            </form:formContainers>
+                        </form:Form>
+
+                        <Table id="tblliftingWeight" mode="single" backgroundDesign="Solid" inset="false" 
+                               items="{
+                                    path: 'tblLiftingWeightModel>/modelData',
+                                        sorter: {
+                                            path: 'lineId'
+                                        }
+                                    }">
+	                        <headerToolbar>
+			                    <Toolbar>
+				                    <content>
+					                    <Title text="" level="H2"/>
+					                    <ToolbarSpacer />
+			                            <Button icon="sap-icon://add" type="Transparent" press="onAddNewDetail"/>
+				                    </content>
+			                    </Toolbar>
+		                    </headerToolbar>
+                            <columns>
+                                <Column><Text text =" " /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="LineId" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Order Num" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Order Entry" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Order Date" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Customer Name" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Item Name" /></Column>     
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Total Weight" /></Column>                                                                                   
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Open Qty" /></Column>                            
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="To Release" /></Column>                            
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Rate Per Kg" /></Column>                            
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Farm Name" /></Column>                            
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Farmer Name" /></Column>   
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemPress">
+                                    <cells>
+                                        <CheckBox selected="{tblLiftingWeightModel>selected}"  />                                    
+                                        <Text text="{tblLiftingWeightModel>lineId}"  />
+                                        <Text text="{tblLiftingWeightModel>orderNumber}"  />
+                                        <Text text="{tblLiftingWeightModel>orderEntry}"  />
+                                        <Text text="{tblLiftingWeightModel>orderDate}"  />
+                                        <Text text="{tblLiftingWeightModel>customerName}"  />
+                                        <Text text="{tblLiftingWeightModel>itemName}"  />
+                                        <Text text="{tblLiftingWeightModel>totalWeight}"  />
+                                        <Text text="{tblLiftingWeightModel>openQuantity}"  />
+                                        <Text text="{tblLiftingWeightModel>toRelease}"  />
+                                        <Text text="{tblLiftingWeightModel>ratePerKg}"  />
+                                        <Text text="{tblLiftingWeightModel>farmName}"  />
+                                        <Text text="{tblLiftingWeightModel>farmerName}"  />                                        
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+
+                        <Panel>
+    	                    <FlexBox		
+				                alignItems="Start"
+				                justifyContent="End">
+				                <items>
+					                <Button text="Save" type="Emphasized" class="sapUiSmallMarginEnd" />
+					                <Button text="Cancel" type="Emphasized" class="sapUiSmallMarginEnd" />
+				                </items>
+			                </FlexBox>
+                        </Panel>         
+                    </VBox>  
+                </f:content>
+			</f:DynamicPage> 
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout> 
+</core:View>

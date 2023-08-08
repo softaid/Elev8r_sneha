@@ -1,0 +1,61 @@
+{
+	"navigation": [
+		{
+			"title": "User Managment",
+			"icon": "sap-icon://add-employee",
+			"expanded": false,
+			"key": "usermanagement",
+			"eid": [],
+			"items": []
+		},
+		{
+			"title": "License Management",
+			"icon": "sap-icon://add-contact",
+			"expanded": false,
+			"key": "licensemanagement",
+			"eid": [],
+			"items": []
+		},
+		{
+			"title": "Import Master",
+			"icon": "sap-icon://enter-more",
+			"expanded": true,
+			"key": "importmasters",
+			"eid": [],
+			"items": []
+		},
+		{
+			"title": "Application Setting",
+			"icon":  "sap-icon://settings",
+			"expanded": true,
+			"key": "manageapplication",
+			"eid": [],
+			"items": []
+		},
+		
+		{
+			"title": "Financial Year Setting",
+			"icon":  "sap-icon://settings",
+			"expanded": true,
+			"key": "financialyearsetting",
+			"eid": [],
+			"items": []
+		},
+		{
+			"title": "Document Series",
+			"icon": "sap-icon://add-document",
+			"expanded": true,
+			"key": "documentseries",
+			"eid": [],
+			"items": []
+		},
+		{
+			"title": "Page Shortcut Key",
+			"icon": "sap-icon://shortcut",
+			"expanded": true,
+			"key": "pageshortcutkey",
+			"eid": [],
+			"items": []
+		}
+	]
+}

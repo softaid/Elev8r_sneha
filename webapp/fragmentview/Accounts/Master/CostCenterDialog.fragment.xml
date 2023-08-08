@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select Cost Center"
+		contentHeight="300px"
+		search="handleCostCenterSearch"
+		confirm="handleCostCenterClose"
+		cancel="handleCostCenterClose"
+		items="{
+			path : 'costcenterModel>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{costcenterModel>id}" />
+				<Text text="{costcenterModel>dimenssioncode}" />
+                <Text text="{costcenterModel>dimenssionname}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="ID" />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Dimenssioncode" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Dimenssionname" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

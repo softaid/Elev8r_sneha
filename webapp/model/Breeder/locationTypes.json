@@ -1,0 +1,24 @@
+{
+	"locationTypes": [
+		{
+			"code" : 1,
+			"locationType": "Type1"
+		},
+		{
+			"code" : 2,
+			"locationType": "Type2"
+		},
+		{
+			"code" : 3,
+			"locationType": "Type3"
+		},
+		{
+			"code" : 4,
+			"locationType": "Type4"
+		},
+		{
+			"code" : 5,
+			"locationType": "Type5"
+		}			
+	]
+}

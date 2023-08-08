@@ -1,0 +1,182 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.Reports.Hatchery.ProductionReport" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+
+    <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+	    <f:title>
+			<f:DynamicPageTitle>
+			    <f:heading>
+					<Title text="{i18n>productionreportname}"/>
+					</f:heading>
+					<f:actions>
+					</f:actions>					
+			</f:DynamicPageTitle>
+		</f:title>
+        <f:header class="sapUiNoContentPadding">
+            <f:DynamicPageHeader pinnable="true">
+                <form:Form editable="true">
+                    <form:title>
+                    </form:title>
+                    <form:layout>
+                    <form:ResponsiveGridLayout
+                        labelSpanXL="6"
+                        labelSpanL="6"
+                        labelSpanM="6"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="3"
+                        columnsL="3"
+                        columnsM="3"
+                        singleContainerFullSize="false" />
+                    </form:layout>
+            <form:formContainers>
+                <form:FormContainer title="">
+                    <form:formElements>
+                        <form:FormElement label="{i18n>DailyBroodingGrowingLabelLocation}">
+                            <form:fields>
+                                <MultiComboBox id="locationtbl"
+                                    selectionChange="handleSelectionChange"
+                                    selectionFinish="handleSelectionFinish"
+                                    width="500px"
+                                    items="{
+                                        path: 'locationList>/modelData',
+                                        sorter: { path: 'locationname' }
+                                    }">
+                                    <core:Item key="{locationList>id}" text="{locationList>locationname}" />
+                                </MultiComboBox>
+                            </form:fields>
+                    </form:FormElement>
+                        <form:FormElement label="{i18n>productionreportbreederbatchname}">
+                            <form:fields>
+                                <MultiComboBox id="breederbatchid"
+                                    selectionChange="handleSelectionChange"
+                                    selectionFinish="breederBatchSelectionFinish"
+                                    width="500px"
+                                    items="{
+                                        path: 'breederBatchModel>/modelData',
+                                        sorter: { path: 'Name' }
+                                    }">
+                                    <core:Item key="{breederBatchModel>breederbatchid}" text="{breederBatchModel>breederbatchname}" />
+                                </MultiComboBox>
+                             </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+                <form:FormContainer>
+                    <form:formElements>
+                        <form:FormElement label="{i18n>productionreportparty}">
+                            <form:fields>
+                                <MultiComboBox id="partyid"
+                                    selectionChange="handleSelectionChange"
+                                    selectionFinish="partySelectionFinish"
+                                    width="500px"
+                                    items="{
+                                        path: 'partyModel>/modelData',
+                                        sorter: { path: 'Name' }
+                                    }">
+                                    <core:Item key="{partyModel>partyid}" text="{partyModel>partyname}" />
+                                </MultiComboBox>
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+                <form:FormContainer>
+                    <form:formElements>
+                        <form:FormElement label="">
+                            <form:fields>
+                                <Button icon="sap-icon://search" type="Emphasized" text="Search Data" width="100%" press="onProductionReportSearchData"/>
+                                <MenuButton icon="sap-icon://download" width="50%" align="right">
+                                <menu>
+                                    <Menu itemSelected="onMenuAction" >
+                                        <items>
+                                            <MenuItem text="{i18n>ProcessingProductionRegistersavecsv}" icon="sap-icon://save" press="onDataExport" />
+                                            <MenuItem text="{i18n>ProcessingProductionRegistersavepdf}" icon="sap-icon://save" press="onPdfExport" />
+                                        </items>
+                                    </Menu>
+                                </menu>
+                                </MenuButton>
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+                </form:formContainers>
+            </form:Form>
+        </f:DynamicPageHeader>
+        </f:header>
+		<f:content>	
+            <VBox fitContainer="true">
+                <ScrollContainer
+                    height="100%"
+                    width="100%"
+                    horizontal="true"
+                    vertical="true"
+                    focusable="true">
+                           
+                    <Table id="tblSettingReport" width='200%' growing="true" growingScrollToLoad="true" items="{
+                                    path: 'tblModel>/modelData',
+                                        sorter: {
+                                            path: 'id'
+                                        }
+                                    }"
+                                    mode="single" backgroundDesign="Solid">
+                        <columns>
+                            <Column><Label text ="{i18n>productionreportparty}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreportbatchno}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreportsetdate}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreportsetterbatch}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreportatchdate}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreporthatcherbatch}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreporteggreceived}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreporteggrate}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreportamount}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreportchicks}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreportsalablechicks}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreportcullsper}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreporthatchper}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreportbreed}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreportgrossprocost}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreporadmincostt}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreportoverhadcost}" /></Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true"><Label text ="{i18n>productionreportnetcost}" /></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{tblModel>partyname}"  />
+                                    <Text text="{tblModel>breederbatchname}"  />
+                                    <Text text="{tblModel>setterbatchdate}"  />  
+                                    <Text text="{tblModel>setterbatchid}"  />  
+                                    <Text text="{tblModel>hatcherbatchdate}"  />  
+                                    <Text text="{tblModel>hatcherbatchid}"  />
+                                    <Text text="{tblModel>totalhatcheggreceived}"  />
+                                    <Text text="{tblModel>rate}"  />
+                                    <Text text="{tblModel>totalamt}"  />
+                                    <Text text="{tblModel>totalchicks}"  />
+                                    <Text text="{tblModel>sellableper}"  />
+                                    <Text text="{tblModel>cullsper}"  />
+                                    <Text text="{tblModel>hatchper}"  /> 
+                                    <Text text="{tblModel>cpitemname}"  />
+                                    <Text text="{tblModel>grosstotal}"  />
+                                    <Text text="{tblModel>overheadcostperegg}"  />
+                                    <Text text="{tblModel>overheadcostperegg}"  />
+                                    <Text text="{tblModel>nettotal}"  />                                      
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </ScrollContainer>   
+            </VBox>  
+        </f:content>
+	</f:DynamicPage>
+</core:View>
+
+
+
+
+ 

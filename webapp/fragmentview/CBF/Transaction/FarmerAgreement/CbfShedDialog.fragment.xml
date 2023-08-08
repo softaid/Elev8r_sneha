@@ -1,0 +1,47 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		noDataText="No Data Found"
+		title="Select CBF Shed"
+		contentHeight="300px"
+		search="handleCbfShedSearch"
+		confirm="handleCbfShedClose"
+		cancel="handleCbfShedClose"
+		items="{
+			path : 'shedList>/modelData'
+		}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{shedList>id}" />
+				<Text text="{shedList>farmerenquiryid}" />
+                <Text text="{shedList>shed_name}" />
+                <Text text="{shedList>capacity}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="ID" />
+				</header>
+			</Column>
+			<Column demandPopin="true" >
+				<header>
+					<Text text="Farmer Enquiry ID" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Shed Name" />
+				</header>
+			</Column>
+            <Column
+				demandPopin="true" >
+				<header>
+					<Text text="Shed Capacity" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>
