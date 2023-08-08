@@ -141,7 +141,7 @@
                                         <form:fields>
                                             <Select id="subcontractor1"
                                                 change=""
-                                                selectedKey="{editMasterModel>/subcontractorid1}" 
+                                                selectedKey="{projectModel>/subcontractorid1}" 
                                                 forceSelection="false"
                                                 width="500px"
                                                 items="{
@@ -156,7 +156,7 @@
                                         <form:fields>
                                             <Select id="subcontractor2"
                                                 change=""
-                                                selectedKey="{editMasterModel>/subcontractorid2}" 
+                                                selectedKey="{projectModel>/subcontractorid2}" 
                                                 forceSelection="false"
                                                 width="500px"
                                                 items="{
@@ -423,7 +423,7 @@
                                     alignItems="Start"
                                     justifyContent="End">
                                     <items>
-                                        <Button text="{i18n>saveButtonText}" id="btnniSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
+                                        <Button text="{i18n>saveButtonText}" id="btnniSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onNISave"/>
                                         <Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
                                     </items>
                                 </FlexBox>

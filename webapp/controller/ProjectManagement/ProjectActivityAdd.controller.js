@@ -344,8 +344,59 @@ sap.ui.define([
 
 
 		onSave: function () {
-			var isvalid = this.validateForm();
-			if(isvalid){
+			//var isvalid = this.validateForm();
+			//if(isvalid){
+			var currentContext = this;
+			let parentModel = this.getView().getModel("projectModel").oData; 
+
+			console.log("-----------parentModel-------------",parentModel);
+			let tableModel = this.getView().getModel("tblModel").oData;
+			let nitblmodel = this.getView().getModel("nitblmodel").oData;
+
+
+			parentModel["companyid"] = commonService.session("companyId");
+			parentModel["userid"] = commonService.session("userId");
+			parentModel.startdate = commonFunction.getDate(parentModel.startdate);
+			parentModel.enddate = commonFunction.getDate(parentModel.enddate);
+			parentModel["subcontractorid1"] = currentContext.getView().byId("subcontractor1")?.getSelectedItem()?.mProperties.key??null;
+			parentModel["subcontractorid2"] = currentContext.getView().byId("subcontractor2")?.getSelectedItem()?.mProperties.ke??null;
+
+			Projectservice.saveProject(parentModel, function (data) {
+
+				MessageToast.show("Project  update sucessfully");
+
+				tableModel.map(function (oModel, index) {
+					oModel["companyid"] = commonService.session("companyId");
+					oModel["userid"] = commonService.session("userId");
+
+					oModel.startdate = (oModel.startdate != null) ? commonFunction.getDate(oModel.startdate) : oModel.startdate;
+					oModel.enddate = (oModel.enddate != null) ? commonFunction.getDate(oModel.enddate) : oModel.enddate;
+					oModel.actualstartdate = (oModel.actualstartdate != null) ? commonFunction.getDate(oModel.actualstartdate) : oModel.actualstartdate;
+					oModel.actualenddate = (oModel.actualenddate != null) ? commonFunction.getDate(oModel.actualenddate) : oModel.actualenddate;
+					// oModel.isactive = oModel.isactive===true?1:0;
+					// oModel.isstd = oModel.isstd===true?1:0;
+
+					Projectservice.saveProjectActivityDetail(oModel, function (data) {
+						MessageToast.show("Project details update sucessfully");
+
+					});
+
+				})
+
+
+
+
+				currentContext.resetModel();
+				// this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
+				// }
+			})
+		//}
+		},
+
+
+		onNISave: function () {
+			//var isvalid = this.validateForm();
+			//if(isvalid){
 			var currentContext = this;
 			let parentModel = this.getView().getModel("projectModel").oData; 
 
@@ -390,8 +441,9 @@ sap.ui.define([
 				// this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
 				// }
 			})
-		}
+		//}
 		},
+
 
 		validateForm: function () {
 			var isValid = true;

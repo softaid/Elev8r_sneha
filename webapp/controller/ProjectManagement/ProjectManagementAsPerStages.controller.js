@@ -564,9 +564,10 @@ sap.ui.define([
 				if (projectindex != 0) {
 					let endStage = oThis.projectWeightObject[model.modelData[resultRow].projectid][(projectindex - 1)];
 					let result_column_field_end = `${endStage}enddate`; // end date of previous stage  next to current  stage field name in view
-					let startdate = model.modelData[resultRow][result_column_field_Start];
+					let startdate = model.modelData[resultRow][result_column_field_start];
 					let enddate = model?.modelData[resultRow]?.[result_column_field_end] ?? null; // end date of previous stage
-					let dayDiff = oThis.dayCalculation(startdate, enddate);
+					let dayDiff = oThis.dayCalculation(enddate,startdate);
+
 					if (dayDiff < 0) {
 						MessageToast.show("start date of current stage  must be greater than or equal to end date of previous stage ");
 						model.modelData[resultRow][`Sequence${resultColumn}startdate`] = null;
