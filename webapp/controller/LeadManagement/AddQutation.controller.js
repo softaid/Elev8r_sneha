@@ -45,6 +45,10 @@ sap.ui.define(
 						this.quoteConversion,
 						this
 					);
+					var emptyModel = this.getModelDefault();
+					var model = new JSONModel();
+					model.setData(emptyModel);
+					this.getView().setModel(model, "editQutationModel");
 
 					// bind Source dropdown
 					commonFunction.getReferenceByType("LeadSrc", "leadSourceModel", this);
@@ -112,7 +116,7 @@ sap.ui.define(
 					commonFunction.getReferenceByType("LftMchn", "MachineModel", this);
 
 					// bind Model dropdown
-					commonFunction.getReferenceByType("LftMdl", "leadmodelModel", this);
+					commonFunction.getReferenceByTypemodel("LftMdl", "leadmodelModel", this);
 
 					// bind Drive dropdown
 					commonFunction.getReferenceByType("LftDrv", "leadDriveModel", this);
@@ -277,12 +281,11 @@ sap.ui.define(
 						currentContext.getView().setModel(oModel, "partyCityModel");
 					});
 
-					var emptyModel = this.getModelDefault();
-					var model = new JSONModel();
-					model.setData(emptyModel);
-					this.getView().setModel(model, "editQutationModel");
+					
 
 					this.getAllQuotations();
+
+
 				},
 
 				getModelDefault: function () {
@@ -654,31 +657,31 @@ sap.ui.define(
 
 				onSave: function () {
 					if (this.validateForm()) {
-					var currentContext = this;
-					var model = this.getView().getModel("editQutationModel").oData;
-					let emaildate = model.quotedate;
-					console.log("editQutationModel", model);
-					model["companyid"] = commonService.session("companyId");
-					model["quotedate"] = commonFunction.getDate(model.quotedate);
-					model["userid"] = commonService.session("userId");
+						var currentContext = this;
+						var model = this.getView().getModel("editQutationModel").oData;
+						let emaildate = model.quotedate;
+						console.log("editQutationModel", model);
+						model["companyid"] = commonService.session("companyId");
+						model["quotedate"] = commonFunction.getDate(model.quotedate);
+						model["userid"] = commonService.session("userId");
 
-					quotationService.saveQuotation(model, function (data) {
-						if (data.id > 0) {
-							var message =
-								model.id == null
-									? "Qutation created successfully!"
-									: "Qutation edited successfully!";
-							currentContext.onCancel();
-							MessageToast.show(message);
-							currentContext.sendEmail(data.id, emaildate);
-							currentContext.bus = sap.ui.getCore().getEventBus();
-							currentContext.bus.publish(
-								"loadquotationdata",
-								"loadQuotationData"
-							);
-						}
-					});
-					this.reset();
+						quotationService.saveQuotation(model, function (data) {
+							if (data.id > 0) {
+								var message =
+									model.id == null
+										? "Qutation created successfully!"
+										: "Qutation edited successfully!";
+								currentContext.onCancel();
+								MessageToast.show(message);
+								currentContext.sendEmail(data.id, emaildate);
+								currentContext.bus = sap.ui.getCore().getEventBus();
+								currentContext.bus.publish(
+									"loadquotationdata",
+									"loadQuotationData"
+								);
+							}
+						});
+						this.reset();
 
 					}
 				},
@@ -702,11 +705,11 @@ sap.ui.define(
 
 
 
-        if(quotevalue!=null){
-		if (!commonFunction.isNumbermessage(this, "txtQutationValue", "please enter correct quotation value!")){
-				isValid = false;
-			}
-		}
+					if (quotevalue != null) {
+						if (!commonFunction.isNumbermessage(this, "txtQutationValue", "please enter correct quotation value!")) {
+							isValid = false;
+						}
+					}
 
 
 					if (
@@ -807,7 +810,7 @@ sap.ui.define(
 					return isValid;
 				},
 
-				sendEmail : function(DocEntry, DocDate){
+				sendEmail: function (DocEntry, DocDate) {
 					let oThis = this;
 					let sUserName = (typeof sessionStorage.CustomerCardName !== "undefined" && sessionStorage.CustomerCardName !== null) ? sessionStorage.CustomerCardName : "Customer";
 					let params = {
@@ -815,19 +818,19 @@ sap.ui.define(
 						to: 'savita.g@logicaldna.com',
 						subject: "Thanks You, Your Order with Sakas PartnerConnect is complete – Order No " + DocEntry,
 						text: "Dear " + sUserName + "!\n\n" +
-		
-							"Thanks for placing order with us on " + DocDate + ", your order no is " + DocEntry + "."+ 
-							"\n\n" + 
+
+							"Thanks for placing order with us on " + DocDate + ", your order no is " + DocEntry + "." +
+							"\n\n" +
 							"For any queries, please contact Sakas Administrator at sakasmilk@gmail.com"
 					};
 					console.log(params);
 					loginService.sendEmail(params, function (data1) {
-						if (data1 === 'SENT'){
+						if (data1 === 'SENT') {
 							MessageToast.show("Sales order booked successfully!");
 							oThis.reset();
 						}
 					});
-				},		
+				},
 
 				onEmailChange: function (oEvent) {
 					var emailId = oEvent.mParameters.value;
@@ -893,6 +896,113 @@ sap.ui.define(
 							},
 						});
 					}
+				},
+
+				onModelSelection: function (oEvent,id) {
+					let oThis = this;
+					var model = oThis.getView().getModel("editQutationModel").oData;
+					model.modelid = id==undefined? model.modelid:id??null;
+					quotationService.getReferenceBymodel({modelid:model.modelid}, function (data) {
+						model.carheight=data[1][0].carheight;
+						model.pitdepth=data[1][0].pitdepth;
+						model.overhead=data[1][0].overhead;
+
+						data[0].forEach(element => {
+							if (element.typecode == "LftSpd") {
+								 model.speedid=element.id;
+							}
+							else if (element.typecode == "LftMchn") {
+								model.machineid=element.id ;
+							}
+						
+							else if (element.typecode == "LftDrv") {
+								model.driveid=element.id;
+							}
+							else if (element.typecode == "LftCtrl") {
+								model.controlid=element.id;
+							}
+							else if (element.typecode == "LftOprn") {
+								model.operationid=element.id;
+							}
+							else if (element.typecode == "DrTyp") {
+								model.typeofdoorid=element.id;
+							}
+							else if (element.typecode == "LdnDr") {
+								model.landingdoorid=element.id;
+							}
+							else if (element.typecode == "CarDr") {
+								model.cardoorid=element.id;
+							}
+							else if (element.typecode == "LwstFlrMking") {
+								model.lowestfloorid=element.id;
+							}
+							else if (element.typecode == "CWTPstn") {
+								model.cwtpositionid=element.id;
+							}
+							else if (element.typecode == "ShftCndtn") {
+								model.shaftconditionid=element.id;
+							}
+							else if (element.typecode == "Unit") {
+								model.unitid=element.id;
+							}
+							else if (element.typecode == "AuxSupSys") {
+								model.auxilarysupplysystemid=element.id;
+							}
+							else if (element.typecode == "MnPwrSys") {
+								model.mainpowersystemid=element.id;
+
+							}
+							 else if (element.typecode == "TrcMedia") {
+								model.tractionmediaid=element.id;
+							} 
+							else if (element.typecode == "CrPsnIndcr") {
+								model.modelid=element.id;
+
+							}
+							 else if (element.typecode == "Floring") {
+								model.modelid=element.id;
+							}
+							else if (element.typecode == "Ventilation") {
+								model.modelid=element.id;
+
+							}
+							else if (element.typecode == "FlsCel") {
+								model.modelid=element.id;
+
+							}
+							 else if (element.typecode == "CarPanel") {
+								model.modelid=element.id;
+							} 
+							else if (element.typecode == "StdFlrHt") {
+								model.modelid=element.id;
+
+							}
+							 else if (element.typecode == "null") {
+								model.modelid=element.id;
+
+							} 
+							else if (element.typecode == "null") {
+								model.modelid=element.id;
+
+							}
+							else if (element.typecode == "null") {
+								model.modelid=element.id;
+
+							}
+							else if (element.typecode == "null") {
+								model.modelid=element.id;
+
+							}
+							 else if (element.typecode == "null") {
+								model.modelid=element.id;
+							}
+							else{
+								model.modelid=element.id;
+
+							}
+						});
+						oThis.getView().getModel("editQutationModel").refresh();
+					});
 				},
 
 				reset: function () {

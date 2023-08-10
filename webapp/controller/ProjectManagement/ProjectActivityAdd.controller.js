@@ -344,8 +344,8 @@ sap.ui.define([
 
 
 		onSave: function () {
-			var isvalid = this.validateForm();
-			if(isvalid){
+			//var isvalid = this.validateForm();
+			//if(isvalid){
 			var currentContext = this;
 			let parentModel = this.getView().getModel("projectModel").oData; 
 
@@ -358,8 +358,8 @@ sap.ui.define([
 			parentModel["userid"] = commonService.session("userId");
 			parentModel.startdate = commonFunction.getDate(parentModel.startdate);
 			parentModel.enddate = commonFunction.getDate(parentModel.enddate);
-			parentModel["subcontractorid1"] = currentContext.getView().byId("subcontractor1").getSelectedItem().mProperties.key;
-			parentModel["subcontractorid2"] = currentContext.getView().byId("subcontractor2").getSelectedItem().mProperties.key;
+			parentModel["subcontractorid1"] = currentContext.getView().byId("subcontractor1")?.getSelectedItem()?.mProperties.key??null;
+			parentModel["subcontractorid2"] = currentContext.getView().byId("subcontractor2")?.getSelectedItem()?.mProperties.ke??null;
 
 			Projectservice.saveProject(parentModel, function (data) {
 
@@ -390,8 +390,48 @@ sap.ui.define([
 				// this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
 				// }
 			})
-		}
+		//}
 		},
+
+
+		onNISave: function () {
+			var currentContext = this;
+			let parentModel = this.getView().getModel("projectModel").oData; 
+			console.log("-----------parentModel-------------",parentModel);
+			let tableModel = this.getView().getModel("tblModel").oData;
+			let nitblmodel = this.getView().getModel("nitblmodel").oData;
+
+
+			parentModel["companyid"] = commonService.session("companyId");
+			parentModel["userid"] = commonService.session("userId");
+			parentModel.startdate = commonFunction.getDate(parentModel.startdate);
+			parentModel.enddate = commonFunction.getDate(parentModel.enddate);
+			parentModel["subcontractorid1"] = currentContext.getView().byId("subcontractor1").getSelectedItem().mProperties.key;
+			parentModel["subcontractorid2"] = currentContext.getView().byId("subcontractor2").getSelectedItem().mProperties.key;
+
+			Projectservice.saveProject(parentModel, function (data) {
+				MessageToast.show("Project  update sucessfully");
+				nitblmodel.map(function (oModel, index) {
+					oModel["companyid"] = commonService.session("companyId");
+					oModel["userid"] = commonService.session("userId");
+
+					oModel.startdate = (oModel.startdate != null) ? commonFunction.getDate(oModel.startdate) : oModel.startdate;
+					oModel.enddate = (oModel.enddate != null) ? commonFunction.getDate(oModel.enddate) : oModel.enddate;
+					oModel.actualstartdate = (oModel.actualstartdate != null) ? commonFunction.getDate(oModel.actualstartdate) : oModel.actualstartdate;
+					oModel.actualenddate = (oModel.actualenddate != null) ? commonFunction.getDate(oModel.actualenddate) : oModel.actualenddate;
+				    Projectservice.saveNIActivityDetail(oModel, function (data) {
+					MessageToast.show("NI details update sucessfully");
+
+					});
+
+				})
+				currentContext.resetModel();
+				// this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
+				// }
+			})
+		//}
+		},
+
 
 		validateForm: function () {
 			var isValid = true;

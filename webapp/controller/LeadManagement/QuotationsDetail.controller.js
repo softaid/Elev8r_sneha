@@ -324,6 +324,22 @@ sap.ui.define([
 			// Conver Quote value in word Format
 			this.notowordChange();
 
+			const fontDefinition = {
+				Calibri: {
+				  normal: 'C:\Users\PoultryOSSales\Downloads\Calibri_Font_Family\Calibri 400.ttf',
+				},
+			  };
+
+
+			//   pdfMake.fonts = {
+			// 	Roboto: {
+			// 		normal: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Regular.ttf',
+			// 		bold: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Medium.ttf',
+			// 		italics: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Italic.ttf',
+			// 		bolditalics: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-MediumItalic.ttf'
+			// 	},
+			// }
+
 			 // const calibriBase64 = '...';
 			
 			var fullHtml = "";
@@ -331,6 +347,12 @@ sap.ui.define([
 			headertable1 += "<!DOCTYPE html> <html> <head> <title>" + "Quotation" + "</title>" +
 				"<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>" +
 				"<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js'></script>" +
+
+				"<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Regular.ttf'></script>" +
+				"<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Medium.ttf'></script>" +
+				"<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Italic.ttf'></script>" +
+				"<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-MediumItalic.ttf'></script>" +
+				//"<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js'></script>" +
 				// "<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.62/vfs_fonts.js'></script>" +
 				"<script type='text/javascript' src='./jspdf/dist/vfs_fonts.js'></script>" +
 				"<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>" +
@@ -345,6 +367,9 @@ sap.ui.define([
 			// FIRST PAGE OF PDF
 			// Add company details on PDF
 			var companyname = this.companyname;
+
+		
+
 			var email = this.companyemail;
 			var city = this.city;
 			var txtQuoteValue = this.nettotalinwords.charAt(0).toUpperCase() + this.nettotalinwords.slice(1);
@@ -650,7 +675,7 @@ headertable1 += "},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
 
 			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -40, 0, 0]}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			// headertable1 += "{canvas: [ { type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1 } ]},";
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{ style: 'tableExample2',";
@@ -684,7 +709,7 @@ headertable1 += "},";
 			headertable1 += "{";
 headertable1 += "  style: 'tableExample2',";
 headertable1 += "  table: {";
-headertable1 += "    widths: ['50%', '25%', '25%'],";
+headertable1 += "    widths: ['65%', '10%', '25%'],";
 headertable1 += "    body: [";
 headertable1 += "      [{ columns: [{ text: 'Lift Solution', style: 'subheader' }] }, { columns: [{ text: 'Unit', style: 'subheader' }] }, { columns: [{ text: 'Price', style: 'subheader' }] }],";
 headertable1 += "      [{ columns: [{ text: '" + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift' }] }, { columns: [{ text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }] }, { columns: [{ text: '     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit)', style: 'titleforlift' }] }],";
@@ -692,7 +717,7 @@ headertable1 += "    ]";
 headertable1 += "  },";
 headertable1 += "  layout: {";
 headertable1 += "    hLineColor: function (i, node) {";
-headertable1 += "    return (i === 0) ? 'black' : 'white';";
+headertable1 += "    return (i === 0 || i === 1) ? 'black' : 'white';";
 headertable1 += "    }";
 headertable1 += "},";
 headertable1 += "},";
@@ -722,7 +747,7 @@ headertable1 += "},";
 			headertable1 += "{columns: [{text:'ACCEPTED:-" + " " + "', style: 'titlebold'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'IN DUPLICATE ON__________________________" + " " + "', style: 'titlebold'}, {text:'BY________________________________________" + " " + "', style: 'subheaderbold'}]},";
-			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
 
@@ -735,12 +760,12 @@ headertable1 += "},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
 
 			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -40, 0, 0]}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			// headertable1 += "{canvas: [ { type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1 } ]},";
 		
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'TERMS OF PAYMENT:', style: 'titleincenterwithunderline'},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: 'TERMS OF PAYMENT:', style: 'titlepaymntterms'},";
 
 			headertable1 += "{ style: 'tableExample4',";
 			headertable1 += " table: {";
@@ -760,20 +785,20 @@ headertable1 += "},";
 			headertable1 += "},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
-			headertable1 += "{text: 'Irrespective of any delay in building completion, availability of permanent power supply or by any cause beyond our control, the final payment will be due to us within 180 days from the date of our intimation that material is at ready at factory.', style: 'titlewithbold'},";
+			headertable1 += "{text: 'Irrespective of any delay in building completion, availability of permanent power supply or by any cause beyond our control, the final payment will be due to us within 180 days from the date of our intimation that material is at ready at factory.', style: 'titlewithboldpaymnt'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			headertable1 += "{text: 'BANK DETAILS:', style: 'titleboldheader'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'COMPANY NAME: SNEHA ELEVATORS LLP', style: 'titlebold' },";
+			headertable1 += "{text: 'COMPANY NAME: SNEHA ELEVATORS LLP', style: 'titleboldbank' },";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'ACCOUNT NO.: 50200057329713', style: 'titlebold'},";
+			headertable1 += "{text: 'ACCOUNT NO.: 50200057329713', style: 'titleboldbank'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'IFSC CODE: HDFC0005176', style: 'titlebold'},";
+			headertable1 += "{text: 'IFSC CODE: HDFC0005176', style: 'titleboldbank'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'PEDDAMMATEMPLE, JUBILEE HILLS BRANCH', style: 'titlebold'},";
+			headertable1 += "{text: 'PEDDAMMATEMPLE, JUBILEE HILLS BRANCH', style: 'titleboldbank'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'HDFC BANK', style: 'titlebold'},";
+			headertable1 += "{text: 'HDFC BANK', style: 'titleboldbank'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			// new code start
@@ -785,7 +810,7 @@ headertable1 += "},";
 			headertable1 += " table: {";
 			headertable1 += "widths: ['100%'],";
 			headertable1 += " body: [";
-			headertable1 += "[ { columns: [ [{text: 'Please note, we will not encourage any cash transactions, request for Cheque or Online payments.', style: 'titlewithbold'},{text: 'As a very special case and as per RBI norms, Only Rs 2,00,000 cash will be accepted and same will be deposited personally at our corporate office with cash receipt.', style: 'titlewithbold'}] ] }],";
+			headertable1 += "[ { columns: [ [{text: 'Please note, we will not encourage any cash transactions, request for Cheque or Online payments.', style: 'titlewithbold'},{text: 'As a very special case and as per RBI norms, Only Rs 2,00,000 cash will be accepted and same will be deposited personally at our corporate office with cash receipt.', style: 'titlewithboldNote'}] ] }],";
 			headertable1 += "]";
 			headertable1 += "}";
 			headertable1 += "},";
@@ -798,11 +823,11 @@ headertable1 += "},";
 			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			// headertable1 += "{text: 'As a very special case and as per RBI norms, Only Rs 2, 00,000 cash will be accepted and same will be deposited personally at our corporate office with cash receipt.', style: 'titlewithbold'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			// SIXTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
@@ -818,7 +843,7 @@ headertable1 += "},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
-			headertable1 += "{text: 'MAINTENANCE', style: 'titleincenter'},";
+			headertable1 += "{text: 'MAINTENANCE', style: 'titleincenterMaintananc'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			headertable1 += "{text: [{text:'Our quotation includes charges towards maintenance for ', style: 'title'},{text:'one year. ', style: 'subheaderwithbold'},{text:'The period of this maintenance shall commence from the date of completed installation and handing over of the lift. The date of commencement of this service shall remain firm irrespective of any delay in building completion, availability of permanent power supply, inspection, taking over or commencing use of the elevator.', style: 'title'}]},";
@@ -846,8 +871,8 @@ headertable1 += "},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
@@ -866,7 +891,7 @@ headertable1 += "},";
 			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
-			headertable1 += "{text: 'CUSTOMERS SCOPE OF WORKS - SUMMARY', style: 'titleincenterwithunderline'},";
+			headertable1 += "{text: 'CUSTOMERS SCOPE OF WORKS - SUMMARY', style: 'titleincenterwork'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'CIVIL WORKS', style: 'titleincenterwithunderline'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -896,10 +921,10 @@ headertable1 += "},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
@@ -914,10 +939,10 @@ headertable1 += "},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
 
 			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -40, 0, 0]}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'PREPARATORY WORK', style: 'titleincenterwithunderline'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'Following are key points under Customer scope:', style: 'titlebold'},";
+			headertable1 += "{text: 'Following are key points under Customer scope:', style: 'titleboldleven'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
 			headertable1 += "{text: '1.    TO FURNISH within two weeks (or sooner if required) from the date of acceptance of this proposal, all required           data for the performance of this contract.',style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -958,7 +983,7 @@ headertable1 += "},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
 
 			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -40, 0, 0]}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '12.    TO PROVIDE and maintain adequate safety and security measures as also retain ELEV8R safety infrastructure to prevent any injury to third party or damage, theft orpilferage of material during storage, erection period and until the elevator is handed over.',style: 'title'},";
@@ -970,10 +995,10 @@ headertable1 += "},";
 			headertable1 += "{text: '15.    TO PROVIDE acceptable living accommodation (complete with light, running water & sanitary facilities) for our erection crew at or near to site.',style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '16.    TO INDEMNIFY and save us harmless against all liability arising out of your failure to carry out and comply with any of the Foregoing requirements.',style: 'title'},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'CONDITIONS OF CONTRACT', style: 'titleincenter'},";
+			headertable1 += "{text: 'CONDITIONS OF CONTRACT', style: 'titleincenterwithunderline'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			headertable1 += "{text: [{text:'1.    This Quotations shall remain valid and effective for ', style: 'title'},{text:'30 days ', style: 'subheaderwithbold'},{text:'from the date of proposal and there after shall be subject to change without notice.', style: 'title'}]},";
@@ -991,9 +1016,12 @@ headertable1 += "},";
 			headertable1 += "{text: [{text:'4.    Installation: ', style: 'subheaderwithbold'},{text:'Installation of each unit shall be completed in ', style: 'title'},{text:' 4 Weeks (stage wise) ', style: 'subheaderwithbold'},{text:'from the date of start of installation work at site, provided all our requests mentioned in the preparatory work are adhered to and contractual terms complied.', style: 'title'}]},";
 
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: '5.    If during the inspection of site, we observe that there is a delay in completion of the hoist way structure or availability of power supply, we may at our option delay the final assembly of materials and shipment to site so as to synchronize with the hoist way and machine room completion date. In such an event, a fresh completion date will be established depending upon minimum installation time indicated in above.',style: 'title'},";
-			
+			headertable1 += "{text: '5.    If during the inspection of site, we observe that there is a delay in completion of the hoist way structure or availability of power supply, we may at our option delay the final assembly of materials and shipment to site so as to synchronize with the hoist way and machine room completion date. In such an event, a fresh completion date ',style: 'title'},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			
+			
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
 
@@ -1006,13 +1034,16 @@ headertable1 += "},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
 
 			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -40, 0, 0]}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			
 			
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			 headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			
+			headertable1 += "{text: 'will be established depending upon minimum installation time indicated in above.In such an event, a fresh completion date will be established depending upon minimum installation time indicated in above.',style: 'title'},";
 			//headertable1 += "{text: '6.    Warranty & Real estate Regulation Act (RERA): The contract is not subject to provision of RERA. The Warranty is for a period of 12 months from the intimation to the customer of the physical completion of installation.',style: 'title'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: [{text:'6.    Warranty & Real estate Regulation Act (RERA): ', style: 'subheaderwithbold'},{text:'The contract is not subject to provision of RERA. The Warranty is for a period of 12 months from the intimation to the customer of the physical completion of installation. ', style: 'title'}]},";
 			
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -1040,10 +1071,10 @@ headertable1 += "},";
 			
 			headertable1 += "{text: [{text:'13.    Right to Use: ', style: 'subheaderwithbold'},{text:'Neither the customer nor any third party shall be entitled to use the elevator for any purpose what so ever prior to: Any usage of Sneha Elevator, for any purpose whatever before the format written handover letter to customer. And or without the full or final payments, including any over dues because of variation in taxes, pending certificates.', style: 'title'}]},";
 
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			
+			headertable1 += "{text: [{text:'14.    Force majeure: Under no circumstances shall either of us be liable for any loss, damage or delay due  to any cause beyond your/our reasonable control,including but not limited to lack of shipping space, embargoes, acts of any Government,', style: 'title'}]},";
 			
-			headertable1 += "{text: [{text:'14.    Force majeure: Under no circumstances shall either of us be liable for any loss, damage or delay due to any cause beyond your/our reasonable control, including but not limited to lack of shipping space, embargoes, acts of any Government, strikes, lockouts, fire, accident, explosion, flood, riots, civil commotion, war, malicious mischief, ', style: 'title'}]},";
 
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
@@ -1060,8 +1091,8 @@ headertable1 += "},";
 			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -40, 0, 0]}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
-
-			headertable1 += "{text: [{text:'    delays in supplies of raw materials and components at our Works due to any or all of the reasons, such as energy crisis, electricity cut, rail/road transporter\\'s strike, go slow, bands, nonavailability of essential raw materials ( iron and steel, pig iron, aluminum, copper, silver, brass, stainless steel, various alloys, electrical grade steel, etc.), act of God or of the State\\'s enemies, or act of third party. Delay resulting from any cause beyond your/our reasonable control shall extend the time for completion of the work and the commencement of the free maintenance period. If for any such reasons, we cannot supply the equipment covered by this contract within ', style: 'title'},{text:'13 weeks', style: 'subheaderwithbold'},{text:' from the date of your acceptance of this proposal, we may, at our option, cancel the contract without being liable to pay any damages or compensation. Under no circumstances, shall either of us be liable for special, indirect or consequential loss or damages of any kind.', style: 'title'}]},";
+          
+			headertable1 += "{text: [{text:'strikes, lockouts, fire, accident, explosion, flood, riots, civil commotion, war, malicious mischief,delays in supplies of raw materials and components at our Works due to any or all of the reasons, such as energy crisis, electricity cut, rail/road transporter\\'s strike, go slow, bands, nonavailability of essential raw materials ( iron and steel, pig iron, aluminum, copper, silver, brass, stainless steel, various alloys, electrical grade steel, etc.), act of God or of the State\\'s enemies, or act of third party. Delay resulting from any cause beyond your/our reasonable control shall extend the time for completion of the work and the commencement of the free maintenance period. If for any such reasons, we cannot supply the equipment covered by this contract within ', style: 'title'},{text:'13 weeks', style: 'subheaderwithbold'},{text:' from the date of your acceptance of this proposal, we may, at our option, cancel the contract without being liable to pay any damages or compensation. Under no circumstances, shall either of us be liable for special, indirect or consequential loss or damages of any kind.', style: 'title'}]},";
 
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '15.    This contract shall be deemed to be an indivisible works contract. Any packing cases, or left over materials or tools tackles, instruments, etc. brought to site are and shall remain our property. We reserve the right to sub-contract the work as and when we deem fit',style: 'title'},";
@@ -1083,8 +1114,8 @@ headertable1 += "},";
 
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
 
@@ -1099,7 +1130,7 @@ headertable1 += "},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			// headertable1 += "{canvas: [ { type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1 } ]},";
 			
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '22.    Presently we have our manufacturing unit in Hyderabad. Based on the technical specifications of the said contract and depending on availability and feasibility of transport or material, ELEV8R at its sole discretion will source the material either from its factory and/or any other source anywhere in India and/or from overseas and hence we will not be in a position to furnish the duty payment details in respect of the bought out and imported materials.',style: 'title'},";
 
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -1174,6 +1205,13 @@ headertable1 += "},";
 				
 				"titlebold: {" +
 				"fontSize:10," +
+				"font:'Roboto-Italic'," +
+				"alignment: 'left'," +
+				"}," +
+
+				"titleboldleven: {" +
+				"fontSize:12," +
+				"bold: true," +
 				"alignment: 'left'," +
 				"}," +
 
@@ -1187,7 +1225,7 @@ headertable1 += "},";
 				"}," +
 
 				"titleboldheader: {" +
-				"fontSize:11," +
+				"fontSize:20," +
 				"decoration: 'underline',"+
 				"bold: true," +
 				"alignment: 'left'," +
@@ -1195,7 +1233,14 @@ headertable1 += "},";
 
 				"titlebold: {" +
 				"fontSize:11," +
-				//"font-family:'Calibri-Regular'," +
+				//"fontFamily:'Arial'," +
+				"bold: true," +
+				"alignment: 'left'," +
+				"}," +
+
+				"titleboldbank: {" +
+				"fontSize:16," +
+				//"font:'Arial'," +
 				"bold: true," +
 				"alignment: 'left'," +
 				"}," +
@@ -1206,8 +1251,26 @@ headertable1 += "},";
 				"alignment: 'left'," +
 				"}," +
 
+				"titlewithboldNote: {" +
+				"fontSize:11," +
+				"bold: true," +
+				"alignment: 'left'," +
+				"}," +
+
+				"titlewithboldpaymnt: {" +
+				"fontSize:12," +
+				"bold: true," +
+				"alignment: 'left'," +
+				"}," +
+
 				"titleincenter: {" +
 				"fontSize:11," +
+				"bold: true," +
+				"alignment: 'center'," +
+				"}," +
+
+				"titleincenterMaintananc: {" +
+				"fontSize:12," +
 				"bold: true," +
 				"alignment: 'center'," +
 				"}," +
@@ -1219,7 +1282,24 @@ headertable1 += "},";
 				"}," +
 
 				"titleincenterwithunderline: {" +
-				"fontSize:11," +
+				"fontSize:14," +
+				"bold: true," +
+				"decoration: 'underline',"+
+				"alignment: 'center'," +
+				"}," +
+
+				
+				"titleincenterwork: {" +
+				"fontSize:16," +
+				"bold: true," +
+				"decoration: 'underline',"+
+				"alignment: 'center'," +
+				"}," +
+
+
+				
+				"titlepaymntterms: {" +
+				"fontSize:14," +
 				"bold: true," +
 				"decoration: 'underline',"+
 				"alignment: 'center'," +
@@ -1286,7 +1366,7 @@ headertable1 += "},";
 				"}," +
 
 				"subheaderformargine: {" +
-				"fontSize:9," +
+				"fontSize:11," +
 				"bold: true," +
 				"margin: [0, 5, 0, 20]," +
 				"}," +
@@ -1447,6 +1527,7 @@ headertable1 += "},";
 				"}," +
 
 				"defaultStyle: {" +
+				//"fontFamily: 'arial'," +
 				"fontSize: 8" +
 				"}," +
 				"fonts : '"+fonts+"'"+

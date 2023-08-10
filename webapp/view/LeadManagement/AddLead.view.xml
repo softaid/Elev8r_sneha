@@ -302,12 +302,13 @@
                                 <form:FormElement label="{i18n>leadModel}">
                                     <form:fields>
                                         <Select id="modelid"                                             
-                                            change="selectModel"
                                             selectedKey="{editPartyModel>/modelid}" 
                                             forceSelection="false"
+                                             change="onModelSelection"
                                             width="500px"
                                             items="{
-                                                path: 'leadmodelModel>/modelData'                                                
+                                                path: 'leadmodelModel>/modelData',
+                                                sorter: { path: 'id' }
                                             }">
                                             <core:Item key="{leadmodelModel>id}" text="{leadmodelModel>description}" />
                                         </Select>

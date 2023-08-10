@@ -388,7 +388,7 @@
                                     <form:fields>
                                         <Select id="modelid"
                                             required="false" 
-                                            change=""
+                                            change="onModelSelection"
                                             
                                             selectedKey="{editQutationModel>/modelid}" 
                                             forceSelection="true"
