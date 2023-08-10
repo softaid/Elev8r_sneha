@@ -7,8 +7,10 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/services/Masters/Location.service',
 	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Lead.service',
-	'sap/ui/elev8rerp/componentcontainer/services/Masters/Contact.service'
-], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, Leadservice, contactService) {
+	'sap/ui/elev8rerp/componentcontainer/services/Masters/Contact.service',
+	"sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Quotation.service",
+
+], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, Leadservice, contactService,quotationService) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddLead", {
@@ -56,7 +58,7 @@ sap.ui.define([
 			commonFunction.getReferenceByType("LftMchn", "MachineModel", this);
 
 			// bind Model dropdown
-			commonFunction.getReferenceByType("LftMdl", "leadmodelModel", this);
+			commonFunction.getReferenceByTypemodel("LftMdl", "leadmodelModel", this);
 
 			// bind Drive dropdown
 			commonFunction.getReferenceByType("LftDrv", "leadDriveModel", this);
@@ -358,6 +360,114 @@ sap.ui.define([
 			var oModel = this.getView().getModel("editPartyModel");
 		},
 
+		onModelSelection: function (oEvent,id) {
+			let oThis = this;
+			var model = oThis.getView().getModel("editPartyModel").oData;
+			model.modelid = id==undefined? model.modelid:id??null;
+			quotationService.getReferenceBymodel({modelid:model.modelid}, function (data) {
+			           	model.carheight=data[1][0].carheight;
+						model.pitdepth=data[1][0].pitdepth;
+						model.overhead=data[1][0].overhead;
+				data[0].forEach(element => {
+					if (element.typecode == "LftSpd") {
+						 model.speedid=element.id;
+					}
+					else if (element.typecode == "LftMchn") {
+						model.machineid=element.id ;
+					}
+				
+					else if (element.typecode == "LftDrv") {
+						model.driveid=element.id;
+					}
+					else if (element.typecode == "LftCtrl") {
+						model.controlid=element.id;
+					}
+					else if (element.typecode == "LftOprn") {
+						model.operationid=element.id;
+					}
+					else if (element.typecode == "DrTyp") {
+						model.typeofdoorid=element.id;
+					}
+					else if (element.typecode == "LdnDr") {
+						model.landingdoorid=element.id;
+					}
+					else if (element.typecode == "CarDr") {
+						model.cardoorid=element.id;
+					}
+					else if (element.typecode == "LwstFlrMking") {
+						model.lowestfloorid=element.id;
+					}
+					else if (element.typecode == "CWTPstn") {
+						model.cwtpositionid=element.id;
+					}
+					else if (element.typecode == "ShftCndtn") {
+						model.shaftconditionid=element.id;
+					}
+					else if (element.typecode == "Unit") {
+						model.unitid=element.id;
+					}
+					else if (element.typecode == "AuxSupSys") {
+						model.auxilarysupplysystemid=element.id;
+					}
+					else if (element.typecode == "MnPwrSys") {
+						model.mainpowersystemid=element.id;
+
+					}
+					 else if (element.typecode == "TrcMedia") {
+						model.tractionmediaid=element.id;
+					} 
+					else if (element.typecode == "CrPsnIndcr") {
+						model.modelid=element.id;
+
+					}
+					 else if (element.typecode == "Floring") {
+						model.modelid=element.id;
+					}
+					else if (element.typecode == "Ventilation") {
+						model.modelid=element.id;
+
+					}
+					else if (element.typecode == "FlsCel") {
+						model.modelid=element.id;
+
+					}
+					 else if (element.typecode == "CarPanel") {
+						model.modelid=element.id;
+					} 
+					else if (element.typecode == "StdFlrHt") {
+						model.modelid=element.id;
+
+					}
+					 else if (element.typecode == "null") {
+						model.modelid=element.id;
+
+					} 
+					else if (element.typecode == "null") {
+						model.modelid=element.id;
+
+					}
+					else if (element.typecode == "null") {
+						model.modelid=element.id;
+
+					}
+					else if (element.typecode == "null") {
+						model.modelid=element.id;
+
+					}
+					 else if (element.typecode == "null") {
+						model.modelid=element.id;
+					}
+					else{
+						model.modelid=element.id;
+
+					}
+
+				});
+				oThis.getView().getModel("editPartyModel").refresh();
+
+			});
+			oThis.getView().getModel("editPartyModel").refresh();
+		},
 		handleSelectionFinish: function (oEvent) {
 			var inputId = oEvent.mParameters.id;
 			var id = inputId.substring(inputId.lastIndexOf('-') + 1);

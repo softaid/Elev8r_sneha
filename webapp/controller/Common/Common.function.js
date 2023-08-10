@@ -696,6 +696,20 @@ sap.ui.define([
             });
         },
 
+        getReferenceByTypemodel: function (typeCode,modelName, currentContext) {
+            masterService.getReferenceByTypeCode({ typecode: typeCode }, function (data) {
+                console.log("------------datypecodeta---------------",data);
+                if(data.length && data[0].length){
+                    var selectModel = new sap.ui.model.json.JSONModel();
+                    selectModel.setData({ modelData: data[0] });
+                    currentContext.getView().setModel(selectModel, modelName);
+                    if(typeCode=="LftMdl" && modelName=="leadmodelModel"){
+                        currentContext.onModelSelection(typeCode,data[0][0].id);
+                    }
+                }
+            });
+        },
+
         getAllLeads : function(modelName, currentContext){
             var leadModel = new sap.ui.model.json.JSONModel();
             commonService.getAllLeads(function(data){
@@ -1852,26 +1866,6 @@ sap.ui.define([
                     currentContext.getView().setModel(model, "subcontractorModel");
                 }
             })
-        },
-
-        //get Breeder setting data reder to dashboard setting page
-        getBreederSettingData: function (currentContext, moduleid) {
-            let isBreederSetting = sessionStorage.getItem(721) == "false";
-            var oRouter = sap.ui.core.UIComponent.getRouterFor(currentContext);
-            if (isBreederSetting) {
-                if (this.session("roleIds") == 3) {
-                    oRouter.getTargets().display("home", {});
-                    oRouter.navTo("home", true);
-                    setTimeout(function () {
-                        MessageToast.show("Your Breeder settings are not complete, Please contact Breeder manager or administrator for completing setup.");
-                    }, 2000);
-                }
-                else {
-                    MessageToast.show("Your Breeder settings are not complete, Please click here to complete the setup.");
-                    oRouter.getTargets().display("dashboardsettings", {});
-                    oRouter.navTo("dashboardsettings", true);
-                }
-            }
         },
 
         //get common setting data reder to dashboard setting page

@@ -35,6 +35,9 @@ sap.ui.define([
                 console.log(params);
                 commonService.runJQueryX("GET", "quotation/converttoorder/" + params.id, null, callback, null);
             },
+              getReferenceBymodel:function(params,callback){
+                commonService.runJQueryX("GET", "quotation/getReferenceBymodel/" + params.modelid, null, callback, null);
+           }
         };
     }
 );
