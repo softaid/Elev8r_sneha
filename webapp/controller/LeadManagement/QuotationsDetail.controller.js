@@ -324,13 +324,6 @@ sap.ui.define([
 			// Conver Quote value in word Format
 			this.notowordChange();
 
-			const fontDefinition = {
-				Calibri: {
-				  normal: 'C:\Users\PoultryOSSales\Downloads\Calibri_Font_Family\Calibri 400.ttf',
-				},
-			  };
-
-
 			 // const calibriBase64 = '...';
 			
 			var fullHtml = "";
@@ -343,6 +336,7 @@ sap.ui.define([
 				"<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>" +
 				"<style type='text/css'>" +
 				"table {font-family: arial, sans-serif;border-collapse: collapse;width: 100%; } td, th {border: 0.5px solid #000;text-align: left;padding: 5px; } th, td {width: 100px;overflow: hidden; } img { width: 180px; height: 120px; text-align: center; } </style> </head>";
+			
 
 			headertable1 += "<body id='tblCustomers' class='amin-logo'>";
 			headertable1 += "</body>";
@@ -483,6 +477,15 @@ sap.ui.define([
 			console.log("city",city);
 			console.log("pincode",pincode);
 
+			var fonts = {
+				'Arial': {
+					normal: './jspdf/dist/Arial.ttf',
+					bold: './jspdf/dist/Arial.ttf',
+					italics: './jspdf/dist/Arial.ttf',
+					bolditalics: './jspdf/dist/Arial.ttf',
+				}
+			}
+
 			// Add PR grid on screen
 			var quoteModel = this.getView().getModel("quoteModel");
 			var tbleModel = this.getView().getModel("quoteModel").oData;
@@ -513,7 +516,7 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
 			headertable1 += "{text: 'Dear Sir/Madam', style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
-			headertable1 += "{text: 'Thank you for giving us an opportunity to provide a proposal for supply & installation of Sneha Elevators at your prestigious project. We would like to give you a brief synopsis about our company, product & after sales service setup. ', style: 'title'},";
+			headertable1 += "{text: 'Thank you for giving us an opportunity to provide a proposal for supply & installation of Sneha Elevators at your prestigious project. We would like to give you a brief synopsis about our company, product & after sales service setup. ', style: 'subheaderone1'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
 			headertable1 += "{text: 'SNEHA ELEVATORS:', style: 'titlewithbold'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
@@ -1144,6 +1147,8 @@ headertable1 += "},";
 				// // "layout: 'noBorders'" +
 				// "};" +
 				// "}," +
+
+				
 				"styles: {" +
 
 				"todatecss: {" +
@@ -1326,6 +1331,7 @@ headertable1 += "},";
 
 				"subheaderone1: {" +
 				"fontSize:9," +
+				//"font:'Arial'," +
 				"bold: true," +
 				"alignment:'right'," +
 				"margin: [0, 05, 0, 4]," +
@@ -1442,9 +1448,12 @@ headertable1 += "},";
 
 				"defaultStyle: {" +
 				"fontSize: 8" +
-				"}" +
+				"}," +
+				"fonts : '"+fonts+"'"+
 				"};" +
+				
 				"pdfMake.createPdf(docDefinition).download('Quotation.pdf');" +
+				
 				"} });";
 			headertable1 += "</script></html>";
 			fullHtml += headertable1;
