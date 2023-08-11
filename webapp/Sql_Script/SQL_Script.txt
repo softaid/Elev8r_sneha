@@ -8298,9 +8298,26 @@ END;$$
 DELIMITER ;
 ;
 
+ALTER TABLE `db_elev8r`.`reference` 
+ADD COLUMN `modelid` INT(11) NULL DEFAULT NULL AFTER `sequenceno`;
+
 
 ALTER TABLE `project` 
 CHANGE COLUMN `niactualenddate` `niactualenddate` DATE NULL DEFAULT NULL ;
 
 ALTER TABLE `documentcollectiondetails` 
 ADD COLUMN `document_name` VARCHAR(45) NULL DEFAULT NULL AFTER `projectid`;
+
+
+
+
+ALTER TABLE `project` 
+ADD COLUMN `nicompletionper` INT(11) NULL AFTER `subcontractorid2`,
+ADD COLUMN `niactualcompletiondays` INT(11) NULL AFTER `nicompletionper`,
+ADD COLUMN `niactualenddate` DATE NULL AFTER `niactualcompletiondays`;
+
+
+
+ALTER TABLE `documentcollectiondetails` 
+ADD COLUMN `document_name` VARCHAR(150) NULL AFTER `projectid`,
+CHANGE COLUMN `image_url` `document_url` VARCHAR(250) NULL DEFAULT NULL ;
