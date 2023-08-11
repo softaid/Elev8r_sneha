@@ -485,22 +485,22 @@ sap.ui.define([
 					name: "AUXILARY SUPPLY SYSTEM",
 					value: leadLiftPDFModel.oData.auxilarysupplysystem,
 				},
-
-
 			);
+				
+			// let stdFeatures = [];
+			// if(leadLiftPDFModel.oData.doortype == "Auto"){
+			// 	stdFeatures = ['Manual Rescue Operation,Auto Fan Cut Off,Rear side SS Hand rail,Automatic leveling with,Ground Floor on Power Restoration,Floor Position and Direction indicator in car and Landings,Terminal approach slow down for safety,Final Limit protection,Emergency alarm,Door Open,V3F drive for door operation,Door Time Protection,Floor announcement,Parking floor,Emergency electric break releaser,Full curtain infrared door safety.'];
 
+			// }else if(leadLiftPDFModel.oData.doortype == "Manual"){
+			// 	stdFeatures = ['Manual Rescue Operation,Auto Fan Cut Off,Rear side SS Hand rail,Automatic leveling with,Ground Floor on Power Restoration,Floor Position and Direction indicator in car and Landings,Terminal approach slow down for safety,Final Limit protection,Emergency alarm.'];
+
+			// }
 			var phone = (this.companycontact === null || this.companycontact == undefined) ? "-" : this.companycontact;
 			var email = (this.companyemail === null || this.companyemail == undefined) ? "-" : this.companyemail;
 			var address = (this.address === null || this.address == undefined) ? "-" : this.address;
 			var detailaddress = (this.detailaddress === null || this.detailaddress == undefined) ? "-" : this.detailaddress;
 			var city = (this.city === null || this.city == undefined) ? "-" : this.city;
 			var pincode = (this.pincode === null || this.pincode == undefined) ? "-" : this.pincode;
-
-			console.log("email",email);
-			console.log("address",address);
-			console.log("detailaddress",detailaddress);
-			console.log("city",city);
-			console.log("pincode",pincode);
 
 			var fonts = {
 				'Arial': {
@@ -648,20 +648,34 @@ headertable1 += "},";
 			// headertable1 += "{canvas: [ { type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1 } ]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'Standard Features(Auto)', style: 'titleincenterstdfea'},";
+			// headertable1 += "{text: 'Standard Features('"+ leadLiftPDFModel.oData.doortype +"')', style: 'titleincenterstdfea'},";
+
+			headertable1 += "{columns: [{text:'Standard Features(" + leadLiftPDFModel.oData.doortype + ")', style: 'titleincenterstdfea'}]},";
+			
 			headertable1 += "{ style: 'tableExample3',";
 			headertable1 += " table: {";
 			//headertable1 += "widths: ['50%','50%'],";
 			headertable1 += "widths: ['35%','1.5%','63.5%'],";
 			headertable1 += " body: [";
-			//headertable1 += "[ { columns: [ ['              ','              ','              ','              ','              ','              ','              ','              ','         STANDARD FEATURES'] ]},{ columns: [ ['  '] ]},{ columns: [ ['Manual Rescue Operation,','Auto Fan Cut Off,','Rear side SS Hand rail,','Automatic leveling with Ground Floor on Power Restoration,','Floor Position and Direction indicator in car and Landings,','Terminal approach slow down for safety,','Final Limit protection, ','Emergency alarm,','Door Open / Close Button, ','V3F drive for door operation,','Door Time Protection,','Floor announcement,','Cancelling cop call on second press,','Parking floor,','Emergency electric break releaser,','Full curtain infrared door safety,'] ]}],";
-			headertable1 += "[ { columns: [{text:'STANDARD FEATURES" + " " + "', style: 'stdtable'} ]},{ columns: [ ['  '] ]},{ columns: [ ['Manual Rescue Operation,','Auto Fan Cut Off,','Rear side SS Hand rail,','Automatic leveling with Ground Floor on Power Restoration,','Floor Position and Direction indicator in car and Landings,','Terminal approach slow down for safety,','Final Limit protection, ','Emergency alarm,','Door Open / Close Button, ','V3F drive for door operation,','Door Time Protection,','Floor announcement,','Cancelling cop call on second press,','Parking floor,','Emergency electric break releaser,','Full curtain infrared door safety,'] ]}],";
-			headertable1 += "[ { columns: [ {text:'Safety Features" + " " + "', style: 'stdtablesafty'} ]},{ columns: [ ['  '] ]},{ columns: [ ['Automatic Rescue Device - ARD,','OSG ( Over Speed Governor)'] ]}],";
+			if(leadLiftPDFModel.oData.doortype == 'Auto'){
+				console.log(leadLiftPDFModel.oData.doortype);
+				headertable1 += "[ { columns: [{text:'STANDARD FEATURES" + " " + "', style: 'stdtable'} ]},{ columns: [ ['  '] ]},{ columns: [ ['Manual Rescue Operation,','Auto Fan Cut Off,','Rear side SS Hand rail,','Automatic leveling with Ground Floor on Power Restoration,','Floor Position and Direction indicator in car and Landings,','Terminal approach slow down for safety,','Final Limit protection, ','Emergency alarm,','Door Open / Close Button, ','V3F drive for door operation,','Door Time Protection,','Floor announcement,','Cancelling cop call on second press,','Parking floor,','Emergency electric break releaser,','Full curtain infrared door safety,'] ]}],";
+			}else if(leadLiftPDFModel.oData.doortype == 'Manual'){
+				headertable1 += "[ { columns: [{text:'STANDARD FEATURES" + " " + "', style: 'stdtable'} ]},{ columns: [ ['  '] ]},{ columns: [ ['Manual Rescue Operation,','Auto Fan Cut Off,','Rear side SS Hand rail,','Automatic leveling with Ground Floor on Power Restoration,','Floor Position and Direction indicator in car and Landings,','Terminal approach slow down for safety,','Final Limit protection, ','Emergency alarm,'] ]}],";
+			}
+			
+			headertable1 += "[ { columns: [ {text:'Safety Features" + " " + "', style: 'stdtablesafty'} ]},{ columns: [ ['  '] ]},{ columns: [ ['Automatic Rescue Device - ARD,','OSG ( Over Speed Governor).'] ]}],";
 
 			headertable1 += "]";
 			headertable1 += "}";
 			headertable1 += "},";
 
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -1339,7 +1353,7 @@ headertable1 += "},";
 
 				"stdtable: {" +
 				"fontSize:11," +
-				"margin: [20, 100, 8, 0]," +
+				// "margin: [20, 100, 8, 0]," +
 				"}," +
 
 				"stdtablesafty: {" +
@@ -1514,7 +1528,7 @@ headertable1 += "},";
 				"}," +
 
 				"tableExample3: {" +
-				"margin: [0, 15, 0, 250]," +
+				//"margin: [0, 15, 0, 250]," +
 				"fontSize: 11," +
 				"}," +
 
