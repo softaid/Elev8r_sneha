@@ -243,19 +243,14 @@ sap.ui.define([
 					obj = { ...(obj), ...(projectStagedata[i][0]) }
 				}
 
-
 				let stageModel = oThis.getView().getModel("stageModel");
 				stageModel.setData(obj);
 				oThis.getView().setModel(stageModel, "stageModel");
 				console.log("------------------stageModel------------------", stageModel);
 
-
-
 				let model = oThis.getView().getModel("RoleModel");
 				console.log(model)
 			})
-
-
 
 		},
 
@@ -343,164 +338,6 @@ sap.ui.define([
 			});
 		},
 
-		// onEndDateSelection: async function (OEvent) {
-		// 	// this.count=0;
-		// 	let oThis = this;
-		// 	let checkbox = OEvent.getSource();
-		// 	let data = checkbox.data("mySuperExtraData");
-		// 	this.count = 1;
-
-		// 	let dateModel = this.getView().getModel("dateModel");
-
-		// 	let dateModelDetails = this.getView().getModel("dateModel").oData;// it date model  for set field for reference
-
-		// 	let jobModel = this.getView().getModel('jobModel').oData;
-		// 	let model = this.getView().getModel("projectModel").oData;
-
-		// 	// name of the stage start date in the project model  in sequence in array 
-
-
-		// 	let resultarr = data.split("_");
-
-		// 	let resultColumn = parseInt(resultarr[0]);  //  column
-
-		// 	let resultingRow = parseInt(resultarr[1]);
-
-		// 	let resultRow = parseInt(oThis.orderArray.indexOf(resultingRow)); // Row
-
-		// 	// it is use  find next stage of our current stage
-		// 	let projectindex = oThis.projectWeightObject[model.modelData[resultRow].projectid].indexOf(`Sequence${resultColumn}`)
-
-		// 	let endStage = oThis.projectWeightObject[model.modelData[resultRow].projectid][(projectindex + 1)];
-
-		// 	let result_column_field_End = `Sequence${resultColumn}enddate`;//end date of current stage field name in view
-		// 	let result_column_field_Start = `${endStage}startdate`; // Start date of stage next to current  stage field name in view
-		// 	// current date logic start
-		// 	let currentDate = new Date();
-		// 	var resultDate = ocommonfunction.setTodaysDate(currentDate);
-		// 	// current date logic ends Sequence1weightage
-
-		// 	//functionality of inserting property in projectStageObjectSave
-		// 	let projectid = `${model.modelData[resultRow].projectid}`;
-
-		// 	oThis.projectStageObjectSave[projectid] = oThis.projectStageObjectSave?.[projectid] ?? [];
-
-
-		// 	let stageweightname = `Sequence${resultColumn}weightage`;// name of current stage project weight 
-
-		// 	// the project weight add  for stage completion
-		// 	let projectWeightAdd = 0;
-		// 	oThis.projectWeightagearray.some((projectWeight) => {
-		// 		if (projectWeight.projectid == model.modelData[resultRow].projectid) {
-		// 			projectWeightAdd = (projectWeight[stageweightname])
-		// 			return true;
-		// 		}
-
-		// 	})
-
-		// 	// if we select the checkbox 
-		// 	if (OEvent.mParameters.selected == true) {
-
-		// 		let validation = oThis.CheckBoxSelectionValidation(resultColumn, resultRow);
-		// 		if (validation == false) {
-		// 			MessageToast.show("before completing stage  you need to complete the previous stage");
-		// 			OEvent.getSource().setSelected(false);
-		// 			return true;
-		// 		}
-
-		// 		// let validationDepartment = oThis.checkboxDepartmentValidation(resultColumn);
-
-		// 		// if (validationDepartment == false) {
-		// 		// 	MessageToast.show("You don't have access of  stage because it is not under your department");
-		// 		// 	OEvent.getSource().setSelected(false);
-		// 		// 	return true;
-		// 		// }
-
-		// 		// No of jobs done under particular  stage
-		// 		let resultString = `Sequence${resultColumn}jobs`; // jobs field
-
-		// 		jobModel[resultString] = jobModel[resultString] + 1;
-
-		// 		{  // functionality for save 
-
-		// 			oThis.projectStageObjectSave[projectid].indexOf(`Sequence${resultColumn}`) == (-1) ? oThis.projectStageObjectSave[projectid].push(`Sequence${resultColumn}`) : " stage is allready present"
-		// 		}
-
-		// 		// it is condition for if selected stage is  not last stage
-		// 		if (oThis.projectWeightObject[model.modelData[resultRow].projectid][(projectindex + 1)] != undefined) {
-
-		// 			dateModelDetails.projectDetailArr[resultRow][result_column_field_Start] = model.modelData[resultRow][result_column_field_Start];
-
-		// 			model.modelData[resultRow][result_column_field_Start] = resultDate;// start date of next stage
-		// 			oThis.projectStageObjectSave[projectid].indexOf(endStage) == (-1) ? oThis.projectStageObjectSave[projectid].push(endStage) : "stage is allready present";
-		// 		}
-		// 		// else{
-
-		// 			oThis.projectDetailSave.indexOf(model.modelData[resultRow].projectid)==-1?oThis.projectDetailSave.push(model.modelData[resultRow].projectid):"it actually present";
-
-		// 		// }
-
-		// 		// set value in dateModel for future reference
-		// 		dateModelDetails.projectDetailArr[resultRow][result_column_field_End] = model.modelData[resultRow][result_column_field_End];
-
-		// 		model.modelData[resultRow][result_column_field_End] = resultDate;// end date  of  current  stage
-
-		// 		model.modelData[resultRow].completionper = parseFloat(model?.modelData[resultRow]?.completionper ?? 0) + parseFloat(projectWeightAdd);
-		// 		//    model.modelData[resultRow].Complete = parseFloat(model?.modelData[resultRow]?.Complete ?? 0) + parseFloat(resultArrayper[resultColumn] ?? 0);
-		// 		if (model.modelData[resultRow].completionper == 100) {
-		// 			model.modelData[resultRow].actualenddate = resultDate;
-		// 			model.modelData[resultRow].actualcompletiondays =  await this.dayCalculation(model.modelData[resultRow].Sequence1startdate, resultDate);
-
-		// 		}
-		// 		console.log(model);
-		// 	}
-
-		// 	// checkbox  selection remove 
-		// 	else {
-
-		// 		{
-		// 			let removeStageend = oThis.projectStageObjectSave[projectid].indexOf(`Sequence${resultColumn}`)
-		// 			oThis.projectStageObjectSave[projectid].splice(removeStageend, 1);
-
-		// 		}
-
-
-		// 		// it is condition for if selected stage is  not last stage
-		// 		if (oThis.projectWeightObject[model.modelData[resultRow].projectid][(projectindex + 1)] != undefined) {
-		// 			model.modelData[resultRow][result_column_field_Start] = dateModelDetails.projectDetailArr[resultRow]?.[result_column_field_Start] ?? null;
-		// 			let removeStagestart = oThis.projectStageObjectSave[projectid].indexOf(endStage);
-		// 			oThis.projectStageObjectSave[projectid].splice(removeStagestart, 1);
-
-
-		// 		}
-		// 		else{
-		// 			model.modelData[resultRow].actualenddate = null;
-		// 			model.modelData[resultRow].actualcompletiondays = null;
-		// 		}
-
-		// 		// remove project completion date  
-		// 		if (model.modelData[resultRow].completionper == 100) {
-		// 			model.modelData[resultRow].actualenddate = null;
-		// 			model.modelData[resultRow].actualcompletiondays = null;
-		// 		}
-
-		// 		// no. of jobs updates
-		// 		let resultString = `Sequence${resultColumn}jobs`;
-
-		// 		jobModel[resultString] = jobModel[resultString] - 1;
-
-		// 		//result_column_field_End == "JobAddedinWarrantyenddate" ? model.modelData[resultRow].actualenddatedate = null : "1";
-		// 		model.modelData[resultRow][result_column_field_End] = dateModelDetails.projectDetailArr[resultRow]?.[result_column_field_End] ?? null; // set intial value as checkbox selection false
-
-
-		// 		//  substract completion % of stage 
-		// 		model.modelData[resultRow].completionper = parseFloat(model?.modelData[resultRow]?.completionper ?? 0) - parseFloat(projectWeightAdd);
-
-		// 		// model.modelData[resultRow].Complete = parseFloat(model?.modelData[resultRow]?.Complete ?? 0) - parseFloat(resultArrayper[resultColumn] ?? 0);
-		// 	}
-		// 	this.getView().getModel("jobModel").refresh();
-		// 	this.getView().getModel("projectModel").refresh();
-		// },
 
 		onCheckBoxSelect: async function (OEvent) {
 			// this.count=0;
@@ -574,6 +411,15 @@ sap.ui.define([
 						return true;
 					}
 				}
+
+				if(model.modelData[resultRow][`Sequence${resultColumn}enddate`]!=null){
+					let dayDiff = oThis.dayCalculation( model.modelData[resultRow][result_column_field_start], model.modelData[resultRow][`Sequence${resultColumn}enddate`]);
+					if(dayDiff<0){
+						MessageToast.show("start date of current stage  must be less than or equal to end date of current stage ");
+					model.modelData[resultRow][`Sequence${resultColumn}startdate`] = null;
+					return true;
+					}
+				}
 			}
 
 			// if we select the checkbox  or end Date manually
@@ -606,6 +452,7 @@ sap.ui.define([
 					OEvent.getSource().setSelected(false);
 					return true;
 				}
+
 
 				// let validationDepartment = oThis.checkboxDepartmentValidation(resultColumn);
 
@@ -784,107 +631,7 @@ sap.ui.define([
 			return -1;
 		},
 
-		// onSave: function () {
-
-		// 	let oThis = this;
-
-
-		// 	let projectModel = oThis.getView().getModel("projectModel").oData.modelData;
-		// 	let saveArray = Object.entries(oThis.projectStageObjectSave);
-		// 	let companyid = commonService.session("companyId");
-
-
-		//    // project details save like ni, sales engineer , completion per
-		// 	oThis.projectDetailSave.map((projectid)=>{
-		// 		projectModel.some((projectdetail)=>{
-
-		// 			if(projectid==projectdetail.projectid){
-		// 				let actualenddate = projectdetail.actualenddate != undefined ? ocommonfunction.getDate(projectdetail.actualenddate) : null;
-		// 				let saveObject = {
-		// 					niengineer:projectdetail?.niengineer??null,
-		// 					salesengineer:projectdetail?.salesengineer??null,
-		// 					actualcompletiondays:projectdetail?.actualcompletiondays?? null,
-		// 					completionper:projectdetail?.completionper??null,
-		// 					actualenddate:actualenddate,
-		// 					id: projectdetail.projectid,
-		// 					companyid: commonService.session("companyId"),
-		// 					userid: commonService.session("userId")
-		// 				};
-
-		// 				projectService.updateProjectManagement(saveObject, function (data) {
-		// 					console.log("---------------modeldetaildata---------------", data);
-		// 					MessageToast.show("Project detail Data saved successfully.");
-
-		// 				})
-		// 			}
-		// 		})
-		// 	})
-
-
-		// 	saveArray.map((ele) => {
-		// 		projectid = ele[0];
-		// 		ele[1] = ele[1].sort(function (a, b) {
-		// 			const numA = parseInt(a.match(/\d+/)[0]);
-		// 			const numB = parseInt(b.match(/\d+/)[0]);
-		// 			return numA - numB;
-		// 		});
-
-		// 		let index = oThis.projectWeightObject[ele[0]].indexOf(ele[1][((ele[1].length) - 1)]);
-
-		// 		index != ((oThis.projectWeightObject[ele[0]].length) - 1) ? ele[1].push(oThis.projectWeightObject[ele[0]][index + 1]) : "no need to push";
-
-		// 	})
-
-		// 	saveArray.map((saveArr) => {
-		// 		projectModel.some((projectdetail) => {
-		// 			if (saveArr[0] == projectdetail.projectid) {
-		// 				saveArr[1].map((sequence) => {
-
-		// 					let startdate = `${sequence}startdate`;
-		// 					let enddate = `${sequence}enddate`;
-
-		// 					let startActualDate = null;
-		// 					if (projectdetail[startdate] != undefined && projectdetail[startdate] != null && projectdetail[startdate].trim() != "") {
-		// 						startActualDate = ocommonfunction.getDate(projectdetail[startdate]);
-		// 					}
-		// 					let endActualDate = null;
-		// 					if (projectdetail[enddate] != undefined && projectdetail[enddate] != null && projectdetail[enddate].trim() != "") {
-		// 						endActualDate = projectdetail[enddate] != undefined ? ocommonfunction.getDate(projectdetail[enddate]) : null;
-		// 					}
-
-		// 					let saveObject = {
-		// 						startdate: startActualDate,
-		// 						enddate: endActualDate,
-		// 						stageid: oThis.stageidObj[sequence],
-		// 						projectid: projectdetail.projectid,
-		// 						companyid: commonService.session("companyId"),
-		// 						userid: commonService.session("userId")
-		// 					};
-		// 					projectService.updateProjectActivityDetail(saveObject, function (data) {
-		// 						console.log("---------------modeldetaildata---------------", data);
-		// 						MessageToast.show("Project detail Data saved successfully.");
-
-		// 					})
-
-		// 					console.log(saveObject)
-
-		// 					return true;
-
-		// 				})
-
-
-		// 			}
-
-
-		// 		})
-
-		// 	});
-
-		// 	this.count=0;
-		// 	 oThis.getView().getModel("projectModel").refresh(true);
-		// 	this.count=1;
-		// },
-
+		
 		onSave: function () {
 			// Storing reference to the current context (this) in oThis
 			let oThis = this;
@@ -905,6 +652,7 @@ sap.ui.define([
 							salesengineer: projectdetail?.salesengineer ?? null,
 							actualcompletiondays: projectdetail?.actualcompletiondays ?? null,
 							completionper: projectdetail?.completionper ?? null,
+							field:"project",
 							actualenddate: actualenddate,
 							id: projectdetail.projectid,
 							companyid: commonService.session("companyId"),
