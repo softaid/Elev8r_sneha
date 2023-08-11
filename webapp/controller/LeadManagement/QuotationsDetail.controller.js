@@ -1071,7 +1071,7 @@ headertable1 += "},";
 			
 			headertable1 += "{text: [{text:'13.    Right to Use: ', style: 'subheaderwithbold'},{text:'Neither the customer nor any third party shall be entitled to use the elevator for any purpose what so ever prior to: Any usage of Sneha Elevator, for any purpose whatever before the format written handover letter to customer. And or without the full or final payments, including any over dues because of variation in taxes, pending certificates.', style: 'title'}]},";
 
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			
 			headertable1 += "{text: [{text:'14.    Force majeure: Under no circumstances shall either of us be liable for any loss, damage or delay due  to any ', style: 'title'}]},";
 			

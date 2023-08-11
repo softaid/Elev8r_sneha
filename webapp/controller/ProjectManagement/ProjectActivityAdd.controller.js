@@ -395,11 +395,8 @@ sap.ui.define([
 
 
 		onNISave: function () {
-			//var isvalid = this.validateForm();
-			//if(isvalid){
 			var currentContext = this;
 			let parentModel = this.getView().getModel("projectModel").oData; 
-
 			console.log("-----------parentModel-------------",parentModel);
 			let tableModel = this.getView().getModel("tblModel").oData;
 			let nitblmodel = this.getView().getModel("nitblmodel").oData;
@@ -413,10 +410,8 @@ sap.ui.define([
 			parentModel["subcontractorid2"] = currentContext.getView().byId("subcontractor2").getSelectedItem().mProperties.key;
 
 			Projectservice.saveProject(parentModel, function (data) {
-
 				MessageToast.show("Project  update sucessfully");
-
-				tableModel.map(function (oModel, index) {
+				nitblmodel.map(function (oModel, index) {
 					oModel["companyid"] = commonService.session("companyId");
 					oModel["userid"] = commonService.session("userId");
 
@@ -424,19 +419,12 @@ sap.ui.define([
 					oModel.enddate = (oModel.enddate != null) ? commonFunction.getDate(oModel.enddate) : oModel.enddate;
 					oModel.actualstartdate = (oModel.actualstartdate != null) ? commonFunction.getDate(oModel.actualstartdate) : oModel.actualstartdate;
 					oModel.actualenddate = (oModel.actualenddate != null) ? commonFunction.getDate(oModel.actualenddate) : oModel.actualenddate;
-					// oModel.isactive = oModel.isactive===true?1:0;
-					// oModel.isstd = oModel.isstd===true?1:0;
-
-					Projectservice.saveProjectActivityDetail(oModel, function (data) {
-						MessageToast.show("Project details update sucessfully");
+				    Projectservice.saveNIActivityDetail(oModel, function (data) {
+					MessageToast.show("NI details update sucessfully");
 
 					});
 
 				})
-
-
-
-
 				currentContext.resetModel();
 				// this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
 				// }
