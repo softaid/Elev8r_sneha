@@ -8235,3 +8235,72 @@ BEGIN
 RETURN @actualcompletiondays;
 END$$
 DELIMITER ;
+
+
+
+ALTER TABLE `project` 
+ADD COLUMN `niactualcompletiondays` INT(11) NULL AFTER `nicompletionper`,
+ADD COLUMN `niactualenddate` INT(11) NULL AFTER `actualdays`;
+
+
+
+
+DROP procedure IF EXISTS `spc_project_update`;
+
+DELIMITER $$
+
+CREATE  PROCEDURE `spc_project_update`(
+    IN p_id INT(11),
+    IN p_actualcompletiondays INT(11),
+    IN p_field VARCHAR(20),
+    IN p_actualenddate DATE,
+    IN p_niengineer VARCHAR(20),
+    IN p_salesengineer VARCHAR(50),
+    IN p_completionper INT(11),
+    IN p_companyid INT,
+    IN p_userid INT,
+    OUT out_id INT
+)
+BEGIN
+    DECLARE action VARCHAR(10);
+    
+    IF p_field = 'project' THEN
+        UPDATE project
+        SET 
+            actualcompletiondays = p_actualcompletiondays,
+            actualenddate = p_actualenddate,
+            niengineer = p_niengineer,
+            completionper = p_completionper,
+            salesengineer = p_salesengineer,
+            companyid = p_companyid
+        WHERE
+            id = p_id 
+            AND companyid = p_companyid;
+        SET action = 'UPDATE'; 
+    ELSE
+        UPDATE project
+        SET 
+            niactualcompletiondays = p_actualcompletiondays,
+            niactualenddate = p_actualenddate,
+            niengineer = p_niengineer,
+            nicompletionper = p_completionper,
+            salesengineer = p_salesengineer,
+            companyid = p_companyid
+        WHERE
+            id = p_id 
+            AND companyid = p_companyid;
+        SET action = 'UPDATE'; 
+    END IF;
+    
+    SELECT LAST_INSERT_ID() INTO out_id;
+END;$$
+
+DELIMITER ;
+;
+
+
+ALTER TABLE `project` 
+CHANGE COLUMN `niactualenddate` `niactualenddate` DATE NULL DEFAULT NULL ;
+
+ALTER TABLE `documentcollectiondetails` 
+ADD COLUMN `document_name` VARCHAR(45) NULL DEFAULT NULL AFTER `projectid`;

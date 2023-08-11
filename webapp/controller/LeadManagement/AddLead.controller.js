@@ -319,6 +319,21 @@ sap.ui.define([
 			}
 		},
 
+		onclickstop: function(oEvent){
+			let oThis = this;
+			let stops=oEvent.mParameters.value;
+			if(parseInt(stops)==stops){
+			let travel= ((stops-1)*3)+1;
+			var model = oThis.getView().getModel("editPartyModel");
+			model.oData.travel=travel;
+			model.refresh();
+			}
+			else{
+				MessageToast.show("Please enter  valide Number of stop");
+			}
+
+		},
+
 		bindLeadDetails: function (id) {
 			var currentContext = this;
 			var oModel = new JSONModel();

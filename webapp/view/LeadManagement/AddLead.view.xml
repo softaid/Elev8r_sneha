@@ -584,7 +584,7 @@
                                 </form:FormElement>
                                 <form:FormElement label="Stop">
                                     <form:fields>
-                                        <Input id="txtstopid"  type="number" valueLiveUpdate="true" value="{editPartyModel>/stopsid}"/>
+                                        <Input id="txtstopid"  type="number" valueLiveUpdate="true" value="{editPartyModel>/stopsid}" liveChange="onclickstop"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="{i18n>laedLowestFloorMarking}">
@@ -727,7 +727,7 @@
                                 </form:FormElement>
                                 <form:FormElement label="Travel">
                                     <form:fields>
-                                        <Input id="txttravel" type="number" valueLiveUpdate="true" value="{editPartyModel>/travel}" description=" "/>
+                                        <Input id="txttravel" type="number" valueLiveUpdate="true" value="{editPartyModel>/travel}" description="mts"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Pit Depth">

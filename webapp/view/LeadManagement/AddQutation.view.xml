@@ -522,7 +522,7 @@
                                 </form:FormElement>
                                 <form:FormElement label="Stop">
                                     <form:fields>
-                                        <Input id="txtstopid"  valueLiveUpdate="true" value="{editQutationModel>/stopsid}"/>
+                                        <Input id="txtstopid"  valueLiveUpdate="true" value="{editQutationModel>/stopsid}" liveChange="onclickstop"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Floor Marking">
