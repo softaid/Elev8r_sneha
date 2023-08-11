@@ -26,7 +26,7 @@
 				rows="{ path: 'projectModel>/modelData' }"
                 enableSelectAll="false"
                 selectionMode="None"
-				visibleRowCount="2"
+				visibleRowCount="3"
 				ariaLabelledBy="title">
 				<table:extension>
 					<OverflowToolbar style="Clear">

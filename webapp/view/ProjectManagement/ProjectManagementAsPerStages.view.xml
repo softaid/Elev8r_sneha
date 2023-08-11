@@ -26,7 +26,7 @@
 				rows="{ path: 'projectModel>/modelData' }"
                 enableSelectAll="false"
                 selectionMode="None"
-				visibleRowCount="{projectrowcount_model>/rowsCount}"
+				visibleRowCount="3"
 				ariaLabelledBy="title">
 				<table:extension>
 					<OverflowToolbar style="Clear">
@@ -802,7 +802,7 @@
                                                      width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
-                                                value="{projectModel>Sequence2enddate}"
+                                                value="{projectModel>Sequence9enddate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 editable="{
                                                             path: 'projectModel>Sequence9enddate',
