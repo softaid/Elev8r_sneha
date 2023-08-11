@@ -406,8 +406,8 @@ sap.ui.define([
 			parentModel["userid"] = commonService.session("userId");
 			parentModel.startdate = commonFunction.getDate(parentModel.startdate);
 			parentModel.enddate = commonFunction.getDate(parentModel.enddate);
-			parentModel["subcontractorid1"] = currentContext.getView().byId("subcontractor1").getSelectedItem().mProperties.key;
-			parentModel["subcontractorid2"] = currentContext.getView().byId("subcontractor2").getSelectedItem().mProperties.key;
+			parentModel["subcontractorid1"] = currentContext.getView().byId("subcontractor1")?.getSelectedItem()?.mProperties?.key??null;
+			parentModel["subcontractorid2"] = currentContext.getView().byId("subcontractor2")?.getSelectedItem()?.mProperties?.key??null;
 
 			Projectservice.saveProject(parentModel, function (data) {
 				MessageToast.show("Project  update sucessfully");

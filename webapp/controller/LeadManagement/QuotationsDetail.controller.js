@@ -485,22 +485,22 @@ sap.ui.define([
 					name: "AUXILARY SUPPLY SYSTEM",
 					value: leadLiftPDFModel.oData.auxilarysupplysystem,
 				},
-
-
 			);
+				
+			// let stdFeatures = [];
+			// if(leadLiftPDFModel.oData.doortype == "Auto"){
+			// 	stdFeatures = ['Manual Rescue Operation,Auto Fan Cut Off,Rear side SS Hand rail,Automatic leveling with,Ground Floor on Power Restoration,Floor Position and Direction indicator in car and Landings,Terminal approach slow down for safety,Final Limit protection,Emergency alarm,Door Open,V3F drive for door operation,Door Time Protection,Floor announcement,Parking floor,Emergency electric break releaser,Full curtain infrared door safety.'];
 
+			// }else if(leadLiftPDFModel.oData.doortype == "Manual"){
+			// 	stdFeatures = ['Manual Rescue Operation,Auto Fan Cut Off,Rear side SS Hand rail,Automatic leveling with,Ground Floor on Power Restoration,Floor Position and Direction indicator in car and Landings,Terminal approach slow down for safety,Final Limit protection,Emergency alarm.'];
+
+			// }
 			var phone = (this.companycontact === null || this.companycontact == undefined) ? "-" : this.companycontact;
 			var email = (this.companyemail === null || this.companyemail == undefined) ? "-" : this.companyemail;
 			var address = (this.address === null || this.address == undefined) ? "-" : this.address;
 			var detailaddress = (this.detailaddress === null || this.detailaddress == undefined) ? "-" : this.detailaddress;
 			var city = (this.city === null || this.city == undefined) ? "-" : this.city;
 			var pincode = (this.pincode === null || this.pincode == undefined) ? "-" : this.pincode;
-
-			console.log("email",email);
-			console.log("address",address);
-			console.log("detailaddress",detailaddress);
-			console.log("city",city);
-			console.log("pincode",pincode);
 
 			var fonts = {
 				'Arial': {
@@ -1383,7 +1383,10 @@ headertable1 += "},";
 				"stdtable: {" +
 				"fontSize:11," +
 				// "margin: [20, 100, 8, 0]," +
+<<<<<<< HEAD
+=======
 				"alignment:'center'," +
+>>>>>>> 23b832fe69210caa251509b484f4b0a1a513312e
 				"}," +
 
 				"stdtablesafty: {" +
@@ -1558,7 +1561,11 @@ headertable1 += "},";
 				"}," +
 
 				"tableExample3: {" +
+<<<<<<< HEAD
+				//"margin: [0, 15, 0, 250]," +
+=======
 				// "margin: [0, 15, 0, 250]," +
+>>>>>>> 23b832fe69210caa251509b484f4b0a1a513312e
 				"fontSize: 11," +
 				"}," +
 

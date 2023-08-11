@@ -324,10 +324,10 @@ sap.ui.define([
 
 					var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
 					// tblmodel.oData.imgdata = currentContext.resultArr[0].imgdata;
-					tblmodel.oData.image_url = currentContext.resultArr[0].image_url;
-					tblmodel.oData.pdf_url = currentContext.resultpdfArr[0].pdf_url;
-					tblmodel.oData.imageid = 0;
-					tblmodel.oData.pdfid = 0;
+					tblmodel.oData.image_url = currentContext.resultArr?.[0]?.image_url??null;
+					tblmodel.oData.pdf_url = currentContext.resultpdfArr?.[0]?.pdf_url??null;
+					tblmodel.oData.imageid =(currentContext.resultArr?.[0]?.image_url??null)==null?null:0;
+					tblmodel.oData.pdfid = (currentContext.resultpdfArr?.[0]?.pdf_url??null)==null?null:0;
 					tblmodel.refresh();
 				}
 			})
@@ -482,14 +482,14 @@ sap.ui.define([
 								pdf_url: BASE64_MARKER + base64,
 								imageid: i,
 								document_Unique: ramdomstring,
-								document_id: 3,
+								document_id: 5,
 								document_name: imgdata.Filename
 							})
 
 							pdfNameIndex++;
 							tblmodel.oData.pdfdata = currentContext.resultpdfArr[0].imgdata;
 							tblmodel.oData.pdf_url = currentContext.resultpdfArr[0].pdf_url;
-							tblmodel.oData.documentid = 0;
+							tblmodel.oData.pdfid = 0;
 							tblmodel.refresh();
 
 
@@ -560,7 +560,7 @@ sap.ui.define([
 			tblmodel.refresh();
 		},
 
-		backwardPress: function () {
+		backwardPress: function (OEvent) {
 
 			let currentContext = this;
 			var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
@@ -582,7 +582,7 @@ sap.ui.define([
 				return true;
 			}
 
-			if (count >= noOfdocumet) {
+			if (count==0) {
 				MessageToast.show(`it is last ${message}`);
 				return true;
 			}
@@ -591,13 +591,13 @@ sap.ui.define([
 			}
 			if(message=="image"){
 			
-			tblmodel.oData.imgdata = currentContext.resultArr[count].imgdata;
+			tblmodel.oData.imgdata = currentContext?.resultArr[count]?.imgdata??null;
 			tblmodel.oData.image_url = currentContext.resultArr[count].image_url;
 			tblmodel.oData.imageid = count;
 			}
 
 			else{
-				tblmodel.oData.imgdata = currentContext.resultpdfArr[count].imgdata;
+				tblmodel.oData.imgdata = currentContext?.resultpdfArr[count]?.imgdata??null;
 				tblmodel.oData.pdf_url = currentContext.resultpdfArr[count].pdf_url;
 				tblmodel.oData.pdfid = count;
 				}
@@ -605,7 +605,7 @@ sap.ui.define([
 			tblmodel.refresh();
 		},
 
-		onDeleteDocument: function () {
+		onDeleteDocument: function (OEvent) {
 			
 
 			let currentContext = this;
@@ -616,7 +616,7 @@ sap.ui.define([
 			if (OEvent.mParameters.id.indexOf("btndeletepdf")==-1 ){
 				message="image";
 				 count = tblmodel.oData.imageid;
-				 resultArr=currentContext.resultArr
+				 resultArr=currentContext.resultArr;
 			}
 			else{
 				 count = tblmodel.oData.pdfid;
@@ -627,24 +627,24 @@ sap.ui.define([
 				return true;
 			}
 			
-			if (currentContext[resultArr][count].id != undefined) {
-				currentContext.DeleteDocumentArr.push(currentContext[resultArr][count])
-				currentContext[resultArr].splice(count, 1);
+			if (resultArr[count].id != undefined) {
+				currentContext.DeleteDocumentArr.push(resultArr[count].id)
+				resultArr.splice(count, 1);
 
 			}
 			else {
-				currentContext[resultArr].splice(count, 1);
+				resultArr.splice(count, 1);
 			}
 
-			if (currentContext.resultArr.length == 0) {
+			if (resultArr.length == 0) {
 				tblmodel.oData.imgdata = null;
 				tblmodel.oData.image_url = null;
 				tblmodel.oData.imageid = null;
 
 			}
 			else {
-				tblmodel.oData.imgdata = currentContext[resultArr][0].imgdata;
-				tblmodel.oData.image_url = currentContext[resultArr][0].image_url;
+				tblmodel.oData.imgdata = resultArr[0].imgdata;
+				tblmodel.oData.image_url = resultArr[0].image_url;
 				tblmodel.oData.imageid = 0;
 			}
 	
@@ -657,7 +657,7 @@ sap.ui.define([
 			let currentContext = this;
 
 			currentContext.DeleteDocumentArr.forEach((deleteImageDetail) => {
-				Projectservice.deleteDocumentCollectionDetails(deleteImageDetail, function (obj) {
+				Projectservice.deleteDocumentCollectionDetails({"id":deleteImageDetail}, function (obj) {
 
 				})
 			});
