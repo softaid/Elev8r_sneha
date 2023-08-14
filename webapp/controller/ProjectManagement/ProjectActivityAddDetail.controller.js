@@ -636,16 +636,17 @@ sap.ui.define([
 				resultArr.splice(count, 1);
 			}
 
+
 			if (resultArr.length == 0) {
 				tblmodel.oData.imgdata = null;
-				tblmodel.oData.image_url = null;
-				tblmodel.oData.imageid = null;
+				tblmodel.oData[`${message}_url`] = null;
+				tblmodel.oData[`${message}id`] = null;
 
 			}
 			else {
 				tblmodel.oData.imgdata = resultArr[0].imgdata;
-				tblmodel.oData.image_url = resultArr[0].image_url;
-				tblmodel.oData.imageid = 0;
+				tblmodel.oData[`${message}_url`] = resultArr[0][`${message}_url`];
+				tblmodel.oData[`${message}id`] = 0;
 			}
 	
 
