@@ -1383,10 +1383,7 @@ headertable1 += "},";
 				"stdtable: {" +
 				"fontSize:11," +
 				// "margin: [20, 100, 8, 0]," +
-<<<<<<< HEAD
-=======
 				"alignment:'center'," +
->>>>>>> 23b832fe69210caa251509b484f4b0a1a513312e
 				"}," +
 
 				"stdtablesafty: {" +
@@ -1561,11 +1558,7 @@ headertable1 += "},";
 				"}," +
 
 				"tableExample3: {" +
-<<<<<<< HEAD
-				//"margin: [0, 15, 0, 250]," +
-=======
 				// "margin: [0, 15, 0, 250]," +
->>>>>>> 23b832fe69210caa251509b484f4b0a1a513312e
 				"fontSize: 11," +
 				"}," +
 
