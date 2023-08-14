@@ -8321,3 +8321,237 @@ ADD COLUMN `niactualenddate` DATE NULL AFTER `niactualcompletiondays`;
 ALTER TABLE `documentcollectiondetails` 
 ADD COLUMN `document_name` VARCHAR(150) NULL AFTER `projectid`,
 CHANGE COLUMN `image_url` `document_url` VARCHAR(250) NULL DEFAULT NULL ;
+
+
+
+
+
+DROP procedure IF EXISTS `db_elev8r`.`spc_project_update`;
+;
+
+DELIMITER $$
+CREATE  PROCEDURE `spc_project_update`(
+    IN p_id INT(11),
+    IN p_actualcompletiondays INT(11),
+    IN p_field VARCHAR(20),
+    IN p_actualenddate DATE,
+    IN p_niengineer VARCHAR(20),
+    IN p_salesengineer VARCHAR(50),
+    IN p_completionper INT(11),
+    IN p_companyid INT,
+    IN p_userid INT,
+    OUT out_id INT
+)
+BEGIN
+    DECLARE action VARCHAR(10);
+    
+    IF p_field = 'project' THEN
+        UPDATE project
+        SET 
+            actualcompletiondays = p_actualcompletiondays,
+            actualenddate = p_actualenddate,
+            niengineer = p_niengineer,
+            completionper = p_completionper,
+            salesengineer = p_salesengineer,
+            companyid = p_companyid
+        WHERE
+            id = p_id 
+            AND companyid = p_companyid;
+        SET action = 'UPDATE'; 
+    ELSE
+        UPDATE project
+        SET 
+            niactualcompletiondays = p_actualcompletiondays,
+            niactualenddate = p_actualenddate,
+            niengineer = p_niengineer,
+            nicompletionper = p_completionper,
+            salesengineer = p_salesengineer,
+            companyid = p_companyid
+        WHERE
+            id = p_id 
+            AND companyid = p_companyid;
+        SET action = 'UPDATE'; 
+    END IF;
+    
+    SELECT LAST_INSERT_ID() INTO out_id;
+END$$
+
+DELIMITER ;
+;
+
+
+
+
+DROP procedure IF EXISTS `db_elev8r`.`spc_reference_save`;
+;
+
+DELIMITER $$
+CREATE PROCEDURE `spc_reference_save`(
+ IN p_id INT(11),
+ IN p_typecode VARCHAR(100),
+ IN p_parentid INT(11),
+ IN p_parenttypecode VARCHAR(200),
+ IN p_description VARCHAR(200),
+ IN p_active TINYINT(4),
+ IN p_defaultvalue TINYINT(4),
+ IN p_projectper DECIMAL(9,3),
+ IN p_stageper DECIMAL(9,3),
+ IN p_departmentid INT(11),
+ IN p_sequenceno INT(11),
+ IN p_modelid varchar(200),
+ IN p_companyid INT(11),
+ IN p_userid INT(11),
+ OUT out_id INT )
+BEGIN
+	SET @action = null;
+    SET @prjCnt = null;
+    
+    SELECT count(*) INTO @prjCnt FROM project WHERE companyid = p_companyid;
+	IF(p_defaultvalue = 1) THEN
+		UPDATE reference SET defaultvalue = 0 WHERE typecode = p_typecode;
+    END IF;
+	IF(NULLIF(p_id, '0') IS NULL) THEN
+		INSERT INTO reference(typecode, parentid, parenttypecode, description, active, defaultvalue,projectper,stageper, createddate, modifieddate, departmentid, sequenceno, modelid, companyid)
+		VALUES (p_typecode, p_parentid, p_parenttypecode, p_description, p_active,p_defaultvalue,p_projectper,p_stageper, now(), now(),p_departmentid, p_sequenceno, p_modelid, p_companyid);
+		
+        
+		SET @action = 'INSERT';
+        
+        IF(p_typecode = 'ProMilestones') THEN
+			IF(@prjCnt > 0) THEN
+				SET @row_number = 0;
+				
+				DROP TABLE IF EXISTS tempproject;
+				CREATE TEMPORARY TABLE tempproject
+				
+				SELECT (@row_number:=@row_number + 1) AS num, id as projectid from (
+					SELECT 
+						id
+					FROM project
+				) 
+				as tblproject;
+
+				BEGIN
+					DECLARE n INT DEFAULT 0;
+					DECLARE i INT DEFAULT 0; 
+					SELECT COUNT(*) FROM tempproject INTO n;
+
+					WHILE i < n DO
+						SET @projectid = NULL;
+						SELECT projectid INTO @projectid FROM tempproject WHERE num = i + 1;
+
+						SET @projectdetailid = null;
+						 CALL spc_projectdetail_save( 	
+							NULL,
+							@projectid,
+							(SELECT id FROM reference WHERE description = p_description LIMIT 1),
+							p_description,
+							p_parentid,
+							null,
+							null,
+							NULL,
+							NULL,
+							0,
+							Null,
+							NULL,
+							NULL,
+							NULL,
+							NULL,
+							NULL,
+							p_departmentid,
+							0,
+							NULL,
+							1,
+							0,
+							NULL,
+							p_companyid,
+							p_userid,
+							@projectdetailid
+						 );
+
+						SET i = i + 1;
+					END WHILE;
+				END;
+			END IF;
+        END IF;
+	
+	ELSE
+		UPDATE reference
+		SET typecode = p_typecode, 
+			parentid = p_parentid, 
+            parenttypecode = p_parenttypecode, 
+			description = p_description,
+            active = p_active,
+            defaultvalue = p_defaultvalue,
+            projectper = p_projectper,
+            stageper = p_stageper,
+            modifieddate = now(),
+            departmentid = p_departmentid,
+            sequenceno = p_sequenceno,
+            modelid = p_modelid,
+			companyid = p_companyid,
+			id = LAST_INSERT_ID(id)
+			
+		WHERE id = p_id
+		AND companyid = p_companyid;
+		
+		SET @action = 'UPDATE';
+        
+        IF(@prjCnt > 0) THEN
+			SET @master = null;
+			SELECT master INTO @master FROM referencetype WHERE typecode = p_typecode;
+			
+			IF(@master = 'ProjectMaster') THEN
+				UPDATE project_detail
+				SET stagename = p_description
+				-- stagecompletionpercentage = p_stageper,
+				-- projectweightage = p_projectper
+				WHERE stageid = p_id;
+			END IF;
+		END IF;
+	END IF;
+	
+	SELECT LAST_INSERT_ID() INTO OUT_ID;
+	
+	-- record log
+   CALL spc_commonlog_save(p_companyid, 'reference', out_id, @action, p_userid);
+
+END$$
+
+DELIMITER ;
+;
+
+
+DROP procedure IF EXISTS `spc_reference_select`;
+
+
+CREATE PROCEDURE `spc_reference_select`(
+	IN p_id varchar(30)
+)
+BEGIN
+	
+		SELECT 
+			id,
+			typecode,
+            IFNULL(parentid,0)as parentid, 
+            parenttypecode, 
+            description,
+            active,
+            defaultvalue,
+            projectper,
+            stageper,
+            displayorder,
+            sequenceno,
+            departmentid,
+            modelid
+		FROM
+			`reference`
+		WHERE
+			id = p_id;
+END$$
+
+DELIMITER ;
+;
+
+
+
