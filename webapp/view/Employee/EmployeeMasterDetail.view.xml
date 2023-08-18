@@ -64,67 +64,30 @@
                                     <Input id="txtName" valueLiveUpdate="true" value="{editemployeeModel>/employeename}" change = "cahegeName" required="true"/>
                                 </form:fields>
                             </form:FormElement> 
-                            
-                             <form:FormElement label="{i18n>employeeMasterLabelEmailId}">
+                            <form:FormElement label="{i18n>employeeMasterLabelEmailId}">
                                 <form:fields>
-                                    <Input id="txtEmail" valueLiveUpdate="true"  value="{editemployeeModel>/emailid}" change = "validemail" required="true" />
+                                    <Input id="txtEmail" valueLiveUpdate="true"  value="{editemployeeModel>/emailid}" />
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement label="Designation">
+                                <form:fields>
+                                    <Input id="designation" value="{editemployeeModel>/designation}" required="true"/>
                                 </form:fields>
                             </form:FormElement>
                             <form:FormElement label="{i18n>employeeMasterLabelMobileNo}">
                                 <form:fields>
-                                    <Input id="txtMobile" type="number" maxLength="10"  valueLiveUpdate="true" value="{editemployeeModel>/mobileno}"
-                                     change="cahegeData"/>
+                                    <Input id="txtMobile" type="number" maxLength="10"  valueLiveUpdate="true" value="{editemployeeModel>/mobileno}" required="true" />
                                 </form:fields>
                             </form:FormElement>
-
-                               <form:FormElement label="{i18n>leadPinCode}">
-                                        <form:fields>
-                                            <Input id="txtPinCode1" type="number" maxLength="6" valueLiveUpdate="true" value="{editPartyModel>/pincode}" change="onNumberInputChange"/>
-                                        </form:fields>
-                                    </form:FormElement>
-
-                             <form:FormElement label="{i18n>employeeMasterLabelActive}">
+                            <form:FormElement label="{i18n>employeeMasterLabelActive}">
                                 <form:fields>
-
                                     <Switch state="{editemployeeModel>/isactive}" customTextOn="Yes" customTextOff="No">
                                         <layoutData>
                                             <FlexItemData growFactor="1" />
                                         </layoutData>
                                     </Switch>
-
                                 </form:fields>
                             </form:FormElement>
-                            <!-- <form:FormElement label="Employee Role">
-                                <form:fields>
-                                    <Select id="emprole"
-                                        required="true" 
-                                        change=""
-                                        selectedKey="{editemployeeModel>/emproleids}" 
-                                        forceSelection="false"
-                                        width="500px"
-                                        items="{
-                                            path: 'roleModel>/modelData',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{roleModel>id}" text="{roleModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>  -->
-                                  <form:FormElement label="Employee Role">
-                                            <form:fields>
-                                                <MultiComboBox id="emprole"
-                                                    required="true" 
-                                                    selectionChange="handleSelectionChange"
-                                                    selectionFinish="handleSelectionFinish"
-                                                    width="500px"
-                                                    items="{
-                                                           path: 'roleModel>/modelData',
-                                                           sorter: { path: 'id' }
-                                                           }">
-                                                    <core:Item key="{roleModel>id}" text="{roleModel>description}" />
-                                                </MultiComboBox>
-                                            </form:fields>
-                                        </form:FormElement>
                         </form:formElements>
                     </form:FormContainer>
                 </form:formContainers>

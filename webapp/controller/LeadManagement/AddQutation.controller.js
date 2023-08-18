@@ -243,6 +243,9 @@ sap.ui.define(
 					// bind unit dropdown
 					commonFunction.getReferenceByType("Unit", "unitModel", this);
 
+					// get all employees list 
+					commonFunction.getEmployeeList(this);
+
 					//bind all Leads
 					leadService.getAllLeads(function (data) {
 						var oModel = new sap.ui.model.json.JSONModel();

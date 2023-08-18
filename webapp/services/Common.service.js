@@ -301,8 +301,8 @@ sap.ui.define([
                 this.runJQueryX("GET", "common/freightlist/" + this.session("companyId"), null, callback, null);
             },
 
-            getEmployeeList: function (params, callback) {
-                this.runJQueryX("GET", "common/employeelist/" + params.typeid + "/" + this.session("companyId"), null, callback, null);
+            getEmployeeList: function (callback) {
+                this.runJQueryX("GET", "common/employeelist/" + this.session("companyId"), null, callback, null);
             },
 
             getBreederBatches: function (callback) {
