@@ -135,7 +135,9 @@ sap.ui.define([
 			// bind auxilary supply system dropdown
 			commonFunction.getReferenceByType("AuxSupSys", "auxilarySupplySystemModel", this);
 
-
+			// get all employees list 
+			commonFunction.getEmployeeList(this);
+			
 			//bind all locations
 			locationService.getAllLocations(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
@@ -248,19 +250,6 @@ sap.ui.define([
 			}else{
 				this.getView().byId("btnSave").setText("Save");
 			}
-
-			// this.model = oData.viewModel;
-			
-			// if (this.model.leadid > 1) {
-			// 	this.bindLeadDetails(this.model.id);
-			// }else{
-			// 	var oModel = new JSONModel();
-			// 	oModel.setData(this.model);
-			// 	this.getView().setModel(oModel, "editPartyModel");
-			// }
-
-			// this.id = this.model.id;
-
 		},
 
 		leaddetails: function (sChannel, sEvent, oData) {

@@ -86,6 +86,11 @@ sap.ui.define([
             var currentContext = this;
 
             employeeService.getAllEmployee(function (data) {
+                if(data.length && data[0].length){
+                    for(let i = 0; i < data[0].length; i++){
+                        data[0][i].isactive = data[0][i].isactive == 1 ? true : false;
+                    }
+                }
                 var oModel = new JSONModel();
                 oModel.setData({ modelData: data[0] });
                 currentContext.getView().setModel(oModel, "employeeModel");

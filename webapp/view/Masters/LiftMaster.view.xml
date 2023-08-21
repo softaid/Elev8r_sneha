@@ -46,7 +46,7 @@
                                             <columns>
                                                 <Column><Text text ="{i18n>leadID}" /></Column>
                                                 <Column><Text text ="{i18n>leadDescription}" /></Column>
-                                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>Active}" /></Column>
+                                                <Column minScreenWidth="Tablet" visible="{visibleModel>/visible}" demandPopin="true"><Text text ="{i18n>Active}" /></Column>
                                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>Default}" /></Column>
                                             </columns>
                                             <items>
@@ -54,12 +54,12 @@
                                                     <cells>
                                                         <Text text="{masterDetailModel>id}"/>
                                                         <Text text="{masterDetailModel>description}"/>
-                                                        <Switch state="{masterDetailModel>active}" id="active" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                                        <Switch state="{masterDetailModel>active}"  enabled="false" id="active" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
                                                             <layoutData>
                                                                 <FlexItemData growFactor="1" />
                                                             </layoutData>
                                                         </Switch>
-                                                         <Switch state="{masterDetailModel>defaultvalue}" id="default" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                                         <Switch state="{masterDetailModel>defaultvalue}" id="default"  enabled="false" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
                                                             <layoutData>
                                                                 <FlexItemData growFactor="1" />
                                                             </layoutData>

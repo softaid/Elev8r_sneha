@@ -291,6 +291,25 @@
 			]
 		}
 	],
+
+	"fixedNavigation" : [
+		{
+			"title": "Company Settings",
+			"icon":"sap-icon://company-view",
+			"expanded": false,
+			"key": "chome",
+			"eid": [19],
+			"items": []
+		},
+		{
+			"title": "Logout",
+			"icon":"sap-icon://log",
+			"expanded": false,
+			"key": "logout",
+			"eid": [19],
+			"items": []
+		}
+	],
 	
 	"masterSettings": [
 		{

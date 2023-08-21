@@ -542,8 +542,8 @@ sap.ui.define([
         },
 
         // get employee list by typeid
-        getEmployeeList: function (typeid, currentContext) {
-            commonService.getEmployeeList({ typeid: typeid }, function (data) {
+        getEmployeeList: function (currentContext) {
+            commonService.getEmployeeList(function (data) {
                 var oLedgerModel = new sap.ui.model.json.JSONModel();
                 oLedgerModel.setData({ modelData: data[0] });
                 currentContext.getView().setModel(oLedgerModel, "employeeList");
