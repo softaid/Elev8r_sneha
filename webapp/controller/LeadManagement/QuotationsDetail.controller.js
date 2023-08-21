@@ -206,6 +206,8 @@ sap.ui.define([
 						console.log("leadLiftPDFModel",leadLiftPDFModel);
 						oThis.notowordChange();
 
+						oThis.notowordChange();
+
 					}
 					// Get Sales Details for PDF
 					if (data[2].length) {
@@ -488,29 +490,12 @@ sap.ui.define([
 				},
 			);
 				
-			// let stdFeatures = [];
-			// if(leadLiftPDFModel.oData.doortype == "Auto"){
-			// 	stdFeatures = ['Manual Rescue Operation,Auto Fan Cut Off,Rear side SS Hand rail,Automatic leveling with,Ground Floor on Power Restoration,Floor Position and Direction indicator in car and Landings,Terminal approach slow down for safety,Final Limit protection,Emergency alarm,Door Open,V3F drive for door operation,Door Time Protection,Floor announcement,Parking floor,Emergency electric break releaser,Full curtain infrared door safety.'];
-
-			// }else if(leadLiftPDFModel.oData.doortype == "Manual"){
-			// 	stdFeatures = ['Manual Rescue Operation,Auto Fan Cut Off,Rear side SS Hand rail,Automatic leveling with,Ground Floor on Power Restoration,Floor Position and Direction indicator in car and Landings,Terminal approach slow down for safety,Final Limit protection,Emergency alarm.'];
-
-			// }
 			var phone = (this.companycontact === null || this.companycontact == undefined) ? "-" : this.companycontact;
 			var email = (this.companyemail === null || this.companyemail == undefined) ? "-" : this.companyemail;
 			var address = (this.address === null || this.address == undefined) ? "-" : this.address;
 			var detailaddress = (this.detailaddress === null || this.detailaddress == undefined) ? "-" : this.detailaddress;
 			var city = (this.city === null || this.city == undefined) ? "-" : this.city;
 			var pincode = (this.pincode === null || this.pincode == undefined) ? "-" : this.pincode;
-
-			var fonts = {
-				'Arial': {
-					normal: './jspdf/dist/Arial.ttf',
-					bold: './jspdf/dist/Arial.ttf',
-					italics: './jspdf/dist/Arial.ttf',
-					bolditalics: './jspdf/dist/Arial.ttf',
-				}
-			}
 
 			// Add PR grid on screen
 			var quoteModel = this.getView().getModel("quoteModel");
@@ -542,7 +527,7 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
 			headertable1 += "{text: 'Dear Sir/Madam', style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
-			headertable1 += "{text: 'Thank you for giving us an opportunity to provide a proposal for supply & installation of Sneha Elevators at your prestigious project. We would like to give you a brief synopsis about our company, product & after sales service setup. ', style: 'subheaderone1'},";
+			headertable1 += "{text: 'Thank you for giving us an opportunity to provide a proposal for supply & installation of Sneha Elevators at your prestigious project. We would like to give you a brief synopsis about our company, product & after sales service setup. ', style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
 			headertable1 += "{text: 'SNEHA ELEVATORS:', style: 'titlewithbold'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
@@ -576,7 +561,7 @@ sap.ui.define([
 
 			// SECOND PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + detailaddress + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
@@ -585,8 +570,9 @@ sap.ui.define([
 			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -40, 0, 0]}]},";
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			// headertable1 += "{canvas: [ { type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1 } ]},";
-			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'AUTO DOOR SPECIFICATION SHEET', style: 'titleincenter'},";
+			headertable1 += "{columns: [{text:'" + (leadLiftPDFModel.oData.doortype).toUpperCase() + " DOOR SPECIFICATION SHEET', style: 'titleincenter'}]},";
+			// headertable1 += "{text: '" + leadLiftPDFModel.oData.doortype +"' DOOR SPECIFICATION SHEET', style: 'titleincenter'},";
+			// {columns: [{text:'" + leadLiftPDFModel.oData.doortype + "' DOOR SPECIFICATION SHEET', style: 'titleincenterstdfea'}]},
 			headertable1 += "{ style: 'tableExample2',";
 			headertable1 += " table: {";
 			headertable1 += "widths: ['50%','50%'],";
@@ -638,7 +624,7 @@ sap.ui.define([
 
 			// Thired PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + detailaddress + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
@@ -648,9 +634,8 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			// headertable1 += "{canvas: [ { type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1 } ]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			
-			headertable1 += "{columns: [{text:'Standard Features(" + leadLiftPDFModel.oData.doortype + ")', style: 'titleincenterstdfea'}]},";
+			headertable1 += "{columns: [{text:'Standard Features(" + leadLiftPDFModel.oData.doortype + ")', style: 'titlepaymntterms'}]},";
 			
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{ style: 'tableExample3',";
@@ -704,6 +689,7 @@ sap.ui.define([
 				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			}
 
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
@@ -712,7 +698,7 @@ sap.ui.define([
 
 			//FOURTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + detailaddress + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
@@ -734,51 +720,35 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'PRICE SUMMARY: Our proposition for the Design and Manufacturing, supply andcompleteinstallation and testing of Elevators as described in the offer will be undertakenat thefollowing conditions. The Prices are in INR. ', style: 'titlebold'},";
 
-			// headertable1 += "{ style: 'tableExample2',";
-			// headertable1 += " table: {";
-			// headertable1 += "widths: ['50%','25%','25%'],";
-			// headertable1 += " body: [";
-			// headertable1 += "[ { columns: [ {text:'Lift Solution" + " " + "', style: 'subheader'} ] },{ columns: [ {text:'Unit" + " " + "', style: 'subheader'} ] },{ columns: [ {text:'Price" + " " + "', style: 'subheader'} ] }],";
-			// headertable1 += "[ { columns: [ [{text:'" + leadLiftPDFModel.oData.modeldetails + "', style: 'title'},{text:'" + " " + "', style: 'title'}] ] },{ columns: [ {text:'" + leadLiftPDFModel.oData.unit + "', style: 'subheader'} ] },{columns: [{text:'     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit) " + "', style: 'title'}]}],";
-			// //headertable1 += "[ { columns: [ [{text:'" + leadLiftPDFModel.oData.modeldetails + "', style: 'title'}] ] }],";
-			// headertable1 += "]";
-			// headertable1 += "}";
-			// headertable1 += "  layout: {";
-			// headertable1 += "    hLineColor: function (i, node) {";
-			// headertable1 += "      return (i === 1) ? 'white' : 'black';"; // Add a semicolon (;) at the end
-			// headertable1 += "    }";
-			// headertable1 += "},";
-            // headertable1 += "},";
-
 			headertable1 += "{";
-headertable1 += "  style: 'tableExample2',";
-headertable1 += "  table: {";
-headertable1 += "    widths: ['65%', '10%', '25%'],";
-headertable1 += "    body: [";
-headertable1 += "      [{ columns: [{ text: 'Lift Solution', style: 'subheader' }] }, { columns: [{ text: 'Unit', style: 'subheader' }] }, { columns: [{ text: 'Price', style: 'subheader' }] }],";
-headertable1 += "      [{ columns: [{ text: '" + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift' }] }, { columns: [{ text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }] }, { columns: [{ text: '     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit)', style: 'titleforlift' }] }],";
-headertable1 += "    ]";
-headertable1 += "  },";
-headertable1 += "  layout: {";
-headertable1 += "    hLineColor: function (i, node) {";
-headertable1 += "    return (i === 0 || i === 1) ? 'black' : 'white';";
-headertable1 += "    }";
-headertable1 += "},";
-headertable1 += "},";
+			headertable1 += "  style: 'tableExample2',";
+			headertable1 += "  table: {";
+			headertable1 += "    widths: ['65%', '10%', '25%'],";
+			headertable1 += "    body: [";
+			headertable1 += "      [{ columns: [{ text: 'Lift Solution', style: 'subheader' }] }, { columns: [{ text: 'Unit', style: 'subheader' }] }, { columns: [{ text: 'Price', style: 'subheader' }] }],";
+			headertable1 += "      [{ columns: [{ text: '" + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift' }] }, { columns: [{ text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }] }, { columns: [{ text: '     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit)', style: 'titleforlift' }] }],";
+			headertable1 += "    ]";
+			headertable1 += "  },";
+			headertable1 += "  layout: {";
+			headertable1 += "    hLineColor: function (i, node) {";
+			headertable1 += "    return (i === 0 || i === 1) ? 'black' : 'white';";
+			headertable1 += "    }";
+			headertable1 += "},";
+			headertable1 += "},";
 
 			headertable1 += "{ style: 'tableExample5',";
 			headertable1 += " table: {";
 			headertable1 += "widths: ['100%'],";
 			headertable1 += " body: [";
-			headertable1 += "[ { columns: [ [{text:'In Words: " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'*Above price is Exclusive of taxes. Taxes as applicable GST @ 18%" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for 30 days from the date of proposal and thereafter shall be subject to change without notice." + " " + "', style: 'title'}] ] }],";
+			headertable1 += "[ { columns: [ [{text:'In Words: " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'*Above price is inclusive of taxes. Taxes as applicable GST @ 18%" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for ', style: 'title'},{text:'30 days ', style: 'subheaderwithbold'},{text:'from the date of proposal and thereafter shall be subject to change without notice." + " " + "', style: 'title'}] ] }],";
+
 			headertable1 += "]";
 			headertable1 += "}";
 			headertable1 += "},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
-			headertable1 += "{text: [{text:'The price/s quoted herein is/are ', style: 'title'},{text:'exclusive ', style: 'subheaderwithbold'},{text:'of all taxes, as currently applicable, whether levied by the Central Government or the State Government. In the event of any amendment or variation in the rate or methodology for charging the applicable taxes, and/or, should be any new levies imposed in respect of this contract, the entire burden of any additional levy shall be borne and payable by you on demand at any time, in addition to the price/s stated herein.', style: 'title'}]},";
+			headertable1 += "{text: [{text:'The price/s quoted herein is/are ', style: 'title'},{text:'inclusive ', style: 'subheaderwithbold'},{text:'of all taxes, as currently applicable, whether levied by the Central Government or the State Government. In the event of any amendment or variation in the rate or methodology for charging the applicable taxes, and/or, should be any new levies imposed in respect of this contract, the entire burden of any additional levy shall be borne and payable by you on demand at any time, in addition to the price/s stated herein.', style: 'title'}]},";
 			
-			//headertable1 += "{text: 'The price/s quoted herein is/are exclusive of all taxes, as currently applicable, whether levied by the Central Government or the State Government. In the event of any amendment or variation in the rate or methodology for charging the applicable taxes, and/or, should be any new levies imposed in respect of this contract, the entire burden of any additional levy shall be borne and payable by you on demand at any time, in addition to the price/s stated herein. ', style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'GST Registration Number -------------------------------------------------------------------------------------------------------', style: 'titlebold'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -797,18 +767,13 @@ headertable1 += "},";
 
 			// FIFTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + detailaddress + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
 
 			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -40, 0, 0]}]},";
-			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			// headertable1 += "{canvas: [ { type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1 } ]},";
-		
-			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'TERMS OF PAYMENT:', style: 'titlepaymntterms'},";
 
 			headertable1 += "{ style: 'tableExample4',";
@@ -816,13 +781,10 @@ headertable1 += "},";
 			headertable1 += "widths: ['50%','50%'],";
 			headertable1 += " body: [";
 			
-			headertable1 += "[ { columns: [ {text:'Advance on order reception." + " " + "', style: 'subheaderformargine'}] },{ columns: [{text:'" + leadLiftPDFModel.oData.advanceonorderreception + "' , style: 'subheaderformargine'} ] }],";
-			headertable1 += "[ { columns: [ {text:'For request of mechanical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['" + leadLiftPDFModel.oData.forrequestofmechanicalmaterial + "'] ] }],";
-			headertable1 += "[ { columns: [ {text:'For request of electrical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['" + leadLiftPDFModel.oData.forrequestofelectricalmaterial + "'] ] }],";
-			headertable1 += "[ { columns: [ {text:'On customer Handover" + " " + "', style: 'subheaderformargine'}] },{ columns: [ ['" + leadLiftPDFModel.oData.oncustomerhandover + "'] ] }],";
-			// headertable1 += "[ { columns: [ ['For request of mechanical material',' ',' '] ] },{ columns: [ ['60%'] ] }],";
-			// headertable1 += "[ { columns: [ ['For request of electrical material',' ',' '] ] },{ columns: [ ['25%'] ] }],";
-			// headertable1 += "[ { columns: [ ['On customer Handover',' ',' '] ] },{ columns: [ ['5%'] ] }],";
+			headertable1 += "[ { columns: [ {text:'Advance on order reception." + " " + "', style: 'subheaderformargine'}] },{ columns: [ {text:'" + leadLiftPDFModel.oData.advanceonorderreception + "', style: 'subheaderformarginenobold'}] }],";
+			headertable1 += "[ { columns: [ {text:'For request of mechanical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ {text:'" + leadLiftPDFModel.oData.forrequestofmechanicalmaterial + "', style: 'subheaderformarginenobold'} ] }],";
+			headertable1 += "[ { columns: [ {text:'For request of electrical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ {text:'" + leadLiftPDFModel.oData.forrequestofelectricalmaterial + "', style: 'subheaderformarginenobold'} ] }],";
+			headertable1 += "[ { columns: [ {text:'On customer Handover" + " " + "', style: 'subheaderformargine'}] },{ columns: [ {text:'" + leadLiftPDFModel.oData.oncustomerhandover + "', style: 'subheaderformarginenobold'} ] }],";
 
 			headertable1 += "]";
 			headertable1 += "}";
@@ -847,35 +809,27 @@ headertable1 += "},";
 
 			// new code start
 
-			// headertable1 += "]";
-			// headertable1 += "}";
-			// headertable1 += "},";
 			headertable1 += "{ style: 'tableExample5',";
 			headertable1 += " table: {";
 			headertable1 += "widths: ['100%'],";
 			headertable1 += " body: [";
-			headertable1 += "[ { columns: [ [{text: 'Please note, we will not encourage any cash transactions, request for Cheque or Online payments.', style: 'titlewithbold'},{text: 'As a very special case and as per RBI norms, Only Rs 2,00,000 cash will be accepted and same will be deposited personally at our corporate office with cash receipt.', style: 'titlewithboldNote'}] ] }],";
+			headertable1 += "[ { columns: [ [{text: 'Please note, we will not encourage any cash transactions, request for Cheque or Online payments.', style: 'titlewithbold'},{text: 'As a very special case and as per RBI norms, Only Rs 2,00,000 cash will be accepted and same will be deposited personally at our corporate office with cash receipt.', style: 'titlewithbold'}] ] }],";
 			headertable1 += "]";
 			headertable1 += "}";
 			headertable1 += "},";
-			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			//new code end
 
-			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			// headertable1 += "{text: 'Please note, we will not encourage any cash transactions, request for Cheque or Online payments.', style: 'titlewithbold'},";
-			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			// headertable1 += "{text: 'As a very special case and as per RBI norms, Only Rs 2, 00,000 cash will be accepted and same will be deposited personally at our corporate office with cash receipt.', style: 'titlewithbold'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
-			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			// SIXTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + detailaddress + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
@@ -923,7 +877,7 @@ headertable1 += "},";
 
 			// SEVENTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + detailaddress + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
@@ -976,7 +930,7 @@ headertable1 += "},";
 			
 			// eightth page of PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + detailaddress + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
@@ -1020,7 +974,7 @@ headertable1 += "},";
 
 			// NINE PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + detailaddress + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
@@ -1071,7 +1025,7 @@ headertable1 += "},";
 
 			// NINE PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + detailaddress + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
@@ -1126,7 +1080,7 @@ headertable1 += "},";
 
 			// NINE PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + detailaddress + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
@@ -1165,7 +1119,7 @@ headertable1 += "},";
 
 			// ELEVENTH PAGE OF PDF
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
-			headertable1 += "{text: '" + "D. No. 2-40/30/1, Road No. 5," + "', style: 'subheaderone'},";
+			headertable1 += "{text: '" + detailaddress + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + city + "-" + pincode + "', style: 'subheaderone'},";
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
@@ -1295,12 +1249,6 @@ headertable1 += "},";
 				"alignment: 'left'," +
 				"}," +
 
-				"titlewithboldNote: {" +
-				"fontSize:11," +
-				"bold: true," +
-				"alignment: 'left'," +
-				"}," +
-
 				"titlewithboldpaymnt: {" +
 				"fontSize:12," +
 				"bold: true," +
@@ -1319,12 +1267,6 @@ headertable1 += "},";
 				"alignment: 'center'," +
 				"}," +
 
-				"titleincenterstdfea: {" +
-				"fontSize:14," +
-				"bold: true," +
-				"alignment: 'center'," +
-				"}," +
-
 				"titleincenterwithunderline: {" +
 				"fontSize:14," +
 				"bold: true," +
@@ -1339,8 +1281,6 @@ headertable1 += "},";
 				"decoration: 'underline',"+
 				"alignment: 'center'," +
 				"}," +
-
-
 				
 				"titlepaymntterms: {" +
 				"fontSize:14," +
@@ -1413,7 +1353,14 @@ headertable1 += "},";
 				"subheaderformargine: {" +
 				"fontSize:11," +
 				"bold: true," +
-				"margin: [0, 5, 0, 20]," +
+				"alignment:'center'," +
+				"margin: [0, 5, 0, 5]," +
+				"}," +
+
+				"subheaderformarginenobold: {" +
+				"fontSize:11," +
+				"alignment:'center'," +
+				"margin: [0, 5, 0, 5]," +
 				"}," +
 
 				"subheaderspace: {" +
@@ -1572,14 +1519,10 @@ headertable1 += "},";
 				"}," +
 
 				"defaultStyle: {" +
-				//"fontFamily: 'arial'," +
 				"fontSize: 8" +
-				"}," +
-				"fonts : '"+fonts+"'"+
+				"}" +
 				"};" +
-				
-				"pdfMake.createPdf(docDefinition).download('"+ leadLiftPDFModel.oData.leadname +".pdf');" +
-				
+				"pdfMake.createPdf(docDefinition).download('Quotation.pdf');" +
 				"} });";
 			headertable1 += "</script></html>";
 			fullHtml += headertable1;
