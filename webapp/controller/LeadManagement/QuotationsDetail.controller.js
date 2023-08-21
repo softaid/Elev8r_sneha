@@ -204,6 +204,7 @@ sap.ui.define([
 						leadLiftPDFModel.setData(data[1][0]);
 						oThis.getView().setModel(leadLiftPDFModel, "leadLiftPDFModel");
 						console.log("leadLiftPDFModel",leadLiftPDFModel);
+						oThis.notowordChange();
 
 					}
 					// Get Sales Details for PDF
@@ -322,7 +323,7 @@ sap.ui.define([
 	   */
 		onPdfExport: function () {
 			// Conver Quote value in word Format
-			this.notowordChange();
+			// this.notowordChange();
 
 			const fontDefinition = {
 				Calibri: {

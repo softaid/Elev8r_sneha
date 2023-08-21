@@ -8553,5 +8553,39 @@ END$$
 DELIMITER ;
 ;
 
+USE `db_elev8r`;
+DROP procedure IF EXISTS `spc_reference_selectbytypecodedepartment`;
+
+DELIMITER $$
+USE `db_elev8r`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_reference_selectbytypecodedepartment`(
+	IN p_typecode varchar(20),
+    IN p_departmentid  INT(11)
+)
+BEGIN
+	
+		SELECT 
+			id,
+			typecode,
+            parentid, 
+            parenttypecode, 
+            description,
+            active,
+            defaultvalue,
+            displayorder,
+			projectper,
+            stageper,
+            sequenceno
+		FROM
+			`reference`
+		WHERE
+			typecode = p_typecode AND departmentid=p_departmentid
+            order by defaultvalue DESC;
+END$$
+
+DELIMITER ;
+
+
+
 
 

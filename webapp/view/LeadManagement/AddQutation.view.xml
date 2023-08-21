@@ -385,13 +385,11 @@
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="{i18n>leadModel}">
-                                    <form:fields>
-                                        <Select id="modelid"
-                                            required="false" 
-                                            change="onModelSelection"
-                                            
+                                          <form:fields>
+                                        <Select id="modelid"                                             
                                             selectedKey="{editQutationModel>/modelid}" 
-                                            forceSelection="true"
+                                            forceSelection="false"
+                                             change="onModelSelection"
                                             width="500px"
                                             items="{
                                                 path: 'leadmodelModel>/modelData',

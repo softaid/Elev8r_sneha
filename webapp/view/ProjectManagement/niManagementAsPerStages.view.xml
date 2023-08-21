@@ -99,7 +99,7 @@
                                         <Select id="typeengineerid" 
                                             change="handleEnginnerChange"
                                             app:mySuperExtraData="{projectModel>projectid}"
-                                            selectedKey="{projectModel>saleengineer}" 
+                                            selectedKey="{projectModel>salesengineer}" 
                                             width="500px"
                                             items="{
                                                 path: 'RoleModel>/modelData'

@@ -901,6 +901,7 @@ sap.ui.define(
 				onModelSelection: function (oEvent,id) {
 					let oThis = this;
 					var model = oThis.getView().getModel("editQutationModel").oData;
+					var model1 = oThis.getView().getModel("leadmodelModel").oData;
 					model.modelid = id==undefined? model.modelid:id??null;
 					quotationService.getReferenceBymodel({modelid:model.modelid}, function (data) {
 						model.carheight=data[1][0].carheight;

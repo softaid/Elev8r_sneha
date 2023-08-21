@@ -222,7 +222,7 @@
                                                 value="{projectModel>Sequence1startdate}"
                                                 valueFormat="dd/MM/yyyy"
                                                editable="{
-                                                            path: 'projectModel>Sequence1enddate',
+                                                            path: 'projectModel>Sequence1startdate',
                                                             formatter: '.formatter.setCheckboxEnable'
                                                         }"
                                                select="onCheckBoxSelect"
@@ -234,7 +234,7 @@
                                                 value="{projectModel>Sequence1enddate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 editable="{
-                                                            path: 'projectModel>Sequence1startdate',
+                                                            path: 'projectModel>Sequence1enddate',
                                                             formatter: '.formatter.setCheckboxEnable'
                                                         }"
                                                  change="onCheckBoxSelect"

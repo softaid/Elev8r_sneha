@@ -268,8 +268,8 @@ sap.ui.define([
 				data[0].map(function (value, index) {
 
 					data[0][index].activestatus = value.isactive == 1 ? "Active" : "In Active";
-					data[0][index].actualstartdate = data[0][index].actualstartdate == null ? null:currentContext.dateFormatter( data[0][index].actualstartdate);
-					data[0][index].actualenddate = data[0][index].actualenddate == null ? null:currentContext.dateFormatter( data[0][index].actualenddate);
+					data[0][index].actualstartdate = data[0]?.[index]?.actualstartdate??null;
+					data[0][index].actualenddate = data[0]?.[index]?.actualenddate??null;
 
 				});
 				var tblModel = currentContext.getView().getModel("tblModel");
@@ -287,8 +287,8 @@ sap.ui.define([
 					data[0].map(function (value, index) {
 	
 						data[0][index].activestatus = value.isactive == 1 ? "Active" : "In Active";
-						data[0][index].actualstartdate = data[0][index].actualstartdate == null ? null:currentContext.dateFormatter( data[0][index].actualstartdate);
-						data[0][index].actualenddate = data[0][index].actualenddate == null ? null:currentContext.dateFormatter( data[0][index].actualenddate);
+						data[0][index].actualstartdate = data[0]?.[index]?.actualstartdate??null
+						data[0][index].actualenddate = data[0]?.[index]?.actualenddate ??null;
 	
 					});
 					var nitblmodel = currentContext.getView().getModel("nitblmodel");
@@ -359,7 +359,7 @@ sap.ui.define([
 			parentModel.startdate = commonFunction.getDate(parentModel.startdate);
 			parentModel.enddate = commonFunction.getDate(parentModel.enddate);
 			parentModel["subcontractorid1"] = currentContext.getView().byId("subcontractor1")?.getSelectedItem()?.mProperties.key??null;
-			parentModel["subcontractorid2"] = currentContext.getView().byId("subcontractor2")?.getSelectedItem()?.mProperties.ke??null;
+			parentModel["subcontractorid2"] = currentContext.getView().byId("subcontractor2")?.getSelectedItem()?.mProperties.key??null;
 
 			Projectservice.saveProject(parentModel, function (data) {
 
@@ -382,8 +382,6 @@ sap.ui.define([
 					});
 
 				})
-
-
 
 
 				currentContext.resetModel();
@@ -462,10 +460,13 @@ sap.ui.define([
 			model.setData({});
 			this.getView().byId("eng").setSelectedKeys([]);
 			this.getView().byId("manager").setSelectedKeys([]);
+			this.getView().byId("salesenginner").setSelectedKeys([]);
+			this.getView().byId("salesmanager").setSelectedKeys([]);
 
 
 			var tableModel = this.getView().getModel("tblModel");
 			tableModel.setData({});
+			this.getView().getModel("nitblmodel").setData({});
 
 			// this.loadData();
 
@@ -862,7 +863,7 @@ sap.ui.define([
 			else  if(oEvt.mParameters.id == "componentcontainer---projectactivitiesAdd--manager"){
 				oprojectModeldata.nimanager = roleids.join(",");
 			}
-			else if(oEvt.mParameters.id == "componentcontainer---projectactivitiesAdd--saleEnginner") {
+			else if(oEvt.mParameters.id == "componentcontainer---projectactivitiesAdd--salesenginner") {
 				oprojectModeldata.salesengineer = roleids.join(",");
 			}
 			else {

@@ -68,17 +68,16 @@
                                 </form:FormElement>
                                 <form:FormElement id="modelEle" label="Select lift model">
                                     <form:fields>
-                                        <Select id="parentstage"
-                                            change=""
-                                            selectedKey="{editMasterModel>/modelid}" 
-                                            forceSelection="false"
-                                            width="500px"
-                                            items="{
-                                                path: 'liftModel>/modelData',
-                                                sorter: { path: 'id' }
-                                            }">
+                                       <MultiComboBox id="parentstage"
+                                                    required="false" 
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                   items="{
+                                                            path: 'liftModel>/modelData',
+                                                            sorter: { path: 'id' }
+                                                        }">
                                             <core:Item key="{liftModel>id}" text="{liftModel>description}" />
-                                        </Select>
+                                            </MultiComboBox>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="{i18n>Active}">

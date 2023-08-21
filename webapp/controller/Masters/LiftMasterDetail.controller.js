@@ -36,6 +36,10 @@ sap.ui.define([
                     if(data.length && data[0].length){
                         data[0][0].active = data[0][0].active == 1 ? true : false;
                         data[0][0].defaultvalue = data[0][0].defaultvalue == 1 ? true : false;
+                        if(data[0][0].modelid!=null){
+                        data[0][0].modelid= data[0][0].modelid.split(",");
+                        currentContext.getView().byId("parentstage").setSelectedKeys( data[0][0].modelid);
+                        }
                         oModel.setData(data[0][0]);
                     }
                 });
@@ -78,6 +82,7 @@ sap.ui.define([
             var isValid = this.validateForm();
 			if(isValid){
                 var model = this.getView().getModel("editMasterModel").oData;
+                  model.modelid= model.modelid.join(",");
 
                 
                 model["companyid"] = commonService.session("companyId");
@@ -139,7 +144,21 @@ sap.ui.define([
         onCancel: function () {
 			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---liftmaster--fclLiftMaster");
 			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
-		}
+		},
+
+    
+		handleSelectionFinish: function (oEvt) {
+            let selectedItems = oEvt.getParameter("selectedItems");
+            let modelid= [];
+            for (var i = 0; i < selectedItems.length; i++) {
+                modelid.push(selectedItems[i].getProperty("key"));
+            }
+			this.getView().getModel("editMasterModel").oData.modelid = modelid;
+
+        },
+
+       
+
 
     });
 }, true);
