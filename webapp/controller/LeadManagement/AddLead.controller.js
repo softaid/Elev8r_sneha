@@ -386,98 +386,16 @@ sap.ui.define([
 						model.machineid=element.id ;
 					}
 				
-					else if (element.typecode == "LftDrv") {
-						model.driveid=element.id;
-					}
-					else if (element.typecode == "LftCtrl") {
-						model.controlid=element.id;
-					}
-					else if (element.typecode == "LftOprn") {
-						model.operationid=element.id;
-					}
-					else if (element.typecode == "DrTyp") {
-						model.typeofdoorid=element.id;
-					}
-					else if (element.typecode == "LdnDr") {
-						model.landingdoorid=element.id;
-					}
-					else if (element.typecode == "CarDr") {
-						model.cardoorid=element.id;
-					}
-					else if (element.typecode == "LwstFlrMking") {
-						model.lowestfloorid=element.id;
-					}
-					else if (element.typecode == "CWTPstn") {
-						model.cwtpositionid=element.id;
-					}
-					else if (element.typecode == "ShftCndtn") {
-						model.shaftconditionid=element.id;
-					}
-					else if (element.typecode == "Unit") {
-						model.unitid=element.id;
-					}
-					else if (element.typecode == "AuxSupSys") {
-						model.auxilarysupplysystemid=element.id;
-					}
 					else if (element.typecode == "MnPwrSys") {
 						model.mainpowersystemid=element.id;
 
 					}
-					 else if (element.typecode == "TrcMedia") {
-						model.tractionmediaid=element.id;
-					} 
-					else if (element.typecode == "CrPsnIndcr") {
-						model.modelid=element.id;
-
-					}
-					 else if (element.typecode == "Floring") {
-						model.modelid=element.id;
-					}
-					else if (element.typecode == "Ventilation") {
-						model.modelid=element.id;
-
-					}
-					else if (element.typecode == "FlsCel") {
-						model.modelid=element.id;
-
-					}
-					 else if (element.typecode == "CarPanel") {
-						model.modelid=element.id;
-					} 
-					else if (element.typecode == "StdFlrHt") {
-						model.modelid=element.id;
-
-					}
-					 else if (element.typecode == "null") {
-						model.modelid=element.id;
-
-					} 
-					else if (element.typecode == "null") {
-						model.modelid=element.id;
-
-					}
-					else if (element.typecode == "null") {
-						model.modelid=element.id;
-
-					}
-					else if (element.typecode == "null") {
-						model.modelid=element.id;
-
-					}
-					 else if (element.typecode == "null") {
-						model.modelid=element.id;
-					}
-					else{
-						model.modelid=element.id;
-
-					}
-
 				});
-				oThis.getView().getModel("editPartyModel").refresh();
 
 			});
 			oThis.getView().getModel("editPartyModel").refresh();
 		},
+
 		handleSelectionFinish: function (oEvent) {
 			var inputId = oEvent.mParameters.id;
 			var id = inputId.substring(inputId.lastIndexOf('-') + 1);

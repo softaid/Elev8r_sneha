@@ -708,7 +708,7 @@ sap.ui.define([
 						let niactualenddate = projectdetail.niactualenddate != undefined ? ocommonfunction.getDate(projectdetail.niactualenddate) : null;
 						let saveObject = {
 							niengineer: projectdetail?.niengineer ?? null,
-							salesengineer: projectdetail?.saleengineer ?? null,
+							salesengineer: projectdetail?.salesengineer ?? null,
 							actualcompletiondays: projectdetail?.niactualcompletiondays ?? null,
 							field:"NI",
 							completionper: projectdetail?.nicompletionper ??null,

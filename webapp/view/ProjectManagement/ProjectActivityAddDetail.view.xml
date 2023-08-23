@@ -206,7 +206,6 @@
                                     </form:FormElement>
                                     <form:FormElement>
                                         <form:fields>
-                                        <HBox>
                                             <Image
                                                 src="{editDocumentCollectionModel>/image_url}"
                                                 densityAware="false"
@@ -217,13 +216,14 @@
                                                     <FlexItemData growFactor="1" />
                                                 </layoutData>
                                             </Image>
+                                            
                                               <Button
                                                 text=""
                                                 width="40%"
                                                 type="Emphasized"
                                                 icon="sap-icon://arrow-right"
                                                 press="forwardPress" id="btnFor"/>
-                                                <HBox>
+                                                
                                                 <Button
                                                 text=""
                                                 width="40%"
@@ -231,8 +231,6 @@
                                                 icon="sap-icon://arrow-left"
                                                 press="backwardPress"
                                                 id= "btnBack"/> 
-                                                </HBox>
-                                                <HBox>
                                                 <Button 
                                                 text=""
                                                 width="40%"
@@ -240,8 +238,6 @@
                                                 icon="sap-icon://delete"
                                                 press="onDeleteDocument"
                                                 id= "btndelete"/>
-                                                </HBox> 
-                                                  </HBox>
                                            
                                         </form:fields>
                                     </form:FormElement>
@@ -272,7 +268,7 @@
                                             text=""
                                             type="Emphasized"
                                             icon="sap-icon://download"
-                                        press="functiondownload"
+                                              press="functiondownload"
                                             id="pdf" />
                                              <Button
                                                 text=""

@@ -152,9 +152,6 @@ sap.ui.define([
                 commonService.runJQueryX("GET", "elevproject/documentcollectiondetails/select/" +  params.projectid + "/" +  params.stageid + "/"+  commonService.session("companyId")+"/"+ params.document_id, null, callback, null);
             },
 
-            // getAllBatchReport: function (params, callback) {
-            //     commonService.runJQueryX("GET", "cbfreports/search/branch_id/" + params.branch_id +  "/" +  params.line_id +"/companyid/"+ commonService.session("companyId"), null, callback, null);
-            // },
             saveDocumentCollectionDetails : function(params, callback){
                 console.log("Params : " , params);
                 commonService.runJQueryX("POST", "elevproject/documentcollectiondetails" , params, callback, null);
