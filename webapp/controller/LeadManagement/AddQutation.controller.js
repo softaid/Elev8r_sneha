@@ -380,6 +380,19 @@ sap.ui.define(
 
 					this.getView().setModel(oModel, "editQutationModel");
 					var oModel = this.getView().getModel("editQutationModel");
+					// this.bindDefaultValue();
+					oModel.refresh();
+				},
+
+
+				bindDefaultValue: function(){
+					var oModel = this.getView().getModel("editQutationModel").oData;
+					 var shaftConditionModel=this.getView().getModel("shaftConditionModel").oData.modelData;
+					 var unitModel=this.getView().getModel("unitModel").oData.modelData;
+					 oModel.shaftconditionid=shaftConditionModel?.[0]?.id??null;
+					 oModel.unitid=unitModel?.[0]?.id??null;
+					 this.getView().getModel("editQutationModel").refresh();
+
 				},
 
 				qutationdetail: function (sChannel, sEvent, oData) {
@@ -918,91 +931,8 @@ sap.ui.define(
 							else if (element.typecode == "LftMchn") {
 								model.machineid=element.id ;
 							}
-						
-							else if (element.typecode == "LftDrv") {
-								model.driveid=element.id;
-							}
-							else if (element.typecode == "LftCtrl") {
-								model.controlid=element.id;
-							}
-							else if (element.typecode == "LftOprn") {
-								model.operationid=element.id;
-							}
-							else if (element.typecode == "DrTyp") {
-								model.typeofdoorid=element.id;
-							}
-							else if (element.typecode == "LdnDr") {
-								model.landingdoorid=element.id;
-							}
-							else if (element.typecode == "CarDr") {
-								model.cardoorid=element.id;
-							}
-							else if (element.typecode == "LwstFlrMking") {
-								model.lowestfloorid=element.id;
-							}
-							else if (element.typecode == "CWTPstn") {
-								model.cwtpositionid=element.id;
-							}
-							else if (element.typecode == "ShftCndtn") {
-								model.shaftconditionid=element.id;
-							}
-							else if (element.typecode == "Unit") {
-								model.unitid=element.id;
-							}
-							else if (element.typecode == "AuxSupSys") {
-								model.auxilarysupplysystemid=element.id;
-							}
 							else if (element.typecode == "MnPwrSys") {
 								model.mainpowersystemid=element.id;
-
-							}
-							 else if (element.typecode == "TrcMedia") {
-								model.tractionmediaid=element.id;
-							} 
-							else if (element.typecode == "CrPsnIndcr") {
-								model.modelid=element.id;
-
-							}
-							 else if (element.typecode == "Floring") {
-								model.modelid=element.id;
-							}
-							else if (element.typecode == "Ventilation") {
-								model.modelid=element.id;
-
-							}
-							else if (element.typecode == "FlsCel") {
-								model.modelid=element.id;
-
-							}
-							 else if (element.typecode == "CarPanel") {
-								model.modelid=element.id;
-							} 
-							else if (element.typecode == "StdFlrHt") {
-								model.modelid=element.id;
-
-							}
-							 else if (element.typecode == "null") {
-								model.modelid=element.id;
-
-							} 
-							else if (element.typecode == "null") {
-								model.modelid=element.id;
-
-							}
-							else if (element.typecode == "null") {
-								model.modelid=element.id;
-
-							}
-							else if (element.typecode == "null") {
-								model.modelid=element.id;
-
-							}
-							 else if (element.typecode == "null") {
-								model.modelid=element.id;
-							}
-							else{
-								model.modelid=element.id;
-
 							}
 						});
 						oThis.getView().getModel("editQutationModel").refresh();

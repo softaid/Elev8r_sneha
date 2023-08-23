@@ -168,9 +168,8 @@ sap.ui.define([
 											return true;
 										}
 									})
-								}
+								};
 
-								objectFordatepicker = JSON.parse(JSON.stringify(obj));  //Array for datepicker
 
 								// loop for project end data
 								for (let i = 0; i < ((projectEndDateData.length) - 1); i++) {
@@ -179,7 +178,9 @@ sap.ui.define([
 											obj = { ...(obj), ...(projectenddate) }
 										}
 									})
-								}
+								};
+
+								objectFordatepicker = JSON.parse(JSON.stringify(obj));  //Array for datepicker
 
 								// loop for project weightage
 								for (let i = 0; i < ((projectWeightagedata.length - 1)); i++) {
@@ -376,7 +377,7 @@ sap.ui.define([
 			let endStage = oThis.projectWeightObject[model.modelData[resultRow].projectid][(projectindex + 1)];
 
 			let result_column_field_End = `Sequence${resultColumn}enddate`;//end date of current stage field name in view
-			let result_column_field_Start = `Sequence${endStage}startdate`; // Start date of stage next to current  stage field name in view
+			let result_column_field_Start = `${endStage}startdate`; // Start date of stage next to current  stage field name in view
 			// current date logic start
 			let currentDate = new Date();
 			var resultDate = ocommonfunction.setTodaysDate(currentDate);
@@ -415,9 +416,6 @@ sap.ui.define([
 						model.modelData[resultRow][result_column_field_start] = oThis.datePickerArr[resultRow][result_column_field_start];
 						return true;
 					}
-					else {
-						oThis.datePickerArr[resultRow][result_column_field_start] = model.modelData[resultRow][result_column_field_start];
-					}
 				}
 
 				// it is condition when we select  start date of stage and end date of stage is present
@@ -428,30 +426,43 @@ sap.ui.define([
 						model.modelData[resultRow][`Sequence${resultColumn}startdate`] = oThis.datePickerArr[resultRow][`Sequence${resultColumn}startdate`];
 						return true;
 					}
+				}
 
-					else {
-						oThis.datePickerArr[resultRow][`Sequence${resultColumn}startdate`] = model.modelData[resultRow][`Sequence${resultColumn}startdate`];
-					}
+
+				 {// it for save update field in datepicker Array
+					oThis.datePickerArr[resultRow][result_column_field_start] = model.modelData[resultRow][result_column_field_start];
 				}
 			}
 
 			// if we select the checkbox  or end Date manually
 			else if (OEvent.mParameters.selected == true || resultDateSelction == "end") {
+				let result_column_field_start = `Sequence${resultColumn}startdate`;//start date of current stage field name in view
 
 				// it is condition for to  add  end date manually or by selecting checkbox when  start date of  that stage is  not present
-				if ((model.modelData[resultRow][result_column_field_Start]) == null) {
+
+				if ((model.modelData[resultRow][result_column_field_start]) == null) {
 					model.modelData[resultRow][result_column_field_End] = oThis.datePickerArr[resultRow][result_column_field_End];
 					MessageToast.show("before selecting end date you need to selected  start date");
 					resultDateSelction == undefined ? OEvent.getSource().setSelected(false) : "Check box is not actually select";
 					return true;
 				}
 				else {
-					let dayDiff = oThis.dayCalculation(model.modelData[resultRow][result_column_field_Start], (model?.modelData[resultRow]?.[result_column_field_End] ?? resultDate));
+					let dayDiff = oThis.dayCalculation(model.modelData[resultRow][result_column_field_start], (model?.modelData[resultRow]?.[result_column_field_End] ?? resultDate));
 
+					// calculate day difference between start date and end date of current stage
 					if (dayDiff < 0) {
 						model.modelData[resultRow][result_column_field_End] = oThis.datePickerArr[resultRow][result_column_field_End];
-
 						MessageToast.show("End Date of Current Stage must be greater than start Date of current Stage");
+						// select or deselect checkbox 
+						resultDateSelction == undefined ? OEvent.getSource().setSelected(false) : "Check box is not actually select";
+						return true;
+					}
+
+					// calculate day difference between start date and end date of Nextstage
+					dayDiff =model.modelData[resultRow][`${endStage}enddate`]!=null?oThis.dayCalculation(model.modelData[resultRow][`${resultColumn}enddate`],(model?.modelData[resultRow]?.[`${endStage}enddate`])):2;
+					if (dayDiff < 0) {
+						model.modelData[resultRow][result_column_field_End] = oThis.datePickerArr[resultRow][result_column_field_End];
+						MessageToast.show("start Date of Next Stage must be greater than end Date of Next Stage");
 						// select or deselect checkbox 
 						resultDateSelction == undefined ? OEvent.getSource().setSelected(false) : "Check box is not actually select";
 						return true;
@@ -508,8 +519,10 @@ sap.ui.define([
 				model.modelData[resultRow][result_column_field_End] = model?.modelData?.[resultRow]?.[result_column_field_End] ?? resultDate;// end date  of  current  stage
 
 
-				{
+				{    // it is use to save in datepicker Arr
 
+					oThis.datePickerArr[resultRow][`Sequence${resultColumn}enddate`] = model.modelData[resultRow][`Sequence${resultColumn}enddate`];
+					oThis.datePickerArr[resultRow][result_column_field_Start] = model.modelData[resultRow][result_column_field_Start];
 
 				}
 
@@ -532,7 +545,7 @@ sap.ui.define([
 				// it is condition for if selected stage is  not last stage
 				if (oThis.projectWeightObject[model.modelData[resultRow].projectid][(projectindex + 1)] != undefined) {
 					if ((model.modelData[resultRow][`${endStage}enddate`]) != null) {
-						MessageToast.show("before deselecting end date of stage you need to deselected  end date of next stage");
+						MessageToast.show("before deselecting stage you need to deselected next stage");
 						OEvent.getSource().setSelected(true);
 						return true;
 					}
@@ -558,6 +571,9 @@ sap.ui.define([
 				jobModel[resultString] = jobModel[resultString] - 1;
 
 				model.modelData[resultRow][result_column_field_End] = null; // set intial value as checkbox selection false
+
+				oThis.datePickerArr[resultRow][`Sequence${resultColumn}enddate`] = null;
+				oThis.datePickerArr[resultRow][result_column_field_Start] = null;
 
 				//  substract completion % of stage 
 				model.modelData[resultRow].completionper = parseFloat(model?.modelData[resultRow]?.completionper ?? 0) - parseFloat(projectWeightAdd);

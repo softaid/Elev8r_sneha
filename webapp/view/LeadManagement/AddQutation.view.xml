@@ -404,7 +404,6 @@
                                         <Select id="unitid"
                                             required="false" 
                                             change=""
-                                            
                                             selectedKey="{editQutationModel>/unitid}" 
                                             forceSelection="true"
                                             width="500px"

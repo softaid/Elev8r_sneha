@@ -515,7 +515,7 @@ sap.ui.define([
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
 
-			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -40, 0, 0]}]},";
+			headertable1 += "{columns: [{image:'" + this.imagepath + "',  width:200, height:50,margin: [0, -80, 0, 0]}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'Neg. No. " + leadLiftPDFModel.oData.negno + "', style: 'subheader'},{text:'Dt. " + leadLiftPDFModel.oData.quotedate + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + leadLiftPDFModel.oData.leadname + "', style: 'subheader'},";
@@ -567,7 +567,7 @@ sap.ui.define([
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
 
-			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -40, 0, 0]}]},";
+			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -80, 0, 40]}]},";
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			// headertable1 += "{canvas: [ { type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1 } ]},";
 			headertable1 += "{columns: [{text:'" + (leadLiftPDFModel.oData.doortype).toUpperCase() + " DOOR SPECIFICATION SHEET', style: 'titleincenter'}]},";
@@ -740,7 +740,7 @@ sap.ui.define([
 			headertable1 += " table: {";
 			headertable1 += "widths: ['100%'],";
 			headertable1 += " body: [";
-			headertable1 += "[ { columns: [ [{text:'In Words: " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'*Above price is inclusive of taxes. Taxes as applicable GST @ 18%" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for ', style: 'title'},{text:'30 days ', style: 'subheaderwithbold'},{text:'from the date of proposal and thereafter shall be subject to change without notice." + " " + "', style: 'title'}] ] }],";
+			headertable1 += "[ { columns: [ [{text:'In Words: " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'*Above price is inclusive of taxes. Taxes as applicable GST @ 18%" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text: [{text:'Note: This Quotation shall remain valid and effective for ', style: 'title'},{text:'30 Days ', style: 'subheaderwithbold'},{text:'from the date of proposal and there after shall be subject to change without notice.', style: 'title'}]}] ] }],";
 
 			headertable1 += "]";
 			headertable1 += "}";
@@ -1273,8 +1273,11 @@ sap.ui.define([
 				"decoration: 'underline',"+
 				"alignment: 'center'," +
 				"}," +
-
 				
+				"imgcss: {" +
+				"border: '2px solid red'," +
+				"}," +
+
 				"titleincenterwork: {" +
 				"fontSize:16," +
 				"bold: true," +
