@@ -135,6 +135,12 @@ sap.ui.define([
 			// bind auxilary supply system dropdown
 			commonFunction.getReferenceByType("AuxSupSys", "auxilarySupplySystemModel", this);
 
+			// bind unit dropdown
+			commonFunction.getReferenceByType("Unit", "unitModel", this);
+
+			// cind shaft condition model
+			commonFunction.getReferenceByType("ShftCndtn", "shaftModel", this);
+
 			// get all employees list 
 			commonFunction.getEmployeeList(this);
 			

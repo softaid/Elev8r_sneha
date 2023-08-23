@@ -314,6 +314,23 @@
                                         </Select>
                                     </form:fields>
                                 </form:FormElement>
+                                <form:FormElement label="Unit">
+                                    <form:fields>
+                                        <Select id="unitid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editPartyModel>/unitid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'unitModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{unitModel>id}" text="{unitModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
                                 <form:FormElement label="{i18n>leadDrive}">
                                     <form:fields>
                                         <Select id="driveid"                                             
@@ -698,6 +715,23 @@
                                 <form:FormElement label="Shaft Depth">
                                     <form:fields>
                                         <Input id="txtshaftdepth"  type="number" valueLiveUpdate="true" value="{editPartyModel>/shaftdepth}" description="mm"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Shaft condition">
+                                    <form:fields>
+                                        <Select id="shaftconditionid"
+                                            required="false" 
+                                            change=""
+                                            
+                                            selectedKey="{editPartyModel>/shaftconditionid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'shaftModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{shaftModel>id}" text="{shaftModel>description}" />
+                                        </Select>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Car Depth">
