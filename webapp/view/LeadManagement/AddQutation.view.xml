@@ -262,7 +262,16 @@
                                 </form:FormElement>  
                                 <form:FormElement label="{i18n>leadsalerep}">
                                     <form:fields>
-                                        <Input id="txtsalesrep"  valueLiveUpdate="true" value="{editQutationModel>/salesrep}"  required="false" change="onPartyNameChange"/>
+                                        <Select id="txtsalesrep"                                             
+                                            change=""
+                                            selectedKey="{editQutationModel>/salesrepid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'employeeList>/modelData'                                                
+                                            }">
+                                            <core:Item key="{employeeList>id}" text="{employeeList>employeename}" />
+                                        </Select>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Quote Score">

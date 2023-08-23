@@ -878,7 +878,7 @@
                                     <form:fields>
                                         <Select id="txtsalesrep"                                             
                                             change=""
-                                            selectedKey="{editPartyModel>/salesrep}" 
+                                            selectedKey="{editPartyModel>/salesrepid}" 
                                             forceSelection="true"
                                             width="500px"
                                             items="{
