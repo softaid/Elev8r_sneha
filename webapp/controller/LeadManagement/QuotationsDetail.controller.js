@@ -197,6 +197,7 @@ sap.ui.define([
 						let quotePDFModel = oThis.getView().getModel("quotePDFModel");
 						quotePDFModel.setData(data[0][0]);
 						oThis.getView().setModel(quotePDFModel, "quotePDFModel");
+						console.log("------------quotePDFModel-----------",quotePDFModel);
 					}
 					// Get Lead and Lift Details for PDF
 					if (data[1].length) {
@@ -508,6 +509,7 @@ sap.ui.define([
 				"var docDefinition = {" +
 				"pageMargins: [ 40, 20, 40, 60 ]," +
 				"content: [";
+					
 			headertable1 += "{text: ' " + companyname + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + detailaddress + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + address + "', style: 'subheaderone'},";
@@ -515,9 +517,16 @@ sap.ui.define([
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
 
-			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -40, 0, 0]}]},";
+			//headertable1 += "{columns: [{image:'" + this.imagepath + "', width:150, height:30,margin: [0,-49,0,0]}]},";
+
+			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:190, height:45,margin: [0,-44,0,0]}]},";
+			//headertable1 += "{columns: [{image:'" + this.imagepath + "', width:100, height:30,margin: [-40, -80, 0, 4]}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			
 			headertable1 += "{columns: [{text:'Neg. No. " + leadLiftPDFModel.oData.negno + "', style: 'subheader'},{text:'Dt. " + leadLiftPDFModel.oData.quotedate + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + leadLiftPDFModel.oData.leadname + "', style: 'subheader'},";
 			headertable1 += "{text: '" + leadLiftPDFModel.oData.address + "', style: 'subheader'},";
 			headertable1 += "{text: '" + leadLiftPDFModel.oData.city + "', style: 'subheader'},";
@@ -547,12 +556,18 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
 			headertable1 += "{text: 'Yours Sincerely,', style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
 			headertable1 += "{text: ' " + "For SNEHA ELEVATORS LLP" + "', style: 'subheader'},";
-			headertable1 += "{text: '" + "T. Prashanth" + "', style: 'subheader'},";
-			headertable1 += "{text: '" + "Assistant Manager - Sales" + "', style: 'subheader'},";
-			headertable1 += "{text: '" + "Contact No. 7337331523" + "', style: 'subheader'},";
+			headertable1 += "{text: '" + quotePDFModel.oData.employeename + "', style: 'subheader'},";
+			headertable1 += "{text: '" + quotePDFModel.oData.designation + "', style: 'subheader'},";
+			headertable1 += "{text: '" + "Contact No. "+ quotePDFModel.oData.mobileno + "', style: 'subheader'},";
 		
+			
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
@@ -611,14 +626,16 @@ sap.ui.define([
 			headertable1 += "widths: ['35%','1.5%','63.5%'],";
 			headertable1 += " body: [";
 			for (var i = 0; i < array.length; i++) {
-				headertable1 += "[ {text: '" + array[i].name + "', style: 'Graycolor'},{text: '" + " " + "'},{text: '" + array[i].value + "'},],";
+				headertable1 += "[ {text: '" + array[i].name + "', style: 'Graycolor'},{text: '" + " " + "'},{text: '" + array[i].value + "',style: 'Graytext'},],";
 			}
 
 			headertable1 += "]";
 			headertable1 += "}";
 			headertable1 += "},";
 		
-			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
 
@@ -646,7 +663,7 @@ sap.ui.define([
 			if(leadLiftPDFModel.oData.doortype == 'Auto'){
 				console.log(leadLiftPDFModel.oData.doortype);
 				
-				headertable1 += "[ { columns: [{text:'STANDARD FEATURES" + " " + "', style: 'stdtable'} ]},{ columns: [ ['  '] ]},{ columns: [ ['Manual Rescue Operation,','Auto Fan Cut Off,','Rear side SS Hand rail,','Automatic leveling with Ground Floor on Power Restoration,','Floor Position and Direction indicator in car and Landings,','Terminal approach slow down for safety,','Final Limit protection, ','Emergency alarm,','Door Open / Close Button, ','V3F drive for door operation,','Door Time Protection,','Floor announcement,','Cancelling cop call on second press,','Parking floor,','Emergency electric break releaser,','Full curtain infrared door safety,'] ]}],";
+				headertable1 += "[ { columns: [{text:'STANDARD FEATURES" + " " + "', style: 'stdtable'} ]},{ columns: [ ['  '] ]},{ columns: [ ['Manual Rescue Operation,','Auto Fan Cut Off,','Rear side SS Hand rail,','Automatic leveling with Ground Floor on Power Restoration,','Floor Position and Direction indicator in car and Landings,','Terminal approach slow down for safety,','Final Limit protection, ','Emergency alarm,','Door Open, ','V3F drive for door operation,','Door Time Protection,','Floor announcement,','Parking floor,','Emergency electric break releaser,','Full curtain infrared door safety,'] ]}],";
 				
 			}else if(leadLiftPDFModel.oData.doortype == 'Manual'){
 				headertable1 += "[ { columns: [{text:'STANDARD FEATURES" + " " + "', style: 'stdtable'} ]},{ columns: [ ['  '] ]},{ columns: [ ['Manual Rescue Operation,','Auto Fan Cut Off,','Rear side SS Hand rail,','Automatic leveling with Ground Floor on Power Restoration,','Floor Position and Direction indicator in car and Landings,','Terminal approach slow down for safety,','Final Limit protection, ','Emergency alarm,'] ]}],";
@@ -671,7 +688,26 @@ sap.ui.define([
 				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			}else if(leadLiftPDFModel.oData.doortype == 'Manual'){
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -718,15 +754,19 @@ sap.ui.define([
 			headertable1 += "}";
 			headertable1 += "},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'PRICE SUMMARY: Our proposition for the Design and Manufacturing, supply andcompleteinstallation and testing of Elevators as described in the offer will be undertakenat thefollowing conditions. The Prices are in INR. ', style: 'titlebold'},";
-
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{";
 			headertable1 += "  style: 'tableExample2',";
 			headertable1 += "  table: {";
 			headertable1 += "    widths: ['65%', '10%', '25%'],";
 			headertable1 += "    body: [";
 			headertable1 += "      [{ columns: [{ text: 'Lift Solution', style: 'subheader' }] }, { columns: [{ text: 'Unit', style: 'subheader' }] }, { columns: [{ text: 'Price', style: 'subheader' }] }],";
-			headertable1 += "      [{ columns: [{ text: '" + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift' }] }, { columns: [{ text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }] }, { columns: [{ text: '     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit)', style: 'titleforlift' }] }],";
+			headertable1 += "      [{ columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] }],";
+			
+			headertable1 += "      [{ columns: [{ text: '"  + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift' }] }, { columns: [{ text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }] }, { columns: [{ text: '     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit)', style: 'titleforlift' }] }],";
+			headertable1 += "      [{ columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] }],";
 			headertable1 += "    ]";
 			headertable1 += "  },";
 			headertable1 += "  layout: {";
@@ -740,14 +780,17 @@ sap.ui.define([
 			headertable1 += " table: {";
 			headertable1 += "widths: ['100%'],";
 			headertable1 += " body: [";
-			headertable1 += "[ { columns: [ [{text:'In Words: " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'*Above price is inclusive of taxes. Taxes as applicable GST @ 18%" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for ', style: 'title'},{text:'30 days ', style: 'subheaderwithbold'},{text:'from the date of proposal and thereafter shall be subject to change without notice." + " " + "', style: 'title'}] ] }],";
-
+			//headertable1 += "[ { columns: [ [{text:'In Words: " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'*Above price is " + leadLiftPDFModel.oData.isgst + " of taxes. Taxes as applicable GST @ 18%" + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for 30 days from the date of proposal and thereafter shall be subject to change without notice. ', style: 'title'}] ] }],";
+ 
+			headertable1 += "[ { columns: [ [{text:'In Words: " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'*Above price is " + leadLiftPDFModel.oData.isgsttogle + " of taxes. Taxes as applicable GST @ 18%" + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text: [{text:'Note: This Quotation shall remain valid and effective for ', style: 'title'},{text:'30 Days ', style: 'subheaderwithbold'},{text:'from the date of proposal and there after shall be subject to change without notice.', style: 'title'}]}] ] }],";
+			//headertable1 += "{columns: [{text:'In Words:" + " " + "', style: 'title'},{text:'30 days" + " " + "', style: 'titlebold'}]},";
+			//headertable1 += "[{text: [[{text:'In Words: " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'*Above price is " + leadLiftPDFModel.oData.isgst + " of taxes. Taxes as applicable GST @ 18%" + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for " + "30 days" + " from the date of proposal and thereafter shall be subject to change without notice." + " " + "', style: 'titlebold'},{text:'Note: This Quotation shall remain valid and effective for " + "', style: 'title'},{text:'" + "30 days" +  "', style: 'titlebold'},{text:'" + " from the date of proposal and thereafter shall be subject to change without notice." + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for 30 days from the date of proposal and thereafter shall be subject to change without notice. ', style: 'title'},{text:'30 days ', style: 'subheaderwithbold13'}] ] }],";
 			headertable1 += "]";
 			headertable1 += "}";
 			headertable1 += "},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-
-			headertable1 += "{text: [{text:'The price/s quoted herein is/are ', style: 'title'},{text:'inclusive ', style: 'subheaderwithbold'},{text:'of all taxes, as currently applicable, whether levied by the Central Government or the State Government. In the event of any amendment or variation in the rate or methodology for charging the applicable taxes, and/or, should be any new levies imposed in respect of this contract, the entire burden of any additional levy shall be borne and payable by you on demand at any time, in addition to the price/s stated herein.', style: 'title'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: [{text:'The price/s quoted herein is/are ', style: 'title'},{text:'" + leadLiftPDFModel.oData.isgst + "', style: 'subheaderwithbold'},{text:' of all taxes, as currently applicable, whether levied by the Central Government or the State Government. In the event of any amendment or variation in the rate or methodology for charging the applicable taxes, and/or, should be any new levies imposed in respect of this contract, the entire burden of any additional levy shall be borne and payable by you on demand at any time, in addition to the price/s stated herein.', style: 'title'}]},";
 			
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'GST Registration Number -------------------------------------------------------------------------------------------------------', style: 'titlebold'},";
@@ -758,9 +801,12 @@ sap.ui.define([
 		  	headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 		    headertable1 += "{ text:'" + "E" + "-" + "Mail ---------------------------------------------------------------------------------------------------------------------------------" + "', style: 'titlebold'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'ACCEPTED:-" + " " + "', style: 'titlebold'}]},";
+			headertable1 += "{columns: [{text:'ACCEPTED" + " " + "', style: 'titlebold'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'IN DUPLICATE ON__________________________" + " " + "', style: 'titlebold'}, {text:'BY________________________________________" + " " + "', style: 'subheaderbold'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
@@ -773,27 +819,34 @@ sap.ui.define([
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
 
-			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -40, 0, 0]}]},";
+			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:190, height:50,margin: [0, -48, 0, 0]}]},";
 			headertable1 += "{text: 'TERMS OF PAYMENT:', style: 'titlepaymntterms'},";
 
 			headertable1 += "{ style: 'tableExample4',";
 			headertable1 += " table: {";
-			headertable1 += "widths: ['50%','50%'],";
+			headertable1 += "widths: ['45%','18%'],";
 			headertable1 += " body: [";
 			
-			headertable1 += "[ { columns: [ {text:'Advance on order reception." + " " + "', style: 'subheaderformargine'}] },{ columns: [ {text:'" + leadLiftPDFModel.oData.advanceonorderreception + "', style: 'subheaderformarginenobold'}] }],";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+		//	headertable1 += "[ { columns: [ {text:'" + " " + "', style: 'subheader'}] },{ columns: [ {text:'" + " " + "', style: 'subheaderone'}] }],";
+		//headertable1 += "      [{ columns: [{ text: '', style: 'subheaderformargine' }] }, { columns: [{ text: '', style: 'subheaderformarginenobold' }] }],";	
+			headertable1 += "[ { columns: [{text:'Advance on order reception." + " " + "', style: 'subheaderformargine'}] },{ columns: [ {text:'" + leadLiftPDFModel.oData.advanceonorderreception + "', style: 'subheaderformarginenobold'}] }],";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "[ { columns: [ {text:'For request of mechanical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ {text:'" + leadLiftPDFModel.oData.forrequestofmechanicalmaterial + "', style: 'subheaderformarginenobold'} ] }],";
 			headertable1 += "[ { columns: [ {text:'For request of electrical material" + " " + "', style: 'subheaderformargine'}] },{ columns: [ {text:'" + leadLiftPDFModel.oData.forrequestofelectricalmaterial + "', style: 'subheaderformarginenobold'} ] }],";
 			headertable1 += "[ { columns: [ {text:'On customer Handover" + " " + "', style: 'subheaderformargine'}] },{ columns: [ {text:'" + leadLiftPDFModel.oData.oncustomerhandover + "', style: 'subheaderformarginenobold'} ] }],";
 
 			headertable1 += "]";
+
+
+			
 			headertable1 += "}";
 			headertable1 += "},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'Irrespective of any delay in building completion, availability of permanent power supply or by any cause beyond our control, the final payment will be due to us within 180 days from the date of our intimation that material is at ready at factory.', style: 'titlewithboldpaymnt'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'BANK DETAILS:', style: 'titleboldheader'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'COMPANY NAME: SNEHA ELEVATORS LLP', style: 'titleboldbank' },";
@@ -806,6 +859,8 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'HDFC BANK', style: 'titleboldbank'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			// new code start
 
@@ -817,12 +872,14 @@ sap.ui.define([
 			headertable1 += "]";
 			headertable1 += "}";
 			headertable1 += "},";
-
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			//new code end
 
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
@@ -869,6 +926,16 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
@@ -887,11 +954,12 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			// headertable1 += "{canvas: [ { type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1 } ]},";
 			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			 headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			headertable1 += "{text: 'CUSTOMERS SCOPE OF WORKS - SUMMARY', style: 'titleincenterwork'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'CIVIL WORKS', style: 'titleincenterwithunderline'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '1.   MINOR CIVIL WORKS LIKE CHIPPING, ENTRANCE WALLS & SHAFT WHITE WASH.', style: 'titlebold'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -905,13 +973,22 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'ELECTRICAL WORKS', style: 'titleincenterwithunderline'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '6.    POWER SUPPLY (SINGLE-PHASE) TO BE PROVIDED IN THE HOISTWAY.', style: 'titlebold'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '7.    BULKHEAD LIGHTING TO BE PROVIDED.', style: 'titlebold'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '8.    TWO SAPARATE EARTH PITS WITH COPPER WIRE OF 8 GUAGE TO BE PROVIDED.', style: 'titlebold'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: '9.    MCB TO BE PROVIDED IN TOP FLOOR AS PER SNEHA SPCIFICATIONS.', style: 'titlebold'},";
+			headertable1 += "{text: '9.    MCB TO BE PROVIDED IN TOP FLOOR AS PER SNEHA SPECIFICATIONS.', style: 'titlebold'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -937,9 +1014,10 @@ sap.ui.define([
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
 
 			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -40, 0, 0]}]},";
-			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'PREPARATORY WORK', style: 'titleincenterwithunderline'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: 'PREPARATORY WORK', style: 'titleincenterwithunderline'},";
+			
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";	
 			headertable1 += "{text: 'Following are key points under Customer scope:', style: 'titleboldleven'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
 			headertable1 += "{text: '1.    TO FURNISH within two weeks (or sooner if required) from the date of acceptance of this proposal, all required           data for the performance of this contract.',style: 'title'},";
@@ -966,7 +1044,9 @@ sap.ui.define([
 
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '11.    TO PROVIDE suitable weatherproof lockup storage accommodation of approximately 50 Sq. per elevator with electric lights for elevator materials at the ground floor level near the hoist way. This should be available well before the arrival of the materials.',style: 'title'},";
-
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: '12.    TO PROVIDE and maintain adequate safety and security measures as also retain ELEV8R safety infrastructure to prevent any injury to third party or damage, theft orpilferage of material during storage, erection period and until the elevator is handed over.',style: 'title'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
@@ -983,8 +1063,8 @@ sap.ui.define([
 			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -40, 0, 0]}]},";
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			
+			
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: '12.    TO PROVIDE and maintain adequate safety and security measures as also retain ELEV8R safety infrastructure to prevent any injury to third party or damage, theft orpilferage of material during storage, erection period and until the elevator is handed over.',style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '13.    To provide hoisting hooks in the ceiling as per the arrangements shown in the equipment layout that will support the loads indicated. These hooks must be certified for the loads indicated.',style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -1014,12 +1094,18 @@ sap.ui.define([
 			headertable1 += "{text: [{text:'4.    Installation: ', style: 'subheaderwithbold'},{text:'Installation of each unit shall be completed in ', style: 'title'},{text:' 4 Weeks (stage wise) ', style: 'subheaderwithbold'},{text:'from the date of start of installation work at site, provided all our requests mentioned in the preparatory work are adhered to and contractual terms complied.', style: 'title'}]},";
 
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: '5.    If during the inspection of site, we observe that there is a delay in completion of the hoist way structure or availability of power supply, we may at our option delay the final assembly of materials and shipment to site so as to synchronize with the hoist way and machine room completion date. In such an event, a fresh completion date ',style: 'title'},";
+			headertable1 += "{text: '5.    If during the inspection of site, we observe that there is a delay in completion of the hoist way structure or availability of power supply, we may at our option delay the final assembly of materials and shipment to site so as to synchronize with the hoist way and machine room completion date. In such an event, a fresh completion date will be established depending upon minimum installation time indicated in above.In such an event, a fresh completion date will be established depending upon minimum installation time indicated in above.',style: 'title'},";
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			
-			
-			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: [{text:'6.    Warranty & Real estate Regulation Act (RERA): ', style: 'subheaderwithbold'},{text:'The contract is not subject to provision of RERA. The Warranty is for a period of 12 months from the intimation to the customer of the physical completion of installation. ', style: 'title'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+
+			headertable1 += "{text: [{text:'7.    Variation in tax : ', style: 'subheaderwithbold'},{text:'The adjustment in price resulting from tax variation or imposition of fresh taxes included in this proposal may be claimed by us as soon as the amount thereof is as certainable and shall be payable on demand. ', style: 'title'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
 
@@ -1039,14 +1125,11 @@ sap.ui.define([
 			
 			 headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			
-			headertable1 += "{text: 'will be established depending upon minimum installation time indicated in above.In such an event, a fresh completion date will be established depending upon minimum installation time indicated in above.',style: 'title'},";
+			//headertable1 += "{text: 'will be established depending upon minimum installation time indicated in above.In such an event, a fresh completion date will be established depending upon minimum installation time indicated in above.',style: 'title'},";
 			//headertable1 += "{text: '6.    Warranty & Real estate Regulation Act (RERA): The contract is not subject to provision of RERA. The Warranty is for a period of 12 months from the intimation to the customer of the physical completion of installation.',style: 'title'},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: [{text:'6.    Warranty & Real estate Regulation Act (RERA): ', style: 'subheaderwithbold'},{text:'The contract is not subject to provision of RERA. The Warranty is for a period of 12 months from the intimation to the customer of the physical completion of installation. ', style: 'title'}]},";
 			
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-
-			headertable1 += "{text: [{text:'7.    Variation in tax : ', style: 'subheaderwithbold'},{text:'The adjustment in price resulting from tax variation or imposition of fresh taxes included in this proposal may be claimed by us as soon as the amount thereof is as certainable and shall be payable on demand. ', style: 'title'}]},";
+			
+			
 
 			//headertable1 += "{text: '7.    Variation in tax : The adjustment in price resulting from tax variation or imposition of fresh taxes included in this proposal may be claimed by us as soon as the amount thereof is as certainable and shall be payable on demand.',style: 'title'},";
 
@@ -1071,10 +1154,14 @@ sap.ui.define([
 
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			
-			headertable1 += "{text: [{text:'14.    Force majeure: Under no circumstances shall either of us be liable for any loss, damage or delay due  to any ', style: 'title'}]},";
+			headertable1 += "{text: [{text:'14.    Force majeure: Under no circumstances shall either of us be liable for any loss, damage or delay due  to any cause beyond your/our reasonable control,including but not limited to lack of shipping space, embargoes, acts of any Government,strikes, lockouts, fire, accident, explosion, flood, riots, civil commotion, war, malicious mischief,delays in supplies of raw materials and components at our Works due to any or all of the reasons, such as energy crisis, electricity cut, rail/road transporter\\'s strike, go slow, bands, nonavailability of essential raw materials ( iron and steel, pig iron, aluminum, copper, silver, brass, stainless steel, various alloys, electrical grade steel, etc.), act of God or of the State\\'s enemies, or act of third party. Delay resulting from any cause beyond your/our reasonable control shall extend the time for completion of the work and the commencement of the free maintenance period. If for any such reasons, we cannot supply the equipment covered by this contract within ', style: 'title'},{text:'13 weeks', style: 'subheaderwithbold'},{text:' from the date of your acceptance of this proposal, we may, at our option, cancel the contract without being liable to pay any damages or compensation. Under no circumstances, shall either of us be liable for special, indirect or consequential loss or damages of any kind.', style: 'title'}]},";
 			
-
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: '15.    This contract shall be deemed to be an indivisible works contract. Any packing cases, or left over materials or tools tackles, instruments, etc. brought to site are and shall remain our property. We reserve the right to sub-contract the work as and when we deem fit',style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
 
@@ -1090,10 +1177,10 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
           
-			headertable1 += "{text: [{text:'cause beyond your/our reasonable control,including but not limited to lack of shipping space, embargoes, acts of any Government,strikes, lockouts, fire, accident, explosion, flood, riots, civil commotion, war, malicious mischief,delays in supplies of raw materials and components at our Works due to any or all of the reasons, such as energy crisis, electricity cut, rail/road transporter\\'s strike, go slow, bands, nonavailability of essential raw materials ( iron and steel, pig iron, aluminum, copper, silver, brass, stainless steel, various alloys, electrical grade steel, etc.), act of God or of the State\\'s enemies, or act of third party. Delay resulting from any cause beyond your/our reasonable control shall extend the time for completion of the work and the commencement of the free maintenance period. If for any such reasons, we cannot supply the equipment covered by this contract within ', style: 'title'},{text:'13 weeks', style: 'subheaderwithbold'},{text:' from the date of your acceptance of this proposal, we may, at our option, cancel the contract without being liable to pay any damages or compensation. Under no circumstances, shall either of us be liable for special, indirect or consequential loss or damages of any kind.', style: 'title'}]},";
+		//	headertable1 += "{text: [{text:'cause beyond your/our reasonable control,including but not limited to lack of shipping space, embargoes, acts of any Government,strikes, lockouts, fire, accident, explosion, flood, riots, civil commotion, war, malicious mischief,delays in supplies of raw materials and components at our Works due to any or all of the reasons, such as energy crisis, electricity cut, rail/road transporter\\'s strike, go slow, bands, nonavailability of essential raw materials ( iron and steel, pig iron, aluminum, copper, silver, brass, stainless steel, various alloys, electrical grade steel, etc.), act of God or of the State\\'s enemies, or act of third party. Delay resulting from any cause beyond your/our reasonable control shall extend the time for completion of the work and the commencement of the free maintenance period. If for any such reasons, we cannot supply the equipment covered by this contract within ', style: 'title'},{text:'13 weeks', style: 'subheaderwithbold'},{text:' from the date of your acceptance of this proposal, we may, at our option, cancel the contract without being liable to pay any damages or compensation. Under no circumstances, shall either of us be liable for special, indirect or consequential loss or damages of any kind.', style: 'title'}]},";
 
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: '15.    This contract shall be deemed to be an indivisible works contract. Any packing cases, or left over materials or tools tackles, instruments, etc. brought to site are and shall remain our property. We reserve the right to sub-contract the work as and when we deem fit',style: 'title'},";
+		//	headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+		//	headertable1 += "{text: '15.    This contract shall be deemed to be an indivisible works contract. Any packing cases, or left over materials or tools tackles, instruments, etc. brought to site are and shall remain our property. We reserve the right to sub-contract the work as and when we deem fit',style: 'title'},";
 
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '16.    Defect liability period: We hereby guarantee the material supplied and the workmanship of the elevator(s) under this contract for a period of 18 months from the date of initial supply of materials or 12 months from the date of completion of each elevator,whichever is earlier, and we will rectify and make good any defects, not due to ordinary wear and tear, improper use, or lack of care, which may develop during this period. This guarantee (a) does not extend to consequential loss and/or damages and (b) is null and void in case of tampering and/or if maintenance, repairs and modifications are carried out by unauthorized persons.',style: 'title'},";
@@ -1109,7 +1196,20 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			headertable1 += "{text: '21.    If materials supplied by us, whether installed or not, are required to be reconditioned/replaced at a later date due to delay on account of (i) non availability of power supply or other incomplete work by you, (ii) force majeure conditions, (iii) non\-payment of dues, the related cost shall be payable by you on demand.',style: 'title'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: '22.    Presently we have our manufacturing unit in Hyderabad. Based on the technical specifications of the said contract and depending on availability and feasibility of transport or material, ELEV8R at its sole discretion will source the material either from its factory and/or any other source anywhere in India and/or from overseas and hence we will not be in a position to furnish the duty payment details in respect of the bought out and imported materials.',style: 'title'},";
 
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			
+
+			headertable1 += "{text: [{text:'23.    If you cancel the contract and/or commit a breach of contract and or contract remains dormant for ', style: 'title'},{text:'26 weeks', style: 'subheaderwithbold'},{text:'from signing the contract, we shall be entitled to claim damages and/or compensation, including the costs of the materials and loss of profits/administrative expenses actual or at the rate of 10% of the value of the contract, whichever is higher.', style: 'title'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: '24.    All disputes, differences and claims whatsoever which shall at any time arise between the parties hereto or their respective representatives concerning this contract and all other documents in pursuance hereof as to the rights, duties, obligations or liabilities of the parties hereto respectively by virtue of this contract shall be:',style: 'title'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+
+			headertable1 += "{text: 'a)    Referred to senior managers of both the parties. If the parties fail to arrive at an amicable settlement and resolution of the issues then it.',style: 'title'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: 'b)    Shall be referred to Arbitration in accordance with the provisions of the Arbitration and Conciliation Act 1996 as amended from time to time. Such arbitration proceedings will take place in Hyderabad* only, and shall be subject to jurisdiction of the Courts in Hyderabad*.',style: 'title'},";
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -1128,22 +1228,8 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			// headertable1 += "{canvas: [ { type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1 } ]},";
 			
-			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: '22.    Presently we have our manufacturing unit in Hyderabad. Based on the technical specifications of the said contract and depending on availability and feasibility of transport or material, ELEV8R at its sole discretion will source the material either from its factory and/or any other source anywhere in India and/or from overseas and hence we will not be in a position to furnish the duty payment details in respect of the bought out and imported materials.',style: 'title'},";
-
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			//headertable1 += "{text: '23.    If you cancel the contract and/or commit a breach of contract and or contract remains dormant for 26 weeks from signing the contract, we shall be entitled to claim damages and/or compensation, including the costs of the materials and loss of profits/administrative expenses actual or at the rate of 10% of the value of the contract, whichever is higher.',style: 'title'},";
+		
 			
-
-			headertable1 += "{text: [{text:'23.    If you cancel the contract and/or commit a breach of contract and or contract remains dormant for ', style: 'title'},{text:'26 weeks', style: 'subheaderwithbold'},{text:'from signing the contract, we shall be entitled to claim damages and/or compensation, including the costs of the materials and loss of profits/administrative expenses actual or at the rate of 10% of the value of the contract, whichever is higher.', style: 'title'}]},";
-
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: '24.    All disputes, differences and claims whatsoever which shall at any time arise between the parties hereto or their respective representatives concerning this contract and all other documents in pursuance hereof as to the rights, duties, obligations or liabilities of the parties hereto respectively by virtue of this contract shall be:',style: 'title'},";
-			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-
-			headertable1 += "{text: 'a)    Referred to senior managers of both the parties. If the parties fail to arrive at an amicable settlement and resolution of the issues then it.',style: 'title'},";
-			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'b)    Shall be referred to Arbitration in accordance with the provisions of the Arbitration and Conciliation Act 1996 as amended from time to time. Such arbitration proceedings will take place in Hyderabad* only, and shall be subject to jurisdiction of the Courts in Hyderabad*.',style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '25.    The amount /advance paid as per the terms of contract will be subject to lien and apportionment over the expenses of the contract by ELEV8R, subject to condition that same has to be informed to the PARTY in writing. The PARTY agrees that the decision of ELEV8R will be final in this regard and the party agrees that the same will not be challenged on any legal grounds.',style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -1220,6 +1306,10 @@ sap.ui.define([
 
 				"Graycolor: {" +
 				"fillColor:'#cccccc'," +
+				"}," +
+
+				"Graytext: {" +
+				"fontSize:11," +
 				"}," +
 
 				"titleboldheader: {" +
@@ -1312,7 +1402,7 @@ sap.ui.define([
 				"subheader: {" +
 				"fontSize:10," +
 				"bold: true," +
-				"margin: [0, 5, 0, 0]," +
+				"margin: [0, 3, 0, 0]," +
 				"}," +
 
 				"subheaderlift: {" +
@@ -1354,13 +1444,13 @@ sap.ui.define([
 				"fontSize:11," +
 				"bold: true," +
 				"alignment:'center'," +
-				"margin: [0, 5, 0, 5]," +
+				"margin: [0, 12, 0, 12]," +
 				"}," +
 
 				"subheaderformarginenobold: {" +
 				"fontSize:11," +
 				"alignment:'center'," +
-				"margin: [0, 5, 0, 5]," +
+				"margin: [0, 12, 0, 12]," +
 				"}," +
 
 				"subheaderspace: {" +
@@ -1391,7 +1481,19 @@ sap.ui.define([
 				"bold: true," +
 				//"fontName:'Calibri-Regular'," +
 				"alignment:'right'," +
-				"margin: [0, 05, 0, 4]," +
+				"margin: [0, 3, 0, 0]," +
+				"}," +
+
+				"subheaderotherpage: {" +
+				"fontSize:10," +
+				"bold: true," +
+				//"fontName:'Calibri-Regular'," +
+				"alignment:'right'," +
+				"margin: [0,5, 0, 0]," +
+				"}," +
+
+				"subheaderoneimg: {" +
+				"margin: [0, -80, 0, 4]," +
 				"}," +
 
 				"subheadercustomer: {" +
@@ -1506,7 +1608,7 @@ sap.ui.define([
 				"}," +
 
 				"tableExample3: {" +
-				// "margin: [0, 15, 0, 250]," +
+				//"margin: [0, 15, 0, 250]," +
 				"fontSize: 11," +
 				"}," +
 
@@ -1522,7 +1624,7 @@ sap.ui.define([
 				"fontSize: 8" +
 				"}" +
 				"};" +
-				"pdfMake.createPdf(docDefinition).download('Quotation.pdf');" +
+				"pdfMake.createPdf(docDefinition).download('"+ leadLiftPDFModel.oData.leadname +".pdf');" +
 				"} });";
 			headertable1 += "</script></html>";
 			fullHtml += headertable1;
