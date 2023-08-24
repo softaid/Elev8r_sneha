@@ -582,7 +582,7 @@ sap.ui.define([
 			headertable1 += "{text: 'Email ID: " + email + "', style: 'subheaderone'},";
 			headertable1 += "{text: '" + "www.elev8r.in" + "', style: 'subheaderone'},";
 
-			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -40, 0, 0]}]},";
+			headertable1 += "{columns: [{image:'" + this.imagepath + "', width:200, height:50,margin: [0, -80, 0, 40]}]},";
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			// headertable1 += "{canvas: [ { type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1 } ]},";
 			headertable1 += "{columns: [{text:'" + (leadLiftPDFModel.oData.doortype).toUpperCase() + " DOOR SPECIFICATION SHEET', style: 'titleincenter'}]},";
@@ -1363,8 +1363,11 @@ sap.ui.define([
 				"decoration: 'underline',"+
 				"alignment: 'center'," +
 				"}," +
-
 				
+				"imgcss: {" +
+				"border: '2px solid red'," +
+				"}," +
+
 				"titleincenterwork: {" +
 				"fontSize:16," +
 				"bold: true," +

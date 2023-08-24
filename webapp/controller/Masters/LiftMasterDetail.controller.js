@@ -82,9 +82,8 @@ sap.ui.define([
             var isValid = this.validateForm();
 			if(isValid){
                 var model = this.getView().getModel("editMasterModel").oData;
-                  model.modelid= model.modelid.join(",");
+                  model.modelid= Array.isArray(model.modelid)==true? model.modelid.join(","):null;
 
-                
                 model["companyid"] = commonService.session("companyId");
                 model["userid"] = commonService.session("userId");
 
