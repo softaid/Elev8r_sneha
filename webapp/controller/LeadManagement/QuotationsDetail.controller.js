@@ -640,7 +640,7 @@ sap.ui.define([
 			headertable1 += "widths: ['35%','1.5%','63.5%'],";
 			headertable1 += " body: [";
 			for (var i = 0; i < array.length; i++) {
-				headertable1 += "[ {text: '" + array[i].name + "', style: 'Graycolor'},{text: '" + " " + "'},{text: '" + array[i].value + "'},],";
+				headertable1 += "[ {text: '" + array[i].name + "', style: 'Graycolor'},{text: '" + " " + "'},{text: '" + array[i].value + "',style: 'Graytext'},],";
 			}
 
 			headertable1 += "]";
@@ -706,9 +706,6 @@ sap.ui.define([
 			headertable1 += "},";
 
 			if(leadLiftPDFModel.oData.doortype == 'Auto'){
-				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -894,16 +891,9 @@ sap.ui.define([
 
 			headertable1 += "]";
 
+
 			
-			headertable1 += "},";
-			headertable1 += "  layout: {";
-			headertable1 += "    hLineWidth: function (i, node) {";
-			headertable1 += "    return (i === 0 || i === 1) ? 0.5 : 0.5;";
-			headertable1 += "    },";
-			headertable1 += "    vLineWidth: function (i, node) {";
-			headertable1 += "    return (i === 0 || i === 1) ? 0.5 : 0.5;";
-			headertable1 += "    }";
-			headertable1 += "},";
+			headertable1 += "}";
 			headertable1 += "},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -933,15 +923,6 @@ sap.ui.define([
 			headertable1 += " body: [";
 			headertable1 += "[ { columns: [ [{text: 'Please note, we will not encourage any cash transactions, request for Cheque or Online payments.', style: 'titlewithbold'},{text: 'As a very special case and as per RBI norms, Only Rs 2,00,000 cash will be accepted and same will be deposited personally at our corporate office with cash receipt.', style: 'titlewithbold'}] ] }],";
 			headertable1 += "]";
-			headertable1 += "},";
-			headertable1 += "  layout: {";
-			headertable1 += "    hLineWidth: function (i, node) {";
-			headertable1 += "    return (i === 0 || i === 1) ? 0.5 : 0.5;";
-			headertable1 += "    },";
-			headertable1 += "    vLineWidth: function (i, node) {";
-			headertable1 += "    return (i === 0 || i === 1) ? 0.5 : 0.5;";
-			headertable1 += "    }";
-			headertable1 += "},";
 			headertable1 += "},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -1270,24 +1251,17 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '22.    Presently we have our manufacturing unit in Hyderabad. Based on the technical specifications of the said contract and depending on availability and feasibility of transport or material, ELEV8R at its sole discretion will source the material either from its factory and/or any other source anywhere in India and/or from overseas and hence we will not be in a position to furnish the duty payment details in respect of the bought out and imported materials.',style: 'title'},";
 
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			
-			//headertable1 += "{text: [{text:'23.    Cancellation / Termination of Contract:', style: 'subheaderwithbold'},{text:'In the event of cancellation or termination of the Contract by the Customer, Sneha, in addition to all applicable taxes, shall be charging from the Customer as follows:', style: 'title'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: '23.    Cancellation / Termination of Contract:', style: 'subheaderwithbold'},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text:'In the event of cancellation or termination of the Contract by the Customer, Sneha, in addition to all applicable taxes, shall be charging from the Customer as follows:', style: 'title'},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'Before approval of drawings – 15% of the Contract Value.', style: 'title'},";
-			headertable1 += "{text: 'After approval of drawings – 30% of the Contract Value.', style: 'title'},";
-			headertable1 += "{text: 'After release to Production – 60% of the Contract Value.', style: 'title'},";
-			headertable1 += "{text: 'After dispatch of material – 100% of the Contract Value.', style: 'title'},";
-			headertable1 += "{text: 'After start of installation – 100% of the Contract Value.', style: 'title'},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'Upon the cancellation or termination of the Contract by the Customer prior to the installation, the Customer cannot claim right of ownership or lien over any materials irrespective of the percentage of Contract Value.', style: 'title'},";
 
-			//headertable1 += "{text: [{text:'23.    If you cancel the contract and/or commit a breach of contract and or contract remains dormant for ', style: 'title'},{text:'26 weeks', style: 'subheaderwithbold'},{text:'from signing the contract, we shall be entitled to claim damages and/or compensation, including the costs of the materials and loss of profits/administrative expenses actual or at the rate of 10% of the value of the contract, whichever is higher.', style: 'title'}]},";
-			
-			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: [{text:'23.    If you cancel the contract and/or commit a breach of contract and or contract remains dormant for ', style: 'title'},{text:'26 weeks', style: 'subheaderwithbold'},{text:'from signing the contract, we shall be entitled to claim damages and/or compensation, including the costs of the materials and loss of profits/administrative expenses actual or at the rate of 10% of the value of the contract, whichever is higher.', style: 'title'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: '24.    All disputes, differences and claims whatsoever which shall at any time arise between the parties hereto or their respective representatives concerning this contract and all other documents in pursuance hereof as to the rights, duties, obligations or liabilities of the parties hereto respectively by virtue of this contract shall be:',style: 'title'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+
+			headertable1 += "{text: 'a)    Referred to senior managers of both the parties. If the parties fail to arrive at an amicable settlement and resolution of the issues then it.',style: 'title'},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{text: 'b)    Shall be referred to Arbitration in accordance with the provisions of the Arbitration and Conciliation Act 1996 as amended from time to time. Such arbitration proceedings will take place in Hyderabad* only, and shall be subject to jurisdiction of the Courts in Hyderabad*.',style: 'title'},";
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -1308,14 +1282,6 @@ sap.ui.define([
 			
 		
 			
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: '24.    All disputes, differences and claims whatsoever which shall at any time arise between the parties hereto or their respective representatives concerning this contract and all other documents in pursuance hereof as to the rights, duties, obligations or liabilities of the parties hereto respectively by virtue of this contract shall be:',style: 'title'},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-
-			headertable1 += "{text: 'a)    Referred to senior managers of both the parties. If the parties fail to arrive at an amicable settlement and resolution of the issues then it.',style: 'title'},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'b)    Shall be referred to Arbitration in accordance with the provisions of the Arbitration and Conciliation Act 1996 as amended from time to time. Such arbitration proceedings will take place in Hyderabad* only, and shall be subject to jurisdiction of the Courts in Hyderabad*.',style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '25.    The amount /advance paid as per the terms of contract will be subject to lien and apportionment over the expenses of the contract by ELEV8R, subject to condition that same has to be informed to the PARTY in writing. The PARTY agrees that the decision of ELEV8R will be final in this regard and the party agrees that the same will not be challenged on any legal grounds.',style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -1409,6 +1375,10 @@ sap.ui.define([
 
 				"Graycolor: {" +
 				"fillColor:'#cccccc'," +
+				"}," +
+
+				"Graytext: {" +
+				"fontSize:11," +
 				"}," +
 
 				"titleboldheader: {" +
