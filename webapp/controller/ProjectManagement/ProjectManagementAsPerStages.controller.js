@@ -128,6 +128,7 @@ sap.ui.define([
 			oThis.projectWeightagearray = [];
 			oThis.ProjectDepartment = [];
 			oThis.datePickerArr = [];
+			let count=false;
 
 
 
@@ -186,7 +187,7 @@ sap.ui.define([
 								for (let i = 0; i < ((projectWeightagedata.length - 1)); i++) {
 									projectWeightagedata[i].some((projectWeight) => {
 										if (projectWeight.projectid == projectid) {
-											obj = { ...(obj), ...(projectWeight) }
+											obj = { ...(obj), ...(projectWeight),count}
 											projectWeightObj = { ...projectWeightObj, ...projectWeight }
 											return true;
 										}
@@ -689,6 +690,7 @@ sap.ui.define([
 			oThis.projectDetailSave.map((projectid) => {
 				projectModel.some((projectdetail) => {
 					if (projectid == projectdetail.projectid) {
+						projectdetail.count= false;
 						// Preparing the data object to be saved for each project detail
 						let actualenddate = projectdetail.actualenddate != undefined ? ocommonfunction.getDate(projectdetail.actualenddate) : null;
 						let saveObject = {

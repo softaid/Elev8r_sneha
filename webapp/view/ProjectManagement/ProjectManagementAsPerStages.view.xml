@@ -221,10 +221,10 @@
                                                 displayFormat="{config>/dateFormat/displayFormat}"
                                                 value="{projectModel>Sequence1startdate}"
                                                 valueFormat="dd/MM/yyyy"
-                                               editable="{
-                                                            path: 'projectModel>Sequence1startdate',
-                                                            formatter: '.formatter.setCheckboxEnable'
-                                                        }"
+                                                 editable="{
+                                        path: 'projectModel>Sequence1startdate',
+                                        formatter: '.formatter.setDatePicker'
+                                    }"
                                                select="onCheckBoxSelect"
                                                 app:mySuperExtraData="1_{projectModel>orderno}_start"
                                                 />
@@ -233,10 +233,10 @@
                                                 displayFormat="{config>/dateFormat/displayFormat}"
                                                 value="{projectModel>Sequence1enddate}"
                                                 valueFormat="dd/MM/yyyy"
-                                                editable="{
-                                                            path: 'projectModel>Sequence1enddate',
-                                                            formatter: '.formatter.setCheckboxEnable'
-                                                        }"
+                                                   editable="{
+                                        path: 'projectModel>Sequence1enddate',
+                                        formatter: '.formatter.setDatePicker'
+                                    }"
                                                  change="onCheckBoxSelect"
                                                  app:mySuperExtraData="1_{projectModel>orderno}_end"
                                                 />
@@ -286,28 +286,27 @@
                     </VBOX>  
 						<table:template>
 							<VBOX>
-                              <DatePicker  width="100%" 
-                                                placeholder="{config>/dateFormat/placeholder}"
-                                                displayFormat="{config>/dateFormat/displayFormat}"
-                                                value="{projectModel>Sequence2startdate}"
-                                                valueFormat="dd/MM/yyyy"
-                                                editable="{
-                                                            path: 'projectModel>Sequence2startdate',
-                                                            formatter: '.formatter.setCheckboxEnable'
-                                                        }"
-                                                 change="onCheckBoxSelect"
-                                                 app:mySuperExtraData="2_{projectModel>orderno}_start"
-                                                />                                               
+                                            <DatePicker width="100%"
+                            placeholder="{config>/dateFormat/placeholder}"
+                            displayFormat="{config>/dateFormat/displayFormat}"
+                            value="{projectModel>Sequence2startdate}"
+                            valueFormat="dd/MM/yyyy"
+                           editable="{
+                                        path: 'projectModel>Sequence2startdate',
+                                        formatter: '.formatter.setDatePicker'
+                                    }"
+                            change="onCheckBoxSelect"
+                            app:mySuperExtraData="2_{projectModel>orderno}_start"/>                                              
                                                    <DatePicker
                                                      width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
                                                 value="{projectModel>Sequence2enddate}"
                                                 valueFormat="dd/MM/yyyy"
-                                                editable="{
-                                                            path: 'projectModel>Sequence2enddate',
-                                                            formatter: '.formatter.setCheckboxEnable'
-                                                        }"
+                                               editable="{
+                                        path: 'projectModel>Sequence2enddate',
+                                        formatter: '.formatter.setDatePicker'
+                                    }"
                                                  change="onCheckBoxSelect"
                                                  app:mySuperExtraData="2_{projectModel>orderno}_end"
                                                 />
@@ -317,7 +316,12 @@
                                     submit="oninputSelect" />  
                                 <Input class="customInputHeight"
                                     editable="false" 
-                                    value="{projectModel>Sequence2enddate}" />       -->
+                                    value="{projectModel>Sequence2enddate}" />  
+                                    
+                                    editable="{
+                                                            path: 'projectModel>Sequence2startdate',
+                                                            formatter: '.formatter.setCheckboxEnable'
+                                                        }"     -->
                             <CheckBox 
                              select="onCheckBoxSelect"
                             app:mySuperExtraData="2_{projectModel>orderno}" 
@@ -363,10 +367,10 @@
                                                 displayFormat="{config>/dateFormat/displayFormat}"
                                                 value="{projectModel>Sequence3startdate}"
                                                 valueFormat="dd/MM/yyyy"
-                                                editable="{
-                                                            path: 'projectModel>Sequence3startdate',
-                                                            formatter: '.formatter.setCheckboxEnable'
-                                                        }"
+                                             editable="{
+                                        path: 'projectModel>Sequence3startdate',
+                                        formatter: '.formatter.setDatePicker'
+                                    }"
                                                  change="onCheckBoxSelect"
                                                  app:mySuperExtraData="3_{projectModel>orderno}_start"
                                                 />                                               
@@ -377,9 +381,9 @@
                                                 value="{projectModel>Sequence3enddate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 editable="{
-                                                            path: 'projectModel>Sequence3enddate',
-                                                            formatter: '.formatter.setCheckboxEnable'
-                                                        }"
+                                        path: 'projectModel>Sequence3enddate',
+                                        formatter: '.formatter.setDatePicker'
+                                    }"
                                                  change="onCheckBoxSelect"
                                                  app:mySuperExtraData="3_{projectModel>orderno}_end"
                                                 />
@@ -437,9 +441,12 @@
                                                 value="{projectModel>Sequence4startdate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 editable="{
-                                                            path: 'projectModel>Sequence4startdate',
-                                                            formatter: '.formatter.setCheckboxEnable'
-                                                        }"
+                                    parts: [
+                                        { path: 'projectModel>Sequence4startdate' },
+                                        { path: 'projectModel>Sequence4weightage' }
+                                    ],
+                                    formatter: '.formatter.setDatePicker'
+                            }" 
                                                  change="onCheckBoxSelect"
                                                  app:mySuperExtraData="4_{projectModel>orderno}_start"
                                                 />                                               
@@ -449,10 +456,13 @@
                                                 displayFormat="{config>/dateFormat/displayFormat}"
                                                 value="{projectModel>Sequence4enddate}"
                                                 valueFormat="dd/MM/yyyy"
-                                                editable="{
-                                                            path: 'projectModel>Sequence4enddate',
-                                                            formatter: '.formatter.setCheckboxEnable'
-                                                        }"
+                                               editable="{
+                                    parts: [
+                                        { path: 'projectModel>Sequence4enddate' },
+                                        { path: 'projectModel>Sequence4weightage' }
+                                    ],
+                                    formatter: '.formatter.setDatePicker'
+                            }" 
                                                  change="onCheckBoxSelect"
                                                  app:mySuperExtraData="4_{projectModel>orderno}_end"
                                                 />

@@ -703,9 +703,7 @@ sap.ui.define([
                     var selectModel = new sap.ui.model.json.JSONModel();
                     selectModel.setData({ modelData: data[0] });
                     currentContext.getView().setModel(selectModel, modelName);
-                    if(typeCode=="LftMdl" && modelName=="leadmodelModel"){
-                        currentContext.onModelSelection(typeCode,data[0][0].id);
-                    }
+                    currentContext.onModelSelection();
                 }
             });
         },
