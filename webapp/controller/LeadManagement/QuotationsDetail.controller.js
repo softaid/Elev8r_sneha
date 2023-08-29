@@ -805,7 +805,7 @@ sap.ui.define([
 			headertable1 += "    widths: ['65%', '10%', '25%'],";
 			headertable1 += "    body: [";
 			headertable1 += "      [{ columns: [{text: 'Lift Solution', style: 'subheader' }] }, { columns: [{ text: 'Unit', style: 'subheader' }] }, { columns: [{ text: 'Price', style: 'subheader' }] }],";
-			headertable1 += "      [{rowSpan:'3',text: '"  + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift'}, { text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }, {text: '     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit)', style: 'titleforlift'}],";
+			headertable1 += "      [{rowSpan:3,text: '"  + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift'}, { text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }, {text: '     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit)', style: 'titleforlift'}],";
 			
 			headertable1 += "    [{ text: '"  + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift'}, {text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift'}, {text: '     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit)', style: 'titleforlift' }],";
 			
