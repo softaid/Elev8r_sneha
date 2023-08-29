@@ -132,7 +132,7 @@ sap.ui.define(function () {
 			let a=true;
 			let b=false;
 			
-			  if(sValue && sValue.trim() !== "" && this.count==0)
+			  if(sValue && sValue.trim() !== "" && sValue.trim() != "-"  && this.count==0)
 			 {
 				return b;
 			 }
@@ -182,7 +182,7 @@ sap.ui.define(function () {
 					let a=true;
 					let b=false;
 					
-					if((date!=null || date==undefined) && this.count==0)
+					if((date!=null || date===undefined|| date==="-") && this.count==0)
 					{
 						return b;
 					}
