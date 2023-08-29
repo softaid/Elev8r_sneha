@@ -10,14 +10,12 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/services/Masters/Contact.service',
 	"sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Quotation.service",
 
-], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, Leadservice, contactService,quotationService) {
+], function (JSONModel, BaseController, MessageToast, MessageBox, commonFunction, commonService, locationService, Leadservice, contactService, quotationService) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddLead", {
 		onInit: function () {
 			var currentContext = this;
-
-			// currentContext.reset();
 			this.bus = sap.ui.getCore().getEventBus();
 			this.bus.subscribe("leaddetails", "newLead", this.leaddetails, this);
 			this.bus.subscribe("leadscreen", "handleLeadList", this.handleLeadList, this);
@@ -143,7 +141,7 @@ sap.ui.define([
 
 			// get all employees list 
 			commonFunction.getEmployeeList(this);
-			
+
 			//bind all locations
 			locationService.getAllLocations(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
@@ -175,7 +173,7 @@ sap.ui.define([
 				currentContext.getView().setModel(oModel, "partyCityModel");
 				let Model = new sap.ui.model.json.JSONModel();
 				currentContext.getView().setModel(Model, "cityModel");
-				currentContext.getView().getModel("cityModel").oData=data[0];
+				currentContext.getView().getModel("cityModel").oData = data[0];
 			});
 
 			var emptyModel = this.getModelDefault();
@@ -230,15 +228,16 @@ sap.ui.define([
 			}
 		},
 
-		getAllLeads : function(){
+		// get all leads from DB
+		getAllLeads: function () {
 			let editPartyModel = this.getView().getModel("editPartyModel");
 			Leadservice.getAllLeads(function (data) {
-				if(data.length && data[0].length){
+				if (data.length && data[0].length) {
 					let lastid = (data[0].length) - 1;
 					let nextid = (data[0][lastid].id) + 1;
 					editPartyModel.oData.leadid = nextid;
 					editPartyModel.refresh();
-				}else{
+				} else {
 					editPartyModel.oData.leadid = 1;
 					editPartyModel.refresh();
 				}
@@ -251,15 +250,15 @@ sap.ui.define([
 			editPartyModel.oData.leadid = selRow.nextid;
 			editPartyModel.refresh();
 
-			if(selRow.id != undefined){
+			if (selRow.id != undefined) {
 				this.getView().byId("btnSave").setText("Update");
-			}else{
+			} else {
 				this.getView().byId("btnSave").setText("Save");
 			}
 		},
 
+		// get data for particular lead to bind on screen
 		leaddetails: function (sChannel, sEvent, oData) {
-
 			let selRow = oData.viewModel;
 			let oThis = this;
 
@@ -273,10 +272,9 @@ sap.ui.define([
 
 				oThis.bindLeadDetails(selRow.id);
 
-			}else {
+			} else {
 				// var oModel = new JSONModel();
 				// this.getView().setModel(oModel, "editPartyModel");
-
 				oThis.getAllLeads();
 			}
 
@@ -287,6 +285,7 @@ sap.ui.define([
 			this.model = currentContext.getView().getModel("viewModel");
 		},
 
+		// get id from contact get data and bind on lead screen 
 		leadConversion: function (sChannel, sEvent, oData) {
 			let selRow = oData.viewModel;
 			let oThis = this;
@@ -306,7 +305,7 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			if (id != undefined) {
 				contactService.convertToLead({ id: id }, function (data) {
-					if(data.length && data[0].length){
+					if (data.length && data[0].length) {
 						oModel.setData(data[0][0]);
 						oThis.getView().setModel(oModel, "editPartyModel");
 					}
@@ -314,26 +313,29 @@ sap.ui.define([
 			}
 		},
 
-		onclickstop: function(oEvent){
+		// calculate travel value as per stop entared by user
+		onclickstop: function (oEvent) {
 			let oThis = this;
-			let stops=oEvent.mParameters.value;
-			if(parseInt(stops)==stops){
-			let travel= ((stops-1)*3)+1;
-			var model = oThis.getView().getModel("editPartyModel");
-			model.oData.travel=travel;
-			model.refresh();
+			let stops = oEvent.mParameters.value;
+			if (parseInt(stops) == stops) {
+				let travel = ((stops - 1) * 3) + 1;
+				var model = oThis.getView().getModel("editPartyModel");
+				model.oData.travel = travel;
+				model.refresh();
 			}
-			else{
+			else {
 				MessageToast.show("Please enter  valide Number of stop");
 			}
 
 		},
 
+		// get data for particular lead and bind that data to screen
 		bindLeadDetails: function (id) {
 			var currentContext = this;
 			var oModel = new JSONModel();
 			if (id != undefined) {
 
+				//service to get single lead details
 				Leadservice.getLeads({ id: id }, function (data) {
 					console.log(data[0][0]);
 					data[0][0].preferedlead = data[0][0].preferedlead == 1 ? true : false;
@@ -370,24 +372,25 @@ sap.ui.define([
 			var oModel = this.getView().getModel("editPartyModel");
 		},
 
-		onModelSelection: function (oEvent,id) {
+		// on Model selection get data for model from SP and set that to screen for autopopulate functionality
+		onModelSelection: function (oEvent, id) {
 			let oThis = this;
 			var model = oThis.getView().getModel("editPartyModel").oData;
-			model.modelid = id==undefined? model.modelid:id??null;
-			quotationService.getReferenceBymodel({modelid:model.modelid}, function (data) {
-			           	model.carheight=data[1][0].carheight;
-						model.pitdepth=data[1][0].pitdepth;
-						model.overhead=data[1][0].overhead;
+			model.modelid = id == undefined ? model.modelid : id ?? null;
+			quotationService.getReferenceBymodel({ modelid: model.modelid }, function (data) {
+				model.carheight = data[1][0].carheight;
+				model.pitdepth = data[1][0].pitdepth;
+				model.overhead = data[1][0].overhead;
 				data[0].forEach(element => {
 					if (element.typecode == "LftSpd") {
-						 model.speedid=element.id;
+						model.speedid = element.id;
 					}
 					else if (element.typecode == "LftMchn") {
-						model.machineid=element.id ;
+						model.machineid = element.id;
 					}
-				
+
 					else if (element.typecode == "MnPwrSys") {
-						model.mainpowersystemid=element.id;
+						model.mainpowersystemid = element.id;
 
 					}
 				});
@@ -468,16 +471,17 @@ sap.ui.define([
 			oBinding.filter([oFilter]);
 		},
 
+		// Save functionality for lead
 		onSave: function () {
 			//if (this.validateForm()) {
 			var currentContext = this;
 			var model = this.getView().getModel("editPartyModel").oData;
 			console.log("model", model);
-
-
 			model["companyid"] = commonService.session("companyId");
 			model["leaddate"] = commonFunction.getDate(model.leaddate);
 			model["userid"] = commonService.session("userId");
+			model["salesrepid"] = currentContext.getView().byId("txtsalesrep").getSelectedKey();
+			var salere = currentContext.getView().byId("txtsalesrep").getSelectedKey();
 
 			Leadservice.saveLead(model, function (data) {
 
@@ -495,6 +499,7 @@ sap.ui.define([
 
 		},
 
+		// Validation function for lead
 		validateForm: function () {
 			var isValid = true;
 			var source = this.getView().byId("sourceid").getSelectedKey();
@@ -590,7 +595,7 @@ sap.ui.define([
 
 			let model = this.getView().getModel("partyCityModel").oData.modelData;
 
-			let cityModel=this.getView().getModel("cityModel").oData;
+			let cityModel = this.getView().getModel("cityModel").oData;
 
 
 			let cityarray = [];
@@ -675,13 +680,13 @@ sap.ui.define([
 			return oBundle
 		},
 
-		selectModel : function(oEvent){
-			console.log("oEvent : ",oEvent);
+		selectModel: function (oEvent) {
+			console.log("oEvent : ", oEvent);
 
 			let modelid = this.getView().byId("modelid").getSelectedItem()
-			.mProperties.key;
+				.mProperties.key;
 
-			console.log("modelid : ",modelid);
+			console.log("modelid : ", modelid);
 		},
 
 		onDelete: function () {
