@@ -307,10 +307,10 @@
                                              change="onModelSelection"
                                             width="500px"
                                             items="{
-                                                path: 'leadmodelModel>/modelData',
+                                                path: 'leadModel>/modelData',
                                                 sorter: { path: 'id' }
                                             }">
-                                            <core:Item key="{leadmodelModel>id}" text="{leadmodelModel>description}" />
+                                            <core:Item key="{leadModel>id}" text="{leadModel>description}" />
                                         </Select>
                                     </form:fields>
                                 </form:FormElement>

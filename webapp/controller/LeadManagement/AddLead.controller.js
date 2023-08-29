@@ -56,7 +56,7 @@ sap.ui.define([
 			commonFunction.getReferenceByType("LftMchn", "MachineModel", this);
 
 			// bind Model dropdown
-			commonFunction.getReferenceByTypemodel("LftMdl", "leadmodelModel", this);
+			commonFunction.getReferenceByTypemodel("LftMdl", "leadModel", this);
 
 			// bind Drive dropdown
 			commonFunction.getReferenceByType("LftDrv", "leadDriveModel", this);
@@ -248,6 +248,7 @@ sap.ui.define([
 			let selRow = oData.viewModel;
 			let editPartyModel = this.getView().getModel("editPartyModel");
 			editPartyModel.oData.leadid = selRow.nextid;
+			 this.onModelSelection();
 			editPartyModel.refresh();
 
 			if (selRow.id != undefined) {
@@ -376,11 +377,13 @@ sap.ui.define([
 		onModelSelection: function (oEvent, id) {
 			let oThis = this;
 			var model = oThis.getView().getModel("editPartyModel").oData;
-			model.modelid = id == undefined ? model.modelid : id ?? null;
-			quotationService.getReferenceBymodel({ modelid: model.modelid }, function (data) {
-				model.carheight = data[1][0].carheight;
-				model.pitdepth = data[1][0].pitdepth;
-				model.overhead = data[1][0].overhead;
+
+			model.modelid = id==undefined? model?.modelid??0:id;
+			quotationService.getReferenceBymodel({modelid:model.modelid}, function (data) {
+			           	model.carheight=data[1][0].carheight;
+						model.pitdepth=data[1][0].pitdepth;
+						model.overhead=data[1][0].overhead;
+						model.modelid=data[1][0].modelid;
 				data[0].forEach(element => {
 					if (element.typecode == "LftSpd") {
 						model.speedid = element.id;
@@ -394,9 +397,9 @@ sap.ui.define([
 
 					}
 				});
+				oThis.getView().getModel("editPartyModel").refresh();
 
 			});
-			oThis.getView().getModel("editPartyModel").refresh();
 		},
 
 		handleSelectionFinish: function (oEvent) {
@@ -480,8 +483,8 @@ sap.ui.define([
 			model["companyid"] = commonService.session("companyId");
 			model["leaddate"] = commonFunction.getDate(model.leaddate);
 			model["userid"] = commonService.session("userId");
-			model["salesrepid"] = currentContext.getView().byId("txtsalesrep").getSelectedKey();
-			var salere = currentContext.getView().byId("txtsalesrep").getSelectedKey();
+			model["salesrepid"] = currentContext.getView().byId("txtsalesrep").getSelectedKey();	
+
 
 			Leadservice.saveLead(model, function (data) {
 

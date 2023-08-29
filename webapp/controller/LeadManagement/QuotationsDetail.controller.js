@@ -809,6 +809,12 @@ sap.ui.define([
 			headertable1 += "  layout: {";
 			headertable1 += "    hLineColor: function (i, node) {";
 			headertable1 += "    return (i === 0 || i === 1) ? 'black' : 'white';";
+			headertable1 += "    },";
+			headertable1 += "    hLineWidth: function (i, node) {";
+			headertable1 += "    return (i === 0 || i === 1) ? 0.5 : 0.5;";
+			headertable1 += "    },";
+			headertable1 += "    vLineWidth: function (i, node) {";
+			headertable1 += "    return (i === 0 || i === 1) ? 0.5 : 0.5;";
 			headertable1 += "    }";
 			headertable1 += "},";
 
@@ -951,7 +957,6 @@ sap.ui.define([
 			headertable1 += " body: [";
 			headertable1 += "[ { columns: [ [{text: 'Please note, we will not encourage any cash transactions, request for Cheque or Online payments.', style: 'titlewithbold'},{text: 'As a very special case and as per RBI norms, Only Rs 2,00,000 cash will be accepted and same will be deposited personally at our corporate office with cash receipt.', style: 'titlewithbold'}] ] }],";
 			headertable1 += "]";
-			headertable1 += "}";
 			headertable1 += "},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -1478,7 +1483,7 @@ sap.ui.define([
 				"alignment: 'center'," +
 				"}," +
 
-
+				
 				"titleincenterwork: {" +
 				"fontSize:16," +
 				"bold: true," +
