@@ -173,7 +173,32 @@ sap.ui.define(function () {
 				 return b;
 			 }
 
-		}
+		},
+		setDatePicker: function (date) 
+        {	
+			let model = this.getView().getModel("projectModel").oData.modelData;
+// 			
+	
+					let a=true;
+					let b=false;
+					
+					if((date!=null || date==undefined) && this.count==0)
+					{
+						return b;
+					}
+					else  if(date==null && this.count==0){
+						return a;
+					}
+
+
+			// let a=true;
+			// let b=false;
+			
+			// return date==null?this.count==0:false?true:false;
+
+			 }
+
+		
 	
 	};
 

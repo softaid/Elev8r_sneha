@@ -405,11 +405,13 @@ sap.ui.define(
 						} else {
 							oThis.getView().byId("btnSave").setEnabled(true);
 						}
-
 						oThis.bindQutationDetails(selRow.id);
 					} else {
 						oThis.getAllQuotations();
+						oThis.onModelSelection();
+
 					}
+
 				},
 
 				LeadChange: function () {
@@ -590,6 +592,7 @@ sap.ui.define(
 						});
 						this.getView().byId("btnSave").setText("Update");
 					}
+					
 
 					this.getView().setModel(oModel, "editQutationModel");
 					var oModel = this.getView().getModel("editQutationModel");
@@ -917,13 +920,13 @@ sap.ui.define(
 				onModelSelection: function (oEvent,id) {
 					let oThis = this;
 					var model = oThis.getView().getModel("editQutationModel").oData;
-					var model1 = oThis.getView().getModel("leadmodelModel").oData;
-					model.modelid = id==undefined? model.modelid:id??null;
+		
+					model.modelid = id==undefined? model?.modelid??0:id;
 					quotationService.getReferenceBymodel({modelid:model.modelid}, function (data) {
-						model.carheight=data[1][0].carheight;
-						model.pitdepth=data[1][0].pitdepth;
-						model.overhead=data[1][0].overhead;
-
+								model.carheight=data[1][0].carheight;
+								model.pitdepth=data[1][0].pitdepth;
+								model.overhead=data[1][0].overhead;
+								model.modelid=data[1][0].modelid;
 						data[0].forEach(element => {
 							if (element.typecode == "LftSpd") {
 								 model.speedid=element.id;
@@ -931,11 +934,14 @@ sap.ui.define(
 							else if (element.typecode == "LftMchn") {
 								model.machineid=element.id ;
 							}
+						
 							else if (element.typecode == "MnPwrSys") {
 								model.mainpowersystemid=element.id;
+		
 							}
 						});
 						oThis.getView().getModel("editQutationModel").refresh();
+		
 					});
 				},
 
