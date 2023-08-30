@@ -310,6 +310,17 @@ sap.ui.define([
 		notowordChange: function () {
 			let leadLiftPDFModel = this.getView().getModel("leadLiftPDFModel");
 			var grandtotal = leadLiftPDFModel.oData.quotevalue;
+			// console.log("grandtotal",grandtotal);
+			// var taxvalue=0;
+			// var total = 0;
+
+			// var taxvalue = leadLiftPDFModel.oData.isgst === "inclusive" ? leadLiftPDFModel.oData.quotevalue * 0.18 : 0;
+			// var total = grandtotal - taxvalue;
+
+			// console.log("taxvalue",taxvalue);
+			// console.log("total",total);
+			// console.log("grandtotal",grandtotal);
+
 			console.log("grandtotal : ", grandtotal);
 			var grandtotalfloor = Math.floor(grandtotal);
 			var text = this.createno(grandtotalfloor);
@@ -322,6 +333,8 @@ sap.ui.define([
 		onPdfExport: function () {
 			// Conver Quote value in word Format
 			// this.notowordChange();
+
+			
 
 			const fontDefinition = {
 				Calibri: {
@@ -377,6 +390,19 @@ sap.ui.define([
 			var quotePDFModel = this.getView().getModel("quotePDFModel");
 			// Leads and Lift Details
 			let leadLiftPDFModel = this.getView().getModel("leadLiftPDFModel");
+			var grandtotal = leadLiftPDFModel.oData.quotevalue;
+			console.log("grandtotal",grandtotal);
+			var taxvalue=0;
+			var total = 0;
+
+			var taxvalue = leadLiftPDFModel.oData.isgst === "inclusive" ? leadLiftPDFModel.oData.quotevalue * 0.18 : 0;
+			var total = grandtotal - taxvalue;
+
+			console.log("taxvalue",taxvalue);
+			console.log("total",total);
+			console.log("grandtotal",grandtotal);
+
+			console.log("grandtotal : ", grandtotal);
 			//Sales Manager Details
 			let saleManagrPDFModel = this.getView().getModel("saleManagrPDFModel");
 
@@ -777,7 +803,7 @@ sap.ui.define([
 			headertable1 += " table: {";
 			headertable1 += "widths: ['50%','50%'],";
 			headertable1 += " body: [";
-			headertable1 += "[ { columns: [{stack:[{text: '" + leadLiftPDFModel.oData.leadname + "', style: 'subheader'},{text: '" + "" + leadLiftPDFModel.oData.address + "', style: 'subheader'},{text: '" + leadLiftPDFModel.oData.city + "', style: 'subheader'},{text: 'Contact No - " + leadLiftPDFModel.oData.contactno + "', style: 'subheader'}]} ] },{ columns: [{stack:[{text: 'Neg No." + leadLiftPDFModel.oData.negno + "', style: 'subheader'},{text: 'Date." + leadLiftPDFModel.oData.quotedate + "', style: 'subheader'},{text: 'Model Code.  " + leadLiftPDFModel.oData.model + "', style: 'subheader'}] }] }],";
+			headertable1 += "[ { columns: [{stack:[{text: '" + leadLiftPDFModel.oData.leadname + "', style: 'subheader'},{text: '" + "" + leadLiftPDFModel.oData.address + "', style: 'subheader'},{text: '" + leadLiftPDFModel.oData.city + "', style: 'subheader'},{text: 'Contact No - " + leadLiftPDFModel.oData.contactno + "', style: 'subheader'}]} ] },{ columns: [{stack:[{text: 'Neg No. " + leadLiftPDFModel.oData.negno + "', style: 'subheader'},{text: 'Date. " + leadLiftPDFModel.oData.quotedate + "', style: 'subheader'},{text: 'Model Code. " + leadLiftPDFModel.oData.model + "', style: 'subheader'}] }] }],";
 
 			headertable1 += "]";
 			headertable1 += "},";
@@ -792,23 +818,46 @@ sap.ui.define([
 			headertable1 += "},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{text: 'PRICE SUMMARY: Our proposition for the Design and Manufacturing, supply and complete installation and testing of Elevators as described in the offer will be undertakenat thefollowing conditions. The Prices are in INR. ', style: 'titlebold'},";
+			headertable1 += "{text: 'PRICE SUMMARY: Our proposition for the Design and Manufacturing, supply and complete installation and testing of Elevators as described in the offer will be undertaken at the following conditions. The Prices are in INR. ', style: 'titlebold'},";
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			// headertable1 += "{";
+			// headertable1 += "  style: 'tableExample2',";
+			// headertable1 += "  table: {";
+			// headertable1 += "    widths: ['65%', '10%', '25%'],";
+			// headertable1 += "    body: [";
+			// headertable1 += "      [{ columns: [{ text: 'Lift Solution', style: 'subheader' }] }, { columns: [{ text: 'Unit', style: 'subheader' }] }, { columns: [{ text: 'Price', style: 'subheader' }] }],";
+			// headertable1 += "      [{ columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] }],";
+			
+			// headertable1 += "      [{ columns: [{ text: '"  + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift' }] }, { columns: [{ text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }] }, { columns: [{ text: '     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit)', style: 'titleforlift' }] }],";
+			// headertable1 += "      [{ columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] }],";
+			// headertable1 += "    ]";
+			// headertable1 += "  },";
+			// headertable1 += "  layout: {";
+			// headertable1 += "    hLineColor: function (i, node) {";
+			// headertable1 += "    return (i === 0 || i === 1) ? 'black' : 'white';";
+			// headertable1 += "    }";
+			// headertable1 += "},";
+			// headertable1 += "},";
+
+
+
 			headertable1 += "{";
 			headertable1 += "  style: 'tableExample2',";
 			headertable1 += "  table: {";
-			headertable1 += "    widths: ['40%', '10%', '25%','25%'],";
+			headertable1 += "    widths: ['50%', '10%','20%','20%'],";
 			headertable1 += "    body: [";
-			headertable1 += "      [{ columns: [{ text: 'Lift Solution', style: 'subheader' }] }, { columns: [{ text: 'Unit', style: 'subheader' }] },{ columns: [{ text: 'Unit', style: 'subheader' }] }, { columns: [{ text: 'Price', style: 'subheader' }] }],";
-			headertable1 += "      [{ columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] },{ columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] }],";
-
-			headertable1 += "      [{ columns: [{ text: '" + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift' }] }, { columns: [{ text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }],columns: [{text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }] },{ columns: [{ text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }] }, { columns: [{ text: '     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit)', style: 'titleforlift' }] }],";
-			headertable1 += "      [{ columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] },{ columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] }],";
+			headertable1 += "      [{ columns: [{text: 'Lift Solution', style: 'subheader' }] }, { columns: [{ text: 'Unit', style: 'subheader' }] },{ columns: [{ text: 'Price Basis', style: 'subheader' }] }, { columns: [{ text: 'Price Rs.', style: 'subheader' }] }],";
+			headertable1 += "      [{rowSpan:3,text: '"  + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift'},{rowSpan:3, text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }, { text: '" + "Basic Price" + "', style: 'titleforlift' }, {text: '     " + total  + ".00', style: 'titleforlift'}],";
+			
+			headertable1 += "    [{ text: '"  + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift'},{ text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }, {text: '" + "GST @ 18%" + "', style: 'titleforlift'}, {text: '     " + taxvalue + ".00', style: 'titleforlift' }],";
+			
+			headertable1 += "      [{text: '"  + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift' },{ text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }, {text: '" + "Grand Total" + "', style: 'titleforlift' }, { text: '     " + leadLiftPDFModel.oData.quotevalue + "', style: 'titleforlift'}],";
+			
 			headertable1 += "    ]";
 			headertable1 += "  },";
 			headertable1 += "  layout: {";
 			headertable1 += "    hLineColor: function (i, node) {";
-			headertable1 += "    return (i === 0 || i === 1) ? 'black' : 'white';";
+			headertable1 += "    return (i === 4) ? 'white' : 'black';";
 			headertable1 += "    },";
 			headertable1 += "    hLineWidth: function (i, node) {";
 			headertable1 += "    return (i === 0 || i === 1) ? 0.5 : 0.5;";
@@ -817,35 +866,6 @@ sap.ui.define([
 			headertable1 += "    return (i === 0 || i === 1) ? 0.5 : 0.5;";
 			headertable1 += "    }";
 			headertable1 += "},";
-
-
-			// headertable1 += "  table: {";
-			// headertable1 += "    widths: ['40%', '10%', '25%', '25%'],";
-			// headertable1 += "    body: [";
-			// headertable1 += "      [{ columns: [{ text: 'Lift Solution', style: 'subheader' }] }, { columns: [{ text: 'Unit', style: 'subheader' }] },{ columns: [{ text: 'Unit1', style: 'subheader' }] }, { columns: [{ text: 'Price', style: 'subheader' }] }],";
-			// headertable1 += "      [{ columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] },{ columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] }],";
-
-			// for (let i = 0; i < 4; i++) {
-			// 	let borderStyle = [true, true, true, true]; // Default: no borders
-
-			// 	// Set border for the specific rows
-			// 	if (i === 0 || i === 1 || i === 2 || i === 3) {
-			// 		borderStyle = [true, true, true, true]; // Right border for "Unit1" column
-			// 	}
-
-			// 	headertable1 += "      [{ columns: [{ text: '', style: 'titleforlift' }] }, { columns: [{ text: '', style: 'titleforlift' }] }, { columns: [{ text: 'Row " + (i + 1) + "', style: 'titleforlift', border: " + JSON.stringify(borderStyle) + " }] }, { columns: [{ text: 'Price', style: 'titleforlift' }] }],";
-			// }
-
-			// headertable1 += "    ]";
-			// headertable1 += "  },";
-			// headertable1 += "  layout: {";
-			// headertable1 += "    hLineColor: function (i, node) {";
-			// headertable1 += "      return (i === 0 || i === 1) ? 'black' : 'white';";
-			// headertable1 += "    }";
-			// headertable1 += "},";
-
-			
-
 			headertable1 += "},";
 
 			headertable1 += "{ style: 'tableExample5',";
@@ -884,8 +904,8 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'ACCEPTED" + " " + "', style: 'titlebold'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'IN DUPLICATE ON__________________________" + " " + "', style: 'titlebold'}, {text:'BY________________________________________" + " " + "', style: 'subheaderbold'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
@@ -957,6 +977,7 @@ sap.ui.define([
 			headertable1 += " body: [";
 			headertable1 += "[ { columns: [ [{text: 'Please note, we will not encourage any cash transactions, request for Cheque or Online payments.', style: 'titlewithbold'},{text: 'As a very special case and as per RBI norms, Only Rs 2,00,000 cash will be accepted and same will be deposited personally at our corporate office with cash receipt.', style: 'titlewithbold'}] ] }],";
 			headertable1 += "]";
+			headertable1 += "}";
 			headertable1 += "},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -1165,6 +1186,7 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: 'CONDITIONS OF CONTRACT', style: 'titleincenterwithunderline'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			headertable1 += "{text: [{text:'1.    This Quotations shall remain valid and effective for ', style: 'title'},{text:'30 days ', style: 'subheaderwithbold'},{text:'from the date of proposal and there after shall be subject to change without notice.', style: 'title'}]},";
 
@@ -1188,7 +1210,6 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 
 			headertable1 += "{text: [{text:'7.    Variation in tax : ', style: 'subheaderwithbold'},{text:'The adjustment in price resulting from tax variation or imposition of fresh taxes included in this proposal may be claimed by us as soon as the amount thereof is as certainable and shall be payable on demand. ', style: 'title'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -1307,7 +1328,6 @@ sap.ui.define([
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
@@ -1424,6 +1444,7 @@ sap.ui.define([
 				"fontSize:11," +
 				"bold: true," +
 				"alignment: 'left'," +
+				"margin: [0, 5, 0, 5]," +
 				"}," +
 
 				"Graycolor: {" +
@@ -1483,7 +1504,7 @@ sap.ui.define([
 				"alignment: 'center'," +
 				"}," +
 
-				
+
 				"titleincenterwork: {" +
 				"fontSize:16," +
 				"bold: true," +
