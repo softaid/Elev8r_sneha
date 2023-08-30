@@ -689,7 +689,7 @@ sap.ui.define(
 										: "Qutation edited successfully!";
 								currentContext.onCancel();
 								MessageToast.show(message);
-								currentContext.sendEmail(data.id, emaildate);
+								//currentContext.sendEmail(data.id, emaildate);
 								currentContext.bus = sap.ui.getCore().getEventBus();
 								currentContext.bus.publish(
 									"loadquotationdata",

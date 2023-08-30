@@ -478,6 +478,7 @@ sap.ui.define([
 			model["companyid"] = commonService.session("companyId");
 			model["leaddate"] = commonFunction.getDate(model.leaddate);
 			model["userid"] = commonService.session("userId");
+			model["salesrepid"] = currentContext.getView().byId("txtsalesrep").getSelectedKey();
 
 			Leadservice.saveLead(model, function (data) {
 
