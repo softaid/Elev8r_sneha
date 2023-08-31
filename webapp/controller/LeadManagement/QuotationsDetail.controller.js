@@ -272,7 +272,7 @@ sap.ui.define([
 									currentContext.onCancel();
 									MessageToast.show(deleteSucc);
 									currentContext.bus = sap.ui.getCore().getEventBus();
-									currentContext.bus.publish("loaddata", "loadData");
+									currentContext.bus.publish("loadquotationData", "loadQuotationData");
 								}
 							});
 						}
@@ -281,8 +281,22 @@ sap.ui.define([
 			}
 		},
 
+		reset: function () {
+			let oThis = this;
+			var model = oThis.getView().getModel("quoteModel");
+			model.setData([]);
+			oThis.getView().setModel(model, "quoteModel");
+
+			let quotationModel = oThis.getView().getModel("quotationModel");
+			quotationModel.setData({modelData : []});
+			oThis.getView.setModel(quotationModel, "quotationModel");
+		},
+
 		onCancel: function () {
-			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---leads--fclLead");
+			// this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---leads--fclLead");
+			this.reset();
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("quotations");
 		},
 
 		//Function for conversion of no to words

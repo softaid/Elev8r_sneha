@@ -695,7 +695,7 @@ sap.ui.define(
 								//currentContext.sendEmail(data.id, emaildate);
 								currentContext.bus = sap.ui.getCore().getEventBus();
 								currentContext.bus.publish(
-									"loadquotationdata",
+									"loadquotationData",
 									"loadQuotationData"
 								);
 							}
