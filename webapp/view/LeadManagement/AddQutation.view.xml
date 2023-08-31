@@ -582,12 +582,6 @@
                                         description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
-                                <form:FormElement label="Car Depth">
-                                    <form:fields>
-                                        <Input id="txtcardepth"  valueLiveUpdate="true" value="{editQutationModel>/cardepth}" 
-                                        description="mm"/>
-                                    </form:fields>
-                                </form:FormElement>
                                 <form:FormElement label="{i18n>leadLandingDoors}">
                                     <form:fields>
                                         <Select id="landingdoorsid"
@@ -637,6 +631,22 @@
                                             }">
                                             <core:Item key="{carPanelModel>id}" text="{carPanelModel>description}" />
                                         </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Car Width">
+                                    <form:fields>
+                                        <Input id="txtcarwidth"  valueLiveUpdate="true" value="{editQutationModel>/carwidth}" description="mm"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Car Height">
+                                    <form:fields>
+                                        <Input id="txtcarheight"  valueLiveUpdate="true" value="{editQutationModel>/carheight}" description="mm"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Car Depth">
+                                    <form:fields>
+                                        <Input id="txtcardepth"  valueLiveUpdate="true" value="{editQutationModel>/cardepth}" 
+                                        description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="False Ceiling">
@@ -926,16 +936,6 @@
                                             }">
                                             <core:Item key="{rightOpeningModel>id}" text="{rightOpeningModel>description}" />
                                         </Select>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="Car Width">
-                                    <form:fields>
-                                        <Input id="txtcarwidth"  valueLiveUpdate="true" value="{editQutationModel>/carwidth}" description="mm"/>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="Car Height">
-                                    <form:fields>
-                                        <Input id="txtcarheight"  valueLiveUpdate="true" value="{editQutationModel>/carheight}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Door Width">
