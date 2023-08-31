@@ -409,9 +409,11 @@ sap.ui.define([
 			var taxvalue=0;
 			var total = 0;
 
-			var taxvalue = leadLiftPDFModel.oData.isgst === "inclusive" ? leadLiftPDFModel.oData.quotevalue * 0.18 : 0;
-			var total = grandtotal - taxvalue;
+			var taxvalue = leadLiftPDFModel.oData.isgst === "inclusive" ? (((leadLiftPDFModel.oData.quotevalue/1.18)*18)/100).toFixed(2) : 0;
+			var total = leadLiftPDFModel.oData.isgst === "inclusive" ? (grandtotal/1.18).toFixed(2) : grandtotal;
 
+			//var total = (grandtotal/1.18).toFixed(2);
+			console.log("Round functionality");
 			console.log("taxvalue",taxvalue);
 			console.log("total",total);
 			console.log("grandtotal",grandtotal);
@@ -861,9 +863,9 @@ sap.ui.define([
 			headertable1 += "    widths: ['50%', '10%','20%','20%'],";
 			headertable1 += "    body: [";
 			headertable1 += "      [{ columns: [{text: 'Lift Solution', style: 'subheader' }] }, { columns: [{ text: 'Unit', style: 'subheader' }] },{ columns: [{ text: 'Price Basis', style: 'subheader' }] }, { columns: [{ text: 'Price Rs.', style: 'subheader' }] }],";
-			headertable1 += "      [{rowSpan:3,text: '"  + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift'},{rowSpan:3, text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }, { text: '" + "Basic Price" + "', style: 'titleforlift' }, {text: '     " + total  + ".00', style: 'titleforlift'}],";
+			headertable1 += "      [{rowSpan:3,text: '"  + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift'},{rowSpan:3, text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }, { text: '" + "Basic Price" + "', style: 'titleforlift' }, {text: '     " + total  + "', style: 'titleforlift'}],";
 			
-			headertable1 += "    [{ text: '"  + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift'},{ text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }, {text: '" + "GST @ 18%" + "', style: 'titleforlift'}, {text: '     " + taxvalue + ".00', style: 'titleforlift' }],";
+			headertable1 += "    [{ text: '"  + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift'},{ text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }, {text: '" + "GST @ 18%" + "', style: 'titleforlift'}, {text: '     " + taxvalue + "', style: 'titleforlift' }],";
 			
 			headertable1 += "      [{text: '"  + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift' },{ text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }, {text: '" + "Grand Total" + "', style: 'titleforlift' }, { text: '     " + leadLiftPDFModel.oData.quotevalue + "', style: 'titleforlift'}],";
 			
