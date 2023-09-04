@@ -176,6 +176,8 @@ sap.ui.define([
 				oModel.setData({ modelData: data[0] });
 				oModel.setSizeLimit(data[0].length);
 				currentContext.getView().setModel(oModel, "partyCityModel");
+				currentContext.setModelDefault()
+
 
 			});
 
@@ -249,6 +251,43 @@ sap.ui.define([
 				pincode: null
 			}
 		},
+
+		setModelDefault: function () {
+
+			let  lead= this.getView().getModel("editOrderModel").oData;
+
+			lead["quotevalue"] = lead["quotevalue"] == null ? 0 :parseFloat(lead.quotevalue) ;
+			lead["nooflifts"] =lead["nooflifts"] == null ? 0:parseInt(lead.nooflifts) ;
+			lead["leadscore"]=lead["leadscore"] == null ? 0:parseFloat(lead.leadscore) ;
+			lead["winprobability"]=lead["winprobability"] == null ? 0:(lead.winprobability) ;
+			lead["stopsid"]=lead["stopsid"] == null ? 0:parseInt(lead.stopsid) ;
+			lead["floormarking"]=lead["floormarking"] == null ? 0:parseFloat(lead.floormarking) ;
+			lead["shaftwidth"] =lead["shaftwidth"] == null ? 0:parseFloat(lead.shaftwidth) ;
+			lead["shaftdepth"]=lead["shaftdepth"] == null ?0: parseFloat(lead.shaftdepth) ;
+			lead["cardepth"]=lead["cardepth"] == null ? 0:parseFloat(lead.cardepth) ;
+			lead["carwidth"]=lead["carwidth"] == null ? 0:parseFloat(lead.carwidth) ;
+			lead["carheight"]=lead["carheight"] == null ? 0:parseFloat(lead.carheight) ;
+			lead["doorwidth"]=lead["doorwidth"] == null ? 0:parseFloat(lead.doorwidth) ;
+			lead["doorheight"]=lead["doorheight"] == null ?0: parseFloat(lead.doorheight) ;
+			lead["travel"]=lead["travel"] == null ?0: parseFloat(lead.travel) ;
+			lead["pitdepth"]=lead["pitdepth"] == null ? 0:parseFloat(lead.pitdepth) ;
+			lead["overhead"]=lead["overhead"] == null ? 0:parseFloat(lead.overhead) ;
+			lead["mrwidth"]=lead["mrwidth"] == null ? 0:parseFloat(lead.mrwidth) ;
+			lead["mrdepth"]=lead["mrdepth"] == null ? 0:parseFloat(lead.mrdepth) ;
+			lead["mrheight"]=lead["mrheight"] == null ? 0:parseFloat(lead.mrheight) ;
+			lead["quotescore"]=lead["quotescore"] == null ? 0:parseFloat(lead.quotescore) ;
+			lead["completiondays"]=lead["completiondays"] == null ? 0:parseFloat(lead.completiondays) ;
+			lead["oncustomerhandover"]=lead["oncustomerhandover"] == null ? 5:parseFloat(lead.oncustomerhandover) ;
+			lead["advanceonorderreception"]=lead["advanceonorderreception"] == null ? 10:parseFloat(lead.advanceonorderreception) ;
+			lead["forrequestofmechanicalmaterial"]=lead["forrequestofmechanicalmaterial"] == null ? 60:parseFloat(lead.forrequestofmechanicalmaterial) ;
+			lead["forrequestofelectricalmaterial"]=lead["forrequestofelectricalmaterial"] == null ? 25:parseFloat(lead.forrequestofelectricalmaterial) ;
+			lead["oncustomerhandover"]=lead["oncustomerhandover"] == null ? 5:parseFloat(lead.oncustomerhandover) ;
+
+
+
+			this.getView().getModel("editOrderModel").refresh()
+		},
+
 
 		onBeforeRendering: function () {
 			var currentContext = this;
@@ -344,6 +383,7 @@ sap.ui.define([
 			else {
 				var oModel = new JSONModel();
 				this.getView().setModel(oModel, "editOrderModel");
+				oThis.setModelDefault()
 				oThis.getView().byId("pdf").setVisible(false);
 			}
 

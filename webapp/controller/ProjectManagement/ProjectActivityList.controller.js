@@ -2,12 +2,15 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
 	'sap/ui/model/Sorter',
-	'sap/ui/elev8rerp/componentcontainer/services/LeadManagement/Quotation.service',
+	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/Project.service',
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
+	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
+	'sap/ui/elev8rerp/componentcontainer/services/Company/ManageUser.service',
 	'sap/m/MessageToast',
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
-], function (JSONModel, BaseController, Sorter, quotationService, xlsx, MessageToast, commonFunction) {
-	"use strict";
+	'sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter',
+
+], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, ManageUserService, MessageToast, commonFunction, formatter) {
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Quotations", {
 

@@ -90,6 +90,8 @@ sap.ui.define([
 					tblmodel.oData.pdf_url = currentContext.resultpdfArr?.[0]?.pdf_url??null;
 					tblmodel.oData.imageid =(currentContext.resultArr?.[0]?.image_url??null)==null?null:0;
 					tblmodel.oData.pdfid = (currentContext.resultpdfArr?.[0]?.pdf_url??null)==null?null:0;
+					tblmodel.oData.pdf_name = (currentContext.resultpdfArr?.[0]?.document_name??null)==null?null: (currentContext.resultpdfArr?.[0]?.document_name);
+
 					tblmodel.refresh();
 				}
 			})
@@ -252,6 +254,7 @@ sap.ui.define([
 							tblmodel.oData.pdfdata = currentContext.resultpdfArr[0].imgdata;
 							tblmodel.oData.pdf_url = currentContext.resultpdfArr[0].pdf_url;
 							tblmodel.oData.pdfid = 0;
+							tblmodel.oData.pdf_name = currentContext.resultpdfArr[0].document_name;
 							tblmodel.refresh();
 
 
@@ -317,6 +320,8 @@ sap.ui.define([
 				tblmodel.oData.imgdata = currentContext.resultpdfArr[count].imgdata;
 				tblmodel.oData.pdf_url = currentContext.resultpdfArr[count].pdf_url;
 				tblmodel.oData.pdfid = count;
+				tblmodel.oData.pdf_name = currentContext.resultpdfArr[count].document_name;
+
 				}
 	
 			tblmodel.refresh();
@@ -362,6 +367,8 @@ sap.ui.define([
 				tblmodel.oData.imgdata = currentContext?.resultpdfArr[count]?.imgdata??null;
 				tblmodel.oData.pdf_url = currentContext.resultpdfArr[count].pdf_url;
 				tblmodel.oData.pdfid = count;
+				tblmodel.oData.pdf_name = currentContext.resultpdfArr[count].document_name;
+
 				}
 	
 			tblmodel.refresh();
@@ -409,6 +416,8 @@ sap.ui.define([
 				tblmodel.oData.imgdata = resultArr[0].imgdata;
 				tblmodel.oData[`${message}_url`] = resultArr[0][`${message}_url`];
 				tblmodel.oData[`${message}id`] = 0;
+				message=="pdf"?	(tblmodel.oData[`${message}_name`] = resultArr[0].document_name):"not change";
+
 			}
 			tblmodel.refresh();	
 			},

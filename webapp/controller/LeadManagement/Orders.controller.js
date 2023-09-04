@@ -30,7 +30,7 @@ sap.ui.define([
 			model.setData(emptyModel);
 			this.getView().setModel(model, "subledgerModel");
 			jQuery.sap.delayedCall(1000, this, function () {
-				this.getView().byId("onSearchId").focus();
+				// this.getView().byId("onSearchId").focus();
 			});
 			this.fnShortCut();
 		},

@@ -797,7 +797,7 @@ sap.ui.define([
 			headertable1 += "{";
 			headertable1 += "  style: 'tableExample2',";
 			headertable1 += "  table: {";
-			headertable1 += "    widths: ['40%', '10%', '25%','25%'],";
+			headertable1 += "    widths: ['50%', '25%','25%'],";
 			headertable1 += "    body: [";
 			headertable1 += "      [{ columns: [{text: 'Lift Solution', style: 'subheader' }] }, { columns: [{ text: 'Unit', style: 'subheader' }] }, { columns: [{ text: 'Price', style: 'subheader' }] }],";
 			headertable1 += "      [{rowSpan:3,text: '"  + leadLiftPDFModel.oData.modeldetails + "', style: 'titleforlift'}, { text: '" + leadLiftPDFModel.oData.unit + "', style: 'titleforlift' }, {text: '     " + leadLiftPDFModel.oData.quotevalue + "(Per Unit)', style: 'titleforlift'}],";
@@ -810,7 +810,7 @@ sap.ui.define([
 			headertable1 += "  },";
 			headertable1 += "  layout: {";
 			headertable1 += "    hLineColor: function (i, node) {";
-			headertable1 += "    return (i === 0 || i === 1) ? 'black' : 'black';";
+			headertable1 += "    return (i === 4) ? 'white' : 'black';";
 			headertable1 += "    },";
 			headertable1 += "    hLineWidth: function (i, node) {";
 			headertable1 += "    return (i === 0 || i === 1) ? 0.5 : 0.5;";
@@ -819,35 +819,6 @@ sap.ui.define([
 			headertable1 += "    return (i === 0 || i === 1) ? 0.5 : 0.5;";
 			headertable1 += "    }";
 			headertable1 += "},";
-
-
-			// headertable1 += "  table: {";
-			// headertable1 += "    widths: ['40%', '10%', '25%', '25%'],";
-			// headertable1 += "    body: [";
-			// headertable1 += "      [{ columns: [{ text: 'Lift Solution', style: 'subheader' }] }, { columns: [{ text: 'Unit', style: 'subheader' }] },{ columns: [{ text: 'Unit1', style: 'subheader' }] }, { columns: [{ text: 'Price', style: 'subheader' }] }],";
-			// headertable1 += "      [{ columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] },{ columns: [{ text: '', style: 'subheader' }] }, { columns: [{ text: '', style: 'subheader' }] }],";
-
-			// for (let i = 0; i < 4; i++) {
-			// 	let borderStyle = [true, true, true, true]; // Default: no borders
-
-			// 	// Set border for the specific rows
-			// 	if (i === 0 || i === 1 || i === 2 || i === 3) {
-			// 		borderStyle = [true, true, true, true]; // Right border for "Unit1" column
-			// 	}
-
-			// 	headertable1 += "      [{ columns: [{ text: '', style: 'titleforlift' }] }, { columns: [{ text: '', style: 'titleforlift' }] }, { columns: [{ text: 'Row " + (i + 1) + "', style: 'titleforlift', border: " + JSON.stringify(borderStyle) + " }] }, { columns: [{ text: 'Price', style: 'titleforlift' }] }],";
-			// }
-
-			// headertable1 += "    ]";
-			// headertable1 += "  },";
-			// headertable1 += "  layout: {";
-			// headertable1 += "    hLineColor: function (i, node) {";
-			// headertable1 += "      return (i === 0 || i === 1) ? 'black' : 'white';";
-			// headertable1 += "    }";
-			// headertable1 += "},";
-
-			
-
 			headertable1 += "},";
 
 			headertable1 += "{ style: 'tableExample5',";

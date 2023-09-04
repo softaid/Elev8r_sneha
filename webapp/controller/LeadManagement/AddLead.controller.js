@@ -174,6 +174,7 @@ sap.ui.define([
 				let Model = new sap.ui.model.json.JSONModel();
 				currentContext.getView().setModel(Model, "cityModel");
 				currentContext.getView().getModel("cityModel").oData = data[0];
+				currentContext.setModelDefault();
 			});
 
 			var emptyModel = this.getModelDefault();
@@ -184,7 +185,39 @@ sap.ui.define([
 			this.getAllLeads();
 		},
 
+
+		setModelDefault: function () {
+
+			let  lead= this.getView().getModel("editPartyModel").oData;
+
+			lead["leadvalue"] =lead["leadvalue"] == null ? 0:parseFloat(lead.leadvalue) ;
+			lead["nooflifts"] =lead["nooflifts"] == null ? 0:parseInt(lead.nooflifts) ;
+			lead["leadscore"]=lead["leadscore"] == null ? 0:parseFloat(lead.leadscore) ;
+			lead["winprobability"]=lead["winprobability"] == null ? 0:(lead.winprobability) ;
+			lead["stopsid"]=lead["stopsid"] == null ? 0:parseInt(lead.stopsid) ;
+			lead["floormarking"]=lead["floormarking"] == null ? 0:parseFloat(lead.floormarking) ;
+			lead["shaftwidth"] =lead["shaftwidth"] == null ? 0:parseFloat(lead.shaftwidth) ;
+			lead["shaftdepth"]=lead["shaftdepth"] == null ?0: parseFloat(lead.shaftdepth) ;
+			lead["cardepth"]=lead["cardepth"] == null ? 0:parseFloat(lead.cardepth) ;
+			lead["carwidth"]=lead["carwidth"] == null ? 0:parseFloat(lead.carwidth) ;
+			lead["carheight"]=lead["carheight"] == null ? 0:parseFloat(lead.carheight) ;
+			lead["doorwidth"]=lead["doorwidth"] == null ? 0:parseFloat(lead.doorwidth) ;
+			lead["doorheight"]=lead["doorheight"] == null ?0: parseFloat(lead.doorheight) ;
+			lead["travel"]=lead["travel"] == null ?0: parseFloat(lead.travel) ;
+			lead["pitdepth"]=lead["pitdepth"] == null ? 0:parseFloat(lead.pitdepth) ;
+			lead["overhead"]=lead["overhead"] == null ? 0:parseFloat(lead.overhead) ;
+			lead["mrwidth"]=lead["mrwidth"] == null ? 0:parseFloat(lead.mrwidth) ;
+			lead["mrdepth"]=lead["mrdepth"] == null ? 0:parseFloat(lead.mrdepth) ;
+			lead["mrheight"]=lead["mrheight"] == null ? 0:parseFloat(lead.mrheight) ;
+
+			this.getView().getModel("editPartyModel").refresh()
+		},
+
+
+
+
 		getModelDefault: function () {
+
 			return {
 				id: null,
 				leadname: null,
@@ -248,7 +281,8 @@ sap.ui.define([
 			let selRow = oData.viewModel;
 			let editPartyModel = this.getView().getModel("editPartyModel");
 			editPartyModel.oData.leadid = selRow.nextid;
-			 this.onModelSelection();
+			this.onModelSelection();
+			this.setModelDefault();
 			editPartyModel.refresh();
 
 			if (selRow.id != undefined) {
@@ -378,12 +412,12 @@ sap.ui.define([
 			let oThis = this;
 			var model = oThis.getView().getModel("editPartyModel").oData;
 
-			model.modelid = id==undefined? model?.modelid??0:id;
-			quotationService.getReferenceBymodel({modelid:model.modelid}, function (data) {
-			           	model.carheight=data[1][0].carheight;
-						model.pitdepth=data[1][0].pitdepth;
-						model.overhead=data[1][0].overhead;
-						model.modelid=data[1][0].modelid;
+			model.modelid = id == undefined ? model?.modelid ?? 0 : id;
+			quotationService.getReferenceBymodel({ modelid: model.modelid }, function (data) {
+				model.carheight = data[1][0].carheight;
+				model.pitdepth = data[1][0].pitdepth;
+				model.overhead = data[1][0].overhead;
+				model.modelid = data[1][0].modelid;
 				data[0].forEach(element => {
 					if (element.typecode == "LftSpd") {
 						model.speedid = element.id;
@@ -483,7 +517,7 @@ sap.ui.define([
 			model["companyid"] = commonService.session("companyId");
 			model["leaddate"] = commonFunction.getDate(model.leaddate);
 			model["userid"] = commonService.session("userId");
-			model["salesrepid"] = currentContext.getView().byId("txtsalesrep").getSelectedKey();	
+			model["salesrepid"] = currentContext.getView().byId("txtsalesrep").getSelectedKey();
 
 
 			Leadservice.saveLead(model, function (data) {
