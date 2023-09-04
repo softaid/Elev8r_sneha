@@ -288,6 +288,7 @@ sap.ui.define(
 						currentContext.setModelDefault();
 						oModel.setSizeLimit(data[0].length);
 						currentContext.getView().setModel(oModel, "partyCityModel");
+						currentContext.setModelDefault();
 					});
 
 					
@@ -296,7 +297,6 @@ sap.ui.define(
 
 
 				},
-
 
 				setModelDefault: function () {
 
@@ -737,10 +737,10 @@ sap.ui.define(
 										: "Qutation edited successfully!";
 								currentContext.onCancel();
 								MessageToast.show(message);
-								currentContext.sendEmail(data.id, emaildate);
+								// currentContext.sendEmail(data.id, emaildate);
 								currentContext.bus = sap.ui.getCore().getEventBus();
 								currentContext.bus.publish(
-									"loadquotationdata",
+									"loadquotationData",
 									"loadQuotationData"
 								);
 							}
@@ -771,6 +771,59 @@ sap.ui.define(
 
 					if (quotevalue != null) {
 						if (!commonFunction.isNumbermessage(this, "txtQutationValue", "please enter correct quotation value!")) {
+							isValid = false;
+						}
+						if (!commonFunction.isNumbermessage(this, "txtLeadScore", "please enter correct quote score value!")) {
+							isValid = false;
+						}
+
+						if (!commonFunction.isNumbermessage(this, "txtnooflifts", "please enter valid no of lift!")) {
+							isValid = false;
+						}
+						if (!commonFunction.isNumbermessage(this, "txtstopid", "please enter valid stop!")) {
+							isValid = false;
+						}
+						if (!commonFunction.isNumbermessage(this, "txtfloormarking", "please enter valid floor marking!")) {
+							isValid = false;
+						}
+						if (!commonFunction.isNumbermessage(this, "txtshaftwidth", "please enter valid shaft width!")) {
+							isValid = false;
+						}
+						if (!commonFunction.isNumbermessage(this, "txtshaftdepth", "please enter valid shaft depth!")) {
+							isValid = false;
+						}
+						if (!commonFunction.isNumbermessage(this, "txtmrwidth", "please enter valid mr width!")) {
+							isValid = false;
+						}
+						if (!commonFunction.isNumbermessage(this, "txtmrdepth", "please enter valid mr depth!")) {
+							isValid = false;
+						}
+						if (!commonFunction.isNumbermessage(this, "txtmrheight", "please enter valid mr height!")) {
+							isValid = false;
+						}
+						if (!commonFunction.isNumbermessage(this, "txtcardepth", "please enter valid car depth!")) {
+							isValid = false;
+						}
+						if (!commonFunction.isNumbermessage(this, "txtcarwidth", "please enter valid car width!")) {
+							isValid = false;
+						}
+						if (!commonFunction.isNumbermessage(this, "txtcarheight", "please enter valid car height!")) {
+							isValid = false;
+						}
+						if (!commonFunction.isNumbermessage(this, "txtdoorwidth", "please enter valid door width!")) {
+							isValid = false;
+						}
+						if (!commonFunction.isNumbermessage(this, "txtdoorheight", "please enter valid door height!")) {
+							isValid = false;
+						}
+						if (!commonFunction.isNumbermessage(this, "txttravel", "please enter valid travel !")) {
+							isValid = false;
+						}
+						if (!commonFunction.isNumbermessage(this, "txtpitdepth", "please enter valid pit depth!")) {
+							isValid = false;
+						}
+
+						if (!commonFunction.isNumbermessage(this, "completiondays", "please enter valid completiondays!")) {
 							isValid = false;
 						}
 					}

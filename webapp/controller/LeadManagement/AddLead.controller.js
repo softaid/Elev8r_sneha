@@ -177,6 +177,7 @@ sap.ui.define([
 				currentContext.setModelDefault();
 			});
 
+
 			var emptyModel = this.getModelDefault();
 			var model = new JSONModel();
 			model.setData(emptyModel);
@@ -184,7 +185,6 @@ sap.ui.define([
 
 			this.getAllLeads();
 		},
-
 
 		setModelDefault: function () {
 
@@ -212,9 +212,6 @@ sap.ui.define([
 
 			this.getView().getModel("editPartyModel").refresh()
 		},
-
-
-
 
 		getModelDefault: function () {
 
@@ -281,8 +278,8 @@ sap.ui.define([
 			let selRow = oData.viewModel;
 			let editPartyModel = this.getView().getModel("editPartyModel");
 			editPartyModel.oData.leadid = selRow.nextid;
-			this.onModelSelection();
-			this.setModelDefault();
+			 this.onModelSelection();
+			 this.setModelDefault();
 			editPartyModel.refresh();
 
 			if (selRow.id != undefined) {
@@ -510,7 +507,7 @@ sap.ui.define([
 
 		// Save functionality for lead
 		onSave: function () {
-			//if (this.validateForm()) {
+			if (this.validateForm()) {
 			var currentContext = this;
 			var model = this.getView().getModel("editPartyModel").oData;
 			console.log("model", model);
@@ -531,7 +528,7 @@ sap.ui.define([
 				}
 
 			});
-			//}
+			}
 			this.reset();
 
 		},
@@ -549,77 +546,61 @@ sap.ui.define([
 
 			var typeoflift = this.getView().byId("typeofliftid").getSelectedKey();
 
-			// var emailId = this.getView().byId("txtEmailId").getValue();
-			// var phoneNo = this.getView().byId("txtPhoneNo").getValue();
-
-			if (!commonFunction.isRequired(this, "txtPartyName", "Please enter lead name."))
-				isValid = false;
-
-			if (!commonFunction.isRequired(this, "contactPerson", "Please enter contact person name."))
-				isValid = false;
-
-			// if (emailId != "") {
-			// 	if (!commonFunction.isEmail(this, "txtEmailId"))
-			// 		isValid = false;
-			// } else if (!commonFunction.isRequired(this, "txtEmailId", "Please enter email ID."))
-			// 	isValid = false;
-
-			// else {
-			// 	this.getView().byId("txtEmailId").setValueState(sap.ui.core.ValueState.None);
-			// }
-
-
-			// if (phoneNo != "") {
-			// 	if (!commonFunction.isNumber(this, "txtPhoneNo"))
-			// 		isValid = false;
-			// }
-			// else if (!commonFunction.isRequired(this, "txtPhoneNo", "Please enter phone no."))
-			// 	isValid = false;
-
-			// else {
-			// 	this.getView().byId("txtPhoneNo").setValueState(sap.ui.core.ValueState.None);
-			// }
-
-
-			// check atleast one source is selected
-
-			if (pipeline.length == 0) {
-				this.getView().byId("txtStageid").setValueState(sap.ui.core.ValueState.Error)
-					.setValueStateText("Please select atleast one Stage.");
-
+			if (!commonFunction.isNumbermessage(this, "txtnooflifts", "please enter valid no of lift!")) {
 				isValid = false;
 			}
-
-			if (source.length == 0) {
-				this.getView().byId("sourceid").setValueState(sap.ui.core.ValueState.Error)
-					.setValueStateText("Please select atleast one source.");
-
+			if (!commonFunction.isNumbermessage(this, "txtstopid", "please enter valid stop!")) {
 				isValid = false;
 			}
-
-			if (typeoflift.length == 0) {
-				this.getView().byId("typeofliftid").setValueState(sap.ui.core.ValueState.Error)
-					.setValueStateText("Please select atleast one lift Type.");
-
+			if (!commonFunction.isNumbermessage(this, "txtfloormarking", "please enter valid floor marking!")) {
 				isValid = false;
 			}
-
-			// if (location.length == 0) {
-			// 	this.getView().byId("leadlocationid").setValueState(sap.ui.core.ValueState.Error)
-			// 		.setValueStateText("Please select atleast one location.");
-
-			// 	isValid = false;
-			// }
-			if (status.length == 0) {
-				this.getView().byId("leadstatusid").setValueState(sap.ui.core.ValueState.Error)
-					.setValueStateText("Please select atleast one status.");
-
+			if (!commonFunction.isNumbermessage(this, "txtshaftwidth", "please enter valid shaft width!")) {
 				isValid = false;
 			}
-			if (category.length == 0) {
-				this.getView().byId("categoryid").setValueState(sap.ui.core.ValueState.Error)
-					.setValueStateText("Please select atleast one category.");
-
+			if (!commonFunction.isNumbermessage(this, "txtshaftdepth", "please enter valid shaft depth!")) {
+				isValid = false;
+			}
+			if (!commonFunction.isNumbermessage(this, "txtmrwidth", "please enter valid mr width!")) {
+				isValid = false;
+			}
+			if (!commonFunction.isNumbermessage(this, "txtmrdepth", "please enter valid mr depth!")) {
+				isValid = false;
+			}
+			if (!commonFunction.isNumbermessage(this, "txtmrheight", "please enter valid mr height!")) {
+				isValid = false;
+			}
+			if (!commonFunction.isNumbermessage(this, "txtcardepth", "please enter valid car depth!")) {
+				isValid = false;
+			}
+			if (!commonFunction.isNumbermessage(this, "txtcarwidth", "please enter valid car width!")) {
+				isValid = false;
+			}
+			if (!commonFunction.isNumbermessage(this, "txtcarheight", "please enter valid car height!")) {
+				isValid = false;
+			}
+			if (!commonFunction.isNumbermessage(this, "txtdoorwidth", "please enter valid door width!")) {
+				isValid = false;
+			}
+			if (!commonFunction.isNumbermessage(this, "txtdoorheight", "please enter valid door height!")) {
+				isValid = false;
+			}
+			if (!commonFunction.isNumbermessage(this, "txttravel", "please enter valid travel !")) {
+				isValid = false;
+			}
+			if (!commonFunction.isNumbermessage(this, "txtpitdepth", "please enter valid pit depth!")) {  
+				isValid = false;
+			}
+			if (!commonFunction.isNumbermessage(this, "txtLeadValue", "please enter valid lead value!")) {
+				isValid = false;
+			}
+			if (!commonFunction.isNumbermessage(this, "txtLeadScore", "please enter valid lead score!")) { 
+				isValid = false;
+			}
+			if (!commonFunction.isNumbermessage(this, "txtoverhead", "please enter valid overhead value!")) {
+				isValid = false;
+			}
+			if (!commonFunction.isNumbermessage(this, "winprobability", "please enter valid win probability value!")) {
 				isValid = false;
 			}
 

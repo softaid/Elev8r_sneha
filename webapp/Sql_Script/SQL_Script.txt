@@ -2206,4 +2206,265 @@ DELIMITER ;
 
 
 
+DROP procedure IF EXISTS `db_elev8r`.`spc_quotepdf`;
+
+DELIMITER $$
+CREATE PROCEDURE db_elev8r.`spc_quotepdf`(
+	IN p_id INT(11)
+)
+BEGIN
+
+	SELECT 
+           Q.id as negno,
+		   Q.quotename,
+		   Q.siteaddress,
+           DATE_FORMAT(Q.quotedate,'%d/%m/%Y') as quotedate,
+           Q.contactperson,
+           Q.snehasalescontactid,
+           Q.snehasalescontactno,
+           Q.designation,
+		   REF.description as modelcode,
+           REF1.description as lifttype,
+           REF2.description as capacity,
+           REF3.description as speed,
+           Q.stopsid,
+           REF4.description as controller,
+           GROUP_CONCAT(REF5.description,' mts') as drive,
+           ifnull(GROUP_CONCAT(Q.shaftwidth,' mm (W) ',' X ',Q.shaftdepth,' mm (D) (',IFNULL(REF7.description,'-'),')'),'-') as shaftsize,
+           ifnull(GROUP_CONCAT(Q.carwidth,' mm (W) ',' X ',Q.cardepth,' mm (D) ',' X ',Q.carheight,' mm (H) (Approximately)'),'-') as carsize,
+           ifnull(GROUP_CONCAT(Q.doorwidth, ' mm Open',' X ',Q.doorheight,' mm Height'),'-') as clearopening,
+           ifnull(CONCAT(Q.pitdepth,' mm'),'-')as pitdepth,
+           ifnull(CONCAT(Q.overhead,' mm'),'-')as overhead,
+           ifnull(CONCAT(REF6.description,' (Manual)'),'-') as cardoor,
+           GROUP_CONCAT(REGEXP_SUBSTR(REF2.description, '[0-9]+'),'P',' - ',left(Q.stopsid,1),'S',' - ',REF.description,' Unit:',Q.nooflifts) as specificationheader,
+           IFNULL(CONCAT(Q.advanceonorderreception,'%'),'-') as advanceonorderreception,
+		   IFNULL(CONCAT(Q.forrequestofmechanicalmaterial,'%'),'-') as forrequestofmechanicalmaterial,
+		   IFNULL(CONCAT(Q.forrequestofelectricalmaterial,'%'),'-') as forrequestofelectricalmaterial,
+		   IFNULL(CONCAT(Q.oncustomerhandover,'%'),'-') as oncustomerhandover,
+           IFNULL(E.employeename,'-') as employeename,
+           IFNULL(E.emailid, '-') as emailid,
+           IFNULL(E.mobileno, '-') as mobileno,
+           IFNULL(E.designation, '-') as designation,
+           REF8.description as doortype           
+	FROM quotation Q
+    LEFT JOIN city C ON C.id = Q.cityid
+    LEFT JOIN reference REF ON REF.id = Q.modelid
+    LEFT JOIN reference REF1 ON REF1.id = Q.typeoflift
+    LEFT JOIN reference REF2 ON REF2.id = Q.capacityid
+    LEFT JOIN reference REF3 ON REF3.id = Q.speedid
+    LEFT JOIN reference REF4 ON REF4.id = Q.controlid
+    LEFT JOIN reference REF5 ON REF5.id = Q.driveid
+    LEFT JOIN reference REF6 ON REF6.id = Q.cardoorid
+	LEFT JOIN reference REF7 ON REF7.id = Q.shaftconditionid
+    LEFT JOIN reference REF8 ON REF8.id = Q.typeofdoorid
+    LEFT JOIN employee E ON E.id = Q.salesrepid
+    WHERE Q.id = p_id;
+    
+    select ifnull(leadname,'-')as leadname,
+		   ifnull(address,'-')as address,
+           ifnull(shaftwidth,'-')as shaftwidth,
+           ifnull(carwidth,'-')as carwidth,
+           ifnull(pitdepth,'-')as pitdepth,
+           ifnull(overhead,'-')as overhead,
+           ifnull(city,'-')as city,
+           ifnull(contactno,'-')as contactno,
+           ifnull(quotedate,'-')as quotedate,
+           ifnull(quotevalue,'-')as quotevalue,
+           ifnull(model,'-')as model,
+           ifnull(capacity,'-')as capacity,
+           ifnull(speed,'-')as speed,
+           ifnull(`stop`,'-')as `stop`,
+           ifnull(control,'-')as control,
+           ifnull(drive,'-')as drive,
+           ifnull(allopeningsameside,'-')as allopeningsameside,
+           ifnull(cardoor,'-')as cardoor,
+           ifnull(specificationheader,'-') as specificationheader,
+           ifnull(landingdoor,'-')as landingdoor,
+           ifnull(floormarking,'-')as floormarking,
+		   ifnull(machine,'-')as machine,
+           ifnull(cityuppercase,'-')as cityuppercase,
+           ifnull(month,'-')as month,
+           year,
+           version,
+		   CONCAT('SELLP/',cityuppercase,'/',month,'/',year,'/',quoteid,'/',version) as negno,
+           modeldetails,
+           ifnull(travel,'-')as travel,
+           result,
+           unit,
+           ifnull(carpanel,'-')as carpanel,
+           ifnull(ventilation,'-')as ventilation,
+           ifnull(tractionmedia,'-')as tractionmedia,
+           ifnull(mainpowersystem,'-')as mainpowersystem,
+           ifnull(carpositionindicator,'-')as carpositionindicator,
+           ifnull(falseceiling,'-')as falseceiling,
+           ifnull(auxilarysupplysystem,'-')as auxilarysupplysystem,
+           ifnull(doortype,'-') as doortype,
+           ifnull(flooring,'-')as flooring,
+           ifnull(operation,'-')as operation,
+           IFNULL(advanceonorderreception,'-') as advanceonorderreception,
+		   IFNULL(forrequestofmechanicalmaterial,'-') as forrequestofmechanicalmaterial,
+		   IFNULL(forrequestofelectricalmaterial,'-') as forrequestofelectricalmaterial,
+		   IFNULL(oncustomerhandover,'-') as oncustomerhandover,
+           IFNULL(salesrepname,'-') as salesrepname,
+           IFNULL(mobileno,'-') as mobileno,
+		   IFNULL(designation,'-') as designation,
+           IFNULL(emailid,'-') as emailid,
+           isgst,
+           isgsttogle
+	from(
+	select 
+			 -- GROUP_CONCAT('ELE/',Q.id) as negno,
+			
+			 L.leadname,
+			 L.address,
+			 Q.modelid,
+			 Q.capacityid,
+			 Q.speedid,
+			 Q.stopsid,
+			 Q.controlid,
+			 Q.driveid,
+			 Q.shaftwidth,
+			 Q.carwidth,
+			 Q.allopeningsameside as allopeningsamesideid,
+			 Q.pitdepth,
+			 Q.overhead,
+			 Q.cardoorid,
+             GROUP_CONCAT(REGEXP_SUBSTR(REF1.description, '[0-9]+'),'P',' - ',left(Q.stopsid,1),'S',' - ',REF5.description,' Unit:',Q.nooflifts) as specificationheader,
+			 Q.landingdoorid,
+             GROUP_CONCAT(Q.travel,'mts') as travel,
+             --  -6P - 7S(C+G+5) - REF.description - S.S Car Panel - cwtposition 
+			GROUP_CONCAT(REGEXP_SUBSTR(REF1.description, '[0-9]+'),'P',' ', '-',' ',Q.stopsid,'S(G','+',(Q.stopsid-1),')',' ','-',' ',REF.description,' ','-',' ',ifnull(REF12.description,'-'),' ',REF8.description) as modeldetails,
+			GROUP_CONCAT(Q.nooflifts,' ','Units') as unit,
+            REGEXP_SUBSTR(REF1.description, '[0-9]+') AS result,
+            Q.floormarking as floormarkingid,
+			Q.machineid,
+			GROUP_CONCAT(C.cityname,' ','-',' ',L.pincode) as city,
+			L.mobileno as contactno,
+            DATE_FORMAT(Q.quotedate,'%d/%m/%Y') as quotedate,
+            Q.quotevalue,
+            Q.cwtpositionid,
+            REF.description as model,
+            REF1.description as capacity,
+            REF2.description as speed,
+            GROUP_CONCAT(Q.stopsid, ' Landings /', Q.stopsid, ' Openings (All Openings are same Side)') as stop,
+            REF4.description as control,
+            REF5.description as drive,
+            REF6.description as allopeningsameside,
+            REF7.description as cardoor,
+            REF8.description as landingdoor,
+            REF9.description as floormarking,
+            REF10.description as machine,
+			REF11.description as cwtposition,
+			REF12.description as carpanel,
+            REF13.description as ventilation,
+            REF14.description as tractionmedia,
+            REF15.description as mainpowersystem,
+            REF16.description as carpositionindicator,
+            REF17.description as falseceiling,
+            REF18.description as auxilarysupplysystem,
+            REF21.description as doortype,
+			REF19.description as flooring,
+            REF20.description as operation,
+            CONCAT(Q.advanceonorderreception,'%') as advanceonorderreception,
+			CONCAT(Q.forrequestofmechanicalmaterial,'%') as forrequestofmechanicalmaterial,
+		    CONCAT(Q.forrequestofelectricalmaterial,'%') as forrequestofelectricalmaterial,
+		    CONCAT(Q.oncustomerhandover,'%') as oncustomerhandover,
+            E.employeename as salesrepname,
+            E.mobileno,
+            E.designation,
+            E.emailid,
+			UPPER(SUBSTRING( CO.city, 1, 3)) as cityuppercase,
+			UPPER(MONTHNAME(Q.quotedate)) AS month,
+            YEAR(Q.quotedate) AS year,
+            Q.leadid,
+            Q.id as quoteid,
+            ( select
+			ROW_NUMBER() OVER (ORDER BY id)  Sequence_no
+			-- id as quoteid
+			from quotation 
+			where leadid = Q.leadid order by id DESC limit 1)as version,
+			IF(Q.includinggst=1,"inclusive","exclusive") as isgst,
+            IF(Q.includinggst=1,"including","excluding") as isgsttogle
+            
+            
+		
+		from quotation Q
+		LEFT JOIN leads L ON L.id = Q.leadid
+		LEFT JOIN employee E ON E.id = L.salesrepid
+		LEFT JOIN city C ON L.cityid = C.id
+		LEFT JOIN company CO ON CO.id = Q.companyid
+		LEFT JOIN reference REF ON REF.id = Q.modelid
+		LEFT JOIN reference REF1 ON REF1.id = Q.capacityid
+		LEFT JOIN reference REF2 ON REF2.id = Q.speedid
+		LEFT JOIN reference REF3 ON REF3.id = Q.stopsid
+		LEFT JOIN reference REF4 ON REF4.id = Q.controlid
+		LEFT JOIN reference REF5 ON REF5.id = Q.driveid
+		LEFT JOIN reference REF6 ON REF6.id = Q.allopeningsameside
+        LEFT JOIN reference REF7 ON REF7.id = Q.cardoorid
+		LEFT JOIN reference REF8 ON REF8.id = Q.landingdoorid
+		LEFT JOIN reference REF9 ON REF9.id = Q.floormarking
+        LEFT JOIN reference REF10 ON REF10.id = Q.machineid
+        LEFT JOIN reference REF11 ON REF11.id = Q.cwtpositionid
+        LEFT JOIN reference REF12 ON REF12.id = Q.carpanelid
+		LEFT JOIN reference REF13 ON REF13.id = Q.ventilationid
+        LEFT JOIN reference REF14 ON REF14.id = Q.tractionmediaid
+		LEFT JOIN reference REF15 ON REF15.id = Q.mainpowersystemid
+		LEFT JOIN reference REF16 ON REF16.id = Q.carpositionindicatorid
+        LEFT JOIN reference REF17 ON REF17.id = Q.falseceilingid
+        LEFT JOIN reference REF18 ON REF18.id = Q.auxilarysupplysystemid
+		LEFT JOIN reference REF19 ON REF19.id = Q.flooringid
+        LEFT JOIN reference REF20 ON REF20.id = Q.operationid
+        LEFT JOIN reference REF21 ON REF21.id = Q.typeofdoorid
+		where Q.id=p_id)temp;
+        
+		SELECT
+           -- IFNULL((UR.username),'-') as salemanager,
+           ifnull(UR.username,'-') assalemanager,
+           CONCAT('Contact No.','-','  ',UR.mobile) as salecontactno
+			FROM user1 UR
+			INNER JOIN userlicense UL ON UR.id = UL.userid
+			INNER JOIN `role` R ON UL.roleid = R.id
+        WHERE R.description = 'Sales Manager';
+        
+        SET @doortype = null;
+		SELECT REF.description INTO @doortype 
+        FROM reference REF
+        LEFT JOIN quotation Q ON Q.typeofdoorid = REF.id
+        WHERE Q.id = p_id AND REF.typecode = 'DrTyp';
+        
+        IF(@doortype = 'Auto') THEN
+			SELECT 'Manual Rescue Operation,
+					Auto Fan Cut Off,
+					Rear side SS Hand rail,
+					Automatic leveling with Ground Floor on Power Restoration,
+					Floor Position and Direction indicator in car and Landings,
+					Terminal approach slow down for safety,
+					Final Limit protection,
+					Emergency alarm,
+					Door Open,
+					V3F drive for door operation,
+					Door Time Protection, 
+					Floor announcement, 
+					Parking floor,
+					Emergency electric break releaser,
+					Full curtain infrared door safety' as stdfeatures,
+                    'Automatic Rescue Device - ARD
+					OSG ( Over Speed Governor)' as safetyfeatures;
+        ELSEIF(@doortype = 'Manual') THEN
+			SELECT 'Manual Rescue Operation,
+					Auto Fan Cut Off,
+					Rear side SS Hand rail,
+					Automatic leveling with Ground Floor on Power Restoration,
+					Floor Position and Direction indicator in car and Landings,
+					Terminal approach slow down for safety,
+					Final Limit protection,
+					Emergency alarm' as stdfeatures,
+                    'Automatic Rescue Device - ARD
+					OSG ( Over Speed Governor)' as safetyfeatures;
+        END IF;
+	
+END$$
+
+DELIMITER ;
+;
 
