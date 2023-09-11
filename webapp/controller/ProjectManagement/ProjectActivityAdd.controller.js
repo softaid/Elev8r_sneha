@@ -21,7 +21,7 @@ sap.ui.define([
 
 			this.bus.subscribe("billofmaterial", "setDetailPage", this.setDetailPage, this);
 			this.bus.subscribe("nistatus", "setDetailNIPage", this.setDetailNIPage, this);
-			this.bus.subscribe("billofmaterial", "handleBillOfMaterialList", this.handleBillOfMaterialList, this);
+			this.bus.subscribe("projectdetail", "handleProjectDetails", this.handleProjectDetailsList, this);
 			this.bus.subscribe("billofmaterial", "onAddbillofmaterial", this.onAddbillofmaterial, this);
 
 			this.bus.subscribe("billofmaterial", "onAddbillofmaterial1", this.onAddbillofmaterial1, this);
@@ -98,7 +98,7 @@ sap.ui.define([
 			}
 		},
 
-		handleBillOfMaterialList: function (sChannel, sEvent, oData) {
+		handleProjectDetailsList: function (sChannel, sEvent, oData) {
 
 			let selRow = oData.viewModel;
 			let oThis = this;
@@ -113,7 +113,7 @@ sap.ui.define([
 					oThis.getView().byId("btnSave").setEnabled(true);
 				}
 
-				oThis.bindBillOfMaterial(selRow.id);
+				oThis.getProjectDetails(selRow.id);
 
 			}
 
@@ -125,7 +125,6 @@ sap.ui.define([
 			});
 
 		},
-
 
 
 		onExit: function () {
@@ -214,14 +213,33 @@ sap.ui.define([
 		},
 
 		// function call on close the project fragement 
-		handleProjectFragementClose: function (oEvent) {
+		handleProjectFragementClose: function (oEvent,id) {
 			let currentContext = this;
 
 			var aContexts = oEvent.getParameter("selectedContexts");
 			if (aContexts != undefined) {
 				var selRow = aContexts.map(function (oContext) { return oContext.getObject(); });
+				currentContext.getProjectDetails(selRow[0].id);
+				// Projectservice.getProject({ id: selRow[0].id }, function (data) {
+				// 	console.log(data[0])
+				// 	data[0][0].isactive = data[0][0].isactive == 1 ? true : false;
+				// 	currentContext.getView().getModel("projectModel").setData(data[0][0]);
+				// 	data[0][0].niengineer != null ? currentContext.getView().byId("eng").setSelectedKeys([...data[0][0].niengineer]) : "data not available";
+				// 	data[0][0].nimanager != null ? currentContext.getView().byId("manager").setSelectedKeys([...data[0][0].nimanager]) : "data not available";
+				// 	data[0][0].salesmanager != null ? currentContext.getView().byId("salesmanager").setSelectedKeys([...data[0][0].salesmanager]) : "data not available";
+				// 	data[0][0].salesengineer != null ? currentContext.getView().byId("salesenginner").setSelectedKeys([...data[0][0].salesengineer]) : "data not available";
+				// 	currentContext.getProjectdetail(data[0][0].id);
+				// 	currentContext.getNIdetail(data[0][0].id);
 
-				Projectservice.getProject({ id: selRow[0].id }, function (data) {
+				// });
+
+			}
+
+		},
+
+		getProjectDetails:function (id) {
+			let currentContext = this;
+				Projectservice.getProject({ id: id }, function (data) {
 					console.log(data[0])
 					data[0][0].isactive = data[0][0].isactive == 1 ? true : false;
 					currentContext.getView().getModel("projectModel").setData(data[0][0]);
@@ -231,14 +249,10 @@ sap.ui.define([
 					data[0][0].salesengineer != null ? currentContext.getView().byId("salesenginner").setSelectedKeys([...data[0][0].salesengineer]) : "data not available";
 					currentContext.getProjectdetail(data[0][0].id);
 					currentContext.getNIdetail(data[0][0].id);
-
 				});
 
-			}
+			
 
-			else {
-
-			}
 		},
 
 		// get all project and bind to  list fragement
@@ -545,7 +559,7 @@ sap.ui.define([
 				const millisecondsInDay = 1000 * 60 * 60 * 24;
 
 				// Calculate the day difference
-				 ItemConsumptiondata.completiondays = ((timeDifference / millisecondsInDay));
+				 ItemConsumptiondata.completiondays = ((timeDifference / millisecondsInDay)+1);
 
 				// Output the result
 				// console.log(`The difference between ${date1.toDateString()} and ${date2.toDateString()} is ${dayDifference} days.`);
@@ -581,8 +595,7 @@ sap.ui.define([
 			let startdate = oThis.getView().getModel("projectModel").oData.startdate;
 			{
 				let endDate = new Date(commonFunction.getDate(startdate));
-				endDate.setHours(0, 0, 0, 0);
-				endDate.setDate(endDate.getDate()-1);
+				endDate.setDate(endDate.getDate());
 
 				let originalDate = new Date(endDate);
 				let dateFormatter = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });
@@ -599,10 +612,9 @@ sap.ui.define([
 						result.push({
 							stagesequence: index,
 							projectweightage: element.projectweightage,
-							stagedaycompletion: parseFloat((stagedaycompletion + ((completiondays / 100) * (parseFloat(element.projectweightage))))),
+							stagedaycompletion: parseFloat((stagedaycompletion + ((completiondays / 100) * (parseFloat(element.projectweightage)))).toFixed(2)),
 							completiondays: parseFloat((((completiondays / 100) * parseFloat(element.projectweightage)))),
-							completiondaystable: (parseFloat((((completiondays / 100) * parseFloat(element.projectweightage))))).toFixed(2),
-
+							completiondaystable:(parseFloat((((completiondays / 100) * parseFloat(element.projectweightage))))).toFixed(2)
 						});
 						ItemConsumptiondata[index].completiondays = result[(result.length) - 1].completiondays;
 						ItemConsumptiondata[index].completiondaystable = result[(result.length) - 1].completiondaystable;
@@ -634,8 +646,11 @@ sap.ui.define([
 				if (index != 0) {
 					{
 						let endDate = new Date(commonFunction.getDate(startdate));
-						endDate.setHours(0, 0, 0, 0);
-						endDate.setDate(endDate.getDate() + (element.stagedaycompletion));
+						// endDate.setHours(0, 0, 0, 0);
+						
+						let input=(!Number.isInteger(parseInt(element.stagedaycompletion.toFixed(3))))?element.stagedaycompletion:(element.stagedaycompletion-0.1);
+
+						endDate.setDate(endDate.getDate() + input);
 
 						let originalDate = new Date(endDate);
 						let dateFormatter = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });
@@ -670,7 +685,44 @@ sap.ui.define([
 				else {
 					if (element.completiondays > 1) {
 						let endDate = new Date(commonFunction.getDate(startdate));
-						endDate.setDate(endDate.getDate() + Math.ceil(element.stagedaycompletion));
+						let input=(!Number.isInteger(parseInt(element.stagedaycompletion.toFixed(3))))?element.stagedaycompletion:(element.stagedaycompletion-0.1);
+
+						endDate.setDate(endDate.getDate() + (input));
+
+
+						// let endDate1 = new Date(commonFunction.getDate(startdate));
+
+						// endDate1.setDate(endDate1.getDate() + (36.01));
+
+						// let endDate2 = new Date(commonFunction.getDate(startdate));
+						// endDate2.setHours(0, 0, 0, 0);
+
+						// endDate2.setDate(endDate2.getDate() + (35.99999));
+
+						// let endDate3 = new Date(commonFunction.getDate(startdate));
+						//  endDate3.setHours(0, 0, 0, 0);
+
+						// endDate3.setDate(endDate3.getDate() + (36));
+
+						// let endDate4 = new Date(commonFunction.getDate(startdate));
+						// endDate4.setHours(0, 0, 0, 0);
+
+						// endDate4.setDate(endDate4.getDate() + (36.00));
+
+						// let endDate5 = new Date(commonFunction.getDate(startdate));
+						// endDate5.setHours(0, 0, 0, 0);
+
+						// endDate5.setDate(endDate5.getDate() + (44.9));
+
+						// let endDate6 = new Date(commonFunction.getDate(startdate));
+						// endDate6.setHours(0, 0, 0, 0);
+
+						// endDate6.setDate(endDate6.getDate() + (45.00));
+						
+						// let endDate7 = new Date(commonFunction.getDate(startdate));
+
+						// endDate7.setDate(endDate7.getDate() + (35));
+
 
 						let originalDate = new Date(endDate);
 						let dateFormatter = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });

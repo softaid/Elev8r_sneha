@@ -75,10 +75,10 @@ sap.ui.define([
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
                 this.bus = sap.ui.getCore().getEventBus();
-                this.bus.publish("orderdetail", "handleOrderDetails", { pagekey: "addorder", viewModel:model });
+                this.bus.publish("orderdetail", "handleOrderDetails", { pagekey: "orderdetail", viewModel:model });
             }, 1000);
             
-            this.bus.publish("orderdetail", "handleOrderDetails", { pagekey: "addorder", viewModel:model });
+            this.bus.publish("orderdetail", "handleOrderDetails", { pagekey: "orderdetail", viewModel:model });
 		},
 		
 		onAddNew: function() {

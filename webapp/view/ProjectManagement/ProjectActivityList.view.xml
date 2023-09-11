@@ -98,11 +98,10 @@
                         </form:Form>               
                     </Panel>
                         <Table id="tblPartyMaster" 
-                                mode="MultiSelect"
                                 inset="false"
                                 sticky="ColumnHeaders" growing="true" growingThreshold="10" growingScrollToLoad="true"  
                                 items="{
-                                path: 'LeadsMasterModel>/modelData'
+                                path: 'projectListModel>/'
                             }" selectionChange="onSelectionChange">
                             <headerToolbar>
                                 <Toolbar>
@@ -110,40 +109,38 @@
                                         <Title text="" level="H2"/>
                                         <ToolbarSpacer />
                                             <SearchField search="onSearch" width="17.5rem" id = "onSearchId"/>
-                                            <Button id="deleteicon" icon="sap-icon://delete" type="Transparent" press="getSelectedItems"/>
-                                            <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/> 
-                                        <Button
+                                            <!-- <Button id="deleteicon" icon="sap-icon://delete" type="Transparent" press="getSelectedItems"/> -->
+                                            <!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>  -->
+                                        <!-- <Button
                                         text="Upload template"
                                         type="Emphasized"
-                                        press="onUploadMasterData" id="btnUploadData"/>
+                                        press="onUploadMasterData" id="btnUploadData"/> -->
                                     </content>
                                 </Toolbar>
                             </headerToolbar>
                             <columns>
-                                <Column><Text text ="{i18n>leadId}" /></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Lead Type"/></Column>   
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Lead Category"/></Column>     
-                                <Column><Text text ="{i18n>leadNameLabel}" /></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>leadSourceLabel}"/></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Status"/></Column>      
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Email W"/></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Sales REP"/></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Mobile Work"/></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Lead Stage"/></Column>      
+                                <Column><Text text ="Sr.No." /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Job No."/></Column>   
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Project Id"/></Column>   
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Customer Name"/></Column>     
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Start Date"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="End date"/></Column>      
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Project Status"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text =" Project %"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Model"/></Column>
                             </columns>
                             <items>
                                 <ColumnListItem type="Navigation" press="onListItemPress">
                                     <cells>
-                                        <ObjectIdentifier  id="leadid" text="{LeadsMasterModel>id}"/>
-                                        <Text text="{LeadsMasterModel>leadtype}" />    
-                                        <Text text="{LeadsMasterModel>leadscategory}" />
-                                        <Text text="{LeadsMasterModel>leadname}" />
-                                        <Text text="{LeadsMasterModel>sourcename}"/>
-                                        <Text text="{LeadsMasterModel>leadstatus}"/>
-                                        <Text text="{LeadsMasterModel>email}"/>
-                                        <Text text="{LeadsMasterModel>salesrep}"/>
-                                        <Text text="{LeadsMasterModel>mobileno}"/> 
-                                        <Text text="{LeadsMasterModel>stagename}"/> 
+                                        <Text text="{projectListModel>srno}" />    
+                                        <Text text="{projectListModel>JobNo}" />   
+                                         <Text text="{projectListModel>id}" />     
+                                        <Text text="{projectListModel>quotename}" />
+                                        <Text text="{projectListModel>startdate}"/>
+                                        <Text text="{projectListModel>enddate}"/>
+                                        <Text text="{projectListModel>pstatus}"/>
+                                        <Text text="{projectListModel>completionper}"/> 
+                                        <Text text="{projectListModel>model}"/>
                                     </cells>
                                 </ColumnListItem>
                             </items>

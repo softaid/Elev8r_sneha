@@ -141,7 +141,7 @@
                                             </Select>
                                         </form:fields>
                                     </form:FormElement>
-                                    <form:FormElement label="Lead">
+                                    <!-- <form:FormElement label="Lead">
                                         <form:fields>
                                             <Select id="txtLead"
                                                 required="false" 
@@ -156,7 +156,7 @@
                                                 <core:Item key="{LeadsMasterModel>id}" text="{LeadsMasterModel>leadname}" />
                                             </Select>
                                         </form:fields>
-                                    </form:FormElement>
+                                    </form:FormElement> -->
                                     <form:FormElement label="Quotation Value">
                                         <form:fields>
                                             <Input id="txtQutationValue" valueLiveUpdate="true" value="{editQutationModel>/quotevalue}" required="false" change="onPartyNameChange"/>

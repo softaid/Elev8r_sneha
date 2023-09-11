@@ -39,7 +39,7 @@ sap.ui.define([
             convertToQuote : function(params, callback){
                 console.log(params);
                 commonService.runJQueryX("GET", "lead/converttoquote/" + params.id, null, callback, null);
-            },
+            }
         };
     }
 );

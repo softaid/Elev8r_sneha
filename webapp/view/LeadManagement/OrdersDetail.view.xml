@@ -1,0 +1,187 @@
+
+<mvc:View
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.OrdersDetail"
+	xmlns="sap.m"
+    xmlns:f="sap.f"
+	xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:table="sap.ui.table"
+    xmlns:u="sap.ui.unified"
+	xmlns:layout="sap.ui.layout">
+	<Page class="pgDashboard" showHeader="true" title="Order Details">
+        <headerContent>
+            <!-- <layout:VerticalLayout
+            class="sapUiContentPadding"
+            width="100%">
+                <layout:content>
+                    <Link
+                        text=""
+                        press="" />
+                </layout:content>
+            </layout:VerticalLayout> -->
+            <!-- <Button id="convertBtn" text="Convert to Order" press="convertToOrder"/> -->
+			<Button icon="sap-icon://add" tooltip="{i18n>leadDetailsAddNewLead}" press="addNewOrder"/>
+            <Button id="editBtn" icon="sap-icon://edit" tooltip="{i18n>leadDetailsUpdateLead}" press="editorder"/>
+            <!-- <Button id="pdf" text="Print" type="Emphasized" class="sapUiSmallMarginEnd" press="onPdfExport"/> -->
+            <Button id="deleteBtn" icon="sap-icon://delete" tooltip="{i18n>leadDetailsDeleteLead}" press="deleteorder"/>
+		</headerContent>
+        <content>
+            <Panel id="pnlShedMaster" headerText="Order Details" width="auto">
+                <VBox width="100%">
+                    <form:Form editable="true">
+                        <form:title>
+                        </form:title>
+                        <form:layout>
+                            <form:ResponsiveGridLayout
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="3"
+                                columnsL="2"
+                                columnsM="1"
+                                singleContainerFullSize="false" />
+                        </form:layout>
+                        <form:formContainers>
+                            <form:FormContainer>
+                                <form:formElements>                            
+                                    <form:FormElement label="Quotation Name">
+                                        <form:fields>
+                                            <Input id="leadname" value="{orderModel>/quotename}" enabled="false"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement label="Quotation Discription">
+                                        <form:fields>
+                                            <Input id="company" value="{orderModel>/quotediscription}"  enabled="false"/>
+                                        </form:fields>
+                                    </form:FormElement>  
+                                    <form:FormElement label="order Status">
+                                        <form:fields>
+                                            <Input id="address" value="{orderModel>/status}" enabled="false" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                            </form:FormContainer>
+                            <form:FormContainer>
+                                <form:formElements>
+                                    <form:FormElement label="Quotation Score">
+                                        <form:fields>
+                                            <Input id="contactperson" value="{orderModel>/quotescore}" enabled="false" />
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <!-- <form:FormElement label="Lead Name">
+                                        <form:fields>
+                                            <Input id="email" value="{orderModel>/leadname}"  enabled="false"/>
+                                        </form:fields>
+                                    </form:FormElement>   -->
+                                    <form:FormElement label="Order Date">
+                                        <form:fields>
+                                            <Input id="mobileno" value="{orderModel>/orderdate}" enabled="false" />
+                                        </form:fields>
+                                    </form:FormElement>  
+                                </form:formElements>
+                            </form:FormContainer>
+                        </form:formContainers>
+                    </form:Form>
+                </VBox>
+            </Panel>
+            <IconTabBar id ="idIconTabBar" selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
+                <items>
+                    <IconTabFilter icon="sap-icon://sales-quote" text="Revision" key="quotation">
+                        <ScrollContainer
+                            height="100%"
+                            width="100%"
+                            horizontal="true"
+                            vertical="true"
+                            focusable="true">
+                                <Panel width="auto">
+                                <table:Table ariaLabelledBy="title" fixedColumnCount="4" rowHeight="40px"
+                                    rows="{ path: 'revisionModel>/modelData' }" selectionMode="None"
+                                    visibleRowCount="3" visibleRowCountMode="Fixed"  width="100%">
+                                    <table:columns>
+                                        <table:Column width="5%">
+                                            <Label text=" Sr. No." />
+                                            <table:template>
+                                                <Text text="Revision:  {revisionModel>srno}" wrapping="true" />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="5%">
+                                            <Label text="Quote Name" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{revisionModel>quotename}" />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="5%">
+                                            <Label text="Quote Value" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{revisionModel>quotevalue}" />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="5%">
+                                            <Label text="Job Code" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{revisionModel>jobcode}" />
+                                            </table:template>
+                                        </table:Column>
+                                          <table:Column hAlign="End" width="10%">
+                                            <Label text=" revision value" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{revisionModel>Revision}" />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="Date" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{revisionModel>orderdate}" />
+                                            </table:template>
+                                        </table:Column>
+                                        <!-- <table:Column hAlign="End" width="10%">
+                                            <Label text="Category" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{revisionModel>quotecategory}" />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="Sub Category" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{revisionModel>quotesubcategory}" />
+                                            </table:template>
+                                        </table:Column> -->
+                                        <table:Column hAlign="End" width="10%">
+                                            <Label text="score" />
+                                            <table:template>
+                                                <Input class="customInputHeight"
+                                                    editable="false" 
+                                                    value="{revisionModel>quotescore}" />
+                                            </table:template>
+                                        </table:Column>
+                                    </table:columns>
+                                </table:Table>
+                            </Panel>
+                        </ScrollContainer>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+	</Page>
+</mvc:View>

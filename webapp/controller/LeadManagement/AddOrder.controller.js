@@ -20,6 +20,7 @@ sap.ui.define([
 			this.bus = sap.ui.getCore().getEventBus();
 			this.bus.subscribe("orderscreen", "newOrder", this.orderDetail, this);
 			this.bus.subscribe("orderdetail", "handleOrderDetails", this.handleOrderDetails, this);
+			this.bus.subscribe("addOrder", "addOrderdetail", this.handleOrderDetails, this);// redirection from order detail screen  to 
 			this.bus.subscribe("converttoorder", "orderConversion", this.orderConversion, this);
 
 			// bind Source dropdown
@@ -183,7 +184,7 @@ sap.ui.define([
 
 			var emptyModel = this.getModelDefault();
 			var model = new JSONModel();
-			model.setData(emptyModel);
+			model.setData({statusing:true});
 			this.getView().setModel(model, "editOrderModel");
 
 			var pdfModel = new JSONModel();
@@ -369,7 +370,7 @@ sap.ui.define([
 				oThis.getView().byId("pdf").setVisible(true);
 
 				if (selRow.action == "view") {
-					oThis.getView().byId("btnSave").setEnabled(false);
+					oThis.getView().byId("btnSave").setEnabled(true);
 				} else {
 					oThis.getView().byId("btnSave").setEnabled(true);
 				}
@@ -382,6 +383,7 @@ sap.ui.define([
 
 			else {
 				var oModel = new JSONModel();
+				oModel.setData({statusing : true});
 				this.getView().setModel(oModel, "editOrderModel");
 				oThis.setModelDefault()
 				oThis.getView().byId("pdf").setVisible(false);
@@ -395,10 +397,13 @@ sap.ui.define([
 			if (id != undefined) {
 
 				orderService.getOrder({ id: id }, function (data) {
+					data[0][0].statusing=data[0][0]["status"]=='Confirmed'? false : true;
 					oModel.setData(data[0][0]);
 				});
 				this.getView().byId("btnSave").setText("Update");
 
+			}
+			else{
 			}
 
 			this.getView().setModel(oModel, "editOrderModel");
@@ -484,11 +489,19 @@ sap.ui.define([
 			model["companyid"] = commonService.session("companyId");
 			model["orderdate"] = commonFunction.getDate(model.orderdate);
 			model["userid"] = commonService.session("userId");
-			model["status"] = currentContext.getView().byId("statusid").getSelectedItem().mProperties.text;
+			model["status"] = currentContext.getView().byId("statusid").getSelectedItem().mProperties.text; 
+			let callService =model["revisions"]==null?"saveOrder":"saveOrderRevisions";
 
-			orderService.saveOrder(model, function (data) {
+			if(model["status"]=="Confirmed"){
+				model["revisions"]=model["revisions"]==null?model.quotevalue:model.revisions.concat(",",model.quotevalue);
+			}
+			else{
+				model["revisions"]=null;
+			}
 
-				if (data.id > 0) {
+			orderService[callService](model, function (data) {
+
+				if (data.id != null) {
 					var message = model.id == null ? "Order created successfully!" : "Order edited successfully!";
 					currentContext.onCancel();
 					MessageToast.show(message);
