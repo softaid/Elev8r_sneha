@@ -194,6 +194,14 @@
 					"items": []
 				},
 				{
+					"title": "Project Detail View",
+					"icon": "sap-icon://workflow-tasks",
+					"expanded": false,
+					"key": "projectdetailview",
+					"eid": [31],
+					"items": []
+				},
+				{
 					"title": "Project Management",
 					"icon": "sap-icon://workflow-tasks",
 					"expanded": false,

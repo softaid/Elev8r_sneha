@@ -61,13 +61,28 @@
                     <form:formContainers>
                         <form:FormContainer>
                             <form:formElements>
-                                <form:FormElement label="Is Parent" id="switchEle">
+                                <!-- <form:FormElement label="Is Parent" id="switchEle">
                                     <form:fields>
                                         <Switch state="{editMasterModel>/isparent}" id="isparent" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" change="getSwitchValue">
                                             <layoutData>
                                                 <FlexItemData growFactor="1" />
                                             </layoutData>
                                         </Switch>
+                                    </form:fields>
+                                </form:FormElement> -->
+                                <form:FormElement id="typeEle" label="Type">
+                                    <form:fields>
+                                        <Select id="type"
+                                            change="typeChanged"
+                                            selectedKey="{editMasterModel>/parenttypeid}" 
+                                            forceSelection="false"
+                                            width="500px"
+                                            items="{
+                                                path: 'refTypeModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{refTypeModel>id}" text="{refTypeModel>description}" />
+                                        </Select>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement id="parentStageEle" label="Parent Stage">
