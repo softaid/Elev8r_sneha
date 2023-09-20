@@ -47,7 +47,7 @@
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Quotation Value"/></Column>      
                             </columns>
                             <items>
-                                <ColumnListItem type="{= ${orderMasterModel>status} === 'Confirmed' ? 'Inactive' : 'Navigation' }" press="onListItemPress">
+                                <ColumnListItem type="{= ${orderMasterModel>status} === 'Confirmed' ? 'Navigation' : 'Navigation' }" press="onListItemPress">
 
                                     <cells>
                                     <ObjectIdentifier text="{orderMasterModel>id}" />  

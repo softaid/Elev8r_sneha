@@ -21,7 +21,7 @@ sap.ui.define([
 
 			this.bus.subscribe("billofmaterial", "setDetailPage", this.setDetailPage, this);
 			this.bus.subscribe("nistatus", "setDetailNIPage", this.setDetailNIPage, this);
-			this.bus.subscribe("billofmaterial", "handleBillOfMaterialList", this.handleBillOfMaterialList, this);
+			this.bus.subscribe("projectdetail", "handleProjectDetails", this.handleProjectDetailsList, this);
 			this.bus.subscribe("billofmaterial", "onAddbillofmaterial", this.onAddbillofmaterial, this);
 
 			this.bus.subscribe("billofmaterial", "onAddbillofmaterial1", this.onAddbillofmaterial1, this);
@@ -61,7 +61,7 @@ sap.ui.define([
 			model.setData({});
 			this.getView().setModel(model, "managerRoleModel");
 
-			
+
 			var model = new JSONModel();
 			model.setData({});
 			this.getView().setModel(model, "DepartmentModel");
@@ -71,14 +71,14 @@ sap.ui.define([
 
 			this.bomArr = [];
 			this.bomDetailArr = [];
-			this.getAllProject();
+			// this.getAllProject();
 			this.getRole();
 			this.getAllDepartment();
 
 			let subcontractorModel = new JSONModel();
 			subcontractorModel.setData(commonFunction.getAllSubcontractors(this));
 			this.getView().setModel(subcontractorModel, "subcontractorModel");
-			
+
 
 			// commonFunction.getFeedMillSettingData(this, 726);
 		},
@@ -98,7 +98,7 @@ sap.ui.define([
 			}
 		},
 
-		handleBillOfMaterialList: function (sChannel, sEvent, oData) {
+		handleProjectDetailsList: function (sChannel, sEvent, oData) {
 
 			let selRow = oData.viewModel;
 			let oThis = this;
@@ -113,7 +113,7 @@ sap.ui.define([
 					oThis.getView().byId("btnSave").setEnabled(true);
 				}
 
-				oThis.bindBillOfMaterial(selRow.id);
+				oThis.getProjectDetails(selRow.id);
 
 			}
 
@@ -125,7 +125,6 @@ sap.ui.define([
 			});
 
 		},
-
 
 
 		onExit: function () {
@@ -155,7 +154,7 @@ sap.ui.define([
 			oDayHistory.projectid = projectModel.id;
 			oDayHistory.isactive = oDayHistory.isactive === 1 ? true : false;
 			oDayHistory.isstd = oDayHistory.isstd === 1 ? true : false;
-			oDayHistory.isstarted=oDayHistory.actualstartdate!= null?true:false;
+			oDayHistory.isstarted = oDayHistory.actualstartdate != null ? true : false;
 
 
 			this.bus = sap.ui.getCore().getEventBus();
@@ -170,7 +169,7 @@ sap.ui.define([
 			oDayHistory.projectid = projectModel.id;
 			oDayHistory.isactive = oDayHistory.isactive === 1 ? true : false;
 			oDayHistory.isstd = oDayHistory.isstd === 1 ? true : false;
-			oDayHistory.isstarted=oDayHistory.actualstartdate!= null?true:false;
+			oDayHistory.isstarted = oDayHistory.actualstartdate != null ? true : false;
 
 
 			this.bus = sap.ui.getCore().getEventBus();
@@ -181,6 +180,7 @@ sap.ui.define([
 
 		// function call on list fragement click
 		onListIconPress: function (oEvent) {
+			this.getAllProject();
 			if (!this._oDialog) {
 				this._oDialog = sap.ui.xmlfragment("sap.ui.elev8rerp.componentcontainer.view.ProjectManagement.ProjectActivityAddDialog", this);
 			}
@@ -196,7 +196,7 @@ sap.ui.define([
 			this._oDialog.open();
 			// this.bindBillOfMaterial();
 		},
-       
+
 		// function call to get manager and engineer
 		getRole: function () {
 			let role = [{ "id": 1, "discription": "eng" }, { "id": 1, "discription": "manager" }];
@@ -213,31 +213,46 @@ sap.ui.define([
 		},
 
 		// function call on close the project fragement 
-		handleProjectFragementClose: function (oEvent) {
-			let currentContext=this;
-			
+		handleProjectFragementClose: function (oEvent,id) {
+			let currentContext = this;
+
 			var aContexts = oEvent.getParameter("selectedContexts");
 			if (aContexts != undefined) {
 				var selRow = aContexts.map(function (oContext) { return oContext.getObject(); });
+				currentContext.getProjectDetails(selRow[0].id);
+				// Projectservice.getProject({ id: selRow[0].id }, function (data) {
+				// 	console.log(data[0])
+				// 	data[0][0].isactive = data[0][0].isactive == 1 ? true : false;
+				// 	currentContext.getView().getModel("projectModel").setData(data[0][0]);
+				// 	data[0][0].niengineer != null ? currentContext.getView().byId("eng").setSelectedKeys([...data[0][0].niengineer]) : "data not available";
+				// 	data[0][0].nimanager != null ? currentContext.getView().byId("manager").setSelectedKeys([...data[0][0].nimanager]) : "data not available";
+				// 	data[0][0].salesmanager != null ? currentContext.getView().byId("salesmanager").setSelectedKeys([...data[0][0].salesmanager]) : "data not available";
+				// 	data[0][0].salesengineer != null ? currentContext.getView().byId("salesenginner").setSelectedKeys([...data[0][0].salesengineer]) : "data not available";
+				// 	currentContext.getProjectdetail(data[0][0].id);
+				// 	currentContext.getNIdetail(data[0][0].id);
 
-				Projectservice.getProject({ id: selRow[0].id }, function (data) {
+				// });
+
+			}
+
+		},
+
+		getProjectDetails:function (id) {
+			let currentContext = this;
+				Projectservice.getProject({ id: id }, function (data) {
 					console.log(data[0])
 					data[0][0].isactive = data[0][0].isactive == 1 ? true : false;
 					currentContext.getView().getModel("projectModel").setData(data[0][0]);
-				data[0][0].niengineer!=null?currentContext.getView().byId("eng").setSelectedKeys([...data[0][0].niengineer]):"data not available";
-				data[0][0].nimanager!=null?currentContext.getView().byId("manager").setSelectedKeys([...data[0][0].nimanager]):"data not available";
-				data[0][0].salesmanager!=null?currentContext.getView().byId("salesmanager").setSelectedKeys([...data[0][0].salesmanager]):"data not available";
-				data[0][0].salesengineer!=null?currentContext.getView().byId("salesenginner").setSelectedKeys([...data[0][0].salesengineer]):"data not available";
-				currentContext.getProjectdetail(data[0][0].id);
-			    currentContext.getNIdetail(data[0][0].id); 
-
+					data[0][0].niengineer != null ? currentContext.getView().byId("eng").setSelectedKeys([...data[0][0].niengineer]) : "data not available";
+					data[0][0].nimanager != null ? currentContext.getView().byId("manager").setSelectedKeys([...data[0][0].nimanager]) : "data not available";
+					data[0][0].salesmanager != null ? currentContext.getView().byId("salesmanager").setSelectedKeys([...data[0][0].salesmanager]) : "data not available";
+					data[0][0].salesengineer != null ? currentContext.getView().byId("salesenginner").setSelectedKeys([...data[0][0].salesengineer]) : "data not available";
+					currentContext.getProjectdetail(data[0][0].id);
+					currentContext.getNIdetail(data[0][0].id);
 				});
 
-			}
+			
 
-			else {
-
-			}
 		},
 
 		// get all project and bind to  list fragement
@@ -268,8 +283,8 @@ sap.ui.define([
 				data[0].map(function (value, index) {
 
 					data[0][index].activestatus = value.isactive == 1 ? "Active" : "In Active";
-					data[0][index].actualstartdate = data[0]?.[index]?.actualstartdate??null;
-					data[0][index].actualenddate = data[0]?.[index]?.actualenddate??null;
+					data[0][index].actualstartdate = data[0]?.[index]?.actualstartdate ?? null;
+					data[0][index].actualenddate = data[0]?.[index]?.actualenddate ?? null;
 
 				});
 				var tblModel = currentContext.getView().getModel("tblModel");
@@ -279,30 +294,30 @@ sap.ui.define([
 			});
 		},
 
-			// get NI stage and show in table
-			getNIdetail: function (projectid) {
-				var currentContext = this;
-				Projectservice.getNIdetail({ id: projectid }, function (data) {
-					console.log("data", data);
-					data[0].map(function (value, index) {
-	
-						data[0][index].activestatus = value.isactive == 1 ? "Active" : "In Active";
-						data[0][index].actualstartdate = data[0]?.[index]?.actualstartdate??null
-						data[0][index].actualenddate = data[0]?.[index]?.actualenddate ??null;
-	
-					});
-					var nitblmodel = currentContext.getView().getModel("nitblmodel");
-					nitblmodel.setData(data[0]);
-					console.log("--------------nitblmodel------------",nitblmodel);
-					nitblmodel.refresh();
-	
+		// get NI stage and show in table
+		getNIdetail: function (projectid) {
+			var currentContext = this;
+			Projectservice.getNIdetail({ id: projectid }, function (data) {
+				console.log("data", data);
+				data[0].map(function (value, index) {
+
+					data[0][index].activestatus = value.isactive == 1 ? "Active" : "In Active";
+					data[0][index].actualstartdate = data[0]?.[index]?.actualstartdate ?? null
+					data[0][index].actualenddate = data[0]?.[index]?.actualenddate ?? null;
+
 				});
-			},
-	
+				var nitblmodel = currentContext.getView().getModel("nitblmodel");
+				nitblmodel.setData(data[0]);
+				console.log("--------------nitblmodel------------", nitblmodel);
+				nitblmodel.refresh();
+
+			});
+		},
 
 
-		dateFormatter:function( date){
-			const inputDateTime= date == null? new Date():new Date(date);
+
+		dateFormatter: function (date) {
+			const inputDateTime = date == null ? new Date() : new Date(date);
 			const options = {
 				year: 'numeric',
 				month: '2-digit',
@@ -330,7 +345,7 @@ sap.ui.define([
 			// Combine the date and time
 			const formattedDateTime = `${formattedDate}`;
 
-		return formattedDateTime;
+			return formattedDateTime;
 
 
 		},
@@ -347,9 +362,9 @@ sap.ui.define([
 			//var isvalid = this.validateForm();
 			//if(isvalid){
 			var currentContext = this;
-			let parentModel = this.getView().getModel("projectModel").oData; 
+			let parentModel = this.getView().getModel("projectModel").oData;
 
-			console.log("-----------parentModel-------------",parentModel);
+			console.log("-----------parentModel-------------", parentModel);
 			let tableModel = this.getView().getModel("tblModel").oData;
 			let nitblmodel = this.getView().getModel("nitblmodel").oData;
 
@@ -358,8 +373,8 @@ sap.ui.define([
 			parentModel["userid"] = commonService.session("userId");
 			parentModel.startdate = commonFunction.getDate(parentModel.startdate);
 			parentModel.enddate = commonFunction.getDate(parentModel.enddate);
-			parentModel["subcontractorid1"] = currentContext.getView().byId("subcontractor1")?.getSelectedItem()?.mProperties.key??null;
-			parentModel["subcontractorid2"] = currentContext.getView().byId("subcontractor2")?.getSelectedItem()?.mProperties.key??null;
+			parentModel["subcontractorid1"] = currentContext.getView().byId("subcontractor1")?.getSelectedItem()?.mProperties.key ?? null;
+			parentModel["subcontractorid2"] = currentContext.getView().byId("subcontractor2")?.getSelectedItem()?.mProperties.key ?? null;
 
 			Projectservice.saveProject(parentModel, function (data) {
 
@@ -388,14 +403,14 @@ sap.ui.define([
 				// this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
 				// }
 			})
-		//}
+			//}
 		},
 
 
 		onNISave: function () {
 			var currentContext = this;
-			let parentModel = this.getView().getModel("projectModel").oData; 
-			console.log("-----------parentModel-------------",parentModel);
+			let parentModel = this.getView().getModel("projectModel").oData;
+			console.log("-----------parentModel-------------", parentModel);
 			let tableModel = this.getView().getModel("tblModel").oData;
 			let nitblmodel = this.getView().getModel("nitblmodel").oData;
 
@@ -404,8 +419,8 @@ sap.ui.define([
 			parentModel["userid"] = commonService.session("userId");
 			parentModel.startdate = commonFunction.getDate(parentModel.startdate);
 			parentModel.enddate = commonFunction.getDate(parentModel.enddate);
-			parentModel["subcontractorid1"] = currentContext.getView().byId("subcontractor1")?.getSelectedItem()?.mProperties?.key??null;
-			parentModel["subcontractorid2"] = currentContext.getView().byId("subcontractor2")?.getSelectedItem()?.mProperties?.key??null;
+			parentModel["subcontractorid1"] = currentContext.getView().byId("subcontractor1")?.getSelectedItem()?.mProperties?.key ?? null;
+			parentModel["subcontractorid2"] = currentContext.getView().byId("subcontractor2")?.getSelectedItem()?.mProperties?.key ?? null;
 
 			Projectservice.saveProject(parentModel, function (data) {
 				MessageToast.show("Project  update sucessfully");
@@ -417,8 +432,8 @@ sap.ui.define([
 					oModel.enddate = (oModel.enddate != null) ? commonFunction.getDate(oModel.enddate) : oModel.enddate;
 					oModel.actualstartdate = (oModel.actualstartdate != null) ? commonFunction.getDate(oModel.actualstartdate) : oModel.actualstartdate;
 					oModel.actualenddate = (oModel.actualenddate != null) ? commonFunction.getDate(oModel.actualenddate) : oModel.actualenddate;
-				    Projectservice.saveNIActivityDetail(oModel, function (data) {
-					MessageToast.show("NI details update sucessfully");
+					Projectservice.saveNIActivityDetail(oModel, function (data) {
+						MessageToast.show("NI details update sucessfully");
 
 					});
 
@@ -427,7 +442,7 @@ sap.ui.define([
 				// this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
 				// }
 			})
-		//}
+			//}
 		},
 
 
@@ -437,7 +452,7 @@ sap.ui.define([
 				isValid = false;
 			if (!commonFunction.isRequired(this, "txtenddate", "End date is required."))
 
-			return isValid;
+				return isValid;
 		},
 
 
@@ -491,7 +506,7 @@ sap.ui.define([
 			this.oFlexibleColumnLayout.removeAllMidColumnPages();
 			this.oFlexibleColumnLayout.addMidColumnPage(this.detailView);
 			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.TwoColumnsBeginExpanded);
-			let DetailModeldata=this.getView().getModel("DetailModel").getData();
+			let DetailModeldata = this.getView().getModel("DetailModel").getData();
 
 		},
 
@@ -513,7 +528,7 @@ sap.ui.define([
 			this.oFlexibleColumnLayout.removeAllMidColumnPages();
 			this.oFlexibleColumnLayout.addMidColumnPage(this.detailView);
 			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.TwoColumnsBeginExpanded);
-			let DetailModeldata=this.getView().getModel("DetailModel").getData();
+			let DetailModeldata = this.getView().getModel("DetailModel").getData();
 
 		},
 
@@ -526,13 +541,31 @@ sap.ui.define([
 			let DetailModel = oThis.getView().getModel("projectModel");
 			let ItemConsumptiondata = DetailModel.oData;
 			if (oEvent.mParameters.id == "componentcontainer---projectactivitiesAdd--txtenddate") {
-				var parts = ItemConsumptiondata.startdate.split('/');
-				let startdate = Date.parse(new Date(parts[2], parts[1], parts[0]));
+				 var parts = ItemConsumptiondata.startdate.split('/');
+				 let startdate = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
 
-				parts = ItemConsumptiondata.enddate.split('/');
-				let enddate = Date.parse(new Date(parts[2], parts[1], parts[0]));// get  difference in start date and end date in millseconds
+				 parts = ItemConsumptiondata.enddate.split('/');
 
-				ItemConsumptiondata.completiondays = parseInt((enddate - startdate) / (86400 * 1000));// Days
+				 const enddate = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
+
+				// let enddate = Date.parse(new Date(parts[2], parts[1], parts[0]));// get  difference in start date and end date in millseconds
+				// Define two date objects
+
+
+				// Calculate the time difference in milliseconds
+				const timeDifference = Math.abs(enddate - startdate);
+
+				// Calculate the number of milliseconds in a day
+				const millisecondsInDay = 1000 * 60 * 60 * 24;
+
+				// Calculate the day difference
+				 ItemConsumptiondata.completiondays = ((timeDifference / millisecondsInDay)+1);
+
+				// Output the result
+				// console.log(`The difference between ${date1.toDateString()} and ${date2.toDateString()} is ${dayDifference} days.`);
+
+
+				// ItemConsumptiondata.completiondays = Math.floor((enddate - startdate) / (86400 * 1000));// Days
 			}
 			else {
 
@@ -562,7 +595,7 @@ sap.ui.define([
 			let startdate = oThis.getView().getModel("projectModel").oData.startdate;
 			{
 				let endDate = new Date(commonFunction.getDate(startdate));
-				endDate.setDate(endDate.getDate() - 1);
+				endDate.setDate(endDate.getDate());
 
 				let originalDate = new Date(endDate);
 				let dateFormatter = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });
@@ -579,12 +612,15 @@ sap.ui.define([
 						result.push({
 							stagesequence: index,
 							projectweightage: element.projectweightage,
-							stagedaycompletion: parseFloat((stagedaycompletion + ((completiondays / 100) * (parseFloat(element.projectweightage)))).toFixed(1)),
-							completiondays: parseFloat((((completiondays / 100) * parseFloat(element.projectweightage))).toFixed(1))
+							stagedaycompletion: parseFloat((stagedaycompletion + ((completiondays / 100) * (parseFloat(element.projectweightage)))).toFixed(2)),
+							completiondays: parseFloat((((completiondays / 100) * parseFloat(element.projectweightage)))),
+							completiondaystable:(parseFloat((((completiondays / 100) * parseFloat(element.projectweightage))))).toFixed(2)
 						});
 						ItemConsumptiondata[index].completiondays = result[(result.length) - 1].completiondays;
+						ItemConsumptiondata[index].completiondaystable = result[(result.length) - 1].completiondaystable;
 
-						stagedaycompletion = parseFloat((stagedaycompletion + ((completiondays / 100) * (parseFloat(element.projectweightage)))).toFixed(1));
+
+						stagedaycompletion = parseFloat((stagedaycompletion + ((completiondays / 100) * (parseFloat(element.projectweightage)))));
 					}
 					else {
 						MessageToast.show(`projectweightage of stage  ${element.stagename} is not defined`);
@@ -610,7 +646,11 @@ sap.ui.define([
 				if (index != 0) {
 					{
 						let endDate = new Date(commonFunction.getDate(startdate));
-						endDate.setDate(endDate.getDate() + Math.ceil(element.stagedaycompletion));
+						// endDate.setHours(0, 0, 0, 0);
+						
+						let input=(!Number.isInteger(parseInt(element.stagedaycompletion.toFixed(3))))?element.stagedaycompletion:(element.stagedaycompletion-0.1);
+
+						endDate.setDate(endDate.getDate() + input);
 
 						let originalDate = new Date(endDate);
 						let dateFormatter = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });
@@ -645,7 +685,44 @@ sap.ui.define([
 				else {
 					if (element.completiondays > 1) {
 						let endDate = new Date(commonFunction.getDate(startdate));
-						endDate.setDate(endDate.getDate() + Math.ceil(element.stagedaycompletion));
+						let input=(!Number.isInteger(parseInt(element.stagedaycompletion.toFixed(3))))?element.stagedaycompletion:(element.stagedaycompletion-0.1);
+
+						endDate.setDate(endDate.getDate() + (input));
+
+
+						// let endDate1 = new Date(commonFunction.getDate(startdate));
+
+						// endDate1.setDate(endDate1.getDate() + (36.01));
+
+						// let endDate2 = new Date(commonFunction.getDate(startdate));
+						// endDate2.setHours(0, 0, 0, 0);
+
+						// endDate2.setDate(endDate2.getDate() + (35.99999));
+
+						// let endDate3 = new Date(commonFunction.getDate(startdate));
+						//  endDate3.setHours(0, 0, 0, 0);
+
+						// endDate3.setDate(endDate3.getDate() + (36));
+
+						// let endDate4 = new Date(commonFunction.getDate(startdate));
+						// endDate4.setHours(0, 0, 0, 0);
+
+						// endDate4.setDate(endDate4.getDate() + (36.00));
+
+						// let endDate5 = new Date(commonFunction.getDate(startdate));
+						// endDate5.setHours(0, 0, 0, 0);
+
+						// endDate5.setDate(endDate5.getDate() + (44.9));
+
+						// let endDate6 = new Date(commonFunction.getDate(startdate));
+						// endDate6.setHours(0, 0, 0, 0);
+
+						// endDate6.setDate(endDate6.getDate() + (45.00));
+						
+						// let endDate7 = new Date(commonFunction.getDate(startdate));
+
+						// endDate7.setDate(endDate7.getDate() + (35));
+
 
 						let originalDate = new Date(endDate);
 						let dateFormatter = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });
@@ -816,36 +893,36 @@ sap.ui.define([
 		onDragStart: function (event) {
 			// Get the dragged item
 			var listItem = event.getParameter("target");
-		
+
 			// Set the dragged data
 			event.getParameter("dragSession").setComplexData("draggedRow", {
 				listItem: listItem,
 				model: listItem.getBindingContext("tblModel").getObject()
 			});
 		},
-		
+
 		onDrop: function (event) {
 			// Get the dragged item data
 			var draggedData = event.getParameter("dragSession").getComplexData("draggedRow");
-		
+
 			// Get the drop target
 			var dropPosition = event.getParameter("dropPosition");
 			var dropIndex = event.getParameter("dropControl").indexOfItem(event.getParameter("droppedControl"));
-		
+
 			// Update the table model based on the drop position
 			var tableModel = this.getView().getModel("tblModel");
 			var tableData = tableModel.getProperty("/");
 			tableData.splice(dropIndex, 0, draggedData.model);
 			tableModel.setProperty("/", tableData);
-		
+
 			// Remove the dragged row from the source position
 			var sourceIndex = event.getParameter("dragSession").getComplexData("draggedRow").listItem.getIndex();
 			event.getParameter("dragSession").getComplexData("draggedRow").listItem.getParent().removeItem(sourceIndex);
-		
+
 			// Update the binding context for the dragged item
 			draggedData.listItem.setBindingContext(tableModel.createBindingContext("/" + dropIndex));
 		},
-		
+
 
 		handleSelectionFinish: function (oEvt) {
 
@@ -860,10 +937,10 @@ sap.ui.define([
 			if (oEvt.mParameters.id == "componentcontainer---projectactivitiesAdd--eng") {
 				oprojectModeldata.niengineer = roleids.join(",");
 			}
-			else  if(oEvt.mParameters.id == "componentcontainer---projectactivitiesAdd--manager"){
+			else if (oEvt.mParameters.id == "componentcontainer---projectactivitiesAdd--manager") {
 				oprojectModeldata.nimanager = roleids.join(",");
 			}
-			else if(oEvt.mParameters.id == "componentcontainer---projectactivitiesAdd--salesenginner") {
+			else if (oEvt.mParameters.id == "componentcontainer---projectactivitiesAdd--salesenginner") {
 				oprojectModeldata.salesengineer = roleids.join(",");
 			}
 			else {

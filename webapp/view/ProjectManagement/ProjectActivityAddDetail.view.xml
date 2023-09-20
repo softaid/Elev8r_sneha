@@ -210,13 +210,19 @@
                                                 src="{editDocumentCollectionModel>/image_url}"
                                                 densityAware="false"
                                                 width="10em" 
-                                                press="functiondownload"
+                                                press=""
                                                 id="image">
                                                 <layoutData>
                                                     <FlexItemData growFactor="1" />
                                                 </layoutData>
                                             </Image>
-                                            
+                                            <HBOX>
+                                             <Button 
+                                            text=""
+                                            type="Emphasized"
+                                            icon="sap-icon://download"
+                                              press="functiondownload"
+                                            id="btnDowimage" />
                                               <Button
                                                 text=""
                                                 width="40%"
@@ -238,7 +244,7 @@
                                                 icon="sap-icon://delete"
                                                 press="onDeleteDocument"
                                                 id= "btndelete"/>
-                                           
+                                           </HBOX>
                                         </form:fields>
                                     </form:FormElement>
                                      <form:FormElement label="Upload Document">
@@ -257,8 +263,16 @@
                                             </u:FileUploader>
                                         </form:fields>
                                     </form:FormElement>
+                                    
+                                      <form:FormElement label="">
+                                    <form:fields>
+                                        <Input id="inputField"  width="53%" value="{editDocumentCollectionModel>/pdf_name}"  editable="false"/>
+                                    </form:fields>
+                                </form:FormElement>
+
                                     <form:FormElement>
                                         <form:fields>
+                                            <HBox>
                                         <!-- <PDFViewer source="{editDocumentCollectionModel>/pdf_url}" height="10em"  press="functiondownload">
                                         <layoutData>
                                             <FlexItemData growFactor="1" />
@@ -269,10 +283,11 @@
                                             type="Emphasized"
                                             icon="sap-icon://download"
                                               press="functiondownload"
-                                            id="pdf" />
+                                            id="btnDowpdf" />
                                              <Button
                                                 text=""
                                                 width="40%"
+                                                margin="5% 5% 5% 5%"
                                                 type="Emphasized"
                                                 icon="sap-icon://arrow-right"
                                                 press="forwardPress" id="btnForpdf"/>
@@ -290,10 +305,14 @@
                                                 icon="sap-icon://delete"
                                                 press="onDeleteDocument"
                                                 id= "btndeletepdf"/>
-                                    
+                                        </HBox>
                                         </form:fields>
                                     </form:FormElement> 
-
+                                         <!-- <form:FormElement label="">
+                                    <form:fields>
+                                        <Input id="inputField" value="{DetailModel>/actualcompletiondays}"  editable="false"/>
+                                    </form:fields>
+                                </form:FormElement>  -->
             <!-- <FlexBox direction="Column" renderType="Div" class="sapUiSmallMargin">
 			<FlexBox>
 				<Button text="Correctly Displayed" press="onCorrectPathClick"/>
@@ -305,6 +324,8 @@
 				</layoutData>
 			</PDFViewer>
 		</FlexBox> -->
+
+        
                             </form:formElements>
                         </form:FormContainer>
                     </form:formContainers>

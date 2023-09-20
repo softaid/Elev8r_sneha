@@ -29,7 +29,14 @@ sap.ui.define([
 
             getOrderPDF : function(Params, Callback){
                 commonService.runJQueryX("GET", "order/converttopdf/" + Params.id, null, Callback, null);
-            }
+            },
+            getorderDetail:function(params,callback){
+                commonService.runJQueryX("GET","order/orderdetail/" + params.id, null, callback, null )
+            },
+            saveOrderRevisions : function(params, callback){
+                commonService.runJQueryX("POST", "order/saveorder/revisionsave" , params, callback, null);
+            },
+
         };
     }
 );

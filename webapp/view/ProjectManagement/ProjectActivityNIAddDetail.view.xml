@@ -204,24 +204,30 @@
                                     </form:FormElement>
                                    <form:FormElement>
                                         <form:fields>
-                                        <HBox>
                                             <Image
                                                 src="{nieditDocumentCollectionModel>/image_url}"
                                                 densityAware="false"
                                                 width="10em" 
-                                                press="functiondownload"
+                                                press=""
                                                 id="image">
                                                 <layoutData>
                                                     <FlexItemData growFactor="1" />
                                                 </layoutData>
                                             </Image>
+                                            <HBOX>
+                                             <Button 
+                                            text=""
+                                            type="Emphasized"
+                                            icon="sap-icon://download"
+                                              press="functiondownload"
+                                            id="btnDowimage" />
                                               <Button
                                                 text=""
                                                 width="40%"
                                                 type="Emphasized"
                                                 icon="sap-icon://arrow-right"
                                                 press="forwardPress" id="btnFor"/>
-                                                <HBox>
+                                                
                                                 <Button
                                                 text=""
                                                 width="40%"
@@ -229,8 +235,6 @@
                                                 icon="sap-icon://arrow-left"
                                                 press="backwardPress"
                                                 id= "btnBack"/> 
-                                                </HBox>
-                                                <HBox>
                                                 <Button 
                                                 text=""
                                                 width="40%"
@@ -238,10 +242,10 @@
                                                 icon="sap-icon://delete"
                                                 press="onDeleteDocument"
                                                 id= "btndelete"/>
-                                                </HBox> 
-                                                  </HBox>
-                                        </form:fields>
+                                           </HBOX>
+                                         </form:fields>
                                     </form:FormElement>
+
                                     <form:FormElement label="Upload Document">
                                         <form:fields>
                                             <u:FileUploader
@@ -258,22 +262,25 @@
                                             </u:FileUploader>
                                         </form:fields>
                                     </form:FormElement>
+                                    
+                                      <form:FormElement label="">
+                                    <form:fields>
+                                        <Input id="inputField"  width="53%" value="{nieditDocumentCollectionModel>/pdf_name}"  editable="false"/>
+                                    </form:fields>
+                                </form:FormElement>
                                     <form:FormElement>
                                         <form:fields>
-                                        <!-- <PDFViewer source="{nieditDocumentCollectionModel>/pdf_url}" height="10em"  press="functiondownload">
-                                        <layoutData>
-                                            <FlexItemData growFactor="1" />
-                                        </layoutData>
-                                    </PDFViewer> -->
+                                            <HBox>
                                      <Button 
                                             text=""
                                             type="Emphasized"
                                             icon="sap-icon://download"
-                                        press="functiondownload"
-                                            id="pdf" />
+                                              press="functiondownload"
+                                            id="btnDowpdf" />
                                              <Button
                                                 text=""
                                                 width="40%"
+                                                margin="5% 5% 5% 5%"
                                                 type="Emphasized"
                                                 icon="sap-icon://arrow-right"
                                                 press="forwardPress" id="btnForpdf"/>
@@ -291,7 +298,7 @@
                                                 icon="sap-icon://delete"
                                                 press="onDeleteDocument"
                                                 id= "btndeletepdf"/>
-                                    
+                                        </HBox>
                                         </form:fields>
                                     </form:FormElement> 
                             </form:formElements>

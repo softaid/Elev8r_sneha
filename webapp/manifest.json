@@ -267,6 +267,11 @@
 					"target": "addorder"
 				},
 				{
+					"pattern": "orderdetail",
+					"name": "orderdetail",
+					"target": "orderdetail"
+				},
+				{
 					"pattern": "leadreports",
 					"name": "leadreports",
 					"target": "leadreports"
@@ -305,6 +310,11 @@
 					"pattern": "projectdetailview",
 					"name": "projectdetailview",
 					"target": "projectdetailview"
+				},
+				{
+					"pattern": "projectActivityList",
+					"name": "projectActivityList",
+					"target": "projectActivityList"
 				},
 				{
 					"pattern": "projectctivities",
@@ -483,6 +493,12 @@
 					"controlId": "mainContents",
 					"parent": "master"
 				},
+				"orderdetail": {
+					"viewId": "orderdetail",
+					"viewName": "LeadManagement/OrdersDetail",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
 				"addorder" : {
 					"viewId": "addorder",
 					"viewName": "LeadManagement/AddOrder",
@@ -540,6 +556,12 @@
 				"projectdetailview" : {
 					"viewId": "projectdetailview",
 					"viewName": "ProjectManagement/ProjectDetailView",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"projectActivityList" : {
+					"viewId": "projectActivityList",
+					"viewName": "ProjectManagement/ProjectActivityList",
 					"controlId": "mainContents",
 					"parent": "master"
 				},

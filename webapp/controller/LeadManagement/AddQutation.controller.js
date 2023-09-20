@@ -34,8 +34,8 @@ sap.ui.define(
 					// currentContext.reset();
 					this.bus = sap.ui.getCore().getEventBus();
 					this.bus.subscribe(
-						"qutationdetails",
-						"newQutation",
+						"qutationcreen",
+						"handleQutationList",
 						this.qutationdetail,
 						this
 					);
@@ -44,6 +44,11 @@ sap.ui.define(
 						"quoteConversion",
 						this.quoteConversion,
 						this
+					);
+					this.bus.subscribe(
+						"qutationdetail",
+						"handleQutationDetails",
+						this.qutationdetail,
 					);
 					var emptyModel = this.getModelDefault();
 					var model = new JSONModel();
@@ -280,6 +285,7 @@ sap.ui.define(
 					commonService.getAllCities(function (data) {
 						var oModel = new sap.ui.model.json.JSONModel();
 						oModel.setData({ modelData: data[0] });
+						currentContext.setModelDefault();
 						oModel.setSizeLimit(data[0].length);
 						currentContext.getView().setModel(oModel, "partyCityModel");
 						currentContext.setModelDefault();
@@ -296,7 +302,7 @@ sap.ui.define(
 
 					let  lead= this.getView().getModel("editQutationModel").oData;
 		
-					lead["leadvalue"] =lead["leadvalue"] == null ? 0:parseFloat(lead.leadvalue) ;
+					lead["quotevalue"] = lead["quotevalue"] == null ? 0 :parseFloat(lead.quotevalue) ;
 					lead["nooflifts"] =lead["nooflifts"] == null ? 0:parseInt(lead.nooflifts) ;
 					lead["leadscore"]=lead["leadscore"] == null ? 0:parseFloat(lead.leadscore) ;
 					lead["winprobability"]=lead["winprobability"] == null ? 0:(lead.winprobability) ;
@@ -433,6 +439,7 @@ sap.ui.define(
 				qutationdetail: function (sChannel, sEvent, oData) {
 					let selRow = oData.viewModel;
 					let oThis = this;
+					// this.setModelDefault();
 
 					if (selRow != null) {
 						if (selRow.action == "view") {
@@ -444,7 +451,6 @@ sap.ui.define(
 					} else {
 						oThis.getAllQuotations();
 						oThis.onModelSelection();
-
 					}
 
 				},
@@ -622,9 +628,13 @@ sap.ui.define(
 					var oModel = new JSONModel();
 					if (id != undefined) {
 						quotationService.getQuotation({ id: id }, function (data) {
+
+
 							data[0][0].withgst = data[0][0].withgst == 1 ? true : false;
 							oModel.setData(data[0][0]);
 						});
+
+
 						this.getView().byId("btnSave").setText("Update");
 					}
 					

@@ -256,7 +256,7 @@
                                             <Text text="{tblModel>stagename}" />         
                                             <Text text="{tblModel>startdate}" />   
                                             <Text text="{tblModel>enddate}"/>
-                                            <Text text="{tblModel>completiondays}"/> 
+                                            <Text text="{tblModel>completiondaystable}"/> 
                                             <Text text="{tblModel>stagecompletionpercentage}"/>
                                             <Text text="{tblModel>projectweightage}"/> 
                                             <tnt:InfoLabel 

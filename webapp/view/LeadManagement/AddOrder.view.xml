@@ -59,7 +59,8 @@
                                 <form:formElements>
                                     <form:FormElement label="ID">
                                         <form:fields>
-                                            <Input id="quotationid" valueLiveUpdate="true" value="{editOrderModel>/orderid}"   />
+                                            <Input id="quotationid" valueLiveUpdate="true" value="{editOrderModel>/orderid}" 
+                                            editable ="{editOrderModel>/statusing}"  />
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Quotation Type">
@@ -67,6 +68,7 @@
                                             <Select id="txtQutationType"                                                 
                                                 change=""
                                                 selectedKey="{editOrderModel>/quotetype}" 
+                                                editable ="{editOrderModel>/statusing}"                                                
                                                 forceSelection="true"
                                                 width="500px"
                                                 items="{
@@ -83,13 +85,15 @@
                                             placeholder="{config>/dateFormat/placeholder}"
                                             displayFormat="{config>/dateFormat/displayFormat}"
                                             value="{editOrderModel>/orderdate}"
-                                            valueFormat="dd/MM/yyyy"                                              
+                                            valueFormat="dd/MM/yyyy"    
+                                            editable ="{editOrderModel>/statusing}"                                          
                                             />
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Lead">
                                         <form:fields>
-                                            <Select id="txtLead"                                                 
+                                            <Select id="txtLead"    
+                                            editable ="{editOrderModel>/statusing}"                                          
                                                 change="LeadChange"
                                                 selectedKey="{editOrderModel>/leadid}" 
                                                 forceSelection="true"
@@ -97,6 +101,7 @@
                                                 items="{
                                                     path: 'LeadsMasterModel>/modelData',
                                                     sorter: { path: 'id' }
+                                                    
                                                 }">
                                                 <core:Item key="{LeadsMasterModel>id}" text="{LeadsMasterModel>leadname}" />
                                             </Select>
@@ -104,18 +109,24 @@
                                     </form:FormElement>
                                     <form:FormElement label="Name">
                                         <form:fields>
-                                            <Input id="txtQutationName" valueLiveUpdate="true" value="{editOrderModel>/quotename}"/>
+                                            <Input id="txtQutationName" 
+                                            editable ="{editOrderModel>/statusing}"
+                                            valueLiveUpdate="true" value="{editOrderModel>/quotename}"/>
                                         </form:fields>
                                     </form:FormElement>   
                                     <form:FormElement label="Description">
                                         <form:fields>
-                                            <Input id="txtQutationDescription" valueLiveUpdate="true" value="{editOrderModel>/quotediscription}" change="onPartyNameChange"/>
+                                            <Input id="txtQutationDescription" 
+                                            editable ="{editOrderModel>/statusing}"
+                                            valueLiveUpdate="true" value="{editOrderModel>/quotediscription}" change="onPartyNameChange"/>
                                         </form:fields>
                                     </form:FormElement>
+
                                     <form:FormElement label="Status">
                                         <form:fields>
                                             <Select id="statusid"                                                 
                                                 selectedKey="{editOrderModel>/status}" 
+                                                editable ="{editOrderModel>/statusing}"
                                                 forceSelection="true"
                                                 width="500px"
                                                 items="{
@@ -128,7 +139,9 @@
                                     </form:FormElement>  
                                     <form:FormElement label="Contact Person">
                                         <form:fields>
-                                            <Input id="contactPerson" valueLiveUpdate="true" value="{editOrderModel>/contactperson}" change="onPartyNameChange"/>
+                                            <Input id="contactPerson"
+                                            editable ="{editOrderModel>/statusing}"
+                                             valueLiveUpdate="true" value="{editOrderModel>/contactperson}" change="onPartyNameChange"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Win Probability">
@@ -136,6 +149,7 @@
                                             <!-- <Input id="progress" valueLiveUpdate="true" value="{editLeadActivityModel>/progress}" /> -->
                                             <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
                                                 max="100" min="0" progress="true"
+                                                enabled ="{editOrderModel>/statusing}"
                                                 showAdvancedTooltip="true" value="{editOrderModel>/winprobability}">
                                                 <ResponsiveScale id="rScaleWarningLevel"
                                                     tickmarksBetweenLabels="20" />
@@ -144,12 +158,15 @@
                                     </form:FormElement> 
                                     <form:FormElement label="Quote Score">
                                         <form:fields>
-                                            <Input id="quotescore" valueLiveUpdate="true" value="{editOrderModel>/quotescore}"   change="onPartyNameChange"/>
+                                            <Input id="quotescore"
+                                            editable ="{editOrderModel>/statusing}"
+                                             valueLiveUpdate="true" value="{editOrderModel>/quotescore}"   change="onPartyNameChange"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Lead Source">
                                         <form:fields>
                                             <Select id="leadsourceid"
+                                            editable ="{editOrderModel>/statusing}"
                                                 change=""
                                                 selectedKey="{editOrderModel>/leadsourceid}" 
                                                 forceSelection="true"
@@ -164,7 +181,8 @@
                                     </form:FormElement>
                                     <form:FormElement label="Quotation Value">
                                         <form:fields>
-                                            <Input id="txtQutationValue" valueLiveUpdate="true" value="{editOrderModel>/quotevalue}" change="onPartyNameChange"/>
+                                            <Input id="txtQutationValue" valueLiveUpdate="true"
+                                             value="{editOrderModel>/quotevalue}" change="onPartyNameChange"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <!-- <form:FormElement label="Quote Stage">
@@ -187,7 +205,7 @@
                                         <form:fields>
                                             <Select id="landarchitectid"
                                                 change=""
-                                                
+                                                editable ="{editOrderModel>/statusing}"
                                                 selectedKey="{editOrderModel>/architectidid}" 
                                                 forceSelection="true"
                                                 width="500px"
@@ -202,6 +220,7 @@
                                     <form:FormElement label="{i18n>leadConsultant}">
                                         <form:fields>
                                             <Select id="landconsaltantid"
+                                            editable ="{editOrderModel>/statusing}"
                                                     change=""    
                                                 selectedKey="{editOrderModel>/leadconsaltantid}" 
                                                 forceSelection="true"
@@ -217,6 +236,7 @@
                                     <form:FormElement label="Category">
                                         <form:fields>
                                             <Select id="txtCategory"
+                                            editable ="{editOrderModel>/statusing}"
                                                 change=""
                                                 selectedKey="{editOrderModel>/quotecategory}" 
                                                 forceSelection="true"
@@ -232,6 +252,7 @@
                                     <form:FormElement label="SubCategory">
                                         <form:fields>
                                             <Select id="txtSubCategory"
+                                            editable ="{editOrderModel>/statusing}"
                                                 change=""
                                                 selectedKey="{editOrderModel>/quotesubcategory}" 
                                                 forceSelection="true"
@@ -246,12 +267,16 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadSiteAddress}">
                                         <form:fields>
-                                            <Input id="siteaddress" valueLiveUpdate="true" value="{editOrderModel>/siteaddress}"/>
+                                            <Input id="siteaddress" 
+                                            editable ="{editOrderModel>/statusing}"
+                                            valueLiveUpdate="true" value="{editOrderModel>/siteaddress}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadCountry}">
                                         <form:fields>
-                                            <Select id="ddlCountry1" selectedKey="{editOrderModel>/countryid}" forceSelection="true"
+                                            <Select id="ddlCountry1"
+                                            editable ="{editOrderModel>/statusing}"
+                                             selectedKey="{editOrderModel>/countryid}" forceSelection="true"
                                                 items="{
                                                     path: 'partyCountryModel>/modelData'                                                    
                                                 }" change="onStatusChange">
@@ -261,7 +286,9 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadState}">
                                         <form:fields>
-                                            <Select id="ddlState1" selectedKey="{editOrderModel>/stateid}" forceSelection="true"
+                                            <Select id="ddlState1" 
+                                            editable ="{editOrderModel>/statusing}"
+                                            selectedKey="{editOrderModel>/stateid}" forceSelection="true"
                                                 items="{
                                                     path: 'partyStateModel>/modelData'                                                    
                                                 }" change="onStatusChange">
@@ -271,7 +298,9 @@
                                     </form:FormElement>                                
                                     <form:FormElement label="{i18n>leadCity}">
                                         <form:fields>
-                                            <Select id="ddlCity1" selectedKey="{editOrderModel>/cityid}" forceSelection="true"
+                                            <Select id="ddlCity1"
+                                            editable ="{editOrderModel>/statusing}"
+                                             selectedKey="{editOrderModel>/cityid}" forceSelection="true"
                                                 items="{
                                                     path: 'partyCityModel>/modelData'                                                    
                                                 }" change="onStatusChange">
@@ -281,7 +310,9 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadPinCode}">
                                         <form:fields>
-                                            <Input id="txtPinCode1" type="number" maxLength="6" valueLiveUpdate="true" value="{editOrderModel>/pincode}" change="onNumberInputChange"/>
+                                            <Input id="txtPinCode1" type="number"
+                                            editable ="{editOrderModel>/statusing}"
+                                             maxLength="6" valueLiveUpdate="true" value="{editOrderModel>/pincode}" change="onNumberInputChange"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <!-- <form:FormElement label="{i18n>leadMobileP}">
@@ -291,17 +322,23 @@
                                     </form:FormElement> -->
                                     <form:FormElement label="{i18n>leadEmail}">
                                         <form:fields>
-                                            <Input id="txtEmailId" valueLiveUpdate="true" value="{editOrderModel>/email}" change="onEmailChange"  />
+                                            <Input id="txtEmailId" valueLiveUpdate="true"
+                                            editable ="{editOrderModel>/statusing}"
+                                             value="{editOrderModel>/email}" change="onEmailChange"  />
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadGSTN}">
                                         <form:fields>
-                                            <Input id="gstn" maxLength="15" valueLiveUpdate="true" value="{editOrderModel>/gstn}"/>
+                                            <Input id="gstn" maxLength="15" 
+                                            editable ="{editOrderModel>/statusing}"
+                                            valueLiveUpdate="true" value="{editOrderModel>/gstn}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadPanNo}">
                                         <form:fields>
-                                            <Input id="panno" maxLength="10" valueLiveUpdate="true" value="{editOrderModel>/panno}"/>
+                                            <Input id="panno" maxLength="10"
+                                            editable ="{editOrderModel>/statusing}"
+                                             valueLiveUpdate="true" value="{editOrderModel>/panno}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <!-- <form:FormElement label="Primary Contact">
@@ -311,22 +348,24 @@
                                     </form:FormElement> -->
                                     <form:FormElement label="Contact Person">
                                         <form:fields>
-                                            <Input id="contactperson" valueLiveUpdate="true" value="{editOrderModel>/contactperson}"/>
+                                            <Input id="contactperson" editable ="{editOrderModel>/statusing}"
+                                             valueLiveUpdate="true" value="{editOrderModel>/contactperson}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Designation">
                                         <form:fields>
-                                            <Input id="designation" valueLiveUpdate="true" value="{editOrderModel>/designation}"/>
+                                            <Input id="designation"
+                                            editable ="{editOrderModel>/statusing}" valueLiveUpdate="true" value="{editOrderModel>/designation}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Mobile No. 1">
                                         <form:fields>
-                                            <Input id="mobileno1" maxLength="10" valueLiveUpdate="true" value="{editOrderModel>/mobileno1}"/>
+                                            <Input id="mobileno1" maxLength="10" editable ="{editOrderModel>/statusing}" valueLiveUpdate="true" value="{editOrderModel>/mobileno1}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Email Official">
                                         <form:fields>
-                                            <Input id="officialemail" valueLiveUpdate="true" value="{editOrderModel>/officialemail}"/>
+                                            <Input id="officialemail" editable ="{editOrderModel>/statusing}" valueLiveUpdate="true" value="{editOrderModel>/officialemail}"/>
                                         </form:fields>
                                     </form:FormElement>
                                 </form:formElements>
@@ -384,6 +423,7 @@
                                         <form:fields>
                                             <Select id="typeofliftid"                                             
                                                 change=""
+                                                editable ="{editOrderModel>/statusing}"
                                                 selectedKey="{editOrderModel>/typeoflift}" 
                                                 forceSelection="true"
                                                 width="500px"
@@ -396,12 +436,14 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadnooflift}">
                                         <form:fields>
-                                            <Input id="txtnooflifts" type="number" valueLiveUpdate="true" value="{editOrderModel>/nooflifts}" change="onPartyNameChange"/>
+                                            <Input id="txtnooflifts" type="number"
+                                            editable ="{editOrderModel>/statusing}"  valueLiveUpdate="true" value="{editOrderModel>/nooflifts}" change="onPartyNameChange"/>
                                         </form:fields>
                                     </form:FormElement>  
                                     <form:FormElement label="{i18n>leadcapacity}">
                                         <form:fields>
-                                            <Select id="capacityid"                                             
+                                            <Select id="capacityid" 
+                                            editable ="{editOrderModel>/statusing}"                                            
                                                 change=""
                                                 selectedKey="{editOrderModel>/capacityid}" 
                                                 forceSelection="true"
@@ -415,7 +457,8 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadModel}">
                                         <form:fields>
-                                            <Select id="modelid"                                             
+                                            <Select id="modelid" 
+                                            editable ="{editOrderModel>/statusing}"                                            
                                                 change=""
                                                 selectedKey="{editOrderModel>/modelid}" 
                                                 forceSelection="true"
@@ -429,7 +472,8 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadDrive}">
                                         <form:fields>
-                                            <Select id="driveid"                                             
+                                            <Select id="driveid"   
+                                            editable ="{editOrderModel>/statusing}"                                          
                                                 change=""
                                                 selectedKey="{editOrderModel>/driveid}" 
                                                 forceSelection="true"
@@ -445,6 +489,7 @@
                                         <form:fields>
                                             <Select id="machineid"                                             
                                                 change=""
+                                                editable ="{editOrderModel>/statusing}"
                                                 selectedKey="{editOrderModel>/machineid}" 
                                                 forceSelection="true"
                                                 width="500px"
@@ -457,7 +502,8 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadControl}">
                                         <form:fields>
-                                            <Select id="controlid"                                             
+                                            <Select id="controlid"    
+                                            editable ="{editOrderModel>/statusing}"                                         
                                                 change=""
                                                 selectedKey="{editOrderModel>/controlid}" 
                                                 forceSelection="true"
@@ -471,7 +517,8 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadOperation}">
                                         <form:fields>
-                                            <Select id="operationid"                                             
+                                            <Select id="operationid"       
+                                            editable ="{editOrderModel>/statusing}"                                      
                                                 change=""
                                                 selectedKey="{editOrderModel>/operationid}" 
                                                 forceSelection="true"
@@ -485,7 +532,8 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadGroupControl}">
                                         <form:fields>
-                                            <Select id="groupcontrolid"                                             
+                                            <Select id="groupcontrolid"     
+                                            editable ="{editOrderModel>/statusing}"                                        
                                                 change=""
                                                 selectedKey="{editOrderModel>/groupcontrolid}" 
                                                 forceSelection="true"
@@ -499,7 +547,8 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadSpeed}">
                                         <form:fields>
-                                            <Select id="speedid"                                             
+                                            <Select id="speedid"       
+                                            editable ="{editOrderModel>/statusing}"                                      
                                                 change=""
                                                 selectedKey="{editOrderModel>/speedid}" 
                                                 forceSelection="true"
@@ -513,7 +562,8 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadTypesodDoor}">
                                         <form:fields>
-                                            <Select id="typesofdoorid"                                             
+                                            <Select id="typesofdoorid"   
+                                            editable ="{editOrderModel>/statusing}"                                          
                                                 change=""
                                                 selectedKey="{editOrderModel>/typeofdoorid}" 
                                                 forceSelection="true"
@@ -527,7 +577,8 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadLandingDoors}">
                                         <form:fields>
-                                            <Select id="landingdoorsid"                                             
+                                            <Select id="landingdoorsid"   
+                                            editable ="{editOrderModel>/statusing}"                                          
                                                 change=""
                                                 selectedKey="{editOrderModel>/landingdoorid}" 
                                                 forceSelection="true"
@@ -543,6 +594,7 @@
                                         <form:fields>
                                             <Select id="carpanelid"
                                                 required="false" 
+                                                editable ="{editOrderModel>/statusing}"
                                                 change=""
                                                 
                                                 selectedKey="{editOrderModel>/carpanelid}" 
@@ -559,6 +611,7 @@
                                     <form:FormElement label="False Ceiling">
                                         <form:fields>
                                             <Select id="falseceilingid"
+                                            editable ="{editOrderModel>/statusing}"
                                                 required="false" 
                                                 change=""
                                                 
@@ -576,6 +629,7 @@
                                     <form:FormElement label="Ventilation">
                                         <form:fields>
                                             <Select id="ventilationid"
+                                            editable ="{editOrderModel>/statusing}"
                                                 required="false" 
                                                 change=""
                                                 
@@ -595,7 +649,7 @@
                                             <Select id="flooringid"
                                                 required="false" 
                                                 change=""
-                                                
+                                                editable ="{editOrderModel>/statusing}"
                                                 selectedKey="{editOrderModel>/flooringid}" 
                                                 forceSelection="true"
                                                 width="500px"
@@ -612,7 +666,7 @@
                                             <Select id="carpositionindicatorid"
                                                 required="false" 
                                                 change=""
-                                                
+                                                editable ="{editOrderModel>/statusing}"
                                                 selectedKey="{editOrderModel>/carpositionindicatorid}" 
                                                 forceSelection="true"
                                                 width="500px"
@@ -629,7 +683,7 @@
                                             <Select id="tractionmediaid"
                                                 required="false" 
                                                 change=""
-                                                
+                                                editable ="{editOrderModel>/statusing}"
                                                 selectedKey="{editOrderModel>/tractionmediaid}" 
                                                 forceSelection="true"
                                                 width="500px"
@@ -646,7 +700,7 @@
                                             <Select id="mainpowersystemid"
                                                 required="false" 
                                                 change=""
-                                                
+                                                editable ="{editOrderModel>/statusing}"
                                                 selectedKey="{editOrderModel>/mainpowersystemid}" 
                                                 forceSelection="true"
                                                 width="500px"
@@ -663,7 +717,7 @@
                                             <Select id="auxilarysupplysystemid"
                                                 required="false" 
                                                 change=""
-                                                
+                                                editable ="{editOrderModel>/statusing}"
                                                 selectedKey="{editOrderModel>/auxilarysupplysystemid}" 
                                                 forceSelection="true"
                                                 width="500px"
@@ -679,6 +733,7 @@
                                         <form:fields>
                                             <Select id="leadcarid"                                             
                                                 change=""
+                                                editable ="{editOrderModel>/statusing}"
                                                 selectedKey="{editOrderModel>/cardoorid}" 
                                                 forceSelection="true"
                                                 width="500px"
@@ -691,7 +746,8 @@
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>leadStandardFloorHeight}">
                                         <form:fields>
-                                            <Select id="landingfloorid"                                             
+                                            <Select id="landingfloorid" 
+                                            editable ="{editOrderModel>/statusing}"                                            
                                                 change=""
                                                 selectedKey="{editOrderModel>/floorheaightid}" 
                                                 forceSelection="true"
@@ -705,13 +761,15 @@
                                     </form:FormElement>
                                     <form:FormElement label="Stop">
                                         <form:fields>
-                                            <Input id="txtstopid" type="number" valueLiveUpdate="true" value="{editOrderModel>/stopsid}"/>
+                                            <Input id="txtstopid"
+                                            editable ="{editOrderModel>/statusing}"  type="number" valueLiveUpdate="true" value="{editOrderModel>/stopsid}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="{i18n>laedLowestFloorMarking}">
                                         <form:fields>
                                             <Select id="landingfloorsid"                                             
                                                 change=""
+                                                editable ="{editOrderModel>/statusing}"
                                                 selectedKey="{editOrderModel>/lowestfloorid}" 
                                                 forceSelection="true"
                                                 width="500px"
@@ -726,6 +784,7 @@
                                         <form:fields>
                                             <Select id="landingcwdpositionid"                                             
                                                 change=""
+                                                editable ="{editOrderModel>/statusing}"
                                                 selectedKey="{editOrderModel>/cwtpositionid}" 
                                                 forceSelection="true"
                                                 width="500px"
@@ -738,13 +797,15 @@
                                     </form:FormElement>
                                     <form:FormElement label="Floor Marking">
                                         <form:fields>
-                                            <Input id="txtfloormarking" valueLiveUpdate="true" value="{editOrderModel>/floormarking}"/>
+                                            <Input id="txtfloormarking" 
+                                            editable ="{editOrderModel>/statusing}" valueLiveUpdate="true" value="{editOrderModel>/floormarking}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="All Opening Same Side">
                                     <form:fields>
                                         <Select id="txtallopeningsameside"                                         
                                             change=""
+                                            editable ="{editOrderModel>/statusing}"
                                             selectedKey="{editOrderModel>/allopeningsameside}" 
                                             forceSelection="true"
                                             width="500px"
@@ -759,6 +820,7 @@
                                         <form:fields>
                                             <Select id="txtFrontOpening"                                             
                                                 change=""
+                                                editable ="{editOrderModel>/statusing}"
                                                 selectedKey="{editOrderModel>/frontopening}" 
                                                 forceSelection="true"
                                                 width="500px"
@@ -773,6 +835,7 @@
                                         <form:fields>
                                             <Select id="txtbackopening"                                             
                                                 change=""
+                                                editable ="{editOrderModel>/statusing}"
                                                 selectedKey="{editOrderModel>/backopening}" 
                                                 forceSelection="true"
                                                 width="500px"
@@ -787,6 +850,7 @@
                                         <form:fields>
                                             <Select id="txtLeftOpening"                                             
                                                 change=""
+                                                editable ="{editOrderModel>/statusing}"
                                                 selectedKey="{editOrderModel>/leftopening}" 
                                                 forceSelection="true"
                                                 width="500px"
@@ -801,6 +865,7 @@
                                         <form:fields>
                                             <Select id="txtRightOpening"                                             
                                                 change=""
+                                                editable ="{editOrderModel>/statusing}"
                                                 selectedKey="{editOrderModel>/rightopening}" 
                                                 forceSelection="true"
                                                 width="500px"
@@ -813,67 +878,68 @@
                                     </form:FormElement>
                                     <form:FormElement label="Shaft Width">
                                         <form:fields>
-                                            <Input id="txtshaftwidth" type="number" valueLiveUpdate="true" value="{editOrderModel>/shaftwidth}"/>
+                                            <Input id="txtshaftwidth" type="number" 
+                                            editable ="{editOrderModel>/statusing}" valueLiveUpdate="true" value="{editOrderModel>/shaftwidth}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Shaft Depth">
                                         <form:fields>
-                                            <Input id="txtshaftdepth" type="number" valueLiveUpdate="true" value="{editOrderModel>/shaftdepth}"/>
+                                            <Input id="txtshaftdepth" editable ="{editOrderModel>/statusing}" type="number" valueLiveUpdate="true" value="{editOrderModel>/shaftdepth}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Car Depth">
                                         <form:fields>
-                                            <Input id="txtcardepth" type="number" valueLiveUpdate="true" value="{editOrderModel>/cardepth}"/>
+                                            <Input id="txtcardepth" type="number" editable ="{editOrderModel>/statusing}"  valueLiveUpdate="true" value="{editOrderModel>/cardepth}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Car Width">
                                         <form:fields>
-                                            <Input id="txtcarwidth" type="number" valueLiveUpdate="true" value="{editOrderModel>/carwidth}"/>
+                                            <Input id="txtcarwidth" type="number" editable ="{editOrderModel>/statusing}" valueLiveUpdate="true" value="{editOrderModel>/carwidth}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Car Height">
                                         <form:fields>
-                                            <Input id="txtcarheight" type="number" valueLiveUpdate="true" value="{editOrderModel>/carheight}"/>
+                                            <Input id="txtcarheight" type="number" editable ="{editOrderModel>/statusing}" valueLiveUpdate="true" value="{editOrderModel>/carheight}"/>
                                         </form:fields>
                                     </form:FormElement>                                    
                                     <form:FormElement label="Door Width">
                                         <form:fields>
-                                            <Input id="txtdoorwidth" type="number" valueLiveUpdate="true" value="{editOrderModel>/doorwidth}"/>
+                                            <Input id="txtdoorwidth" type="number"  editable ="{editOrderModel>/statusing}" valueLiveUpdate="true" value="{editOrderModel>/doorwidth}"/>
                                         </form:fields>
                                     </form:FormElement>
                                         <form:FormElement label="Door Height">
                                         <form:fields>
-                                            <Input id="txtdoorheight" type="number" valueLiveUpdate="true" value="{editOrderModel>/doorheight}"/>
+                                            <Input id="txtdoorheight" type="number" editable ="{editOrderModel>/statusing}"  valueLiveUpdate="true" value="{editOrderModel>/doorheight}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Travel">
                                         <form:fields>
-                                            <Input id="txttravel" type="number" valueLiveUpdate="true" value="{editOrderModel>/travel}"/>
+                                            <Input id="txttravel" type="number"  editable ="{editOrderModel>/statusing}" valueLiveUpdate="true" value="{editOrderModel>/travel}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Pit Depth">
                                         <form:fields>
-                                            <Input id="txtpitdepth"  valueLiveUpdate="true" value="{editOrderModel>/pitdepth}"/>
+                                            <Input id="txtpitdepth" editable ="{editOrderModel>/statusing}"  valueLiveUpdate="true" value="{editOrderModel>/pitdepth}"/>
                                         </form:fields>
                                     </form:FormElement>
                                         <form:FormElement label="Over Head">
                                         <form:fields>
-                                            <Input id="txtoverhead" type="number" valueLiveUpdate="true" value="{editOrderModel>/overhead}"/>
+                                            <Input id="txtoverhead" type="number" editable ="{editOrderModel>/statusing}" valueLiveUpdate="true" value="{editOrderModel>/overhead}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Mr Width">
                                         <form:fields>
-                                            <Input id="txtmrwidth" type="number" valueLiveUpdate="true" value="{editOrderModel>/mrwidth}"/>
+                                            <Input id="txtmrwidth" type="number"  editable ="{editOrderModel>/statusing}" valueLiveUpdate="true" value="{editOrderModel>/mrwidth}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Mr Depth">
                                         <form:fields>
-                                            <Input id="txtmrdepth" type="number" valueLiveUpdate="true" value="{editOrderModel>/mrdepth}"/>
+                                            <Input id="txtmrdepth" type="number" editable ="{editOrderModel>/statusing}" valueLiveUpdate="true" value="{editOrderModel>/mrdepth}"/>
                                         </form:fields>
                                     </form:FormElement>
                                     <form:FormElement label="Mr Height">
                                         <form:fields>
-                                            <Input id="txtmrheight" type="number" valueLiveUpdate="true" value="{editOrderModel>/mrheight}"/>
+                                            <Input id="txtmrheight" type="number" editable ="{editOrderModel>/statusing}" valueLiveUpdate="true" value="{editOrderModel>/mrheight}"/>
                                         </form:fields>
                                     </form:FormElement>
                                 </form:formElements>      
