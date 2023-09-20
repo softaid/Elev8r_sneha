@@ -1,0 +1,170 @@
+
+UPDATE `db_elev8r_local`.`referencetype` SET `typecode` = 'ProjStgType', `typename` = 'Project Stage Type', `description` = 'Project Stage Type' WHERE (`typecode` = 'ProjActType');
+DELETE FROM `db_elev8r_local`.`referencetype` WHERE (`typecode` = 'ProjType');
+INSERT INTO `db_elev8r_local`.`referencetype` (`typecode`, `typename`, `description`, `master`, `createddate`, `modifieddate`, `companyid`) VALUES ('RefType', 'Reference Type', 'Reference Type', 'ReferenceMaster', '2023-09-19 00:00:00', '2023-09-19 00:00:00', '27');
+INSERT INTO `db_elev8r_local`.`reference` (`id`, `typecode`, `description`, `createddate`, `modifieddate`, `active`, `defaultvalue`, `companyid`) VALUES ('387', 'RefType', 'Stage', '2023-09-19 02:49:00', '2023-09-19 02:49:00', '1', '1', '27');
+INSERT INTO `db_elev8r_local`.`reference` (`id`, `typecode`, `description`, `createddate`, `modifieddate`, `active`, `defaultvalue`, `companyid`) VALUES ('388', 'RefType', 'Activity', '2023-09-19 02:49:00', '2023-09-19 02:49:00', '1', '1', '27');
+
+ALTER TABLE `db_elev8r_local`.`reference` 
+CHANGE COLUMN `parenttypecode` `parenttypeid` INT(11) NULL DEFAULT NULL ;
+
+ALTER TABLE `db_elev8r_local`.`reference` 
+ADD COLUMN `isrelatedtopayment` TINYINT(4) NULL AFTER `modelid`,
+ADD COLUMN `iscustomersignoffrequired` TINYINT(4) NULL AFTER `isrelatedtopayment`,
+ADD COLUMN `notifyinternaluser` TINYINT(4) NULL AFTER `iscustomersignoffrequired`,
+CHANGE COLUMN `extendeddescriptioin` `dependency` VARCHAR(200) NULL DEFAULT NULL ,
+CHANGE COLUMN `grouptitle` `statusid` INT(11) NULL DEFAULT NULL ;
+
+
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_save`;
+;
+
+DELIMITER $$
+CREATE PROCEDURE `spc_reference_save`(
+ IN p_id INT(11),
+ IN p_typecode VARCHAR(100),
+ IN p_parentid INT(11),
+ IN p_parenttypeid INT(11),
+ IN p_description VARCHAR(200),
+ IN p_active TINYINT(4),
+ IN p_dependency VARCHAR(200),
+ IN p_defaultvalue TINYINT(4),
+ IN p_projectper DECIMAL(9,3),
+ IN p_stageper DECIMAL(9,3),
+ IN p_departmentid INT(11),
+ IN p_sequenceno INT(11),
+ IN p_modelid varchar(200),
+ IN p_isrelatedtopayment TINYINT(4),
+ IN p_iscustomersignoffrequired TINYINT(4), 
+ IN p_notifyinternaluser TINYINT(4),
+ IN p_companyid INT(11),
+ IN p_userid INT(11),
+ OUT out_id INT )
+BEGIN
+	SET @action = null;
+    SET @prjCnt = null;
+    
+    SELECT count(*) INTO @prjCnt FROM project WHERE companyid = p_companyid;
+	IF(p_defaultvalue = 1) THEN
+		UPDATE reference SET defaultvalue = 0 WHERE typecode = p_typecode;
+    END IF;
+	IF(NULLIF(p_id, '0') IS NULL) THEN
+		INSERT INTO reference(typecode, parentid, parenttypeid, description, active, dependency,defaultvalue,projectper,
+        stageper, createddate, modifieddate, departmentid, sequenceno, modelid, isrelatedtopayment, iscustomersignoffrequired,
+        notifyinternaluser,companyid)
+		VALUES (p_typecode, p_parentid, p_parenttypeid, p_description, p_active,p_dependency,p_defaultvalue,p_projectper,
+        p_stageper, now(), now(),p_departmentid, p_sequenceno, p_modelid, p_isrelatedtopayment, p_iscustomersignoffrequired,
+        p_notifyinternaluser, p_companyid);
+		
+		SET @action = 'INSERT';
+        
+        IF(p_typecode = 'ProMilestones') THEN
+			IF(@prjCnt > 0) THEN
+				SET @row_number = 0;
+				
+				DROP TABLE IF EXISTS tempproject;
+				CREATE TEMPORARY TABLE tempproject
+				
+				SELECT (@row_number:=@row_number + 1) AS num, id as projectid from (
+					SELECT 
+						id
+					FROM project
+				) 
+				as tblproject;
+
+				BEGIN
+					DECLARE n INT DEFAULT 0;
+					DECLARE i INT DEFAULT 0; 
+					SELECT COUNT(*) FROM tempproject INTO n;
+
+					WHILE i < n DO
+						SET @projectid = NULL;
+						SELECT projectid INTO @projectid FROM tempproject WHERE num = i + 1;
+
+						SET @projectdetailid = null;
+						 CALL spc_projectdetail_save( 	
+							NULL,
+							@projectid,
+							(SELECT id FROM reference WHERE description = p_description LIMIT 1),
+							p_description,
+							p_parentid,
+							null,
+							null,
+							NULL,
+							NULL,
+							0,
+							Null,
+							NULL,
+							NULL,
+							NULL,
+							NULL,
+							NULL,
+							p_departmentid,
+							0,
+							NULL,
+							1,
+							0,
+							NULL,
+							p_companyid,
+							p_userid,
+							@projectdetailid
+						 );
+
+						SET i = i + 1;
+					END WHILE;
+				END;
+			END IF;
+        END IF;
+	
+	ELSE
+		UPDATE reference
+		SET typecode = p_typecode, 
+			parentid = p_parentid, 
+            parenttypeid = p_parenttypeid, 
+			description = p_description,
+            active = p_active,
+            dependency = p_dependency,
+            defaultvalue = p_defaultvalue,
+            projectper = p_projectper,
+            stageper = p_stageper,
+            modifieddate = now(),
+            departmentid = p_departmentid,
+            sequenceno = p_sequenceno,
+            modelid = p_modelid,
+            isrelatedtopayment = p_isrelatedtopayment,
+            iscustomersignoffrequired = p_iscustomersignoffrequired,
+            notifyinternaluser = p_notifyinternaluser,
+			companyid = p_companyid,
+			id = LAST_INSERT_ID(id)
+			
+		WHERE id = p_id
+		AND companyid = p_companyid;
+		
+		SET @action = 'UPDATE';
+        
+        IF(@prjCnt > 0) THEN
+			SET @master = null;
+			SELECT master INTO @master FROM referencetype WHERE typecode = p_typecode;
+			
+			IF(@master = 'ProjectMaster') THEN
+				UPDATE project_detail
+				SET stagename = p_description
+				-- stagecompletionpercentage = p_stageper,
+				-- projectweightage = p_projectper
+				WHERE stageid = p_id;
+			END IF;
+		END IF;
+	END IF;
+	
+	SELECT LAST_INSERT_ID() INTO OUT_ID;
+	
+	-- record log
+   CALL spc_commonlog_save(p_companyid, 'reference', out_id, @action, p_userid);
+
+END$$
+
+DELIMITER ;
+;
+
+
+
