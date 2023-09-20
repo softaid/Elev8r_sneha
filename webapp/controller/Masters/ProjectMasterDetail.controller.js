@@ -29,6 +29,8 @@ sap.ui.define([
             // bind Pipeline dropdown
             commonFunction.getReferenceStages("ProMilestones", "parentStageModel", this);
 
+            commonFunction.getReferenceStages("RefType", "refTypeModel", this);
+
             // get all departments
             commonFunction.getAllDepartments("departmentModel", this);
 
@@ -77,6 +79,10 @@ sap.ui.define([
             var currentContext = this;
             var oBundle = this.getModel("i18n").getResourceBundle()
             return oBundle
+        },
+
+        typeChanged : function(oEvent){
+            console.log(oEvent.mParameters);
         },
 
         getSwitchValue: function (oEvent) {
