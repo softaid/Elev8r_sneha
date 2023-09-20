@@ -188,6 +188,15 @@
                                     </Slider>
                                 </form:fields>
                             </form:FormElement> 
+                            <form:FormElement label="Remarks">
+                                <form:fields>
+                                 <Input id="Remark" value="{DetailModel>/stagecompletionpercentage}"/>
+                                </form:fields>
+                            </form:FormElement> 
+                            
+
+
+
                               <form:FormElement label="Upload Image">
                                         <form:fields>
                                             <u:FileUploader

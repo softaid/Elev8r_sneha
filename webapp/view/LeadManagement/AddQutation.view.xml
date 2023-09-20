@@ -214,7 +214,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'leadSourceModel>/modelData',
+                      1                          path: 'leadSourceModel>/modelData',
                                                 sorter: { path: 'id' }
                                             }">
                                         <core:Item key="{leadSourceModel>id}" text="{leadSourceModel>description}" />
