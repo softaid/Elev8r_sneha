@@ -4,9 +4,8 @@ DELETE FROM `db_elev8r_local`.`referencetype` WHERE (`typecode` = 'ProjType');
 INSERT INTO `db_elev8r_local`.`referencetype` (`typecode`, `typename`, `description`, `master`, `createddate`, `modifieddate`, `companyid`) VALUES ('RefType', 'Reference Type', 'Reference Type', 'ReferenceMaster', '2023-09-19 00:00:00', '2023-09-19 00:00:00', '27');
 INSERT INTO `db_elev8r_local`.`reference` (`id`, `typecode`, `description`, `createddate`, `modifieddate`, `active`, `defaultvalue`, `companyid`) VALUES ('387', 'RefType', 'Stage', '2023-09-19 02:49:00', '2023-09-19 02:49:00', '1', '1', '27');
 INSERT INTO `db_elev8r_local`.`reference` (`id`, `typecode`, `description`, `createddate`, `modifieddate`, `active`, `defaultvalue`, `companyid`) VALUES ('388', 'RefType', 'Activity', '2023-09-19 02:49:00', '2023-09-19 02:49:00', '1', '1', '27');
+INSERT INTO `db_elev8r_local`.`reference` (`id`, `typecode`, `description`, `createddate`, `modifieddate`, `active`, `defaultvalue`) VALUES ('400', 'RefType', 'Attribute', '2023-09-19 02:49:00', '2023-09-19 02:49:00', '1', '1');
 
-ALTER TABLE `db_elev8r_local`.`reference` 
-CHANGE COLUMN `parenttypecode` `parenttypeid` INT(11) NULL DEFAULT NULL ;
 
 ALTER TABLE `db_elev8r_local`.`reference` 
 ADD COLUMN `isrelatedtopayment` TINYINT(4) NULL AFTER `modelid`,
@@ -15,16 +14,20 @@ ADD COLUMN `notifyinternaluser` TINYINT(4) NULL AFTER `iscustomersignoffrequired
 CHANGE COLUMN `extendeddescriptioin` `dependency` VARCHAR(200) NULL DEFAULT NULL ,
 CHANGE COLUMN `grouptitle` `statusid` INT(11) NULL DEFAULT NULL ;
 
+ALTER TABLE `db_elev8r_local`.`reference` 
+ADD COLUMN `stgtypeid` INT(11) NULL AFTER `iscustomersignoffrequired`;
+
 
 DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_save`;
 ;
 
 DELIMITER $$
-CREATE PROCEDURE `spc_reference_save`(
+CREATE PROCEDURE db_elev8r_local.`spc_reference_save`(
  IN p_id INT(11),
  IN p_typecode VARCHAR(100),
  IN p_parentid INT(11),
- IN p_parenttypeid INT(11),
+ IN p_type VARCHAR(20),
+ IN p_stgtypeid INT(11),
  IN p_description VARCHAR(200),
  IN p_active TINYINT(4),
  IN p_dependency VARCHAR(200),
@@ -49,10 +52,10 @@ BEGIN
 		UPDATE reference SET defaultvalue = 0 WHERE typecode = p_typecode;
     END IF;
 	IF(NULLIF(p_id, '0') IS NULL) THEN
-		INSERT INTO reference(typecode, parentid, parenttypeid, description, active, dependency,defaultvalue,projectper,
+		INSERT INTO reference(typecode, parentid, type, stgtypeid, description, active, dependency,defaultvalue,projectper,
         stageper, createddate, modifieddate, departmentid, sequenceno, modelid, isrelatedtopayment, iscustomersignoffrequired,
         notifyinternaluser,companyid)
-		VALUES (p_typecode, p_parentid, p_parenttypeid, p_description, p_active,p_dependency,p_defaultvalue,p_projectper,
+		VALUES (p_typecode, p_parentid, p_type, p_stgtypeid, p_description, p_active,p_dependency,p_defaultvalue,p_projectper,
         p_stageper, now(), now(),p_departmentid, p_sequenceno, p_modelid, p_isrelatedtopayment, p_iscustomersignoffrequired,
         p_notifyinternaluser, p_companyid);
 		
@@ -120,7 +123,8 @@ BEGIN
 		UPDATE reference
 		SET typecode = p_typecode, 
 			parentid = p_parentid, 
-            parenttypeid = p_parenttypeid, 
+            type = p_type, 
+            stgtypeid = p_stgtypeid,
 			description = p_description,
             active = p_active,
             dependency = p_dependency,
@@ -167,4 +171,321 @@ DELIMITER ;
 ;
 
 
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_selectbytypecode`;
+;
 
+DELIMITER $$
+CREATE PROCEDURE db_elev8r_local.`spc_reference_selectbytypecode`(
+	IN p_typecode varchar(20)
+)
+BEGIN
+	
+		SELECT 
+			id,
+			typecode,
+            parentid, 
+            type, 
+            stgtypeid,
+            description,
+            active,
+            dependency,
+            departmentid,
+            defaultvalue,
+            displayorder,
+			projectper,
+            stageper,
+            sequenceno,
+            isrelatedtopayment,
+            iscustomersignoffrequired,
+			notifyinternaluser
+		FROM
+			`reference`
+		WHERE
+			typecode = p_typecode
+            order by defaultvalue DESC;
+END$$
+
+DELIMITER ;
+;
+
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_bytypecodeandmodelid`;
+;
+
+DELIMITER $$
+CREATE PROCEDURE db_elev8r_local.`spc_reference_bytypecodeandmodelid`(
+	IN p_modelid INT(11)
+   -- IN p_typecode VARCHAR(100)
+)
+BEGIN
+    
+    SET @@sql_mode = '';
+    SET @modelid = null;
+     SET @finalmodelid = null;
+    
+    select id into @modelid from reference where typecode="LftMdl" limit 1;
+    select  IF (p_modelid <> 0,p_modelid,@modelid) into @finalmodelid;
+    
+	SELECT 
+		id,
+		typecode,
+		parentid, 
+		type, 
+        stgtypeid,
+		description,
+		active,
+		dependency,
+		departmentid,
+		defaultvalue,
+		displayorder,
+		projectper,
+		stageper,
+		sequenceno,
+		isrelatedtopayment,
+		iscustomersignoffrequired,
+		notifyinternaluser		
+	FROM
+		`reference`
+	WHERE
+		-- typecode = p_typecode AND 
+	find_in_set( @finalmodelid,modelid) group by typecode;
+	   -- modelid = p_modelid;
+		   
+		
+    SET @carheight = null;
+    SET @pitdepth = null;
+    SET @overhead = null;
+	SET @openingheight = null;
+
+    
+	SET @model = null;
+    SELECT description INTO @model FROM reference WHERE id =  @finalmodelid;
+    
+    IF (@model = "RM Series") THEN
+		SELECT 2100, 1400, 4200,2000  INTO @carheight, @pitdepth, @overhead,@openingheight;
+    ELSEIF(@model = "VL Series") THEN
+		SELECT 2100, 1400, 4200,2000  INTO @carheight, @pitdepth, @overhead,@openingheight;
+    ELSEIF(@model = "SL Series") THEN
+		SELECT 2000, 150, 3000,2000  INTO @carheight, @pitdepth, @overhead,@openingheight;
+    END IF;
+    
+    SELECT 		
+		@carheight as carheight,
+		@pitdepth as pitdepth,
+		@overhead as overhead,
+        @finalmodelid as modelid;
+
+	
+END$$
+
+DELIMITER ;
+;
+
+
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_select`;
+;
+
+DELIMITER $$
+CREATE PROCEDURE db_elev8r_local.`spc_reference_select`(
+	IN p_id varchar(30)
+)
+BEGIN
+	
+		SELECT 
+			id,
+			typecode,
+            IFNULL(parentid,0)as parentid,
+            type, 
+            stgtypeid,
+            description,
+            active,
+            dependency,
+            departmentid,
+            defaultvalue,
+            displayorder,
+			projectper,
+            stageper,
+            sequenceno,
+            isrelatedtopayment,
+            iscustomersignoffrequired,
+			notifyinternaluser
+		FROM
+			`reference`
+		WHERE
+			id = p_id;
+END$$
+
+DELIMITER ;
+;
+
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_selectbygroup`;
+;
+
+DELIMITER $$
+CREATE PROCEDURE db_elev8r_local.`spc_reference_selectbygroup`(
+	IN typecode varchar(20)
+)
+BEGIN
+	
+		SELECT 
+			id,
+			typecode,
+            parentid, 
+            type, 
+            stgtypeid,
+            description,
+            active,
+            dependency,
+            defaultvalue,
+            displayorder,
+			projectper,
+            stageper,
+            sequenceno,
+            isrelatedtopayment,
+            iscustomersignoffrequired,
+			notifyinternaluser
+		FROM
+			reference
+		WHERE
+			parenttypecode = p_typecode and
+            deleted <> 1
+		ORDER BY defaultvalue DESC;
+END$$
+
+DELIMITER ;
+;
+
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_selectbytypecodedepartment`;
+;
+
+DELIMITER $$
+CREATE PROCEDURE db_elev8r_local.`spc_reference_selectbytypecodedepartment`(
+	IN p_typecode varchar(20),
+    IN p_departmentid  INT(11)
+)
+BEGIN
+	
+		SELECT 
+			id,
+			typecode,
+            parentid, 
+            type, 
+            stgtypeid,
+            description,
+            active,
+            dependency,
+            defaultvalue,
+            displayorder,
+			projectper,
+            stageper,
+            sequenceno,
+            isrelatedtopayment,
+            iscustomersignoffrequired,
+			notifyinternaluser
+		FROM
+			`reference`
+		WHERE
+			typecode = p_typecode AND departmentid=p_departmentid
+            order by defaultvalue DESC;
+END$$
+
+DELIMITER ;
+;
+
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_reference_selectbytypecodeandparenttype`;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE PROCEDURE `spc_reference_selectbytypecodeandparenttype`(
+	IN p_typecode varchar(20),
+    IN p_type VARCHAR(20)
+)
+BEGIN
+	
+		SELECT 
+			id,
+			typecode,
+            parentid, 
+            type, 
+            stgtypeid,
+            description,
+            active,
+            dependency,
+            departmentid,
+            defaultvalue,
+            displayorder,
+			projectper,
+            stageper,
+            sequenceno,
+            isrelatedtopayment,
+            iscustomersignoffrequired,
+			notifyinternaluser
+		FROM
+			`reference`
+		WHERE
+			typecode = p_typecode
+            AND type = p_type
+            order by defaultvalue DESC;
+END$$
+
+DELIMITER ;
+
+INSERT INTO `db_elev8r_local`.`referencetype` (`typecode`, `typename`, `description`, `master`, `createddate`, `modifieddate`, `companyid`) VALUES ('InputAttribute', 'InputAttribute', 'Input type attributes', 'InputAttribute', '2023-09-20 04:31:00', '2023-09-20 04:31:00', '27');
+INSERT INTO `db_elev8r_local`.`reference` (`id`, `typecode`, `description`, `createddate`, `modifieddate`, `active`, `defaultvalue`) VALUES ('391', 'InputAttribute', 'Boolean', '2023-09-20 12:42:25', '2023-09-20 12:42:25', '1', '1');
+INSERT INTO `db_elev8r_local`.`reference` (`id`, `typecode`, `description`, `createddate`, `modifieddate`, `active`, `defaultvalue`) VALUES ('392', 'InputAttribute', 'Date', '2023-09-20 12:42:25', '2023-09-20 12:42:25', '1', '1');
+INSERT INTO `db_elev8r_local`.`reference` (`id`, `typecode`, `description`, `createddate`, `modifieddate`, `active`, `defaultvalue`) VALUES ('393', 'InputAttribute', 'Remark', '2023-09-20 12:42:25', '2023-09-20 12:42:25', '1', '1');
+INSERT INTO `db_elev8r_local`.`reference` (`id`, `typecode`, `description`, `createddate`, `modifieddate`, `active`, `defaultvalue`) VALUES ('394', 'InputAttribute', 'Number', '2023-09-20 12:42:25', '2023-09-20 12:42:25', '1', '1');
+INSERT INTO `db_elev8r_local`.`reference` (`id`, `typecode`, `description`, `createddate`, `modifieddate`, `active`, `defaultvalue`) VALUES ('395', 'InputAttribute', 'Amount', '2023-09-20 12:42:25', '2023-09-20 12:42:25', '1', '1');
+INSERT INTO `db_elev8r_local`.`reference` (`id`, `typecode`, `description`, `createddate`, `modifieddate`, `active`, `defaultvalue`) VALUES ('396', 'InputAttribute', 'Attachment', '2023-09-20 12:42:25', '2023-09-20 12:42:25', '1', '1');
+INSERT INTO `db_elev8r_local`.`reference` (`id`, `typecode`, `description`, `createddate`, `modifieddate`, `active`, `defaultvalue`) VALUES ('397', 'InputAttribute', 'Tristate', '2023-09-20 12:42:25', '2023-09-20 12:42:25', '1', '1');
+INSERT INTO `db_elev8r_local`.`reference` (`id`, `typecode`, `description`, `createddate`, `modifieddate`, `active`, `defaultvalue`) VALUES ('398', 'InputAttribute', 'Signature', '2023-09-20 12:42:25', '2023-09-20 12:42:25', '1', '1');
+INSERT INTO `db_elev8r_local`.`reference` (`id`, `typecode`, `description`, `createddate`, `modifieddate`, `active`, `defaultvalue`) VALUES ('399', 'InputAttribute', 'Header', '2023-09-20 12:42:25', '2023-09-20 12:42:25', '1', '1');
+
+
+ALTER TABLE `db_elev8r_local`.`reference` 
+CHANGE COLUMN `parenttypecode` `type` VARCHAR(20) NULL DEFAULT NULL ;
+
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_selectbytypecodeandparenttype`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_reference_selectbytypecodeandparenttype`(
+	IN p_typecode varchar(20),
+    IN p_parenttype VARCHAR(20)
+)
+BEGIN
+	
+		SELECT 
+			id,
+			typecode,
+            parentid, 
+            parenttypeid, 
+            stgtypeid,
+            description,
+            active,
+            dependency,
+            departmentid,
+            defaultvalue,
+            displayorder,
+			projectper,
+            stageper,
+            sequenceno,
+            isrelatedtopayment,
+            iscustomersignoffrequired,
+			notifyinternaluser
+		FROM
+			`reference`
+		WHERE
+			typecode = p_typecode
+            AND type = p_parenttype
+            order by defaultvalue DESC;
+END$$
+
+DELIMITER ;
+;
+
+
+ALTER TABLE `db_elev8r_local`.`reference` 
+ADD COLUMN `attributetypes` VARCHAR(200) NULL AFTER `notifyinternaluser`;

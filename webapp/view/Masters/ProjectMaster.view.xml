@@ -47,8 +47,8 @@
                                             <columns  id="column">
                                                 <Column><Text text ="{i18n>projectID}" /></Column>
                                                 <Column><Text text ="{i18n>projectDescription}" /></Column>
-                                                <Column minScreenWidth="Tablet"  demandPopin="true"><Text text ="{i18n>Active}" /></Column>
-                                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>Default}" /></Column>
+                                                <Column visible="{visibleModel>/visible}" minScreenWidth="Tablet"  demandPopin="true"><Text text ="{i18n>Active}" /></Column>
+                                                <Column visible="{visibleModel>/visible}" minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>Default}" /></Column>
                                                
                                                 <Column visible="{visibleModel>/visible}" minScreenWidth=""  demandPopin="false" >
                                                 <Text text ="Project Per" /></Column>
