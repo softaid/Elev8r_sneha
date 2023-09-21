@@ -3,6 +3,7 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
 	'sap/ui/model/Sorter',
 	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/Project.service',
+	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/QCCheckList.service',
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/services/Company/ManageUser.service',
@@ -10,7 +11,7 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 	'sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter',
 
-], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, ManageUserService, MessageToast, commonFunction, formatter) {
+], function (JSONModel, BaseController, Sorter, Projectservice,QCCheckListservice, xlsx, commonService, ManageUserService, MessageToast, commonFunction, formatter) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivity", {
@@ -41,9 +42,37 @@ sap.ui.define([
 			this.getView().setModel(model, "tblModel");
 
 			// set empty model to view		
-			var niModel = new JSONModel();
-			niModel.setData({});
-			this.getView().setModel(niModel, "nitblmodel");
+			// var niModel = new JSONModel();
+			// niModel.setData({});
+			// this.getView().setModel(niModel, "nitblmodel");
+
+			var activitiestblmodel = new JSONModel();
+			activitiestblmodel.setData({});
+			this.getView().setModel(activitiestblmodel, "activitiestblmodel");
+
+			var paymenttblmodel = new JSONModel();
+			paymenttblmodel.setData({});
+			this.getView().setModel(paymenttblmodel, "paymenttblmodel");
+
+			var attachmenttblmodel = new JSONModel();
+			attachmenttblmodel.setData({});
+			this.getView().setModel(attachmenttblmodel, "attachmenttblmodel");
+
+			var qctblmodel = new JSONModel();
+			qctblmodel.setData([
+				{description :"Motor", parameter:"shaft width", status:"yes", remark :"11"},
+				{description :"Motor", parameter:"shaft Depth", status:"yes", remark :"11"},
+				{description :"Hoistway", parameter:"Fan Fixation",  status:"yes", remark :"11"},
+				{description :"Hoistway", parameter:"Oil Can",  status:"yes", remark :"11"},
+				{description :"Hoistway", parameter:"shaft length",  status:"yes", remark :"11"},
+				{description :"Car Top", parameter:"Car frame",  status:"yes", remark :"11"},
+
+		]);
+			this.getView().setModel(qctblmodel, "qcModel");
+
+			var ganttcharttblmodel = new JSONModel();
+			ganttcharttblmodel.setData({});
+			this.getView().setModel(ganttcharttblmodel, "ganttcharttblmodel");
 
 			var model = new JSONModel();
 			model.setData({});
@@ -74,7 +103,8 @@ sap.ui.define([
 			// this.getAllProject();
 			this.getRole();
 			this.getAllDepartment();
-
+			this.getQcdetail(2);
+			
 			let subcontractorModel = new JSONModel();
 			subcontractorModel.setData(commonFunction.getAllSubcontractors(this));
 			this.getView().setModel(subcontractorModel, "subcontractorModel");
@@ -310,6 +340,88 @@ sap.ui.define([
 				nitblmodel.setData(data[0]);
 				console.log("--------------nitblmodel------------", nitblmodel);
 				nitblmodel.refresh();
+
+			});
+		},
+
+		// get Activities details of project
+		getActivitesdetail: function (projectid) {
+			var currentContext = this;
+			Projectservice.getNIdetail({ id: projectid }, function (data) {
+				console.log("data", data);
+				data[0].map(function (value, index) {
+
+					data[0][index].activestatus = value.isactive == 1 ? "Active" : "In Active";
+					data[0][index].actualstartdate = data[0]?.[index]?.actualstartdate ?? null
+					data[0][index].actualenddate = data[0]?.[index]?.actualenddate ?? null;
+
+				});
+				var nitblmodel = currentContext.getView().getModel("nitblmodel");
+				nitblmodel.setData(data[0]);
+				console.log("--------------nitblmodel------------", nitblmodel);
+				nitblmodel.refresh();
+
+			});
+		},
+
+
+
+		// get Payment details of project
+		getPaymentdetail: function (projectid) {
+			var currentContext = this;
+			Projectservice.getNIdetail({ id: projectid }, function (data) {
+				console.log("data", data);
+				data[0].map(function (value, index) {
+					data[0][index].activestatus = value.isactive == 1 ? "Active" : "In Active";
+					data[0][index].actualstartdate = data[0]?.[index]?.actualstartdate ?? null
+					data[0][index].actualenddate = data[0]?.[index]?.actualenddate ?? null;
+
+				});
+				var nitblmodel = currentContext.getView().getModel("nitblmodel");
+				nitblmodel.setData(data[0]);
+				console.log("--------------nitblmodel------------", nitblmodel);
+				nitblmodel.refresh();
+
+			});
+		},
+
+		// Get attachment details of projects
+		getAttachmentdetail: function (projectid) {
+			var currentContext = this;
+			Projectservice.getNIdetail({ id: projectid }, function (data) {
+				console.log("data", data);
+				data[0].map(function (value, index) {
+
+					data[0][index].activestatus = value.isactive == 1 ? "Active" : "In Active";
+					data[0][index].actualstartdate = data[0]?.[index]?.actualstartdate ?? null
+					data[0][index].actualenddate = data[0]?.[index]?.actualenddate ?? null;
+
+				});
+				var nitblmodel = currentContext.getView().getModel("nitblmodel");
+				nitblmodel.setData(data[0]);
+				console.log("--------------nitblmodel------------", nitblmodel);
+				nitblmodel.refresh();
+
+			});
+		},
+
+  
+        // get QC check list details of project
+		getQcdetail: function (projectid) {
+			var currentContext = this;
+			QCCheckListservice.getQcchecklist({ id: projectid }, function (data) {
+				console.log("data", data);
+				data[0].map(function (value, index) {
+
+					data[0][index].activestatus = value.isactive == 1 ? "Active" : "In Active";
+					data[0][index].actualstartdate = data[0]?.[index]?.actualstartdate ?? null
+					data[0][index].actualenddate = data[0]?.[index]?.actualenddate ?? null;
+
+				});
+				var qcModel = currentContext.getView().getModel("qcModel");
+				qcModel.setData(data[0]);
+				console.log("--------------nitblmodel------------", qcModel);
+				qcModel.refresh();
 
 			});
 		},
