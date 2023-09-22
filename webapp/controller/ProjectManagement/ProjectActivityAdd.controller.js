@@ -22,6 +22,7 @@ sap.ui.define([
 
 			this.bus.subscribe("billofmaterial", "setDetailPage", this.setDetailPage, this);
 			this.bus.subscribe("nistatus", "setDetailNIPage", this.setDetailNIPage, this);
+			this.bus.subscribe("attributestatus", "setDetailAttributePage", this.setDetailAttributePage, this);
 			this.bus.subscribe("projectdetail", "handleProjectDetails", this.handleProjectDetailsList, this);
 			this.bus.subscribe("billofmaterial", "onAddbillofmaterial", this.onAddbillofmaterial, this);
 
@@ -68,7 +69,7 @@ sap.ui.define([
 				{description :"Car Top", parameter:"Car frame",  status:"yes", remark :"11"},
 
 		]);
-			this.getView().setModel(qctblmodel, "qcModel");
+			this.getView().setModel(qctblmodel, "attributeModel");
 
 			var ganttcharttblmodel = new JSONModel();
 			ganttcharttblmodel.setData({});
@@ -103,7 +104,7 @@ sap.ui.define([
 			// this.getAllProject();
 			this.getRole();
 			this.getAllDepartment();
-			this.getQcdetail(2);
+			// this.getQcdetail(2);
 			
 			let subcontractorModel = new JSONModel();
 			subcontractorModel.setData(commonFunction.getAllSubcontractors(this));
@@ -169,12 +170,21 @@ sap.ui.define([
 
 			this.bus.publish("billofmaterial", "setDetailPage", { viewName: "ProjectActivityAddDetail", viewModel: { projectid: projectModel.id } });
 		},
-
+		
 		onAddNewRowNI: function () {
 			this.bus = sap.ui.getCore().getEventBus();
 			let projectModel = this.getView().getModel("projectModel").getData();
 
 			this.bus.publish("nistatus", "setDetailNIPage", { viewName: "ProjectActivityNIAddDetail", viewModel: { projectid: projectModel.id } });
+		},
+
+		onAddNewRowAttribute: function () {
+			this.bus = sap.ui.getCore().getEventBus();
+			let projectModel = this.getView().getModel("attributeModel").getData();
+
+			// this.bus.publish("Attributestatus", "setDetailAttributePage", { viewName: "ProjectActivityAttribute", viewModel: { projectid: 2 } });
+			this.bus.publish("attributestatus", "setDetailAttributePage", { viewName: "ProjectActivityAttribute", viewModel:  { projectid: 2 }  });
+
 		},
 
 		onListItemPress: function (oEvent) {
@@ -204,6 +214,21 @@ sap.ui.define([
 
 			this.bus = sap.ui.getCore().getEventBus();
 			this.bus.publish("nistatus", "setDetailNIPage", { viewName: "ProjectActivityNIAddDetail", viewModel: oDayHistory });
+
+		},
+
+
+		onListItemPressAttribute: function (oEvent) {
+
+			let oDayHistory = oEvent.getSource().getBindingContext("attributeModel").getObject();
+			let projectModel = this.getView().getModel("attributeModel").getData();
+			oDayHistory.projectid = projectModel.id;
+			oDayHistory.isactive = oDayHistory.isactive === 1 ? true : false;
+			oDayHistory.isstd = oDayHistory.isstd === 1 ? true : false;
+			oDayHistory.isstarted = oDayHistory.actualstartdate != null ? true : false;
+
+			this.bus = sap.ui.getCore().getEventBus();
+			this.bus.publish("attributestatus", "setDetailAttributePage", { viewName: "ProjectActivityAttribute", viewModel:  { data: oDayHistory }  });
 
 		},
 
@@ -278,7 +303,7 @@ sap.ui.define([
 					data[0][0].salesmanager != null ? currentContext.getView().byId("salesmanager").setSelectedKeys([...data[0][0].salesmanager]) : "data not available";
 					data[0][0].salesengineer != null ? currentContext.getView().byId("salesenginner").setSelectedKeys([...data[0][0].salesengineer]) : "data not available";
 					currentContext.getProjectdetail(data[0][0].id);
-					currentContext.getNIdetail(data[0][0].id);
+					//currentContext.getNIdetail(data[0][0].id);
 				});
 
 			
@@ -311,11 +336,9 @@ sap.ui.define([
 			Projectservice.getProjectdetail({ id: projectid }, function (data) {
 				console.log("data", data);
 				data[0].map(function (value, index) {
-
 					data[0][index].activestatus = value.isactive == 1 ? "Active" : "In Active";
 					data[0][index].actualstartdate = data[0]?.[index]?.actualstartdate ?? null;
 					data[0][index].actualenddate = data[0]?.[index]?.actualenddate ?? null;
-
 				});
 				var tblModel = currentContext.getView().getModel("tblModel");
 				tblModel.setData(data[0]);
@@ -418,10 +441,10 @@ sap.ui.define([
 					data[0][index].actualenddate = data[0]?.[index]?.actualenddate ?? null;
 
 				});
-				var qcModel = currentContext.getView().getModel("qcModel");
-				qcModel.setData(data[0]);
-				console.log("--------------nitblmodel------------", qcModel);
-				qcModel.refresh();
+				var attributeModel = currentContext.getView().getModel("attributeModel");
+				attributeModel.setData(data[0]);
+				console.log("--------------nitblmodel------------", attributeModel);
+				attributeModel.refresh();
 
 			});
 		},
@@ -644,6 +667,28 @@ sap.ui.define([
 
 		},
 
+		setDetailAttributePage: function (channel, event, data) {
+
+			this.detailView = sap.ui.view({
+				viewName: "sap.ui.elev8rerp.componentcontainer.view.ProjectManagement." + data.viewName,
+				type: "XML"
+			});
+
+			let model = new JSONModel();
+			model.setData({ ...data.viewModel });
+
+			// this.getView().setModel(model, "tblModel");
+
+			this.detailView.setModel(model, "AttributeDetailModel");
+			// this.detailView.setModel(model, "DetailModel");
+
+			this.oFlexibleColumnLayout.removeAllMidColumnPages();
+			this.oFlexibleColumnLayout.addMidColumnPage(this.detailView);
+			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.TwoColumnsBeginExpanded);
+			// let DetailModeldata = this.getView().getModel("AttributeDetailModel").getData();
+
+		},
+
 
 
 		// function for calculate end date or completion day
@@ -801,39 +846,6 @@ sap.ui.define([
 
 						endDate.setDate(endDate.getDate() + (input));
 
-
-						// let endDate1 = new Date(commonFunction.getDate(startdate));
-
-						// endDate1.setDate(endDate1.getDate() + (36.01));
-
-						// let endDate2 = new Date(commonFunction.getDate(startdate));
-						// endDate2.setHours(0, 0, 0, 0);
-
-						// endDate2.setDate(endDate2.getDate() + (35.99999));
-
-						// let endDate3 = new Date(commonFunction.getDate(startdate));
-						//  endDate3.setHours(0, 0, 0, 0);
-
-						// endDate3.setDate(endDate3.getDate() + (36));
-
-						// let endDate4 = new Date(commonFunction.getDate(startdate));
-						// endDate4.setHours(0, 0, 0, 0);
-
-						// endDate4.setDate(endDate4.getDate() + (36.00));
-
-						// let endDate5 = new Date(commonFunction.getDate(startdate));
-						// endDate5.setHours(0, 0, 0, 0);
-
-						// endDate5.setDate(endDate5.getDate() + (44.9));
-
-						// let endDate6 = new Date(commonFunction.getDate(startdate));
-						// endDate6.setHours(0, 0, 0, 0);
-
-						// endDate6.setDate(endDate6.getDate() + (45.00));
-						
-						// let endDate7 = new Date(commonFunction.getDate(startdate));
-
-						// endDate7.setDate(endDate7.getDate() + (35));
 
 
 						let originalDate = new Date(endDate);

@@ -1,0 +1,366 @@
+
+
+<mvc:View
+	xmlns:c="sap.ui.core"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivityAttribute"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	height="100%">
+    <f:DynamicPage toggleHeaderOnTitleClick="false">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Attributes Details"/>
+                </f:heading>
+                <f:actions>
+						<ToolbarSpacer/>
+						 <Button
+							text="{i18n>saveButtonText}"
+                            type="Emphasized"
+                            press="onSave" id="btnSave"/>
+						<Button
+							text="{i18n>deleteButtonText}"
+							type="Emphasized"
+                            press="onDelete"
+							id= "btnDelete"/>						
+					</f:actions>
+					<f:navigationActions>
+						<Button
+								icon="sap-icon://decline"
+								type="Transparent" press="onCancel" />
+					</f:navigationActions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>	
+            <VBox fitContainer="true">
+                <form:Form editable="true">
+                    <form:title>
+                        <core:Title text="" />
+                    </form:title>
+                    <form:layout>
+                        <form:ResponsiveGridLayout
+                            labelSpanXL="2"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="2"
+                            columnsL="1"
+                            columnsM="1"
+                            singleContainerFullSize="false" />
+                    </form:layout>
+                    <form:formContainers>
+                        <form:FormContainer>
+                            <form:formElements>
+
+                            <form:FormElement  label="Activity">
+                                   <form:fields>
+                                    <Select id="activity"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{AttributeDetailModel>/activityid}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'activityModel>/',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{activityModel>id}" text="{activityModel>stagename}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+
+
+                             <!-- <form:FormElement label="Activity Name">
+                                    <form:fields>
+                                        <Input id="activity" value="{AttributeDetailModel>/stagename}"/>
+                                    </form:fields>
+                                </form:FormElement> -->
+
+                                 <form:FormElement label="Attribute Name">
+                                    <form:fields>
+                                        <Input id="attribute" value="{AttributeDetailModel>/stagename}"/>
+                                    </form:fields>
+                                </form:FormElement>
+
+                              <form:FormElement label="Attribute Type ">
+                                       <form:fields>
+                                            <MultiComboBox id="attributetype"
+                                                    required="true" 
+                                                    selectionChange=""
+                                                    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                           path: 'attributeModel>/modelData',
+                                                           sorter: { path: 'createdby' }
+                                                           }">
+                                                    <core:Item key="{attributeModel>id}" text="{attributeModel>description}" />
+                                                </MultiComboBox>
+                                        </form:fields>
+                                    </form:FormElement>
+
+                                  <form:FormElement label="Header">
+                                    <form:fields>
+                                        <Input id="header" value="{AttributeDetailModel>/header}"/>
+                                    </form:fields>
+                                </form:FormElement>
+
+                                  <form:FormElement id="projecttype" label="Group">
+                                   <form:fields>
+                                    <Select id="project"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{AttributeDetailModel>/departmentid}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'DepartmentModel>/',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{DepartmentModel>id}" text="{DepartmentModel>department}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+
+                                <form:FormElement label=" Date">
+                                    <form:fields>
+                                    <DatePicker id="startDate" width="100%" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}"
+                                                value="{AttributeDetailModel>/startdate}"
+                                                valueFormat="dd/MM/yyyy"
+                                                required="true"
+                                                editable="true"
+                                                 visible="true"/>
+                                        </form:fields>
+                                </form:FormElement>
+                                 <!-- <form:FormElement label="End Date">
+                                        <form:fields>
+                                    <DatePicker id="endDate" width="100%" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}"
+                                                value="{AttributeDetailModel>/enddate}"
+                                                valueFormat="dd/MM/yyyy"
+                                                required="true"
+                                                editable="false"
+                                                change="dayCalculation"/>
+                                        </form:fields>
+                                </form:FormElement> -->
+                                 <form:FormElement label="Input">
+                                    <form:fields>
+                                        <Input id="completionDay" value="{AttributeDetailModel>/completiondays}" change="dayCalculation"/>
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <form:FormElement label="Status">
+                                    <form:fields>
+                                            <!-- <Radio columns="3" valueState="Error" class="sapUiMediumMarginBottom"> -->
+                                                <RadioButton id="RB3-1" text="Yes" />
+                                                <RadioButton id="RB3-2" text=" No" />
+                                                <RadioButton id="RB3-3" text="NA" />
+                                            <!-- </Radio> -->
+                                        </form:fields>
+                                </form:FormElement>
+                                 
+                                
+                                 
+                                 <form:FormElement label=" Actual Completion Day">
+                                    <form:fields>
+                                        <Input id="actualcompletionDay" value="{AttributeDetailModel>/actualcompletiondays}"  editable="false"/>
+                                    </form:fields>
+                                </form:FormElement> 
+                                <form:FormElement label="Stage %">
+                                    <form:fields>
+                                        <Input id="StagePercent" value="{AttributeDetailModel>/stagecompletionpercentage}"/>
+                                    </form:fields>
+                                </form:FormElement>
+
+                                <!-- <form:FormElement label="Project %">
+                                    <form:fields>
+                                <Input id="projectPercent" value="{AttributeDetailModel>/projectweightage}"/>
+                                    </form:fields>
+                                </form:FormElement> -->
+
+                                  <!-- <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
+                                       <form:fields>
+                                            <Switch  state="{AttributeDetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No">
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </Switch>
+                                        </form:fields>
+                                 </form:FormElement>
+
+                                      <form:FormElement label="Is Standard">
+                                       <form:fields>
+                                            <Switch  state="{AttributeDetailModel>/isstd}" id="isstd" customTextOn="Yes" customTextOff="No" enabled="false">
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </Switch>
+                                        </form:fields>
+                                    </form:FormElement> -->
+
+                                      <!-- <form:FormElement label="Is Started">
+                                       <form:fields>
+                                            <Switch  state="{AttributeDetailModel>/isstarted}" id="isstart"
+                                            change="isstartchange" customTextOn="Yes" customTextOff="No">
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </Switch>
+                                        </form:fields>
+                                    </form:FormElement> -->
+                                      <!-- <form:FormElement label="stage Per">
+                                <form:fields>
+                                   <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
+                                        max="100" min="0" progress="true" change="onsliderchange"
+                                        showAdvancedTooltip="true" value="{AttributeDetailModel>/completionper}">
+                                        <ResponsiveScale id="rScaleWarningLevel"
+                                            tickmarksBetweenLabels="20" />
+                                    </Slider>
+                                </form:fields>
+                            </form:FormElement>  -->
+                            
+
+                              <form:FormElement label="Upload Image">
+                                        <form:fields>
+                                            <u:FileUploader
+                                                id="fileUploader"
+                                                name="myFileUpload"
+                                                tooltip="Upload Product Image"
+                                                uploadComplete="handleUploadComplete"
+                                                change="handleValueChange"
+                                                typeMissmatch="handleTypeMissmatch"
+                                                style="Emphasized"
+                                                fileType="png,jpg,gif,pdf,txt,doc,jpeg"
+                                                 multiple="true"
+                                                placeholder="Choose a document image...">
+                                            </u:FileUploader>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    <form:FormElement>
+                                        <form:fields>
+                                            <Image
+                                                src="{editDocumentCollectionModel>/image_url}"
+                                                densityAware="false"
+                                                width="10em" 
+                                                press=""
+                                                id="image">
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </Image>
+                                            <HBOX>
+                                             <Button 
+                                            text=""
+                                            type="Emphasized"
+                                            icon="sap-icon://download"
+                                              press="functiondownload"
+                                            id="btnDowimage" />
+                                              <Button
+                                                text=""
+                                                width="40%"
+                                                type="Emphasized"
+                                                icon="sap-icon://arrow-right"
+                                                press="forwardPress" id="btnFor"/>
+                                                
+                                                <Button
+                                                text=""
+                                                width="40%"
+                                                type="Emphasized"
+                                                icon="sap-icon://arrow-left"
+                                                press="backwardPress"
+                                                id= "btnBack"/> 
+                                                <Button 
+                                                text=""
+                                                width="40%"
+                                                type="Emphasized"
+                                                icon="sap-icon://delete"
+                                                press="onDeleteDocument"
+                                                id= "btndelete"/>
+                                           </HBOX>
+                                        </form:fields>
+                                    </form:FormElement>
+                                     <form:FormElement label="Upload Document">
+                                        <form:fields>
+                                            <u:FileUploader
+                                                id="fileUploaderpdf"
+                                                name="myFileUpload"
+                                                tooltip="Upload Product Document"
+                                                multiple="true"
+                                                uploadComplete="handleUploadCompletePDF"
+                                                change="handleValueChangePDF"
+                                                typeMissmatch="handleTypeMissmatch"
+                                                style="Emphasized"
+                                                fileType="pdf"
+                                                placeholder="Choose a document...">
+                                            </u:FileUploader>
+                                        </form:fields>
+                                    </form:FormElement>
+                                    
+                                      <form:FormElement label="">
+                                    <form:fields>
+                                        <Input id="inputField"  width="53%" value="{editDocumentCollectionModel>/pdf_name}"  editable="false"/>
+                                    </form:fields>
+                                </form:FormElement>
+
+                                    <form:FormElement>
+                                        <form:fields>
+                                            <HBox>
+                                      
+                                     <Button 
+                                            text=""
+                                            type="Emphasized"
+                                            icon="sap-icon://download"
+                                              press="functiondownload"
+                                            id="btnDowpdf" />
+                                             <Button
+                                                text=""
+                                                width="40%"
+                                                margin="5% 5% 5% 5%"
+                                                type="Emphasized"
+                                                icon="sap-icon://arrow-right"
+                                                press="forwardPress" id="btnForpdf"/>
+                                                <Button
+                                                text=""
+                                                width="40%"
+                                                type="Emphasized"
+                                                icon="sap-icon://arrow-left"
+                                                press="backwardPress"
+                                                id= "btnBackpdf"/> 
+                                                <Button 
+                                                text=""
+                                                width="40%"
+                                                type="Emphasized"
+                                                icon="sap-icon://delete"
+                                                press="onDeleteDocument"
+                                                id= "btndeletepdf"/>
+                                        </HBox>
+                                        </form:fields>
+                                    </form:FormElement> 
+                                         <form:FormElement label="Remarks">
+                                            <form:fields>
+                                              <TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{projectModel>/note}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+                                            </form:fields>
+                                        </form:FormElement> 
+
+        
+                            </form:formElements>
+                        </form:FormContainer>
+                    </form:formContainers>
+                </form:Form>
+            </VBox>
+        </f:content>				
+	</f:DynamicPage>
+</mvc:View>
