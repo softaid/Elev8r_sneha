@@ -130,49 +130,49 @@ sap.ui.define([
 			
 		},
 
-		functiondownload: async function (OEvent) {
-			// let checkbox = OEvent.getSource();
-			// let data = checkbox.data("mySuperExtraData");
-			let currentContext = this;
-			let document_name = "";
-			let sUrl;
+		// functiondownload: async function (OEvent) {
+		// 	// let checkbox = OEvent.getSource();
+		// 	// let data = checkbox.data("mySuperExtraData");
+		// 	let currentContext = this;
+		// 	let document_name = "";
+		// 	let sUrl;
 
-			var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
-			if (OEvent.mParameters.id.indexOf("image")!=-1 ){
-				document_name = currentContext.resultArr[tblmodel.oData.imageid].document_name;
-				sUrl=tblmodel.oData.image_url;
-			}
-			else {
-				document_name = currentContext.resultpdfArr[tblmodel.oData.pdfid].document_name;
-				sUrl=tblmodel.oData.pdf_url;
-			}
+		// 	var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
+		// 	if (OEvent.mParameters.id.indexOf("image")!=-1 ){
+		// 		document_name = currentContext.resultArr[tblmodel.oData.imageid].document_name;
+		// 		sUrl=tblmodel.oData.image_url;
+		// 	}
+		// 	else {
+		// 		document_name = currentContext.resultpdfArr[tblmodel.oData.pdfid].document_name;
+		// 		sUrl=tblmodel.oData.pdf_url;
+		// 	}
 
-			var oXHR = new XMLHttpRequest();
-			oXHR.open("GET", sUrl, true);
-			oXHR.responseType = "blob";
+		// 	var oXHR = new XMLHttpRequest();
+		// 	oXHR.open("GET", sUrl, true);
+		// 	oXHR.responseType = "blob";
 
-			oXHR.onload = function (event) {
-				var blob = oXHR.response;
+		// 	oXHR.onload = function (event) {
+		// 		var blob = oXHR.response;
 
-				// Create a temporary anchor element to initiate the download
-				var link = document.createElement("a");
-				link.href = URL.createObjectURL(blob);
-
-
-				// Set the download attribute to specify the filename for the downloaded file
-				link.setAttribute("download", document_name);
-
-				// Trigger the click event on the anchor element
-				link.click();
-
-				// Clean up - revoke the object URL and remove the anchor element after the click event has been triggered
-				URL.revokeObjectURL(link.href);
-			};
-
-			oXHR.send();
+		// 		// Create a temporary anchor element to initiate the download
+		// 		var link = document.createElement("a");
+		// 		link.href = URL.createObjectURL(blob);
 
 
-		},
+		// 		// Set the download attribute to specify the filename for the downloaded file
+		// 		link.setAttribute("download", document_name);
+
+		// 		// Trigger the click event on the anchor element
+		// 		link.click();
+
+		// 		// Clean up - revoke the object URL and remove the anchor element after the click event has been triggered
+		// 		URL.revokeObjectURL(link.href);
+		// 	};
+
+		// 	oXHR.send();
+
+
+		// },
 
 		handleValueChange: async function (oEvent) {
 
