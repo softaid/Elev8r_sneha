@@ -494,7 +494,7 @@ sap.ui.define([
 					}
 
 					// calculate day difference between start date and end date of Nextstage
-					dayDiff =model.modelData[resultRow][`${endStage}enddate`]!=null?oThis.dayCalculation(model.modelData[resultRow][`${resultColumn}enddate`],(model?.modelData[resultRow]?.[`${endStage}enddate`])):2;
+					dayDiff =model.modelData[resultRow][`${endStage}enddate`]!=null?oThis.dayCalculation(model.modelData[resultRow][`Sequence${resultColumn}enddate`],(model?.modelData[resultRow]?.[`${endStage}enddate`])):2;
 					if (dayDiff < 0) {
 						model.modelData[resultRow][result_column_field_End] = oThis.datePickerArr[resultRow][result_column_field_End];
 						MessageToast.show("start Date of Next Stage must be greater than end Date of Next Stage");

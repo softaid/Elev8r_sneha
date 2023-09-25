@@ -214,6 +214,7 @@ sap.ui.define([
 		},
 
 		getModelDefault: function () {
+
 			return {
 				id: null,
 				leadname: null,
@@ -408,12 +409,12 @@ sap.ui.define([
 			let oThis = this;
 			var model = oThis.getView().getModel("editPartyModel").oData;
 
-			model.modelid = id==undefined? model?.modelid??0:id;
-			quotationService.getReferenceBymodel({modelid:model.modelid}, function (data) {
-			           	model.carheight=data[1][0].carheight;
-						model.pitdepth=data[1][0].pitdepth;
-						model.overhead=data[1][0].overhead;
-						model.modelid=data[1][0].modelid;
+			model.modelid = id == undefined ? model?.modelid ?? 0 : id;
+			quotationService.getReferenceBymodel({ modelid: model.modelid }, function (data) {
+				model.carheight = data[1][0].carheight;
+				model.pitdepth = data[1][0].pitdepth;
+				model.overhead = data[1][0].overhead;
+				model.modelid = data[1][0].modelid;
 				data[0].forEach(element => {
 					if (element.typecode == "LftSpd") {
 						model.speedid = element.id;
@@ -513,7 +514,7 @@ sap.ui.define([
 			model["companyid"] = commonService.session("companyId");
 			model["leaddate"] = commonFunction.getDate(model.leaddate);
 			model["userid"] = commonService.session("userId");
-			model["salesrepid"] = currentContext.getView().byId("txtsalesrep").getSelectedKey();	
+			model["salesrepid"] = currentContext.getView().byId("txtsalesrep").getSelectedKey();
 
 
 			Leadservice.saveLead(model, function (data) {

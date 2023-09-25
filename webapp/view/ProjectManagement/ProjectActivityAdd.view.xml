@@ -217,7 +217,7 @@
             
                     <IconTabBar selectedKey="{view>/selectedTabKey}" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
                             <items>
-                    <IconTabFilter text="{i18n>feedMillBillOfMaterialLabelTabBillOfMaterialList}">
+                    <IconTabFilter text="Project Stage">
                                     <VBox fitContainer="true">
                                    
                         <Table id="tblBillOfMaterial" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
@@ -229,10 +229,10 @@
                                 <headerToolbar>
                                     <Toolbar>
                                     <content>
-                                        <Title text="{i18n>feedMillBillOfMaterialTitle}" level="H2"/>
+                                        <Title text="Project Stage" level="H2"/>
                                         <ToolbarSpacer />
                                             
-                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNewRow" id ="add" visible="false"/>
+                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNewRow" id ="add" visible="true"/>
                                     </content>
                                     </Toolbar>
                                 </headerToolbar>
@@ -256,7 +256,7 @@
                                             <Text text="{tblModel>stagename}" />         
                                             <Text text="{tblModel>startdate}" />   
                                             <Text text="{tblModel>enddate}"/>
-                                            <Text text="{tblModel>completiondays}"/> 
+                                            <Text text="{tblModel>completiondaystable}"/> 
                                             <Text text="{tblModel>stagecompletionpercentage}"/>
                                             <Text text="{tblModel>projectweightage}"/> 
                                             <tnt:InfoLabel 
@@ -323,7 +323,7 @@
                             </FlexBox>
                     </Panel> 
                     </IconTabFilter>
-                    <IconTabFilter text="{i18n>NIManagementList}">
+                    <!-- <IconTabFilter text="{i18n>NIManagementList}">
                         <VBox fitContainer="true">
                             <Table id="tblNIStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
                                 path: 'nitblmodel>/',
@@ -342,7 +342,7 @@
                                 </Toolbar>
                             </headerToolbar>
                             <columns>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Id" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Id11" /></Column>
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" /></Column>
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" /></Column>
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" /></Column>
@@ -424,6 +424,527 @@
                                     justifyContent="End">
                                     <items>
                                         <Button text="{i18n>saveButtonText}" id="btnniSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onNISave"/>
+                                        <Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
+                                    </items>
+                                </FlexBox>
+                            </Panel> 
+                    </IconTabFilter> -->
+                     <IconTabFilter text="Activities">
+                        <VBox fitContainer="true">
+                            <Table id="tblActiviteStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
+                                path: 'activitymodel>/',
+                                    sorter: {
+                                        path: 'id'
+                                    }
+                                }">
+                            <headerToolbar>
+                                <Toolbar>
+                                <content>
+                                    <Title text="Project Activity" level="H2"/>
+                                    <ToolbarSpacer />
+                                        
+                                    <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="niadd" visible="true"/>
+                                </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Id" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelStage}" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelProject}" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Active status" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemPressActivity">
+                                    <cells>        
+                                        <Text text="{activitymodel>count}" /> 
+                                        <Text text="{activitymodel>stagename}" />         
+                                        <Text text="{activitymodel>startdate}" />   
+                                        <Text text="{activitymodel>enddate}"/>
+                                        <Text text="{activitymodel>completiondays}"/> 
+                                        <Text text="{activitymodel>stagecompletionpercentage}"/>
+                                        <Text text="{activitymodel>projectweightage}"/> 
+                                        <tnt:InfoLabel 
+                                                text="1"
+                                                displayOnly= "false"
+                                                class="sapMInfoLabelSmall" 
+                                                colorScheme= "{parts: [{path: 'nitblmodel>isactive'}],
+                                                formatter: '.formatter.setItemStockColor'}"
+                                                />  
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </VBox>   
+                          <form:Form editable="true">
+                            <form:title>
+                                <core:Title text="" />
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                        <form:FormElement label="Note">
+                                            <form:fields>
+                                                <TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{projectModel>/note}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    
+                                    <form:FormContainer title="">
+                                                    <form:formElements>
+                                                    <form:FormElement label="">
+                                                            <form:fields>
+                                                    <Button text="Generate schedule" id="btnActivityschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onniclick"/>
+                                                            </form:fields>
+                                                        </form:FormElement>
+                                                    </form:formElements>
+                                                </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                            <Panel>
+                                <FlexBox		
+                                    alignItems="Start"
+                                    justifyContent="End">
+                                    <items>
+                                        <Button text="{i18n>saveButtonText}" id="btnActivitySave" type="Emphasized" class="sapUiSmallMarginEnd" press="onNISave"/>
+                                        <Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
+                                    </items>
+                                </FlexBox>
+                            </Panel> 
+                    </IconTabFilter>
+
+                     <IconTabFilter text="Payments">
+                        <VBox fitContainer="true">
+                            <Table id="tblpaymentStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
+                                path: 'paymentmodel>/',
+                                    sorter: {
+                                        path: 'id'
+                                    }
+                                }">
+                            <headerToolbar>
+                                <Toolbar>
+                                <content>
+                                    <Title text="Payments" level="H2"/>
+                                    <ToolbarSpacer />
+                                        
+                                    <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowpayments" id ="paymentadd" visible="true"/>
+                                </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Id" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelStage}" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelProject}" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Active status" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemPressPayments">
+                                    <cells>        
+                                        <Text text="{activitymodel>count}" /> 
+                                        <Text text="{activitymodel>stagename}" />         
+                                        <Text text="{activitymodel>startdate}" />   
+                                        <Text text="{activitymodel>enddate}"/>
+                                        <Text text="{activitymodel>completiondays}"/> 
+                                        <Text text="{activitymodel>stagecompletionpercentage}"/>
+                                        <Text text="{activitymodel>projectweightage}"/> 
+                                        <tnt:InfoLabel 
+                                                text="1"
+                                                displayOnly= "false"
+                                                class="sapMInfoLabelSmall" 
+                                                colorScheme= "{parts: [{path: 'nitblmodel>isactive'}],
+                                                formatter: '.formatter.setItemStockColor'}"
+                                                />  
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </VBox>   
+                          <form:Form editable="true">
+                            <form:title>
+                                <core:Title text="" />
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                        <form:FormElement label="Note">
+                                            <form:fields>
+                                                <TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{projectModel>/note}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    
+                                    <form:FormContainer title="">
+                                                    <form:formElements>
+                                                    <form:FormElement label="">
+                                                            <form:fields>
+                                                    <!-- <Button text="Generate schedule" id="btnActivityschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onniclick"/> -->
+                                                            </form:fields>
+                                                        </form:FormElement>
+                                                    </form:formElements>
+                                                </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                            <Panel>
+                                <FlexBox		
+                                    alignItems="Start"
+                                    justifyContent="End">
+                                    <items>
+                                        <Button text="{i18n>saveButtonText}" id="btnPaymentSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onNISave"/>
+                                        <Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
+                                    </items>
+                                </FlexBox>
+                            </Panel> 
+                    </IconTabFilter>
+
+                     <IconTabFilter text="Attachments">
+                        <VBox fitContainer="true">
+                            <Table id="tblAttachmentStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
+                                path: 'attachmentmodel>/',
+                                    sorter: {
+                                        path: 'id'
+                                    }
+                                }">
+                            <headerToolbar>
+                                <Toolbar>
+                                <content>
+                                    <Title text="Attachment" level="H2"/>
+                                    <ToolbarSpacer />
+                                        
+                                    <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="Attachmentadd" visible="true"/>
+                                </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Id" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelStage}" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelProject}" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Active status" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemPressActivity">
+                                    <cells>        
+                                        <Text text="{activitymodel>count}" /> 
+                                        <Text text="{activitymodel>stagename}" />         
+                                        <Text text="{activitymodel>startdate}" />   
+                                        <Text text="{activitymodel>enddate}"/>
+                                        <Text text="{activitymodel>completiondays}"/> 
+                                        <Text text="{activitymodel>stagecompletionpercentage}"/>
+                                        <Text text="{activitymodel>projectweightage}"/> 
+                                        <tnt:InfoLabel 
+                                                text="1"
+                                                displayOnly= "false"
+                                                class="sapMInfoLabelSmall" 
+                                                colorScheme= "{parts: [{path: 'nitblmodel>isactive'}],
+                                                formatter: '.formatter.setItemStockColor'}"
+                                                />  
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </VBox>   
+                          <form:Form editable="true">
+                            <form:title>
+                                <core:Title text="" />
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                        <form:FormElement label="Note">
+                                            <form:fields>
+                                                <TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{projectModel>/note}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    
+                                    <form:FormContainer title="">
+                                                    <form:formElements>
+                                                    <form:FormElement label="">
+                                                            <form:fields>
+                                                    <!-- <Button text="Generate schedule" id="btnActivityschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onAttachmentclick"/> -->
+                                                            </form:fields>
+                                                        </form:FormElement>
+                                                    </form:formElements>
+                                                </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                            <Panel>
+                                <FlexBox		
+                                    alignItems="Start"
+                                    justifyContent="End">
+                                    <items>
+                                        <Button text="{i18n>saveButtonText}" id="btnAttachmentSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onAttachmentSave"/>
+                                        <Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
+                                    </items>
+                                </FlexBox>
+                            </Panel> 
+                    </IconTabFilter>
+
+                     <IconTabFilter text="Attributes">
+                        <VBox fitContainer="true">
+                       	<Table
+		headerText="Products"
+		growingScrollToLoad="true"
+         items="{
+                                path: 'attributeModel>/',
+                                    sorter: {
+                                        path: 'id'
+                                    }
+                   
+                                }">
+                                 <headerToolbar>
+                                <Toolbar>
+                                <content>
+                                    <Title text="Attachment" level="H2"/>
+                                    <ToolbarSpacer />
+                                        
+                                    <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowAttribute" id ="AddAttribute" visible="true"/>
+                                </content>
+                                </Toolbar>
+                            </headerToolbar>
+		<columns>
+         <Column minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="true"><Text text ="Activity"/></Column> 
+         <Column minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="false"><Text text ="group"/></Column>   
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Attribute"/></Column>   
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Remark"/></Column>     
+                                <!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Start Date"/></Column> -->
+                                <!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="End date"/></Column>     -->
+		</columns>
+                <items>
+            <ColumnListItem type="Navigation" press="onListItemPressAttribute">
+			<Text text="{attributeModel>description}" />
+            <Text text="{attributeModel>parameter}" />
+            <Text text="{attributeModel>status}" />
+            <input value="{attributeModel>remark}" />
+		</ColumnListItem>
+                </items>
+	</Table>
+                    </VBox>   
+                          <form:Form editable="true">
+                            <form:title>
+                                <core:Title text="" />
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                        <form:FormElement label="Note">
+                                            <form:fields>
+                                                <TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{projectModel>/note}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    
+                                    <form:FormContainer title="">
+                                                    <form:formElements>
+                                                    <form:FormElement label="">
+                                                            <form:fields>
+                                                    <!-- <Button text="Generate schedule" id="btnActivityschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onniclick"/> -->
+                                                            </form:fields>
+                                                        </form:FormElement>
+                                                    </form:formElements>
+                                                </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                            <Panel>
+                                <FlexBox		
+                                    alignItems="Start"
+                                    justifyContent="End">
+                                    <items>
+                                        <Button text="{i18n>saveButtonText}" id="btnQCSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onNISave"/>
+                                        <Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
+                                    </items>
+                                </FlexBox>
+                            </Panel> 
+                    </IconTabFilter>
+
+                     <IconTabFilter text="Gantt Chart">
+                        <VBox fitContainer="true">
+                            <Table id="tblGantteStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
+                                path: 'activitymodel>/',
+                                    sorter: {
+                                        path: 'id'
+                                    }
+                                }">
+                            <headerToolbar>
+                                <Toolbar>
+                                <content>
+                                    <Title text="Project Activity" level="H2"/>
+                                    <ToolbarSpacer />
+                                        
+                                    <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="Ganttadd" visible="true"/>
+                                </content>
+                                </Toolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Id" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelStage}" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelProject}" />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Active status" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press="onListItemPressActivity">
+                                    <cells>        
+                                        <Text text="{activitymodel>count}" /> 
+                                        <Text text="{activitymodel>stagename}" />         
+                                        <Text text="{activitymodel>startdate}" />   
+                                        <Text text="{activitymodel>enddate}"/>
+                                        <Text text="{activitymodel>completiondays}"/> 
+                                        <Text text="{activitymodel>stagecompletionpercentage}"/>
+                                        <Text text="{activitymodel>projectweightage}"/> 
+                                        <tnt:InfoLabel 
+                                                text="1"
+                                                displayOnly= "false"
+                                                class="sapMInfoLabelSmall" 
+                                                colorScheme= "{parts: [{path: 'nitblmodel>isactive'}],
+                                                formatter: '.formatter.setItemStockColor'}"
+                                                />  
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </VBox>   
+                          <form:Form editable="true">
+                            <form:title>
+                                <core:Title text="" />
+                            </form:title>
+                            <form:layout>
+                                <form:ResponsiveGridLayout
+                                    labelSpanXL="4"
+                                    labelSpanL="4"
+                                    labelSpanM="4"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="0"
+                                    emptySpanL="0"
+                                    emptySpanM="0"
+                                    emptySpanS="0"
+                                    columnsXL="3"
+                                    columnsL="2"
+                                    columnsM="2"
+                                    singleContainerFullSize="false" />
+                            </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                        <form:FormElement label="Note">
+                                            <form:fields>
+                                                <TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{projectModel>/note}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                    
+                                    <form:FormContainer title="">
+                                                    <form:formElements>
+                                                    <form:FormElement label="">
+                                                            <form:fields>
+                                                    <!-- <Button text="Generate schedule" id="btnActivityschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onniclick"/> -->
+                                                            </form:fields>
+                                                        </form:FormElement>
+                                                    </form:formElements>
+                                                </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                            <Panel>
+                                <FlexBox		
+                                    alignItems="Start"
+                                    justifyContent="End">
+                                    <items>
+                                        <!-- <Button text="{i18n>saveButtonText}" id="btnActivitySave" type="Emphasized" class="sapUiSmallMarginEnd" press="onNISave"/> -->
                                         <Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
                                     </items>
                                 </FlexBox>

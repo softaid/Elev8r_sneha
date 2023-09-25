@@ -1,3 +1,4 @@
+
 sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
@@ -6,24 +7,31 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
-	'sap/m/MessageToast'
+	'sap/m/MessageToast',
 ], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, commonFunction, MessageToast) {
 	"use strict";
 
-	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivityNIAddDetail", {
+	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivityAttribute", {
 		onInit: function () {
 
 			//this.handleRouteMatched(null);
 			var emptyModel = this.getModelDefault();
 			var model = new JSONModel();
 			model.setData(emptyModel);
-			this.getView().setModel(model, "nieditDocumentCollectionModel");
+			this.getView().setModel(model, "activityModel");
+
+            var model = new JSONModel();
+			model.setData({});
+			this.getView().setModel(model, "activityModel");
+
+            commonFunction.getReferenceStages("InputAttribute", "attributeModel", this);
 			var currentContext = this;
 			currentContext.resultArr = [];// image array
 			currentContext.resultpdfArr = [];// pdf array
 			currentContext.DeleteDocumentArr = [];//in this array we  push index of array we want to delete
 
-
+              currentContext.getActivitydetail({projectid:53,field:"activity"})
+ 
 		},
 
 		getModelDefault: function () {
@@ -34,119 +42,144 @@ sap.ui.define([
 
 		onBeforeRendering: async function () {
 
-			this.model = this.getView().getModel("ProjectDetailModel");
+			this.model = this.getView().getModel("AttributeDetailModel");
 			console.log("-----------------------this.model----------------------", this.model);
 
 			var oModel = new JSONModel();
-			var documentModel = this.getView().getModel("nieditDocumentCollectionModel");
-
-			if (this.model != undefined) {
-
-				this.getView().setModel(this.model, "DetailModel");
-				this.getView().setModel(this.model, "NIDetailModel");
-				var oConfig = sap.ui.getCore().getModel("configModel");
-				console.log(documentModel.image_url);
-				oModel.setData(documentModel);
-			}
+			// var documentModel = this.getView().getModel("editDocumentCollectionModel");
 
 			// if (this.model != undefined) {
-			//     var oConfig = sap.ui.getCore().getModel("configModel");
-			//     console.log(this.model.image_url);
-			//     oModel.setData(this.model);
+			// 	this.getView().setModel(this.model, "DetailModel");
+			// 	oModel.setData(documentModel);
 			// }
 
+			// this.createPdfFormate();
+
 			// get document list
+
+			// var currentContext = this;
+			// let detailModel = this.getView().getModel("DetailModel").oData;
+			// await Projectservice.getDocumentCollectionDetails({ projectid: detailModel.projectid, stageid: detailModel.stageid, document_id: 3 }, function (data) {
+			// 	var oConfig = sap.ui.getCore().getModel("configModel");
+
+			// 	data[0].forEach((document) => {
+			// 		if (document.document_id == 3) {
+			// 			document.image_url = oConfig.oData.webapi.docurl + document.document_url;
+			// 			currentContext.resultArr.push(document);
+
+			// 		}
+			// 		else {
+			// 			document.pdf_url = oConfig.oData.webapi.docurl + document.document_url;
+			// 			currentContext.resultpdfArr.push(document);
+			// 		}
+			// 	})
+			// 	console.log("data", data);
+			// 	if (data[0].length) {
+			// 		var dModel = new sap.ui.model.json.JSONModel();
+			// 		dModel.setData({ modelData: data[0] });
+			// 		currentContext.getView().setModel(dModel, "documentList");
+
+			// 		var oModel = new sap.ui.model.json.JSONModel();
+
+			// 		currentContext.getView().setModel(oModel, "editDocumentCollectionModel");
+
+
+			// 		var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
+			// 		// tblmodel.oData.imgdata = currentContext.resultArr[0].imgdata;
+			// 		tblmodel.oData.image_url = currentContext.resultArr?.[0]?.image_url??null;
+			// 		tblmodel.oData.pdf_url = currentContext.resultpdfArr?.[0]?.pdf_url??null;
+			// 		tblmodel.oData.imageid =(currentContext.resultArr?.[0]?.image_url??null)==null?null:0;
+			// 		tblmodel.oData.pdfid = (currentContext.resultpdfArr?.[0]?.pdf_url??null)==null?null:0;
+			// 		tblmodel.oData.pdf_name = (currentContext.resultpdfArr?.[0]?.document_name??null)==null?null: (currentContext.resultpdfArr?.[0]?.document_name);
+
+			// 		tblmodel.refresh();
+			// 	}
+			// })
+		},
+
+
+        // get project Activity and show in table
+		getActivitydetail: function (obj) {
 			var currentContext = this;
-			let detailModel = this.getView().getModel("NIDetailModel").oData;
-			await Projectservice.getDocumentCollectionDetails({ projectid: detailModel.projectid, stageid: detailModel.stageid, document_id: 3 }, function (data) {
-				var oConfig = sap.ui.getCore().getModel("configModel");
-
-				data[0].forEach((document) => {
-					if (document.document_id == 3) {
-						document.image_url = oConfig.oData.webapi.docurl + document.document_url;
-						currentContext.resultArr.push(document);
-
-					}
-					else {
-						document.pdf_url = oConfig.oData.webapi.docurl + document.document_url;
-
-						currentContext.resultpdfArr.push(document);
-					}
-				})
+			Projectservice.getProjectdetail({ id: obj.projectid ,field:'activity'}, function (data) {
 				console.log("data", data);
-				if (data[0].length) {
-					var dModel = new sap.ui.model.json.JSONModel();
-					dModel.setData({ modelData: data[0] });
-					currentContext.getView().setModel(dModel, "documentList");
-
-					var oModel = new sap.ui.model.json.JSONModel();
-
-					currentContext.getView().setModel(oModel, "nieditDocumentCollectionModel");
-
-
-					var tblmodel = currentContext.getView().getModel("nieditDocumentCollectionModel");
-					// tblmodel.oData.imgdata = currentContext.resultArr[0].imgdata;
-					tblmodel.oData.image_url = currentContext.resultArr?.[0]?.image_url??null;
-					tblmodel.oData.pdf_url = currentContext.resultpdfArr?.[0]?.pdf_url??null;
-					tblmodel.oData.imageid =(currentContext.resultArr?.[0]?.image_url??null)==null?null:0;
-					tblmodel.oData.pdfid = (currentContext.resultpdfArr?.[0]?.pdf_url??null)==null?null:0;
-					tblmodel.oData.pdf_name = (currentContext.resultpdfArr?.[0]?.document_name??null)==null?null: (currentContext.resultpdfArr?.[0]?.document_name);
-
-					tblmodel.refresh();
-				}
-			})
+				data[0].map(function (value, index) {
+					data[0][index].activestatus = value.isactive == 1 ? "Active" : "In Active";
+					data[0][index].actualstartdate = data[0]?.[index]?.actualstartdate ?? null;
+					data[0][index].actualenddate = data[0]?.[index]?.actualenddate ?? null;
+				});
+				var tblModel = currentContext.getView().getModel("activityModel");
+				tblModel.setData(data[0]);
+				tblModel.refresh();
+			});
 		},
 
-		functiondownload: async function (OEvent) {
-			// let checkbox = OEvent.getSource();
-			// let data = checkbox.data("mySuperExtraData");
-			let currentContext = this;
-			let document_name = "";
-			let sUrl;
+        handleSelectionFinish: function (oEvt) {
 
-			var tblmodel = currentContext.getView().getModel("nieditDocumentCollectionModel");
-			if (OEvent.mParameters.id.indexOf("image")!=-1 ){
-				document_name = currentContext.resultArr[tblmodel.oData.imageid].document_name;
-				sUrl=tblmodel.oData.image_url;
+			let oprojectModel = this.getView().getModel("attributeModel");
+			let oprojectModeldata = oprojectModel.oData;
+			let selectedItems = oEvt.getParameter("selectedItems");
+			let attributeids = [];
+
+			for (var i = 0; i < selectedItems.length; i++) {
+				attributeids.push(selectedItems[i].getProperty("key"));
 			}
-			else {
-				document_name = currentContext.resultpdfArr[tblmodel.oData.pdfid].document_name;
-				sUrl=tblmodel.oData.pdf_url;
+             {
+				attributeModel.attributetypes = attributeids.join(",");
 			}
-
-			var oXHR = new XMLHttpRequest();
-			oXHR.open("GET", sUrl, true);
-			oXHR.responseType = "blob";
-
-			oXHR.onload = function (event) {
-				var blob = oXHR.response;
-
-				// Create a temporary anchor element to initiate the download
-				var link = document.createElement("a");
-				link.href = URL.createObjectURL(blob);
-
-
-				// Set the download attribute to specify the filename for the downloaded file
-				link.setAttribute("download", document_name);
-
-				// Trigger the click event on the anchor element
-				link.click();
-
-				// Clean up - revoke the object URL and remove the anchor element after the click event has been triggered
-				URL.revokeObjectURL(link.href);
-			};
-
-			oXHR.send();
-
-
+			
 		},
+
+		// functiondownload: async function (OEvent) {
+		// 	// let checkbox = OEvent.getSource();
+		// 	// let data = checkbox.data("mySuperExtraData");
+		// 	let currentContext = this;
+		// 	let document_name = "";
+		// 	let sUrl;
+
+		// 	var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
+		// 	if (OEvent.mParameters.id.indexOf("image")!=-1 ){
+		// 		document_name = currentContext.resultArr[tblmodel.oData.imageid].document_name;
+		// 		sUrl=tblmodel.oData.image_url;
+		// 	}
+		// 	else {
+		// 		document_name = currentContext.resultpdfArr[tblmodel.oData.pdfid].document_name;
+		// 		sUrl=tblmodel.oData.pdf_url;
+		// 	}
+
+		// 	var oXHR = new XMLHttpRequest();
+		// 	oXHR.open("GET", sUrl, true);
+		// 	oXHR.responseType = "blob";
+
+		// 	oXHR.onload = function (event) {
+		// 		var blob = oXHR.response;
+
+		// 		// Create a temporary anchor element to initiate the download
+		// 		var link = document.createElement("a");
+		// 		link.href = URL.createObjectURL(blob);
+
+
+		// 		// Set the download attribute to specify the filename for the downloaded file
+		// 		link.setAttribute("download", document_name);
+
+		// 		// Trigger the click event on the anchor element
+		// 		link.click();
+
+		// 		// Clean up - revoke the object URL and remove the anchor element after the click event has been triggered
+		// 		URL.revokeObjectURL(link.href);
+		// 	};
+
+		// 	oXHR.send();
+
+
+		// },
 
 		handleValueChange: async function (oEvent) {
 
 			var oFileUploader = oEvent.getSource();
 			var aFiles = oEvent.getParameter("files");
 			var currentContext = this;
-			var tblmodel = currentContext.getView().getModel("nieditDocumentCollectionModel");
+			var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
 
 			var oFileUploader = this.byId("fileUploader");
 			let returnArr = await currentContext.createImageFormate(oFileUploader, aFiles);
@@ -156,7 +189,7 @@ sap.ui.define([
 
 		createImageFormate: function (oFileUploader, aFiles) {
 			var currentContext = this;
-			var tblmodel = currentContext.getView().getModel("nieditDocumentCollectionModel");
+			var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
 			let imageNameArr = [];
 			let imageNameIndex = 0;
 
@@ -210,7 +243,7 @@ sap.ui.define([
 		},
 		createPdfFormate: function (oFileUploader, aFiles) {
 			var currentContext = this;
-			var tblmodel = currentContext.getView().getModel("nieditDocumentCollectionModel");
+			var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
 			let pdfNameArr = [];
 			let pdfNameIndex = 0;
 
@@ -283,7 +316,7 @@ sap.ui.define([
 
 		forwardPress: function (OEvent) {
 			let currentContext = this;
-			var tblmodel = currentContext.getView().getModel("nieditDocumentCollectionModel");
+			var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
 			let count ;
 			let message="pdf";
 			let noOfdocumet;
@@ -330,7 +363,7 @@ sap.ui.define([
 		backwardPress: function (OEvent) {
 
 			let currentContext = this;
-			var tblmodel = currentContext.getView().getModel("nieditDocumentCollectionModel");
+			var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
 			let count ;
 			let message="pdf";
 			let noOfdocumet;
@@ -378,7 +411,7 @@ sap.ui.define([
 			
 
 			let currentContext = this;
-			var tblmodel = currentContext.getView().getModel("nieditDocumentCollectionModel");
+			var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
 			let count ;
 			let message="pdf";
 			let resultArr;
@@ -405,7 +438,7 @@ sap.ui.define([
 				resultArr.splice(count, 1);
 			}
 
-			
+
 			if (resultArr.length == 0) {
 				tblmodel.oData.imgdata = null;
 				tblmodel.oData[`${message}_url`] = null;
@@ -419,6 +452,8 @@ sap.ui.define([
 				message=="pdf"?	(tblmodel.oData[`${message}_name`] = resultArr[0].document_name):"not change";
 
 			}
+	
+
 			tblmodel.refresh();	
 			},
 
@@ -458,23 +493,22 @@ sap.ui.define([
 			reader.onload = function (evt) {
 				var pdfUrl = evt.target.result;
 				// Update the pdf_url property of the model with the uploaded PDF URL
-				var oModel = this.getView().getModel("nieditDocumentCollectionModel");
+				var oModel = this.getView().getModel("editDocumentCollectionModel");
 				oModel.setProperty("/pdf_url", pdfUrl);
 
-				console.log("------------nieditDocumentCollectionModel------------", oModel);
+				console.log("------------editDocumentCollectionModel------------", oModel);
 			}.bind(this);
 			reader.readAsDataURL(file);
 		},
 
 
 
-        onNISave: function () {
+		onSave: function () {
 			// if (this.validateForm()) {
 			let currentContext = this;
-			let oModel = this.getView().getModel("NIDetailModel").oData;
-			console.log("-------------------NIDetailModel-----------",oModel);
-			var parentModel = currentContext.getView().getModel("nieditDocumentCollectionModel").oData;
-			console.log("-------------------------parentModel1-------------------------", parentModel);
+			let oModel = this.getView().getModel("DetailModel").oData;
+
+			var parentModel = currentContext.getView().getModel("editDocumentCollectionModel").oData;
 			let objPush = {
 				id: null,
 				stageid: oModel.stageid,
@@ -483,35 +517,36 @@ sap.ui.define([
 				userid: commonService.session("userId"),
 				parentstageid: null
 			}
+
+			console.log("-------------------------parentModel1-------------------------", parentModel);
+
 			parentModel["id"] = null;
 			parentModel["projectid"] = oModel.projectid;
-			parentModel["stageid"] = oModel.projectid;
+			parentModel["stageid"] = 2;
 			parentModel["document_id"] = 3;
 			parentModel["companyid"] = commonService.session("companyId");
 			parentModel["userid"] = commonService.session("userId");
-
 			oModel["companyid"] = commonService.session("companyId");
 			oModel["userid"] = commonService.session("userId");
 
 			oModel.startdate = (oModel.startdate != null) ? commonFunction.getDate(oModel.startdate) : oModel.startdate;
 			oModel.enddate = (oModel.enddate != null) ? commonFunction.getDate(oModel.enddate) : oModel.enddate;
-            oModel.actualstartdate = (oModel.actualstartdate != null) ? commonFunction.getDate(oModel.actualstartdate) : oModel.actualstartdate;
+			oModel.actualstartdate = (oModel.actualstartdate != null) ? commonFunction.getDate(oModel.actualstartdate) : oModel.actualstartdate;
 			oModel.actualenddate = (oModel.actualenddate != null) ? commonFunction.getDate(oModel.actualenddate) : oModel.actualenddate;
 			oModel.isactive = oModel.isactive === true ? 1 : 0;
 			oModel.isstd = oModel.isstd === true ? 1 : 0;
 
-			Projectservice.saveNIActivityDetail(oModel, function (savedata) {
+			Projectservice.saveProjectActivityDetail(oModel, function (savedata) {
 				console.log("--------------oModel------------", oModel);
-				Projectservice.getNIdetail({ id: oModel.projectid }, function (data) {
-					console.log("data", data[0]);
+				Projectservice.getProjectdetail({ id: oModel.projectid }, function (data) {
+					console.log("data", data);
 					data[0].map(function (value, index) {
 						data[0][index].activestatus = value.isactive == 1 ? "Active" : "InActive";
 					});
-					let nitblmodel = currentContext.getView().getModel("nitblmodel");
-                    console.log("-----------nitblmodel----------",nitblmodel);
-					nitblmodel.setData(data[0]);
-					nitblmodel.refresh();
-					currentContext.onCancel();
+					let tblModel = currentContext.getView().getModel("tblModel");
+					console.log("-----------tblModel----------", tblModel);
+					tblModel.setData(data[0]);
+					tblModel.refresh();
 				})
 			});
 

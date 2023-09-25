@@ -133,7 +133,7 @@ sap.ui.define([
 			setTimeout(function () {
 				this.bus = sap.ui.getCore().getEventBus();
 				this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel: null });
-			}, 1000);
+			}, 3000);
 			this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel: null });
 
 

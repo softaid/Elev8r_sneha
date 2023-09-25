@@ -90,7 +90,8 @@ sap.ui.define([
         getModelDefault: function () {
             var date = new Date();
             return {
-                typecode: "ActType"
+                typecode: "ProjStgType",
+                visible: false
             }
         },
 
@@ -131,7 +132,7 @@ sap.ui.define([
             var oTable = this.byId("table");
            
 
-
+            if(pModel.oData.typecode )
             if (pModel.oData.typecode != "ProMilestones") {
                 var masterDetailModel = this.getView().getModel("masterDetailModel").oData.modelData;
                 for (let i = 0; i < masterDetailModel.length; i++) {

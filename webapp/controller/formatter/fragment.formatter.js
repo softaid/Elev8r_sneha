@@ -132,7 +132,7 @@ sap.ui.define(function () {
 			let a=true;
 			let b=false;
 			
-			  if(sValue && sValue.trim() !== "" && this.count==0)
+			  if(sValue && sValue.trim() !== "" && sValue.trim() != "-"  && this.count==0)
 			 {
 				return b;
 			 }
@@ -174,7 +174,8 @@ sap.ui.define(function () {
 			 }
 
 		},
-		setDatePicker: function (date) 
+		
+		setDatePicking: function (date) 
         {	
 			let model = this.getView().getModel("projectModel").oData.modelData;
 // 			
@@ -182,23 +183,34 @@ sap.ui.define(function () {
 					let a=true;
 					let b=false;
 					
-					if((date!=null || date==undefined) && this.count==0)
+					if((date!=null || date===undefined|| date==="-") && this.count==0)
 					{
 						return b;
 					}
 					else  if(date==null && this.count==0){
 						return a;
 					}
+			 },
+			 
 
+		setDatePicker: function (date,a1,b1) 
+        {	
+			let model = this.getView().getModel("projectModel").oData.modelData;
+// 			
+					let a=true;
+					let b=false;
+					
+					if((date!=null || date===undefined|| date==="-") && this.count==0)
+					{
+						console.log(model[1].Sequence6enddate)
 
-			// let a=true;
-			// let b=false;
-			
-			// return date==null?this.count==0:false?true:false;
+						return b;
+					}
+					else  if(date==null && this.count==0){
+						return a;
+					}
 
 			 }
-
-		
 	
 	};
 

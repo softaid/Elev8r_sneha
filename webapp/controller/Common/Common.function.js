@@ -625,15 +625,29 @@ sap.ui.define([
         },
 
         getReferenceStages : function(typeCode,modelName, currentContext) {
+            let stageArr = []
             masterService.getReferenceByTypeCode({ typecode: typeCode }, function (data) {
                 if(data.length && data[0].length){
                     for(let i = 0; i < data[0].length; i++){
                         if(data[0][i].parentid == null){
-                            var selectModel = new sap.ui.model.json.JSONModel();
-                            selectModel.setData({ modelData: data[0] });
-                            currentContext.getView().setModel(selectModel, modelName);
+                            stageArr.push(data[0][i]);
                         }
                     }
+
+                    var selectModel = new sap.ui.model.json.JSONModel();
+                    selectModel.setData({ modelData: stageArr });
+                    currentContext.getView().setModel(selectModel, modelName);
+                }
+            });
+        },
+
+        getReferenceByTypeCodeAndParentType : function(typeCode,parenttype,modelName, currentContext) {
+            masterService.getReferenceByTypeCodeAndParentType({ typecode: typeCode, parenttype : parenttype }, function (data) {
+                if(data.length && data[0].length){
+                    var selectModel = new sap.ui.model.json.JSONModel();
+                    selectModel.setData({ modelData: data[0] });
+                    currentContext.getView().setModel(selectModel, modelName);
+                        
                 }
             });
         },

@@ -61,16 +61,35 @@
                     <form:formContainers>
                         <form:FormContainer>
                             <form:formElements>
-                                <form:FormElement label="Is Parent" id="switchEle">
+                                <form:FormElement id="typeEle" label="Type">
                                     <form:fields>
-                                        <Switch state="{editMasterModel>/isparent}" id="isparent" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" change="getSwitchValue">
-                                            <layoutData>
-                                                <FlexItemData growFactor="1" />
-                                            </layoutData>
-                                        </Switch>
+                                        <Select id="type"
+                                            change="typeChanged"
+                                            selectedKey="{editMasterModel>/type}" 
+                                            width="500px"
+                                            items="{
+                                                path: 'refTypeModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{refTypeModel>id}" text="{refTypeModel>description}" />
+                                        </Select>
                                     </form:fields>
                                 </form:FormElement>
-                                <form:FormElement id="parentStageEle" label="Parent Stage">
+                                <form:FormElement id="stgTypeEle" label="Stage Type">
+                                    <form:fields>
+                                        <Select id="stgtype"
+                                            change="stgtypeChanged"
+                                            selectedKey="{editMasterModel>/stgtypeid}" 
+                                            width="500px"
+                                            items="{
+                                                path: 'stgTypeModel>/modelData',
+                                                sorter: { path: 'id' }
+                                            }">
+                                            <core:Item key="{stgTypeModel>id}" text="{stgTypeModel>description}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement id="parentStageEle" label="Parent">
                                     <form:fields>
                                         <Select id="parentstage"
                                             change=""
@@ -100,7 +119,7 @@
                                         </Select>
                                     </form:fields>
                                 </form:FormElement>
-                                <form:FormElement label="{i18n>leadSequenceNo}">
+                                <form:FormElement id="sequenceEle" label="{i18n>leadSequenceNo}">
                                     <form:fields>
                                         <Input id="sequenceno" value="{editMasterModel>/sequenceno}"/>
                                     </form:fields>
@@ -110,7 +129,22 @@
                                         <Input id="description" value="{editMasterModel>/description}"/>
                                     </form:fields>
                                 </form:FormElement>
-                                <form:FormElement label="{i18n>Active}">
+                                <form:FormElement label="Prerequisites" id="prerequisitesEle">
+                                    <form:fields>
+                                        <MultiComboBox id="prerequisites"
+                                            required="true" 
+                                            selectionChange=""
+                                            selectionFinish="handleSelectionFinish"
+                                            width="500px"
+                                            items="{
+                                                    path: 'prerequisiteModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                    }">
+                                            <core:Item key="{prerequisiteModel>id}" text="{prerequisiteModel>description}" />
+                                        </MultiComboBox>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement id="activeEle" label="{i18n>Active}">
                                     <form:fields>
                                         <Switch  state="{editMasterModel>/active}" id="active" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
                                             <layoutData>
@@ -119,33 +153,39 @@
                                         </Switch>
                                     </form:fields>
                                 </form:FormElement>
-                                <form:FormElement label="Projct Per">
-                                <form:fields>
-                                   <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
-                                        max="100" min="0" progress="true"
-                                        showAdvancedTooltip="true" value="{editMasterModel>/projectper}">
-                                        <ResponsiveScale id="rScaleWarningLevel"
-                                            tickmarksBetweenLabels="20" />
-                                    </Slider>
-                                </form:fields>
-                            </form:FormElement> 
-                             <form:FormElement label="Stage Per">
-                                <form:fields>
-                                   <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevelOne"
-                                        max="100" min="0" progress="true"
-                                        showAdvancedTooltip="true" value="{editMasterModel>/stageper}">
-                                        <ResponsiveScale id="rScaleWarningLevelOne"
-                                            tickmarksBetweenLabels="20" />
-                                    </Slider>
-                                </form:fields>
-                            </form:FormElement> 
-                                  <form:FormElement label="Last stage">
+                                <form:FormElement id="projectPerEle" label="Projct Per">
                                     <form:fields>
-                                        <Switch  state="{editMasterModel>/defaultvalue}" id="default" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
-                                            <layoutData>
-                                                <FlexItemData growFactor="1" />
-                                            </layoutData>
-                                        </Switch>
+                                        <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
+                                            max="100" min="0" progress="true"
+                                            showAdvancedTooltip="true" value="{editMasterModel>/projectper}">
+                                            <ResponsiveScale id="rScaleWarningLevel"
+                                                tickmarksBetweenLabels="20" />
+                                        </Slider>
+                                    </form:fields>
+                                </form:FormElement> 
+                                <form:FormElement id="stagePerEle" label="Stage Per">
+                                    <form:fields>
+                                        <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevelOne"
+                                            max="100" min="0" progress="true"
+                                            showAdvancedTooltip="true" value="{editMasterModel>/stageper}">
+                                            <ResponsiveScale id="rScaleWarningLevelOne"
+                                                tickmarksBetweenLabels="20" />
+                                        </Slider>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement id="attributeEle" label="Attribute Type">
+                                    <form:fields>
+                                        <MultiComboBox id="attrinutetype"
+                                            required="true" 
+                                            selectionChange=""
+                                            selectionFinish="handleSelectionFinish"
+                                            width="500px"
+                                            items="{
+                                                    path: 'attributeModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                    }">
+                                            <core:Item key="{attributeModel>id}" text="{attributeModel>description}" />
+                                        </MultiComboBox>
                                     </form:fields>
                                 </form:FormElement>
                             </form:formElements>

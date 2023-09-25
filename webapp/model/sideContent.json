@@ -189,7 +189,15 @@
 					"title": "Project",
 					"icon": "sap-icon://workflow-tasks",
 					"expanded": false,
-					"key": "projectactivitiesAdd",
+					"key": "projectActivityList",
+					"eid": [36],
+					"items": []
+				},
+				{
+					"title": "Project Detail View",
+					"icon": "sap-icon://workflow-tasks",
+					"expanded": false,
+					"key": "projectdetailview",
 					"eid": [31],
 					"items": []
 				},
