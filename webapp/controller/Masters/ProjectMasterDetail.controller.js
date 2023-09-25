@@ -29,6 +29,10 @@ sap.ui.define([
             console.log("this.model", this.model);
             // bind Pipeline dropdown
 
+            this.model.dependency != null ? currentContext.getView().byId("prerequisites").setSelectedKeys(this.model.dependency.split(',')) : "data not available";
+            this.model.attributetypes != null ? currentContext.getView().byId("attributetype").setSelectedKeys(this.model.attributetypes.split(',')) : "data not available";
+            // data[0][0].nimanager != null ? currentContext.getView().byId("manager").setSelectedKeys([...data[0][0].nimanager]) : "data not available";
+
             commonFunction.getReferenceStages("RefType", "refTypeModel", this);
 
             commonFunction.getReferenceStages("ProjStgType", "stgTypeModel", this);

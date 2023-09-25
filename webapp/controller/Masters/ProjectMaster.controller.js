@@ -81,6 +81,9 @@ sap.ui.define([
                 "departmentid": viewModel.getProperty("departmentid"),
                 "parentid": viewModel.getProperty("parentid"),
                 "sequenceno": viewModel.getProperty("sequenceno"),
+                "type" : viewModel.getProperty("type"),
+                "dependency" : viewModel.getProperty("dependency"),
+                "attributetypes" : viewModel.getProperty("attributetypes"),
                 "row1": "true",
             }
             this.bus = sap.ui.getCore().getEventBus();
@@ -165,19 +168,38 @@ sap.ui.define([
 
             masterService.getReferenceByTypeCode({ typecode: oData.typecode }, function (data) {
                 var oModel = new sap.ui.model.json.JSONModel();
-                if (data.length && data[0].length) {
-                    for (let i = 0; i < data[0].length; i++) {
-                        data[0][i].active = data[0][i].active == 1 ? true : false;
-                        data[0][i].defaultvalue = data[0][i].defaultvalue == 1 ? true : false;
-                    }
-                    oModel.setData({ modelData: data[0] });
-                    currentContext.getView().setModel(oModel, "masterDetailModel");
-                    console.log("masterDetailModel", oModel);
-                } else {
-                    oModel.setData({ modelData: [] });
-                    currentContext.getView().setModel(oModel, "masterDetailModel");
-                    console.log("masterDetailModel1", oModel);
+                // if (data.length && data[0].length) {
+                //     for (let i = 0; i < data[0].length; i++) {
+                //         data[0][i].active = data[0][i].active == 1 ? true : false;
+                //         data[0][i].defaultvalue = data[0][i].defaultvalue == 1 ? true : false;
+                //     }
+                //     oModel.setData({ modelData: data[0] });
+                //     currentContext.getView().setModel(oModel, "masterDetailModel");
+                //     console.log("masterDetailModel", oModel);
+                // } else {
+                //     oModel.setData({ modelData: [] });
+                //     currentContext.getView().setModel(oModel, "masterDetailModel");
+                //     console.log("masterDetailModel1", oModel);
+                // }
+
+                var map = {}, node, roots = [], i;
+                for (i = 0; i < data[0].length; i += 1) {
+                    map[data[0][i].id] = i; // initialize the map
+                    data[0][i].children = []; // initialize the children
                 }
+                for (i = 0; i < data[0].length; i += 1) {
+                    node = data[0][i];
+                    if (node.parentid !== null) {
+                        // if you have dangling branches check that map[node.parentId] exists
+                        data[0][map[node.parentid]].children.push(node);
+                    } else {
+                        roots.push(node);
+                    }
+                }
+
+                oModel.setData({ modelData: roots });
+                currentContext.getView().setModel(oModel, "masterDetailModel");
+
             });
         },
 
