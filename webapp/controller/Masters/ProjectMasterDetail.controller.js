@@ -50,6 +50,7 @@ sap.ui.define([
                 this.getView().byId("stagePerEle").setVisible(false);
                 this.getView().byId("prerequisitesEle").setVisible(true);
                 this.getView().byId("attributeEle").setVisible(false);
+                this.getView().byId("notifyEle").setVisible(true);
             }
             else {
                 this.getView().byId("departmentEle").setVisible(false);
@@ -62,6 +63,7 @@ sap.ui.define([
                 this.getView().byId("stagePerEle").setVisible(false);
                 this.getView().byId("prerequisitesEle").setVisible(false);
                 this.getView().byId("attributeEle").setVisible(false);
+                this.getView().byId("notifyEle").setVisible(false);
             }
 
             if (this.model.id != null) {
@@ -115,6 +117,7 @@ sap.ui.define([
                 this.getView().byId("stagePerEle").setVisible(false);
                 this.getView().byId("parentStageEle").setVisible(false);
                 this.getView().byId("attributeEle").setVisible(false);
+                this.getView().byId("notifyEle").setVisible(true);
             }else if(typeTxt == "Activity"){
                 commonFunction.getReferenceByTypeCodeAndParentType("ProMilestones", "Stage", "parentStageModel", this);
                 this.getView().byId("stgTypeEle").setVisible(false);
@@ -125,6 +128,7 @@ sap.ui.define([
                 this.getView().byId("stagePerEle").setVisible(true);
                 this.getView().byId("parentStageEle").setVisible(true);
                 this.getView().byId("attributeEle").setVisible(false);
+                this.getView().byId("notifyEle").setVisible(true);
             }else if(typeTxt == "Attribute"){
                 commonFunction.getReferenceByTypeCodeAndParentType("ProMilestones", "Activity", "parentStageModel", this);
                 commonFunction.getReferenceStages("InputAttribute", "attributeModel", this);
@@ -136,6 +140,7 @@ sap.ui.define([
                 this.getView().byId("stagePerEle").setVisible(false);
                 this.getView().byId("parentStageEle").setVisible(true);
                 this.getView().byId("attributeEle").setVisible(true);
+                this.getView().byId("notifyEle").setVisible(false);
             }
         },
 
