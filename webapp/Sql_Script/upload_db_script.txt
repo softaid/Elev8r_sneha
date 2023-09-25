@@ -40,6 +40,7 @@ CREATE PROCEDURE db_elev8r_local.`spc_reference_save`(
  IN p_isrelatedtopayment TINYINT(4),
  IN p_iscustomersignoffrequired TINYINT(4), 
  IN p_notifyinternaluser TINYINT(4),
+ IN p_attributetypes VARCHAR(200),
  IN p_companyid INT(11),
  IN p_userid INT(11),
  OUT out_id INT )
@@ -54,10 +55,10 @@ BEGIN
 	IF(NULLIF(p_id, '0') IS NULL) THEN
 		INSERT INTO reference(typecode, parentid, type, stgtypeid, description, active, dependency,defaultvalue,projectper,
         stageper, createddate, modifieddate, departmentid, sequenceno, modelid, isrelatedtopayment, iscustomersignoffrequired,
-        notifyinternaluser,companyid)
+        notifyinternaluser,attributetypes,companyid)
 		VALUES (p_typecode, p_parentid, p_type, p_stgtypeid, p_description, p_active,p_dependency,p_defaultvalue,p_projectper,
         p_stageper, now(), now(),p_departmentid, p_sequenceno, p_modelid, p_isrelatedtopayment, p_iscustomersignoffrequired,
-        p_notifyinternaluser, p_companyid);
+        p_notifyinternaluser, p_attributetypes, p_companyid);
 		
 		SET @action = 'INSERT';
         
@@ -138,6 +139,7 @@ BEGIN
             isrelatedtopayment = p_isrelatedtopayment,
             iscustomersignoffrequired = p_iscustomersignoffrequired,
             notifyinternaluser = p_notifyinternaluser,
+            attributetypes = p_attributetypes,
 			companyid = p_companyid,
 			id = LAST_INSERT_ID(id)
 			
@@ -489,3 +491,43 @@ DELIMITER ;
 
 ALTER TABLE `db_elev8r_local`.`reference` 
 ADD COLUMN `attributetypes` VARCHAR(200) NULL AFTER `notifyinternaluser`;
+
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_selectbytypecode`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_reference_selectbytypecode`(
+	IN p_typecode varchar(20)
+)
+BEGIN
+	
+		SELECT 
+			id,
+			typecode,
+            parentid, 
+            type, 
+            stgtypeid,
+            description,
+            active,
+            dependency,
+            departmentid,
+            defaultvalue,
+            displayorder,
+			projectper,
+            stageper,
+            sequenceno,
+            isrelatedtopayment,
+            iscustomersignoffrequired,
+			notifyinternaluser,
+            attributetypes
+		FROM
+			`reference`
+		WHERE
+			typecode = p_typecode
+            order by defaultvalue DESC;
+END$$
+
+DELIMITER ;
+;
+
