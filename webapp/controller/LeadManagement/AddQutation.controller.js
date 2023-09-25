@@ -46,9 +46,10 @@ sap.ui.define(
 						this
 					);
 					this.bus.subscribe(
-						"qutationdetail",
+						"qutationcreen",
 						"handleQutationDetails",
-						this.qutationdetail,
+						this.handleQutationDetails,
+						this
 					);
 					var emptyModel = this.getModelDefault();
 					var model = new JSONModel();
@@ -330,6 +331,22 @@ sap.ui.define(
 
 		
 					this.getView().getModel("editQutationModel").refresh()
+				},
+
+
+				handleQutationDetails: function (sChannel, sEvent, oData) {
+					let selRow = oData.viewModel;
+					let editPartyModel = this.getView().getModel("editQutationModel");
+					editQutationModel.oData.leadid = selRow.nextid;
+					 this.onModelSelection();
+					 this.setModelDefault();
+					editPartyModel.refresh();
+		
+					if (selRow.id != undefined) {
+						this.getView().byId("btnSave").setText("Update");
+					} else {
+						this.getView().byId("btnSave").setText("Save");
+					}
 				},
 
 				getModelDefault: function () {

@@ -11,7 +11,7 @@ sap.ui.define([
             },
 
             getProjectdetail : function(param,callback){
-                commonService.runJQueryX("GET", "elevproject/selectprojectdetail/" + param.id, null, callback, null);
+                commonService.runJQueryX("GET", "elevproject/selectprojectdetail/" + param.id+"/"+param.field, null, callback, null);
             },
 
             // get all NI details

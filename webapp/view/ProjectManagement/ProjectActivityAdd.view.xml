@@ -750,54 +750,44 @@
                             </Panel> 
                     </IconTabFilter>
 
-
-                     <IconTabFilter text="Quality Check">
+                     <IconTabFilter text="Attributes">
                         <VBox fitContainer="true">
                        	<Table
 		headerText="Products"
 		growingScrollToLoad="true"
          items="{
-                                path: 'qcModel>/',
+                                path: 'attributeModel>/',
                                     sorter: {
                                         path: 'id'
                                     }
+                   
                                 }">
+                                 <headerToolbar>
+                                <Toolbar>
+                                <content>
+                                    <Title text="Attachment" level="H2"/>
+                                    <ToolbarSpacer />
+                                        
+                                    <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowAttribute" id ="AddAttribute" visible="true"/>
+                                </content>
+                                </Toolbar>
+                            </headerToolbar>
 		<columns>
-        <Column mergeDuplicates="true">
-				<header>
-					<Text text="Description" />
-				</header>
-			</Column>
-			<Column mergeDuplicates="false">
-				<header>
-					<Text text="Parameters" />
-				</header>
-			</Column>
-			<Column
-				minScreenWidth="Tablet"
-				demandPopin="true"
-				hAlign="End" >
-				<header>
-					<Text text="status" />
-				</header>
-			</Column>
-            <Column
-				minScreenWidth="Tablet"
-				demandPopin="true"
-				hAlign="End" >
-				<header>
-					<Text text="remarks" />
-				</header>
-			</Column>
+         <Column minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="true"><Text text ="Activity"/></Column> 
+         <Column minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="false"><Text text ="group"/></Column>   
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Attribute"/></Column>   
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Remark"/></Column>     
+                                <!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Start Date"/></Column> -->
+                                <!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="End date"/></Column>     -->
 		</columns>
-
-		<ColumnListItem vAlign="Middle">
-			<Text text="{qcModel>description}" />
-            <Text text="{qcModel>parameter}" />
-            <Text text="{qcModel>status}" />
-            <input value="{qcModel>remark}" />
-			
+                <items>
+            <ColumnListItem type="Navigation" press="onListItemPressAttribute">
+			<Text text="{attributeModel>description}" />
+            <Text text="{attributeModel>parameter}" />
+            <Text text="{attributeModel>status}" />
+            <input value="{attributeModel>remark}" />
 		</ColumnListItem>
+                </items>
 	</Table>
                     </VBox>   
                           <form:Form editable="true">

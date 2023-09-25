@@ -307,6 +307,11 @@
 					"target": "projectactivitiesAdd"
 				},
 				{
+					"pattern": "ProjectActivityAttribute",
+					"name": "ProjectActivityAttribute",
+					"target": "ProjectActivityAttribute"
+				},
+				{
 					"pattern": "projectdetailview",
 					"name": "projectdetailview",
 					"target": "projectdetailview"
@@ -550,6 +555,13 @@
 				"projectactivitiesAdd" : {
 					"viewId": "projectactivitiesAdd",
 					"viewName": "ProjectManagement/ProjectActivityAdd",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+
+				"ProjectActivityAttribute" : {
+					"viewId": "ProjectActivityAttribute",
+					"viewName": "ProjectManagement/ProjectActivityAttribute",
 					"controlId": "mainContents",
 					"parent": "master"
 				},

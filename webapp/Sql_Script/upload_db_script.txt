@@ -1,3 +1,138 @@
+DROP PROCEDURE IF EXISTS spc_convertto_quote;
+DELIMITER $$
+CREATE  PROCEDURE `spc_convertto_quote`(
+	IN p_id INT(11)
+)
+BEGIN
+SET @quotestatusid = NULL;
+select id from `reference` where typecode="QuoteStatus" and description="New" into @quotestatusid;
+
+	SELECT 
+		L.leadname,
+		L.mobileno,
+		L.companyname,
+		L.email ,
+		L.sourceid ,
+		L.stageid ,
+		L.leadscategory,
+		L.leadvalue,
+		L.typeoflift ,
+		L.nooflifts ,
+		L.contactperson ,
+		L.leadstatus ,
+		L.locationid ,
+		L.salesrepid,
+		L.capacityid ,
+		L.modelid ,
+		L.driveid ,
+		L.machineid , 
+		L.controlid ,
+		L.operationid ,
+		L.speedid ,
+		L.typeofdoorid ,
+		L.landingdoorid ,
+		L.cardoorid ,
+		L.lowestfloorid ,
+		L.cwtpositionid ,
+		L.floorheaightid ,
+		L.architectidid ,
+		L.leadconsaltantid ,
+		L.leaddate ,
+		L.leadscore ,
+		L.leaddescription  ,
+		L.cityid  ,
+		L.stateid ,
+		L.countryid ,
+		L.phoneno , 
+		L.linkedin ,
+		L.facebook ,
+		L.youtube , 
+		L.pincode , 
+		L.stopsid ,
+		L.floormarking ,
+		L.allopeningsameside ,
+		L.frontopening ,
+		L.backopening ,
+		L.leftopening , 
+		L.rightopening, 
+		L.shaftwidth ,
+		L.shaftdepth ,
+		L.cardepth ,
+		L.carwidth ,
+		L.carheight , 
+		L.doorwidth , 
+		L.doorheight ,
+		L.travel,
+		L.pitdepth ,
+		L.overhead,
+		L.mrwidth , 
+		L.mrdepth ,
+		L.mrheight ,
+		L.leadtype,
+		L.isdeleted ,
+		L.companyid ,
+		L.groupcontrolid ,
+		L.leadsubcategoryid  ,
+		L.address ,
+		L.gstn ,
+		L.mobilep ,
+		L.scoutername ,
+		L.reference ,
+		L.preferedlead ,
+		L.panno ,
+		L.winprobability , 
+		L.carpanelid ,
+		L.ventilationid ,
+		L.tractionmediaid ,
+		L.mainpowersystemid ,
+		L.carpositionindicatorid ,
+		L.falseceilingid ,
+		L.auxilarysupplysystemid ,
+		L.flooringid,
+        L.unitid,
+        L.shaftconditionid,
+        L.id as leadid,
+		L.leadname as quotename,
+		L.sourceid as leadsourceid,
+		L.stageid as quotestageid,
+		L.leadscategory as quotecategory,
+        L.leadvalue as quotevalue,
+        DATE_FORMAT(L.leaddate,'%d/%m/%Y') as quotedate,
+        @quotestatusid  as quotestatusid,
+        L.leaddescription as quotediscription,
+        L.leadscore as quotescore,
+        L.address as siteaddress,
+		L.linkedin as sociallink1,
+        L.facebook as sociallink2,
+        L.youtube as sociallink3,
+        (SELECT id FROM quotation ORDER BY id DESC LIMIT 1) as lastquoteid,
+        10 as advanceonorderreception,
+		60 as forrequestofmechanicalmaterial,
+		25 as forrequestofelectricalmaterial,
+		5 as oncustomerhandover
+
+
+		FROM leads L
+		WHERE L.id = p_id;
+
+END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS spc_getqcchecklist;
+DELIMITER $$
+CREATE  PROCEDURE `spc_getqcchecklist`(
+	IN p_companyid INT
+)
+BEGIN
+    
+select *
+from `reference` 
+where 
+find_in_set(typecode,'AditionalFeatures,CarBottom,CarInside,CarTop,CounterWeight,Hoistway,HoistwayDoors,MachineRoom/HeadRoom,Motor,OverAllCleaning,Pit,QcCheckList')
+AND companyid= p_companyid;
+END$$
+DELIMITER ;
+
 
 UPDATE `db_elev8r_local`.`referencetype` SET `typecode` = 'ProjStgType', `typename` = 'Project Stage Type', `description` = 'Project Stage Type' WHERE (`typecode` = 'ProjActType');
 DELETE FROM `db_elev8r_local`.`referencetype` WHERE (`typecode` = 'ProjType');
