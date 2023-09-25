@@ -3,6 +3,7 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
 	'sap/ui/model/Sorter',
 	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/Project.service',
+	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/QCCheckList.service',
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/services/Company/ManageUser.service',
@@ -10,7 +11,7 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 	'sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter',
 
-], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, ManageUserService, MessageToast, commonFunction, formatter) {
+], function (JSONModel, BaseController, Sorter, Projectservice,QCCheckListservice, xlsx, commonService, ManageUserService, MessageToast, commonFunction, formatter) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivity", {
@@ -78,9 +79,14 @@ sap.ui.define([
 			let subcontractorModel = new JSONModel();
 			subcontractorModel.setData(commonFunction.getAllSubcontractors(this));
 			this.getView().setModel(subcontractorModel, "subcontractorModel");
-			
 
-			// commonFunction.getFeedMillSettingData(this, 726);
+			commonService.getQcCheckList(function (data) {
+				console.log("---------------QCChecklistData--------------",data);
+			});
+
+			QCCheckListservice.getAllQcchecklist(function (data) {
+				console.log("---------------getAllQcchecklist--------------",data);
+			});
 		},
 
 		getModelDefault: function () {

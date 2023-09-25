@@ -10,10 +10,12 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 	'sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
 
 
 
-], function (JSONModel, BaseController, Sorter, leadService, ProjectTracking, xlsx, projectService, MessageToast, ocommonfunction, formatter, commonService) {
+], function (JSONModel, BaseController, Sorter, leadService, ProjectTracking, xlsx, projectService, MessageToast, ocommonfunction, formatter, commonService,Filter, FilterOperator) {
 
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectManagementAsPerStages", {
@@ -315,7 +317,7 @@ sap.ui.define([
 			var oTableSearchState = [],
 				sQuery = oEvent.getParameter("query");
 			var contains = sap.ui.model.FilterOperator.Contains;
-			var columns = ['projectname', 'milestone', 'status', 'startdate'];
+			var columns = ['projectname', 'milestone', 'status'];
 			var filters = new sap.ui.model.Filter(columns.map(function (colName) {
 				return new sap.ui.model.Filter(colName, contains, sQuery);
 			}),
@@ -325,7 +327,39 @@ sap.ui.define([
 				oTableSearchState = [filters];
 			}
 
-			this.getView().byId("tblProjectMaster").getBinding("items").filter(oTableSearchState, "Application");
+			this.getView().byId("MyTableId").getBinding("items").filter(oTableSearchState, "Application");
+		},
+
+
+		_filter: function () {
+			debugger;
+			var oFilter = null;
+
+			if (this._oGlobalFilter) {
+				oFilter = new Filter([this._oGlobalFilter], true);
+			} else if (this._oGlobalFilter) {
+				oFilter = this._oGlobalFilter;
+			}
+
+			this.byId("MyTableId").getBinding().filter(oFilter, "Application");
+		},
+
+		filterGlobally: function (oEvent) {
+			var sQuery = oEvent.getParameter("query");
+			console.log("-----------------sQuery---------------", sQuery);
+			this._oGlobalFilter = null;
+
+			if (sQuery) {
+				this._oGlobalFilter = new Filter([
+					new Filter("orderno", FilterOperator.EQ, sQuery),
+					new Filter("projectname", FilterOperator.EQ, sQuery),
+					new Filter("modelname", FilterOperator.EQ, sQuery),
+					new Filter("niengineer", FilterOperator.EQ, sQuery),
+					new Filter("salesengineer", FilterOperator.EQ, sQuery)
+				], false);
+			}
+
+			this._filter();
 		},
 
 		onSort: function (oEvent) {

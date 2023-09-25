@@ -289,7 +289,7 @@ sap.ui.define([
 
 			let quotationModel = oThis.getView().getModel("quotationModel");
 			quotationModel.setData({modelData : []});
-			oThis.getView.setModel(quotationModel, "quotationModel");
+			oThis.getView().setModel(quotationModel, "quotationModel");
 		},
 
 		onCancel: function () {
@@ -405,6 +405,13 @@ sap.ui.define([
 			// Leads and Lift Details
 			let leadLiftPDFModel = this.getView().getModel("leadLiftPDFModel");
 			var grandtotal = leadLiftPDFModel.oData.quotevalue;
+
+
+			let text = leadLiftPDFModel.oData.address;
+            let length = text.length;
+
+			console.log("------------length-----------------",length);
+
 			console.log("grandtotal",grandtotal);
 			var taxvalue=0;
 			var total = 0;
@@ -625,11 +632,12 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + (leadLiftPDFModel.oData.doortype).toUpperCase() + " DOOR SPECIFICATION SHEET', style: 'titleincenter'}]},";
 			// headertable1 += "{text: '" + leadLiftPDFModel.oData.doortype +"' DOOR SPECIFICATION SHEET', style: 'titleincenter'},";
 			// {columns: [{text:'" + leadLiftPDFModel.oData.doortype + "' DOOR SPECIFICATION SHEET', style: 'titleincenterstdfea'}]},
-			headertable1 += "{ style: 'tableExample2',";
+			headertable1 += "{ style: 'tableExamples2',";
 			headertable1 += " table: {";
 			headertable1 += "widths: ['50%','50%'],";
+			headertable1 += "heights: [100],";
 			headertable1 += " body: [";
-			headertable1 += "[ { columns: [{stack:[{text: '" + leadLiftPDFModel.oData.leadname + "', style: 'subheader'},{text: '" + "" + leadLiftPDFModel.oData.address + "', style: 'subheader'},{text: '" + leadLiftPDFModel.oData.city + "', style: 'subheader'},{text: 'Contact No - " + leadLiftPDFModel.oData.contactno + "', style: 'subheader'}]} ] },{ columns: [{stack:[{text: 'Neg No. " + leadLiftPDFModel.oData.negno + "', style: 'subheader'},{text: 'Date. " + leadLiftPDFModel.oData.quotedate + "', style: 'subheader'},{text: 'Model Code. " + leadLiftPDFModel.oData.model + "', style: 'subheader'}] }] }],";
+			headertable1 += "[ { columns: [{stack:[{text: '" + leadLiftPDFModel.oData.leadname + "', style: 'subheader'},{rowSpan:2,text: '" + "" + leadLiftPDFModel.oData.address + "', style: 'subheader'},{text: '" + leadLiftPDFModel.oData.city + "', style: 'subheader'},{text: 'Contact No - " + leadLiftPDFModel.oData.contactno + "', style: 'subheader'}]} ] },{ columns: [{stack:[{text: 'Neg No. " + leadLiftPDFModel.oData.negno + "', style: 'subheader'},{text: 'Date. " + leadLiftPDFModel.oData.quotedate + "', style: 'subheader'},{text: 'Model Code. " + leadLiftPDFModel.oData.model + "', style: 'subheader'}] }] }],";
 			headertable1 += "]";
 			headertable1 += "},";
 			headertable1 += "  layout: {";
@@ -692,9 +700,29 @@ sap.ui.define([
 			headertable1 += "},";
 
 			headertable1 += "},";
+
+
+
+			if (length>43) {
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			}
+			// else if (length > 94) {
+			// headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			// //headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			// 	}
+			else
+			{
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			}
+			 
+
+
+
+			
+			
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
 
@@ -819,7 +847,7 @@ sap.ui.define([
 			headertable1 += " table: {";
 			headertable1 += "widths: ['50%','50%'],";
 			headertable1 += " body: [";
-			headertable1 += "[ { columns: [{stack:[{text: '" + leadLiftPDFModel.oData.leadname + "', style: 'subheader'},{text: '" + "" + leadLiftPDFModel.oData.address + "', style: 'subheader'},{text: '" + leadLiftPDFModel.oData.city + "', style: 'subheader'},{text: 'Contact No - " + leadLiftPDFModel.oData.contactno + "', style: 'subheader'}]} ] },{ columns: [{stack:[{text: 'Neg No. " + leadLiftPDFModel.oData.negno + "', style: 'subheader'},{text: 'Date. " + leadLiftPDFModel.oData.quotedate + "', style: 'subheader'},{text: 'Model Code. " + leadLiftPDFModel.oData.model + "', style: 'subheader'}] }] }],";
+			headertable1 += "[ { columns: [{stack:[{text: '" + leadLiftPDFModel.oData.leadname + "', style: 'subheader'},{rowSpan:2,text: '" + "" + leadLiftPDFModel.oData.address + "', style: 'subheader'},{text: '" + leadLiftPDFModel.oData.city + "', style: 'subheader'},{text: 'Contact No - " + leadLiftPDFModel.oData.contactno + "', style: 'subheader'}]} ] },{ columns: [{stack:[{text: 'Neg No. " + leadLiftPDFModel.oData.negno + "', style: 'subheader'},{text: 'Date. " + leadLiftPDFModel.oData.quotedate + "', style: 'subheader'},{text: 'Model Code. " + leadLiftPDFModel.oData.model + "', style: 'subheader'}] }] }],";
 
 			headertable1 += "]";
 			headertable1 += "},";
@@ -888,9 +916,9 @@ sap.ui.define([
 			headertable1 += " table: {";
 			headertable1 += "widths: ['100%'],";
 			headertable1 += " body: [";
-			//headertable1 += "[ { columns: [ [{text:'In Words: " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'*Above price is " + leadLiftPDFModel.oData.isgst + " of taxes. Taxes as applicable GST @ 18%" + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for 30 days from the date of proposal and thereafter shall be subject to change without notice. ', style: 'title'}] ] }],";
+			//headertable1 += "[ { columns: [ [{text:'In Words: " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'*Above price is " + leadLiftPDFModel.oData.isgst + " of taxes." + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for 30 days from the date of proposal and thereafter shall be subject to change without notice. ', style: 'title'}] ] }],";
 
-			headertable1 += "[ { columns: [ [{text:'In Words: " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'*Above price is " + leadLiftPDFModel.oData.isgsttogle + " of taxes. Taxes as applicable GST @ 18%" + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text: [{text:'Note: This Quotation shall remain valid and effective for ', style: 'title'},{text:'30 Days ', style: 'subheaderwithbold'},{text:'from the date of proposal and there after shall be subject to change without notice.', style: 'title'}]}] ] }],";
+			headertable1 += "[ { columns: [ [{text:'In Words: " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'*Above price is " + leadLiftPDFModel.oData.isgsttogle + " of taxes." + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text: [{text:'Note: This Quotation shall remain valid and effective for ', style: 'title'},{text:'30 Days ', style: 'subheaderwithbold'},{text:'from the date of proposal and there after shall be subject to change without notice.', style: 'title'}]}] ] }],";
 			//headertable1 += "{columns: [{text:'In Words:" + " " + "', style: 'title'},{text:'30 days" + " " + "', style: 'titlebold'}]},";
 			//headertable1 += "[{text: [[{text:'In Words: " + txtQuoteValue + "Only(Per Unit)" + " " + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'*Above price is " + leadLiftPDFModel.oData.isgst + " of taxes. Taxes as applicable GST @ 18%" + "', style: 'titlebold'},{text:'" + " " + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for " + "30 days" + " from the date of proposal and thereafter shall be subject to change without notice." + " " + "', style: 'titlebold'},{text:'Note: This Quotation shall remain valid and effective for " + "', style: 'title'},{text:'" + "30 days" +  "', style: 'titlebold'},{text:'" + " from the date of proposal and thereafter shall be subject to change without notice." + "', style: 'title'},{text:'Note: This Quotation shall remain valid and effective for 30 days from the date of proposal and thereafter shall be subject to change without notice. ', style: 'title'},{text:'30 days ', style: 'subheaderwithbold13'}] ] }],";
 			headertable1 += "]";
@@ -922,8 +950,20 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'IN DUPLICATE ON__________________________" + " " + "', style: 'titlebold'}, {text:'BY________________________________________" + " " + "', style: 'subheaderbold'}]},";
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+
+			if (length > 43) {
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				}
+			// else if (length > 43 && length > 92) {
+			// 	//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			// 	//headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			// 		}
+				else
+				{
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+				}
 			headertable1 += "{text: '" + "Sneha Elevators LLP" + "', style: 'subheaderfooter'},";
 			headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheaderfooter'},{text:'Customer Signature" + " " + "', style: 'subheadercustomer'}]},";
 
@@ -1271,7 +1311,7 @@ sap.ui.define([
 
 			headertable1 += "{text: [{text:'12.    Ownership of Material : ', style: 'subheaderwithbold'},{text:'Till the final payment is made, the customer cannot claim right of ownership or lien over any materials. Sneha shall have the right to take back / reclaim the possession of the same or any part thereof at the customer\\'s cost. In case the payment is not made as per the terms of the contract. Sneha Elevators LLP have the right to dismantle its equipment and take the materials supplied back in its possession ', style: 'title'}]},";
 
-			//headertable1 += "{text: '12.    Ownership of Material; Till the final payment is made, the customer cannot claim right of ownership or lien over any materials. Sneha shall have the right to take back / reclaim the possession of the same or any part thereof at the customerâ€™s cost. In case the payment is not made as per the terms of the contract. Sneha Elevators LLP have the right to dismantle its equipment and take the materials supplied back in its possession',style: 'title'},";
+			//headertable1 += "{text: '12.    Ownership of Material; Till the final payment is made, the customer cannot claim right of ownership or lien over any materials. Sneha shall have the right to take back / reclaim the possession of the same or any part thereof at the customerÃ¢â‚¬â„¢s cost. In case the payment is not made as per the terms of the contract. Sneha Elevators LLP have the right to dismantle its equipment and take the materials supplied back in its possession',style: 'title'},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			//headertable1 += "{text: '13.    Right to Use: Neither the customer nor any third party shall be entitled to use the elevator for any purpose what so ever prior to: Any usage of Sneha Elevator, for any purpose whatever before the format written handover letter to customer. And or without the full or final payments, including any over dues because of variation in taxes, pending certificates.',style: 'title'},";
 
@@ -1392,7 +1432,7 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
-			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'";'' + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
 			headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
@@ -1560,6 +1600,12 @@ sap.ui.define([
 				"bold: true," +
 				"margin: [0, 3, 0, 0]," +
 				"}," +
+
+				// "subheader: {" +
+				// "fontSize:10," +
+				// "bold: true," +
+				// "margin: [0, 3, 0, 5]," +
+				// "}," +
 
 				"subheaderlead: {" +
 				"fontSize:12," +
@@ -1746,6 +1792,12 @@ sap.ui.define([
 				"fontSize: 8," +
 				"}," +
 
+				
+				"tableExamples2: {" +
+				"margin: [0, 15, 0,0]," +
+				"fontSize: 8," +
+				"}," +
+
 				"specificationHeader: {" +
 				"margin: [0, 10, 0, 0]," +
 				"fillColor:'#cccccc'," +
@@ -1755,7 +1807,7 @@ sap.ui.define([
 				"}," +
 
 				"specificationTableExample: {" +
-				"margin: [0, 0, 0, 0]," +
+				"margin: [0, 0, 0,0 ]," +
 				"fontSize: 10," +
 				"}," +
 

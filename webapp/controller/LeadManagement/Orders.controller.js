@@ -108,7 +108,7 @@ sap.ui.define([
 			var oTableSearchState = [],
 				sQuery = oEvent.getParameter("query");
 			var contains = sap.ui.model.FilterOperator.Contains;
-			var columns = ['leadname', 'contactname'];
+			var columns = ['leadname', 'quotename','status','quotecategory'];
 			var filters = new sap.ui.model.Filter(columns.map(function (colName) {
 				return new sap.ui.model.Filter(colName, contains, sQuery);
 			}),

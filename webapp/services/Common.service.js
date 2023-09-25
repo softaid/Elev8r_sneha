@@ -798,6 +798,9 @@ sap.ui.define([
             getAllSubcontractors: function(callback){
                 this.runJQueryX("GET", "subcontractor/searchsubcontractors/" + this.session("companyId"), null, callback, null);
             },
+            getQcCheckList : function(callback){
+                this.runJQueryX("GET", "common/getqcchecklistsearch/" + this.session("companyId"), null, callback, null);
+            },
         };
     }
 );
