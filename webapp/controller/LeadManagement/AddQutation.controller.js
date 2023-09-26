@@ -50,16 +50,10 @@ sap.ui.define(
 					// currentContext.reset();
 					this.bus = sap.ui.getCore().getEventBus();
 					this.bus.subscribe(
-						"qutationdetails",
-						"newQutation",
-						this.qutationdetail,
-						this
-					);
-
-					this.bus.subscribe(
-						"qutationdetails",
+						"qutationcreen",
 						"handleQutationDetails",
-						this.qutationdetail,
+						this.handleQutationDetails,
+						this
 					);
 
 					var emptyModel = this.getModelDefault();
@@ -342,6 +336,22 @@ sap.ui.define(
 
 		
 					this.getView().getModel("editQutationModel").refresh()
+				},
+
+
+				handleQutationDetails: function (sChannel, sEvent, oData) {
+					let selRow = oData.viewModel;
+					let editPartyModel = this.getView().getModel("editQutationModel");
+					editQutationModel.oData.leadid = selRow.nextid;
+					 this.onModelSelection();
+					 this.setModelDefault();
+					editPartyModel.refresh();
+		
+					if (selRow.id != undefined) {
+						this.getView().byId("btnSave").setText("Update");
+					} else {
+						this.getView().byId("btnSave").setText("Save");
+					}
 				},
 
 				getModelDefault: function () {

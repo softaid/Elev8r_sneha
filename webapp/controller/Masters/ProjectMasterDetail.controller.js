@@ -42,7 +42,7 @@ sap.ui.define([
             // get all departments
             commonFunction.getAllDepartments("departmentModel", this);
 
-            if (this.model.typecode == "ProMilestones") {
+            if (this.model.typecode == "ProMilestones" && this.model.type == "Stage") {
                 
                 this.getView().byId("departmentEle").setVisible(true);
                 this.getView().byId("typeEle").setVisible(true);
@@ -54,6 +54,24 @@ sap.ui.define([
                 this.getView().byId("stagePerEle").setVisible(false);
                 this.getView().byId("prerequisitesEle").setVisible(true);
                 this.getView().byId("attributeEle").setVisible(false);
+            }else if(this.model.typecode == "ProMilestones" && this.model.type == "Activity"){
+                this.getView().byId("stgTypeEle").setVisible(false);
+                this.getView().byId("departmentEle").setVisible(false);
+                this.getView().byId("sequenceEle").setVisible(false);
+                this.getView().byId("prerequisitesEle").setVisible(false);
+                this.getView().byId("projectPerEle").setVisible(false);
+                this.getView().byId("stagePerEle").setVisible(true);
+                this.getView().byId("parentStageEle").setVisible(true);
+                this.getView().byId("attributeEle").setVisible(false);
+            }else if(this.model.typecode == "ProMilestones" && this.model.type == "Attribute"){
+                this.getView().byId("stgTypeEle").setVisible(false);
+                this.getView().byId("departmentEle").setVisible(false);
+                this.getView().byId("sequenceEle").setVisible(false);
+                this.getView().byId("prerequisitesEle").setVisible(false);
+                this.getView().byId("projectPerEle").setVisible(false);
+                this.getView().byId("stagePerEle").setVisible(false);
+                this.getView().byId("parentStageEle").setVisible(true);
+                this.getView().byId("attributeEle").setVisible(true);
             }
             else {
                 this.getView().byId("departmentEle").setVisible(false);

@@ -32,6 +32,7 @@
 					<OverflowToolbar style="Clear">
 						<Title id="title" text="Projects"/>
                         <VBOX alignItems="End">
+                        <SearchField search="filterGlobally" width="17.5rem" id = "onSearchId"/>
                         <Button
                         id="btnProjectSave"
                         text="{i18n>saveButtonText}"
@@ -39,6 +40,19 @@
                         press = "onSave"/>	
                         </VBOX>
                         
+					</OverflowToolbar>
+
+                    <OverflowToolbar style="Clear">
+						<Title id="title" text="Project Management"/>
+                        <ToolbarSpacer />
+                        <HBOX>
+                        <SearchField search="filterGlobally" width="17.5rem" id = "onSearchId"/>
+                        <Button
+                        id="btnProjectSave"
+                        text="{i18n>saveButtonText}"
+                        type="Emphasized"
+                        press = "onSave"/>	
+                        </HBOX>
 					</OverflowToolbar>
 				</table:extension>
 				<table:columns>

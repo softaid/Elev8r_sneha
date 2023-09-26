@@ -110,8 +110,13 @@ sap.ui.define([
 			subcontractorModel.setData(commonFunction.getAllSubcontractors(this));
 			this.getView().setModel(subcontractorModel, "subcontractorModel");
 
+			commonService.getQcCheckList(function (data) {
+				console.log("---------------QCChecklistData--------------",data);
+			});
 
-			// commonFunction.getFeedMillSettingData(this, 726);
+			QCCheckListservice.getAllQcchecklist(function (data) {
+				console.log("---------------getAllQcchecklist--------------",data);
+			});
 		},
 
 		getModelDefault: function () {

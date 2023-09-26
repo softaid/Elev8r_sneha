@@ -135,6 +135,14 @@ sap.ui.define([
 				this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel: null });
 			}, 3000);
 			this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel: null });
+
+
+			// this.bus = sap.ui.getCore().getEventBus();
+			// setTimeout(function () {
+			// 	this.bus = sap.ui.getCore().getEventBus();
+			// 	this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel: null });
+			// }, 1000);
+			// this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel: null });
 		},
 
 		/**
@@ -154,7 +162,7 @@ sap.ui.define([
 			var oTableSearchState = [],
 				sQuery = oEvent.getParameter("query");
 			var contains = sap.ui.model.FilterOperator.Contains;
-			var columns = ['leadname', 'contactname'];
+			var columns = ['leadname', 'contactname','quotename','leadstatus','quotecategory'];
 			var filters = new sap.ui.model.Filter(columns.map(function (colName) {
 				return new sap.ui.model.Filter(colName, contains, sQuery);
 			}),
