@@ -638,15 +638,6 @@ sap.ui.define([
 			headertable1 += "{columns: [{text:'" + (leadLiftPDFModel.oData.doortype).toUpperCase() + " DOOR SPECIFICATION SHEET', style: 'titleincenter'}]},";
 			// headertable1 += "{text: '" + leadLiftPDFModel.oData.doortype +"' DOOR SPECIFICATION SHEET', style: 'titleincenter'},";
 			// {columns: [{text:'" + leadLiftPDFModel.oData.doortype + "' DOOR SPECIFICATION SHEET', style: 'titleincenterstdfea'}]},
-<<<<<<< HEAD
-			headertable1 += "{ style: 'tableExamples2',";
-			headertable1 += " table: {";
-			headertable1 += "widths: ['50%','50%'],";
-			headertable1 += "heights: [100],";
-			headertable1 += " body: [";
-			headertable1 += "[ { columns: [{stack:[{text: '" + leadLiftPDFModel.oData.leadname + "', style: 'subheader'},{rowSpan:2,text: '" + "" + leadLiftPDFModel.oData.address + "', style: 'subheader'},{text: '" + leadLiftPDFModel.oData.city + "', style: 'subheader'},{text: 'Contact No - " + leadLiftPDFModel.oData.contactno + "', style: 'subheader'}]} ] },{ columns: [{stack:[{text: 'Neg No. " + leadLiftPDFModel.oData.negno + "', style: 'subheader'},{text: 'Date. " + leadLiftPDFModel.oData.quotedate + "', style: 'subheader'},{text: 'Model Code. " + leadLiftPDFModel.oData.model + "', style: 'subheader'}] }] }],";
-			headertable1 += "]";
-=======
 			headertable1 += "{ style: '',";
 			headertable1 += " table: {";
 			headertable1 += "    heights: function (i, node) {";
@@ -658,7 +649,6 @@ sap.ui.define([
 			headertable1 += "      [{text: '"  + leadLiftPDFModel.oData.modeldetails+ "', style: ''},{ text: '" + leadLiftPDFModel.oData.unit + "', style: '' }],";
 			
 			headertable1 += "    ]";
->>>>>>> 659d86e1b704c2aa9a1a5a56a7c1ab6e61b07c75
 			headertable1 += "},";
 			headertable1 += "  layout: {";
 			headertable1 += "    hLineWidth: function (i, node) {";

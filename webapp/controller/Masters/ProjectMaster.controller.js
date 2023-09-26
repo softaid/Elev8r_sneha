@@ -214,7 +214,8 @@ sap.ui.define([
                 typename: oModel.oData.typename,
                 description: oModel.oData.description,
                 active: true,
-                defaultvalue: true
+                defaultvalue: true,
+                type : "Stage"
             };
             this.bus = sap.ui.getCore().getEventBus();
             this.bus.publish("master", "setDetailPage", { viewName: "ProjectMasterDetail", viewModel: model });

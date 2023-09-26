@@ -666,3 +666,146 @@ END$$
 DELIMITER ;
 ;
 
+CREATE TABLE `db_elev8r_local`.`project_attributes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `projectid` INT(11) NULL,
+  `stageid` INT(11) NULL,
+  `activityid` INT(11) NULL,
+  `attributeitypeds` VARCHAR(100) NULL,
+  `attributename` VARCHAR(100) NULL,
+  `companyid` INT(11) NULL,
+  PRIMARY KEY (`id`));
+
+ALTER TABLE `db_elev8r_local`.`project_attributes` 
+ADD COLUMN `attributevalue` JSON NULL AFTER `companyid`,
+ADD COLUMN `remark` VARCHAR(200) NULL AFTER `attributevalue`,
+ADD COLUMN `attributeid` INT(11) NULL AFTER `remark`;
+
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectattributes_save`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectattributes_save`(
+	IN p_id INT(11), 
+	IN p_projectid INT(11),
+    IN p_stageid INT(11),
+    IN p_activityid INT(11),
+    IN p_attributeids VARCHAR(100),
+    IN p_attributename VARCHAR(100),
+    IN p_attributevalue JSON,
+    IN p_remark VARCHAR(200),
+	IN p_companyid INT(11),
+	OUT out_id INT
+)
+BEGIN
+
+	SET @action = null;
+
+	IF(NULLIF(p_id, '0') IS NULL) THEN
+		
+		INSERT INTO project_attributes(id,
+							  projectid,
+                              stageid,
+                              activityid,
+                              attributeids,
+                              attributename,
+                              attributevalue,
+                              remark,
+                              companyid)
+					   VALUES (p_id,
+							   p_projectid,
+                               p_stageid,
+                               p_activityid,
+                               p_attributeids,
+                               p_attributename,
+                               p_attributevalue,
+                               p_remark,
+                               p_companyid);
+		
+		SET @action = 'INSERT';
+	
+	ELSE
+		UPDATE project_attributes
+		SET 
+            projectid = p_projectid,
+		    stageid = p_stageid,
+		    activityid = p_activityid,
+		    attributeids = p_attributeids,
+		    attributename = p_attributename,
+		    attributevalue = p_attributevalue,
+			remark = p_remark,
+			id = LAST_INSERT_ID(id)
+			
+		WHERE id = p_id
+		AND companyid = p_companyid;
+                
+		SET @action = 'UPDATE';
+		
+	END IF;
+	
+	SELECT LAST_INSERT_ID() INTO OUT_ID;
+    
+END$$
+
+DELIMITER ;
+;
+
+
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectattributes_search`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectattributes_search`(
+	IN p_companyid int(11)
+)
+BEGIN
+	select 
+    id,
+  projectid,
+  stageid,
+  activityid,
+  attributeids,
+  attributename,
+  attributevalue,
+  remark,
+  companyid
+    from project_attributes
+    where companyid = p_companyid;
+END$$
+
+DELIMITER ;
+;
+
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectattributes_select`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectattributes_select`(
+	IN p_projectid INT(11)
+)
+BEGIN
+	SELECT 
+    id,
+    projectid,
+	stageid,
+    activityid,
+    attributeids,
+    attributename,
+    attributevalue,
+    remark,
+    companyid
+    from project_attributes
+    WHERE projectid = p_projectid;
+END$$
+
+DELIMITER ;
+;
