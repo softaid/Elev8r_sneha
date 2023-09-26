@@ -26,7 +26,7 @@
                         <IconTabBar selectedKey="{view>/selectedTabKey}" expanded="true" class="sapUiResponsiveContentPadding" items ="{masterModel>/modelData}" select="onTabSelect">
                             <items>
                                 <IconTabFilter text="{masterModel>typename}" key="{masterModel>typecode}">
-                                    <VBox fitContainer="true">
+                                    <!-- <VBox fitContainer="true">
                                         <Table 
                                             inset="false" 
                                             id="table"
@@ -78,7 +78,14 @@
                                                 </ColumnListItem>
                                             </items>
                                         </Table>   
-                                    </VBox>  
+                                    </VBox>   -->
+
+                                    <Tree
+                                        id="Tree"
+                                        expandFirstLevel="true"
+                                        items="{masterDetailModel>/modelData}">
+                                        <StandardTreeItem id="txtItem" title="{masterDetailModel>description}" type="Navigation" press="onListItemPress" expanded="true"/>
+                                    </Tree>
                                 </IconTabFilter>
                             </items>
                         </IconTabBar>

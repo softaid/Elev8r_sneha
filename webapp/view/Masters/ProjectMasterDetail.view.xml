@@ -175,7 +175,7 @@
                                 </form:FormElement>
                                 <form:FormElement id="attributeEle" label="Attribute Type">
                                     <form:fields>
-                                        <MultiComboBox id="attrinutetype"
+                                        <MultiComboBox id="attributetype"
                                             required="true" 
                                             selectionChange=""
                                             selectionFinish="handleSelectionFinish"
