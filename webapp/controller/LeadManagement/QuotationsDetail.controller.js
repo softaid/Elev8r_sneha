@@ -39,6 +39,7 @@ sap.ui.define([
 			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
 			this.bus.subscribe("converttoorder", "orderConversion", this.orderConversion, this);
 
+
 			this.handleRouteMatched(null);
 
 			// Define all Required Models
@@ -225,7 +226,6 @@ sap.ui.define([
 
 		},
 
-		//Navigate Add qutation screen
 		addNewQutation: function () {
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {

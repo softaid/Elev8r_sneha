@@ -518,7 +518,7 @@ sap.ui.define([
 		},
 
 		onSave: function () {
-			if (this.validateForm()) {
+			// if (this.validateForm()) {
 			var currentContext = this;
 			var model = this.getView().getModel("editOrderModel").oData;
 			console.log("editOrderModel", model);
@@ -546,8 +546,8 @@ sap.ui.define([
 				}
 
 			});
-			}
-			this.reset();
+			// }
+			//this.reset();
 
 		},
 

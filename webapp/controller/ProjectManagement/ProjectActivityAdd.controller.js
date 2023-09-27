@@ -3,7 +3,7 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
 	'sap/ui/model/Sorter',
 	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/Project.service',
-	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/QCCheckList.service',
+	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/AttributeList.service',
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/services/Company/ManageUser.service',
@@ -11,7 +11,7 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 	'sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter',
 
-], function (JSONModel, BaseController, Sorter, Projectservice,QCCheckListservice, xlsx, commonService, ManageUserService, MessageToast, commonFunction, formatter) {
+], function (JSONModel, BaseController, Sorter, Projectservice,AttributeListservice, xlsx, commonService, ManageUserService, MessageToast, commonFunction, formatter) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivity", {
@@ -49,7 +49,7 @@ sap.ui.define([
 
 			var activitiestblmodel = new JSONModel();
 			activitiestblmodel.setData({});
-			this.getView().setModel(activitiestblmodel, "activitiestblmodel");
+			this.getView().setModel(activitiestblmodel, "activitymodel");
 
 			var paymenttblmodel = new JSONModel();
 			paymenttblmodel.setData({});
@@ -61,12 +61,12 @@ sap.ui.define([
 
 			var qctblmodel = new JSONModel();
 			qctblmodel.setData([
-				{description :"Motor", parameter:"shaft width", status:"yes", remark :"11"},
-				{description :"Motor", parameter:"shaft Depth", status:"yes", remark :"11"},
-				{description :"Hoistway", parameter:"Fan Fixation",  status:"yes", remark :"11"},
-				{description :"Hoistway", parameter:"Oil Can",  status:"yes", remark :"11"},
-				{description :"Hoistway", parameter:"shaft length",  status:"yes", remark :"11"},
-				{description :"Car Top", parameter:"Car frame",  status:"yes", remark :"11"},
+				{ id:1,description :"Motor", parameter:"shaft width", status:"yes", remark :"11"},
+				{ id:2,description :"Motor", parameter:"shaft Depth", status:"yes", remark :"11"},
+				{id:3,description :"Hoistway", parameter:"Fan Fixation",  status:"yes", remark :"11"},
+				{id:4,description :"Hoistway", parameter:"Oil Can",  status:"yes", remark :"11"},
+				{id:5,description :"Hoistway", parameter:"shaft length",  status:"yes", remark :"11"},
+				{id:6,description :"Car Top", parameter:"Car frame",  status:"yes", remark :"11"},
 
 		]);
 			this.getView().setModel(qctblmodel, "attributeModel");
@@ -104,7 +104,7 @@ sap.ui.define([
 			// this.getAllProject();
 			this.getRole();
 			this.getAllDepartment();
-			// this.getQcdetail(2);
+			 //this.getQcdetail(2);
 			
 			let subcontractorModel = new JSONModel();
 			subcontractorModel.setData(commonFunction.getAllSubcontractors(this));
@@ -185,10 +185,10 @@ sap.ui.define([
 
 		onAddNewRowAttribute: function () {
 			this.bus = sap.ui.getCore().getEventBus();
-			let projectModel = this.getView().getModel("attributeModel").getData();
+			let projectModel = this.getView().getModel("projectModel").getData();
 
-			// this.bus.publish("Attributestatus", "setDetailAttributePage", { viewName: "ProjectActivityAttribute", viewModel: { projectid: 2 } });
-			this.bus.publish("attributestatus", "setDetailAttributePage", { viewName: "ProjectActivityAttribute", viewModel:  { projectid: 2 }  });
+			// this.bus.publish("Attributestatus", "setDetailAttributePage", { viewName: "ProjectActivityAttributeDetail", viewModel: { projectid: 2 } });
+			this.bus.publish("attributestatus", "setDetailAttributePage", { viewName: "ProjectActivityAttributeDetail", viewModel:  { ...projectModel,attributetype:"" } });
 
 		},
 
@@ -233,7 +233,7 @@ sap.ui.define([
 			oDayHistory.isstarted = oDayHistory.actualstartdate != null ? true : false;
 
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.publish("attributestatus", "setDetailAttributePage", { viewName: "ProjectActivityAttribute", viewModel:  { data: oDayHistory }  });
+			this.bus.publish("attributestatus", "setDetailAttributePage", { viewName: "ProjectActivityAttributeDetail", viewModel:  {...oDayHistory,attributetype:"392,393,396"}});
 
 		},
 
@@ -308,6 +308,9 @@ sap.ui.define([
 					data[0][0].salesmanager != null ? currentContext.getView().byId("salesmanager").setSelectedKeys([...data[0][0].salesmanager]) : "data not available";
 					data[0][0].salesengineer != null ? currentContext.getView().byId("salesenginner").setSelectedKeys([...data[0][0].salesengineer]) : "data not available";
 					currentContext.getProjectdetail(data[0][0].id);
+					currentContext.getActivitesdetail(data[0][0].id);
+					currentContext.getAttributeList(data[0][0].id);
+
 					//currentContext.getNIdetail(data[0][0].id);
 				});
 
@@ -338,7 +341,7 @@ sap.ui.define([
 		// get project stage and show in table
 		getProjectdetail: function (projectid) {
 			var currentContext = this;
-			Projectservice.getProjectdetail({ id: projectid }, function (data) {
+			Projectservice.getProjectdetail({ id: projectid,field:"stage"}, function (data) {
 				console.log("data", data);
 				data[0].map(function (value, index) {
 					data[0][index].activestatus = value.isactive == 1 ? "Active" : "In Active";
@@ -375,7 +378,7 @@ sap.ui.define([
 		// get Activities details of project
 		getActivitesdetail: function (projectid) {
 			var currentContext = this;
-			Projectservice.getNIdetail({ id: projectid }, function (data) {
+			Projectservice.getProjectdetail({ id: projectid,field:"activity"}, function (data) {
 				console.log("data", data);
 				data[0].map(function (value, index) {
 
@@ -384,10 +387,10 @@ sap.ui.define([
 					data[0][index].actualenddate = data[0]?.[index]?.actualenddate ?? null;
 
 				});
-				var nitblmodel = currentContext.getView().getModel("nitblmodel");
-				nitblmodel.setData(data[0]);
-				console.log("--------------nitblmodel------------", nitblmodel);
-				nitblmodel.refresh();
+				var activitymodel = currentContext.getView().getModel("activitymodel");
+				activitymodel.setData(data[0]);
+				console.log("--------------nitblmodel------------", activitymodel);
+				activitymodel.refresh();
 
 			});
 		},
@@ -435,9 +438,9 @@ sap.ui.define([
 
   
         // get QC check list details of project
-		getQcdetail: function (projectid) {
+		getAttributeList: function (projectid) {
 			var currentContext = this;
-			QCCheckListservice.getQcchecklist({ id: projectid }, function (data) {
+			AttributeListservice.getAttributeList({ id: projectid }, function (data) {
 				console.log("data", data);
 				data[0].map(function (value, index) {
 
@@ -658,7 +661,7 @@ sap.ui.define([
 			});
 
 			let model = new JSONModel();
-			model.setData({ ...data.viewModel });
+			model.setData({ ...data.viewModel, });
 
 			// this.getView().setModel(model, "tblModel");
 
@@ -680,7 +683,7 @@ sap.ui.define([
 			});
 
 			let model = new JSONModel();
-			model.setData({ ...data.viewModel });
+			model.setData(data.viewModel);
 
 			// this.getView().setModel(model, "tblModel");
 

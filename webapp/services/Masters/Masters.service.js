@@ -48,6 +48,11 @@ sap.ui.define([
             getReferenceByTypeCodeAndParentType : function(params, callback){
                 commonService.runJQueryX("GET", "leadmaster/referencebytypecodeandparenttype/" + params.typecode + "/" + params.parenttype, null, callback, null);
             },
+            
+            // getReferenceByTypeCodeAndParentType : function(params, callback){
+            //     commonService.runJQueryX("GET", "leadmaster/referencebytypecodeandparenttype/" + params.typecode + "/" + params.parenttype, null, callback, null);
+            // },
+
 
             getReferenceByTypeCodeDepartment : function(params, callback){
                 commonService.runJQueryX("GET", "leadmaster/referencebytypecode/Department/"+params.typecode+"/"+ params.departmentid, null, callback, null);
