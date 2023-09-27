@@ -15,8 +15,8 @@ sap.ui.define([
                 commonService.runJQueryX("GET", "qcchecklist/searchqcchecklist/" + commonService.session("companyId"), null, callback, null);
             },
            
-            getQcchecklist: function(params, callback){
-                commonService.runJQueryX("GET", "qcchecklist/selectqcchecklist/" + params.id, null, callback, null);
+            getAttributelist: function(params, callback){
+                commonService.runJQueryX("GET", "attributelist/selectattributelist/" + params.id, null, callback, null);
             },
 
             saveQcchecklist: function(params, callback){

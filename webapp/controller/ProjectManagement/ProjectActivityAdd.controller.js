@@ -3,7 +3,7 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/BaseController',
 	'sap/ui/model/Sorter',
 	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/Project.service',
-	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/QCCheckList.service',
+	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/AttributeList.service',
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/services/Company/ManageUser.service',
@@ -11,7 +11,7 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 	'sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter',
 
-], function (JSONModel, BaseController, Sorter, Projectservice,QCCheckListservice, xlsx, commonService, ManageUserService, MessageToast, commonFunction, formatter) {
+], function (JSONModel, BaseController, Sorter, Projectservice,AttributeListservice, xlsx, commonService, ManageUserService, MessageToast, commonFunction, formatter) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivity", {
@@ -104,7 +104,7 @@ sap.ui.define([
 			// this.getAllProject();
 			this.getRole();
 			this.getAllDepartment();
-			// this.getQcdetail(2);
+			 //this.getQcdetail(2);
 			
 			let subcontractorModel = new JSONModel();
 			subcontractorModel.setData(commonFunction.getAllSubcontractors(this));
@@ -188,7 +188,7 @@ sap.ui.define([
 			let projectModel = this.getView().getModel("projectModel").getData();
 
 			// this.bus.publish("Attributestatus", "setDetailAttributePage", { viewName: "ProjectActivityAttributeDetail", viewModel: { projectid: 2 } });
-			this.bus.publish("attributestatus", "setDetailAttributePage", { viewName: "ProjectActivityAttributeDetail", viewModel:  { ...projectModel,attributetype:[] } });
+			this.bus.publish("attributestatus", "setDetailAttributePage", { viewName: "ProjectActivityAttributeDetail", viewModel:  { ...projectModel,attributetype:"" } });
 
 		},
 
@@ -309,6 +309,8 @@ sap.ui.define([
 					data[0][0].salesengineer != null ? currentContext.getView().byId("salesenginner").setSelectedKeys([...data[0][0].salesengineer]) : "data not available";
 					currentContext.getProjectdetail(data[0][0].id);
 					currentContext.getActivitesdetail(data[0][0].id);
+					currentContext.getAttributeList(data[0][0].id);
+
 					//currentContext.getNIdetail(data[0][0].id);
 				});
 
@@ -436,9 +438,9 @@ sap.ui.define([
 
   
         // get QC check list details of project
-		getQcdetail: function (projectid) {
+		getAttributeList: function (projectid) {
 			var currentContext = this;
-			QCCheckListservice.getQcchecklist({ id: projectid }, function (data) {
+			AttributeListservice.getAttributeList({ id: projectid }, function (data) {
 				console.log("data", data);
 				data[0].map(function (value, index) {
 

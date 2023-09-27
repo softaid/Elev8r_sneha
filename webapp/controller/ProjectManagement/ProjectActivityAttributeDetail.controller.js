@@ -56,7 +56,7 @@ sap.ui.define([
 
 			let model = this.getView().getModel("attributetypeModel");
 			let attributeSelectModel = this.getView().getModel("attributeSelectModel");
-			let AttributeDetailModel = this.getView().getModel("AttributeDetailModel").getDate();
+			let AttributeDetailModel = this.getView().getModel("AttributeDetailModel").getData();
 
 			let attributeObj = {};
 			currentContext.globalAttributeObj = {}
@@ -73,7 +73,7 @@ sap.ui.define([
 
 				model.setData(data[0]);
 
-				if (AttributeDetailModel.attributetype.length == 0) {
+				if (AttributeDetailModel.attributetype == "") {
 					attributeSelectModel.setData(attributeObj);
 				}
 				else {
@@ -82,9 +82,10 @@ sap.ui.define([
 						AttributeDetailModel.attributetype.split(",").indexOf(`${ele.id}`) != -1 ? obj[ele.description] = ele.id : "not push"
 					}
 					attributeSelectModel.setData(obj);
+					currentContext.getView().byId("attributetype").setSelectedKeys(AttributeDetailModel.attributetype.split(","));
+
 				}
 
-				currentContext.getView().byId("attributetype").setSelectedKeys(AttributeDetailModel.attributetype.split(","));
 
 				selectModel.setData({ modelData: data[0] });
 				currentContext.getView().setModel(selectModel, "attributetypeModel");
@@ -103,38 +104,38 @@ sap.ui.define([
 
 			// get document list
             // in this service document id is only pass but we don't use it in sp to filters the data so we only pass bu never use
-			await Projectservice.getDocumentCollectionDetails({ projectid: AttributeDetailModel.projectid, activityid: AttributeDetailModel.activityid, attributeid: AttributeDetailModel.attributeid, document_id: 3 }, function (data) {
-				var oConfig = sap.ui.getCore().getModel("configModel");
+			// await Projectservice.getDocumentCollectionDetails({ projectid: AttributeDetailModel.projectid, activityid: AttributeDetailModel.activityid, attributeid: AttributeDetailModel.attributeid, document_id: 3 }, function (data) {
+			// 	var oConfig = sap.ui.getCore().getModel("configModel");
 
-				data[0].forEach((document) => {
-					if (document.document_id == 3) {
-						document.image_url = oConfig.oData.webapi.docurl + document.document_url;
-						currentContext.resultArr.push(document);
+			// 	data[0].forEach((document) => {
+			// 		if (document.document_id == 3) {
+			// 			document.image_url = oConfig.oData.webapi.docurl + document.document_url;
+			// 			currentContext.resultArr.push(document);
 
-					}
-					else {
-						document.pdf_url = oConfig.oData.webapi.docurl + document.document_url;
-						currentContext.resultpdfArr.push(document);
-					}
-				})
-				console.log("data", data);
-				if (data[0].length) {
+			// 		}
+			// 		else {
+			// 			document.pdf_url = oConfig.oData.webapi.docurl + document.document_url;
+			// 			currentContext.resultpdfArr.push(document);
+			// 		}
+			// 	})
+			// 	console.log("data", data);
+			// 	if (data[0].length) {
 
-					var oModel = new sap.ui.model.json.JSONModel();
+			// 		var oModel = new sap.ui.model.json.JSONModel();
 
-					currentContext.getView().setModel(oModel, "editDocumentCollectionModel");
+			// 		currentContext.getView().setModel(oModel, "editDocumentCollectionModel");
 
-					var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
-					// tblmodel.oData.imgdata = currentContext.resultArr[0].imgdata;
-					tblmodel.oData.image_url = currentContext.resultArr?.[0]?.image_url ?? null;
-					tblmodel.oData.pdf_url = currentContext.resultpdfArr?.[0]?.pdf_url ?? null;
-					tblmodel.oData.imageid = (currentContext.resultArr?.[0]?.image_url ?? null) == null ? null : 0;
-					tblmodel.oData.pdfid = (currentContext.resultpdfArr?.[0]?.pdf_url ?? null) == null ? null : 0;
-					tblmodel.oData.pdf_name = (currentContext.resultpdfArr?.[0]?.document_name ?? null) == null ? null : (currentContext.resultpdfArr?.[0]?.document_name);
+			// 		var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
+			// 		// tblmodel.oData.imgdata = currentContext.resultArr[0].imgdata;
+			// 		tblmodel.oData.image_url = currentContext.resultArr?.[0]?.image_url ?? null;
+			// 		tblmodel.oData.pdf_url = currentContext.resultpdfArr?.[0]?.pdf_url ?? null;
+			// 		tblmodel.oData.imageid = (currentContext.resultArr?.[0]?.image_url ?? null) == null ? null : 0;
+			// 		tblmodel.oData.pdfid = (currentContext.resultpdfArr?.[0]?.pdf_url ?? null) == null ? null : 0;
+			// 		tblmodel.oData.pdf_name = (currentContext.resultpdfArr?.[0]?.document_name ?? null) == null ? null : (currentContext.resultpdfArr?.[0]?.document_name);
 
-					tblmodel.refresh();
-				}
-			})
+			// 		tblmodel.refresh();
+			// 	}
+			// })
 		},
 
 
