@@ -16,6 +16,7 @@ xmlns:l="sap.ui.layout">
 							<Title id="DashboardTitle" text="Dashboard" />
 						</f:heading>
 						<f:actions>
+
 							<Button
 							id="addlead"
 							icon="sap-icon://leads"
@@ -63,7 +64,7 @@ xmlns:l="sap.ui.layout">
 				<f:content>
 					<Page class="pgDashboard" showHeader="false" id="contentDashboard">
 						<content>
-							<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Total Leads" press="getTotalLeadsDetail">
+							<!-- <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Total Leads" press="getTotalLeadsDetail">
 								<TileContent footer="">
 									<NumericContent truncateValueTo="20" value="{dashBoard_oModel>/leadcount}" valueColor="Good" withMargin="false" />
 								</TileContent>
@@ -82,7 +83,14 @@ xmlns:l="sap.ui.layout">
 								<TileContent unit="" footer="">
 									<NumericContent truncateValueTo="20" value="{dashBoard_oModel>/projectcount}" valueColor="Error" withMargin="false" />
 								</TileContent>
-							</GenericTile>
+							</GenericTile> -->
+
+							<core:HTML id="ganttContainer" content="
+								&lt;div id='gantt_here' style='width:100%; height:100%;'&gt;&lt;/div&gt;
+								&lt;script type='text/javascript'&gt;
+								gantt.init('gantt_here');
+								&lt;/script&gt;">
+							</core:HTML>
 						</content>		
 					</Page>
 				</f:content>

@@ -7,7 +7,8 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 	'sap/ui/elev8rerp/componentcontainer/services/DashBoard/CommonDashBoard.service',
-], function (BaseController, JSONModel, Device,MessageToast,formatter, commonService, commonFunction, commondashboardService) {
+	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/Project.service'
+], function (BaseController, JSONModel, Device, MessageToast, formatter, commonService, commonFunction, commondashboardService, ProjectService) {
 	"use strict";
 	return BaseController.extend("sap.ui.demo.nav.controller.Home", {
 		formatter: formatter,
@@ -16,32 +17,76 @@ sap.ui.define([
 			return sap.ui.core.UIComponent.getRouterFor(this);
 		},
 
-		onButtonPress: function(oEvent) {
+		onAfterRendering: function () {
+			// Initialize Gantt chart after rendering
+			gantt.init("gantt_here");
+			console.log("Initializing Gantt chart...");
+			this.loadProjectData();
+		},
+
+		loadProjectData: function () {
+			//debugger;
+			var currentContext = this;
+			ProjectService.getAllProjectsDetailForGanttChart(function (data1) {
+				console.log("----getAllProjectsDetailForGanttChart----", data1);
+
+				var data = {};
+				let ganttChartArray = [];
+
+				if (data1[0].length) {
+					for (let i = 0; i < data1[0].length; i++) {
+						ganttChartArray.push({
+							id: data1[0][i].stageid == null ? data1[0][i].projectid : (data1[0][i].projectid) + "-" + (data1[0][i].stageid),
+							text: data1[0][i].stagename == null ? data1[0][i].jobcode : data1[0][i].stagename,
+							start_date: data1[0][i].type == null ? data1[0][i].proactualstartdate : data1[0][i].type == "Stage" ? data1[0][i].stagestartdate : data1[0][i].activitystartdate,
+							duration: data1[0][i].duration,
+							parent: data1[0][i].type == null ? null : data1[0][i].type == "Stage" ? data1[0][i].projectid : (data1[0][i].projectid) + "-" + (data1[0][i].parentid),
+							projectid: data1[0][i].projectid
+						})
+					}
+					data = { tasks: ganttChartArray };
+					console.log("----------------ganttChartArray----------------------", data);
+				}
+
+				gantt.init("gantt_here");
+				gantt.parse(data);
+
+				var projectModel = new sap.ui.model.json.JSONModel();
+				projectModel.setData({ modelData: data[0] });
+				currentContext.getView().setModel(projectModel, "projectModel");
+				console.log("------------projectModel---------", projectModel);
+			});
+		},
+
+
+
+
+		onButtonPress: function (oEvent) {
 			var oButton = oEvent.getSource();
 			this.byId("actionSheet").openBy(oButton);
 		},
 
-		addLead : function(oEvent){
+		addLead: function (oEvent) {
 			let oThis = this;
-            let sRouteName = "addlead";
-            this.getRouter().navTo(sRouteName);
+			let sRouteName = "addlead";
+			this.getRouter().navTo(sRouteName);
 		},
 
-		addLeadActivity : function(oEvent){
+		addLeadActivity: function (oEvent) {
 			let oThis = this;
-            let sRouteName = "leadactivities";
+			let sRouteName = "leadactivities";
 			oThis.getRouter().navTo(sRouteName);
 		},
 
-		addProject : function(oEvent){
+		addProject: function (oEvent) {
 			let oThis = this;
-            let sRouteName = "project";
+			let sRouteName = "project";
 			oThis.getRouter().navTo(sRouteName);
 		},
 
-		addQuotation : function(oEvent){
+		addQuotation: function (oEvent) {
 			let oThis = this;
-            let sRouteName = "quotations";
+			let sRouteName = "quotations";
 			oThis.getRouter().navTo(sRouteName);
 		},
 
@@ -127,8 +172,8 @@ sap.ui.define([
 					let msg = "Data for dashboard is not available";
 					MessageToast.show(msg);
 				}
-				else{
-					if(data.success){
+				else {
+					if (data.success) {
 						console.log(data);
 						dashBoard_oModel.setData(data[0][0]);
 					}
@@ -147,22 +192,20 @@ sap.ui.define([
 					moduleAccessoModel.setData(moduleData[0]);
 				}
 				currentContext.getView().setModel(moduleAccessoModel, "moduleAccessoModel");
-				
+
 				// If data is not get from database  then handle Empty data condition
-				if (!moduleData.length)
-					{
-						console.log("ModuleData is not available");
+				if (!moduleData.length) {
+					console.log("ModuleData is not available");
+				}
+				else {
+					console.log(moduleData);
+					for (var i = 0; i < moduleData[0].length; i++) {
+						modulearray.push({
+							id: id++,
+							entityname: moduleData[0][i].entityname
+						});
 					}
-				else
-					{
-						console.log(moduleData);
-						for (var i = 0; i < moduleData[0].length; i++) {
-							modulearray.push({
-								id: id++,
-								entityname: moduleData[0][i].entityname
-							});
-						}
-					}
+				}
 
 				var oModel = new sap.ui.model.json.JSONModel();
 				oModel.setData({ modelData: modulearray });

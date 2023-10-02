@@ -161,5 +161,14 @@ sap.ui.define([
             deleteDocumentCollectionDetails : function(params, callback){
                 commonService.runJQueryX("DELETE", "elevproject/documentcollectiondetails/delete" , params, callback, null);
             },
+
+            // getAllProjectsDetailForGanttChart : function(callback){
+            //     commonService.runJQueryX("GET", "elevproject/ganttchartprojectsdetail/" + commonService.session("companyId"), null, callback, null);
+            // },     
+            
+            getAllProjectsDetailForGanttChart : function(callback){
+                commonService.runJQueryX("GET", "elevproject/searchprojectsg/" + commonService.session("companyId"), null, callback, null);
+            },
+
          }
     })
