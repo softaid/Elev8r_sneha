@@ -14,7 +14,7 @@ sap.ui.define([
 ], function (JSONModel, BaseController, Sorter, Projectservice, AttributeListservice, xlsx, commonService, ManageUserService, MessageToast, commonFunction, formatter) {
 	"use strict";
 
-	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.Project", {
+	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectDetail", {
 		formatter: formatter,
 
 		onInit: function () {
@@ -24,11 +24,6 @@ sap.ui.define([
 			this.bus.subscribe("activitystatus", "setDetailActivityPage", this.setDetailActivityPage, this);
 			this.bus.subscribe("attributestatus", "setDetailAttributePage", this.setDetailAttributePage, this);
 			this.bus.subscribe("projectdetail", "handleProjectDetails", this.handleProjectDetailsList, this);
-			this.bus.subscribe("billofmaterial", "onAddbillofmaterial", this.onAddbillofmaterial, this);
-
-			this.bus.subscribe("billofmaterial", "onAddbillofmaterial1", this.onAddbillofmaterial1, this);
-
-			this.bus.subscribe("billofmaterial", "onDeletebillofmaterial", this.onDeletebillofmaterial, this);
 			this.oFlexibleColumnLayout = this.byId("fclBillOfMaterial");
 			var currentContext = this;
 

@@ -543,7 +543,7 @@
 				},
 				"projectdetail" : {
 					"viewId": "projectdetail",
-					"viewName": "ProjectManagement/projectdetail",
+					"viewName": "ProjectManagement/ProjectDetail",
 					"controlId": "mainContents",
 					"parent": "master"
 				},
