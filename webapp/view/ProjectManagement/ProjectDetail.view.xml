@@ -453,15 +453,16 @@
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" /></Column>
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" /></Column>
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" /></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelStage}" />
-                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelStage}" /></Column>
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelProject}" />
+                                  <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelProject}" />
+                                  sap-icon://action
                                 </Column>
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Active status" />
                                 </Column>
                             </columns>
                             <items>
-                                <ColumnListItem type="Navigation" press="onListItemPressActivity">
+                                <ColumnListItem  press="onListItemPressActivity">
                                     <cells>        
                                         <Text text="{activitymodel>count}" /> 
                                         <Text text="{activitymodel>stagename}" />         
