@@ -2,7 +2,7 @@
 
 <mvc:View
 	xmlns:c="sap.ui.core"
-	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivityAddDetail"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectStageDetail"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:u="sap.ui.unified"
 	xmlns="sap.m"
@@ -17,7 +17,7 @@
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <Title text="Activity Details"/>
+                    <Title text="Stage Details"/>
                 </f:heading>
                 <f:actions>
 						<ToolbarSpacer/>
@@ -65,7 +65,7 @@
                             <form:formElements>
                                  <form:FormElement label="Stage Name">
                                     <form:fields>
-                                        <Input id="Stage" value="{DetailModel>/stagename}"/>
+                                        <Input id="Stage" value="{StageDetailModel>/stagename}"/>
                                     </form:fields>
                                 </form:FormElement>
 
@@ -74,7 +74,7 @@
                                     <Select id="project"
 					                    required="true" 
                                         change=""
-                                        selectedKey="{DetailModel>/departmentid}" 
+                                        selectedKey="{StageDetailModel>/departmentid}" 
                                         forceSelection="false"
                                         width="500px"
                                         items="{
@@ -90,7 +90,7 @@
                                     <DatePicker id="startDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
-                                                value="{DetailModel>/startdate}"
+                                                value="{StageDetailModel>/startdate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
                                                 editable="false" />
@@ -101,7 +101,7 @@
                                     <DatePicker id="endDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
-                                                value="{DetailModel>/enddate}"
+                                                value="{StageDetailModel>/enddate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
                                                 editable="false"
@@ -110,7 +110,7 @@
                                 </form:FormElement>
                                  <form:FormElement label="Completion Day">
                                     <form:fields>
-                                        <Input id="completionDay" value="{DetailModel>/completiondays}" change="dayCalculation"/>
+                                        <Input id="completionDay" value="{StageDetailModel>/completiondays}" change="dayCalculation"/>
                                     </form:fields>
                                 </form:FormElement> 
                                   <form:FormElement label=" Actual Start Date">
@@ -118,7 +118,7 @@
                                     <DatePicker id="ActualstartDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
-                                                value="{DetailModel>/actualstartdate}"
+                                                value="{StageDetailModel>/actualstartdate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
                                                 editable="false" />
@@ -129,7 +129,7 @@
                                     <DatePicker id="actualendDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
-                                                value="{DetailModel>/actualenddate}"
+                                                value="{StageDetailModel>/actualenddate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
                                                 editable="false"/>
@@ -137,22 +137,22 @@
                                 </form:FormElement>
                                  <form:FormElement label=" Actual Completion Day">
                                     <form:fields>
-                                        <Input id="actualcompletionDay" value="{DetailModel>/actualcompletiondays}"  editable="false"/>
+                                        <Input id="actualcompletionDay" value="{StageDetailModel>/actualcompletiondays}"  editable="false"/>
                                     </form:fields>
                                 </form:FormElement> 
                                 <form:FormElement label="Stage %">
                                     <form:fields>
-                                        <Input id="StagePercent" value="{DetailModel>/stagecompletionpercentage}"/>
+                                        <Input id="StagePercent" value="{StageDetailModel>/stagecompletionpercentage}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Project %">
                                     <form:fields>
-                                <Input id="projectPercent" value="{DetailModel>/projectweightage}"/>
+                                <Input id="projectPercent" value="{StageDetailModel>/projectweightage}"/>
                                     </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
                                        <form:fields>
-                                            <Switch  state="{DetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No">
+                                            <Switch  state="{StageDetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No">
                                                 <layoutData>
                                                     <FlexItemData growFactor="1" />
                                                 </layoutData>
@@ -161,7 +161,7 @@
                                     </form:FormElement>
                                       <form:FormElement label="Is Standard">
                                        <form:fields>
-                                            <Switch  state="{DetailModel>/isstd}" id="isstd" customTextOn="Yes" customTextOff="No" enabled="false">
+                                            <Switch  state="{StageDetailModel>/isstd}" id="isstd" customTextOn="Yes" customTextOff="No" enabled="false">
                                                 <layoutData>
                                                     <FlexItemData growFactor="1" />
                                                 </layoutData>
@@ -170,7 +170,7 @@
                                     </form:FormElement>
                                       <form:FormElement label="Is Started">
                                        <form:fields>
-                                            <Switch  state="{DetailModel>/isstarted}" id="isstart"
+                                            <Switch  state="{StageDetailModel>/isstarted}" id="isstart"
                                             change="isstartchange" customTextOn="Yes" customTextOff="No">
                                                 <layoutData>
                                                     <FlexItemData growFactor="1" />
@@ -182,7 +182,7 @@
                                 <form:fields>
                                    <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
                                         max="100" min="0" progress="true" change="onsliderchange"
-                                        showAdvancedTooltip="true" value="{DetailModel>/completionper}">
+                                        showAdvancedTooltip="true" value="{StageDetailModel>/completionper}">
                                         <ResponsiveScale id="rScaleWarningLevel"
                                             tickmarksBetweenLabels="20" />
                                     </Slider>
@@ -190,7 +190,7 @@
                             </form:FormElement> 
                             <form:FormElement label="Remarks">
                                 <form:fields>
-                                 <Input id="Remark" value="{DetailModel>/stagecompletionpercentage}"/>
+                                 <Input id="Remark" value="{StageDetailModel>/remark}"/>
                                 </form:fields>
                             </form:FormElement> 
                             
@@ -319,7 +319,7 @@
                                     </form:FormElement> 
                                          <!-- <form:FormElement label="">
                                     <form:fields>
-                                        <Input id="inputField" value="{DetailModel>/actualcompletiondays}"  editable="false"/>
+                                        <Input id="inputField" value="{StageDetailModel>/actualcompletiondays}"  editable="false"/>
                                     </form:fields>
                                 </form:FormElement>  -->
             <!-- <FlexBox direction="Column" renderType="Div" class="sapUiSmallMargin">

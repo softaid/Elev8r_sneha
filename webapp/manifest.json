@@ -277,11 +277,6 @@
 					"target": "leadreports"
 				},
 				{
-					"pattern": "project",
-					"name": "project",
-					"target": "project"
-				},
-				{
 					"pattern": "projectmanagement",
 					"name": "projectmanagement",
 					"target": "projectmanagement"
@@ -297,34 +292,34 @@
 					"target": "nimanagementaspermasterstages"
 				},
 				{
-					"pattern": "projectactivities",
-					"name": "projectactivities",
-					"target": "projectactivities"
+					"pattern": "project",
+					"name": "project",
+					"target": "project"
 				},
 				{
-					"pattern": "projectactivitiesAdd",
-					"name": "projectactivitiesAdd",
-					"target": "projectactivitiesAdd"
+					"pattern": "projectattributedetail",
+					"name": "projectattributedetail",
+					"target": "projectattributedetail"
 				},
 				{
-					"pattern": "ProjectActivityAttributeDetail",
-					"name": "ProjectActivityAttributeDetail",
-					"target": "ProjectActivityAttributeDetail"
+					"pattern": "projectdetail",
+					"name": "projectdetail",
+					"target": "projectdetail"
 				},
 				{
-					"pattern": "projectdetailview",
-					"name": "projectdetailview",
-					"target": "projectdetailview"
+					"pattern": "projectList",
+					"name": "projectList",
+					"target": "projectList"
 				},
 				{
-					"pattern": "projectActivityList",
-					"name": "projectActivityList",
-					"target": "projectActivityList"
+					"pattern": "projectstagedetail",
+					"name": "projectstagedetail",
+					"target": "projectstagedetail"
 				},
 				{
-					"pattern": "projectctivities",
-					"name": "projectctivities",
-					"target": "projectctivities"
+					"pattern": "ProjectActivityDetail",
+					"name": "ProjectActivityDetail",
+					"target": "ProjectActivityDetail"
 				},
 				{
 					"pattern": "payments",
@@ -546,34 +541,29 @@
 					"controlId": "mainContents",
 					"parent": "master"
 				},
-				"project" : {
-					"viewId": "project",
-					"viewName": "ProjectManagement/Project",
+				"projectdetail" : {
+					"viewId": "projectdetail",
+					"viewName": "ProjectManagement/projectdetail",
 					"controlId": "mainContents",
 					"parent": "master"
 				},
-				"projectactivitiesAdd" : {
-					"viewId": "projectactivitiesAdd",
-					"viewName": "ProjectManagement/ProjectActivityAdd",
+				"projectstagedetail" : {
+					"viewId": "projectstagedetail",
+					"viewName": "ProjectManagement/ProjectStageDetail",
 					"controlId": "mainContents",
 					"parent": "master"
 				},
 
-				"ProjectActivityAttributeDetail" : {
-					"viewId": "ProjectActivityAttributeDetail",
-					"viewName": "ProjectManagement/ProjectActivityAttributeDetail",
+				"projectattributedetail" : {
+					"viewId": "projectattributedetail",
+					"viewName": "ProjectManagement/ProjectAttributeDetail",
 					"controlId": "mainContents",
 					"parent": "master"
 				},
-				"projectdetailview" : {
-					"viewId": "projectdetailview",
-					"viewName": "ProjectManagement/ProjectDetailView",
-					"controlId": "mainContents",
-					"parent": "master"
-				},
-				"projectActivityList" : {
-					"viewId": "projectActivityList",
-					"viewName": "ProjectManagement/ProjectActivityList",
+				
+				"projectList" : {
+					"viewId": "projectList",
+					"viewName": "ProjectManagement/ProjectList",
 					"controlId": "mainContents",
 					"parent": "master"
 				},
@@ -595,9 +585,9 @@
 					"controlId": "mainContents",
 					"parent": "master"
 				},
-				"projectactivities" : {
-					"viewId": "projectactivities",
-					"viewName": "ProjectManagement/ProjectActivity",
+				"ProjectActivityDetail" : {
+					"viewId": "ProjectActivityDetail",
+					"viewName": "ProjectManagement/ProjectActivityDetail",
 					"controlId": "mainContents",
 					"parent": "master"
 				},

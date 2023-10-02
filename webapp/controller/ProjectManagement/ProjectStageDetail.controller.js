@@ -11,7 +11,7 @@ sap.ui.define([
 ], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, commonFunction, MessageToast) {
 	"use strict";
 
-	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivityAddDetail", {
+	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectStageDetail", {
 		onInit: function () {
 
 			//this.handleRouteMatched(null);
@@ -37,59 +37,39 @@ sap.ui.define([
 
 		onBeforeRendering: async function () {
 
-			this.model = this.getView().getModel("ProjectDetailModel");
-			console.log("-----------------------this.model----------------------", this.model);
-
-			var oModel = new JSONModel();
-			var documentModel = this.getView().getModel("editDocumentCollectionModel");
-
-			if (this.model != undefined) {
-				this.getView().setModel(this.model, "DetailModel");
-				oModel.setData(documentModel);
-			}
-
-			// this.createPdfFormate();
-
-			// get document list
-
+			let StageDetailModel = this.getView().getModel("StageDetailModel").oData;
 			var currentContext = this;
-			let detailModel = this.getView().getModel("DetailModel").oData;
-			await Projectservice.getDocumentCollectionDetails({ projectid: detailModel.projectid, stageid: detailModel.stageid, document_id: 3 }, function (data) {
-				var oConfig = sap.ui.getCore().getModel("configModel");
 
-				data[0].forEach((document) => {
-					if (document.document_id == 3) {
-						document.image_url = oConfig.oData.webapi.docurl + document.document_url;
-						currentContext.resultArr.push(document);
 
-					}
-					else {
-						document.pdf_url = oConfig.oData.webapi.docurl + document.document_url;
-						currentContext.resultpdfArr.push(document);
+			if (StageDetailModel.id != undefined) {
+
+				// get document list
+				await Projectservice.getDocumentCollectionDetails({ projectid: StageDetailModel.projectid, stageid: StageDetailModel.stageid, document_id: 3 }, function (data) {
+					var oConfig = sap.ui.getCore().getModel("configModel");
+					if (data[0].length > 0) {
+						data[0].forEach((document) => {
+							if (document.document_id == 3) {
+								document.image_url = oConfig.oData.webapi.docurl + document.document_url;
+								currentContext.resultArr.push(document);
+
+							}
+							else {
+								document.pdf_url = oConfig.oData.webapi.docurl + document.document_url;
+								currentContext.resultpdfArr.push(document);
+							}
+						})
+
+						var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
+						tblmodel.oData.image_url = currentContext.resultArr?.[0]?.image_url ?? null;
+						tblmodel.oData.pdf_url = currentContext.resultpdfArr?.[0]?.pdf_url ?? null;
+						tblmodel.oData.imageid = (currentContext.resultArr?.[0]?.image_url ?? null) == null ? null : 0;
+						tblmodel.oData.pdfid = (currentContext.resultpdfArr?.[0]?.pdf_url ?? null) == null ? null : 0;
+						tblmodel.oData.pdf_name = (currentContext.resultpdfArr?.[0]?.document_name ?? null) == null ? null : (currentContext.resultpdfArr?.[0]?.document_name);
+
+						tblmodel.refresh();
 					}
 				})
-				console.log("data", data);
-				if (data[0].length) {
-					var dModel = new sap.ui.model.json.JSONModel();
-					dModel.setData({ modelData: data[0] });
-					currentContext.getView().setModel(dModel, "documentList");
-
-					var oModel = new sap.ui.model.json.JSONModel();
-
-					currentContext.getView().setModel(oModel, "editDocumentCollectionModel");
-
-
-					var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
-					// tblmodel.oData.imgdata = currentContext.resultArr[0].imgdata;
-					tblmodel.oData.image_url = currentContext.resultArr?.[0]?.image_url??null;
-					tblmodel.oData.pdf_url = currentContext.resultpdfArr?.[0]?.pdf_url??null;
-					tblmodel.oData.imageid =(currentContext.resultArr?.[0]?.image_url??null)==null?null:0;
-					tblmodel.oData.pdfid = (currentContext.resultpdfArr?.[0]?.pdf_url??null)==null?null:0;
-					tblmodel.oData.pdf_name = (currentContext.resultpdfArr?.[0]?.document_name??null)==null?null: (currentContext.resultpdfArr?.[0]?.document_name);
-
-					tblmodel.refresh();
-				}
-			})
+			}
 		},
 
 		functiondownload: async function (OEvent) {
@@ -100,13 +80,13 @@ sap.ui.define([
 			let sUrl;
 
 			var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
-			if (OEvent.mParameters.id.indexOf("image")!=-1 ){
+			if (OEvent.mParameters.id.indexOf("image") != -1) {
 				document_name = currentContext.resultArr[tblmodel.oData.imageid].document_name;
-				sUrl=tblmodel.oData.image_url;
+				sUrl = tblmodel.oData.image_url;
 			}
 			else {
 				document_name = currentContext.resultpdfArr[tblmodel.oData.pdfid].document_name;
-				sUrl=tblmodel.oData.pdf_url;
+				sUrl = tblmodel.oData.pdf_url;
 			}
 
 			var oXHR = new XMLHttpRequest();
@@ -279,20 +259,20 @@ sap.ui.define([
 		forwardPress: function (OEvent) {
 			let currentContext = this;
 			var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
-			let count ;
-			let message="pdf";
+			let count;
+			let message = "pdf";
 			let noOfdocumet;
-			if (OEvent.mParameters.id.indexOf("btnForpdf")==-1 ){
-				message="image";
-				 count = tblmodel.oData.imageid;
-				 noOfdocumet = (currentContext.resultArr.length - 1);
+			if (OEvent.mParameters.id.indexOf("btnForpdf") == -1) {
+				message = "image";
+				count = tblmodel.oData.imageid;
+				noOfdocumet = (currentContext.resultArr.length - 1);
 			}
-			else{
-				 count = tblmodel.oData.pdfid;
-				 noOfdocumet = (currentContext.resultpdfArr.length - 1);
+			else {
+				count = tblmodel.oData.pdfid;
+				noOfdocumet = (currentContext.resultpdfArr.length - 1);
 
 			}
-				if (count == null) {
+			if (count == null) {
 				MessageToast.show(`No ${message} to preview`);
 				return true;
 			}
@@ -304,21 +284,21 @@ sap.ui.define([
 			else {
 				count++;
 			}
-			if(message=="image"){
-			
-			tblmodel.oData.imgdata = currentContext.resultArr[count].imgdata;
-			tblmodel.oData.image_url = currentContext.resultArr[count].image_url;
-			tblmodel.oData.imageid = count;
+			if (message == "image") {
+
+				tblmodel.oData.imgdata = currentContext.resultArr[count].imgdata;
+				tblmodel.oData.image_url = currentContext.resultArr[count].image_url;
+				tblmodel.oData.imageid = count;
 			}
 
-			else{
+			else {
 				tblmodel.oData.imgdata = currentContext.resultpdfArr[count].imgdata;
 				tblmodel.oData.pdf_url = currentContext.resultpdfArr[count].pdf_url;
 				tblmodel.oData.pdfid = count;
 				tblmodel.oData.pdf_name = currentContext.resultpdfArr[count].document_name;
 
-				}
-	
+			}
+
 			tblmodel.refresh();
 		},
 
@@ -326,71 +306,71 @@ sap.ui.define([
 
 			let currentContext = this;
 			var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
-			let count ;
-			let message="pdf";
+			let count;
+			let message = "pdf";
 			let noOfdocumet;
-			if (OEvent.mParameters.id.indexOf("btnBackpdf")==-1 ){
-				message="image";
-				 count = tblmodel.oData.imageid;
-				 noOfdocumet = (currentContext.resultArr.length - 1);
+			if (OEvent.mParameters.id.indexOf("btnBackpdf") == -1) {
+				message = "image";
+				count = tblmodel.oData.imageid;
+				noOfdocumet = (currentContext.resultArr.length - 1);
 			}
-			else{
-				 count = tblmodel.oData.pdfid;
-				 noOfdocumet = (currentContext.resultpdfArr.length - 1);
+			else {
+				count = tblmodel.oData.pdfid;
+				noOfdocumet = (currentContext.resultpdfArr.length - 1);
 
 			}
-				if (count == null) {
+			if (count == null) {
 				MessageToast.show(`No ${message} to preview`);
 				return true;
 			}
 
-			if (count==0) {
+			if (count == 0) {
 				MessageToast.show(`it is last ${message}`);
 				return true;
 			}
 			else {
 				count--;
 			}
-			if(message=="image"){
-			
-			tblmodel.oData.imgdata = currentContext?.resultArr[count]?.imgdata??null;
-			tblmodel.oData.image_url = currentContext.resultArr[count].image_url;
-			tblmodel.oData.imageid = count;
+			if (message == "image") {
+
+				tblmodel.oData.imgdata = currentContext?.resultArr[count]?.imgdata ?? null;
+				tblmodel.oData.image_url = currentContext.resultArr[count].image_url;
+				tblmodel.oData.imageid = count;
 			}
 
-			else{
-				tblmodel.oData.imgdata = currentContext?.resultpdfArr[count]?.imgdata??null;
+			else {
+				tblmodel.oData.imgdata = currentContext?.resultpdfArr[count]?.imgdata ?? null;
 				tblmodel.oData.pdf_url = currentContext.resultpdfArr[count].pdf_url;
 				tblmodel.oData.pdfid = count;
 				tblmodel.oData.pdf_name = currentContext.resultpdfArr[count].document_name;
 
-				}
-	
+			}
+
 			tblmodel.refresh();
 		},
 
 		onDeleteDocument: function (OEvent) {
-			
+
 
 			let currentContext = this;
 			var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
-			let count ;
-			let message="pdf";
+			let count;
+			let message = "pdf";
 			let resultArr;
-			if (OEvent.mParameters.id.indexOf("btndeletepdf")==-1 ){
-				message="image";
-				 count = tblmodel.oData.imageid;
-				 resultArr=currentContext.resultArr;
+			if (OEvent.mParameters.id.indexOf("btndeletepdf") == -1) {
+				message = "image";
+				count = tblmodel.oData.imageid;
+				resultArr = currentContext.resultArr;
 			}
-			else{
-				 count = tblmodel.oData.pdfid;
-				 resultArr = (currentContext.resultpdfArr);
+			else {
+				count = tblmodel.oData.pdfid;
+				resultArr = (currentContext.resultpdfArr);
 			}
-				if (count == null) {
+			if (count == null) {
 				MessageToast.show(`No ${message}  available to delete `);
 				return true;
 			}
-			
+
 			if (resultArr[count].id != undefined) {
 				currentContext.DeleteDocumentArr.push(resultArr[count].id)
 				resultArr.splice(count, 1);
@@ -411,20 +391,20 @@ sap.ui.define([
 				tblmodel.oData.imgdata = resultArr[0].imgdata;
 				tblmodel.oData[`${message}_url`] = resultArr[0][`${message}_url`];
 				tblmodel.oData[`${message}id`] = 0;
-				message=="pdf"?	(tblmodel.oData[`${message}_name`] = resultArr[0].document_name):"not change";
+				message == "pdf" ? (tblmodel.oData[`${message}_name`] = resultArr[0].document_name) : "not change";
 
 			}
-	
 
-			tblmodel.refresh();	
-			},
+
+			tblmodel.refresh();
+		},
 
 
 		onDeleteDocumentSave: function () {
 			let currentContext = this;
 
 			currentContext.DeleteDocumentArr.forEach((deleteImageDetail) => {
-				Projectservice.deleteDocumentCollectionDetails({"id":deleteImageDetail}, function (obj) {
+				Projectservice.deleteDocumentCollectionDetails({ "id": deleteImageDetail }, function (obj) {
 
 				})
 			});
@@ -468,24 +448,23 @@ sap.ui.define([
 		onSave: function () {
 			// if (this.validateForm()) {
 			let currentContext = this;
-			let oModel = this.getView().getModel("DetailModel").oData;
+			let oModel = this.getView().getModel("StageDetailModel").oData;
 
 			var parentModel = currentContext.getView().getModel("editDocumentCollectionModel").oData;
 			let objPush = {
 				id: null,
-				stageid: oModel.stageid,
+				stageid:  oModel.stageid,
 				projectid: oModel.projectid,
+				parentstageid:null,
 				companyid: commonService.session("companyId"),
 				userid: commonService.session("userId"),
-				parentstageid: null
+				type: "Stage"
 			}
 
-			console.log("-------------------------parentModel1-------------------------", parentModel);
 
 			parentModel["id"] = null;
+			oModel.type = "Stage";
 			parentModel["projectid"] = oModel.projectid;
-			parentModel["stageid"] = 2;
-			parentModel["document_id"] = 3;
 			parentModel["companyid"] = commonService.session("companyId");
 			parentModel["userid"] = commonService.session("userId");
 			oModel["companyid"] = commonService.session("companyId");
@@ -499,42 +478,45 @@ sap.ui.define([
 			oModel.isstd = oModel.isstd === true ? 1 : 0;
 
 			Projectservice.saveProjectActivityDetail(oModel, function (savedata) {
-				console.log("--------------oModel------------", oModel);
-				Projectservice.getProjectdetail({ id: oModel.projectid }, function (data) {
+
+				// objPush.stageid=savedata.id  //  get id of  new save activity  for document save
+
+				currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
+					if (document.id == undefined) {
+						Projectservice.saveDocumentCollectionDetails({ ...objPush, ...document }, function (obj) {
+							var saveMsg = "Data Saved Successfully.";
+							var editMsg = "Data Updated Successfully";
+							var ErrorMsg = "Data not Saved Successfully";
+							var message = parentModel.id == null ? saveMsg : editMsg
+							if (message == null) {
+								MessageToast.show(ErrorMsg);
+	
+							}
+							else {
+								MessageToast.show(message);
+							}
+						})
+					}
+				});
+	
+
+
+				Projectservice.getProjectdetail({ id: oModel.projectid, field: "stage" }, function (data) {
 					console.log("data", data);
 					data[0].map(function (value, index) {
 						data[0][index].activestatus = value.isactive == 1 ? "Active" : "InActive";
 					});
+					
 					let tblModel = currentContext.getView().getModel("tblModel");
-					console.log("-----------tblModel----------", tblModel);
 					tblModel.setData(data[0]);
+
+					var StageModel = currentContext.getView().getModel("StageModel");
+					StageModel.setData(data[0]);
 					tblModel.refresh();
 				})
 			});
 
-
-			console.log("-------------------------parentModel2-------------------------", parentModel);
-
-			currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
-				if (document.id == undefined) {
-					Projectservice.saveDocumentCollectionDetails({ ...objPush, ...document }, function (obj) {
-						var saveMsg = "Data Saved Successfully.";
-						var editMsg = "Data Updated Successfully";
-						var ErrorMsg = "Data not Saved Successfully";
-						var message = parentModel.id == null ? saveMsg : editMsg
-						if (message == null) {
-							MessageToast.show(ErrorMsg);
-
-						}
-						else {
-							MessageToast.show(message);
-							//currentContext.resetModel();
-							//currentContext.loadData();
-						}
-					})
-				}
-			});
-
+		
 			currentContext.DeleteDocumentArr.length > 0 ? currentContext.onDeleteDocumentSave() : "No image is available to delete";
 
 			currentContext.onCancel();
@@ -577,7 +559,7 @@ sap.ui.define([
 
 		onDelete: function () {
 			var currentContext = this;
-			var oModel = this.getView().getModel("DetailModel").oData;
+			var oModel = this.getView().getModel("StageDetailModel").oData;
 			oModel["companyid"] = commonService.session("companyId");
 			oModel["userid"] = commonService.session("userId");
 			Projectservice.deleteProjectActivityDetail(params, function (data) {
@@ -590,19 +572,19 @@ sap.ui.define([
 
 		// function call select stage starting toggle yes
 		isstartchange: function () {
-			let DetailModeldata = this.getView().getModel("DetailModel");
-			console.log(DetailModeldata.oData.isstarted);
-			this.getView().byId("inpWarningLevel").setEnabled(DetailModeldata.oData.isstarted == true);
-			console.log(DetailModeldata);
+			let StageDetailModeldata = this.getView().getModel("StageDetailModel");
+			console.log(StageDetailModeldata.oData.isstarted);
+			this.getView().byId("inpWarningLevel").setEnabled(StageDetailModeldata.oData.isstarted == true);
+			console.log(StageDetailModeldata);
 
-			DetailModeldata.oData.isstarted == true ? DetailModeldata.oData.completionper = 0 : "null";
-			console.log(DetailModeldata);
+			StageDetailModeldata.oData.isstarted == true ? StageDetailModeldata.oData.completionper = 0 : "null";
+			console.log(StageDetailModeldata);
 
 
-			DetailModeldata.oData.actualstartdate = this.dateFormatter(null);
-			DetailModeldata.refresh();
+			StageDetailModeldata.oData.actualstartdate = this.dateFormatter(null);
+			StageDetailModeldata.refresh();
 
-			console.log(DetailModeldata);
+			console.log(StageDetailModeldata);
 
 		},
 
@@ -645,7 +627,7 @@ sap.ui.define([
 		// function call on stage percentage change
 		onsliderchange: function () {
 			let currentContext = this;
-			let oModel = this.getView().getModel("DetailModel").oData;
+			let oModel = this.getView().getModel("StageDetailModel").oData;
 			oModel.actualenddate = null;
 			oModel.Actualcompletiondays = null;
 
@@ -663,7 +645,7 @@ sap.ui.define([
 
 			}
 
-			this.getView().getModel("DetailModel").refresh();
+			this.getView().getModel("StageDetailModel").refresh();
 
 		},
 
@@ -671,8 +653,8 @@ sap.ui.define([
 		dayCalculation: async function (oEvent) {
 
 			let oThis = this;
-			let DetailModel = oThis.getView().getModel("DetailModel");
-			let ItemConsumptiondata = DetailModel.oData;
+			let StageDetailModel = oThis.getView().getModel("StageDetailModel");
+			let ItemConsumptiondata = StageDetailModel.oData;
 			if (oEvent.mParameters.id.match("endDate") != null) {
 				var parts = ItemConsumptiondata.startdate.split('/');
 				let startdate = Date.parse(new Date(parts[2], parts[1], parts[0]));
@@ -694,14 +676,14 @@ sap.ui.define([
 
 			}
 
-			DetailModel.refresh();
+			StageDetailModel.refresh();
 
 		},
 
 
 
 		onCancel: function () {
-			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---projectactivitiesAdd--fclBillOfMaterial");
+			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---projectdetail--fclBillOfMaterial");
 			//("it  is fixed"---" name of  main control in manifest.json file in pattern"---"id of view in that particular view code")
 			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
 		},

@@ -15,12 +15,15 @@ sap.ui.define([
                 commonService.runJQueryX("GET", "qcchecklist/searchqcchecklist/" + commonService.session("companyId"), null, callback, null);
             },
            
-            getAttributelist: function(params, callback){
-                commonService.runJQueryX("GET", "attributelist/selectattributelist/" + params.id, null, callback, null);
+            // get all attribute for particular project
+            getAttributeList: function(params, callback){
+                commonService.runJQueryX("GET", "attributelist/selectattributelist/" + params.projectid, null, callback, null);
             },
 
-            saveQcchecklist: function(params, callback){
-                commonService.runJQueryX("POST", "qcchecklist/saveqcchecklist" , params, callback, null);
+
+            // save attribute for particular project
+            saveAttributeList: function(params, callback){
+                commonService.runJQueryX("POST", "Attributelist/saveAttributelist" , params, callback, null);
             }
 
 

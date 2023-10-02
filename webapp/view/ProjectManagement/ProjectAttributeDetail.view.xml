@@ -3,7 +3,7 @@
 
 <mvc:View
 	xmlns:c="sap.ui.core"
-	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivityAttributeDetail"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectAttributeDetail"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:u="sap.ui.unified"
 	xmlns="sap.m"
@@ -67,15 +67,16 @@
 									<form:fields>
 										<Select id="activity"
 					                    required="true" 
-                                        change=""
+                                        change="ActivitySelect"
                                         selectedKey="{AttributeDetailModel>/activityid}" 
                                         forceSelection="false"
+                                        showSecondaryValues= "true"
                                         width="500px"
                                         items="{
                                             path: 'activityModel>/',
                                             sorter: { path: 'id' }
                                         }">
-											<core:Item key="{activityModel>id}" text="{activityModel>stagename}" />
+											<core:Item key="{activityModel>stageid}" text="{activityModel>stagename}" additionalText="{activityModel>parentid}" />
 										</Select>
 									</form:fields>
 								</form:FormElement>
@@ -109,6 +110,7 @@
 										<Input id="header" value="{AttributeDetailModel>/header}"/>
 									</form:fields>
 								</form:FormElement>
+
 								<form:FormElement id="projecttype" label="Group" 
                                      visible="{
                                         path: 'attributeSelectModel>/group',
@@ -136,10 +138,10 @@
                                     }"
                                                    >
 									<form:fields>
-										<DatePicker id="startDate" width="100%" 
+										<DatePicker id="Date" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
-                                                value="{AttributeDetailModel>/startdate}"
+                                                value="{AttributeDetailModel>/Date}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
                                                 editable="true"
@@ -155,15 +157,27 @@
                                                 required="true"
                                                 editable="false"
                                                 change="dayCalculation"/></form:fields></form:FormElement> -->
-								<form:FormElement label="Input" 
+
+								<form:FormElement label="Amount" 
+                                      visible="{
+                                        path: 'attributeSelectModel>/Amount',
+                                        formatter: '.formatter.setvisibilty'
+                                    }">
+									<form:fields>
+										<Input id="Amount" value="{AttributeDetailModel>/Amount}"/>
+									</form:fields>
+								</form:FormElement>
+
+                                <form:FormElement label="Input" 
                                       visible="{
                                         path: 'attributeSelectModel>/Input',
                                         formatter: '.formatter.setvisibilty'
                                     }">
 									<form:fields>
-										<Input id="completionDay" value="{AttributeDetailModel>/completiondays}" change="dayCalculation"/>
+										<Input id="Input" value="{AttributeDetailModel>/Input}" />
 									</form:fields>
 								</form:FormElement>
+
 								<form:FormElement label="Status"  
                                  visible="{
                                         path: 'attributeSelectModel>/Tristate',
@@ -171,11 +185,19 @@
                                     }"
                                  >
 									<form:fields>
-										<!-- <Radio columns="3" valueState="Error" class="sapUiMediumMarginBottom"> -->
-										<RadioButton id="RB3-1" text="Yes" />
-										<RadioButton id="RB3-2" text=" No" />
-										<RadioButton id="RB3-3" text="NA" />
-										<!-- </Radio> -->
+									<Select id="tristate"
+					                    required="true" 
+                                        change="ActivitySelect"
+                                        selectedKey="{AttributeDetailModel>/Tristate}" 
+                                        forceSelection="true"
+                                        showSecondaryValues= "true"
+                                        width="500px"
+                                        items="{
+                                            path: 'tristateModel>/',
+                                            sorter: { path: 'id' }
+                                        }">
+											<core:Item key="{tristateModel>text}" text="{tristateModel>text}"/>
+										</Select>
 									</form:fields>
 								</form:FormElement>
 								<!-- <form:FormElement label=" Actual Completion Day">
@@ -280,7 +302,7 @@
                                                 placeholder="Choose a document..."></u:FileUploader>
 									</form:fields>
 								</form:FormElement>
-								<form:FormElement label="Document upload"    
+								<form:FormElement label="Document Download"    
                                       visible="{
                                         path: 'attributeSelectModel>/Attachment',
                                         formatter: '.formatter.setvisibilty'
@@ -325,12 +347,9 @@
 										</HBox>
 									</form:fields>
 								</form:FormElement >
-								<form:FormElement label="Remarks"   visible="{
-                                        path: 'attributeSelectModel>/Remark',
-                                        formatter: '.formatter.setvisibilty'
-                                    }">
+								<form:FormElement label="Remarks"   visible="true">
 									<form:fields>
-										<TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{projectModel>/note}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+										<TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{AttributeDetailModel>/remark}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
 									</form:fields>
 								</form:FormElement>
 							</form:formElements>

@@ -12,7 +12,7 @@ sap.ui.define([
 
 ], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, ManageUserService, MessageToast, commonFunction, formatter) {
 
-	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.Quotations", {
+	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.ProjectList", {
 
 		onInit: function () {
 
@@ -67,20 +67,20 @@ sap.ui.define([
 			this.bus = sap.ui.getCore().getEventBus();
 			setTimeout(function () {
 				this.bus = sap.ui.getCore().getEventBus();
-				this.bus.publish("projectdetail", "handleProjectDetails", { pagekey: "projectactivitiesAdd", viewModel: model });
+				this.bus.publish("projectdetail", "handleProjectDetails", { pagekey: "projectdetail", viewModel: model });
 			}, 1000);
 
-            this.bus.publish("projectdetail", "handleProjectDetails", { pagekey: "projectactivitiesAdd", viewModel: model });
+            this.bus.publish("projectdetail", "handleProjectDetails", { pagekey: "projectdetail", viewModel: model });
 		},
 
-		onAddNew: function () {
-			this.bus = sap.ui.getCore().getEventBus();
-			setTimeout(function () {
-				this.bus = sap.ui.getCore().getEventBus();
-				this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel: null });
-			}, 3000);
-			this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel: null });
-		},
+		// onAddNew: function () {
+		// 	this.bus = sap.ui.getCore().getEventBus();
+		// 	setTimeout(function () {
+		// 		this.bus = sap.ui.getCore().getEventBus();
+		// 		this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel: null });
+		// 	}, 3000);
+		// 	this.bus.publish("qutationcreen", "handleQutationList", { pagekey: "addqutation", viewModel: null });
+		// },
 
 		/**
 		* Function to navigate to specified route.
