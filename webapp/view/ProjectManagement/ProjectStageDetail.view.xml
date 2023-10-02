@@ -2,7 +2,7 @@
 
 <mvc:View
 	xmlns:c="sap.ui.core"
-	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivityAttribute"
+	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectStageDetail"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:u="sap.ui.unified"
 	xmlns="sap.m"
@@ -12,11 +12,12 @@
 	xmlns:layout="sap.ui.layout"
 	xmlns:form="sap.ui.layout.form"
 	height="100%">
+
     <f:DynamicPage toggleHeaderOnTitleClick="false">
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <Title text="Attributes Details"/>
+                    <Title text="Stage Details"/>
                 </f:heading>
                 <f:actions>
 						<ToolbarSpacer/>
@@ -62,65 +63,18 @@
                     <form:formContainers>
                         <form:FormContainer>
                             <form:formElements>
-
-                            <form:FormElement  label="Activity">
-                                   <form:fields>
-                                    <Select id="activity"
-					                    required="true" 
-                                        change=""
-                                        selectedKey="{AttributeDetailModel>/activityid}" 
-                                        forceSelection="false"
-                                        width="500px"
-                                        items="{
-                                            path: 'activityModel>/',
-                                            sorter: { path: 'id' }
-                                        }">
-                                        <core:Item key="{activityModel>id}" text="{activityModel>stagename}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
-
-
-                             <!-- <form:FormElement label="Activity Name">
+                                 <form:FormElement label="Stage Name">
                                     <form:fields>
-                                        <Input id="activity" value="{AttributeDetailModel>/stagename}"/>
-                                    </form:fields>
-                                </form:FormElement> -->
-
-                                 <form:FormElement label="Attribute Name">
-                                    <form:fields>
-                                        <Input id="attribute" value="{AttributeDetailModel>/stagename}"/>
+                                        <Input id="Stage" value="{StageDetailModel>/stagename}"/>
                                     </form:fields>
                                 </form:FormElement>
 
-                              <form:FormElement label="Attribute Type ">
-                                       <form:fields>
-                                            <MultiComboBox id="attributetype"
-                                                    required="true" 
-                                                    selectionChange=""
-                                                    selectionFinish="handleSelectionFinish"
-                                                    width="500px"
-                                                    items="{
-                                                           path: 'attributeModel>/modelData',
-                                                           sorter: { path: 'createdby' }
-                                                           }">
-                                                    <core:Item key="{attributeModel>id}" text="{attributeModel>description}" />
-                                                </MultiComboBox>
-                                        </form:fields>
-                                    </form:FormElement>
-
-                                  <form:FormElement label="Header">
-                                    <form:fields>
-                                        <Input id="header" value="{AttributeDetailModel>/header}"/>
-                                    </form:fields>
-                                </form:FormElement>
-
-                                  <form:FormElement id="projecttype" label="Group">
-                                   <form:fields>
+                                  <form:FormElement id="projecttype" label="Department">
+                                <form:fields>
                                     <Select id="project"
 					                    required="true" 
                                         change=""
-                                        selectedKey="{AttributeDetailModel>/departmentid}" 
+                                        selectedKey="{StageDetailModel>/departmentid}" 
                                         forceSelection="false"
                                         width="500px"
                                         items="{
@@ -131,107 +85,117 @@
                                     </Select>
                                 </form:fields>
                             </form:FormElement>
-
-                                <form:FormElement label=" Date">
+                                <form:FormElement label="Start Date">
                                     <form:fields>
                                     <DatePicker id="startDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
-                                                value="{AttributeDetailModel>/startdate}"
+                                                value="{StageDetailModel>/startdate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="true"
-                                                 visible="true"/>
+                                                editable="false" />
                                         </form:fields>
                                 </form:FormElement>
-                                 <!-- <form:FormElement label="End Date">
+                                 <form:FormElement label="End Date">
                                         <form:fields>
                                     <DatePicker id="endDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
-                                                value="{AttributeDetailModel>/enddate}"
+                                                value="{StageDetailModel>/enddate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
                                                 editable="false"
                                                 change="dayCalculation"/>
                                         </form:fields>
-                                </form:FormElement> -->
-                                 <form:FormElement label="Input">
-                                    <form:fields>
-                                        <Input id="completionDay" value="{AttributeDetailModel>/completiondays}" change="dayCalculation"/>
-                                    </form:fields>
                                 </form:FormElement>
-
-                                <form:FormElement label="Status">
+                                 <form:FormElement label="Completion Day">
                                     <form:fields>
-                                            <!-- <Radio columns="3" valueState="Error" class="sapUiMediumMarginBottom"> -->
-                                                <RadioButton id="RB3-1" text="Yes" />
-                                                <RadioButton id="RB3-2" text=" No" />
-                                                <RadioButton id="RB3-3" text="NA" />
-                                            <!-- </Radio> -->
+                                        <Input id="completionDay" value="{StageDetailModel>/completiondays}" change="dayCalculation"/>
+                                    </form:fields>
+                                </form:FormElement> 
+                                  <form:FormElement label=" Actual Start Date">
+                                    <form:fields>
+                                    <DatePicker id="ActualstartDate" width="100%" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}"
+                                                value="{StageDetailModel>/actualstartdate}"
+                                                valueFormat="dd/MM/yyyy"
+                                                required="true"
+                                                editable="false" />
                                         </form:fields>
                                 </form:FormElement>
-                                 
-                                
-                                 
+                                 <form:FormElement label=" Actual End Date">
+                                        <form:fields>
+                                    <DatePicker id="actualendDate" width="100%" 
+                                                placeholder="{config>/dateFormat/placeholder}"
+                                                displayFormat="{config>/dateFormat/displayFormat}"
+                                                value="{StageDetailModel>/actualenddate}"
+                                                valueFormat="dd/MM/yyyy"
+                                                required="true"
+                                                editable="false"/>
+                                        </form:fields>
+                                </form:FormElement>
                                  <form:FormElement label=" Actual Completion Day">
                                     <form:fields>
-                                        <Input id="actualcompletionDay" value="{AttributeDetailModel>/actualcompletiondays}"  editable="false"/>
+                                        <Input id="actualcompletionDay" value="{StageDetailModel>/actualcompletiondays}"  editable="false"/>
                                     </form:fields>
                                 </form:FormElement> 
                                 <form:FormElement label="Stage %">
                                     <form:fields>
-                                        <Input id="StagePercent" value="{AttributeDetailModel>/stagecompletionpercentage}"/>
+                                        <Input id="StagePercent" value="{StageDetailModel>/stagecompletionpercentage}"/>
                                     </form:fields>
                                 </form:FormElement>
-
-                                <!-- <form:FormElement label="Project %">
+                                <form:FormElement label="Project %">
                                     <form:fields>
-                                <Input id="projectPercent" value="{AttributeDetailModel>/projectweightage}"/>
+                                <Input id="projectPercent" value="{StageDetailModel>/projectweightage}"/>
                                     </form:fields>
-                                </form:FormElement> -->
-
-                                  <!-- <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
+                                </form:FormElement>
+                                 <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
                                        <form:fields>
-                                            <Switch  state="{AttributeDetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No">
+                                            <Switch  state="{StageDetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No">
                                                 <layoutData>
                                                     <FlexItemData growFactor="1" />
                                                 </layoutData>
                                             </Switch>
                                         </form:fields>
-                                 </form:FormElement>
-
+                                    </form:FormElement>
                                       <form:FormElement label="Is Standard">
                                        <form:fields>
-                                            <Switch  state="{AttributeDetailModel>/isstd}" id="isstd" customTextOn="Yes" customTextOff="No" enabled="false">
+                                            <Switch  state="{StageDetailModel>/isstd}" id="isstd" customTextOn="Yes" customTextOff="No" enabled="false">
                                                 <layoutData>
                                                     <FlexItemData growFactor="1" />
                                                 </layoutData>
                                             </Switch>
                                         </form:fields>
-                                    </form:FormElement> -->
-
-                                      <!-- <form:FormElement label="Is Started">
+                                    </form:FormElement>
+                                      <form:FormElement label="Is Started">
                                        <form:fields>
-                                            <Switch  state="{AttributeDetailModel>/isstarted}" id="isstart"
+                                            <Switch  state="{StageDetailModel>/isstarted}" id="isstart"
                                             change="isstartchange" customTextOn="Yes" customTextOff="No">
                                                 <layoutData>
                                                     <FlexItemData growFactor="1" />
                                                 </layoutData>
                                             </Switch>
                                         </form:fields>
-                                    </form:FormElement> -->
-                                      <!-- <form:FormElement label="stage Per">
+                                    </form:FormElement>
+                                      <form:FormElement label="stage Per">
                                 <form:fields>
                                    <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
                                         max="100" min="0" progress="true" change="onsliderchange"
-                                        showAdvancedTooltip="true" value="{AttributeDetailModel>/completionper}">
+                                        showAdvancedTooltip="true" value="{StageDetailModel>/completionper}">
                                         <ResponsiveScale id="rScaleWarningLevel"
                                             tickmarksBetweenLabels="20" />
                                     </Slider>
                                 </form:fields>
-                            </form:FormElement>  -->
+                            </form:FormElement> 
+                            <form:FormElement label="Remarks">
+                                <form:fields>
+                                 <Input id="Remark" value="{StageDetailModel>/remark}"/>
+                                </form:fields>
+                            </form:FormElement> 
                             
+
+
 
                               <form:FormElement label="Upload Image">
                                         <form:fields>
@@ -318,7 +282,11 @@
                                     <form:FormElement>
                                         <form:fields>
                                             <HBox>
-                                      
+                                        <!-- <PDFViewer source="{editDocumentCollectionModel>/pdf_url}" height="10em"  press="functiondownload">
+                                        <layoutData>
+                                            <FlexItemData growFactor="1" />
+                                        </layoutData>
+                                    </PDFViewer> -->
                                      <Button 
                                             text=""
                                             type="Emphasized"
@@ -349,11 +317,22 @@
                                         </HBox>
                                         </form:fields>
                                     </form:FormElement> 
-                                         <form:FormElement label="Remarks">
-                                            <form:fields>
-                                              <TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{projectModel>/note}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
-                                            </form:fields>
-                                        </form:FormElement> 
+                                         <!-- <form:FormElement label="">
+                                    <form:fields>
+                                        <Input id="inputField" value="{StageDetailModel>/actualcompletiondays}"  editable="false"/>
+                                    </form:fields>
+                                </form:FormElement>  -->
+            <!-- <FlexBox direction="Column" renderType="Div" class="sapUiSmallMargin">
+			<FlexBox>
+				<Button text="Correctly Displayed" press="onCorrectPathClick"/>
+				<Button text="Loading Error" press="onIncorrectPathClick"/>
+			</FlexBox>
+			<PDFViewer source="{/Source}" title="{/Title}" height="{/Height}">
+				<layoutData>
+					<FlexItemData growFactor="1" />
+				</layoutData>
+			</PDFViewer>
+		</FlexBox> -->
 
         
                             </form:formElements>

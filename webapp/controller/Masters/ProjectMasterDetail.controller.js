@@ -31,7 +31,7 @@ sap.ui.define([
 
             this.model.dependency != null ? currentContext.getView().byId("prerequisites").setSelectedKeys(this.model.dependency.split(',')) : "data not available";
             this.model.attributetypes != null ? currentContext.getView().byId("attributetype").setSelectedKeys(this.model.attributetypes.split(',')) : "data not available";
-            data[0][0].departmentid != null ? currentContext.getView().byId("departmentid").setSelectedKey(data[0][0].departmentid) : "data not available";
+            this.model.parentid != null ? currentContext.getView().byId("parentstage").setSelectedKey(this.model.parentid) : "data not available";
 
             commonFunction.getReferenceStages("RefType", "refTypeModel", this);
 
@@ -42,7 +42,7 @@ sap.ui.define([
             // get all departments
             commonFunction.getAllDepartments("departmentModel", this);
 
-            if (this.model.typecode == "ProMilestones") {
+            if (this.model.typecode == "ProMilestones" && this.model.type == "Stage") {
                 
                 this.getView().byId("departmentEle").setVisible(true);
                 this.getView().byId("typeEle").setVisible(true);
@@ -54,7 +54,24 @@ sap.ui.define([
                 this.getView().byId("stagePerEle").setVisible(false);
                 this.getView().byId("prerequisitesEle").setVisible(true);
                 this.getView().byId("attributeEle").setVisible(false);
-                this.getView().byId("notifyEle").setVisible(true);
+            }else if(this.model.typecode == "ProMilestones" && this.model.type == "Activity"){
+                this.getView().byId("stgTypeEle").setVisible(false);
+                this.getView().byId("departmentEle").setVisible(false);
+                this.getView().byId("sequenceEle").setVisible(false);
+                this.getView().byId("prerequisitesEle").setVisible(false);
+                this.getView().byId("projectPerEle").setVisible(false);
+                this.getView().byId("stagePerEle").setVisible(true);
+                this.getView().byId("parentStageEle").setVisible(true);
+                this.getView().byId("attributeEle").setVisible(false);
+            }else if(this.model.typecode == "ProMilestones" && this.model.type == "Attribute"){
+                this.getView().byId("stgTypeEle").setVisible(false);
+                this.getView().byId("departmentEle").setVisible(false);
+                this.getView().byId("sequenceEle").setVisible(false);
+                this.getView().byId("prerequisitesEle").setVisible(false);
+                this.getView().byId("projectPerEle").setVisible(false);
+                this.getView().byId("stagePerEle").setVisible(false);
+                this.getView().byId("parentStageEle").setVisible(true);
+                this.getView().byId("attributeEle").setVisible(true);
             }
             else {
                 this.getView().byId("departmentEle").setVisible(false);

@@ -666,3 +666,2252 @@ END$$
 DELIMITER ;
 ;
 
+CREATE TABLE `db_elev8r_local`.`project_attributes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `projectid` INT(11) NULL,
+  `stageid` INT(11) NULL,
+  `activityid` INT(11) NULL,
+  `attributetypeids` VARCHAR(100) NULL,
+  `attributename` VARCHAR(100) NULL,
+  `companyid` INT(11) NULL,
+  PRIMARY KEY (`id`));
+
+ALTER TABLE `db_elev8r_local`.`project_attributes` 
+ADD COLUMN `attributevalue` JSON NULL AFTER `companyid`,
+ADD COLUMN `remark` VARCHAR(200) NULL AFTER `attributevalue`,
+ADD COLUMN `attributeid` INT(11) NULL AFTER `remark`;
+
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectattributes_save`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectattributes_save`(
+	IN p_id INT(11), 
+	IN p_projectid INT(11),
+    IN p_stageid INT(11),
+    IN p_activityid INT(11),
+    IN p_attributeids VARCHAR(100),
+    IN p_attributename VARCHAR(100),
+    IN p_attributevalue JSON,
+    IN p_remark VARCHAR(200),
+	IN p_companyid INT(11),
+	OUT out_id INT
+)
+BEGIN
+
+	SET @action = null;
+
+	IF(NULLIF(p_id, '0') IS NULL) THEN
+		
+		INSERT INTO project_attributes(id,
+							  projectid,
+                              stageid,
+                              activityid,
+                              attributeids,
+                              attributename,
+                              attributevalue,
+                              remark,
+                              companyid)
+					   VALUES (p_id,
+							   p_projectid,
+                               p_stageid,
+                               p_activityid,
+                               p_attributeids,
+                               p_attributename,
+                               p_attributevalue,
+                               p_remark,
+                               p_companyid);
+		
+		SET @action = 'INSERT';
+	
+	ELSE
+		UPDATE project_attributes
+		SET 
+            projectid = p_projectid,
+		    stageid = p_stageid,
+		    activityid = p_activityid,
+		    attributeids = p_attributeids,
+		    attributename = p_attributename,
+		    attributevalue = p_attributevalue,
+			remark = p_remark,
+			id = LAST_INSERT_ID(id)
+			
+		WHERE id = p_id
+		AND companyid = p_companyid;
+                
+		SET @action = 'UPDATE';
+		
+	END IF;
+	
+	SELECT LAST_INSERT_ID() INTO OUT_ID;
+    
+END$$
+
+DELIMITER ;
+;
+
+
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectattributes_search`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectattributes_search`(
+	IN p_companyid int(11)
+)
+BEGIN
+	select 
+    id,
+  projectid,
+  stageid,
+  activityid,
+  attributeids,
+  attributename,
+  attributevalue,
+  remark,
+  companyid
+    from project_attributes
+    where companyid = p_companyid;
+END$$
+
+DELIMITER ;
+;
+
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectattributes_select`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectattributes_select`(
+	IN p_projectid INT(11)
+)
+BEGIN
+	SELECT 
+    id,
+    projectid,
+	stageid,
+    activityid,
+    attributeids,
+    attributename,
+    attributevalue,
+    remark,
+    companyid
+    from project_attributes
+    WHERE projectid = p_projectid;
+END$$
+
+DELIMITER ;
+;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_order_save`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_order_save`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_order_save`(
+	IN p_id int(11), 
+    IN p_quoteid int(11),
+	IN p_leadid int(11), 
+	IN p_quotevalue decimal(12,3), 
+	IN p_quotetype int(11), 
+	IN p_orderdate date, 
+	IN p_quotename varchar(45), 
+	IN p_quotediscription varchar(45), 
+	IN p_quotestatusid int(11), 
+	IN p_quotescore decimal(9,3), 
+	IN p_quotecategory int(11), 
+	IN p_quotesubcategory int(11), 
+	IN p_leadsourceid int(11),
+	IN p_quotestageid int(11), 
+	IN p_typeoflift int(11), 
+	IN p_nooflifts int(11), 
+	IN p_capacityid int(11), 
+	IN p_modelid int(11), 
+	IN p_driveid int(11), 
+	IN p_machineid int(11), 
+	IN p_controlid int(11), 
+	IN p_groupcontrolid int(11), 
+	IN p_operationid int(11), 
+	IN p_speedid int(11), 
+	IN p_typeofdoorid int(11), 
+	IN p_landingdoorid int(11), 
+	IN p_cardoorid int(11), 
+	IN p_lowestfloorid int(11), 
+	IN p_cwtpositionid int(11), 
+	IN p_floorheaightid int(11), 
+    IN p_carpanelid int(11),
+	IN p_ventilationid int(11),
+	IN p_tractionmediaid int(11),
+	IN p_mainpowersystemid int(11),
+	IN p_carpositionindicatorid int(11),
+	IN p_falseceilingid int(11),
+	IN p_auxilarysupplysystemid int(11),
+	IN p_flooringid int(11),
+	IN p_architectidid int(11), 
+	IN p_consaltantid int(11), 
+	IN p_stopsid int(11), 
+	IN p_floormarking int(11), 
+	IN p_allopeningsameside varchar(45), 
+	IN p_frontopening varchar(45), 
+	IN p_backopening varchar(45), 
+	IN p_leftopening varchar(45), 
+	IN p_rightopening varchar(45), 
+	IN p_shaftwidth int(11), 
+	IN p_shaftdepth int(11), 
+	IN p_cardepth int(11), 
+	IN p_carwidth int(11), 
+	IN p_carheight int(11), 
+	IN p_doorwidth int(11), 
+	IN p_doorheight int(11), 
+	IN p_travel varchar(45), 
+	IN p_pitdepth int(11), 
+	IN p_overhead int(11), 
+	IN p_mrwidth int(11), 
+	IN p_mrdepth int(11), 
+	IN p_mrheight int(11), 
+	IN p_isdeleted tinyint(4), 
+	IN p_winprobability decimal(9,3), 
+	IN p_siteaddress varchar(150), 
+	IN p_cityid int(11), 
+	IN p_stateid int(11), 
+	IN p_countryid int(11), 
+	IN p_pincode int(11), 
+	IN p_phoneno VARCHAR(45), 
+	IN p_officialemail varchar(100), 
+	IN p_gstn varchar(100), 
+	IN p_panno varchar(100), 
+	IN p_sociallink1 varchar(100), 
+	IN p_sociallink2 varchar(100), 
+	IN p_sociallink3 varchar(100),
+	IN p_primarycontactid varchar(45), 
+	IN p_contactperson varchar(45), 
+	IN p_designation varchar(45), 
+	IN p_mobileno1 varchar(45), 
+    IN p_status VARCHAR(45),
+	IN p_companyid int(11),
+	IN p_userid INT(11),
+	IN p_revisions VARCHAR(100),
+	OUT out_id INT
+)
+BEGIN
+
+	SET @action = null;
+
+	IF(NULLIF(p_id, '0') IS NULL) THEN
+		
+		INSERT INTO `order`(id,
+							  quoteid,
+							  leadid,
+							  quotevalue,
+                              quotetype,
+                              orderdate,
+                              quotename,
+                              quotediscription,
+                              quotestatusid,
+                              quotescore,
+                              quotecategory, 
+							  quotesubcategory,
+                              leadsourceid,
+                              quotestageid,
+                              typeoflift,
+                              nooflifts,
+                              capacityid,
+                              modelid,
+                              driveid,
+                              machineid, 
+                              controlid,
+                              operationid,
+                              speedid,
+                              typeofdoorid,
+                              landingdoorid,
+                              cardoorid,
+                              lowestfloorid,
+                              cwtpositionid,
+                              floorheaightid,
+                              carpanelid,
+                              ventilationid,
+                              tractionmediaid,
+                              mainpowersystemid,
+                              carpositionindicatorid,
+                              falseceilingid,
+							  auxilarysupplysystemid,
+                              flooringid,
+                              architectidid, 
+                              leadconsaltantid,
+                              stopsid,
+                              floormarking,
+                              allopeningsameside,
+                              frontopening,
+                              backopening,
+                              leftopening,
+                              rightopening, 
+                              shaftwidth,
+                              shaftdepth,
+                              cardepth,
+                              carwidth,
+                              carheight,
+                              doorwidth,
+                              doorheight,
+                              travel,
+                              pitdepth,
+                              overhead,
+                              mrwidth,
+                              mrdepth, 
+                              mrheight,
+                              isdeleted,
+                              groupcontrolid,
+                              winprobability,
+                              siteaddress,
+                              cityid,
+                              stateid,
+                              countryid,
+                              pincode,
+                              phoneno,
+                              officialemail,
+                              gstn,
+                              panno,
+                              sociallink1,
+                              sociallink2,
+                              sociallink3,
+                              primarycontactid,
+                              contactperson,
+                              designation,
+                              mobileno1,
+                              status,
+                              revisionno,
+                              revisions,
+                              companyid)
+					   VALUES (p_id,
+						       p_quoteid,
+                               p_leadid,
+						       p_quotevalue,
+                               p_quotetype,
+                               p_orderdate,
+                               p_quotename,
+                               p_quotediscription,
+                               p_quotestatusid,
+                               p_quotescore,
+                               p_quotecategory, 
+							   p_quotesubcategory,
+                               p_leadsourceid,
+                               p_quotestageid,
+                               p_typeoflift,
+                               p_nooflifts,
+                               p_capacityid,
+                               p_modelid,
+                               p_driveid,
+                               p_machineid, 
+                               p_controlid,
+                               p_operationid,
+                               p_speedid,
+                               p_typeofdoorid,
+                               p_landingdoorid,
+                               p_cardoorid,
+                               p_lowestfloorid,
+                               p_cwtpositionid,
+                               p_floorheaightid,
+                               p_carpanelid,
+							   p_ventilationid,
+							   p_tractionmediaid,
+							   p_mainpowersystemid,
+							   p_carpositionindicatorid,
+							   p_falseceilingid,
+							   p_auxilarysupplysystemid,
+							   p_flooringid,
+                               p_architectidid, 
+                               p_consaltantid,
+                               p_stopsid,
+                               p_floormarking,
+                               p_allopeningsameside,
+                               p_frontopening,
+                               p_backopening,
+                               p_leftopening,
+                               p_rightopening, 
+                               p_shaftwidth,
+                               p_shaftdepth,
+                               p_cardepth,
+                               p_carwidth,
+                               p_carheight,
+                               p_doorwidth,
+                               p_doorheight,
+                               p_travel,
+                               p_pitdepth,
+                               p_overhead,
+                               p_mrwidth,
+                               p_mrdepth, 
+                               p_mrheight,
+                               0,
+                               p_groupcontrolid,
+                               p_winprobability,
+                               p_siteaddress,
+                               p_cityid,
+                               p_stateid,
+                               p_countryid,
+                               p_pincode,
+                               p_phoneno,
+                               p_officialemail,
+                               p_gstn,
+                               p_panno,
+                               p_sociallink1,
+                               p_sociallink2,
+                               p_sociallink3,
+                               p_primarycontactid,
+                               p_contactperson,
+                               p_designation,
+                               p_mobileno1,
+                               p_status,
+                               1,
+                               p_revisions,
+                               p_companyid);
+		
+		SET @action = 'INSERT';
+	
+	ELSE
+		-- save previous values in metadata column
+        SET @previouscol = null;
+        SET @revisionno = null;
+        SET @currval = null;
+        SELECT JSON_OBJECT('id',IFNULL(id,'-'),'quoteid',IFNULL(quoteid,'-'),'leadid',IFNULL(leadid,'-'),'quotevalue',IFNULL(quotevalue,'-'),'quotetype',IFNULL(quotetype,'-'),'orderdate',IFNULL(orderdate,'-'),'quotename',IFNULL(quotename,''),
+							  'quotediscription',IFNULL(quotediscription,'-'),'quotestatusid',IFNULL(quotestatusid,'-'),'quotescore',IFNULL(quotescore,'-'),'quotecategory',IFNULL(quotecategory,'-'), 
+							  'quotesubcategory',IFNULL(quotesubcategory,'-'),'leadsourceid',IFNULL(leadsourceid,'-'),'quotestageid',IFNULL(quotestageid,'-'),'typeoflift',IFNULL(typeoflift,'-'),'nooflifts',IFNULL(nooflifts,'-'),'capacityid',IFNULL(capacityid,'-'),'modelid',IFNULL(modelid,'-'),'driveid',IFNULL(driveid,'-'),'machineid',IFNULL(machineid,'-'), 
+                              'controlid',IFNULL(controlid,'-'),'operationid',IFNULL(operationid,'-'),'speedid',IFNULL(speedid,'-'),'typeofdoorid',IFNULL(typeofdoorid,'-'),'landingdoorid',IFNULL(landingdoorid,'-'),'cardoorid',IFNULL(cardoorid,'-'),'lowestfloorid',IFNULL(lowestfloorid,'-'),'cwtpositionid',IFNULL(cwtpositionid,'-'),'floorheaightid',IFNULL(floorheaightid,'-'),
+                              'architectidid',IFNULL(architectidid,'-'),'leadconsaltantid',IFNULL(leadconsaltantid,'-'),'stopsid',IFNULL(stopsid,'-'),'floormarking',IFNULL(floormarking,'-'),'allopeningsameside',IFNULL(allopeningsameside,'-'),'frontopening',IFNULL(frontopening,'-'),'backopening',IFNULL(backopening,'-'),'leftopening',IFNULL(leftopening,'-'),
+                              'rightopening',IFNULL(rightopening,'-'),'shaftwidth',IFNULL(shaftwidth,'-'),'shaftdepth',IFNULL(shaftdepth,'-'),'cardepth',IFNULL(cardepth,'-'),'carwidth',IFNULL(carwidth,'-'),'carheight',IFNULL(carheight,'-'),'doorwidth',IFNULL(doorwidth,'-'),'doorheight',IFNULL(doorheight,'-'),'travel',IFNULL(travel,'-'),'pitdepth',IFNULL(pitdepth,'-'),
+                              'overhead',IFNULL(overhead,'-'),'mrwidth',IFNULL(mrwidth,'-'),'mrdepth',IFNULL(mrdepth,'-'),'mrheight',IFNULL(mrheight,'-'),'isdeleted',IFNULL(isdeleted,'-'),'groupcontrolid',IFNULL(groupcontrolid,'-'),'winprobability',IFNULL(winprobability,'-'),'siteaddress',IFNULL(siteaddress,'-'),'cityid',IFNULL(cityid,'-'),'stateid',IFNULL(stateid,'-'),
+                              'countryid',IFNULL(countryid,'-'),'pincode',IFNULL(pincode,'-'),'phoneno',IFNULL(phoneno,'-'),'officialemail',IFNULL(officialemail,'-'),'gstn',IFNULL(gstn,'-'),'panno',IFNULL(panno,'-'),'sociallink1',IFNULL(sociallink1,'-'),'sociallink2',IFNULL(sociallink2,'-'),'sociallink3',IFNULL(sociallink3,'-'),'primarycontactid',IFNULL(primarycontactid,'-'),
+                              'contactperson',IFNULL(contactperson,'-'),'destination',IFNULL(designation,'-'),'mobileno1',IFNULL(mobileno1,'-'),'status',IFNULL(status,'-'),'includinggst',IFNULL(includinggst,'-'),'snehasalescontactname',IFNULL(snehasalescontactname,'-'),
+                              'snehasalescontactno',IFNULL(snehasalescontactno,'-'),'revisionno',IFNULL(revisionno,'-'),'carpanelid',IFNULL(carpanelid,'-'),'ventilationid',IFNULL(ventilationid,'-'),'tractionmediaid',IFNULL(tractionmediaid,'-'),'mainpowersystemid',IFNULL(mainpowersystemid,'-'),'carpositionindicatorid',IFNULL(carpositionindicatorid,'-'),
+                              'falseceilingid',IFNULL(falseceilingid,'-'),'auxilarysupplysystemid',IFNULL(auxilarysupplysystemid,'-'),'flooringid',IFNULL(flooringid,'-'),'shaftconditionid',IFNULL(shaftconditionid,'-'),'unitid',IFNULL(unitid,'-'))
+		INTO @currval FROM `order` WHERE id = p_id;
+        
+        -- get current value form metadata
+        SELECT previousvalues INTO @previouscol FROM `order` WHERE id = p_id AND previousvalues IS NOT NULL;
+		SELECT revisionno INTO @revisionno FROM `order` WHERE id = p_id;
+
+		IF @previouscol IS NOT NULL THEN
+			UPDATE `order`
+			SET previousvalues = JSON_ARRAY_APPEND(CAST(@previouscol AS JSON), '$', @currval),
+				revisionno = (@revisionno + 1)
+			WHERE id = p_id;
+		ELSE
+			UPDATE `order`
+			SET previousvalues = JSON_ARRAY(@currval),
+				revisionno = (@revisionno + 1)
+			WHERE id = p_id;
+		END IF;
+       
+		UPDATE `order`
+		SET 
+            leadid = p_leadid,
+            quoteid = p_quoteid,
+            quotevalue = p_quotevalue,
+            quotetype = p_quotetype,
+            orderdate = p_orderdate,
+            quotename = p_quotename,
+            quotediscription = p_quotediscription,
+            quotestatusid = p_quotestatusid,
+            quotescore = p_quotescore,
+            quotecategory = p_quotecategory,
+            quotesubcategory = p_quotesubcategory,
+            leadsourceid = p_leadsourceid,
+            quotestageid = p_quotestageid,
+            typeoflift = p_typeoflift,
+            nooflifts = p_nooflifts,
+            capacityid = p_capacityid,
+            modelid = p_modelid,
+            driveid = p_driveid,
+            machineid = p_machineid,
+			controlid = p_controlid,
+            operationid = p_operationid,
+            speedid = p_speedid,
+            typeofdoorid = p_typeofdoorid,
+            landingdoorid = p_landingdoorid,
+            cardoorid = p_cardoorid,
+            lowestfloorid = p_lowestfloorid,
+            cwtpositionid = p_cwtpositionid,
+            floorheaightid = p_floorheaightid,
+            carpanelid = p_carpanelid,
+			ventilationid = p_ventilationid,
+			tractionmediaid = p_tractionmediaid,
+			mainpowersystemid = p_mainpowersystemid,
+			carpositionindicatorid = p_carpositionindicatorid,
+			falseceilingid = p_falseceilingid,
+			auxilarysupplysystemid = p_auxilarysupplysystemid,
+			flooringid = p_flooringid,
+            architectidid = p_architectidid, 
+			leadconsaltantid = p_consaltantid,
+            stopsid = p_stopsid,
+            floormarking = p_floormarking,
+            allopeningsameside = p_allopeningsameside,
+            frontopening = p_frontopening,
+            backopening = p_backopening,
+            leftopening = p_leftopening,
+            rightopening = p_rightopening, 
+			shaftwidth = p_shaftwidth,
+            shaftdepth = p_shaftdepth,
+            cardepth = p_cardepth,
+            carwidth = p_carwidth,
+            carheight = p_carheight,
+            doorwidth = p_doorwidth,
+            doorheight = p_doorheight,
+            travel = p_travel,
+            pitdepth = p_pitdepth,
+            overhead = p_overhead,
+            mrwidth = p_mrwidth,
+            mrdepth = p_mrdepth, 
+			mrheight = p_mrheight,
+            isdeleted = p_isdeleted,
+            groupcontrolid = p_groupcontrolid,
+            winprobability = p_winprobability,
+            siteaddress = p_siteaddress,
+            cityid = p_cityid,
+            stateid = p_stateid,
+            countryid = p_countryid,
+            pincode = p_pincode,
+            phoneno = p_phoneno,
+			officialemail = p_officialemail,
+            gstn = p_gstn,
+            panno = p_panno,
+            sociallink1 = p_sociallink1,
+            sociallink2 = p_sociallink2,
+            sociallink3 = p_sociallink3,
+            primarycontactid = p_primarycontactid,
+            contactperson = p_contactperson,
+            designation = p_designation,
+			mobileno1 = p_mobileno1,
+             revisions= p_revisions,
+            status = p_status,
+            companyid = p_companyid,
+			id = LAST_INSERT_ID(id)
+			
+		WHERE id = p_id
+		AND companyid = p_companyid;
+		
+		SET @action = 'UPDATE';
+		
+	END IF;
+    
+    SELECT LAST_INSERT_ID() INTO OUT_ID;
+	
+    SET @orderid = null;
+	
+    SELECT LAST_INSERT_ID() INTO @orderid;
+    
+    -- save order as project when order gets confirmed
+    IF(p_status = 'Confirmed') THEN
+		SET @incrementalval = null;
+        SELECT IFNULL(incrementalval,1) INTO @incrementalval FROM `order` ORDER BY id DESC LIMIT 1;
+        
+        SET @model = null;
+        SELECT LEFT(description , 2) INTO @model FROM reference WHERE id = p_modelid;
+        
+        SET @jobcode = null;
+        SELECT CONCAT(@model,(SELECT DATE_FORMAT(now(), '%y')),'-',(SELECT MONTH(NOW())),'V8R',@incrementalval)
+        INTO @jobcode;
+        
+        UPDATE `order`
+        SET jobcode = @jobcode,
+        incrementalval = @incrementalval + 1
+        WHERE id = @orderid;
+        
+		SET @projectid = null;
+		call spc_project_save(
+			null, @orderid, p_quotevalue, null, p_orderdate, null,null, 1,null,null, null, null, null,null,null,null,0,p_companyid, p_userid, @projectid
+        );
+        
+        UPDATE project SET completionper = 0 WHERE id = @projectid;
+        
+        SET @row_number = 0;
+	   
+		DROP TABLE IF EXISTS tempprojectdetail;
+		CREATE TEMPORARY TABLE tempprojectdetail
+		
+		SELECT (@row_number:=@row_number + 1) AS num, id as stageid, parentid, description, stageper, projectper, departmentid, stgtypeid, dependency from (
+			SELECT 
+				id,
+                parentid,
+				description,
+				stageper,
+				projectper,
+                departmentid,
+                stgtypeid,
+                dependency
+			FROM reference
+			where typecode = 'ProMilestones' AND active = 1 AND type in("Stage","Activity")
+		) 
+		as tblprojectdetail;
+        
+        BEGIN
+			DECLARE n INT DEFAULT 0;
+			DECLARE i INT DEFAULT 0;
+			SELECT COUNT(*) FROM tempprojectdetail INTO n;
+			 
+			WHILE i<n DO 
+				SET @stageid = null;
+				SET @description = null;
+                SET @parentid = null;
+				SET @stageper = null;
+				SET @projectper = null;
+                SET @departmentid = null;
+                SET @actualstartdate = null;
+				select stageid, description, parentid, stageper, projectper, departmentid
+                into @stageid, @description, @parentid, @stageper, @projectper, @departmentid from tempprojectdetail where num = i+1;
+				 
+                 IF(i = 0) THEN
+					SET @actualstartdate := p_orderdate;
+				 ELSE
+					SET @actualstartdate := null;
+                 END IF;
+                 
+				 SET @projectdetailid = null;
+				 CALL spc_projectdetail_save( 	
+					NULL,
+					@projectid,
+					@stageid,
+					@description,
+					@parentid,
+					@stageper,
+					@projectper,
+					NULL,
+					NULL,
+					NULL,
+                    Null,
+					NULL,
+					@actualstartdate,
+					NULL,
+                    NULL,
+					NULL,
+					@departmentid,
+                    1,
+                    NULL,
+                    0,
+                    0,
+					NULL,
+					p_companyid,
+					p_userid,
+					@projectdetailid
+				 );
+				SET i = i + 1;
+			END WHILE;
+		End;
+        
+        -- save project attributes
+        
+        SET @row_no = 0;
+	   
+		DROP TABLE IF EXISTS tempprojectattributes;
+		CREATE TEMPORARY TABLE tempprojectattributes
+		
+		SELECT (@row_no:=@row_no + 1) AS num, id as attributeid, parentid as activityid, description as attributename, type, stgtypeid, attributetypes from (
+			SELECT 
+				id,
+                parentid,
+				description,
+                type,
+                stgtypeid,
+                attributetypes
+			FROM reference
+			where typecode = 'ProMilestones' AND type  = "Attribute"
+		) 
+		as tblprojectattrdetail;
+        
+        BEGIN
+			DECLARE n_attr INT DEFAULT 0;
+			DECLARE i_attr INT DEFAULT 0;
+			SELECT COUNT(*) FROM tempprojectattributes INTO n_attr;
+			 
+			WHILE i_attr<n_attr DO 
+				SET @attributeid = null;
+                SET @activityid = null;
+				SET @attributename = null;
+                SET @type = null;
+                SET @stgtypeid = null;
+                SET @attributetypes = null;
+				select attributeid, activityid, attributename, type, stgtypeid, attributetypes
+                into @attributeid, @activityid, @attributename, @type, @stgtypeid, @attributetypes from tempprojectattributes where num = i_attr+1;
+                 
+				 SET @projectattrid = null;
+				 CALL spc_projectattributes_save( 	
+					NULL,
+                    @attributeid,
+					@projectid,
+					(SELECT parentid FROM `reference` WHERE id = @activityid),
+					@activityid,
+					@attributetypes,
+                    @attributename,
+					NULL,
+                    NULL,
+					p_companyid,
+					@projectattrid
+				 );
+				SET i_attr = i_attr + 1;
+			END WHILE;
+		End;
+        
+        -- save project NI details
+        
+        SET @row_number1 = 0;
+	   
+		DROP TABLE IF EXISTS tempprojectnidetail;
+		CREATE TEMPORARY TABLE tempprojectnidetail
+		
+		SELECT (@row_number1:=@row_number1 + 1) AS num1, id as stageid, description, stageper, projectper, parentid from (
+			SELECT 
+				id,
+				description,
+				stageper,
+				projectper,
+                parentid
+			FROM reference
+			where typecode = 'Nimaster' AND active = 1
+		) 
+		as tblprojectnidetail;
+        
+        BEGIN
+			DECLARE n1 INT DEFAULT 0;
+			DECLARE i1 INT DEFAULT 0;
+			SELECT COUNT(*) FROM tempprojectnidetail INTO n1;
+			 
+			WHILE i1<n1 DO 
+				SET @stageid1 = null;
+				SET @description1 = null;
+				SET @stageper1 = null;
+				SET @projectper1 = null;
+                SET @parentid1 = null;
+                SET @actualstartdate = null;
+				select stageid, description, stageper, projectper, parentid 
+                into @stageid1, @description1, @stageper1, @projectper1, @parentid1 from tempprojectnidetail where num1 = i1+1;
+				
+                IF(i1 = 0) THEN
+					SET @actualstartdate := p_orderdate;
+				 ELSE
+					SET @actualstartdate := null;
+                 END IF;
+                 
+                 SET @nidetailid = null;
+                 call spc_niprojectdetail_save(
+					NULL,
+					@projectid,
+					@stageid1,
+					@description1,
+					@parentid1,
+					@stageper1,
+					@projectper1,
+                    NULL,
+					NULL,
+					NULL,
+                    Null,
+					NULL,
+					NULL,
+					NULL,
+                    0,
+					NULL,
+					1,
+                    @actualstartdate,
+                    NULL,
+					p_companyid,
+                    @nidetailid
+                 );
+				SET i1 = i1 + 1;
+			END WHILE;
+		End;
+        
+        
+    END IF;
+END$$
+
+DELIMITER ;
+;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_projectattributes_select`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectattributes_select`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectattributes_select`(
+	IN p_projectid INT(11)
+)
+BEGIN
+	SELECT 
+    id,
+    projectid,
+	stageid,
+    activityid,
+    attributetypeids,
+    attributename,
+    attributevalue,
+    remark,
+    companyid
+    from project_attributes
+    WHERE projectid = p_projectid;
+END$$
+
+DELIMITER ;
+;
+
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_attributelist_select`;
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_order_save`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_order_save`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_attributelist_select`(
+	IN p_projectid INT(11)
+)
+BEGIN
+	SELECT 
+     PA.id,
+	 PA.projectid,
+	 PA.stageid,
+	 PA.activityid,
+	 PA.attributetypeids,
+	 PA.attributename,
+	 PA.attributevalue,
+	 PA.attributeid,
+	 PA.remark,
+     PD.stagename,
+     PD.id AS projectdetailid
+	FROM project_attributes PA  LEFT JOIN  project_detail PD ON PD.stageid=PA.activityid
+    WHERE PA.projectid =p_projectid AND  PD.projectid =p_projectid;
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_order_save`(
+	IN p_id int(11), 
+    IN p_quoteid int(11),
+	IN p_leadid int(11), 
+	IN p_quotevalue decimal(12,3), 
+	IN p_quotetype int(11), 
+	IN p_orderdate date, 
+	IN p_quotename varchar(45), 
+	IN p_quotediscription varchar(45), 
+	IN p_quotestatusid int(11), 
+	IN p_quotescore decimal(9,3), 
+	IN p_quotecategory int(11), 
+	IN p_quotesubcategory int(11), 
+	IN p_leadsourceid int(11),
+	IN p_quotestageid int(11), 
+	IN p_typeoflift int(11), 
+	IN p_nooflifts int(11), 
+	IN p_capacityid int(11), 
+	IN p_modelid int(11), 
+	IN p_driveid int(11), 
+	IN p_machineid int(11), 
+	IN p_controlid int(11), 
+	IN p_groupcontrolid int(11), 
+	IN p_operationid int(11), 
+	IN p_speedid int(11), 
+	IN p_typeofdoorid int(11), 
+	IN p_landingdoorid int(11), 
+	IN p_cardoorid int(11), 
+	IN p_lowestfloorid int(11), 
+	IN p_cwtpositionid int(11), 
+	IN p_floorheaightid int(11), 
+    IN p_carpanelid int(11),
+	IN p_ventilationid int(11),
+	IN p_tractionmediaid int(11),
+	IN p_mainpowersystemid int(11),
+	IN p_carpositionindicatorid int(11),
+	IN p_falseceilingid int(11),
+	IN p_auxilarysupplysystemid int(11),
+	IN p_flooringid int(11),
+	IN p_architectidid int(11), 
+	IN p_consaltantid int(11), 
+	IN p_stopsid int(11), 
+	IN p_floormarking int(11), 
+	IN p_allopeningsameside varchar(45), 
+	IN p_frontopening varchar(45), 
+	IN p_backopening varchar(45), 
+	IN p_leftopening varchar(45), 
+	IN p_rightopening varchar(45), 
+	IN p_shaftwidth int(11), 
+	IN p_shaftdepth int(11), 
+	IN p_cardepth int(11), 
+	IN p_carwidth int(11), 
+	IN p_carheight int(11), 
+	IN p_doorwidth int(11), 
+	IN p_doorheight int(11), 
+	IN p_travel varchar(45), 
+	IN p_pitdepth int(11), 
+	IN p_overhead int(11), 
+	IN p_mrwidth int(11), 
+	IN p_mrdepth int(11), 
+	IN p_mrheight int(11), 
+	IN p_isdeleted tinyint(4), 
+	IN p_winprobability decimal(9,3), 
+	IN p_siteaddress varchar(150), 
+	IN p_cityid int(11), 
+	IN p_stateid int(11), 
+	IN p_countryid int(11), 
+	IN p_pincode int(11), 
+	IN p_phoneno VARCHAR(45), 
+	IN p_officialemail varchar(100), 
+	IN p_gstn varchar(100), 
+	IN p_panno varchar(100), 
+	IN p_sociallink1 varchar(100), 
+	IN p_sociallink2 varchar(100), 
+	IN p_sociallink3 varchar(100),
+	IN p_primarycontactid varchar(45), 
+	IN p_contactperson varchar(45), 
+	IN p_designation varchar(45), 
+	IN p_mobileno1 varchar(45), 
+    IN p_status VARCHAR(45),
+	IN p_companyid int(11),
+	IN p_userid INT(11),
+	IN p_revisions VARCHAR(100),
+	OUT out_id INT
+)
+BEGIN
+
+	SET @action = null;
+
+	IF(NULLIF(p_id, '0') IS NULL) THEN
+		
+		INSERT INTO `order`(id,
+							  quoteid,
+							  leadid,
+							  quotevalue,
+                              quotetype,
+                              orderdate,
+                              quotename,
+                              quotediscription,
+                              quotestatusid,
+                              quotescore,
+                              quotecategory, 
+							  quotesubcategory,
+                              leadsourceid,
+                              quotestageid,
+                              typeoflift,
+                              nooflifts,
+                              capacityid,
+                              modelid,
+                              driveid,
+                              machineid, 
+                              controlid,
+                              operationid,
+                              speedid,
+                              typeofdoorid,
+                              landingdoorid,
+                              cardoorid,
+                              lowestfloorid,
+                              cwtpositionid,
+                              floorheaightid,
+                              carpanelid,
+                              ventilationid,
+                              tractionmediaid,
+                              mainpowersystemid,
+                              carpositionindicatorid,
+                              falseceilingid,
+							  auxilarysupplysystemid,
+                              flooringid,
+                              architectidid, 
+                              leadconsaltantid,
+                              stopsid,
+                              floormarking,
+                              allopeningsameside,
+                              frontopening,
+                              backopening,
+                              leftopening,
+                              rightopening, 
+                              shaftwidth,
+                              shaftdepth,
+                              cardepth,
+                              carwidth,
+                              carheight,
+                              doorwidth,
+                              doorheight,
+                              travel,
+                              pitdepth,
+                              overhead,
+                              mrwidth,
+                              mrdepth, 
+                              mrheight,
+                              isdeleted,
+                              groupcontrolid,
+                              winprobability,
+                              siteaddress,
+                              cityid,
+                              stateid,
+                              countryid,
+                              pincode,
+                              phoneno,
+                              officialemail,
+                              gstn,
+                              panno,
+                              sociallink1,
+                              sociallink2,
+                              sociallink3,
+                              primarycontactid,
+                              contactperson,
+                              designation,
+                              mobileno1,
+                              status,
+                              revisionno,
+                              revisions,
+                              companyid)
+					   VALUES (p_id,
+						       p_quoteid,
+                               p_leadid,
+						       p_quotevalue,
+                               p_quotetype,
+                               p_orderdate,
+                               p_quotename,
+                               p_quotediscription,
+                               p_quotestatusid,
+                               p_quotescore,
+                               p_quotecategory, 
+							   p_quotesubcategory,
+                               p_leadsourceid,
+                               p_quotestageid,
+                               p_typeoflift,
+                               p_nooflifts,
+                               p_capacityid,
+                               p_modelid,
+                               p_driveid,
+                               p_machineid, 
+                               p_controlid,
+                               p_operationid,
+                               p_speedid,
+                               p_typeofdoorid,
+                               p_landingdoorid,
+                               p_cardoorid,
+                               p_lowestfloorid,
+                               p_cwtpositionid,
+                               p_floorheaightid,
+                               p_carpanelid,
+							   p_ventilationid,
+							   p_tractionmediaid,
+							   p_mainpowersystemid,
+							   p_carpositionindicatorid,
+							   p_falseceilingid,
+							   p_auxilarysupplysystemid,
+							   p_flooringid,
+                               p_architectidid, 
+                               p_consaltantid,
+                               p_stopsid,
+                               p_floormarking,
+                               p_allopeningsameside,
+                               p_frontopening,
+                               p_backopening,
+                               p_leftopening,
+                               p_rightopening, 
+                               p_shaftwidth,
+                               p_shaftdepth,
+                               p_cardepth,
+                               p_carwidth,
+                               p_carheight,
+                               p_doorwidth,
+                               p_doorheight,
+                               p_travel,
+                               p_pitdepth,
+                               p_overhead,
+                               p_mrwidth,
+                               p_mrdepth, 
+                               p_mrheight,
+                               0,
+                               p_groupcontrolid,
+                               p_winprobability,
+                               p_siteaddress,
+                               p_cityid,
+                               p_stateid,
+                               p_countryid,
+                               p_pincode,
+                               p_phoneno,
+                               p_officialemail,
+                               p_gstn,
+                               p_panno,
+                               p_sociallink1,
+                               p_sociallink2,
+                               p_sociallink3,
+                               p_primarycontactid,
+                               p_contactperson,
+                               p_designation,
+                               p_mobileno1,
+                               p_status,
+                               1,
+                               p_revisions,
+                               p_companyid);
+		
+		SET @action = 'INSERT';
+	
+	ELSE
+		-- save previous values in metadata column
+        SET @previouscol = null;
+        SET @revisionno = null;
+        SET @currval = null;
+        SELECT JSON_OBJECT('id',IFNULL(id,'-'),'quoteid',IFNULL(quoteid,'-'),'leadid',IFNULL(leadid,'-'),'quotevalue',IFNULL(quotevalue,'-'),'quotetype',IFNULL(quotetype,'-'),'orderdate',IFNULL(orderdate,'-'),'quotename',IFNULL(quotename,''),
+							  'quotediscription',IFNULL(quotediscription,'-'),'quotestatusid',IFNULL(quotestatusid,'-'),'quotescore',IFNULL(quotescore,'-'),'quotecategory',IFNULL(quotecategory,'-'), 
+							  'quotesubcategory',IFNULL(quotesubcategory,'-'),'leadsourceid',IFNULL(leadsourceid,'-'),'quotestageid',IFNULL(quotestageid,'-'),'typeoflift',IFNULL(typeoflift,'-'),'nooflifts',IFNULL(nooflifts,'-'),'capacityid',IFNULL(capacityid,'-'),'modelid',IFNULL(modelid,'-'),'driveid',IFNULL(driveid,'-'),'machineid',IFNULL(machineid,'-'), 
+                              'controlid',IFNULL(controlid,'-'),'operationid',IFNULL(operationid,'-'),'speedid',IFNULL(speedid,'-'),'typeofdoorid',IFNULL(typeofdoorid,'-'),'landingdoorid',IFNULL(landingdoorid,'-'),'cardoorid',IFNULL(cardoorid,'-'),'lowestfloorid',IFNULL(lowestfloorid,'-'),'cwtpositionid',IFNULL(cwtpositionid,'-'),'floorheaightid',IFNULL(floorheaightid,'-'),
+                              'architectidid',IFNULL(architectidid,'-'),'leadconsaltantid',IFNULL(leadconsaltantid,'-'),'stopsid',IFNULL(stopsid,'-'),'floormarking',IFNULL(floormarking,'-'),'allopeningsameside',IFNULL(allopeningsameside,'-'),'frontopening',IFNULL(frontopening,'-'),'backopening',IFNULL(backopening,'-'),'leftopening',IFNULL(leftopening,'-'),
+                              'rightopening',IFNULL(rightopening,'-'),'shaftwidth',IFNULL(shaftwidth,'-'),'shaftdepth',IFNULL(shaftdepth,'-'),'cardepth',IFNULL(cardepth,'-'),'carwidth',IFNULL(carwidth,'-'),'carheight',IFNULL(carheight,'-'),'doorwidth',IFNULL(doorwidth,'-'),'doorheight',IFNULL(doorheight,'-'),'travel',IFNULL(travel,'-'),'pitdepth',IFNULL(pitdepth,'-'),
+                              'overhead',IFNULL(overhead,'-'),'mrwidth',IFNULL(mrwidth,'-'),'mrdepth',IFNULL(mrdepth,'-'),'mrheight',IFNULL(mrheight,'-'),'isdeleted',IFNULL(isdeleted,'-'),'groupcontrolid',IFNULL(groupcontrolid,'-'),'winprobability',IFNULL(winprobability,'-'),'siteaddress',IFNULL(siteaddress,'-'),'cityid',IFNULL(cityid,'-'),'stateid',IFNULL(stateid,'-'),
+                              'countryid',IFNULL(countryid,'-'),'pincode',IFNULL(pincode,'-'),'phoneno',IFNULL(phoneno,'-'),'officialemail',IFNULL(officialemail,'-'),'gstn',IFNULL(gstn,'-'),'panno',IFNULL(panno,'-'),'sociallink1',IFNULL(sociallink1,'-'),'sociallink2',IFNULL(sociallink2,'-'),'sociallink3',IFNULL(sociallink3,'-'),'primarycontactid',IFNULL(primarycontactid,'-'),
+                              'contactperson',IFNULL(contactperson,'-'),'destination',IFNULL(designation,'-'),'mobileno1',IFNULL(mobileno1,'-'),'status',IFNULL(status,'-'),'includinggst',IFNULL(includinggst,'-'),'snehasalescontactname',IFNULL(snehasalescontactname,'-'),
+                              'snehasalescontactno',IFNULL(snehasalescontactno,'-'),'revisionno',IFNULL(revisionno,'-'),'carpanelid',IFNULL(carpanelid,'-'),'ventilationid',IFNULL(ventilationid,'-'),'tractionmediaid',IFNULL(tractionmediaid,'-'),'mainpowersystemid',IFNULL(mainpowersystemid,'-'),'carpositionindicatorid',IFNULL(carpositionindicatorid,'-'),
+                              'falseceilingid',IFNULL(falseceilingid,'-'),'auxilarysupplysystemid',IFNULL(auxilarysupplysystemid,'-'),'flooringid',IFNULL(flooringid,'-'),'shaftconditionid',IFNULL(shaftconditionid,'-'),'unitid',IFNULL(unitid,'-'))
+		INTO @currval FROM `order` WHERE id = p_id;
+        
+        -- get current value form metadata
+        SELECT previousvalues INTO @previouscol FROM `order` WHERE id = p_id AND previousvalues IS NOT NULL;
+		SELECT revisionno INTO @revisionno FROM `order` WHERE id = p_id;
+
+		IF @previouscol IS NOT NULL THEN
+			UPDATE `order`
+			SET previousvalues = JSON_ARRAY_APPEND(CAST(@previouscol AS JSON), '$', @currval),
+				revisionno = (@revisionno + 1)
+			WHERE id = p_id;
+		ELSE
+			UPDATE `order`
+			SET previousvalues = JSON_ARRAY(@currval),
+				revisionno = (@revisionno + 1)
+			WHERE id = p_id;
+		END IF;
+       
+		UPDATE `order`
+		SET 
+            leadid = p_leadid,
+            quoteid = p_quoteid,
+            quotevalue = p_quotevalue,
+            quotetype = p_quotetype,
+            orderdate = p_orderdate,
+            quotename = p_quotename,
+            quotediscription = p_quotediscription,
+            quotestatusid = p_quotestatusid,
+            quotescore = p_quotescore,
+            quotecategory = p_quotecategory,
+            quotesubcategory = p_quotesubcategory,
+            leadsourceid = p_leadsourceid,
+            quotestageid = p_quotestageid,
+            typeoflift = p_typeoflift,
+            nooflifts = p_nooflifts,
+            capacityid = p_capacityid,
+            modelid = p_modelid,
+            driveid = p_driveid,
+            machineid = p_machineid,
+			controlid = p_controlid,
+            operationid = p_operationid,
+            speedid = p_speedid,
+            typeofdoorid = p_typeofdoorid,
+            landingdoorid = p_landingdoorid,
+            cardoorid = p_cardoorid,
+            lowestfloorid = p_lowestfloorid,
+            cwtpositionid = p_cwtpositionid,
+            floorheaightid = p_floorheaightid,
+            carpanelid = p_carpanelid,
+			ventilationid = p_ventilationid,
+			tractionmediaid = p_tractionmediaid,
+			mainpowersystemid = p_mainpowersystemid,
+			carpositionindicatorid = p_carpositionindicatorid,
+			falseceilingid = p_falseceilingid,
+			auxilarysupplysystemid = p_auxilarysupplysystemid,
+			flooringid = p_flooringid,
+            architectidid = p_architectidid, 
+			leadconsaltantid = p_consaltantid,
+            stopsid = p_stopsid,
+            floormarking = p_floormarking,
+            allopeningsameside = p_allopeningsameside,
+            frontopening = p_frontopening,
+            backopening = p_backopening,
+            leftopening = p_leftopening,
+            rightopening = p_rightopening, 
+			shaftwidth = p_shaftwidth,
+            shaftdepth = p_shaftdepth,
+            cardepth = p_cardepth,
+            carwidth = p_carwidth,
+            carheight = p_carheight,
+            doorwidth = p_doorwidth,
+            doorheight = p_doorheight,
+            travel = p_travel,
+            pitdepth = p_pitdepth,
+            overhead = p_overhead,
+            mrwidth = p_mrwidth,
+            mrdepth = p_mrdepth, 
+			mrheight = p_mrheight,
+            isdeleted = p_isdeleted,
+            groupcontrolid = p_groupcontrolid,
+            winprobability = p_winprobability,
+            siteaddress = p_siteaddress,
+            cityid = p_cityid,
+            stateid = p_stateid,
+            countryid = p_countryid,
+            pincode = p_pincode,
+            phoneno = p_phoneno,
+			officialemail = p_officialemail,
+            gstn = p_gstn,
+            panno = p_panno,
+            sociallink1 = p_sociallink1,
+            sociallink2 = p_sociallink2,
+            sociallink3 = p_sociallink3,
+            primarycontactid = p_primarycontactid,
+            contactperson = p_contactperson,
+            designation = p_designation,
+			mobileno1 = p_mobileno1,
+             revisions= p_revisions,
+            status = p_status,
+            companyid = p_companyid,
+			id = LAST_INSERT_ID(id)
+			
+		WHERE id = p_id
+		AND companyid = p_companyid;
+		
+		SET @action = 'UPDATE';
+		
+	END IF;
+    
+    SELECT LAST_INSERT_ID() INTO OUT_ID;
+	
+    SET @orderid = null;
+	
+    SELECT LAST_INSERT_ID() INTO @orderid;
+    
+    -- save order as project when order gets confirmed
+    IF(p_status = 'Confirmed') THEN
+		SET @incrementalval = null;
+        SELECT IFNULL(incrementalval,1) INTO @incrementalval FROM `order` ORDER BY id DESC LIMIT 1;
+        
+        SET @model = null;
+        SELECT LEFT(description , 2) INTO @model FROM reference WHERE id = p_modelid;
+        
+        SET @jobcode = null;
+        SELECT CONCAT(@model,(SELECT DATE_FORMAT(now(), '%y')),'-',(SELECT MONTH(NOW())),'V8R',@incrementalval)
+        INTO @jobcode;
+        
+        UPDATE `order`
+        SET jobcode = @jobcode,
+        incrementalval = @incrementalval + 1
+        WHERE id = @orderid;
+        
+		SET @projectid = null;
+		call spc_project_save(
+			null, @orderid, p_quotevalue, null, p_orderdate, null,null, 1,null,null, null, null, null,null,null,null,0,p_companyid, p_userid, @projectid
+        );
+        
+        UPDATE project SET completionper = 0 WHERE id = @projectid;
+        
+        SET @row_number = 0;
+	   
+		DROP TABLE IF EXISTS tempprojectdetail;
+		CREATE TEMPORARY TABLE tempprojectdetail
+		
+		SELECT (@row_number:=@row_number + 1) AS num, id as stageid, parentid, description, stageper, projectper, departmentid, stgtypeid, dependency from (
+			SELECT 
+				id,
+                parentid,
+				description,
+				stageper,
+				projectper,
+                departmentid,
+                stgtypeid,
+                dependency
+			FROM reference
+			where typecode = 'ProMilestones' AND active = 1 AND type in("Stage","Activity")
+		) 
+		as tblprojectdetail;
+        
+        BEGIN
+			DECLARE n INT DEFAULT 0;
+			DECLARE i INT DEFAULT 0;
+			SELECT COUNT(*) FROM tempprojectdetail INTO n;
+			 
+			WHILE i<n DO 
+				SET @stageid = null;
+				SET @description = null;
+                SET @parentid = null;
+				SET @stageper = null;
+				SET @projectper = null;
+                SET @departmentid = null;
+                SET @actualstartdate = null;
+				select stageid, description, parentid, stageper, projectper, departmentid
+                into @stageid, @description, @parentid, @stageper, @projectper, @departmentid from tempprojectdetail where num = i+1;
+				 
+                 IF(i = 0) THEN
+					SET @actualstartdate := p_orderdate;
+				 ELSE
+					SET @actualstartdate := null;
+                 END IF;
+                 
+				 SET @projectdetailid = null;
+				 CALL spc_projectdetail_save( 	
+					NULL,
+					@projectid,
+					@stageid,
+					@description,
+					@parentid,
+					@stageper,
+					@projectper,
+					NULL,
+					NULL,
+					NULL,
+                    Null,
+					NULL,
+					@actualstartdate,
+					NULL,
+                    NULL,
+					NULL,
+					@departmentid,
+                    1,
+                    NULL,
+                    0,
+                    0,
+					NULL,
+					p_companyid,
+					p_userid,
+					@projectdetailid
+				 );
+				SET i = i + 1;
+			END WHILE;
+		End;
+        
+        -- save project attributes
+        
+        SET @row_no = 0;
+	   
+		DROP TABLE IF EXISTS tempprojectattributes;
+		CREATE TEMPORARY TABLE tempprojectattributes
+		
+		SELECT (@row_no:=@row_no + 1) AS num, id as attributeid, parentid as activityid, description as attributename, type, stgtypeid, attributetypes from (
+			SELECT 
+				id,
+                parentid,
+				description,
+                type,
+                stgtypeid,
+                attributetypes
+			FROM reference
+			where typecode = 'ProMilestones' AND type  = "Attribute"
+		) 
+		as tblprojectattrdetail;
+        
+        BEGIN
+			DECLARE n_attr INT DEFAULT 0;
+			DECLARE i_attr INT DEFAULT 0;
+			SELECT COUNT(*) FROM tempprojectattributes INTO n_attr;
+			 
+			WHILE i_attr<n_attr DO 
+				SET @attributeid = null;
+                SET @activityid = null;
+				SET @attributename = null;
+                SET @type = null;
+                SET @stgtypeid = null;
+                SET @attributetypes = null;
+				select attributeid, activityid, attributename, type, stgtypeid, attributetypes
+                into @attributeid, @activityid, @attributename, @type, @stgtypeid, @attributetypes from tempprojectattributes where num = i_attr+1;
+                 
+				 SET @projectattrid = null;
+				 CALL spc_projectattributes_save( 	
+					NULL,
+                    @attributeid,
+					@projectid,
+					(SELECT parentid FROM `reference` WHERE id = @activityid),
+					@activityid,
+					@attributetypes,
+                    @attributename,
+					JSON_OBJECT('Boolean',null,'Date',null,'Remark',null,'Number',null,'Amount',null,'Attachment',null,'Tristate',null,'Signature',null,'Header',null),
+                    NULL,
+					p_companyid,
+					@projectattrid
+				 );
+				SET i_attr = i_attr + 1;
+			END WHILE;
+		End;
+        
+        -- save project NI details
+        
+        SET @row_number1 = 0;
+	   
+		DROP TABLE IF EXISTS tempprojectnidetail;
+		CREATE TEMPORARY TABLE tempprojectnidetail
+		
+		SELECT (@row_number1:=@row_number1 + 1) AS num1, id as stageid, description, stageper, projectper, parentid from (
+			SELECT 
+				id,
+				description,
+				stageper,
+				projectper,
+                parentid
+			FROM reference
+			where typecode = 'Nimaster' AND active = 1
+		) 
+		as tblprojectnidetail;
+        
+        BEGIN
+			DECLARE n1 INT DEFAULT 0;
+			DECLARE i1 INT DEFAULT 0;
+			SELECT COUNT(*) FROM tempprojectnidetail INTO n1;
+			 
+			WHILE i1<n1 DO 
+				SET @stageid1 = null;
+				SET @description1 = null;
+				SET @stageper1 = null;
+				SET @projectper1 = null;
+                SET @parentid1 = null;
+                SET @actualstartdate = null;
+				select stageid, description, stageper, projectper, parentid 
+                into @stageid1, @description1, @stageper1, @projectper1, @parentid1 from tempprojectnidetail where num1 = i1+1;
+				
+                IF(i1 = 0) THEN
+					SET @actualstartdate := p_orderdate;
+				 ELSE
+					SET @actualstartdate := null;
+                 END IF;
+                 
+                 SET @nidetailid = null;
+                 call spc_niprojectdetail_save(
+					NULL,
+					@projectid,
+					@stageid1,
+					@description1,
+					@parentid1,
+					@stageper1,
+					@projectper1,
+                    NULL,
+					NULL,
+					NULL,
+                    Null,
+					NULL,
+					NULL,
+					NULL,
+                    0,
+					NULL,
+					1,
+                    @actualstartdate,
+                    NULL,
+					p_companyid,
+                    @nidetailid
+                 );
+				SET i1 = i1 + 1;
+			END WHILE;
+		End;
+        
+        
+    END IF;
+END$$
+
+DELIMITER ;
+;
+
+ALTER TABLE `db_elev8r_local`.`project_detail` 
+ADD COLUMN `type` VARCHAR(100) NULL AFTER `completionper`,
+ADD COLUMN `stgtypeid` INT(11) NULL AFTER `type`,
+ADD COLUMN `dependency` VARCHAR(100) NULL AFTER `stgtypeid`;
+
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectdetail_save`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectdetail_save`(
+	IN p_id INT(11),
+    IN p_projectid int(11), 
+	IN p_stageid int(11), 
+	IN p_stagename varchar(100), 
+	IN p_parentid int(11), 
+	IN p_stagecompletionpercentage decimal(9,3), 
+	IN p_projectweightage decimal(9,3), 
+	IN p_managerstatusid int(11), 
+	IN p_customerstatusid int(11), 
+	IN p_iscompleted tinyint(4), 
+	IN p_startdate date, 
+	IN p_enddate date,
+    IN p_actualstartdate DATETIME, 
+    IN p_actualenddate DATETIME, 
+	IN p_actualcompletiondays DECIMAL(4,1),
+    IN p_completionper INT(11),
+    IN p_departmentid INT(11),
+    IN P_isactive tinyint(4),
+	IN p_attachment varchar(150), 
+	IN p_isstd tinyint(4), 
+	IN p_isdeleted tinyint(4),
+	IN p_completiondays varchar(50), 
+    IN p_type VARCHAR(100),
+    IN p_stgtypeid INT(11),
+    IN p_dependency VARCHAR(100),
+	IN p_companyid int(11),
+	IN p_userid INT(11),
+	OUT out_id INT(11)
+)
+BEGIN
+
+	SET @action = null;
+    
+    SET @action = null;
+	BEGIN
+		
+		IF(NULLIF(p_id, '0') IS NULL) THEN
+		
+			INSERT INTO project_detail 
+				(projectid, stageid, stagename, parentid, stagecompletionpercentage, projectweightage, managerstatusid,
+                customerstatusid, iscompleted, startdate, enddate,actualstartdate,actualenddate,actualcompletiondays,
+                completionper,departmentid,isactive, attachment, isstd, isdeleted,completiondays,type,stgtypeid,dependency,companyid)
+			VALUES 
+				(p_projectid, p_stageid, p_stagename, p_parentid, p_stagecompletionpercentage, p_projectweightage, p_managerstatusid,
+                p_customerstatusid, p_iscompleted, p_startdate, p_enddate,p_actualstartdate,p_actualenddate,p_actualcompletiondays,
+                p_completionper,p_departmentid,P_isactive,p_attachment, p_isstd, p_isdeleted,p_completiondays,p_type,p_stgtypeid,p_dependency,p_companyid);
+				
+		SET @action = 'INSERT';
+		
+	ELSE
+	
+		UPDATE project_detail
+			SET 
+				projectid = p_projectid,
+                stageid = p_stageid,
+                stagename = p_stagename,
+                parentid = p_parentid,
+                stagecompletionpercentage = p_stagecompletionpercentage,
+                projectweightage = p_projectweightage,
+                managerstatusid = p_managerstatusid,
+                customerstatusid = p_customerstatusid,
+                iscompleted = p_iscompleted,
+                startdate = p_startdate,
+                enddate = p_enddate,
+                actualstartdate=p_actualstartdate,
+                actualenddate=p_actualenddate,
+                actualcompletiondays=p_actualcompletiondays,
+                departmentid=p_departmentid,
+                isactive=P_isactive,
+                attachment = p_attachment,
+                isstd = p_isstd,
+                completiondays=p_completiondays,
+                completionper=p_completionper,
+                isdeleted = p_isdeleted,
+                type = p_type,
+                stgtypeid = p_stgtypeid,
+                dependency = p_dependency,
+                companyid = p_companyid,
+				id = LAST_INSERT_ID(id)
+			WHERE
+				id = p_id 
+				AND companyid = p_companyid;
+                
+			
+			SET @action = 'UPDATE';        
+					
+		END IF;
+		
+		SELECT LAST_INSERT_ID() INTO out_id; 
+		
+	END;
+
+END$$
+
+DELIMITER ;
+;
+
+
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_order_save`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_order_save`(
+	IN p_id int(11), 
+    IN p_quoteid int(11),
+	IN p_leadid int(11), 
+	IN p_quotevalue decimal(12,3), 
+	IN p_quotetype int(11), 
+	IN p_orderdate date, 
+	IN p_quotename varchar(45), 
+	IN p_quotediscription varchar(45), 
+	IN p_quotestatusid int(11), 
+	IN p_quotescore decimal(9,3), 
+	IN p_quotecategory int(11), 
+	IN p_quotesubcategory int(11), 
+	IN p_leadsourceid int(11),
+	IN p_quotestageid int(11), 
+	IN p_typeoflift int(11), 
+	IN p_nooflifts int(11), 
+	IN p_capacityid int(11), 
+	IN p_modelid int(11), 
+	IN p_driveid int(11), 
+	IN p_machineid int(11), 
+	IN p_controlid int(11), 
+	IN p_groupcontrolid int(11), 
+	IN p_operationid int(11), 
+	IN p_speedid int(11), 
+	IN p_typeofdoorid int(11), 
+	IN p_landingdoorid int(11), 
+	IN p_cardoorid int(11), 
+	IN p_lowestfloorid int(11), 
+	IN p_cwtpositionid int(11), 
+	IN p_floorheaightid int(11), 
+    IN p_carpanelid int(11),
+	IN p_ventilationid int(11),
+	IN p_tractionmediaid int(11),
+	IN p_mainpowersystemid int(11),
+	IN p_carpositionindicatorid int(11),
+	IN p_falseceilingid int(11),
+	IN p_auxilarysupplysystemid int(11),
+	IN p_flooringid int(11),
+	IN p_architectidid int(11), 
+	IN p_consaltantid int(11), 
+	IN p_stopsid int(11), 
+	IN p_floormarking int(11), 
+	IN p_allopeningsameside varchar(45), 
+	IN p_frontopening varchar(45), 
+	IN p_backopening varchar(45), 
+	IN p_leftopening varchar(45), 
+	IN p_rightopening varchar(45), 
+	IN p_shaftwidth int(11), 
+	IN p_shaftdepth int(11), 
+	IN p_cardepth int(11), 
+	IN p_carwidth int(11), 
+	IN p_carheight int(11), 
+	IN p_doorwidth int(11), 
+	IN p_doorheight int(11), 
+	IN p_travel varchar(45), 
+	IN p_pitdepth int(11), 
+	IN p_overhead int(11), 
+	IN p_mrwidth int(11), 
+	IN p_mrdepth int(11), 
+	IN p_mrheight int(11), 
+	IN p_isdeleted tinyint(4), 
+	IN p_winprobability decimal(9,3), 
+	IN p_siteaddress varchar(150), 
+	IN p_cityid int(11), 
+	IN p_stateid int(11), 
+	IN p_countryid int(11), 
+	IN p_pincode int(11), 
+	IN p_phoneno VARCHAR(45), 
+	IN p_officialemail varchar(100), 
+	IN p_gstn varchar(100), 
+	IN p_panno varchar(100), 
+	IN p_sociallink1 varchar(100), 
+	IN p_sociallink2 varchar(100), 
+	IN p_sociallink3 varchar(100),
+	IN p_primarycontactid varchar(45), 
+	IN p_contactperson varchar(45), 
+	IN p_designation varchar(45), 
+	IN p_mobileno1 varchar(45), 
+    IN p_status VARCHAR(45),
+	IN p_companyid int(11),
+	IN p_userid INT(11),
+	IN p_revisions VARCHAR(100),
+	OUT out_id INT
+)
+BEGIN
+
+	SET @action = null;
+
+	IF(NULLIF(p_id, '0') IS NULL) THEN
+		
+		INSERT INTO `order`(id,
+							  quoteid,
+							  leadid,
+							  quotevalue,
+                              quotetype,
+                              orderdate,
+                              quotename,
+                              quotediscription,
+                              quotestatusid,
+                              quotescore,
+                              quotecategory, 
+							  quotesubcategory,
+                              leadsourceid,
+                              quotestageid,
+                              typeoflift,
+                              nooflifts,
+                              capacityid,
+                              modelid,
+                              driveid,
+                              machineid, 
+                              controlid,
+                              operationid,
+                              speedid,
+                              typeofdoorid,
+                              landingdoorid,
+                              cardoorid,
+                              lowestfloorid,
+                              cwtpositionid,
+                              floorheaightid,
+                              carpanelid,
+                              ventilationid,
+                              tractionmediaid,
+                              mainpowersystemid,
+                              carpositionindicatorid,
+                              falseceilingid,
+							  auxilarysupplysystemid,
+                              flooringid,
+                              architectidid, 
+                              leadconsaltantid,
+                              stopsid,
+                              floormarking,
+                              allopeningsameside,
+                              frontopening,
+                              backopening,
+                              leftopening,
+                              rightopening, 
+                              shaftwidth,
+                              shaftdepth,
+                              cardepth,
+                              carwidth,
+                              carheight,
+                              doorwidth,
+                              doorheight,
+                              travel,
+                              pitdepth,
+                              overhead,
+                              mrwidth,
+                              mrdepth, 
+                              mrheight,
+                              isdeleted,
+                              groupcontrolid,
+                              winprobability,
+                              siteaddress,
+                              cityid,
+                              stateid,
+                              countryid,
+                              pincode,
+                              phoneno,
+                              officialemail,
+                              gstn,
+                              panno,
+                              sociallink1,
+                              sociallink2,
+                              sociallink3,
+                              primarycontactid,
+                              contactperson,
+                              designation,
+                              mobileno1,
+                              status,
+                              revisionno,
+                              revisions,
+                              companyid)
+					   VALUES (p_id,
+						       p_quoteid,
+                               p_leadid,
+						       p_quotevalue,
+                               p_quotetype,
+                               p_orderdate,
+                               p_quotename,
+                               p_quotediscription,
+                               p_quotestatusid,
+                               p_quotescore,
+                               p_quotecategory, 
+							   p_quotesubcategory,
+                               p_leadsourceid,
+                               p_quotestageid,
+                               p_typeoflift,
+                               p_nooflifts,
+                               p_capacityid,
+                               p_modelid,
+                               p_driveid,
+                               p_machineid, 
+                               p_controlid,
+                               p_operationid,
+                               p_speedid,
+                               p_typeofdoorid,
+                               p_landingdoorid,
+                               p_cardoorid,
+                               p_lowestfloorid,
+                               p_cwtpositionid,
+                               p_floorheaightid,
+                               p_carpanelid,
+							   p_ventilationid,
+							   p_tractionmediaid,
+							   p_mainpowersystemid,
+							   p_carpositionindicatorid,
+							   p_falseceilingid,
+							   p_auxilarysupplysystemid,
+							   p_flooringid,
+                               p_architectidid, 
+                               p_consaltantid,
+                               p_stopsid,
+                               p_floormarking,
+                               p_allopeningsameside,
+                               p_frontopening,
+                               p_backopening,
+                               p_leftopening,
+                               p_rightopening, 
+                               p_shaftwidth,
+                               p_shaftdepth,
+                               p_cardepth,
+                               p_carwidth,
+                               p_carheight,
+                               p_doorwidth,
+                               p_doorheight,
+                               p_travel,
+                               p_pitdepth,
+                               p_overhead,
+                               p_mrwidth,
+                               p_mrdepth, 
+                               p_mrheight,
+                               0,
+                               p_groupcontrolid,
+                               p_winprobability,
+                               p_siteaddress,
+                               p_cityid,
+                               p_stateid,
+                               p_countryid,
+                               p_pincode,
+                               p_phoneno,
+                               p_officialemail,
+                               p_gstn,
+                               p_panno,
+                               p_sociallink1,
+                               p_sociallink2,
+                               p_sociallink3,
+                               p_primarycontactid,
+                               p_contactperson,
+                               p_designation,
+                               p_mobileno1,
+                               p_status,
+                               1,
+                               p_revisions,
+                               p_companyid);
+		
+		SET @action = 'INSERT';
+	
+	ELSE
+		-- save previous values in metadata column
+        SET @previouscol = null;
+        SET @revisionno = null;
+        SET @currval = null;
+        SELECT JSON_OBJECT('id',IFNULL(id,'-'),'quoteid',IFNULL(quoteid,'-'),'leadid',IFNULL(leadid,'-'),'quotevalue',IFNULL(quotevalue,'-'),'quotetype',IFNULL(quotetype,'-'),'orderdate',IFNULL(orderdate,'-'),'quotename',IFNULL(quotename,''),
+							  'quotediscription',IFNULL(quotediscription,'-'),'quotestatusid',IFNULL(quotestatusid,'-'),'quotescore',IFNULL(quotescore,'-'),'quotecategory',IFNULL(quotecategory,'-'), 
+							  'quotesubcategory',IFNULL(quotesubcategory,'-'),'leadsourceid',IFNULL(leadsourceid,'-'),'quotestageid',IFNULL(quotestageid,'-'),'typeoflift',IFNULL(typeoflift,'-'),'nooflifts',IFNULL(nooflifts,'-'),'capacityid',IFNULL(capacityid,'-'),'modelid',IFNULL(modelid,'-'),'driveid',IFNULL(driveid,'-'),'machineid',IFNULL(machineid,'-'), 
+                              'controlid',IFNULL(controlid,'-'),'operationid',IFNULL(operationid,'-'),'speedid',IFNULL(speedid,'-'),'typeofdoorid',IFNULL(typeofdoorid,'-'),'landingdoorid',IFNULL(landingdoorid,'-'),'cardoorid',IFNULL(cardoorid,'-'),'lowestfloorid',IFNULL(lowestfloorid,'-'),'cwtpositionid',IFNULL(cwtpositionid,'-'),'floorheaightid',IFNULL(floorheaightid,'-'),
+                              'architectidid',IFNULL(architectidid,'-'),'leadconsaltantid',IFNULL(leadconsaltantid,'-'),'stopsid',IFNULL(stopsid,'-'),'floormarking',IFNULL(floormarking,'-'),'allopeningsameside',IFNULL(allopeningsameside,'-'),'frontopening',IFNULL(frontopening,'-'),'backopening',IFNULL(backopening,'-'),'leftopening',IFNULL(leftopening,'-'),
+                              'rightopening',IFNULL(rightopening,'-'),'shaftwidth',IFNULL(shaftwidth,'-'),'shaftdepth',IFNULL(shaftdepth,'-'),'cardepth',IFNULL(cardepth,'-'),'carwidth',IFNULL(carwidth,'-'),'carheight',IFNULL(carheight,'-'),'doorwidth',IFNULL(doorwidth,'-'),'doorheight',IFNULL(doorheight,'-'),'travel',IFNULL(travel,'-'),'pitdepth',IFNULL(pitdepth,'-'),
+                              'overhead',IFNULL(overhead,'-'),'mrwidth',IFNULL(mrwidth,'-'),'mrdepth',IFNULL(mrdepth,'-'),'mrheight',IFNULL(mrheight,'-'),'isdeleted',IFNULL(isdeleted,'-'),'groupcontrolid',IFNULL(groupcontrolid,'-'),'winprobability',IFNULL(winprobability,'-'),'siteaddress',IFNULL(siteaddress,'-'),'cityid',IFNULL(cityid,'-'),'stateid',IFNULL(stateid,'-'),
+                              'countryid',IFNULL(countryid,'-'),'pincode',IFNULL(pincode,'-'),'phoneno',IFNULL(phoneno,'-'),'officialemail',IFNULL(officialemail,'-'),'gstn',IFNULL(gstn,'-'),'panno',IFNULL(panno,'-'),'sociallink1',IFNULL(sociallink1,'-'),'sociallink2',IFNULL(sociallink2,'-'),'sociallink3',IFNULL(sociallink3,'-'),'primarycontactid',IFNULL(primarycontactid,'-'),
+                              'contactperson',IFNULL(contactperson,'-'),'destination',IFNULL(designation,'-'),'mobileno1',IFNULL(mobileno1,'-'),'status',IFNULL(status,'-'),'includinggst',IFNULL(includinggst,'-'),'snehasalescontactname',IFNULL(snehasalescontactname,'-'),
+                              'snehasalescontactno',IFNULL(snehasalescontactno,'-'),'revisionno',IFNULL(revisionno,'-'),'carpanelid',IFNULL(carpanelid,'-'),'ventilationid',IFNULL(ventilationid,'-'),'tractionmediaid',IFNULL(tractionmediaid,'-'),'mainpowersystemid',IFNULL(mainpowersystemid,'-'),'carpositionindicatorid',IFNULL(carpositionindicatorid,'-'),
+                              'falseceilingid',IFNULL(falseceilingid,'-'),'auxilarysupplysystemid',IFNULL(auxilarysupplysystemid,'-'),'flooringid',IFNULL(flooringid,'-'),'shaftconditionid',IFNULL(shaftconditionid,'-'),'unitid',IFNULL(unitid,'-'))
+		INTO @currval FROM `order` WHERE id = p_id;
+        
+        -- get current value form metadata
+        SELECT previousvalues INTO @previouscol FROM `order` WHERE id = p_id AND previousvalues IS NOT NULL;
+		SELECT revisionno INTO @revisionno FROM `order` WHERE id = p_id;
+
+		IF @previouscol IS NOT NULL THEN
+			UPDATE `order`
+			SET previousvalues = JSON_ARRAY_APPEND(CAST(@previouscol AS JSON), '$', @currval),
+				revisionno = (@revisionno + 1)
+			WHERE id = p_id;
+		ELSE
+			UPDATE `order`
+			SET previousvalues = JSON_ARRAY(@currval),
+				revisionno = (@revisionno + 1)
+			WHERE id = p_id;
+		END IF;
+       
+		UPDATE `order`
+		SET 
+            leadid = p_leadid,
+            quoteid = p_quoteid,
+            quotevalue = p_quotevalue,
+            quotetype = p_quotetype,
+            orderdate = p_orderdate,
+            quotename = p_quotename,
+            quotediscription = p_quotediscription,
+            quotestatusid = p_quotestatusid,
+            quotescore = p_quotescore,
+            quotecategory = p_quotecategory,
+            quotesubcategory = p_quotesubcategory,
+            leadsourceid = p_leadsourceid,
+            quotestageid = p_quotestageid,
+            typeoflift = p_typeoflift,
+            nooflifts = p_nooflifts,
+            capacityid = p_capacityid,
+            modelid = p_modelid,
+            driveid = p_driveid,
+            machineid = p_machineid,
+			controlid = p_controlid,
+            operationid = p_operationid,
+            speedid = p_speedid,
+            typeofdoorid = p_typeofdoorid,
+            landingdoorid = p_landingdoorid,
+            cardoorid = p_cardoorid,
+            lowestfloorid = p_lowestfloorid,
+            cwtpositionid = p_cwtpositionid,
+            floorheaightid = p_floorheaightid,
+            carpanelid = p_carpanelid,
+			ventilationid = p_ventilationid,
+			tractionmediaid = p_tractionmediaid,
+			mainpowersystemid = p_mainpowersystemid,
+			carpositionindicatorid = p_carpositionindicatorid,
+			falseceilingid = p_falseceilingid,
+			auxilarysupplysystemid = p_auxilarysupplysystemid,
+			flooringid = p_flooringid,
+            architectidid = p_architectidid, 
+			leadconsaltantid = p_consaltantid,
+            stopsid = p_stopsid,
+            floormarking = p_floormarking,
+            allopeningsameside = p_allopeningsameside,
+            frontopening = p_frontopening,
+            backopening = p_backopening,
+            leftopening = p_leftopening,
+            rightopening = p_rightopening, 
+			shaftwidth = p_shaftwidth,
+            shaftdepth = p_shaftdepth,
+            cardepth = p_cardepth,
+            carwidth = p_carwidth,
+            carheight = p_carheight,
+            doorwidth = p_doorwidth,
+            doorheight = p_doorheight,
+            travel = p_travel,
+            pitdepth = p_pitdepth,
+            overhead = p_overhead,
+            mrwidth = p_mrwidth,
+            mrdepth = p_mrdepth, 
+			mrheight = p_mrheight,
+            isdeleted = p_isdeleted,
+            groupcontrolid = p_groupcontrolid,
+            winprobability = p_winprobability,
+            siteaddress = p_siteaddress,
+            cityid = p_cityid,
+            stateid = p_stateid,
+            countryid = p_countryid,
+            pincode = p_pincode,
+            phoneno = p_phoneno,
+			officialemail = p_officialemail,
+            gstn = p_gstn,
+            panno = p_panno,
+            sociallink1 = p_sociallink1,
+            sociallink2 = p_sociallink2,
+            sociallink3 = p_sociallink3,
+            primarycontactid = p_primarycontactid,
+            contactperson = p_contactperson,
+            designation = p_designation,
+			mobileno1 = p_mobileno1,
+             revisions= p_revisions,
+            status = p_status,
+            companyid = p_companyid,
+			id = LAST_INSERT_ID(id)
+			
+		WHERE id = p_id
+		AND companyid = p_companyid;
+		
+		SET @action = 'UPDATE';
+		
+	END IF;
+    
+    SELECT LAST_INSERT_ID() INTO OUT_ID;
+	
+    SET @orderid = null;
+	
+    SELECT LAST_INSERT_ID() INTO @orderid;
+    
+    -- save order as project when order gets confirmed
+    IF(p_status = 'Confirmed') THEN
+		SET @incrementalval = null;
+        SELECT IFNULL(incrementalval,1) INTO @incrementalval FROM `order` ORDER BY id DESC LIMIT 1;
+        
+        SET @model = null;
+        SELECT LEFT(description , 2) INTO @model FROM reference WHERE id = p_modelid;
+        
+        SET @jobcode = null;
+        SELECT CONCAT(@model,(SELECT DATE_FORMAT(now(), '%y')),'-',(SELECT MONTH(NOW())),'V8R',@incrementalval)
+        INTO @jobcode;
+        
+        UPDATE `order`
+        SET jobcode = @jobcode,
+        incrementalval = @incrementalval + 1
+        WHERE id = @orderid;
+        
+		SET @projectid = null;
+		call spc_project_save(
+			null, @orderid, p_quotevalue, null, p_orderdate, null,null, 1,null,null, null, null, null,null,null,null,0,p_companyid, p_userid, @projectid
+        );
+        
+        UPDATE project SET completionper = 0 WHERE id = @projectid;
+        
+        SET @row_number = 0;
+	   
+		DROP TABLE IF EXISTS tempprojectdetail;
+		CREATE TEMPORARY TABLE tempprojectdetail
+		
+		SELECT (@row_number:=@row_number + 1) AS num, id as stageid, parentid, description, stageper, projectper, departmentid, type, stgtypeid, dependency from (
+			SELECT 
+				id,
+                parentid,
+				description,
+				stageper,
+				projectper,
+                departmentid,
+                type,
+                stgtypeid,
+                dependency
+			FROM reference
+			where typecode = 'ProMilestones' AND active = 1 AND type in("Stage","Activity")
+		) 
+		as tblprojectdetail;
+        
+        BEGIN
+			DECLARE n INT DEFAULT 0;
+			DECLARE i INT DEFAULT 0;
+			SELECT COUNT(*) FROM tempprojectdetail INTO n;
+			 
+			WHILE i<n DO 
+				SET @stageid = null;
+				SET @description = null;
+                SET @parentid = null;
+				SET @stageper = null;
+				SET @projectper = null;
+                SET @departmentid = null;
+                SET @actualstartdate = null;
+                SET @type = null;
+                SET @stgtypeid = null;
+                SET @dependency = null;
+				select stageid, description, parentid, stageper, projectper, departmentid, type, stgtypeid, dependency
+                into @stageid, @description, @parentid, @stageper, @projectper, @departmentid, @type, @stgtypeid, @dependency from tempprojectdetail where num = i+1;
+				 
+                 IF(i = 0) THEN
+					SET @actualstartdate := p_orderdate;
+				 ELSE
+					SET @actualstartdate := null;
+                 END IF;
+                 
+				 SET @projectdetailid = null;
+				 CALL spc_projectdetail_save( 	
+					NULL,
+					@projectid,
+					@stageid,
+					@description,
+					@parentid,
+					@stageper,
+					@projectper,
+					NULL,
+					NULL,
+					NULL,
+                    Null,
+					NULL,
+					@actualstartdate,
+					NULL,
+                    NULL,
+					NULL,
+					@departmentid,
+                    1,
+                    NULL,
+                    0,
+                    0,
+					NULL,
+                    @type,
+                    @stgtypeid,
+                    @dependency,
+					p_companyid,
+					p_userid,
+					@projectdetailid
+				 );
+				SET i = i + 1;
+			END WHILE;
+		End;
+        
+        -- save project attributes
+        
+        SET @row_no = 0;
+	   
+		DROP TABLE IF EXISTS tempprojectattributes;
+		CREATE TEMPORARY TABLE tempprojectattributes
+		
+		SELECT (@row_no:=@row_no + 1) AS num, id as attributeid, parentid as activityid, description as attributename, type, stgtypeid, attributetypes from (
+			SELECT 
+				id,
+                parentid,
+				description,
+                type,
+                stgtypeid,
+                attributetypes
+			FROM reference
+			where typecode = 'ProMilestones' AND type  = "Attribute"
+		) 
+		as tblprojectattrdetail;
+        
+        BEGIN
+			DECLARE n_attr INT DEFAULT 0;
+			DECLARE i_attr INT DEFAULT 0;
+			SELECT COUNT(*) FROM tempprojectattributes INTO n_attr;
+			 
+			WHILE i_attr<n_attr DO 
+				SET @attributeid = null;
+                SET @activityid = null;
+				SET @attributename = null;
+                SET @type = null;
+                SET @stgtypeid = null;
+                SET @attributetypes = null;
+				select attributeid, activityid, attributename, type, stgtypeid, attributetypes
+                into @attributeid, @activityid, @attributename, @type, @stgtypeid, @attributetypes from tempprojectattributes where num = i_attr+1;
+                 
+				 SET @projectattrid = null;
+				 CALL spc_projectattributes_save( 	
+					NULL,
+                    @attributeid,
+					@projectid,
+					(SELECT parentid FROM `reference` WHERE id = @activityid),
+					@activityid,
+					@attributetypes,
+                    @attributename,
+					JSON_OBJECT('Boolean',null,'Date',null,'Remark',null,'Number',null,'Amount',null,'Attachment',null,'Tristate',null,'Signature',null,'Header',null),
+                    NULL,
+					p_companyid,
+					@projectattrid
+				 );
+				SET i_attr = i_attr + 1;
+			END WHILE;
+		End;
+        
+        -- save project NI details
+        
+        SET @row_number1 = 0;
+	   
+		DROP TABLE IF EXISTS tempprojectnidetail;
+		CREATE TEMPORARY TABLE tempprojectnidetail
+		
+		SELECT (@row_number1:=@row_number1 + 1) AS num1, id as stageid, description, stageper, projectper, parentid from (
+			SELECT 
+				id,
+				description,
+				stageper,
+				projectper,
+                parentid
+			FROM reference
+			where typecode = 'Nimaster' AND active = 1
+		) 
+		as tblprojectnidetail;
+        
+        BEGIN
+			DECLARE n1 INT DEFAULT 0;
+			DECLARE i1 INT DEFAULT 0;
+			SELECT COUNT(*) FROM tempprojectnidetail INTO n1;
+			 
+			WHILE i1<n1 DO 
+				SET @stageid1 = null;
+				SET @description1 = null;
+				SET @stageper1 = null;
+				SET @projectper1 = null;
+                SET @parentid1 = null;
+                SET @actualstartdate = null;
+				select stageid, description, stageper, projectper, parentid 
+                into @stageid1, @description1, @stageper1, @projectper1, @parentid1 from tempprojectnidetail where num1 = i1+1;
+				
+                IF(i1 = 0) THEN
+					SET @actualstartdate := p_orderdate;
+				 ELSE
+					SET @actualstartdate := null;
+                 END IF;
+                 
+                 SET @nidetailid = null;
+                 call spc_niprojectdetail_save(
+					NULL,
+					@projectid,
+					@stageid1,
+					@description1,
+					@parentid1,
+					@stageper1,
+					@projectper1,
+                    NULL,
+					NULL,
+					NULL,
+                    Null,
+					NULL,
+					NULL,
+					NULL,
+                    0,
+					NULL,
+					1,
+                    @actualstartdate,
+                    NULL,
+					p_companyid,
+                    @nidetailid
+                 );
+				SET i1 = i1 + 1;
+			END WHILE;
+		End;
+        
+        
+    END IF;
+END$$
+
+DELIMITER ;
+;
+
+
+ALTER TABLE `db_elev8r_local`.`documentcollectiondetails` 
+ADD COLUMN `parentid` INT(11) NULL AFTER `document_name`,
+ADD COLUMN `type` VARCHAR(100) NULL AFTER `parentid`;
+
+
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_documentcollectiondetails_save`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_documentcollectiondetails_save`(
+	IN p_id INT(11),
+    IN p_projectid INT(11),
+    IN p_stageid INT(11),
+    IN p_parentstageid INT(11),
+    IN p_document_id INT(11),
+    IN p_document_url VARCHAR(250),
+    IN p_document_name varchar(150),
+    IN p_parentid INT(11),
+    IN p_type VARCHAR(100),
+    IN p_companyid INT,
+    IN p_userid INT,
+    OUT out_id INT
+)
+BEGIN
+
+	SET @action = null;
+
+	IF(NULLIF(p_id, '0') IS NULL) THEN
+	
+		INSERT INTO  documentcollectiondetails
+				(id,projectid, stageid,parentstageid, document_id,document_url,document_name, parentid, type,company_id)
+			VALUES 
+				(p_id,p_projectid, p_stageid,p_parentstageid,p_document_id, p_document_url,p_document_name, p_parentid, p_type, p_companyid);
+		
+        SET @action = 'INSERT';
+        
+	ELSE
+    
+		UPDATE documentcollectiondetails
+				SET projectid=p_projectid,
+					stageid = p_stageid, 
+                    parentstageid = p_parentstageid,
+					document_id = p_document_id,
+					document_url = p_document_url,
+                    parentid = p_parentid,
+                    type = p_type,
+					company_id = p_companyid,
+					id = LAST_INSERT_ID(id)
+			WHERE
+				id = p_id
+                AND companyid = p_companyid;
+                
+			SET @action = 'UPDATE';
+
+	END IF;
+    
+    SELECT LAST_INSERT_ID() INTO out_id;
+    
+    -- record log
+   -- CALL spc_commonlog_save(p_companyid, 'cbf_documentcollectiondetails', out_id, @action, p_userid);
+
+    
+
+END$$
+
+DELIMITER ;
+;
+

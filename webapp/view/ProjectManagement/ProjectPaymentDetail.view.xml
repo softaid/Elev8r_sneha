@@ -71,7 +71,7 @@
                                                 path: 'refTypeModel>/modelData',
                                                 sorter: { path: 'id' }
                                             }">
-                                            <core:Item key="{refTypeModel>description}" text="{refTypeModel>description}" />
+                                            <core:Item key="{refTypeModel>id}" text="{refTypeModel>description}" />
                                         </Select>
                                     </form:fields>
                                 </form:FormElement>
@@ -186,15 +186,6 @@
                                                     }">
                                             <core:Item key="{attributeModel>id}" text="{attributeModel>description}" />
                                         </MultiComboBox>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement id="notifyEle" label="Notify User">
-                                    <form:fields>
-                                        <Switch  state="{editMasterModel>/notifyinternaluser}" id="notify" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
-                                            <layoutData>
-                                                <FlexItemData growFactor="1" />
-                                            </layoutData>
-                                        </Switch>
                                     </form:fields>
                                 </form:FormElement>
                             </form:formElements>

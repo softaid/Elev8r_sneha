@@ -29,6 +29,8 @@ sap.ui.define(
 			"sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddQutation",
 			{
 				onInit: function () {
+					debugger;
+					console.log("Quote");
 					var currentContext = this;
 
 					// currentContext.reset();
@@ -45,12 +47,15 @@ sap.ui.define(
 						this.quoteConversion,
 						this
 					);
+					// currentContext.reset();
+					this.bus = sap.ui.getCore().getEventBus();
 					this.bus.subscribe(
 						"qutationcreen",
 						"handleQutationDetails",
 						this.handleQutationDetails,
 						this
 					);
+
 					var emptyModel = this.getModelDefault();
 					var model = new JSONModel();
 					model.setData(emptyModel);
