@@ -6,7 +6,7 @@
 	xmlns:dnd="sap.ui.core.dnd"
    xmlns:k= "jQuery.sap.ui.event.keyCodes"
          xmlns:tnt="sap.tnt">
- <f:FlexibleColumnLayout  id="fclBillOfMaterial" backgroundDesign="Solid">
+ <f:FlexibleColumnLayout  id="fclProjectActivity" backgroundDesign="Solid">
 		<f:beginColumnPages>
 
 
@@ -555,17 +555,17 @@
                                 </Toolbar>
                             </headerToolbar>
                             <columns>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Id" /></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" /></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" /></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" /></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" /></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelStage}" />
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Stage" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Date" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Payment(%)" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Expected Amount" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Received Amount" /></Column>
+                                <!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelStage}" />
                                 </Column>
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelProject}" />
                                 </Column>
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Active status" />
-                                </Column>
+                                </Column> -->
                             </columns>
                             <items>
                                 <ColumnListItem type="Navigation" press="onListItemPressPayments">
@@ -575,7 +575,7 @@
                                         <Text text="{activitymodel>startdate}" />   
                                         <Text text="{activitymodel>enddate}"/>
                                         <Text text="{activitymodel>completiondays}"/> 
-                                        <Text text="{activitymodel>stagecompletionpercentage}"/>
+                                        <!-- <Text text="{activitymodel>stagecompletionpercentage}"/>
                                         <Text text="{activitymodel>projectweightage}"/> 
                                         <tnt:InfoLabel 
                                                 text="1"
@@ -583,7 +583,7 @@
                                                 class="sapMInfoLabelSmall" 
                                                 colorScheme= "{parts: [{path: 'nitblmodel>isactive'}],
                                                 formatter: '.formatter.setItemStockColor'}"
-                                                />  
+                                                />   -->
                                     </cells>
                                 </ColumnListItem>
                             </items>

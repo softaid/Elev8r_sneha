@@ -114,9 +114,9 @@ sap.ui.define([
 				console.log("---------------QCChecklistData--------------",data);
 			});
 
-			QCCheckListservice.getAllQcchecklist(function (data) {
-				console.log("---------------getAllQcchecklist--------------",data);
-			});
+			// QCCheckListservice.getAllQcchecklist(function (data) {
+			// 	console.log("---------------getAllQcchecklist--------------",data);
+			// });
 		},
 
 		getModelDefault: function () {

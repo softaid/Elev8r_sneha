@@ -71,7 +71,7 @@
                                                 path: 'refTypeModel>/modelData',
                                                 sorter: { path: 'id' }
                                             }">
-                                            <core:Item key="{refTypeModel>description}" text="{refTypeModel>description}" />
+                                            <core:Item key="{refTypeModel>id}" text="{refTypeModel>description}" />
                                         </Select>
                                     </form:fields>
                                 </form:FormElement>
