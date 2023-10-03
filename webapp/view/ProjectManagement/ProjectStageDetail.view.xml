@@ -230,7 +230,7 @@
                                             text=""
                                             type="Emphasized"
                                             icon="sap-icon://download"
-                                              press="functiondownload"
+                                            press="functiondownload"
                                             id="btnDowimage" />
                                               <Button
                                                 text=""

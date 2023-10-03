@@ -1,12 +1,8 @@
-<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectDetail"
-	xmlns:table="sap.ui.table"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:u="sap.ui.unified"
-	xmlns:c="sap.ui.core"
-	xmlns="sap.m"
-	xmlns:f="sap.f"
-	xmlns:form="sap.ui.layout.form"
-	xmlns:core="sap.ui.core"
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivityAdd" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core"
 	xmlns:dnd="sap.ui.core.dnd"
     xmlns:k= "jQuery.sap.ui.event.keyCodes"
     xmlns:tnt="sap.tnt">
@@ -331,16 +327,8 @@
                                                     <content>
                                                         <Title text="Project Activity" level="H2"/>
                                                         <ToolbarSpacer />
-                                                            <HBOX>
-                                                            <SearchField search="onSearch" width="17.5rem" id = "onSearchId"/>
-                                                            <Button
-                                                            width="20%"
-                                                            align="right"
-                                                            tooltip="Group"
-                                                            icon="sap-icon://group-2"
-                                                            press="handleGroupButtonPressed"/>
-                                                            <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="niadd" visible="true"/> 
-                                                            </HBOX>
+                                                            
+                                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="niadd" visible="true"/>
                                                     </content>
                                                 </Toolbar>
                                             </headerToolbar>
@@ -733,20 +721,115 @@
                                         </FlexBox>
                                     </Panel> 
                                 </IconTabFilter>
-                                
                                 <IconTabFilter text="Gantt Chart">
-                                  <Page class="pgDashboard" showHeader="false" id="contentDashboard">
-						      <content>
-                                <core:HTML id="ganttContainer" content="
-                                    &lt;div id='gantt_here' style='width:100%; height:100%;'&gt;&lt;/div&gt;
-                                    &lt;script type='text/javascript'&gt;
-                                    gantt.init('gantt_here');
-                                    &lt;/script&gt;">
-                                </core:HTML>
-						     </content>		
-					       </Page>
-                            </IconTabFilter>
+                                    <VBox fitContainer="true">
+                                        <Table id="tblGantteStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
+                                            path: 'activitymodel>/',
+                                                sorter: {
+                                                    path: 'id'
+                                                }
+                                            }">
+                                            <headerToolbar>
+                                                <Toolbar>
+                                                    <content>
+                                                        <Title text="Project Activity" level="H2"/>
+                                                        <ToolbarSpacer />
+                                                            
+                                                        <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="Ganttadd" visible="true"/>
+                                                    </content>
+                                                </Toolbar>
+                                            </headerToolbar>
+                                            <columns>
+                                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Id" /></Column>
+                                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" /></Column>
+                                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" /></Column>
+                                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" /></Column>
+                                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" /></Column>
+                                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelStage}" />
+                                                </Column>
+                                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelProject}" />
+                                                </Column>
+                                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Active status" />
+                                                </Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem type="Navigation" press="onListItemPressActivity">
+                                                    <cells>        
+                                                        <Text text="{activitymodel>count}" /> 
+                                                        <Text text="{activitymodel>stagename}" />         
+                                                        <Text text="{activitymodel>startdate}" />   
+                                                        <Text text="{activitymodel>enddate}"/>
+                                                        <Text text="{activitymodel>completiondays}"/> 
+                                                        <Text text="{activitymodel>stagecompletionpercentage}"/>
+                                                        <Text text="{activitymodel>projectweightage}"/> 
+                                                        <tnt:InfoLabel 
+                                                                text="1"
+                                                                displayOnly= "false"
+                                                                class="sapMInfoLabelSmall" 
+                                                                colorScheme= "{parts: [{path: 'nitblmodel>isactive'}],
+                                                                formatter: '.formatter.setItemStockColor'}"
+                                                                />  
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>
+                                    </VBox>   
+                                    <form:Form editable="true">
+                                        <form:title>
+                                            <core:Title text="" />
+                                        </form:title>
+                                        <form:layout>
+                                            <form:ResponsiveGridLayout
+                                                labelSpanXL="4"
+                                                labelSpanL="4"
+                                                labelSpanM="4"
+                                                labelSpanS="12"
+                                                adjustLabelSpan="false"
+                                                emptySpanXL="0"
+                                                emptySpanL="0"
+                                                emptySpanM="0"
+                                                emptySpanS="0"
+                                                columnsXL="3"
+                                                columnsL="2"
+                                                columnsM="2"
+                                                singleContainerFullSize="false" />
+                                        </form:layout>
+                                        <form:formContainers>
+                                            <form:FormContainer>
+                                                <form:formElements>
+                                                    <form:FormElement label="Note">
+                                                        <form:fields>
+                                                            <TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{projectModel>/note}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                </form:formElements>
+                                            </form:FormContainer>            
+                                            <form:FormContainer title="">
+                                                <form:formElements>
+                                                    <form:FormElement label="">
+                                                        <form:fields>
+                                                            <!-- <Button text="Generate schedule" id="btnActivityschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onniclick"/> -->
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                </form:formElements>
+                                            </form:FormContainer>
+                                        </form:formContainers>
+                                    </form:Form>
+                                    <Panel>
+                                        <FlexBox		
+                                            alignItems="Start"
+                                            justifyContent="End">
+                                            <items>
+                                                <!-- <Button text="{i18n>saveButtonText}" id="btnActivitySave" type="Emphasized" class="sapUiSmallMarginEnd" press="onNISave"/> -->
+                                                <Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
+                                            </items>
+                                        </FlexBox>
+                                    </Panel> 
+                                </IconTabFilter>
                             </items>
+                            <layoutData>
+                                <FlexItemData growFactor="1" baseSize="0%"/>
+                            </layoutData>
                         </IconTabBar>
                     </VBox>  
                 </f:content>
@@ -754,3 +837,8 @@
     	</f:beginColumnPages>
 	</f:FlexibleColumnLayout>
 </core:View>
+
+
+
+
+

@@ -181,64 +181,8 @@
 					"title": "Project",
 					"icon": "sap-icon://workflow-tasks",
 					"expanded": false,
-					"key": "project",
-					"eid": [],
-					"items": []
-				},
-				{
-					"title": "Project",
-					"icon": "sap-icon://workflow-tasks",
-					"expanded": false,
-					"key": "projectList",
+					"key": "projectActivityList",
 					"eid": [36],
-					"items": []
-				},
-				{
-					"title": "Project Detail View",
-					"icon": "sap-icon://workflow-tasks",
-					"expanded": false,
-					"key": "projectdetailview",
-					"eid": [31],
-					"items": []
-				},
-				{
-					"title": "Project Management",
-					"icon": "sap-icon://workflow-tasks",
-					"expanded": false,
-					"key": "projectmanagement",
-					"eid": [],
-					"items": []
-				},
-				{
-					"title": "Project Management",
-					"icon": "sap-icon://workflow-tasks",
-					"expanded": false,
-					"key": "projectmanagementaspermasterstages",
-					"eid": [32],
-					"items": []
-				},
-				{
-					"title": "NI Management Detail",
-					"icon": "sap-icon://workflow-tasks",
-					"expanded": false,
-					"key": "nimanagementaspermasterstages",
-					"eid": [33],
-					"items": []
-				},
-				{
-					"title": "Activities",
-					"icon": "sap-icon://activities",
-					"expanded": false,
-					"key": "projectactivities",
-					"eid": [14],
-					"items": []
-				},
-				{
-					"title": "Payments",
-					"icon": "sap-icon://batch-payments",
-					"expanded": false,
-					"key": "payments",
-					"eid": [15],
 					"items": []
 				},
 				{
@@ -247,53 +191,6 @@
 					"expanded": false,
 					"key": "projectreports",
 					"eid": [16],
-					"items": []
-				}
-			]
-		},
-
-		{
-			"title": "Sales",
-			"icon": "sap-icon://crm-sales",
-			"expanded": false,
-			"key": "saleorder",
-			"eid": [27],
-			"items": [
-				{
-					"title": "Sale Order",
-					"icon": "sap-icon://my-sales-order",
-					"expanded": false,
-					"key": "saleorder",
-					"eid": [28],
-					"items": []
-				}
-			
-			]
-		},
-
-
-		
-		{
-			"title": "My Tasks",
-			"icon": "sap-icon://receipt",
-			"expanded": false,
-			"key": "mytasks",
-			"eid": [17],
-			"items": [
-				{
-					"title": "Attendance",
-					"icon": "sap-icon://account",
-					"expanded": false,
-					"key": "attendance",
-					"eid": [18],
-					"items": []
-				},
-				{
-					"title": "Expenses",
-					"icon": "sap-icon://batch-payments",
-					"expanded": false,
-					"key": "expenses",
-					"eid": [19],
 					"items": []
 				}
 			]

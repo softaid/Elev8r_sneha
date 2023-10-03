@@ -161,6 +161,10 @@ sap.ui.define([
 
             deleteDocumentCollectionDetails : function(params, callback){
                 commonService.runJQueryX("DELETE", "elevproject/documentcollectiondetails/delete" , params, callback, null);
+            }, 
+
+            getStageOrActivityDetail : function(params, callback){
+                commonService.runJQueryX("GET", "elevproject/stagedetail/select/" +  params.id, null, callback, null);
             },
 
             // getAllProjectsDetailForGanttChart : function(callback){
