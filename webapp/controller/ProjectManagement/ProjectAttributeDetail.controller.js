@@ -7,13 +7,14 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter',
+	'sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/AttributeList.service',
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 	'sap/ui/elev8rerp/componentcontainer/services/Masters/Masters.service',
 	'sap/m/MessageToast',
-], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, formatter, commonFunction, masterService, MessageToast) {
+], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, formatter, AttributeListService, commonFunction, masterService, MessageToast) {
 	"use strict";
 
-	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivityAttributeDetail", {
+	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectAttributeDetail", {
 		formatter: formatter,
 		onInit: async function () {
 
@@ -30,16 +31,19 @@ sap.ui.define([
 			model.setData({});
 			this.getView().setModel(model, "activityModel");
 
+			var model = new JSONModel();
+			model.setData([{id :1 ,text :"yes"},{id :2,text :"No"},{id :3 ,text :"NA"}]);
+			this.getView().setModel(model, "tristateModel");
+
 			var editDocumentCollectionModel = new JSONModel();
 			editDocumentCollectionModel.setData({});
 			this.getView().setModel(model, "editDocumentCollectionModel");
 
-			// await commonFunction.getReferenceStages("InputAttribute", "attributetypeModel", this);
 			var currentContext = this;
 			currentContext.resultArr = [];// image array
 			currentContext.resultpdfArr = [];// pdf array
 			currentContext.DeleteDocumentArr = [];//in this array we  push index of array we want to delete
-			currentContext.getActivitydetail({ projectid: 53, field: "activity" })
+			currentContext.getActivitydetail({ projectid: 60, field: "activity" })
 
 		},
 
@@ -53,7 +57,6 @@ sap.ui.define([
 
 			let currentContext = this;
 
-
 			let model = this.getView().getModel("attributetypeModel");
 			let attributeSelectModel = this.getView().getModel("attributeSelectModel");
 			let AttributeDetailModel = this.getView().getModel("AttributeDetailModel").getData();
@@ -61,31 +64,30 @@ sap.ui.define([
 			let attributeObj = {};
 			currentContext.globalAttributeObj = {}
 
-
 			masterService.getReferenceByTypeCode({ typecode: "InputAttribute" }, function (data) {
 				data[0].forEach((ele) => {
 					attributeObj[ele.description] = ele.id;
 					currentContext.globalAttributeObj[ele.description] = null;
-
 				});
 
 				var selectModel = new sap.ui.model.json.JSONModel();
 
 				model.setData(data[0]);
 
-				if (AttributeDetailModel.attributetype == "") {
+				if (AttributeDetailModel.attributetypeids == null) {
 					attributeSelectModel.setData(attributeObj);
 				}
 				else {
 					let obj = {}
 					for (let ele of data[0]) {
-						AttributeDetailModel.attributetype.split(",").indexOf(`${ele.id}`) != -1 ? obj[ele.description] = ele.id : "not push"
+						AttributeDetailModel.attributetypeids.split(",").indexOf(`${ele.id}`) != -1 ? obj[ele.description] = ele.id : "not push"
 					}
+					console.log(JSON.parse(AttributeDetailModel.attributevalue))
+					currentContext.getView().getModel("AttributeDetailModel").setData({ ...JSON.parse(AttributeDetailModel.attributevalue), ...AttributeDetailModel })
 					attributeSelectModel.setData(obj);
-					currentContext.getView().byId("attributetype").setSelectedKeys(AttributeDetailModel.attributetype.split(","));
-
+					currentContext.getDocumentCollectionDetails() // get document details
+					currentContext.getView().byId("attributetype").setSelectedKeys(AttributeDetailModel.attributetypeids.split(","));
 				}
-
 
 				selectModel.setData({ modelData: data[0] });
 				currentContext.getView().setModel(selectModel, "attributetypeModel");
@@ -93,58 +95,60 @@ sap.ui.define([
 			});
 
 
+		},
 
+
+		getDocumentCollectionDetails: async function () {
 			var oModel = new JSONModel();
-			var documentModel = this.getView().getModel("editDocumentCollectionModel");
-
-			if (this.model != undefined) {
-				this.getView().setModel(this.model, "DetailModel");
-				oModel.setData(documentModel);
-			}
+			let currentContext=this;
+			let AttributeDetailModel = this.getView().getModel("AttributeDetailModel").getData();
 
 			// get document list
-            // in this service document id is only pass but we don't use it in sp to filters the data so we only pass bu never use
-			// await Projectservice.getDocumentCollectionDetails({ projectid: AttributeDetailModel.projectid, activityid: AttributeDetailModel.activityid, attributeid: AttributeDetailModel.attributeid, document_id: 3 }, function (data) {
-			// 	var oConfig = sap.ui.getCore().getModel("configModel");
+			// in this service document id is only pass but we don't use it in sp to filters the data so we only pass but never use
+			if (AttributeDetailModel.Attachment == "true") {
+				await Projectservice.getDocumentCollectionDetails({ projectid: AttributeDetailModel.projectid, stageid: AttributeDetailModel.id}, function (data) {
+					var oConfig = sap.ui.getCore().getModel("configModel");
+					data[0].forEach((document) => {
+						if (document.document_id == 3) {
+							document.image_url = oConfig.oData.webapi.docurl + document.document_url;
+							currentContext.resultArr.push(document);
 
-			// 	data[0].forEach((document) => {
-			// 		if (document.document_id == 3) {
-			// 			document.image_url = oConfig.oData.webapi.docurl + document.document_url;
-			// 			currentContext.resultArr.push(document);
+						}
+						else {
+							document.pdf_url = oConfig.oData.webapi.docurl + document.document_url;
+							currentContext.resultpdfArr.push(document);
+						}
+					})
+					console.log("data", data);
+					if (data[0].length) {
 
-			// 		}
-			// 		else {
-			// 			document.pdf_url = oConfig.oData.webapi.docurl + document.document_url;
-			// 			currentContext.resultpdfArr.push(document);
-			// 		}
-			// 	})
-			// 	console.log("data", data);
-			// 	if (data[0].length) {
+						var oModel = new sap.ui.model.json.JSONModel();
 
-			// 		var oModel = new sap.ui.model.json.JSONModel();
+						currentContext.getView().setModel(oModel, "editDocumentCollectionModel");
 
-			// 		currentContext.getView().setModel(oModel, "editDocumentCollectionModel");
+						var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
+						// tblmodel.oData.imgdata = currentContext.resultArr[0].imgdata;
+						tblmodel.oData.image_url = currentContext.resultArr?.[0]?.image_url ?? null;
+						tblmodel.oData.pdf_url = currentContext.resultpdfArr?.[0]?.pdf_url ?? null;
+						tblmodel.oData.imageid = (currentContext.resultArr?.[0]?.image_url ?? null) == null ? null : 0;
+						tblmodel.oData.pdfid = (currentContext.resultpdfArr?.[0]?.pdf_url ?? null) == null ? null : 0;
+						tblmodel.oData.pdf_name = (currentContext.resultpdfArr?.[0]?.document_name ?? null) == null ? null : (currentContext.resultpdfArr?.[0]?.document_name);
 
-			// 		var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
-			// 		// tblmodel.oData.imgdata = currentContext.resultArr[0].imgdata;
-			// 		tblmodel.oData.image_url = currentContext.resultArr?.[0]?.image_url ?? null;
-			// 		tblmodel.oData.pdf_url = currentContext.resultpdfArr?.[0]?.pdf_url ?? null;
-			// 		tblmodel.oData.imageid = (currentContext.resultArr?.[0]?.image_url ?? null) == null ? null : 0;
-			// 		tblmodel.oData.pdfid = (currentContext.resultpdfArr?.[0]?.pdf_url ?? null) == null ? null : 0;
-			// 		tblmodel.oData.pdf_name = (currentContext.resultpdfArr?.[0]?.document_name ?? null) == null ? null : (currentContext.resultpdfArr?.[0]?.document_name);
+						tblmodel.refresh();
+					}
+				})
+			}
 
-			// 		tblmodel.refresh();
-			// 	}
-			// })
+
 		},
 
 
 		jsonObjectCreation: function () {
-			let AttributeDetailModel = this.getView().getModel("AttributeDetailModel").getDate();
-			this.globalAttributeObj = {};
+			let AttributeDetailModel = this.getView().getModel("AttributeDetailModel").getData();
 			for (let ele in this.globalAttributeObj) {
 				this.globalAttributeObj[ele] = (AttributeDetailModel[ele] == undefined || AttributeDetailModel[ele].trim() == "") ? null : AttributeDetailModel[ele];
 			}
+			AttributeDetailModel.attributevalue = JSON.stringify(this.globalAttributeObj);
 		},
 		// get project Activity and show in table
 		getActivitydetail: function (obj) {
@@ -175,54 +179,54 @@ sap.ui.define([
 				attributeObj[ele.getProperty("text")] = ele.getProperty("key");
 			})
 
-			AttributeDetailModel.oData.attributetype = (attributeids.join(","));
+			AttributeDetailModel.oData.attributetypeids = (attributeids.join(","));
 			attributeSelectModel.setData(attributeObj);
 
 		},
 
-		// functiondownload: async function (OEvent) {
-		// 	// let checkbox = OEvent.getSource();
-		// 	// let data = checkbox.data("mySuperExtraData");
-		// 	let currentContext = this;
-		// 	let document_name = "";
-		// 	let sUrl;
+		functiondownload: async function (OEvent) {
+			// let checkbox = OEvent.getSource();
+			// let data = checkbox.data("mySuperExtraData");
+			let currentContext = this;
+			let document_name = "";
+			let sUrl;
 
-		// 	var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
-		// 	if (OEvent.mParameters.id.indexOf("image")!=-1 ){
-		// 		document_name = currentContext.resultArr[tblmodel.oData.imageid].document_name;
-		// 		sUrl=tblmodel.oData.image_url;
-		// 	}
-		// 	else {
-		// 		document_name = currentContext.resultpdfArr[tblmodel.oData.pdfid].document_name;
-		// 		sUrl=tblmodel.oData.pdf_url;
-		// 	}
+			var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
+			if (OEvent.mParameters.id.indexOf("image") != -1) {
+				document_name = currentContext.resultArr[tblmodel.oData.imageid].document_name;
+				sUrl = tblmodel.oData.image_url;
+			}
+			else {
+				document_name = currentContext.resultpdfArr[tblmodel.oData.pdfid].document_name;
+				sUrl = tblmodel.oData.pdf_url;
+			}
 
-		// 	var oXHR = new XMLHttpRequest();
-		// 	oXHR.open("GET", sUrl, true);
-		// 	oXHR.responseType = "blob";
+			var oXHR = new XMLHttpRequest();
+			oXHR.open("GET", sUrl, true);
+			oXHR.responseType = "blob";
 
-		// 	oXHR.onload = function (event) {
-		// 		var blob = oXHR.response;
+			oXHR.onload = function (event) {
+				var blob = oXHR.response;
 
-		// 		// Create a temporary anchor element to initiate the download
-		// 		var link = document.createElement("a");
-		// 		link.href = URL.createObjectURL(blob);
-
-
-		// 		// Set the download attribute to specify the filename for the downloaded file
-		// 		link.setAttribute("download", document_name);
-
-		// 		// Trigger the click event on the anchor element
-		// 		link.click();
-
-		// 		// Clean up - revoke the object URL and remove the anchor element after the click event has been triggered
-		// 		URL.revokeObjectURL(link.href);
-		// 	};
-
-		// 	oXHR.send();
+				// Create a temporary anchor element to initiate the download
+				var link = document.createElement("a");
+				link.href = URL.createObjectURL(blob);
 
 
-		// },
+				// Set the download attribute to specify the filename for the downloaded file
+				link.setAttribute("download", document_name);
+
+				// Trigger the click event on the anchor element
+				link.click();
+
+				// Clean up - revoke the object URL and remove the anchor element after the click event has been triggered
+				URL.revokeObjectURL(link.href);
+			};
+
+			oXHR.send();
+
+
+		},
 
 		handleValueChange: async function (oEvent) {
 
@@ -240,6 +244,8 @@ sap.ui.define([
 		createImageFormate: function (oFileUploader, aFiles) {
 			var currentContext = this;
 			var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
+			let AttributeDetailModel = this.getView().getModel("AttributeDetailModel").getData();
+
 			let imageNameArr = [];
 			let imageNameIndex = 0;
 
@@ -280,6 +286,7 @@ sap.ui.define([
 							})
 
 							imageNameIndex++;
+							AttributeDetailModel.Attachment = "true";   // we need to true as string because trim function which is use in jsoncreation 
 							tblmodel.oData.imgdata = currentContext.resultArr[0].imgdata;
 							tblmodel.oData.image_url = currentContext.resultArr[0].image_url;
 							tblmodel.oData.imageid = 0;
@@ -289,11 +296,14 @@ sap.ui.define([
 						};
 					})(file);
 				reader.readAsDataURL(file);
+
 			}
 		},
 		createPdfFormate: function (oFileUploader, aFiles) {
 			var currentContext = this;
 			var tblmodel = currentContext.getView().getModel("editDocumentCollectionModel");
+			let AttributeDetailModel = this.getView().getModel("AttributeDetailModel").getData();
+
 			let pdfNameArr = [];
 			let pdfNameIndex = 0;
 
@@ -334,6 +344,7 @@ sap.ui.define([
 							})
 
 							pdfNameIndex++;
+							AttributeDetailModel.Attachment = "true";   // we need to true as string because trim function which is use in jsoncreation 
 							tblmodel.oData.pdfdata = currentContext.resultpdfArr[0].imgdata;
 							tblmodel.oData.pdf_url = currentContext.resultpdfArr[0].pdf_url;
 							tblmodel.oData.pdfid = 0;
@@ -556,72 +567,75 @@ sap.ui.define([
 		onSave: function () {
 			// if (this.validateForm()) {
 			let currentContext = this;
-			let oModel = this.getView().getModel("DetailModel").oData;
+			let oModel = this.getView().getModel("AttributeDetailModel").oData;
 
 			var parentModel = currentContext.getView().getModel("editDocumentCollectionModel").oData;
 			let objPush = {
 				id: null,
 				stageid: oModel.stageid,
+				stageid: oModel.activityid,
 				projectid: oModel.projectid,
 				companyid: commonService.session("companyId"),
 				userid: commonService.session("userId"),
 				parentstageid: null
 			}
 
-			console.log("-------------------------parentModel1-------------------------", parentModel);
 
-			parentModel["id"] = null;
-			parentModel["projectid"] = oModel.projectid;
-			parentModel["stageid"] = 2;
-			parentModel["document_id"] = 3;
-			parentModel["companyid"] = commonService.session("companyId");
-			parentModel["userid"] = commonService.session("userId");
 			oModel["companyid"] = commonService.session("companyId");
-			oModel["userid"] = commonService.session("userId");
+			//oModel["userid"] = commonService.session("userId");
 
-			oModel.startdate = (oModel.startdate != null) ? commonFunction.getDate(oModel.startdate) : oModel.startdate;
-			oModel.enddate = (oModel.enddate != null) ? commonFunction.getDate(oModel.enddate) : oModel.enddate;
-			oModel.actualstartdate = (oModel.actualstartdate != null) ? commonFunction.getDate(oModel.actualstartdate) : oModel.actualstartdate;
-			oModel.actualenddate = (oModel.actualenddate != null) ? commonFunction.getDate(oModel.actualenddate) : oModel.actualenddate;
-			oModel.isactive = oModel.isactive === true ? 1 : 0;
-			oModel.isstd = oModel.isstd === true ? 1 : 0;
-
-			// Projectservice.saveProjectActivityDetail(oModel, function (savedata) {
-			// 	console.log("--------------oModel------------", oModel);
-			// 	Projectservice.getProjectdetail({ id: oModel.projectid }, function (data) {
-			// 		console.log("data", data);
-			// 		data[0].map(function (value, index) {
-			// 			data[0][index].activestatus = value.isactive == 1 ? "Active" : "InActive";
-			// 		});
-			// 		let tblModel = currentContext.getView().getModel("tblModel");
-			// 		console.log("-----------tblModel----------", tblModel);
-			// 		tblModel.setData(data[0]);
-			// 		tblModel.refresh();
-			// 	})
-			// });
+			// create json object  and  pass it  for save json in service
+			currentContext.jsonObjectCreation()
 
 
-			console.log("-------------------------parentModel2-------------------------", parentModel);
+			AttributeListService.saveAttributeList(oModel, function (savedata) {
 
-			currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
-				if (document.id == undefined) {
-					Projectservice.saveDocumentCollectionDetails({ ...objPush, ...document }, function (obj) {
-						var saveMsg = "Data Saved Successfully.";
-						var editMsg = "Data Updated Successfully";
-						var ErrorMsg = "Data not Saved Successfully";
-						var message = parentModel.id == null ? saveMsg : editMsg
-						if (message == null) {
-							MessageToast.show(ErrorMsg);
+				objPush.id = savedata.id  // attribute id in project_attributes
 
-						}
-						else {
-							MessageToast.show(message);
-						}
-					})
+				// get   updated attribute list
+				AttributeListService.getAttributeList({ projectid: oModel.projectid }, function (data) {
+					console.log("data", data);
+					var attributeModel = currentContext.getView().getModel("attributeModel");
+					attributeModel.setData(data[0]);
+					console.log("--------------nitblmodel------------", attributeModel);
+					attributeModel.refresh();
+				});
+
+
+				let documentSaveObj = {
+					stageid: savedata.id,// attribute id in project_attributes  table
+					parentstageid: oModel.activityid,  //activity id
+					projectid: oModel.projectid,
+					type: "attribute",
+					companyid: commonService.session("companyId"),
+					userid: commonService.session("userId"),
+
 				}
+
+				currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
+					if (document.id == undefined) {
+						Projectservice.saveDocumentCollectionDetails({ ...documentSaveObj, ...document }, function (obj) {
+							var saveMsg = "Data Saved Successfully.";
+							var editMsg = "Data Updated Successfully";
+							var ErrorMsg = "Data not Saved Successfully";
+							var message = parentModel.id == null ? saveMsg : editMsg
+							if (message == null) {
+								MessageToast.show(ErrorMsg);
+							}
+							else {
+								MessageToast.show(message);
+							}
+						})
+					}
+				});
+
+				currentContext.DeleteDocumentArr.length > 0 ? currentContext.onDeleteDocumentSave() : "No image is available to delete";
+
 			});
 
-			currentContext.DeleteDocumentArr.length > 0 ? currentContext.onDeleteDocumentSave() : "No image is available to delete";
+
+
+
 
 			currentContext.onCancel();
 
@@ -784,11 +798,30 @@ sap.ui.define([
 
 		},
 
+		// function call on activity select
+		ActivitySelect: function (oEvent) {
+			// var aContexts = oEvent.getParameter("selectedContexts");
+			// var selRow = aContexts.map(function (oContext) { return oContext.getObject(); });
+			// currentContext.getProjectDetails(selRow[0].id);
+			let oModel = this.getView().getModel("AttributeDetailModel").oData;
+			let activityModel = this.getView().getModel("activityModel").oData;
+
+			//  inthis we stage id  under which our activity is present and we add attribute agains that activity
+			activityModel.forEach((ele) => {
+				if (ele.stageid == oModel.activityid) {
+					oModel.stageid = ele.parentid
+				}
+			})
+			console.log(oModel);
+		},
+
 
 
 		onCancel: function () {
-			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---projectactivitiesAdd--fclProjectActivity");
+			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---projectdetail--fclBillOfMaterial");
 			//("it  is fixed"---" name of  main control in manifest.json file in pattern"---"id of view in that particular view code")
+
+          // (  it_is_Fixed---ViewId_in_manifest.Json--it_is_fixed)
 			this.oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
 		}
 

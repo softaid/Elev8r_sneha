@@ -1464,6 +1464,9 @@ END$$
 DELIMITER ;
 ;
 
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_attributelist_select`;
 USE `db_elev8r_local`;
 DROP procedure IF EXISTS `spc_order_save`;
 
@@ -1473,6 +1476,24 @@ DROP procedure IF EXISTS `db_elev8r_local`.`spc_order_save`;
 
 DELIMITER $$
 USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_attributelist_select`(
+	IN p_projectid INT(11)
+)
+BEGIN
+	SELECT 
+     PA.id,
+	 PA.projectid,
+	 PA.stageid,
+	 PA.activityid,
+	 PA.attributetypeids,
+	 PA.attributename,
+	 PA.attributevalue,
+	 PA.attributeid,
+	 PA.remark,
+     PD.stagename,
+     PD.id AS projectdetailid
+	FROM project_attributes PA  LEFT JOIN  project_detail PD ON PD.stageid=PA.activityid
+    WHERE PA.projectid =p_projectid AND  PD.projectid =p_projectid;
 CREATE DEFINER=`sa`@`%` PROCEDURE `spc_order_save`(
 	IN p_id int(11), 
     IN p_quoteid int(11),

@@ -148,8 +148,9 @@ sap.ui.define([
                 commonService.runJQueryX("GET", "elevproject/documentcollectiondetails/search/" + commonService.session("companyId"), null, callback, null);
             },
      
+            // get document   for that particular stage or activity or attribute
             getDocumentCollectionDetails : function(params, callback){
-                commonService.runJQueryX("GET", "elevproject/documentcollectiondetails/select/" +  params.projectid + "/" +  params.stageid + "/"+  commonService.session("companyId")+"/"+ params.document_id, null, callback, null);
+                commonService.runJQueryX("GET", "elevproject/documentcollectiondetails/select/" +  params.projectid + "/" +  params.stageid + "/"+  commonService.session("companyId"), null, callback, null);
             },
 
             saveDocumentCollectionDetails : function(params, callback){
