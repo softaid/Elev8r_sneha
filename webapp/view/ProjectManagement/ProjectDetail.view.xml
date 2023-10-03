@@ -249,9 +249,9 @@
                                                 <Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Activity" />
 												</Column>
-                                                <Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Edit" />
-												</Column>
+                                                <!-- <Column minScreenWidth="Tablet" demandPopin="true">
+													<Text text ="Edit" /> -->
+												<!-- </Column> -->
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text =" status" />
 												</Column>
@@ -266,21 +266,22 @@
 														<Text text="{tblModel>completiondaystable}"/>
 														<Text text="{tblModel>stagecompletionpercentage}"/>
 														<Text text="{tblModel>projectweightage}"/>
+
                                                         <Button icon="sap-icon://begin" type="Transparent" 
                                                                 press="onStagePress"
                                                                 app:mySuperExtraData="{tblModel>stageid}_Activity"
                                                             />
-														<Button icon="sap-icon://edit" type="Transparent" 
+														<!-- <Button icon="sap-icon://edit" type="Transparent" 
                                                                 press="onStagePress"
                                                                 app:mySuperExtraData="{tblModel>id}_Stage"
-                                                            />
+                                                            /> -->
 														<tnt:InfoLabel 
-                                                    text="1"
-                                                    displayOnly= "false"
-                                                    class="sapMInfoLabelSmall" 
-                                                    colorScheme= "{parts: [{path: 'tblModel>isactive'}],
-                                                    formatter: '.formatter.setItemStockColor'}"
-                                                    />
+                                                            text="1"
+                                                            displayOnly= "false"
+                                                            class="sapMInfoLabelSmall" 
+                                                            colorScheme= "{parts: [{path: 'tblModel>isactive'}],
+                                                            formatter: '.formatter.setItemStockColor'}"
+                                                        />
 													</cells>
 												</ColumnListItem>
 											</items>
@@ -404,12 +405,12 @@
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Attribute" />
 												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Edit" />
-												</Column>
+												<!-- <Column minScreenWidth="Tablet" demandPopin="true">
+													<Text text ="Edit" /> -->
+												<!-- </Column> -->
 											</columns>
 											<items>
-												<ColumnListItem  press="onListItemPressActivity">
+												<ColumnListItem  type="Navigation" press="onListItemPressActivity">
 													<cells>
 														<Text text="{activitymodel>count}" />
                                                         <Text text="{activitymodel>parentstage}" />
@@ -421,10 +422,10 @@
                                                             press="onActivityPress"
                                                             app:mySuperExtraData="{activitymodel>stageid}_Attribute"
                                                         />
-														<Button icon="sap-icon://edit" type="Transparent" 
+														<!-- <Button icon="sap-icon://edit" type="Transparent" 
                                                             press="onActivityPress"
                                                             app:mySuperExtraData="{activitymodel>id}_Activity"
-                                                        />
+                                                        /> -->
 													</cells>
 												</ColumnListItem>
 											</items>
