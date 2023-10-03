@@ -252,7 +252,7 @@ sap.ui.define([
 			// this.bindBillOfMaterial();
 		},
 
-		  //stage detail
+		//stage detail
 		setDetailPage: function (channel, event, data) {
 
 			this.detailView = sap.ui.view({
@@ -396,6 +396,76 @@ sap.ui.define([
 
 		},
 
+
+
+		// function for navigate stage to Activity screen with the stage we select for that only those activity under that stage  are see in activity tab and other wise open detail screen of stage detail
+
+		onStagePress: function (OEvent) {
+			let oThis = this;
+			let checkbox = OEvent.getSource();
+			let data = checkbox.data("mySuperExtraData");
+			let [id, field] = data.split("_");
+			if (field == "Activity") {
+				var oIconTabBar = oThis.getView().byId("projectDetail");
+				let Arr=oThis.ActivityList.filter((ele) => {
+					return ele.parentid == id;
+				});
+				let activitymodel = oThis.getView().getModel("activitymodel");
+				activitymodel.setData(Arr);
+				// Set the selected key to switch to the "Other Tab"
+				oIconTabBar.setSelectedKey("Activity");
+
+			}
+			else {
+				Projectservice.getStageOrActivityDetail({ id: id }, function (data) {
+					let detail = data[0][0];
+					detail.isactive = detail.isactive === 1 ? true : false;
+					detail.isstd = detail.isstd === 1 ? true : false;
+					detail.isstarted = detail.actualstartdate != null ? true : false;
+					oThis.bus = sap.ui.getCore().getEventBus();
+					oThis.bus.publish("billofmaterial", "setDetailPage", { viewName: "projectstagedetail", viewModel: detail });
+				})
+			}
+
+			console.log(data)
+		},
+
+
+		// function for navigate Activity to attribute screen with the activity we select for that only those attribute under that activity  are see in attribute tab and other wise open detail screen of Activity detail
+		onActivityPress: function (OEvent) {
+			let oThis = this;
+			let checkbox = OEvent.getSource();
+			let data = checkbox.data("mySuperExtraData");
+			let [id, field] = data.split("_");
+			if (field == "Attribute") {
+				var oIconTabBar = oThis.getView().byId("projectDetail");
+
+				let Arr=oThis.AttributeList.filter((ele) => {
+					return ele.activityid == id;
+				});
+				var attributeModel = oThis.getView().getModel("attributeModel");
+
+				attributeModel.setData(Arr);
+
+				// Set the selected key to switch to the "Other Tab"
+				oIconTabBar.setSelectedKey("Attribute");
+
+			}
+			else {
+				Projectservice.getStageOrActivityDetail({ id: id }, function (data) {
+					let detail = data[0][0];
+					detail.isactive = detail.isactive === 1 ? true : false;
+					detail.isstd = detail.isstd === 1 ? true : false;
+					detail.isstarted = detail.actualstartdate != null ? true : false;
+					oThis.bus = sap.ui.getCore().getEventBus();
+					oThis.bus.publish("billofmaterial", "setDetailPage", { viewName: "projectactivitydetail", viewModel: detail });
+				})
+
+			}
+
+			console.log(data)
+		},
+
 		// get all project and bind to  list fragement
 		getAllProject: function () {
 			var currentContext = this;
@@ -436,7 +506,7 @@ sap.ui.define([
 					data[0][index].actualstartdate = data[0]?.[index]?.actualstartdate ?? null;
 					data[0][index].actualenddate = data[0]?.[index]?.actualenddate ?? null;
 				});
-				
+
 				var tblModel = currentContext.getView().getModel("tblModel");
 				tblModel.setData(data[0]);
 
@@ -477,6 +547,7 @@ sap.ui.define([
 
 				});
 				var activitymodel = currentContext.getView().getModel("activitymodel");
+				currentContext.ActivityList = JSON.parse(JSON.stringify(data[0]));// Array consist of all Activity
 				activitymodel.setData(data[0]);
 				console.log("--------------nitblmodel------------", activitymodel);
 				activitymodel.refresh();
@@ -539,6 +610,8 @@ sap.ui.define([
 
 				});
 				var attributeModel = currentContext.getView().getModel("attributeModel");
+				currentContext.AttributeList = JSON.parse(JSON.stringify(data[0]));// Array consist of all Activity
+
 				attributeModel.setData(data[0]);
 				console.log("--------------nitblmodel------------", attributeModel);
 				attributeModel.refresh();
@@ -719,7 +792,7 @@ sap.ui.define([
 		},
 
 		// function for calculate end date or completion day
-	 dayCalculation: async function (oEvent) {
+		dayCalculation: async function (oEvent) {
 
 			let oThis = this;
 			let DetailModel = oThis.getView().getModel("projectModel");
