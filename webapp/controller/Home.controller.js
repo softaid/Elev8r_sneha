@@ -19,9 +19,9 @@ sap.ui.define([
 
 		onAfterRendering: function () {
 			// Initialize Gantt chart after rendering
-			gantt.init("gantt_here");
+			//gantt.init("gantt_here");
 			console.log("Initializing Gantt chart...");
-			this.loadProjectData();
+			//this.loadProjectData();
 		},
 
 		loadProjectData: function () {
