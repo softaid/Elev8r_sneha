@@ -4,14 +4,15 @@
 	xmlns:u="sap.ui.unified"
 	xmlns:c="sap.ui.core"
 	xmlns="sap.m"
-	xmlns:f="sap.f"
-	xmlns:form="sap.ui.layout.form"
-	xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core"
 	xmlns:dnd="sap.ui.core.dnd"
-	xmlns:k= "jQuery.sap.ui.event.keyCodes"
-	xmlns:tnt="sap.tnt"
-	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<f:FlexibleColumnLayout  id="fclBillOfMaterial" backgroundDesign="Solid">
+    xmlns:k= "jQuery.sap.ui.event.keyCodes"
+    xmlns:tnt="sap.tnt"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    height="100%">
+    <f:FlexibleColumnLayout  id="fclProjectActivity" backgroundDesign="Solid">
 		<f:beginColumnPages>
 			<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
 				<f:title>
@@ -232,19 +233,19 @@
 													<Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" />
+													<Text text ="Actual Start" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" />
+													<Text text ="Actual End" />
 												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" />
+                                                <Column minScreenWidth="Tablet" demandPopin="true">
+													<Text text ="Stage completion" />
 												</Column>
+												<!-- <Column minScreenWidth="Tablet" demandPopin="true">
+													<Text text ="Actual Days" />
+												</Column> -->
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelStage}" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelProject}" />
+													<Text text ="OverDueDays" />
 												</Column>
                                                 <Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Activity" />
@@ -261,11 +262,11 @@
 													<cells>
 														<Text text="{tblModel>count}" />
 														<Text text="{tblModel>stagename}" />
-														<Text text="{tblModel>startdate}" />
-														<Text text="{tblModel>enddate}"/>
-														<Text text="{tblModel>completiondaystable}"/>
-														<Text text="{tblModel>stagecompletionpercentage}"/>
-														<Text text="{tblModel>projectweightage}"/>
+														<Text text="{tblModel>actualstartdate}" />
+														<Text text="{tblModel>actualenddate}"/>
+                                                        <Text text="{tblModel>stagecompletionpercentage}"/>
+														<!-- <Text text="{tblModel>completiondaystable}"/> -->
+														<Text text="{tblModel>overduedays}"/>
 
                                                         <Button icon="sap-icon://begin" type="Transparent" 
                                                                 press="onStagePress"
@@ -279,7 +280,7 @@
                                                             text="1"
                                                             displayOnly= "false"
                                                             class="sapMInfoLabelSmall" 
-                                                            colorScheme= "{parts: [{path: 'tblModel>isactive'}],
+                                                            colorScheme= "{parts: [{path: 'tblModel>overduedays'}],
                                                             formatter: '.formatter.setItemStockColor'}"
                                                         />
 													</cells>
@@ -379,7 +380,17 @@
 													<content>
 														<Title text="Project Activity" level="H2"/>
 														<ToolbarSpacer />
-														<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowactivity" id ="niadd" visible="true"/>
+                                                          <HBOX>
+                                                            <SearchField search="onSearch" width="17.5rem" id = "onSearchId"/>
+                                                            <Button
+                                                            width="20%"
+                                                            align="right"
+                                                            tooltip="Group"
+                                                            icon="sap-icon://group-2"
+                                                            press="handleGroupButtonPressed"/>
+                                                            <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="niadd" visible="true"/> 
+                                                            </HBOX>
+														<!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowactivity" id ="niadd" visible="true"/> -->
 													</content>
 												</Toolbar>
 											</headerToolbar>

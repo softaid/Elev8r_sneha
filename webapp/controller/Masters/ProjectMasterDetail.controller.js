@@ -92,6 +92,7 @@ sap.ui.define([
                 this.getView().byId("attributeEle").setVisible(false);
                 this.getView().byId("customerSignOffEle").setVisible(false);
                 this.getView().byId("addToggleEle").setVisible(false);
+                this.getView().byId("notifyEle").setVisible(false);
             }
 
             if (this.model.id != null) {
@@ -147,6 +148,7 @@ sap.ui.define([
                 this.getView().byId("attributeEle").setVisible(false);
                 this.getView().byId("customerSignOffEle").setVisible(true);
                 this.getView().byId("addToggleEle").setVisible(true);
+                this.getView().byId("notifyEle").setVisible(true);
             }else if(typeTxt == "Activity"){
                 commonFunction.getReferenceByTypeCodeAndParentType("ProMilestones", "Stage", "parentStageModel", this);
                 this.getView().byId("stgTypeEle").setVisible(true);
@@ -159,6 +161,7 @@ sap.ui.define([
                 this.getView().byId("attributeEle").setVisible(false);
                 this.getView().byId("customerSignOffEle").setVisible(true);
                 this.getView().byId("addToggleEle").setVisible(true);
+                this.getView().byId("notifyEle").setVisible(true);
             }else if(typeTxt == "Attribute"){
                 commonFunction.getReferenceByTypeCodeAndParentType("ProMilestones", "Activity", "parentStageModel", this);
                 commonFunction.getReferenceStages("InputAttribute", "attributeModel", this);
@@ -172,6 +175,7 @@ sap.ui.define([
                 this.getView().byId("attributeEle").setVisible(true);
                 this.getView().byId("customerSignOffEle").setVisible(false);
                 this.getView().byId("addToggleEle").setVisible(false);
+                this.getView().byId("notifyEle").setVisible(false);
             }
         },
 

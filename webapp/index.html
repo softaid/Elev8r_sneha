@@ -12,6 +12,8 @@
 		data-sap-ui-preload="async" data-sap-ui-async="true" data-sap-ui-xx-componentpreload="off"
 		data-sap-ui-language="en" data-sap-ui-resourceroots='{"sap.ui.elev8rerp.componentcontainer": "./"}'>
 		</script>
+    <link rel="stylesheet" href="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.css">
+	<script src="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.js"></script>		
 	<script src="jspdf/dist/jspdf.debug.js"></script>
 	<script src="jspdf/dist/html2canvas.js"></script>
 	<script src="jspdf-autotable/dist/jspdf.plugin.autotable.min.js"></script>
@@ -108,9 +110,23 @@
 		})();
 
 	</script>
+
+<style type="text/css">
+    html, body{
+      height:100%;
+      padding:0px;
+      margin:0px;
+      overflow: hidden;
+    }
+
+  </style>
 </head>
 
 <body class="sapUiBody" id="content">
+	<!-- <div id="gantt_here" style='width:100%; height:100%;'></div>
+	<script type="text/javascript">
+	  gantt.init("gantt_here");
+	</script> -->
 </body>
 
 

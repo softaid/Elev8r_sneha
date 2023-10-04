@@ -87,10 +87,7 @@ sap.ui.define(function () {
 			}
 		},
 
-		setItemStockColor: function (sValue) {
-			
-			return "Warning";
-		},
+	
 
 	};
 

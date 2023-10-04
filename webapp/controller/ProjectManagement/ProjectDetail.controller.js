@@ -14,7 +14,7 @@ sap.ui.define([
 ], function (JSONModel, BaseController, Sorter, Projectservice, AttributeListservice, xlsx, commonService, ManageUserService, MessageToast, commonFunction, formatter) {
 	"use strict";
 
-	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.Project", {
+	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectDetail", {
 		formatter: formatter,
 
 		onInit: function () {
@@ -24,12 +24,7 @@ sap.ui.define([
 			this.bus.subscribe("activitystatus", "setDetailActivityPage", this.setDetailActivityPage, this);
 			this.bus.subscribe("attributestatus", "setDetailAttributePage", this.setDetailAttributePage, this);
 			this.bus.subscribe("projectdetail", "handleProjectDetails", this.handleProjectDetailsList, this);
-			this.bus.subscribe("billofmaterial", "onAddbillofmaterial", this.onAddbillofmaterial, this);
-
-			this.bus.subscribe("billofmaterial", "onAddbillofmaterial1", this.onAddbillofmaterial1, this);
-
-			this.bus.subscribe("billofmaterial", "onDeletebillofmaterial", this.onDeletebillofmaterial, this);
-			this.oFlexibleColumnLayout = this.byId("fclBillOfMaterial");
+			this.oFlexibleColumnLayout = this.byId("fclProjectActivity");
 			var currentContext = this;
 
 			var emptyModel = this.getModelDefault();
@@ -112,6 +107,53 @@ sap.ui.define([
 			// QCCheckListservice.getAllQcchecklist(function (data) {
 			// 	console.log("---------------getAllQcchecklist--------------",data);
 			// });
+
+			this.mGroupFunctions = {
+                
+                parentstage: function (oContext) {
+                    var name = oContext.getProperty("parentstage");
+                    return {
+                        key: name,
+                        text: name
+                    };
+                },
+                stagename: function (oContext) {
+                    var name = oContext.getProperty("stagename");
+                    return {
+                        key: name,
+                        text: name
+                    };
+                },
+            }
+		},
+
+		handleGroupDialogConfirm: function (oEvent) {
+            var oTable = this.byId("tblActiviteStatus"),
+                mParams = oEvent.getParameters(),
+                oBinding = oTable.getBinding("items"),
+                sPath,
+                bDescending,
+                vGroup,
+                aGroups = [];
+
+            if (mParams.groupItem) {
+                sPath = mParams.groupItem.getKey();
+                bDescending = mParams.groupDescending;
+                vGroup = this.mGroupFunctions[sPath];
+                aGroups.push(new Sorter(sPath, bDescending, vGroup));
+                // apply the selected group settings
+                oBinding.sort(aGroups);
+            } else if (this.groupReset) {
+                oBinding.sort();
+                this.groupReset = false;
+            }
+        },
+
+		handleGroupButtonPressed: function () {
+			if (!this._oDialog1) {
+				this._oDialog1 = sap.ui.xmlfragment("sap.ui.elev8rerp.componentcontainer.fragmentview.Reports.GroupDialog", this);
+			}
+			this._oDialog1.open();
 		},
 
 		getModelDefault: function () {
@@ -175,6 +217,7 @@ sap.ui.define([
 			this.bus = sap.ui.getCore().getEventBus();
 			let projectModel = this.getView().getModel("projectModel").getData();
 
+
 			this.bus.publish("activitystatus", "setDetailActivityPage", { viewName: "ProjectActivityDetail", viewModel: { projectid: projectModel.id } });
 		},
 
@@ -210,6 +253,20 @@ sap.ui.define([
 			oDayHistory.isactive = oDayHistory.isactive === 1 ? true : false;
 			oDayHistory.isstd = oDayHistory.isstd === 1 ? true : false;
 			oDayHistory.isstarted = oDayHistory.actualstartdate != null ? true : false;
+
+			Projectservice.getStageOrActivityDetail({ parentid: oDayHistory.parentid, projectid: oDayHistory.projectid }, function (data) {
+			
+				data[0][0].dependency.filter((ele)=>{
+
+					
+				})
+
+				let dependency = data[0][0].dependency;
+				console.log(data[0][0]);
+
+
+			})
+
 
 
 			this.bus = sap.ui.getCore().getEventBus();
@@ -273,6 +330,7 @@ sap.ui.define([
 
 		// Activity Detail
 		setDetailActivityPage: function (channel, event, data) {
+			debugger;
 
 			this.detailView = sap.ui.view({
 				viewName: "sap.ui.elev8rerp.componentcontainer.view.ProjectManagement." + data.viewName,
@@ -407,7 +465,7 @@ sap.ui.define([
 			let [id, field] = data.split("_");
 			if (field == "Activity") {
 				var oIconTabBar = oThis.getView().byId("projectDetail");
-				let Arr=oThis.ActivityList.filter((ele) => {
+				let Arr = oThis.ActivityList.filter((ele) => {
 					return ele.parentid == id;
 				});
 				let activitymodel = oThis.getView().getModel("activitymodel");
@@ -440,7 +498,7 @@ sap.ui.define([
 			if (field == "Attribute") {
 				var oIconTabBar = oThis.getView().byId("projectDetail");
 
-				let Arr=oThis.AttributeList.filter((ele) => {
+				let Arr = oThis.AttributeList.filter((ele) => {
 					return ele.activityid == id;
 				});
 				var attributeModel = oThis.getView().getModel("attributeModel");
@@ -499,18 +557,18 @@ sap.ui.define([
 		// get project stage and show in table
 		getStageDetail: function (projectid) {
 			var currentContext = this;
+			currentContext.projectCompletionObj = {};
 			Projectservice.getProjectdetail({ id: projectid, field: "stage" }, function (data) {
 				console.log("data", data);
-				data[0].map(function (value, index) {
+				data[0].forEach(function (value, index) {
 					data[0][index].activestatus = value.isactive == 1 ? "Active" : "In Active";
 					data[0][index].actualstartdate = data[0]?.[index]?.actualstartdate ?? null;
 					data[0][index].actualenddate = data[0]?.[index]?.actualenddate ?? null;
+					currentContext.projectCompletionObj[value.stageid] = value.stagecompletionpercentage;
 				});
-
 				var tblModel = currentContext.getView().getModel("tblModel");
+				currentContext.StageList = JSON.parse(JSON.stringify(data[0]));// Array consist of all Activity
 				tblModel.setData(data[0]);
-
-
 			});
 		},
 
