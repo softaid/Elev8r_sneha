@@ -5,12 +5,12 @@
 		confirm=".handleGroupDialogConfirm"
 		reset=".resetGroupDialog">
 		<groupItems>
-			<ViewSettingsItem text="BOM Name" key="bomname" />
-            <ViewSettingsItem text="Production Order No." key="pocode" />
+			<!-- <ViewSettingsItem text="BOM Name" key="bomname" />
+            <ViewSettingsItem text="Production Order No." key="pocode" /> -->
 
-            <ViewSettingsItem text="Stage" key="stagename" />
-            <ViewSettingsItem text="Input Item" key="inputitemname" />
-            <ViewSettingsItem text="Output Item" key="outputitemname" />
+            <ViewSettingsItem text="Stage" key="parentstage" />
+            <ViewSettingsItem text="Activity" key="stagename" />
+            <!-- <ViewSettingsItem text="Output Item" key="outputitemname" /> -->
 		</groupItems>
 	</ViewSettingsDialog>
 </core:FragmentDefinition>

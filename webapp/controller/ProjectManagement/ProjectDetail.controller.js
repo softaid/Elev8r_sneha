@@ -24,7 +24,7 @@ sap.ui.define([
 			this.bus.subscribe("activitystatus", "setDetailActivityPage", this.setDetailActivityPage, this);
 			this.bus.subscribe("attributestatus", "setDetailAttributePage", this.setDetailAttributePage, this);
 			this.bus.subscribe("projectdetail", "handleProjectDetails", this.handleProjectDetailsList, this);
-			this.oFlexibleColumnLayout = this.byId("fclBillOfMaterial");
+			this.oFlexibleColumnLayout = this.byId("fclProjectActivity");
 			var currentContext = this;
 
 			var emptyModel = this.getModelDefault();
@@ -107,6 +107,53 @@ sap.ui.define([
 			// QCCheckListservice.getAllQcchecklist(function (data) {
 			// 	console.log("---------------getAllQcchecklist--------------",data);
 			// });
+
+			this.mGroupFunctions = {
+                
+                parentstage: function (oContext) {
+                    var name = oContext.getProperty("parentstage");
+                    return {
+                        key: name,
+                        text: name
+                    };
+                },
+                stagename: function (oContext) {
+                    var name = oContext.getProperty("stagename");
+                    return {
+                        key: name,
+                        text: name
+                    };
+                },
+            }
+		},
+
+		handleGroupDialogConfirm: function (oEvent) {
+            var oTable = this.byId("tblActiviteStatus"),
+                mParams = oEvent.getParameters(),
+                oBinding = oTable.getBinding("items"),
+                sPath,
+                bDescending,
+                vGroup,
+                aGroups = [];
+
+            if (mParams.groupItem) {
+                sPath = mParams.groupItem.getKey();
+                bDescending = mParams.groupDescending;
+                vGroup = this.mGroupFunctions[sPath];
+                aGroups.push(new Sorter(sPath, bDescending, vGroup));
+                // apply the selected group settings
+                oBinding.sort(aGroups);
+            } else if (this.groupReset) {
+                oBinding.sort();
+                this.groupReset = false;
+            }
+        },
+
+		handleGroupButtonPressed: function () {
+			if (!this._oDialog1) {
+				this._oDialog1 = sap.ui.xmlfragment("sap.ui.elev8rerp.componentcontainer.fragmentview.Reports.GroupDialog", this);
+			}
+			this._oDialog1.open();
 		},
 
 		getModelDefault: function () {
@@ -268,6 +315,7 @@ sap.ui.define([
 
 		// Activity Detail
 		setDetailActivityPage: function (channel, event, data) {
+			debugger;
 
 			this.detailView = sap.ui.view({
 				viewName: "sap.ui.elev8rerp.componentcontainer.view.ProjectManagement." + data.viewName,
