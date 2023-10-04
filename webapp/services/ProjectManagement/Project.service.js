@@ -164,7 +164,7 @@ sap.ui.define([
             }, 
 
             getStageOrActivityDetail : function(params, callback){
-                commonService.runJQueryX("GET", "elevproject/stagedetail/select/" +  params.id, null, callback, null);
+                commonService.runJQueryX("GET", "elevproject/stagedetail/select/"+ params.parentid+"/"+params.projectid, null, callback, null);
             },
 
          }

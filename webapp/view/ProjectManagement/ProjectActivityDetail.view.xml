@@ -67,7 +67,7 @@
                                     </form:fields>
                                 </form:FormElement>
 
-                                  <form:FormElement id="projecttype" label="Stage">
+                                  <form:FormElement id="stageid" label="Stage">
                                 <form:fields>
                                     <Select id="project"
 					                    required="true" 
@@ -91,7 +91,7 @@
                                                 value="{ActivityDetailModel>/startdate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="false" />
+                                                editable="true" />
                                         </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label="End Date">
@@ -102,7 +102,7 @@
                                                 value="{ActivityDetailModel>/enddate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="false"
+                                                editable="true"
                                                 change="dayCalculation"/>
                                         </form:fields>
                                 </form:FormElement>
@@ -119,7 +119,7 @@
                                                 value="{ActivityDetailModel>/actualstartdate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="false" />
+                                                editable="true" />
                                         </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label=" Actual End Date">
@@ -130,12 +130,12 @@
                                                 value="{ActivityDetailModel>/actualenddate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="false"/>
+                                                editable="true"/>
                                         </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label=" Actual Completion Day">
                                     <form:fields>
-                                        <Input id="actualcompletionDay" value="{ActivityDetailModel>/actualcompletiondays}"  editable="false"/>
+                                        <Input id="actualcompletionDay" value="{ActivityDetailModel>/actualcompletiondays}"  editable="true"/>
                                     </form:fields>
                                 </form:FormElement> 
                                 <form:FormElement label="Stage %" visible="true">
@@ -157,7 +157,7 @@
                                             </Switch>
                                         </form:fields>
                                     </form:FormElement>
-                                      <form:FormElement label="Is Standard">
+                                      <!-- <form:FormElement label="Is Standard">
                                        <form:fields>
                                             <Switch  state="{ActivityDetailModel>/isstd}" id="isstd" customTextOn="Yes" customTextOff="No" enabled="false">
                                                 <layoutData>
@@ -165,7 +165,7 @@
                                                 </layoutData>
                                             </Switch>
                                         </form:fields>
-                                    </form:FormElement>
+                                    </form:FormElement> -->
                                       <form:FormElement label="Is Started">
                                        <form:fields>
                                             <Switch  state="{ActivityDetailModel>/isstarted}" id="isstart"
@@ -273,7 +273,7 @@
                                     
                                       <form:FormElement label="">
                                     <form:fields>
-                                        <Input id="inputField"  width="53%" value="{editDocumentCollectionModel>/pdf_name}"  editable="false"/>
+                                        <Input id="inputField"  width="53%" value="{editDocumentCollectionModel>/pdf_name}"  editable="true"/>
                                     </form:fields>
                                 </form:FormElement>
 
@@ -317,7 +317,7 @@
                                     </form:FormElement> 
                                          <!-- <form:FormElement label="">
                                     <form:fields>
-                                        <Input id="inputField" value="{ActivityDetailModel>/actualcompletiondays}"  editable="false"/>
+                                        <Input id="inputField" value="{ActivityDetailModel>/actualcompletiondays}"  editable="true"/>
                                     </form:fields>
                                 </form:FormElement>  -->
             <!-- <FlexBox direction="Column" renderType="Div" class="sapUiSmallMargin">

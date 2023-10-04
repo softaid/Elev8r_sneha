@@ -106,7 +106,7 @@ sap.ui.define([
 			// get document list
 			// in this service document id is only pass but we don't use it in sp to filters the data so we only pass but never use
 			if (AttributeDetailModel.Attachment == "true") {
-				await Projectservice.getDocumentCollectionDetails({ projectid: AttributeDetailModel.projectid, stageid: AttributeDetailModel.id}, function (data) {
+				await Projectservice.getDocumentCollectionDetails({ projectid: AttributeDetailModel.projectid, stageid: AttributeDetailModel.stageid}, function (data) {
 					var oConfig = sap.ui.getCore().getModel("configModel");
 					data[0].forEach((document) => {
 						if (document.document_id == 3) {
@@ -582,6 +582,8 @@ sap.ui.define([
 
 
 			oModel["companyid"] = commonService.session("companyId");
+			oModel.type ="Attribute";
+
 			//oModel["userid"] = commonService.session("userId");
 
 			// create json object  and  pass it  for save json in service
@@ -590,7 +592,7 @@ sap.ui.define([
 
 			AttributeListService.saveAttributeList(oModel, function (savedata) {
 
-				objPush.id = savedata.id  // attribute id in project_attributes
+				objPush.id = savedata.stageid  // attribute id in project_attributes
 
 				// get   updated attribute list
 				AttributeListService.getAttributeList({ projectid: oModel.projectid }, function (data) {
@@ -603,10 +605,10 @@ sap.ui.define([
 
 
 				let documentSaveObj = {
-					stageid: savedata.id,// attribute id in project_attributes  table
+					stageid: savedata.stageid,// attribute id in project_attributes  table
 					parentstageid: oModel.activityid,  //activity id
 					projectid: oModel.projectid,
-					type: "attribute",
+					type: "Attribute",
 					companyid: commonService.session("companyId"),
 					userid: commonService.session("userId"),
 

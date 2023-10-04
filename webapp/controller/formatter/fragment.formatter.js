@@ -196,11 +196,15 @@ sap.ui.define(function () {
 
 		},
 
-        // set visibilty of attribute  input field
-		setvisibilty: function (value) {
-			let model = this.getView().getModel("attributeSelectModel").oData;
-			  return Boolean(value);
-		}
+		setItemStockColor: function (sValue) {
+			  if(sValue>1){
+				return 3;
+			  }
+			  else{
+				return 5;
+			  }
+
+		},
 
 	};
 
