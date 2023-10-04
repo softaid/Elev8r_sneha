@@ -5,105 +5,93 @@ sap.ui.define(function () {
 	var Formatter = {
 
 
-		getBooleanValue : function(Ans){
+		getBooleanValue: function (Ans) {
 
 			var boolAns = new sap.ui.model.type.Boolean();
-		  
-			if(Ans === 1 || Ans ==="1" || Ans == "true"){
+
+			if (Ans === 1 || Ans === "1" || Ans == "true") {
 				boolAns = true;
-			}else{
+			} else {
 				boolAns = false;
 			}
-		  
+
 			return boolAns;
 		},
 
 
-        setColorCurrSetting: function (sValue) 
-        {
-			if(sValue != null){
-            switch (sValue.toLowerCase()) {
-                				case "yes":
-                					return 8;
-                				case "no":
-                					return 3;
-                				default:
-                					return 9;
-					}
+		setColorCurrSetting: function (sValue) {
+			if (sValue != null) {
+				switch (sValue.toLowerCase()) {
+					case "yes":
+						return 8;
+					case "no":
+						return 3;
+					default:
+						return 9;
 				}
-				return
-        },
-        
-        setColorEggsProcSche: function (sValue) 
-        {	
-			if(sValue != null){
-			switch (sValue.toLowerCase()) {
-
-									case "new":
-                					return 5;
-                				case "approve":
-                                    return 8;
-                                case "cancel":
-                                    return 3;
-                                case "processed":
-									return 9;
-								case "started":
-									return 2;
-								case "approved & transfer":
-								return 7;
-                				default:
-                					return 9;
-					}
-				}
+			}
+			return
 		},
-		setColorHouseready: function (sValue) 
-        {	
-			if(sValue != null){
-			switch (sValue.toLowerCase()) {
 
-									case "ready":
-                					return 5;
-                				case "approved":
-                                    return 8;
-                                case "rejected":
-                                    return 3;
-                				default:
-                					return 9;
-					}
-				}
-		},
-		setColorMaterialReq: function (sValue) 
-        {	
-			if(sValue != null){
-			switch (sValue.toLowerCase()) {
+		setColorEggsProcSche: function (sValue) {
+			if (sValue != null) {
+				switch (sValue.toLowerCase()) {
 
-								case "new":
-									return 5;
-								case "approve":
-									return 8;
-								case "cancel":
-									return 3;
-								case "complete":
-								return 7;
-                				default:
-                					return 9;
-					}
+					case "new":
+						return 5;
+					case "approve":
+						return 8;
+					case "cancel":
+						return 3;
+					case "processed":
+						return 9;
+					case "started":
+						return 2;
+					case "approved & transfer":
+						return 7;
+					default:
+						return 9;
 				}
+			}
 		},
-		setItemStockColor: function (sValue) 
-        {	
-			if(sValue != null){
-			switch (sValue) {
+		setColorHouseready: function (sValue) {
+			if (sValue != null) {
+				switch (sValue.toLowerCase()) {
 
-								case 0:
-									return 3;
-								default:
-                					return 8;
-								
-					}
+					case "ready":
+						return 5;
+					case "approved":
+						return 8;
+					case "rejected":
+						return 3;
+					default:
+						return 9;
 				}
+			}
 		},
-	
+		setColorMaterialReq: function (sValue) {
+			if (sValue != null) {
+				switch (sValue.toLowerCase()) {
+
+					case "new":
+						return 5;
+					case "approve":
+						return 8;
+					case "cancel":
+						return 3;
+					case "complete":
+						return 7;
+					default:
+						return 9;
+				}
+			}
+		},
+
+		setItemStockColor: function (sValue) {
+			
+			return "Warning";
+		},
+
 	};
 
 	return Formatter;
