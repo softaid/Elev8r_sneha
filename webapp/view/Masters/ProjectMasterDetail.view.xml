@@ -188,6 +188,15 @@
                                         </MultiComboBox>
                                     </form:fields>
                                 </form:FormElement>
+                                <form:FormElement id="notifyEle" label="Notify User">
+                                    <form:fields>
+                                        <Switch  state="{editMasterModel>/notifyinternaluser}" id="notify" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </form:fields>
+                                </form:FormElement>
                             </form:formElements>
                         </form:FormContainer>
                     </form:formContainers>

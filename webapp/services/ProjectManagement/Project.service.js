@@ -167,5 +167,13 @@ sap.ui.define([
                 commonService.runJQueryX("GET", "elevproject/stagedetail/select/"+ params.parentid+"/"+params.projectid, null, callback, null);
             },
 
+            // getAllProjectsDetailForGanttChart : function(callback){
+            //     commonService.runJQueryX("GET", "elevproject/ganttchartprojectsdetail/" + commonService.session("companyId"), null, callback, null);
+            // },     
+            
+            getAllProjectsDetailForGanttChart : function(callback){
+                commonService.runJQueryX("GET", "elevproject/searchprojectsg/" + commonService.session("companyId"), null, callback, null);
+            },
+
          }
     })

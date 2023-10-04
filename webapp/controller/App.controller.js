@@ -27,7 +27,12 @@ sap.ui.define([
 						this._bExpanded = (oDevice.name === "Desktop");
 					}
 				}.bind(this));
-			}
+			},
+			// onAfterRendering: function() {
+			// 	// Initialize Gantt chart after rendering
+			// 	gantt.init("gantt_here");
+			//   }
+			
 		});
 	});
 

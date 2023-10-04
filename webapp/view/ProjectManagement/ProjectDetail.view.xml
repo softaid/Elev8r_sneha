@@ -4,14 +4,15 @@
 	xmlns:u="sap.ui.unified"
 	xmlns:c="sap.ui.core"
 	xmlns="sap.m"
-	xmlns:f="sap.f"
-	xmlns:form="sap.ui.layout.form"
-	xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core"
 	xmlns:dnd="sap.ui.core.dnd"
-	xmlns:k= "jQuery.sap.ui.event.keyCodes"
-	xmlns:tnt="sap.tnt"
-	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<f:FlexibleColumnLayout  id="fclBillOfMaterial" backgroundDesign="Solid">
+    xmlns:k= "jQuery.sap.ui.event.keyCodes"
+    xmlns:tnt="sap.tnt"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    height="100%">
+    <f:FlexibleColumnLayout  id="fclProjectActivity" backgroundDesign="Solid">
 		<f:beginColumnPages>
 			<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
 				<f:title>
@@ -379,7 +380,17 @@
 													<content>
 														<Title text="Project Activity" level="H2"/>
 														<ToolbarSpacer />
-														<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowactivity" id ="niadd" visible="true"/>
+                                                          <HBOX>
+                                                            <SearchField search="onSearch" width="17.5rem" id = "onSearchId"/>
+                                                            <Button
+                                                            width="20%"
+                                                            align="right"
+                                                            tooltip="Group"
+                                                            icon="sap-icon://group-2"
+                                                            press="handleGroupButtonPressed"/>
+                                                            <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="niadd" visible="true"/> 
+                                                            </HBOX>
+														<!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowactivity" id ="niadd" visible="true"/> -->
 													</content>
 												</Toolbar>
 											</headerToolbar>

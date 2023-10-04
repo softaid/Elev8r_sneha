@@ -2915,3 +2915,141 @@ END$$
 DELIMITER ;
 ;
 
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_selectbytypecode`;
+;
+
+DELIMITER $$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_reference_selectbytypecode`(
+	IN p_typecode varchar(20)
+)
+BEGIN
+	
+		SELECT 
+			id,
+            CASE
+				WHEN sequenceno IS NOT NULL THEN sequenceno
+				ELSE id
+			END as sequenceno,
+			typecode,
+            parentid, 
+            type, 
+            stgtypeid,
+            description,
+            active,
+            dependency,
+            departmentid,
+            defaultvalue,
+            displayorder,
+			projectper,
+            stageper,
+            isrelatedtopayment,
+            iscustomersignoffrequired,
+			notifyinternaluser,
+            attributetypes
+		FROM
+			`reference`
+		WHERE
+			typecode = p_typecode
+            order by defaultvalue DESC;
+END$$
+
+DELIMITER ;
+;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_projectdetail_select`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectdetail_select`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectdetail_select`(
+	IN p_id INT(11),
+    IN p_field varchar(30)
+)
+BEGIN
+
+	SET @counter = 0;
+	SET @field=0;
+    
+
+SELECT (@counter := @counter + 1) AS count ,  
+              id, 
+           projectid, 
+		   stageid, 
+           stagename, 
+           parentid, 
+           stagecompletionpercentage, 
+           projectweightage, 
+           managerstatusid,
+		   customerstatusid,
+           completiondays,
+           isactive,
+           iscompleted, 
+           DATE_FORMAT(startdate,'%d/%m/%Y') as startdate,
+		   DATE_FORMAT(enddate,'%d/%m/%Y') as enddate,
+           DATE_FORMAT(actualstartdate,'%d/%m/%Y') as actualstartdate,
+		   DATE_FORMAT(actualenddate,'%d/%m/%Y') as actualenddate,
+           DATEDIFF(enddate,startdate) as planneddays,
+           (DATEDIFF(IFNULL(actualenddate,CURDATE()),actualstartdate) - DATEDIFF(enddate,startdate)) as overduedays,
+           actualcompletiondays,
+           completionper,
+           departmentid,
+           attachment,
+           isstd,
+           isdeleted,
+           stgtypeid,
+           dependency,
+           companyid
+	FROM project_detail 
+    WHERE  projectid= p_id AND 
+	(p_field = 'stage' AND parentid IS NULL OR p_field != 'stage' AND parentid IS NOT NULL);
+     -- parentid=IF(p_field != 'activity', NULL, NOT NULL);
+
+END$$
+
+DELIMITER ;
+;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_projectdetail_search`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectdetail_search`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectdetail_search`(
+	IN p_projectid int(11)
+)
+BEGIN
+		
+	SELECT id, 
+		   projectid, 
+		   stageid, 
+		   stagename, 
+		   parentid, 
+		   stagecompletionpercentage, 
+		   projectweightage, 
+		   managerstatusid,
+		   customerstatusid, 
+		   iscompleted, 
+		   DATE_FORMAT(startdate,'%d/%m/%Y') as startdate,
+		   DATE_FORMAT(enddate,'%d/%m/%Y') as enddate, 
+           DATEDIFF(enddate,startdate) as planneddays,
+           (DATEDIFF(IFNULL(actualenddate,CURDATE()),actualstartdate) - DATEDIFF(enddate, startdate)) as overduedays,
+		   attachment, 
+		   isstd, 
+		   isdeleted
+		FROM project_detail
+		
+		WHERE projectid = p_projectid;
+        
+END$$
+
+DELIMITER ;
+;
+

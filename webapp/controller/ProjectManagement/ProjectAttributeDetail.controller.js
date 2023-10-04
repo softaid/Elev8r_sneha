@@ -820,7 +820,7 @@ sap.ui.define([
 
 
 		onCancel: function () {
-			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---projectdetail--fclBillOfMaterial");
+			this.oFlexibleColumnLayout = sap.ui.getCore().byId("componentcontainer---projectdetail--fclProjectActivity");
 			//("it  is fixed"---" name of  main control in manifest.json file in pattern"---"id of view in that particular view code")
 
           // (  it_is_Fixed---ViewId_in_manifest.Json--it_is_fixed)
