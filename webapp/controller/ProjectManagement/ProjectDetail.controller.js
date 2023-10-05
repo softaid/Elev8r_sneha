@@ -444,7 +444,7 @@ sap.ui.define([
 				currentContext.getStageDetail(data[0][0].id);
 				currentContext.getActivitesdetail(data[0][0].id);
 				currentContext.getAttributeList(data[0][0].id);
-				// currentContext.getAttachmentList(data[0][0].id);
+				currentContext.getAttachmentList(data[0][0].id);
 
 
 				//currentContext.getNIdetail(data[0][0].id);
@@ -613,6 +613,8 @@ sap.ui.define([
 			});
 		},
 
+		
+
 
 
 		// get Payment details of project
@@ -677,7 +679,18 @@ sap.ui.define([
 			});
 		},
 
+		getAttachmentList : function(projectid){
+			let oThis = this;
+			Projectservice.getAttachmentList({projectid : projectid},function(data){
+				if(data.length && data[0].length){
+					var attachmenttblmodel = oThis.getView().getModel("attachmenttblmodel");
 
+					attachmenttblmodel.setData(data[0]);
+					console.log("--------------attachmenttblmodel------------", attachmenttblmodel);
+					attachmenttblmodel.refresh();
+				}
+			})
+		},
 
 		dateFormatter: function (date) {
 			const inputDateTime = date == null ? new Date() : new Date(date);

@@ -614,7 +614,7 @@
 								<IconTabFilter text="Attachments"  key="Attachment">
 									<VBox fitContainer="true">
 										<Table id="tblAttachmentStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
-                                path: 'attachmentmodel>/',
+                                path: 'attachmenttblmodel>/',
                                     sorter: {
                                         path: 'id'
                                     }
@@ -630,47 +630,33 @@
 											</headerToolbar>
 											<columns>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Id" />
+													<Text text ="Type" />
+												</Column>
+												<Column minScreenWidth="Tablet" demandPopin="true" visible="false" >
+													<Text text ="Stage Name"/>
+												</Column>
+												<Column minScreenWidth="Tablet" demandPopin="true" visible="false" >
+													<Text text ="Activity Name"/>
+												</Column>
+												<Column minScreenWidth="Tablet" demandPopin="true" visible="false" >
+													<Text text ="Attribute Name"/>
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" />
+													<Text text ="Description" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelStage}" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelProject}" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Active status" />
+													<Text text ="Document Name" />
 												</Column>
 											</columns>
 											<items>
-												<ColumnListItem type="Navigation" press="onListItemPressActivity">
+												<ColumnListItem type="Navigation" press="onListItemPressAttachment">
 													<cells>
-														<Text text="{activitymodel>count}" />
-														<Text text="{activitymodel>stagename}" />
-														<Text text="{activitymodel>startdate}" />
-														<Text text="{activitymodel>enddate}"/>
-														<Text text="{activitymodel>completiondays}"/>
-														<Text text="{activitymodel>stagecompletionpercentage}"/>
-														<Text text="{activitymodel>projectweightage}"/>
-														<tnt:InfoLabel 
-                                                text="1"
-                                                displayOnly= "false"
-                                                class="sapMInfoLabelSmall" 
-                                                colorScheme= "{parts: [{path: 'nitblmodel>isactive'}],
-                                                formatter: '.formatter.setItemStockColor'}"
-                                                />
+														<Text text="{attachmenttblmodel>type}" />
+														<Text text="{attachmenttblmodel>stagename}"/>
+														<Text text="{attachmenttblmodel>activityname}" />
+														<Text text="{attachmenttblmodel>attributename}" />
+														<Text text="{attachmenttblmodel>description}" />
+														<Text text="{attachmenttblmodel>document_name}" />
 													</cells>
 												</ColumnListItem>
 											</items>
