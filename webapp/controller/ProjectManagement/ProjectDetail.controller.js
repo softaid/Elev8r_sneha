@@ -19,7 +19,6 @@ sap.ui.define([
 
 		onInit: function () {
 			this.bus = sap.ui.getCore().getEventBus();
-
 			this.bus.subscribe("billofmaterial", "setDetailPage", this.setDetailPage, this);
 			this.bus.subscribe("activitystatus", "setDetailActivityPage", this.setDetailActivityPage, this);
 			this.bus.subscribe("attributestatus", "setDetailAttributePage", this.setDetailAttributePage, this);
@@ -100,61 +99,221 @@ sap.ui.define([
 			subcontractorModel.setData(commonFunction.getAllSubcontractors(this));
 			this.getView().setModel(subcontractorModel, "subcontractorModel");
 
-			// commonService.getQcCheckList(function (data) {
-			// 	console.log("---------------QCChecklistData--------------",data);
-			// });
-
-			// QCCheckListservice.getAllQcchecklist(function (data) {
-			// 	console.log("---------------getAllQcchecklist--------------",data);
-			// });
-
+			// this function is used for grouping in Activity tab
 			this.mGroupFunctions = {
-                
-                parentstage: function (oContext) {
-                    var name = oContext.getProperty("parentstage");
-                    return {
-                        key: name,
-                        text: name
-                    };
-                },
-                stagename: function (oContext) {
-                    var name = oContext.getProperty("stagename");
-                    return {
-                        key: name,
-                        text: name
-                    };
-                },
-            }
+
+				parentstage: function (oContext) {
+					var name = oContext.getProperty("parentstage");
+					return {
+						key: name,
+						text: name
+					};
+				},
+				stagename: function (oContext) {
+					var name = oContext.getProperty("stagename");
+					return {
+						key: name,
+						text: name
+					};
+				},
+			}
+
+			// this function is used for grouping in Attribute tab
+			this.mGroupFunctionsAttribute = {
+
+				parentstagename: function (oContext) {
+					var name = oContext.getProperty("parentstagename");
+					return {
+						key: name,
+						text: name
+					};
+				},
+				stagename: function (oContext) {
+					var name = oContext.getProperty("stagename");
+					return {
+						key: name,
+						text: name
+					};
+				},
+				attributename: function (oContext) {
+					var name = oContext.getProperty("attributename");
+					return {
+						key: name,
+						text: name
+					};
+				},
+			}
 		},
 
+        
+		//Activity grouping confirm dialog
 		handleGroupDialogConfirm: function (oEvent) {
-            var oTable = this.byId("tblActiviteStatus"),
-                mParams = oEvent.getParameters(),
-                oBinding = oTable.getBinding("items"),
-                sPath,
-                bDescending,
-                vGroup,
-                aGroups = [];
+			this.groupReset = false;
+			var oTable = this.byId("tblActiviteStatus"),
+				mParams = oEvent.getParameters(),
+				oBinding = oTable.getBinding("items"),
+				sPath,
+				bDescending,
+				vGroup,
+				aGroups = [];
 
-            if (mParams.groupItem) {
-                sPath = mParams.groupItem.getKey();
-                bDescending = mParams.groupDescending;
-                vGroup = this.mGroupFunctions[sPath];
-                aGroups.push(new Sorter(sPath, bDescending, vGroup));
-                // apply the selected group settings
-                oBinding.sort(aGroups);
-            } else if (this.groupReset) {
-                oBinding.sort();
-                this.groupReset = false;
-            }
-        },
+			if (mParams.groupItem) {
+				sPath = mParams.groupItem.getKey();
+				bDescending = mParams.groupDescending;
+				vGroup = this.mGroupFunctions[sPath];
+				aGroups.push(new Sorter(sPath, bDescending, vGroup));
+				// apply the selected group settingss
+				oBinding.sort(aGroups);
+			} else if (this.groupReset== false) {
+				oBinding.sort(aGroups);
+				this.groupReset = false;
+			}
+		},
 
+		//reset activity dialog
+		resetGroupDialog: function (oEvent) {
+			this.groupReset = true;
+		},
+
+		//Function to load grouping fragement
 		handleGroupButtonPressed: function () {
 			if (!this._oDialog1) {
 				this._oDialog1 = sap.ui.xmlfragment("sap.ui.elev8rerp.componentcontainer.fragmentview.Reports.GroupDialog", this);
 			}
 			this._oDialog1.open();
 		},
+
+		//Search functionality for all columns for particular value
+		onSearchActivity: function (oEvent) {
+			var oTableSearchState = [],
+				sQuery = oEvent.getParameter("query");
+			var contains = sap.ui.model.FilterOperator.Contains;
+			var columns = ['parentstage', 'stagename'];
+			var filters = new sap.ui.model.Filter(columns.map(function (colName) {
+				return new sap.ui.model.Filter(colName, contains, sQuery);
+			}),
+				false);
+			if (sQuery && sQuery.length > 0) {
+				oTableSearchState = [filters];
+			}
+			this.getView().byId("tblActiviteStatus").getBinding("items").filter(oTableSearchState, "Application");
+		},
+
+		onAcivitySort: function (oEvent) {
+			this._bDescendingSort = !this._bDescendingSort;
+			var oView = this.getView(),
+				oTable = oView.byId("tblActiviteStatus"),
+				oBinding = oTable.getBinding("items"),
+				oSorter = new Sorter("count", this._bDescendingSort);
+			oBinding.sort(oSorter);
+		},
+
+		//Search functionality for all columns for particular value
+		onSearchStages: function (oEvent) {
+			var oTableSearchState = [],
+				sQuery = oEvent.getParameter("query");
+			var contains = sap.ui.model.FilterOperator.Contains;
+			var columns = ['stagename'];
+			var filters = new sap.ui.model.Filter(columns.map(function (colName) {
+				return new sap.ui.model.Filter(colName, contains, sQuery);
+			}),
+				false);
+			if (sQuery && sQuery.length > 0) {
+				oTableSearchState = [filters];
+			}
+			this.getView().byId("tblProjectStages").getBinding("items").filter(oTableSearchState, "Application");
+		},
+
+		onStagesSort: function (oEvent) {
+			this._bDescendingSort = !this._bDescendingSort;
+			var oView = this.getView(),
+				oTable = oView.byId("tblProjectStages"),
+				oBinding = oTable.getBinding("items"),
+				oSorter = new Sorter("count", this._bDescendingSort);
+			oBinding.sort(oSorter);
+		},
+
+		 // Function to reset all filters applied to table
+		 getAllStages: async function(){
+			this.groupReset = false;
+            var oTable = this.byId("tblProjectStages"),
+                oBinding = oTable.getBinding("items"),
+                aGroups = [];
+                oBinding.sort(aGroups);
+                this.groupReset = false;
+		},
+
+		handleAttributeGroupDialogConfirm: function (oEvent) {
+			this.groupReset = false;
+			var oTable = this.byId("tblAttributes"),
+				mParams = oEvent.getParameters(),
+				oBinding = oTable.getBinding("items"),
+				sPath,
+				bDescending,
+				vGroup,
+				aGroups = [];
+
+			if (mParams.groupItem) {
+				sPath = mParams.groupItem.getKey();
+				bDescending = mParams.groupDescending;
+				vGroup = this.mGroupFunctionsAttribute[sPath];
+				aGroups.push(new Sorter(sPath, bDescending, vGroup));
+				// apply the selected group settingss
+				oBinding.sort(aGroups);
+			} else if (this.groupReset== false) {
+				oBinding.sort(aGroups);
+				this.groupReset = false;
+			}
+		},
+
+		//reset activity dialog
+		resetAttributeGroupDialog: function (oEvent) {
+			this.groupReset = true;
+		},
+
+		//Function to load grouping fragement
+		handleAttributeGroupButtonPressed: function () {
+			if (!this._oDialog2) {
+				this._oDialog2 = sap.ui.xmlfragment("sap.ui.elev8rerp.componentcontainer.fragmentview.Reports.AttributeGroupDialog", this);
+			}
+			this._oDialog2.open();
+		},
+		
+			//Search functionality for all columns for particular value
+			onSearchAttribute: function (oEvent) {
+				var oTableSearchState = [],
+					sQuery = oEvent.getParameter("query");
+				var contains = sap.ui.model.FilterOperator.Contains;
+				var columns = ['stagename','attributename','parentstagename'];
+				var filters = new sap.ui.model.Filter(columns.map(function (colName) {
+					return new sap.ui.model.Filter(colName, contains, sQuery);
+				}),
+					false);
+				if (sQuery && sQuery.length > 0) {
+					oTableSearchState = [filters];
+				}
+				this.getView().byId("tblAttributes").getBinding("items").filter(oTableSearchState, "Application");
+			},
+	
+			onAttributeSort: function (oEvent) {
+				this._bDescendingSort = !this._bDescendingSort;
+				var oView = this.getView(),
+					oTable = oView.byId("tblAttributes"),
+					oBinding = oTable.getBinding("items"),
+					oSorter = new Sorter("stagename", this._bDescendingSort);
+				oBinding.sort(oSorter);
+			},
+	
+			 // Function to reset all filters applied to table
+			 getAllAttrubutes: async function(){
+				this.groupReset = false;
+				var oTable = this.byId("tblAttributes"),
+					oBinding = oTable.getBinding("items"),
+					aGroups = [];
+					oBinding.sort(aGroups);
+					this.groupReset = false;
+			},
+
 
 		getModelDefault: function () {
 			return {
@@ -607,7 +766,7 @@ sap.ui.define([
 				var activitymodel = currentContext.getView().getModel("activitymodel");
 				currentContext.ActivityList = JSON.parse(JSON.stringify(data[0]));// Array consist of all Activity
 				activitymodel.setData(data[0]);
-				console.log("--------------nitblmodel------------", activitymodel);
+				console.log("--------------activitymodel------------", activitymodel);
 				activitymodel.refresh();
 
 			});
@@ -673,7 +832,7 @@ sap.ui.define([
 				currentContext.AttributeList = JSON.parse(JSON.stringify(data[0]));// Array consist of all Activity
 
 				attributeModel.setData(data[0]);
-				console.log("--------------nitblmodel------------", attributeModel);
+				console.log("--------------attributeModel------------", attributeModel);
 				attributeModel.refresh();
 
 			});
@@ -1042,17 +1201,18 @@ sap.ui.define([
 				DetailModel.refresh();
 
 			})
-			// else {
-			// 	ItemConsumptiondata[element.stagesequence].startdate = startdate;
-
-			// }
-
-			// });
-
-			// DetailModel.refresh();
-
 		},
-		// function for calculate end date or completion day
+		
+        // Function to reset all filters applied to table
+		getAllActivities: async function(){
+			this.groupReset = false;
+            var oTable = this.byId("tblActiviteStatus"),
+                oBinding = oTable.getBinding("items"),
+                aGroups = [];
+                oBinding.sort(aGroups);
+                this.groupReset = false;
+		},
+
 		onniclick: async function (oEvent) {
 
 			let oThis = this;
