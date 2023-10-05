@@ -54,8 +54,10 @@ sap.ui.define([
                 this.getView().byId("stagePerEle").setVisible(false);
                 this.getView().byId("prerequisitesEle").setVisible(true);
                 this.getView().byId("attributeEle").setVisible(false);
+                this.getView().byId("customerSignOffEle").setVisible(true);
+                this.getView().byId("addToggleEle").setVisible(true);
             }else if(this.model.typecode == "ProMilestones" && this.model.type == "Activity"){
-                this.getView().byId("stgTypeEle").setVisible(false);
+                this.getView().byId("stgTypeEle").setVisible(true);
                 this.getView().byId("departmentEle").setVisible(false);
                 this.getView().byId("sequenceEle").setVisible(false);
                 this.getView().byId("prerequisitesEle").setVisible(false);
@@ -63,6 +65,8 @@ sap.ui.define([
                 this.getView().byId("stagePerEle").setVisible(true);
                 this.getView().byId("parentStageEle").setVisible(true);
                 this.getView().byId("attributeEle").setVisible(false);
+                this.getView().byId("customerSignOffEle").setVisible(true);
+                this.getView().byId("addToggleEle").setVisible(true);
             }else if(this.model.typecode == "ProMilestones" && this.model.type == "Attribute"){
                 this.getView().byId("stgTypeEle").setVisible(false);
                 this.getView().byId("departmentEle").setVisible(false);
@@ -72,6 +76,8 @@ sap.ui.define([
                 this.getView().byId("stagePerEle").setVisible(false);
                 this.getView().byId("parentStageEle").setVisible(true);
                 this.getView().byId("attributeEle").setVisible(true);
+                this.getView().byId("customerSignOffEle").setVisible(false);
+                this.getView().byId("addToggleEle").setVisible(false);
             }
             else {
                 this.getView().byId("departmentEle").setVisible(false);
@@ -84,6 +90,8 @@ sap.ui.define([
                 this.getView().byId("stagePerEle").setVisible(false);
                 this.getView().byId("prerequisitesEle").setVisible(false);
                 this.getView().byId("attributeEle").setVisible(false);
+                this.getView().byId("customerSignOffEle").setVisible(false);
+                this.getView().byId("addToggleEle").setVisible(false);
                 this.getView().byId("notifyEle").setVisible(false);
             }
 
@@ -138,10 +146,12 @@ sap.ui.define([
                 this.getView().byId("stagePerEle").setVisible(false);
                 this.getView().byId("parentStageEle").setVisible(false);
                 this.getView().byId("attributeEle").setVisible(false);
+                this.getView().byId("customerSignOffEle").setVisible(true);
+                this.getView().byId("addToggleEle").setVisible(true);
                 this.getView().byId("notifyEle").setVisible(true);
             }else if(typeTxt == "Activity"){
                 commonFunction.getReferenceByTypeCodeAndParentType("ProMilestones", "Stage", "parentStageModel", this);
-                this.getView().byId("stgTypeEle").setVisible(false);
+                this.getView().byId("stgTypeEle").setVisible(true);
                 this.getView().byId("departmentEle").setVisible(false);
                 this.getView().byId("sequenceEle").setVisible(false);
                 this.getView().byId("prerequisitesEle").setVisible(false);
@@ -149,6 +159,8 @@ sap.ui.define([
                 this.getView().byId("stagePerEle").setVisible(true);
                 this.getView().byId("parentStageEle").setVisible(true);
                 this.getView().byId("attributeEle").setVisible(false);
+                this.getView().byId("customerSignOffEle").setVisible(true);
+                this.getView().byId("addToggleEle").setVisible(true);
                 this.getView().byId("notifyEle").setVisible(true);
             }else if(typeTxt == "Attribute"){
                 commonFunction.getReferenceByTypeCodeAndParentType("ProMilestones", "Activity", "parentStageModel", this);
@@ -161,6 +173,8 @@ sap.ui.define([
                 this.getView().byId("stagePerEle").setVisible(false);
                 this.getView().byId("parentStageEle").setVisible(true);
                 this.getView().byId("attributeEle").setVisible(true);
+                this.getView().byId("customerSignOffEle").setVisible(false);
+                this.getView().byId("addToggleEle").setVisible(false);
                 this.getView().byId("notifyEle").setVisible(false);
             }
         },

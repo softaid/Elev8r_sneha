@@ -238,19 +238,19 @@
 													<Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" />
+													<Text text ="Actual Start" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" />
+													<Text text ="Actual End" />
 												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" />
+                                                <Column minScreenWidth="Tablet" demandPopin="true">
+													<Text text ="Stage completion" />
 												</Column>
+												<!-- <Column minScreenWidth="Tablet" demandPopin="true">
+													<Text text ="Actual Days" />
+												</Column> -->
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelStage}" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelProject}" />
+													<Text text ="OverDueDays" />
 												</Column>
                                                 <Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Activity" />
@@ -267,11 +267,11 @@
 													<cells>
 														<Text text="{tblModel>count}" />
 														<Text text="{tblModel>stagename}" />
-														<Text text="{tblModel>startdate}" />
-														<Text text="{tblModel>enddate}"/>
-														<Text text="{tblModel>completiondaystable}"/>
-														<Text text="{tblModel>stagecompletionpercentage}"/>
-														<Text text="{tblModel>projectweightage}"/>
+														<Text text="{tblModel>actualstartdate}" />
+														<Text text="{tblModel>actualenddate}"/>
+                                                        <Text text="{tblModel>stagecompletionpercentage}"/>
+														<!-- <Text text="{tblModel>completiondaystable}"/> -->
+														<Text text="{tblModel>overduedays}"/>
 
                                                         <Button icon="sap-icon://begin" type="Transparent" 
                                                                 press="onStagePress"
@@ -285,7 +285,7 @@
                                                             text="1"
                                                             displayOnly= "false"
                                                             class="sapMInfoLabelSmall" 
-                                                            colorScheme= "{parts: [{path: 'tblModel>isactive'}],
+                                                            colorScheme= "{parts: [{path: 'tblModel>overduedays'}],
                                                             formatter: '.formatter.setItemStockColor'}"
                                                         />
 													</cells>

@@ -7,8 +7,9 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
+	'sap/ui/elev8rerp/componentcontainer/services/Masters/Masters.service',
 	'sap/m/MessageToast',
-], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, commonFunction, MessageToast) {
+], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, commonFunction,masterService, MessageToast) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectStageDetail", {
@@ -42,9 +43,12 @@ sap.ui.define([
 
 
 			if (StageDetailModel.id != undefined) {
+				currentContext.getView().byId("dependency").setSelectedKeys(StageDetailModel.dependency&&StageDetailModel.dependency.split(","));
+
+
 
 				// get document list
-				await Projectservice.getDocumentCollectionDetails({ projectid: StageDetailModel.projectid, stageid: StageDetailModel.stageid, document_id: 3 }, function (data) {
+				await Projectservice.getDocumentCollectionDetails({ projectid: StageDetailModel.projectid, stageid: StageDetailModel.stageid }, function (data) {
 					var oConfig = sap.ui.getCore().getModel("configModel");
 					if (data[0].length > 0) {
 						data[0].forEach((document) => {
@@ -70,6 +74,19 @@ sap.ui.define([
 					}
 				})
 			}
+		},
+
+		handleSelectionFinish: function (oEvt) {
+			 let StageDetailModel = this.getView().getModel("StageDetailModel");
+			let selectedItems = oEvt.getParameter("selectedItems");
+			let dependencyid = [];
+
+			selectedItems.forEach((ele) => {
+				dependencyid.push(ele.getProperty("key"));
+			})
+		
+			StageDetailModel.oData.dependency = (dependencyid.join(","));
+
 		},
 
 		functiondownload: async function (OEvent) {
@@ -463,23 +480,52 @@ sap.ui.define([
 
 
 			parentModel["id"] = null;
-			oModel.type = "Stage";
 			parentModel["projectid"] = oModel.projectid;
 			parentModel["companyid"] = commonService.session("companyId");
 			parentModel["userid"] = commonService.session("userId");
-			oModel["companyid"] = commonService.session("companyId");
-			oModel["userid"] = commonService.session("userId");
 
+			oModel["companyid"] = commonService.session("companyId");
+			oModel.type ="Stage";
+			oModel["userid"] = commonService.session("userId");
 			oModel.startdate = (oModel.startdate != null) ? commonFunction.getDate(oModel.startdate) : oModel.startdate;
 			oModel.enddate = (oModel.enddate != null) ? commonFunction.getDate(oModel.enddate) : oModel.enddate;
 			oModel.actualstartdate = (oModel.actualstartdate != null) ? commonFunction.getDate(oModel.actualstartdate) : oModel.actualstartdate;
 			oModel.actualenddate = (oModel.actualenddate != null) ? commonFunction.getDate(oModel.actualenddate) : oModel.actualenddate;
 			oModel.isactive = oModel.isactive === true ? 1 : 0;
 			oModel.isstd = oModel.isstd === true ? 1 : 0;
+			// {
+			// 	  id:   NULL,
+			// 		'ProMilestones',
+			// 		p_parentid,
+			// 		p_type,
+			// 	    p_stgtypeid,
+			// 	    p_stagename,
+			// 	    p_isactive,
+			// 	    p_dependency,
+			// 	    0,
+			// 	    p_projectweightage,
+			// 	    p_stagecompletionpercentage,
+			// 	    p_departmentid,
+			// 	    NULL,
+			// 	    NULL,
+			// 	    NULL,
+			// 	    p_iscustomersignoffrequired, 
+			// 	    0,
+			// 		NULL,
+			// 		p_companyid,
+			// 		p_userid,
+			// 		@refid
+			// }
 
+			if(oModel.id==null){
+				masterService.saveReference(1, function (data) {
+
+			})}
+
+			else{
 			Projectservice.saveProjectActivityDetail(oModel, function (savedata) {
 
-				// objPush.stageid=savedata.id  //  get id of  new save activity  for document save
+				 objPush.stageid=savedata.stageid  //  get id of  new save activity  for document save
 
 				currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
 					if (document.id == undefined) {
@@ -510,11 +556,10 @@ sap.ui.define([
 					let tblModel = currentContext.getView().getModel("tblModel");
 					tblModel.setData(data[0]);
 
-					var StageModel = currentContext.getView().getModel("StageModel");
-					StageModel.setData(data[0]);
-					tblModel.refresh();
+					// var StageModel = currentContext.getView().getModel("StageModel");
+					// StageModel.setData(data[0]);
 				})
-			});
+			})};
 
 		
 			currentContext.DeleteDocumentArr.length > 0 ? currentContext.onDeleteDocumentSave() : "No image is available to delete";

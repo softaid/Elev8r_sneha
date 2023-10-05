@@ -42,7 +42,7 @@ sap.ui.define([
 			if (ActivityDetailModel.id != undefined) {
 							
 			// get document list
-			await Projectservice.getDocumentCollectionDetails({ projectid: ActivityDetailModel.projectid, stageid: ActivityDetailModel.stageid, document_id: 3 }, function (data) {
+			await Projectservice.getDocumentCollectionDetails({ projectid: ActivityDetailModel.projectid, stageid: ActivityDetailModel.stageid }, function (data) {
 				var oConfig = sap.ui.getCore().getModel("configModel");
 				if (data[0].length>0) {
 				data[0].forEach((document) => {
@@ -467,6 +467,8 @@ sap.ui.define([
 			oModel.type = "Activity";
 			oModel["companyid"] = commonService.session("companyId");
 			oModel["userid"] = commonService.session("userId");
+			oModel.type ="Activity";
+
 
 			oModel.startdate = (oModel.startdate != null) ? commonFunction.getDate(oModel.startdate) : oModel.startdate;
 			oModel.enddate = (oModel.enddate != null) ? commonFunction.getDate(oModel.enddate) : oModel.enddate;

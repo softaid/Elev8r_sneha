@@ -165,12 +165,16 @@
                                 </form:FormElement> 
                                 <form:FormElement id="stagePerEle" label="Stage Per">
                                     <form:fields>
-                                        <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevelOne"
+                                        <Slider width="100%" height="200%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevelOne"
                                             max="100" min="0" progress="true"
                                             showAdvancedTooltip="true" value="{editMasterModel>/stageper}">
                                             <ResponsiveScale id="rScaleWarningLevelOne"
                                                 tickmarksBetweenLabels="20" />
                                         </Slider>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement>
+                                    <form:fields>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement id="attributeEle" label="Attribute Type">
@@ -186,6 +190,24 @@
                                                     }">
                                             <core:Item key="{attributeModel>id}" text="{attributeModel>description}" />
                                         </MultiComboBox>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement id="customerSignOffEle" label="Is customer signoff required">
+                                    <form:fields>
+                                        <Switch  state="{editMasterModel>/iscustomersignoffrequired}" id="customerSignoff" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement id="addToggleEle" label="Add to current project">
+                                    <form:fields>
+                                        <Switch  state="{editMasterModel>/addtocurrentproject}" id="addToggle" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >
+                                        <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement id="notifyEle" label="Notify User">

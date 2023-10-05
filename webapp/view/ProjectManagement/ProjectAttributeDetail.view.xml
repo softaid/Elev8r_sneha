@@ -76,7 +76,7 @@
                                             path: 'activityModel>/',
                                             sorter: { path: 'id' }
                                         }">
-											<core:Item key="{activityModel>stageid}" text="{activityModel>stagename}" additionalText="{activityModel>parentid}" />
+											<core:Item key="{activityModel>stageid}" text="{activityModel>stagename}"/>
 										</Select>
 									</form:fields>
 								</form:FormElement>
@@ -155,7 +155,7 @@
                                                 value="{AttributeDetailModel>/enddate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="false"
+                                                editable="true"
                                                 change="dayCalculation"/></form:fields></form:FormElement> -->
 
 								<form:FormElement label="Amount" 
@@ -202,7 +202,7 @@
 								</form:FormElement>
 								<!-- <form:FormElement label=" Actual Completion Day">
 									<form:fields>
-										<Input id="actualcompletionDay" value="{AttributeDetailModel>/actualcompletiondays}"  editable="false"/>
+										<Input id="actualcompletionDay" value="{AttributeDetailModel>/actualcompletiondays}"  editable="true"/>
 									</form:fields>
 								</form:FormElement>
 								<form:FormElement label="Stage %">
@@ -308,7 +308,7 @@
                                         formatter: '.formatter.setvisibilty'
                                     }">
 									<form:fields>
-										<Input id="inputField"  width="53%" value="{editDocumentCollectionModel>/pdf_name}"  editable="false"/>
+										<Input id="inputField"  width="53%" value="{editDocumentCollectionModel>/pdf_name}"  editable="true"/>
 									</form:fields>
 								</form:FormElement>
 								<form:FormElement     visible="{
