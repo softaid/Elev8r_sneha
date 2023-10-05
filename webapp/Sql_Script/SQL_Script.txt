@@ -2466,5 +2466,36 @@ BEGIN
 END$$
 
 DELIMITER ;
-;
+
+DROP PROCEDURE IF EXISTS spc_attributelist_select;
+
+DELIMITER $$
+CREATE  PROCEDURE `spc_attributelist_select`(
+	IN p_projectid INT(11)
+)
+BEGIN
+	SELECT 
+     PA.id,
+	 PA.projectid,
+	 PA.stageid,
+	 PA.activityid,
+	 PA.attributetypeids,
+	 PA.attributename,
+	 PA.attributevalue,
+	 PA.attributeid,
+	 PA.remark,
+     PD.stagename,
+     PD.id AS projectdetailid,
+     PD1.stagename as parentstagename
+     
+	FROM project_attributes PA  
+    LEFT JOIN  project_detail PD ON PD.stageid=PA.activityid
+	LEFT JOIN  project_detail PD1 ON PD1.stageid=PA.stageid AND PD1.`type`= 'Stage'
+    
+    WHERE PA.projectid =p_projectid
+    AND  PD.projectid =p_projectid;
+END$$
+DELIMITER ;
+
+
 

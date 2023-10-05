@@ -210,18 +210,23 @@
 							<items>
 								<IconTabFilter text="Project Stage">
 									<VBox fitContainer="true">
-										<Table id="tblBillOfMaterial" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
-                            path: 'tblModel>/',
-                                sorter: {
-                                    path: 'id'
-                                }
-                              }">
+										<Table id="tblProjectStages" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
+											path: 'tblModel>/',
+												sorter: {
+													path: 'id'
+												}
+											}">
 											<headerToolbar>
 												<Toolbar>
 													<content>
 														<Title text="Project Stage" level="H2"/>
 														<ToolbarSpacer />
-														<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowStage" id ="add" visible="true"/>
+														 <HBOX>
+                                                            <SearchField search="onSearchStages" width="17.5rem" id = "onStageSearchId"/>
+															 <Button icon="sap-icon://sort" type="Transparent" press="onStagesSort"/>
+                                                            <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowStage" id ="add" visible="true"/> 
+                                                            </HBOX>
+														<!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowStage" id ="add" visible="true"/> -->
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -294,19 +299,19 @@
 										</form:title>
 										<form:layout>
 											<form:ResponsiveGridLayout
-                                labelSpanXL="4"
-                                labelSpanL="4"
-                                labelSpanM="4"
-                                labelSpanS="12"
-                                adjustLabelSpan="false"
-                                emptySpanXL="0"
-                                emptySpanL="0"
-                                emptySpanM="0"
-                                emptySpanS="0"
-                                columnsXL="3"
-                                columnsL="2"
-                                columnsM="2"
-                                singleContainerFullSize="false" />
+												labelSpanXL="4"
+												labelSpanL="4"
+												labelSpanM="4"
+												labelSpanS="12"
+												adjustLabelSpan="false"
+												emptySpanXL="0"
+												emptySpanL="0"
+												emptySpanM="0"
+												emptySpanS="0"
+												columnsXL="3"
+												columnsL="2"
+												columnsM="2"
+												singleContainerFullSize="false" />
 										</form:layout>
 										<form:formContainers>
 											<form:FormContainer>
@@ -322,7 +327,7 @@
 												<form:formElements>
 													<form:FormElement label="">
 														<form:fields>
-															<Button text="Generate schedule" id="btnschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onclick"/>
+															<Button text="Get All Activities" id="btnschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onclick"/>
 														</form:fields>
 													</form:FormElement>
 												</form:formElements>
@@ -331,8 +336,8 @@
 									</form:Form>
 									<Panel>
 										<FlexBox		
-                        alignItems="Start"
-                        justifyContent="End">
+											alignItems="Start"
+											justifyContent="End">
 											<items>
 												<Button text="{i18n>saveButtonText}" id="btnSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onSave"/>
 												<Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
@@ -370,26 +375,27 @@
 								<IconTabFilter text="Activities"   key="Activity">
 									<VBox fitContainer="true">
 										<Table id="tblActiviteStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
-                                path: 'activitymodel>/',
-                                    sorter: {
-                                        path: 'id'
-                                    }
-                                }">
+											path: 'activitymodel>/',
+												sorter: {
+													path: 'id'
+												}
+											}">
 											<headerToolbar>
 												<Toolbar>
 													<content>
 														<Title text="Project Activity" level="H2"/>
 														<ToolbarSpacer />
                                                           <HBOX>
-                                                            <SearchField search="onSearch" width="17.5rem" id = "onSearchId"/>
+                                                            <SearchField search="onSearchActivity" width="17.5rem" id = "onSearchId"/>
                                                             <Button
-                                                            width="20%"
-                                                            align="right"
-                                                            tooltip="Group"
-                                                            icon="sap-icon://group-2"
-                                                            press="handleGroupButtonPressed"/>
-                                                            <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="niadd" visible="true"/> 
-                                                            </HBOX>
+																width="20%"
+																align="right"
+																tooltip="Group"
+																icon="sap-icon://group-2"
+																press="handleGroupButtonPressed"/>
+															 <Button icon="sap-icon://sort" type="Transparent" press="onAcivitySort"/>
+                                                             <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="niadd" visible="true"/> 
+                                                          </HBOX>
 														<!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowactivity" id ="niadd" visible="true"/> -->
 													</content>
 												</Toolbar>
@@ -476,7 +482,7 @@
 												<form:formElements>
 													<form:FormElement label="">
 														<form:fields>
-															<Button text="Generate schedule" id="btnActivityschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onniclick"/>
+															<Button text="Get All Activities" id="btnActivityschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="getAllStages"/>
 														</form:fields>
 													</form:FormElement>
 												</form:formElements>
@@ -682,19 +688,19 @@
 										</form:title>
 										<form:layout>
 											<form:ResponsiveGridLayout
-                                    labelSpanXL="4"
-                                    labelSpanL="4"
-                                    labelSpanM="4"
-                                    labelSpanS="12"
-                                    adjustLabelSpan="false"
-                                    emptySpanXL="0"
-                                    emptySpanL="0"
-                                    emptySpanM="0"
-                                    emptySpanS="0"
-                                    columnsXL="3"
-                                    columnsL="2"
-                                    columnsM="2"
-                                    singleContainerFullSize="false" />
+											labelSpanXL="4"
+											labelSpanL="4"
+											labelSpanM="4"
+											labelSpanS="12"
+											adjustLabelSpan="false"
+											emptySpanXL="0"
+											emptySpanL="0"
+											emptySpanM="0"
+											emptySpanS="0"
+											columnsXL="3"
+											columnsL="2"
+											columnsM="2"
+											singleContainerFullSize="false" />
 										</form:layout>
 										<form:formContainers>
 											<form:FormContainer>
@@ -719,8 +725,8 @@
 									</form:Form>
 									<Panel>
 										<FlexBox		
-                                    alignItems="Start"
-                                    justifyContent="End">
+											alignItems="Start"
+											justifyContent="End">
 											<items>
 												<Button text="{i18n>saveButtonText}" id="btnAttachmentSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onAttachmentSave"/>
 												<Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
@@ -731,26 +737,41 @@
 								<IconTabFilter text="Attributes" key="Attribute">
 									<VBox fitContainer="true">
 										<Table
-                                    headerText="Products"
-                                    growingScrollToLoad="true"
-                                    items="{
+										    id="tblAttributes"
+											headerText="Products"
+											growingScrollToLoad="true"
+											items="{
                                                             path: 'attributeModel>/',
                                                                 sorter: {
                                                                     path: 'stagename'
                                                                 }
                    
-                                }">
+                               					 }">
 											<headerToolbar>
 												<Toolbar>
 													<content>
 														<Title text="Attachment" level="H2"/>
 														<ToolbarSpacer />
-														<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowAttribute" id ="AddAttribute" visible="true"/>
+														  <HBOX>
+                                                         	<SearchField search="onSearchAttribute" width="17.5rem" id = "onAttachmentSearchId"/>
+                                                            <Button
+																width="20%"
+																align="right"
+																tooltip="Group"
+																icon="sap-icon://group-2"
+																press="handleAttributeGroupButtonPressed"/>
+															 <Button icon="sap-icon://sort" type="Transparent" press="onAttributeSort"/>
+                                                             <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowAttribute" id ="AddAttribute" visible="true"/> 
+                                                          </HBOX>
+														<!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowAttribute" id ="AddAttribute" visible="true"/> -->
 													</content>
 												</Toolbar>
 											</headerToolbar>
 											<columns>
-												<Column minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="true">
+												<Column minScreenWidth="Tablet" demandPopin="true">
+													<Text text ="Stage"/>
+												</Column>
+												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Activity"/>
 												</Column>
 												<!-- <Column minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="false"><Text text ="group"/></Column>    -->
@@ -765,8 +786,8 @@
 											</columns>
 											<items>
 												<ColumnListItem type="Navigation" press="onListItemPressAttribute">
+												    <Text text="{attributeModel>parentstagename}" />
 													<Text text="{attributeModel>stagename}" />
-													<!-- <Text text="{attributeModel>parameter}" /> -->
 													<Text text="{attributeModel>attributename}" />
 													<input value="{attributeModel>remark}" />
 												</ColumnListItem>
@@ -895,7 +916,7 @@
 											<core:Title text="" />
 										</form:title>
 										<form:layout>
-											<form:ResponsiveGridLayout
+									<form:ResponsiveGridLayout
                                     labelSpanXL="4"
                                     labelSpanL="4"
                                     labelSpanM="4"

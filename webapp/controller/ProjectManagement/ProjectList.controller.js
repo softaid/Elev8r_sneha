@@ -36,12 +36,106 @@ sap.ui.define([
 				// this.getView().byId("onSearchId").focus();
 			});
 
-			// bind Quote Type dropdown  
-			//commonFunction.getReferenceByTypeForFilter("QuoteType", "quoteTypeModel", this);
+			// this function is used for grouping in ProjectList
+			this.mGroupFunctions = {
 
-			// bind Lead dropdown quote category
-			//commonFunction.getReferenceByTypeForFilter("QuoteCategory", "quoteCategoryModel", this);
+				quotename: function (oContext) {
+					var name = oContext.getProperty("quotename");
+					return {
+						key: name,
+						text: name
+					};
+				},
+				pstatus: function (oContext) {
+					var name = oContext.getProperty("pstatus");
+					return {
+						key: name,
+						text: name
+					};
+				},
+				model: function (oContext) {
+					var name = oContext.getProperty("model");
+					return {
+						key: name,
+						text: name
+					};
+				},
+			}
 		},
+
+		
+		//Search functionality for all columns for particular value
+		onSearch: function (oEvent) {
+			var oTableSearchState = [],
+				sQuery = oEvent.getParameter("query");
+			var contains = sap.ui.model.FilterOperator.Contains;
+			var columns = ['JobNo','quotename','pstatus','model'];
+			var filters = new sap.ui.model.Filter(columns.map(function (colName) {
+				return new sap.ui.model.Filter(colName, contains, sQuery);
+			}),
+				false);
+			if (sQuery && sQuery.length > 0) {
+				oTableSearchState = [filters];
+			}
+			this.getView().byId("tblProjectList").getBinding("items").filter(oTableSearchState, "Application");
+		},
+
+		onProjectSort: function (oEvent) {
+			this._bDescendingSort = !this._bDescendingSort;
+			var oView = this.getView(),
+				oTable = oView.byId("tblProjectList"),
+				oBinding = oTable.getBinding("items"),
+				oSorter = new Sorter("id", this._bDescendingSort);
+			oBinding.sort(oSorter);
+		},
+
+		 // Function to reset all filters applied to table
+		 getAllProjects: async function(){
+			this.groupReset = false;
+            var oTable = this.byId("tblProjectList"),
+                oBinding = oTable.getBinding("items"),
+                aGroups = [];
+                oBinding.sort(aGroups);
+                this.groupReset = false;
+		},
+
+		//Activity grouping confirm dialog
+		handleProjectGroupDialogConfirm: function (oEvent) {
+			this.groupReset = false;
+			var oTable = this.byId("tblProjectList"),
+				mParams = oEvent.getParameters(),
+				oBinding = oTable.getBinding("items"),
+				sPath,
+				bDescending,
+				vGroup,
+				aGroups = [];
+
+			if (mParams.groupItem) {
+				sPath = mParams.groupItem.getKey();
+				bDescending = mParams.groupDescending;
+				vGroup = this.mGroupFunctions[sPath];
+				aGroups.push(new Sorter(sPath, bDescending, vGroup));
+				// apply the selected group settingss
+				oBinding.sort(aGroups);
+			} else if (this.groupReset== false) {
+				oBinding.sort(aGroups);
+				this.groupReset = false;
+			}
+		},
+
+		//reset activity dialog
+		resetProjectGroupDialog: function (oEvent) {
+			this.groupReset = true;
+		},
+
+		//Function to load grouping fragement
+		handleProjectGroupButtonPressed: function () {
+			if (!this._oDialog1) {
+				this._oDialog1 = sap.ui.xmlfragment("sap.ui.elev8rerp.componentcontainer.fragmentview.Reports.ProjectListGroupDialog", this);
+			}
+			this._oDialog1.open();
+		},
+
 
 		getModelDefault: function () {
 			return {
@@ -94,23 +188,6 @@ sap.ui.define([
 			this.bus = sap.ui.getCore().getEventBus();
 			oRouter.getTargets().display(oData.pagekey, { viewModel: oData.viewModel });
 			oRouter.navTo(oData.pagekey, true);
-		},
-
-		onSearch: function (oEvent) {
-			var oTableSearchState = [],
-				sQuery = oEvent.getParameter("query");
-			var contains = sap.ui.model.FilterOperator.Contains;
-			var columns = ['leadname', 'contactname'];
-			var filters = new sap.ui.model.Filter(columns.map(function (colName) {
-				return new sap.ui.model.Filter(colName, contains, sQuery);
-			}),
-				false);
-
-			if (sQuery && sQuery.length > 0) {
-				oTableSearchState = [filters];
-			}
-
-			this.getView().byId("tblQuotationMaster").getBinding("items").filter(oTableSearchState, "Application");
 		},
 
 		onSort: function (oEvent) {
