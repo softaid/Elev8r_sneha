@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm=".handleAttachementGroupDialogConfirm"
+		reset=".resetAttachementGroupDialog">
+		<groupItems>
+             <ViewSettingsItem text="Stage" key="stagename" /> 
+             <ViewSettingsItem text="Activity" key="activityname" />
+             <ViewSettingsItem text="Attribute" key="attributename" />
+             <ViewSettingsItem text="Description" key="description" />
+             <ViewSettingsItem text="Type" key="type" />
+		</groupItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

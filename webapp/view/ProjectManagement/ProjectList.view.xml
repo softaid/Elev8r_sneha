@@ -6,96 +6,18 @@
 	xmlns:form="sap.ui.layout.form"
     xmlns:u="sap.ui.unified">
     <f:FlexibleColumnLayout  id="fclLead" backgroundDesign="Solid">
-		<f:beginColumnPages>
-		    <f:DynamicPage toggleHeaderOnTitleClick="false">
-			    <f:title>
-		    	    <f:DynamicPageTitle>
-				        <f:heading>
-					       <Title text=" "/>
-				        </f:heading>
-			        </f:DynamicPageTitle>
-		        </f:title>
-				<f:content>	
+        <f:beginColumnPages>
+            <f:DynamicPage toggleHeaderOnTitleClick="false">
+                <f:title>
+                    <f:DynamicPageTitle>
+                        <f:heading>
+                            <Title text=" "/>
+                        </f:heading>
+                    </f:DynamicPageTitle>
+                </f:title>
+                <f:content>
                     <VBox fitContainer="true" width="100%">
                         <Panel id="pnlLeadMaster" expandable="true" expanded="true"  headerText="Project List" width="100%">
-                        <!-- <form:Form editable="true">
-                            <form:title>
-                            </form:title>
-                            <form:layout>
-                                <form:ResponsiveGridLayout
-                                    labelSpanXL="2"
-                                labelSpanL="2"
-                                labelSpanM="2"
-                                labelSpanS="12"
-                                adjustLabelSpan="false"
-                                emptySpanXL="0"
-                                emptySpanL="0"
-                                emptySpanM="0"
-                                emptySpanS="0"
-                                columnsXL="2"
-                                columnsL="1"
-                                columnsM="1"
-                                singleContainerFullSize="false" />
-                            </form:layout>
-                            <form:formContainers>
-                                <form:FormContainer> 
-                                    <form:formElements >
-                                        <form:FormElement label="Lead Status" >
-                                            <form:fields>
-                                                <SegmentedButton  accessibleName="Select Lead Status" selectionChange="handleSelectionChange">
-                                                    <items>
-                                                        <SegmentedButtonItem  width="auto" text="All({LeadsTotalCountModel>/totalleads})" press="onQulified"></SegmentedButtonItem>
-                                                        <SegmentedButtonItem width="auto" text="Qualified({LeadsQualifiedModel>/qualified})" press="onQulified"></SegmentedButtonItem>
-                                                        <SegmentedButtonItem width="auto" text="Unqualified({LeadsUnqualifiedModel>/unqualified})" press="onQulified"></SegmentedButtonItem>
-
-                                                    </items>
-                                                </SegmentedButton>
-                                            </form:fields>
-                                        </form:FormElement>   
-                                        <form:FormElement label="Lead Type">
-                                            <form:fields>
-                                                <SegmentedButton accessibleName="Select Lead Type" 
-                                                    items="{path: 'leadTypeModel>/modelData'}" selectionChange="handleSelectionChange">
-                                                    <items>
-                                                        <SegmentedButtonItem width="auto" text="{leadTypeModel>description}" press="onLeadType"></SegmentedButtonItem>
-                                                    </items>
-                                                </SegmentedButton>
-                                            </form:fields>
-                                        </form:FormElement>   
-                                        <form:FormElement label="Lead Category">
-                                            <form:fields>
-                                                <SegmentedButton accessibleName="Select Lead Category"
-                                                items="{path: 'leadCategoryModel>/modelData'}" selectionChange="handleSelectionChange">
-                                                    <items>
-                                                        <SegmentedButtonItem width="auto" text="{leadCategoryModel>description}" press="onLeadCategory"></SegmentedButtonItem>
-                                                    </items>
-                                                </SegmentedButton>
-                                            </form:fields>
-                                        </form:FormElement>   
-                                        <form:FormElement label="Lead Source">
-                                            <form:fields>
-                                                <SegmentedButton accessibleName="Select Lead Source"
-                                                items="{path: 'leadSourceModel>/modelData'}" selectionChange="handleSelectionChange">
-                                                    <items>
-                                                        <SegmentedButtonItem width="auto" text="{leadSourceModel>description}" press="onLeadSource"></SegmentedButtonItem>
-                                                    </items>
-                                                </SegmentedButton>
-                                            </form:fields>
-                                        </form:FormElement>   
-                                        <form:FormElement label="Lead Stage">
-                                            <form:fields>
-                                                <SegmentedButton  accessibleName="Select Lead Stage"
-                                                items="{path: 'stageModel>/modelData'}" selectionChange="handleSelectionChange">
-                                                    <items>
-                                                        <SegmentedButtonItem width="auto"  text="{stageModel>description}" press="onLeadStage"></SegmentedButtonItem>
-                                                    </items>
-                                                </SegmentedButton>
-                                            </form:fields>
-                                        </form:FormElement>   
-                                    </form:formElements>      
-                                </form:FormContainer>
-                            </form:formContainers>
-                        </form:Form>                -->
                     </Panel>
                         <Table id="tblProjectList" 
                                 inset="false"
@@ -108,7 +30,7 @@
                                     <content>
                                         <Title text="" level="H2"/>
                                         <ToolbarSpacer />
-                                          <HBOX>
+                                        <HBOX>
                                             <SearchField search="onSearch" width="17.5rem" id = "onSearchId"/>
                                             <Button
                                                 width="20%"
@@ -116,34 +38,51 @@
                                                 tooltip="Group"
                                                 icon="sap-icon://group-2"
                                                 press="handleProjectGroupButtonPressed"/>
-                                                <Button icon="sap-icon://sort" type="Transparent" press="onProjectSort"/>
-                                            </HBOX>
-                                           
+                                            <Button icon="sap-icon://sort" type="Transparent" press="onProjectSort"/>
+                                        </HBOX>
                                     </content>
                                 </Toolbar>
                             </headerToolbar>
                             <columns>
-                                <Column><Text text ="Sr.No." /></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Job No."/></Column>   
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Project Id"/></Column>   
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Customer Name"/></Column>     
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Start Date"/></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="End date"/></Column>      
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Project Status"/></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text =" Project %"/></Column>
-                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Model"/></Column>
+                                <Column>
+                                    <Text text ="Sr.No." />
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Job No."/>
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Project Id"/>
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Customer Name"/>
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Start Date"/>
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="End date"/>
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Project Status"/>
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text =" Project %"/>
+                                </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Model"/>
+                                </Column>
                             </columns>
                             <items>
                                 <ColumnListItem type="Navigation" press="onListItemPress">
                                     <cells>
-                                        <Text text="{projectListModel>srno}" />    
-                                        <Text text="{projectListModel>JobNo}" />   
-                                         <Text text="{projectListModel>id}" />     
+                                        <Text text="{projectListModel>srno}" />
+                                        <Text text="{projectListModel>JobNo}" />
+                                        <Text text="{projectListModel>id}" />
                                         <Text text="{projectListModel>quotename}" />
                                         <Text text="{projectListModel>startdate}"/>
                                         <Text text="{projectListModel>enddate}"/>
                                         <Text text="{projectListModel>pstatus}"/>
-                                        <Text text="{projectListModel>completionper}"/> 
+                                        <Text text="{projectListModel>completionper}"/>
                                         <Text text="{projectListModel>model}"/>
                                     </cells>
                                 </ColumnListItem>
@@ -156,9 +95,9 @@
                         </TabContainer>
                         <HBox width="auto"></HBox>
                         <HBox id="pnlMasterData" width="auto"></HBox>
-                    </VBox> 
-                </f:content>				
-			</f:DynamicPage>
-		</f:beginColumnPages>
-	</f:FlexibleColumnLayout>
+                    </VBox>
+                </f:content>
+            </f:DynamicPage>
+        </f:beginColumnPages>
+    </f:FlexibleColumnLayout>
 </core:View>
