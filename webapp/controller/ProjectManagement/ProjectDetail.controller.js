@@ -261,7 +261,7 @@ sap.ui.define(
           var oTableSearchState = [],
             sQuery = oEvent.getParameter("query");
           var contains = sap.ui.model.FilterOperator.Contains;
-          var columns = ["parentstage", "stagename"];
+          var columns = ["parentstage", "stagename","status"];
           var filters = new sap.ui.model.Filter(
             columns.map(function (colName) {
               return new sap.ui.model.Filter(colName, contains, sQuery);
@@ -291,7 +291,7 @@ sap.ui.define(
           var oTableSearchState = [],
             sQuery = oEvent.getParameter("query");
           var contains = sap.ui.model.FilterOperator.Contains;
-          var columns = ["stagename"];
+          var columns = ['stagename','status'];
           var filters = new sap.ui.model.Filter(
             columns.map(function (colName) {
               return new sap.ui.model.Filter(colName, contains, sQuery);
@@ -501,6 +501,7 @@ sap.ui.define(
             createdby: null,
             isactive: true,
             isall: true,
+			isallactivities: true,
             note: null,
           };
         },
@@ -778,6 +779,7 @@ sap.ui.define(
           Projectservice.getProject({ id: id }, function (data) {
             data[0][0].isactive = data[0][0].isactive == 1 ? true : false;
             data[0][0].isall = false;
+			data[0][0].isallactivities = false;
             currentContext
               .getView()
               .getModel("projectModel")
@@ -936,16 +938,18 @@ sap.ui.define(
 
               var tblModel = currentContext.getView().getModel("tblModel");
               currentContext.StageList = JSON.parse(JSON.stringify(data[0])); // Array consist of all Activity
-
-              let filteredData = data[0].filter(function (ele) {
-                return ele.isactive === 1;
-              });
-
-              if (projectModel.oData.isall == false) {
-                tblModel.setData(filteredData);
-              } else {
-                tblModel.setData(data[0]);
-              }
+              
+			  if(data[0]){
+				let filteredData = data[0].filter(function (ele) {
+					return ele.isactive === 1;
+				  });
+	
+				  if (projectModel.oData.isall == false) {
+					tblModel.setData(filteredData);
+				  } else {
+					tblModel.setData(data[0]);
+				  }
+			  }
             }
           );
         },
@@ -989,6 +993,7 @@ sap.ui.define(
         // get Activities details of project
         getActivitesdetail: function (projectid) {
           var currentContext = this;
+		  var projectModel = currentContext.getView().getModel("projectModel");
           Projectservice.getProjectdetail(
             { id: projectid, field: "activity" },
             function (data) {
@@ -1004,11 +1009,39 @@ sap.ui.define(
                 .getView()
                 .getModel("activitymodel");
               currentContext.ActivityList = JSON.parse(JSON.stringify(data[0])); // Array consist of all Activity
-              activitymodel.setData(data[0]);
+			  if(data[0]){
+				let filteredData = data[0].filter(function (ele) {
+					return ele.isactive === 1;
+				  });
+	
+				  if (projectModel.oData.isallactivities == false) {
+					activitymodel.setData(filteredData);
+				  } else {
+					activitymodel.setData(data[0]);
+				  }
+			  }
               activitymodel.refresh();
             }
           );
         },
+
+		getAllActivitiesForToggle: function (oEvent) {
+			let currentContext = this;
+			let activitymodel = currentContext.getView().getModel("activitymodel");
+			let context = oEvent.getSource().getState();
+			if (currentContext.ActivityList.length) {
+			  let filteredDatafinal = currentContext.ActivityList.filter(function (
+				ele
+			  ) {
+				return ele.isactive === 1;
+			  });
+			  if (context == false) {
+				activitymodel.setData(filteredDatafinal);
+			  } else {
+				activitymodel.setData(currentContext.ActivityList);
+			  }
+			}
+		  },
 
         // get Payment details of project
         getPaymentdetail: function (projectid) {
