@@ -540,10 +540,7 @@
 											</headerToolbar>
 											<columns>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Stage" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Activity" />
+													<Text text ="Stage/Activity" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Type" />
@@ -561,7 +558,6 @@
 											<items>
 												<ColumnListItem type="Navigation" press="onListItemPressPayments">
 													<cells>
-														<Text text="{paymenttblmodel>parentstage}" />
 														<Text text="{paymenttblmodel>stagename}" />
 														<Text text="{paymenttblmodel>type}" />
 														<Text text="{paymenttblmodel>paymentper}" />
