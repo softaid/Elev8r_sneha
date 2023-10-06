@@ -12,7 +12,7 @@
     xmlns:tnt="sap.tnt"
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
     height="100%">
-    <f:FlexibleColumnLayout  id="fclProjectActivity" backgroundDesign="Solid">
+	<f:FlexibleColumnLayout  id="fclProjectActivity" backgroundDesign="Solid">
 		<f:beginColumnPages>
 			<f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
 				<f:title>
@@ -236,12 +236,16 @@
 													<content>
 														<Title text="Project Stage" level="H2"/>
 														<ToolbarSpacer />
-														 <HBOX>
-                                                            <SearchField search="onSearchStages" width="17.5rem" id = "onStageSearchId"/>
-															 <Button icon="sap-icon://sort" type="Transparent" press="onStagesSort"/>
-                                                            <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowStage" id ="add" visible="true"/> 
-                                                            </HBOX>
-														<!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowStage" id ="add" visible="true"/> -->
+														<HBOX>
+															<Switch tooltip="Show All"  state="{projectModel>/isall}" id="showallstages" customTextOn="Yes" customTextOff="No"  change= "getAll">
+																<layoutData>
+																	<FlexItemData growFactor="1" />
+																</layoutData>
+															</Switch>
+															<SearchField search="onSearchStages" width="17.5rem" id = "onStageSearchId"/>
+															<Button icon="sap-icon://sort" type="Transparent" press="onStagesSort"/>
+															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowStage" id ="add" visible="true"/>
+														</HBOX>
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -261,16 +265,12 @@
                                                 <Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Stage Complt(%)" />
 												</Column>
-												<!-- <Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Actual Days" />
-												</Column> -->
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="OverDueDays" />
 												</Column>
-                                                <Column minScreenWidth="Tablet" demandPopin="true">
+												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Activity" />
 												</Column>
-                                               
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text =" status" />
 												</Column>
@@ -282,17 +282,12 @@
 														<Text text="{tblModel>stagename}" />
 														<Text text="{tblModel>actualstartdate}" />
 														<Text text="{tblModel>actualenddate}"/>
-                                                        <Text text="{tblModel>stagecompletionpercentage}"/>
-														<!-- <Text text="{tblModel>completiondaystable}"/> -->
+														<Text text="{tblModel>stagecompletionpercentage}"/>
 														<Text text="{tblModel>overduedays}"/>
                                                         <Button icon="sap-icon://begin" type="Transparent" 
                                                                 press="onStagePress"
                                                                 app:mySuperExtraData="{tblModel>stageid}_Activity"
                                                             />
-														<!-- <Button icon="sap-icon://edit" type="Transparent" 
-                                                                press="onStagePress"
-                                                                app:mySuperExtraData="{tblModel>id}_Stage"
-                                                            /> -->
 														<tnt:InfoLabel 
                                                             text="{tblModel>status}"
                                                             displayOnly= "false"
@@ -357,33 +352,7 @@
 										</FlexBox>
 									</Panel>
 								</IconTabFilter>
-								<!-- <IconTabFilter text="{i18n>NIManagementList}"><VBox fitContainer="true"><Table id="tblNIStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
-                                path: 'nitblmodel>/',
-                                    sorter: {
-                                        path: 'id'
-                                    }
-                                }"><headerToolbar><Toolbar><content><Title text="{i18n>NITitle}" level="H2"/><ToolbarSpacer /><Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="niadd" visible="false"/></content></Toolbar></headerToolbar><columns><Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Id11" /></Column><Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" /></Column><Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" /></Column><Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" /></Column><Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" /></Column><Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelStage}" /></Column><Column minScreenWidth="Tablet" demandPopin="true"><Text text ="{i18n>feedMillBillOfMaterialLabelProject}" /></Column><Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Active status" /></Column></columns><items><ColumnListItem type="Navigation" press="onListItemPressNI"><cells><Text text="{nitblmodel>count}" /><Text text="{nitblmodel>stagename}" /><Text text="{nitblmodel>startdate}" /><Text text="{nitblmodel>enddate}"/><Text text="{nitblmodel>completiondays}"/><Text text="{nitblmodel>stagecompletionpercentage}"/><Text text="{nitblmodel>projectweightage}"/><tnt:InfoLabel 
-                                                text="1"
-                                                displayOnly= "false"
-                                                class="sapMInfoLabelSmall" 
-                                                colorScheme= "{parts: [{path: 'nitblmodel>isactive'}],
-                                                formatter: '.formatter.setItemStockColor'}"
-                                                /></cells></ColumnListItem></items></Table></VBox><form:Form editable="true"><form:title><core:Title text="" /></form:title><form:layout><form:ResponsiveGridLayout
-                                    labelSpanXL="4"
-                                    labelSpanL="4"
-                                    labelSpanM="4"
-                                    labelSpanS="12"
-                                    adjustLabelSpan="false"
-                                    emptySpanXL="0"
-                                    emptySpanL="0"
-                                    emptySpanM="0"
-                                    emptySpanS="0"
-                                    columnsXL="3"
-                                    columnsL="2"
-                                    columnsM="2"
-                                    singleContainerFullSize="false" /></form:layout><form:formContainers><form:FormContainer><form:formElements><form:FormElement label="Note"><form:fields><TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{projectModel>/note}" growing="true" rows="4" growingMaxLines="7" width="100%"/></form:fields></form:FormElement></form:formElements></form:FormContainer><form:FormContainer title=""><form:formElements><form:FormElement label=""><form:fields><Button text="Generate schedule" id="btnnischedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onniclick"/></form:fields></form:FormElement></form:formElements></form:FormContainer></form:formContainers></form:Form><Panel><FlexBox		
-                                    alignItems="Start"
-                                    justifyContent="End"><items><Button text="{i18n>saveButtonText}" id="btnniSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onNISave"/><Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/></items></FlexBox></Panel></IconTabFilter> -->
+							
 								<IconTabFilter text="Activities"   key="Activity">
 									<VBox fitContainer="true">
 										<Table id="tblActiviteStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
@@ -397,18 +366,22 @@
 													<content>
 														<Title text="Project Activity" level="H2"/>
 														<ToolbarSpacer />
-                                                          <HBOX>
-                                                            <SearchField search="onSearchActivity" width="17.5rem" id = "onSearchId"/>
-                                                            <Button
+														<HBOX>
+															<Switch tooltip="Show All"  state="{projectModel>/isallactivities}" id="showallactivities" customTextOn="Active" customTextOff="All"  change= "getAllActivitiesForToggle">
+															<layoutData>
+																<FlexItemData growFactor="1" />
+															</layoutData>
+															</Switch>
+															<SearchField search="onSearchActivity" width="17.5rem" id = "onSearchId"/>
+															<Button
 																width="20%"
 																align="right"
 																tooltip="Group"
 																icon="sap-icon://group-2"
 																press="handleGroupButtonPressed"/>
-															 <Button icon="sap-icon://sort" type="Transparent" press="onAcivitySort"/>
-                                                             <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="niadd" visible="true"/> 
-                                                          </HBOX>
-														<!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowactivity" id ="niadd" visible="true"/> -->
+															<Button icon="sap-icon://sort" type="Transparent" press="onAcivitySort"/>
+															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="niadd" visible="true"/>
+														</HBOX>
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -416,7 +389,7 @@
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Id" />
 												</Column>
-                                                <Column minScreenWidth="Tablet" demandPopin="true">
+												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Stage Name" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
@@ -446,7 +419,7 @@
 												<ColumnListItem  type="Navigation" press="onListItemPressActivity">
 													<cells>
 														<Text text="{activitymodel>count}" />
-                                                        <Text text="{activitymodel>parentstage}" />
+														<Text text="{activitymodel>parentstage}" />
 														<Text text="{activitymodel>stagename}" />
 														<Text text="{activitymodel>actualstartdate}" />
 														<Text text="{activitymodel>actualenddate}"/>
@@ -609,7 +582,6 @@
 												<form:formElements>
 													<form:FormElement label="">
 														<form:fields>
-															<!-- <Button text="Generate schedule" id="btnActivityschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onniclick"/> -->
 														</form:fields>
 													</form:FormElement>
 												</form:formElements>
@@ -640,7 +612,17 @@
 													<content>
 														<Title text="Attachment" level="H2"/>
 														<ToolbarSpacer />
-														<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="Attachmentadd" visible="true"/>
+														<HBOX>
+															<SearchField search="onSearchAttachment" width="17.5rem" id = "onattachementSearchId"/>
+															<Button
+																width="20%"
+																align="right"
+																tooltip="Group"
+																icon="sap-icon://group-2"
+																press="handleAttachementGroupButtonPressed"/>
+															<Button icon="sap-icon://sort" type="Transparent" press="onAttachementSort"/>
+															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="Attachmentadd" visible="true"/>
+														</HBOX>
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -716,7 +698,6 @@
 												<form:formElements>
 													<form:FormElement label="">
 														<form:fields>
-															<!-- <Button text="Generate schedule" id="btnActivityschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onAttachmentclick"/> -->
 														</form:fields>
 													</form:FormElement>
 												</form:formElements>
@@ -752,18 +733,17 @@
 													<content>
 														<Title text="Attachment" level="H2"/>
 														<ToolbarSpacer />
-														  <HBOX>
-                                                         	<SearchField search="onSearchAttribute" width="17.5rem" id = "onAttachmentSearchId"/>
-                                                            <Button
+														<HBOX>
+															<SearchField search="onSearchAttribute" width="17.5rem" id = "onAttachmentSearchId"/>
+															<Button
 																width="20%"
 																align="right"
 																tooltip="Group"
 																icon="sap-icon://group-2"
 																press="handleAttributeGroupButtonPressed"/>
-															 <Button icon="sap-icon://sort" type="Transparent" press="onAttributeSort"/>
-                                                             <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowAttribute" id ="AddAttribute" visible="true"/> 
-                                                          </HBOX>
-														<!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowAttribute" id ="AddAttribute" visible="true"/> -->
+															<Button icon="sap-icon://sort" type="Transparent" press="onAttributeSort"/>
+															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowAttribute" id ="AddAttribute" visible="true"/>
+														</HBOX>
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -774,19 +754,16 @@
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Activity"/>
 												</Column>
-												<!-- <Column minScreenWidth="Tablet" demandPopin="true" mergeDuplicates="false"><Text text ="group"/></Column>    -->
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Attribute"/>
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Remark"/>
 												</Column>
-												<!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Start Date"/></Column> -->
-												<!-- <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="End date"/></Column>     -->
 											</columns>
 											<items>
 												<ColumnListItem type="Navigation" press="onListItemPressAttribute">
-												    <Text text="{attributeModel>parentstagename}" />
+													<Text text="{attributeModel>parentstagename}" />
 													<Text text="{attributeModel>stagename}" />
 													<Text text="{attributeModel>attributename}" />
 													<input value="{attributeModel>remark}" />
@@ -828,7 +805,6 @@
 												<form:formElements>
 													<form:FormElement label="">
 														<form:fields>
-															<!-- <Button text="Generate schedule" id="btnActivityschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onniclick"/> -->
 														</form:fields>
 													</form:FormElement>
 												</form:formElements>
@@ -916,7 +892,7 @@
 											<core:Title text="" />
 										</form:title>
 										<form:layout>
-									<form:ResponsiveGridLayout
+											<form:ResponsiveGridLayout
                                     labelSpanXL="4"
                                     labelSpanL="4"
                                     labelSpanM="4"
@@ -945,7 +921,6 @@
 												<form:formElements>
 													<form:FormElement label="">
 														<form:fields>
-															<!-- <Button text="Generate schedule" id="btnActivityschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onniclick"/> -->
 														</form:fields>
 													</form:FormElement>
 												</form:formElements>
@@ -957,7 +932,6 @@
                                     alignItems="Start"
                                     justifyContent="End">
 											<items>
-												<!-- <Button text="{i18n>saveButtonText}" id="btnActivitySave" type="Emphasized" class="sapUiSmallMarginEnd" press="onNISave"/> -->
 												<Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
 											</items>
 										</FlexBox>
