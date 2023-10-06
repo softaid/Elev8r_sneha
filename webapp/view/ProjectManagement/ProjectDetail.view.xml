@@ -270,9 +270,7 @@
                                                 <Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Activity" />
 												</Column>
-                                                <!-- <Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Edit" /> -->
-												<!-- </Column> -->
+                                               
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text =" status" />
 												</Column>
@@ -287,7 +285,6 @@
                                                         <Text text="{tblModel>stagecompletionpercentage}"/>
 														<!-- <Text text="{tblModel>completiondaystable}"/> -->
 														<Text text="{tblModel>overduedays}"/>
-
                                                         <Button icon="sap-icon://begin" type="Transparent" 
                                                                 press="onStagePress"
                                                                 app:mySuperExtraData="{tblModel>stageid}_Activity"
@@ -297,10 +294,10 @@
                                                                 app:mySuperExtraData="{tblModel>id}_Stage"
                                                             /> -->
 														<tnt:InfoLabel 
-                                                            text="1"
+                                                            text="{tblModel>status}"
                                                             displayOnly= "false"
                                                             class="sapMInfoLabelSmall" 
-                                                            colorScheme= "{parts: [{path: 'tblModel>overduedays'}],
+                                                            colorScheme= "{parts: [{path: 'tblModel>overduedaysstatus'}],
                                                             formatter: '.formatter.setItemStockColor'}"
                                                         />
 													</cells>
@@ -426,20 +423,24 @@
 													<Text text ="Activity Name" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" />
+													<Text text ="Actual Start" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" />
+													<Text text ="Actual End" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" />
+													<Text text ="Activity Completion" />
+												</Column>
+												<Column minScreenWidth="Tablet" demandPopin="true">
+													<Text text ="OverDueDay" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Attribute" />
 												</Column>
-												<!-- <Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Edit" /> -->
-												<!-- </Column> -->
+												<Column minScreenWidth="Tablet" demandPopin="true">
+													<Text text =" status" />
+												</Column>
+												
 											</columns>
 											<items>
 												<ColumnListItem  type="Navigation" press="onListItemPressActivity">
@@ -447,17 +448,22 @@
 														<Text text="{activitymodel>count}" />
                                                         <Text text="{activitymodel>parentstage}" />
 														<Text text="{activitymodel>stagename}" />
-														<Text text="{activitymodel>startdate}" />
-														<Text text="{activitymodel>enddate}"/>
-														<Text text="{activitymodel>completiondays}"/>
+														<Text text="{activitymodel>actualstartdate}" />
+														<Text text="{activitymodel>actualenddate}"/>
+														<Text text="{activitymodel>actualenddate}"/>
+														<Text text="{activitymodel>overduedays}"/>
 														<Button icon="sap-icon://begin" type="Transparent" 
                                                             press="onActivityPress"
                                                             app:mySuperExtraData="{activitymodel>stageid}_Attribute"
                                                         />
-														<!-- <Button icon="sap-icon://edit" type="Transparent" 
-                                                            press="onActivityPress"
-                                                            app:mySuperExtraData="{activitymodel>id}_Activity"
-                                                        /> -->
+														<tnt:InfoLabel 
+                                                            text="{activitymodel>status}"
+                                                            displayOnly= "false"
+                                                            class="sapMInfoLabelSmall" 
+                                                            colorScheme= "{parts: [{path: 'activitymodel>overduedaysstatus'}],
+                                                            formatter: '.formatter.setItemStockColor'}"
+                                                        />
+														
 													</cells>
 												</ColumnListItem>
 											</items>
