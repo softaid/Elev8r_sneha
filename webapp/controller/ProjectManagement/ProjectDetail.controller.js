@@ -902,6 +902,28 @@ sap.ui.define([
 
 		},
 
+		getAllStageArActivity: async function (oEvent) {
+
+			let currentContext = this;
+
+
+			if (oEvent.mParameters.id.match("btnallstage") != null) {
+
+				var tblModel = currentContext.getView().getModel("tblModel");
+				tblModel.setData(currentContext.StageList);
+
+				
+			}
+			else if (oEvent.mParameters.id.match("btnallactivity") != null) {
+				var activitymodel = currentContext.getView().getModel("activitymodel");
+				activitymodel.setData(currentContext.ActivityList);
+			
+
+			}
+			// else if (oEvent.mParameters.id.match("startDate") != null) {
+
+		},
+
 
 		resourceBundle: function () {
 			var currentContext = this;

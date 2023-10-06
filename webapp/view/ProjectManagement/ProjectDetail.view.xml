@@ -339,7 +339,7 @@
 												<form:formElements>
 													<form:FormElement label="">
 														<form:fields>
-															<Button text="Get All Activities" id="btnschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="onclick"/>
+															<Button text="All Stage" id="btnallstage" type="Emphasized" class="sapUiSmallMarginEnd" press="getAllStageArActivity"/>
 														</form:fields>
 													</form:FormElement>
 												</form:formElements>
@@ -503,7 +503,7 @@
 												<form:formElements>
 													<form:FormElement label="">
 														<form:fields>
-															<Button text="Get All Activities" id="btnActivityschedule" type="Emphasized" class="sapUiSmallMarginEnd" press="getAllStages"/>
+															<Button text="All Activity" id="btnallactivity" type="Emphasized" class="sapUiSmallMarginEnd" press="getAllStageArActivity"/>
 														</form:fields>
 													</form:FormElement>
 												</form:formElements>
