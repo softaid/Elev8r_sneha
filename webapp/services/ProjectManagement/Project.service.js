@@ -126,6 +126,10 @@ sap.ui.define([
                 commonService.runJQueryX("GET", "department/search/" + commonService.session("companyId"), null, callback, null);
             },
 
+            getAttachmentList : function(params, callback){
+                commonService.runJQueryX("GET", "elevproject/getlist/" + params.projectid, null, callback, null);
+            },
+
             getAllDocumentCollection : function(callback){
                 console.log(commonService.session("companyId"));
                 commonService.runJQueryX("GET", "documentcollection/search/" + commonService.session("companyId"), null, callback, null);

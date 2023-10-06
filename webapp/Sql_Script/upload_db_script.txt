@@ -3053,3 +3053,916 @@ END$$
 DELIMITER ;
 ;
 
+ALTER TABLE `db_elev8r_local`.`project_detail` 
+ADD COLUMN `iscustomersignoffrequired` TINYINT(4) NULL AFTER `dependency`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_projectdetail_save`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectdetail_save`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectdetail_save`(
+	IN p_id INT(11),
+    IN p_projectid int(11), 
+	IN p_stageid int(11), 
+	IN p_stagename varchar(100), 
+	IN p_parentid int(11), 
+	IN p_stagecompletionpercentage decimal(9,3), 
+	IN p_projectweightage decimal(9,3), 
+	IN p_managerstatusid int(11), 
+	IN p_customerstatusid int(11), 
+	IN p_iscompleted tinyint(4), 
+	IN p_startdate date, 
+	IN p_enddate date,
+    IN p_actualstartdate DATETIME, 
+    IN p_actualenddate DATETIME, 
+	IN p_actualcompletiondays DECIMAL(4,1),
+    IN p_completionper INT(11),
+    IN p_departmentid INT(11),
+    IN P_isactive tinyint(4),
+	IN p_attachment varchar(150), 
+	IN p_isstd tinyint(4), 
+	IN p_isdeleted tinyint(4),
+	IN p_completiondays varchar(50), 
+    IN p_type VARCHAR(100),
+    IN p_stgtypeid INT(11),
+    IN p_dependency VARCHAR(100),
+    IN p_iscustomersignoffrequired TINYINT(4),
+	IN p_companyid int(11),
+	IN p_userid INT(11),
+	OUT out_id INT(11)
+)
+BEGIN
+
+	SET @action = null;
+    
+    SET @action = null;
+	BEGIN
+		
+		IF(NULLIF(p_id, '0') IS NULL) THEN
+		
+			INSERT INTO project_detail 
+				(projectid, stageid, stagename, parentid, stagecompletionpercentage, projectweightage, managerstatusid,
+                customerstatusid, iscompleted, startdate, enddate,actualstartdate,actualenddate,actualcompletiondays,
+                completionper,departmentid,isactive, attachment, isstd, isdeleted,completiondays,type,stgtypeid,dependency,
+                iscustomersignoffrequired,companyid)
+			VALUES 
+				(p_projectid, p_stageid, p_stagename, p_parentid, p_stagecompletionpercentage, p_projectweightage, p_managerstatusid,
+                p_customerstatusid, p_iscompleted, p_startdate, p_enddate,p_actualstartdate,p_actualenddate,p_actualcompletiondays,
+                p_completionper,p_departmentid,P_isactive,p_attachment, p_isstd, p_isdeleted,p_completiondays,p_type,p_stgtypeid,p_dependency,
+                p_iscustomersignoffrequired,p_companyid);
+				
+		SET @action = 'INSERT';
+		
+	ELSE
+	
+		UPDATE project_detail
+			SET 
+				projectid = p_projectid,
+                stageid = p_stageid,
+                stagename = p_stagename,
+                parentid = p_parentid,
+                stagecompletionpercentage = p_stagecompletionpercentage,
+                projectweightage = p_projectweightage,
+                managerstatusid = p_managerstatusid,
+                customerstatusid = p_customerstatusid,
+                iscompleted = p_iscompleted,
+                startdate = p_startdate,
+                enddate = p_enddate,
+                actualstartdate=p_actualstartdate,
+                actualenddate=p_actualenddate,
+                actualcompletiondays=p_actualcompletiondays,
+                departmentid=p_departmentid,
+                isactive=P_isactive,
+                attachment = p_attachment,
+                isstd = p_isstd,
+                completiondays=p_completiondays,
+                completionper=p_completionper,
+                isdeleted = p_isdeleted,
+                type = p_type,
+                stgtypeid = p_stgtypeid,
+                dependency = p_dependency,
+                iscustomersignoffrequired = p_iscustomersignoffrequired,
+                companyid = p_companyid,
+				id = LAST_INSERT_ID(id)
+			WHERE
+				id = p_id 
+				AND companyid = p_companyid;
+                
+			
+			SET @action = 'UPDATE';        
+					
+		END IF;
+		
+		SELECT LAST_INSERT_ID() INTO out_id; 
+		
+	END;
+
+END$$
+
+DELIMITER ;
+;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_projectdetail_search`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectdetail_search`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectdetail_search`(
+	IN p_projectid int(11)
+)
+BEGIN
+		
+	SELECT id, 
+		   projectid, 
+		   stageid, 
+		   stagename, 
+		   parentid, 
+		   stagecompletionpercentage, 
+		   projectweightage, 
+		   managerstatusid,
+		   customerstatusid, 
+		   iscompleted, 
+		   DATE_FORMAT(startdate,'%d/%m/%Y') as startdate,
+		   DATE_FORMAT(enddate,'%d/%m/%Y') as enddate, 
+           DATEDIFF(enddate,startdate) as planneddays,
+           (DATEDIFF(IFNULL(actualenddate,CURDATE()),actualstartdate) - DATEDIFF(enddate, startdate)) as overduedays,
+		   attachment, 
+		   isstd, 
+		   isdeleted,
+           iscustomersignoffrequired
+		FROM project_detail
+		
+		WHERE projectid = p_projectid;
+        
+END$$
+
+DELIMITER ;
+;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_projectdetail_select`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectdetail_select`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectdetail_select`(
+	IN p_id INT(11),
+    IN p_field varchar(30)
+)
+BEGIN
+
+	SET @counter = 0;
+	SET @field=0;
+    
+
+SELECT (@counter := @counter + 1) AS count ,  
+			PD.id, 
+           PD.projectid, 
+		   PD.stageid, 
+           PD.stagename, 
+           PD.parentid, 
+           PD.stagecompletionpercentage, 
+           PD.projectweightage, 
+           PD.managerstatusid,
+		   PD.customerstatusid,
+           PD.completiondays,
+           PD.isactive,
+           PD.iscompleted, 
+           DATE_FORMAT(PD.startdate,'%d/%m/%Y') as startdate,
+		   DATE_FORMAT(PD.enddate,'%d/%m/%Y') as enddate,
+           DATE_FORMAT(PD.actualstartdate,'%d/%m/%Y') as actualstartdate,
+		   DATE_FORMAT(PD.actualenddate,'%d/%m/%Y') as actualenddate,
+           DATEDIFF(PD.enddate,PD.startdate) as planneddays,
+           (DATEDIFF(IFNULL(PD.actualenddate,CURDATE()),PD.actualstartdate) - DATEDIFF(PD.enddate,PD.startdate)) as overduedays,
+			DATEDIFF(PD.actualenddate,PD.actualstartdate) as actualdays,
+           PD.actualcompletiondays,
+           PD.completionper,
+           PD.departmentid,
+           PD.attachment,
+           PD.isstd,
+           PD.isdeleted,
+           PD.stgtypeid,
+           PD.dependency,
+           PD.iscustomersignoffrequired,
+           PD.companyid,
+           RE.description AS parentstage
+	FROM project_detail PD  
+    LEFT JOIN  reference RE ON RE.id=PD.parentid
+    WHERE  PD.projectid= p_id AND 
+	(p_field = 'stage' AND PD.parentid IS NULL OR p_field != 'stage' AND PD.parentid IS NOT NULL);
+     -- parentid=IF(p_field != 'activity', NULL, NOT NULL);
+
+END$$
+
+DELIMITER ;
+;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_reference_save`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_save`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_reference_save`(
+ IN p_id INT(11),
+ IN p_typecode VARCHAR(100),
+ IN p_parentid INT(11),
+ IN p_type VARCHAR(20),
+ IN p_stgtypeid INT(11),
+ IN p_description VARCHAR(200),
+ IN p_active TINYINT(4),
+ IN p_dependency VARCHAR(200),
+ IN p_defaultvalue TINYINT(4),
+ IN p_projectper DECIMAL(9,3),
+ IN p_stageper DECIMAL(9,3),
+ IN p_departmentid INT(11),
+ IN p_sequenceno INT(11),
+ IN p_modelid varchar(200),
+ IN p_isrelatedtopayment TINYINT(4),
+ IN p_iscustomersignoffrequired TINYINT(4), 
+ IN p_notifyinternaluser TINYINT(4),
+ IN p_attributetypes VARCHAR(200),
+ IN p_companyid INT(11),
+ IN p_userid INT(11),
+ OUT out_id INT )
+BEGIN
+	SET @action = null;
+    SET @prjCnt = null;
+    
+    SELECT count(*) INTO @prjCnt FROM project WHERE companyid = p_companyid;
+	IF(p_defaultvalue = 1) THEN
+		UPDATE reference SET defaultvalue = 0 WHERE typecode = p_typecode;
+    END IF;
+    
+	IF(NULLIF(p_id, '0') IS NULL) THEN
+		INSERT INTO reference(typecode, parentid, type, stgtypeid, description, active, dependency,defaultvalue,projectper,
+        stageper, createddate, modifieddate, departmentid, sequenceno, modelid, isrelatedtopayment, iscustomersignoffrequired,
+        notifyinternaluser,attributetypes,companyid)
+		VALUES (p_typecode, p_parentid, p_type, p_stgtypeid, p_description, p_active,p_dependency,p_defaultvalue,p_projectper,
+        p_stageper, now(), now(),p_departmentid, p_sequenceno, p_modelid, p_isrelatedtopayment, p_iscustomersignoffrequired,
+        p_notifyinternaluser, p_attributetypes, p_companyid);
+		
+		SET @action = 'INSERT';
+        
+        IF(p_typecode = 'ProMilestones') THEN
+			IF(@prjCnt > 0) THEN
+				SET @row_number = 0;
+				
+				DROP TABLE IF EXISTS tempproject;
+				CREATE TEMPORARY TABLE tempproject
+				
+				SELECT (@row_number:=@row_number + 1) AS num, id as projectid from (
+					SELECT 
+						id
+					FROM project
+				) 
+				as tblproject;
+
+				BEGIN
+					DECLARE n INT DEFAULT 0;
+					DECLARE i INT DEFAULT 0; 
+					SELECT COUNT(*) FROM tempproject INTO n;
+
+					WHILE i < n DO
+						SET @projectid = NULL;
+						SELECT projectid INTO @projectid FROM tempproject WHERE num = i + 1;
+
+						SET @projectdetailid = null;
+						 CALL spc_projectdetail_save( 	
+							NULL,
+							@projectid,
+							(SELECT id FROM reference WHERE description = p_description LIMIT 1),
+							p_description,
+							p_parentid,
+							null,
+							null,
+							NULL,
+							NULL,
+							0,
+							Null,
+							NULL,
+							NULL,
+							NULL,
+							NULL,
+							NULL,
+							p_departmentid,
+							0,
+							NULL,
+							1,
+							0,
+							NULL,
+							p_companyid,
+							p_userid,
+							@projectdetailid
+						 );
+
+						SET i = i + 1;
+					END WHILE;
+				END;
+			END IF;
+        END IF;
+	
+	ELSE
+		SET @ref_parentid = null;
+		IF(p_parentid = 0) THEN
+			SELECT null INTO @ref_parentid;
+		END IF;
+		
+		UPDATE reference
+		SET typecode = p_typecode, 
+			parentid = @ref_parentid, 
+            type = p_type, 
+            stgtypeid = p_stgtypeid,
+			description = p_description,
+            active = p_active,
+            dependency = p_dependency,
+            defaultvalue = p_defaultvalue,
+            projectper = p_projectper,
+            stageper = p_stageper,
+            modifieddate = now(),
+            departmentid = p_departmentid,
+            sequenceno = p_sequenceno,
+            modelid = p_modelid,
+            isrelatedtopayment = p_isrelatedtopayment,
+            iscustomersignoffrequired = p_iscustomersignoffrequired,
+            notifyinternaluser = p_notifyinternaluser,
+            attributetypes = p_attributetypes,
+			companyid = p_companyid,
+			id = LAST_INSERT_ID(id)
+			
+		WHERE id = p_id
+		AND companyid = p_companyid;
+		
+		SET @action = 'UPDATE';
+        
+        IF(@prjCnt > 0) THEN
+			SET @master = null;
+			SELECT master INTO @master FROM referencetype WHERE typecode = p_typecode;
+			
+			IF(@master = 'ProjectMaster') THEN
+				UPDATE project_detail
+				SET stagename = p_description
+				-- stagecompletionpercentage = p_stageper,
+				-- projectweightage = p_projectper
+				WHERE stageid = p_id;
+			END IF;
+		END IF;
+	END IF;
+	
+	SELECT LAST_INSERT_ID() INTO OUT_ID;
+	
+	-- record log
+   CALL spc_commonlog_save(p_companyid, 'reference', out_id, @action, p_userid);
+
+END$$
+
+DELIMITER ;
+;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_projectdetail_select`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectdetail_select`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectdetail_select`(
+	IN p_id INT(11),
+    IN p_field varchar(30)
+)
+BEGIN
+
+	SET @counter = 0;
+	SET @field=0;
+    
+
+SELECT (@counter := @counter + 1) AS count ,  
+			PD.id, 
+           PD.projectid, 
+		   PD.stageid, 
+           PD.stagename, 
+           PD.parentid, 
+           PD.stagecompletionpercentage, 
+           PD.projectweightage, 
+           PD.managerstatusid,
+		   PD.customerstatusid,
+           PD.completiondays,
+           PD.isactive,
+           PD.iscompleted, 
+           DATE_FORMAT(PD.startdate,'%d/%m/%Y') as startdate,
+		   DATE_FORMAT(PD.enddate,'%d/%m/%Y') as enddate,
+           DATE_FORMAT(PD.actualstartdate,'%d/%m/%Y') as actualstartdate,
+		   DATE_FORMAT(PD.actualenddate,'%d/%m/%Y') as actualenddate,
+           DATEDIFF(PD.enddate,PD.startdate) as planneddays,
+           (DATEDIFF(IFNULL(PD.actualenddate,CURDATE()),PD.actualstartdate) - DATEDIFF(PD.enddate,PD.startdate)) as overduedays,
+			DATEDIFF(PD.actualenddate,PD.actualstartdate) as actualdays,
+           PD.actualcompletiondays,
+           PD.completionper,
+           PD.departmentid,
+           PD.attachment,
+           PD.isstd,
+           PD.isdeleted,
+           PD.stgtypeid,
+           PD.dependency,
+           PD.iscustomersignoffrequired,
+           PD.companyid,
+           RE.description AS parentstage,
+           CASE
+				WHEN actualstartdate IS NULL THEN 'New'
+                WHEN (actualstartdate IS NOT NULL AND actualenddate IS NULL) THEN 'In Progress'
+				ELSE 'Completed'
+			END as status
+	FROM project_detail PD  
+    LEFT JOIN  reference RE ON RE.id=PD.parentid
+    WHERE  PD.projectid= p_id AND 
+	(p_field = 'stage' AND PD.parentid IS NULL OR p_field != 'stage' AND PD.parentid IS NOT NULL);
+     -- parentid=IF(p_field != 'activity', NULL, NOT NULL);
+
+END$$
+
+DELIMITER ;
+;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_projectdetail_save`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectdetail_save`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectdetail_save`(
+	IN p_id INT(11),
+    IN p_projectid int(11), 
+	IN p_stageid int(11), 
+	IN p_stagename varchar(100), 
+	IN p_parentid int(11), 
+	IN p_stagecompletionpercentage decimal(9,3), 
+	IN p_projectweightage decimal(9,3), 
+	IN p_managerstatusid int(11), 
+	IN p_customerstatusid int(11), 
+	IN p_iscompleted tinyint(4), 
+	IN p_startdate date, 
+	IN p_enddate date,
+    IN p_actualstartdate DATETIME, 
+    IN p_actualenddate DATETIME, 
+	IN p_actualcompletiondays DECIMAL(4,1),
+    IN p_completionper INT(11),
+    IN p_departmentid INT(11),
+    IN P_isactive tinyint(4),
+	IN p_attachment varchar(150), 
+	IN p_isstd tinyint(4), 
+	IN p_isdeleted tinyint(4),
+	IN p_completiondays varchar(50), 
+    IN p_type VARCHAR(100),
+    IN p_stgtypeid INT(11),
+    IN p_dependency VARCHAR(100),
+    IN p_iscustomersignoffrequired TINYINT(4),
+	IN p_companyid int(11),
+	IN p_userid INT(11),
+	OUT out_id INT(11)
+)
+BEGIN
+
+    SET @action = null;
+	BEGIN
+		
+		IF(NULLIF(p_id, '0') IS NULL) THEN
+		
+			INSERT INTO project_detail 
+				(projectid, stageid, stagename, parentid, stagecompletionpercentage, projectweightage, managerstatusid,
+                customerstatusid, iscompleted, startdate, enddate,actualstartdate,actualenddate,actualcompletiondays,
+                completionper,departmentid,isactive, attachment, isstd, isdeleted,completiondays,type,stgtypeid,dependency,
+                iscustomersignoffrequired,companyid)
+			VALUES 
+				(p_projectid, p_stageid, p_stagename, p_parentid, p_stagecompletionpercentage, p_projectweightage, p_managerstatusid,
+                p_customerstatusid, p_iscompleted, p_startdate, p_enddate,p_actualstartdate,p_actualenddate,p_actualcompletiondays,
+                p_completionper,p_departmentid,P_isactive,p_attachment, p_isstd, p_isdeleted,p_completiondays,p_type,p_stgtypeid,p_dependency,
+                p_iscustomersignoffrequired,p_companyid);
+                
+			-- if user added new stage from project detail then that should be saved in project master(reference) also
+            
+				 SET @refid = null;
+				 CALL spc_reference_save( 	
+					NULL,
+					'ProMilestones',
+					p_parentid,
+					p_type,
+				    p_stgtypeid,
+				    p_stagename,
+				    p_isactive,
+				    p_dependency,
+				    0,
+				    p_projectweightage,
+				    p_stagecompletionpercentage,
+				    p_departmentid,
+				    NULL,
+				    NULL,
+				    NULL,
+				    p_iscustomersignoffrequired, 
+				    0,
+					NULL,
+					p_companyid,
+					p_userid,
+					@refid
+				 );
+				
+			UPDATE project_detail
+            SET stageid = @refid
+            WHERE id = LAST_INSERT_ID();
+            
+		SET @action = 'INSERT';
+		
+	ELSE
+	
+		UPDATE project_detail
+			SET 
+				projectid = p_projectid,
+                stageid = p_stageid,
+                stagename = p_stagename,
+                parentid = p_parentid,
+                stagecompletionpercentage = p_stagecompletionpercentage,
+                projectweightage = p_projectweightage,
+                managerstatusid = p_managerstatusid,
+                customerstatusid = p_customerstatusid,
+                iscompleted = p_iscompleted,
+                startdate = p_startdate,
+                enddate = p_enddate,
+                actualstartdate=p_actualstartdate,
+                actualenddate=p_actualenddate,
+                actualcompletiondays=p_actualcompletiondays,
+                departmentid=p_departmentid,
+                isactive=P_isactive,
+                attachment = p_attachment,
+                isstd = p_isstd,
+                completiondays=p_completiondays,
+                completionper=p_completionper,
+                isdeleted = p_isdeleted,
+                type = p_type,
+                stgtypeid = p_stgtypeid,
+                dependency = p_dependency,
+                iscustomersignoffrequired = p_iscustomersignoffrequired,
+                companyid = p_companyid,
+				id = LAST_INSERT_ID(id)
+			WHERE
+				id = p_id 
+				AND companyid = p_companyid;
+                
+			
+			SET @action = 'UPDATE';        
+					
+		END IF;
+		
+        SELECT stageid INTO out_id FROM project_detail WHERE id = LAST_INSERT_ID();
+		-- SELECT LAST_INSERT_ID() INTO out_id; 
+		
+	END;
+
+END$$
+
+DELIMITER ;
+;
+
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_projectattributes_save`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectattributes_save`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectattributes_save`(
+	IN p_id INT(11), 
+    IN p_attributeid INT(11),
+	IN p_projectid INT(11),
+    IN p_stageid INT(11),
+    IN p_activityid INT(11),
+    IN p_attributetypeids VARCHAR(100),
+    IN p_attributename VARCHAR(100),
+    IN p_attributevalue JSON,
+    IN p_remark VARCHAR(200),
+	IN p_companyid INT(11),
+	OUT out_id INT
+)
+BEGIN
+
+	SET @action = null;
+
+	IF(NULLIF(p_id, '0') IS NULL) THEN
+		
+		INSERT INTO project_attributes(id,
+							  attributeid,
+							  projectid,
+                              stageid,
+                              activityid,
+                              attributetypeids,
+                              attributename,
+                              attributevalue,
+                              remark,
+                              companyid)
+					   VALUES (p_id,
+							   p_attributeid,
+							   p_projectid,
+                               p_stageid,
+                               p_activityid,
+                               p_attributetypeids,
+                               p_attributename,
+                               p_attributevalue,
+                               p_remark,
+                               p_companyid);
+		
+        -- if user added new stage from project detail then that should be saved in project master(reference) also
+            
+				 SET @refid = null;
+				 CALL spc_reference_save( 	
+					NULL,
+					'ProMilestones',
+					p_activityid,
+					'Attribute',
+				    NULL,
+				    p_attributename,
+				    1,
+				    NULL,
+				    0,
+				    NULL,
+				    NULL,
+				    NULL,
+				    NULL,
+				    NULL,
+				    NULL,
+				    NULL, 
+				    0,
+					p_attributetypeids,
+					p_companyid,
+					NULL,
+					@refid
+				 );
+				
+			UPDATE project_attributes
+            SET attributeid = @refid
+            WHERE id = LAST_INSERT_ID();
+        
+		SET @action = 'INSERT';
+	
+	ELSE
+		UPDATE project_attributes
+		SET 
+            projectid = p_projectid,
+            attributeid = p_attributeid,
+		    stageid = p_stageid,
+		    activityid = p_activityid,
+		    attributetypeids = p_attributetypeids,
+		    attributename = p_attributename,
+		    attributevalue = p_attributevalue,
+			remark = p_remark,
+			id = LAST_INSERT_ID(id)
+			
+		WHERE id = p_id
+		AND companyid = p_companyid;
+                
+		SET @action = 'UPDATE';
+		
+	END IF;
+	
+	SELECT attributeid INTO out_id FROM project_attributes WHERE id = LAST_INSERT_ID();
+	-- SELECT LAST_INSERT_ID() INTO OUT_ID;
+    
+END$$
+
+DELIMITER ;
+;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_reference_save`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_save`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_reference_save`(
+ IN p_id INT(11),
+ IN p_typecode VARCHAR(100),
+ IN p_parentid INT(11),
+ IN p_type VARCHAR(20),
+ IN p_stgtypeid INT(11),
+ IN p_description VARCHAR(200),
+ IN p_active TINYINT(4),
+ IN p_dependency VARCHAR(200),
+ IN p_defaultvalue TINYINT(4),
+ IN p_projectper DECIMAL(9,3),
+ IN p_stageper DECIMAL(9,3),
+ IN p_departmentid INT(11),
+ IN p_sequenceno INT(11),
+ IN p_modelid varchar(200),
+ IN p_isrelatedtopayment TINYINT(4),
+ IN p_iscustomersignoffrequired TINYINT(4), 
+ IN p_notifyinternaluser TINYINT(4),
+ IN p_attributetypes VARCHAR(200),
+ IN p_companyid INT(11),
+ IN p_userid INT(11),
+ OUT out_id INT )
+BEGIN
+	SET @action = null;
+    SET @prjCnt = null;
+    
+    SELECT count(*) INTO @prjCnt FROM project WHERE companyid = p_companyid;
+	IF(p_defaultvalue = 1) THEN
+		UPDATE reference SET defaultvalue = 0 WHERE typecode = p_typecode;
+    END IF;
+    
+	IF(NULLIF(p_id, '0') IS NULL) THEN
+		INSERT INTO reference(typecode, parentid, type, stgtypeid, description, active, dependency,defaultvalue,projectper,
+        stageper, createddate, modifieddate, departmentid, sequenceno, modelid, isrelatedtopayment, iscustomersignoffrequired,
+        notifyinternaluser,attributetypes,companyid)
+		VALUES (p_typecode, p_parentid, p_type, p_stgtypeid, p_description, p_active,p_dependency,p_defaultvalue,p_projectper,
+        p_stageper, now(), now(),p_departmentid, p_sequenceno, p_modelid, p_isrelatedtopayment, p_iscustomersignoffrequired,
+        p_notifyinternaluser, p_attributetypes, p_companyid);
+		
+		SET @action = 'INSERT';
+        
+        IF(p_typecode = 'ProMilestones') THEN
+			IF(@prjCnt > 0) THEN
+				SET @row_number = 0;
+				
+				DROP TABLE IF EXISTS tempproject;
+				CREATE TEMPORARY TABLE tempproject
+				
+				SELECT (@row_number:=@row_number + 1) AS num, id as projectid from (
+					SELECT 
+						id
+					FROM project
+				) 
+				as tblproject;
+
+				BEGIN
+					DECLARE n INT DEFAULT 0;
+					DECLARE i INT DEFAULT 0; 
+					SELECT COUNT(*) FROM tempproject INTO n;
+
+					WHILE i < n DO
+						SET @projectid = NULL;
+						SELECT projectid INTO @projectid FROM tempproject WHERE num = i + 1;
+
+						SET @projectdetailid = null;
+						 CALL spc_projectdetail_save( 	
+							NULL,
+							@projectid,
+							(SELECT id FROM reference WHERE description = p_description LIMIT 1),
+							p_description,
+							p_parentid,
+							null,
+							null,
+							NULL,
+							NULL,
+							0,
+							Null,
+							NULL,
+							NULL,
+							NULL,
+							NULL,
+							NULL,
+							p_departmentid,
+							1,
+							NULL,
+							1,
+							0,
+							NULL,
+                            p_type,
+							p_stgtypeid,
+							p_dependency,
+							p_iscustomersignoffrequired,
+							p_companyid,
+							p_userid,
+							@projectdetailid
+						 );
+
+						SET i = i + 1;
+					END WHILE;
+				END;
+			END IF;
+        END IF;
+	
+	ELSE
+		SET @ref_parentid = null;
+		IF(p_parentid = 0) THEN
+			SELECT null INTO @ref_parentid;
+		END IF;
+		
+		UPDATE reference
+		SET typecode = p_typecode, 
+			parentid = @ref_parentid, 
+            type = p_type, 
+            stgtypeid = p_stgtypeid,
+			description = p_description,
+            active = p_active,
+            dependency = p_dependency,
+            defaultvalue = p_defaultvalue,
+            projectper = p_projectper,
+            stageper = p_stageper,
+            modifieddate = now(),
+            departmentid = p_departmentid,
+            sequenceno = p_sequenceno,
+            modelid = p_modelid,
+            isrelatedtopayment = p_isrelatedtopayment,
+            iscustomersignoffrequired = p_iscustomersignoffrequired,
+            notifyinternaluser = p_notifyinternaluser,
+            attributetypes = p_attributetypes,
+			companyid = p_companyid,
+			id = LAST_INSERT_ID(id)
+			
+		WHERE id = p_id
+		AND companyid = p_companyid;
+		
+		SET @action = 'UPDATE';
+        
+        IF(@prjCnt > 0) THEN
+			SET @master = null;
+			SELECT master INTO @master FROM referencetype WHERE typecode = p_typecode;
+			
+			IF(@master = 'ProjectMaster') THEN
+				UPDATE project_detail
+				SET stagename = p_description
+				-- stagecompletionpercentage = p_stageper,
+				-- projectweightage = p_projectper
+				WHERE stageid = p_id;
+			END IF;
+		END IF;
+	END IF;
+	
+	SELECT LAST_INSERT_ID() INTO OUT_ID;
+	
+	-- record log
+   CALL spc_commonlog_save(p_companyid, 'reference', out_id, @action, p_userid);
+
+END$$
+
+DELIMITER ;
+;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_documentcollectionlist_search`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_documentcollectionlist_search`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_documentcollectionlist_search`(
+	IN p_projectid INT(11)
+)
+BEGIN
+	SELECT DD.id,
+		   DD.stageid,
+           DD.document_id,
+           DD.document_url,
+		   DD.document_name,
+           REF.description,
+           DD.type,
+           CASE
+				WHEN (DD.type = 'Stage') THEN REF.description
+				ELSE '-'
+			END as stagename,
+            CASE
+				WHEN (DD.type = 'Activity') THEN REF.description
+				ELSE '-'
+			END as activityname,
+            CASE
+				WHEN (DD.type = 'Attribute') THEN REF.description
+				ELSE '-'
+			END as attributename
+    
+    FROM documentcollectiondetails DD
+    LEFT JOIN reference REF ON REF.id = DD.stageid
+    
+    WHERE
+        DD.projectid = p_projectid;
+
+END$$
+
+DELIMITER ;
+;
+
+

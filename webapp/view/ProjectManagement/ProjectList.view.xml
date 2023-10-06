@@ -18,7 +18,7 @@
 				<f:content>	
                     <VBox fitContainer="true" width="100%">
                         <Panel id="pnlLeadMaster" expandable="true" expanded="true"  headerText="Project List" width="100%">
-                        <form:Form editable="true">
+                        <!-- <form:Form editable="true">
                             <form:title>
                             </form:title>
                             <form:layout>
@@ -95,9 +95,9 @@
                                     </form:formElements>      
                                 </form:FormContainer>
                             </form:formContainers>
-                        </form:Form>               
+                        </form:Form>                -->
                     </Panel>
-                        <Table id="tblPartyMaster" 
+                        <Table id="tblProjectList" 
                                 inset="false"
                                 sticky="ColumnHeaders" growing="true" growingThreshold="10" growingScrollToLoad="true"  
                                 items="{
@@ -108,13 +108,17 @@
                                     <content>
                                         <Title text="" level="H2"/>
                                         <ToolbarSpacer />
+                                          <HBOX>
                                             <SearchField search="onSearch" width="17.5rem" id = "onSearchId"/>
-                                            <!-- <Button id="deleteicon" icon="sap-icon://delete" type="Transparent" press="getSelectedItems"/> -->
-                                            <!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNew"/>  -->
-                                        <!-- <Button
-                                        text="Upload template"
-                                        type="Emphasized"
-                                        press="onUploadMasterData" id="btnUploadData"/> -->
+                                            <Button
+                                                width="20%"
+                                                align="right"
+                                                tooltip="Group"
+                                                icon="sap-icon://group-2"
+                                                press="handleProjectGroupButtonPressed"/>
+                                                <Button icon="sap-icon://sort" type="Transparent" press="onProjectSort"/>
+                                            </HBOX>
+                                           
                                     </content>
                                 </Toolbar>
                             </headerToolbar>

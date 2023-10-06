@@ -1,0 +1,13 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm=".handleProjectGroupDialogConfirm"
+		reset=".resetProjectGroupDialog">
+		<groupItems>
+             <ViewSettingsItem text="Customer Name" key="quotename" />
+             <ViewSettingsItem text="Project Status" key="pstatus" />
+             <ViewSettingsItem text="Model" key="model" />
+		</groupItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>
