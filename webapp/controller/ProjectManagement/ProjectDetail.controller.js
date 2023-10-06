@@ -857,11 +857,11 @@ sap.ui.define([
 			let oThis = this;
 			Projectservice.getReferenceRelatedPayment({typecode : typecode,projectid : projectid},function(data){
 				if(data.length && data[0].length){
-					var paymentmodel = oThis.getView().getModel("paymentmodel");
+					var paymenttblmodel = oThis.getView().getModel("paymenttblmodel");
 
-					paymentmodel.setData(data[0]);
-					console.log("--------------paymentmodel------------", paymentmodel);
-					paymentmodel.refresh();
+					paymenttblmodel.setData(data[0]);
+					console.log("--------------paymenttblmodel------------", paymenttblmodel);
+					paymenttblmodel.refresh();
 				}
 			})
 		},

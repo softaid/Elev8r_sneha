@@ -524,7 +524,7 @@
 								<IconTabFilter text="Payments">
 									<VBox fitContainer="true">
 										<Table id="tblpaymentStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
-											path: 'paymentmodel>/',
+											path: 'paymenttblmodel>/',
 												sorter: {
 													path: 'id'
 												}
@@ -546,6 +546,9 @@
 													<Text text ="Activity" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
+													<Text text ="Type" />
+												</Column>
+												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Payment(%)" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
@@ -558,11 +561,12 @@
 											<items>
 												<ColumnListItem type="Navigation" press="onListItemPressPayments">
 													<cells>
-														<Text text="{paymentmodel>parentstage}" />
-														<Text text="{paymentmodel>description}" />
-														<Text text="{paymentmodel>paymentper}" />
-														<Text text="{paymentmodel>expectedamount}"/>
-														<Text text="{paymentmodel>receivedamount}"/>
+														<Text text="{paymenttblmodel>parentstage}" />
+														<Text text="{paymenttblmodel>stagename}" />
+														<Text text="{paymenttblmodel>type}" />
+														<Text text="{paymenttblmodel>paymentper}" />
+														<Text text="{paymenttblmodel>expectedamount}"/>
+														<Text text="{paymenttblmodel>receivedamount}"/>
 														<tnt:InfoLabel 
                                                 text="1"
                                                 displayOnly= "false"

@@ -6238,4 +6238,40 @@ END$$
 DELIMITER ;
 ;
 
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_reference_paymentstages`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_paymentstages`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_reference_paymentstages`(
+	IN p_typecode VARCHAR(20),
+    IN p_projectid INT(11)
+)
+BEGIN
+
+	SET @row_number = 0;
+				
+	DROP TABLE IF EXISTS tempstagetype;
+	CREATE TEMPORARY TABLE tempstagetype
+	
+	SELECT (@row_number:=@row_number + 1) AS num, id as stgtypeid from (
+		SELECT id FROM `reference` WHERE typecode = p_typecode AND description = 'Payment'
+	) 
+	as tblproject;
+    
+    SELECT PD.*,
+		   REF.description as parentstage
+	FROM `project_detail` PD
+    LEFT JOIN `reference` REF ON REF.id = PD.parentid
+    WHERE PD.stgtypeid IN (SELECT stgtypeid FROM tempstagetype) AND PD.projectid = p_projectid;
+
+END$$
+
+DELIMITER ;
+;
+
 
