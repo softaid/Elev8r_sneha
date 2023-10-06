@@ -94,6 +94,7 @@ sap.ui.define([
 			// this.getAllProject();
 			this.getRole();
 			this.getAllDepartment();
+			commonFunction.getUser(this,18);
 
 			let subcontractorModel = new JSONModel();
 			subcontractorModel.setData(commonFunction.getAllSubcontractors(this));
@@ -1378,6 +1379,38 @@ sap.ui.define([
 			draggedData.listItem.setBindingContext(tableModel.createBindingContext("/" + dropIndex));
 		},
 
+		onDownload: async function (oEvent) {
+			let oConfig = sap.ui.getCore().getModel("configModel");
+
+			let oDownloadData = oEvent.getSource();
+			let [doc_url, document_name] = oDownloadData.data("mySuperExtraData").split('_');
+			let image_url = oConfig.oData.webapi.docurl + doc_url;
+
+			var oXHR = new XMLHttpRequest();
+			oXHR.open("GET", image_url, true);
+			oXHR.responseType = "blob";
+
+			oXHR.onload = function (event) {
+				var blob = oXHR.response;
+
+				// Create a temporary anchor element to initiate the download
+				var link = document.createElement("a");
+				link.href = URL.createObjectURL(blob);
+
+				// Set the download attribute to specify the filename for the downloaded file
+				link.setAttribute("download", document_name);
+
+				// Trigger the click event on the anchor element
+				link.click();
+
+				// Clean up - revoke the object URL and remove the anchor element after the click event has been triggered
+				URL.revokeObjectURL(link.href);
+			};
+
+			oXHR.send();
+
+
+		},
 
 		handleSelectionFinish: function (oEvt) {
 
