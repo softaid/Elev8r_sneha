@@ -86,6 +86,8 @@ sap.ui.define([
 			stageModel.setData({});
 			this.getView().setModel(model, "StageModel");
 
+			commonFunction.getReferenceByType("ProjStgType", "stagetypeModel", this);
+
 
 			this.flag = false;
 
@@ -424,7 +426,7 @@ sap.ui.define([
 				oDayHistory.dependencyStatus= dependency!=null?(dependency.split(",").every((ele) => {
 					 return currentContext.projectCompletionObj[ele]==100;
 				})):true;
-
+				oDayHistory.WarningStatus= oDayHistory.dependencyStatus==false?"To start the Activity you need to first complete dependency stages":null;
 				currentContext.bus = sap.ui.getCore().getEventBus();
 				currentContext.bus.publish("activitystatus", "setDetailActivityPage", { viewName: "ProjectActivityDetail", viewModel: oDayHistory });
 

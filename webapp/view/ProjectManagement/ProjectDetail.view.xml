@@ -244,7 +244,7 @@
 													<Text text ="Actual End" />
 												</Column>
                                                 <Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Stage completion" />
+													<Text text ="Stage Complt(%)" />
 												</Column>
 												<!-- <Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Actual Days" />
@@ -414,7 +414,7 @@
 													<Text text ="Actual End" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Activity Completion" />
+													<Text text ="Activity Complt(%)" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="OverDueDay" />
@@ -435,7 +435,7 @@
 														<Text text="{activitymodel>stagename}" />
 														<Text text="{activitymodel>actualstartdate}" />
 														<Text text="{activitymodel>actualenddate}"/>
-														<Text text="{activitymodel>actualenddate}"/>
+														<Text text="{activitymodel>stagecompletionpercentage}"/>
 														<Text text="{activitymodel>overduedays}"/>
 														<Button icon="sap-icon://begin" type="Transparent" 
                                                             press="onActivityPress"
