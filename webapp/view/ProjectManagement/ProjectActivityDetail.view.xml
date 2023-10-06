@@ -6,9 +6,9 @@
 	xmlns="sap.m"
 	xmlns:t="sap.ui.table"
 	xmlns:f="sap.f"
+	xmlns:core="sap.ui.core"
 	xmlns:layout="sap.ui.layout"
 	xmlns:form="sap.ui.layout.form"
-    xmlns:core="sap.ui.core"
 	height="100%">
 		
 	 <f:DynamicPage toggleHeaderOnTitleClick="false">
@@ -111,7 +111,13 @@
                                         <Input id="completionDay" value="{ActivityDetailModel>/completiondays}" change="dayCalculation"/>
                                     </form:fields>
                                 </form:FormElement> 
-                                  <form:FormElement label=" Actual Start Date">
+                                  <form:FormElement label=" Actual Start Date"
+                                   visible="{
+                                        path: 'ActivityDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                                  
+                                   >
                                     <form:fields>
                                     <DatePicker id="ActualstartDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
@@ -122,7 +128,9 @@
                                                 editable="true" />
                                         </form:fields>
                                 </form:FormElement>
-                                 <form:FormElement label=" Actual End Date">
+                                 <form:FormElement label=" Actual End Date" 
+                                  visible="{ActivityDetailModel>/dependencyStatus}"
+                                 >
                                         <form:fields>
                                     <DatePicker id="actualendDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
@@ -133,19 +141,32 @@
                                                 editable="true"/>
                                         </form:fields>
                                 </form:FormElement>
-                                 <form:FormElement label=" Actual Completion Day">
+                                 <form:FormElement label=" Actual Completion Day"  
+                                  visible="{
+                                        path: 'ActivityDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                                >
                                     <form:fields>
                                         <Input id="actualcompletionDay" value="{ActivityDetailModel>/actualcompletiondays}"  editable="true"/>
                                     </form:fields>
                                 </form:FormElement> 
-                                <form:FormElement label="Stage %" visible="true">
+                                <form:FormElement label="Stage %"
+
+                                 visible="{
+                                        path: 'ActivityDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                                 >
                                     <form:fields>
                                         <Input id="StagePercent" value="{ActivityDetailModel>/stagecompletionpercentage}"/>
                                     </form:fields>
                                 </form:FormElement>
-                                <form:FormElement label="Project %"  visible="false" >
+                                <form:FormElement label="Project %"  visible="false" 
+                                > 
                                     <form:fields>
-                                <Input id="projectPercent" value="{ActivityDetailModel>/projectweightage}"/>
+                                <Input id="projectPercent" value="{ActivityDetailModel>/projectweightage}"
+                                />
                                     </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
@@ -166,7 +187,12 @@
                                             </Switch>
                                         </form:fields>
                                     </form:FormElement> -->
-                                      <form:FormElement label="Is Started">
+                                      <form:FormElement label="Is Started"  
+                                       visible="{
+                                        path: 'ActivityDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                                     >
                                        <form:fields>
                                             <Switch  state="{ActivityDetailModel>/isstarted}" id="isstart"
                                             change="isstartchange" customTextOn="Yes" customTextOff="No">
@@ -186,7 +212,12 @@
                                     </Slider>
                                 </form:fields>
                             </form:FormElement> 
-                            <form:FormElement label="Remarks">
+                            <form:FormElement label="Remarks" 
+                               visible="{
+                                        path: 'ActivityDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                            >
                                 <form:fields>
                                  <Input id="Remark" value="{ActivityDetailModel>/remark}"/>
                                 </form:fields>
@@ -195,7 +226,12 @@
 
 
 
-                              <form:FormElement label="Upload Image">
+                              <form:FormElement label="Upload Image" 
+                               visible="{
+                                        path: 'ActivityDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }" 
+                              >
                                         <form:fields>
                                             <u:FileUploader
                                                 id="fileUploader"
@@ -211,7 +247,12 @@
                                             </u:FileUploader>
                                         </form:fields>
                                     </form:FormElement>
-                                    <form:FormElement>
+                                    <form:FormElement  
+                                     visible="{
+                                        path: 'ActivityDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                                     >
                                         <form:fields>
                                             <Image
                                                 src="{editDocumentCollectionModel>/image_url}"
@@ -254,7 +295,12 @@
                                            </HBOX>
                                         </form:fields>
                                     </form:FormElement>
-                                     <form:FormElement label="Upload Document">
+                                     <form:FormElement label="Upload Document" 
+                                      visible="{
+                                        path: 'ActivityDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                                      >
                                         <form:fields>
                                             <u:FileUploader
                                                 id="fileUploaderpdf"
@@ -271,13 +317,23 @@
                                         </form:fields>
                                     </form:FormElement>
                                     
-                                      <form:FormElement label="">
+                                      <form:FormElement label=""
+                                       visible="{
+                                        path: 'ActivityDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                                       >
                                     <form:fields>
                                         <Input id="inputField"  width="53%" value="{editDocumentCollectionModel>/pdf_name}"  editable="true"/>
                                     </form:fields>
                                 </form:FormElement>
 
-                                    <form:FormElement>
+                                    <form:FormElement   
+                                     visible="{
+                                        path: 'ActivityDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                                    >
                                         <form:fields>
                                             <HBox>
                                         <!-- <PDFViewer source="{editDocumentCollectionModel>/pdf_url}" height="10em"  press="functiondownload">
