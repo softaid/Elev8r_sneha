@@ -1379,9 +1379,40 @@ sap.ui.define(
 
             ItemConsumptiondata.enddate = enddate;
           }
+		  DetailModel.refresh();
+		},
 
-          DetailModel.refresh();
+		onDownload: async function (oEvent) {
+			let oConfig = sap.ui.getCore().getModel("configModel");
+
+			let oDownloadData = oEvent.getSource();
+			let [doc_url, document_name] = oDownloadData.data("mySuperExtraData").split('_');
+			let image_url = oConfig.oData.webapi.docurl + doc_url;
+
+			var oXHR = new XMLHttpRequest();
+			oXHR.open("GET", image_url, true);
+			oXHR.responseType = "blob";
+
+			oXHR.onload = function (event) {
+				var blob = oXHR.response;
+
+				// Create a temporary anchor element to initiate the download
+				var link = document.createElement("a");
+				link.href = URL.createObjectURL(blob);
+
+				// Set the download attribute to specify the filename for the downloaded file
+				link.setAttribute("download", document_name);
+
+				// Trigger the click event on the anchor element
+				link.click();
+
+				// Clean up - revoke the object URL and remove the anchor element after the click event has been triggered
+				URL.revokeObjectURL(link.href);
+			};
+
+			oXHR.send();
         },
+
         // function for calculate end date or completion day
         onclick: async function (oEvent) {
           let oThis = this;

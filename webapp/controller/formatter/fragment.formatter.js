@@ -199,7 +199,16 @@ sap.ui.define(function () {
 		setvisibilty: function (sValue) {
 			return sValue;
 
-	  },
+		},
+		setvisibiltywarning: function (sValue) {
+			return Boolean(sValue);
+
+		},
+		setvisibiltywarning: function (sValue) {
+			return !Boolean(sValue);
+
+		},
+
 
 
 		setItemStockColor: function (sValue) {
@@ -210,23 +219,23 @@ sap.ui.define(function () {
 
 
 
-			  if(sValue==-1){  // condition of not started or their is no scheduling
-			  }
-			  else if(sValue==1){ // stage is  schedule
+			if (sValue == -1) {  // condition of not started or their is no scheduling
+			}
+			else if (sValue == 1) { // stage is  schedule
 				return 1;// yellow
-			  }
-			  else if(sValue==2){// stage is schedule and  in progress  and not Delay 
+			}
+			else if (sValue == 2) {// stage is schedule and  in progress  and not Delay 
 				return 8;// green
-			  }
-			  else if(sValue==3){  // stage is schedule and in progress  and Delay
+			}
+			else if (sValue == 3) {  // stage is schedule and in progress  and Delay
 				return 3; //red color
-			  }
-			  else if(sValue==5){  // stage is schedule and  Complete  and not delay
+			}
+			else if (sValue == 5) {  // stage is schedule and  Complete  and not delay
 				return 5;//blue
-			  }
-			  else{     // stage is schedule and complete and Delay
+			}
+			else {     // stage is schedule and complete and Delay
 				return 3;  // red color schema
-			  }
+			}
 
 		},
 

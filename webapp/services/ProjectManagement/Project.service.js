@@ -130,6 +130,10 @@ sap.ui.define([
                 commonService.runJQueryX("GET", "elevproject/getlist/" + params.projectid, null, callback, null);
             },
 
+            getReferenceRelatedPayment : function(params,callback){
+                commonService.runJQueryX("GET", "leadmaster/paymentreference/" + params.typecode + "/" + params.projectid, null, callback, null);
+            },
+
             getAllDocumentCollection : function(callback){
                 console.log(commonService.session("companyId"));
                 commonService.runJQueryX("GET", "documentcollection/search/" + commonService.session("companyId"), null, callback, null);

@@ -163,6 +163,21 @@
 												</Select>
 											</form:fields>
 										</form:FormElement>
+										<form:FormElement id="customerEle" label="Customer">
+											<form:fields>
+												<Select id="customer"
+                                                change=""
+                                                selectedKey="{projectModel>/customerid}" 
+                                                forceSelection="false"
+                                                width="500px"
+                                                items="{
+                                                    path: 'userModel>/modelData',
+                                                    sorter: { path: 'id' }
+                                                }">
+													<core:Item key="{userModel>id}" text="{userModel>createdbyname}" />
+												</Select>
+											</form:fields>
+										</form:FormElement>
 										<form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMStartDate}">
 											<form:fields>
 												<DatePicker id="txtStartdate" width="100%" 
@@ -247,8 +262,8 @@
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Actual End" />
 												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Stage completion" />
+                                                <Column minScreenWidth="Tablet" demandPopin="true">
+													<Text text ="Stage Complt(%)" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="OverDueDays" />
@@ -387,7 +402,7 @@
 													<Text text ="Actual End" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Activity Completion" />
+													<Text text ="Activity Complt(%)" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="OverDueDay" />
@@ -408,7 +423,7 @@
 														<Text text="{activitymodel>stagename}" />
 														<Text text="{activitymodel>actualstartdate}" />
 														<Text text="{activitymodel>actualenddate}"/>
-														<Text text="{activitymodel>actualenddate}"/>
+														<Text text="{activitymodel>stagecompletionpercentage}"/>
 														<Text text="{activitymodel>overduedays}"/>
 														<Button icon="sap-icon://begin" type="Transparent" 
                                                             press="onActivityPress"
@@ -482,11 +497,11 @@
 								<IconTabFilter text="Payments">
 									<VBox fitContainer="true">
 										<Table id="tblpaymentStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
-                                path: 'paymentmodel>/',
-                                    sorter: {
-                                        path: 'id'
-                                    }
-                                }">
+											path: 'paymenttblmodel>/',
+												sorter: {
+													path: 'id'
+												}
+											}">
 											<headerToolbar>
 												<Toolbar>
 													<content>
@@ -498,40 +513,29 @@
 											</headerToolbar>
 											<columns>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Id" />
+													<Text text ="Stage/Activity" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" />
+													<Text text ="Type" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" />
+													<Text text ="Payment(%)" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" />
+													<Text text ="Expected Amount" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelStage}" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelProject}" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Active status" />
+													<Text text ="Received Amount" />
 												</Column>
 											</columns>
 											<items>
 												<ColumnListItem type="Navigation" press="onListItemPressPayments">
 													<cells>
-														<Text text="{activitymodel>count}" />
-														<Text text="{activitymodel>stagename}" />
-														<Text text="{activitymodel>startdate}" />
-														<Text text="{activitymodel>enddate}"/>
-														<Text text="{activitymodel>completiondays}"/>
-														<Text text="{activitymodel>stagecompletionpercentage}"/>
-														<Text text="{activitymodel>projectweightage}"/>
+														<Text text="{paymenttblmodel>stagename}" />
+														<Text text="{paymenttblmodel>type}" />
+														<Text text="{paymenttblmodel>paymentper}" />
+														<Text text="{paymenttblmodel>expectedamount}"/>
+														<Text text="{paymenttblmodel>receivedamount}"/>
 														<tnt:InfoLabel 
                                                 text="1"
                                                 displayOnly= "false"
@@ -641,9 +645,12 @@
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Document Name" />
 												</Column>
+												<Column minScreenWidth="Tablet" demandPopin="true">
+													<Text text ="Download" />
+												</Column>
 											</columns>
 											<items>
-												<ColumnListItem type="Navigation" press="onListItemPressAttachment">
+												<ColumnListItem type="Inactive" press="onListItemPressAttachment">
 													<cells>
 														<Text text="{attachmenttblmodel>type}" />
 														<Text text="{attachmenttblmodel>stagename}"/>
@@ -651,6 +658,7 @@
 														<Text text="{attachmenttblmodel>attributename}" />
 														<Text text="{attachmenttblmodel>description}" />
 														<Text text="{attachmenttblmodel>document_name}" />
+														<Button icon="sap-icon://download" type="Transparent" press="onDownload" app:mySuperExtraData="{attachmenttblmodel>document_url}_{attachmenttblmodel>document_name}" visible="true"/>
 													</cells>
 												</ColumnListItem>
 											</items>
