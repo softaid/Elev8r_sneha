@@ -540,40 +540,29 @@
 											</headerToolbar>
 											<columns>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Id" />
+													<Text text ="Stage" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" />
+													<Text text ="Activity" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelItemUnit}" />
+													<Text text ="Payment(%)" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelUnitCost}" />
+													<Text text ="Expected Amount" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelMaterialType}" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelStage}" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="{i18n>feedMillBillOfMaterialLabelProject}" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Active status" />
+													<Text text ="Received Amount" />
 												</Column>
 											</columns>
 											<items>
 												<ColumnListItem type="Navigation" press="onListItemPressPayments">
 													<cells>
-														<Text text="{activitymodel>count}" />
-														<Text text="{activitymodel>stagename}" />
-														<Text text="{activitymodel>startdate}" />
-														<Text text="{activitymodel>enddate}"/>
-														<Text text="{activitymodel>completiondays}"/>
-														<Text text="{activitymodel>stagecompletionpercentage}"/>
-														<Text text="{activitymodel>projectweightage}"/>
+														<Text text="{paymentmodel>parentstage}" />
+														<Text text="{paymentmodel>description}" />
+														<Text text="{paymentmodel>paymentper}" />
+														<Text text="{paymentmodel>expectedamount}"/>
+														<Text text="{paymentmodel>receivedamount}"/>
 														<tnt:InfoLabel 
                                                 text="1"
                                                 displayOnly= "false"

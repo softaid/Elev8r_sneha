@@ -605,7 +605,7 @@ sap.ui.define([
 				currentContext.getActivitesdetail(data[0][0].id);
 				currentContext.getAttributeList(data[0][0].id);
 				currentContext.getAttachmentList(data[0][0].id);
-
+				currentContext.getPaymentStages('ProjStgType',data[0][0].id);
 
 				//currentContext.getNIdetail(data[0][0].id);
 			});
@@ -849,6 +849,19 @@ sap.ui.define([
 					attachmenttblmodel.setData(data[0]);
 					console.log("--------------attachmenttblmodel------------", attachmenttblmodel);
 					attachmenttblmodel.refresh();
+				}
+			})
+		},
+
+		getPaymentStages : function(typecode,projectid){
+			let oThis = this;
+			Projectservice.getReferenceRelatedPayment({typecode : typecode,projectid : projectid},function(data){
+				if(data.length && data[0].length){
+					var paymentmodel = oThis.getView().getModel("paymentmodel");
+
+					paymentmodel.setData(data[0]);
+					console.log("--------------paymentmodel------------", paymentmodel);
+					paymentmodel.refresh();
 				}
 			})
 		},
