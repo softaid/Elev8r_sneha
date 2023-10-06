@@ -109,45 +109,45 @@ sap.ui.define([
 			// });
 
 			this.mGroupFunctions = {
-                
-                parentstage: function (oContext) {
-                    var name = oContext.getProperty("parentstage");
-                    return {
-                        key: name,
-                        text: name
-                    };
-                },
-                stagename: function (oContext) {
-                    var name = oContext.getProperty("stagename");
-                    return {
-                        key: name,
-                        text: name
-                    };
-                },
-            }
+
+				parentstage: function (oContext) {
+					var name = oContext.getProperty("parentstage");
+					return {
+						key: name,
+						text: name
+					};
+				},
+				stagename: function (oContext) {
+					var name = oContext.getProperty("stagename");
+					return {
+						key: name,
+						text: name
+					};
+				},
+			}
 		},
 
 		handleGroupDialogConfirm: function (oEvent) {
-            var oTable = this.byId("tblActiviteStatus"),
-                mParams = oEvent.getParameters(),
-                oBinding = oTable.getBinding("items"),
-                sPath,
-                bDescending,
-                vGroup,
-                aGroups = [];
+			var oTable = this.byId("tblActiviteStatus"),
+				mParams = oEvent.getParameters(),
+				oBinding = oTable.getBinding("items"),
+				sPath,
+				bDescending,
+				vGroup,
+				aGroups = [];
 
-            if (mParams.groupItem) {
-                sPath = mParams.groupItem.getKey();
-                bDescending = mParams.groupDescending;
-                vGroup = this.mGroupFunctions[sPath];
-                aGroups.push(new Sorter(sPath, bDescending, vGroup));
-                // apply the selected group settings
-                oBinding.sort(aGroups);
-            } else if (this.groupReset) {
-                oBinding.sort();
-                this.groupReset = false;
-            }
-        },
+			if (mParams.groupItem) {
+				sPath = mParams.groupItem.getKey();
+				bDescending = mParams.groupDescending;
+				vGroup = this.mGroupFunctions[sPath];
+				aGroups.push(new Sorter(sPath, bDescending, vGroup));
+				// apply the selected group settings
+				oBinding.sort(aGroups);
+			} else if (this.groupReset) {
+				oBinding.sort();
+				this.groupReset = false;
+			}
+		},
 
 		handleGroupButtonPressed: function () {
 			if (!this._oDialog1) {
@@ -246,7 +246,7 @@ sap.ui.define([
 
 
 		onListItemPressActivity: function (oEvent) {
-			console.log(oEvent);
+			let currentContext=this;
 			let oDayHistory = oEvent.getSource().getBindingContext("activitymodel").getObject();
 			let projectModel = this.getView().getModel("projectModel").getData();
 			oDayHistory.projectid = projectModel.id;
@@ -255,22 +255,19 @@ sap.ui.define([
 			oDayHistory.isstarted = oDayHistory.actualstartdate != null ? true : false;
 
 			Projectservice.getStageOrActivityDetail({ parentid: oDayHistory.parentid, projectid: oDayHistory.projectid }, function (data) {
-			
-				data[0][0].dependency.filter((ele)=>{
 
-					
-				})
+				let dependency= data[0][0].dependency;
+				// if dependencyStatus  is true means all dependency stage are completed  so we can proceed it  otherwise false mean  condition is not satisfied
+				oDayHistory.dependencyStatus= dependency!=null?(dependency.split(",").every((ele) => {
+					 return currentContext.projectCompletionObj[ele]==100;
+				})):true;
 
-				let dependency = data[0][0].dependency;
-				console.log(data[0][0]);
+				currentContext.bus = sap.ui.getCore().getEventBus();
+				currentContext.bus.publish("activitystatus", "setDetailActivityPage", { viewName: "ProjectActivityDetail", viewModel: oDayHistory });
 
 
 			})
 
-
-
-			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.publish("activitystatus", "setDetailActivityPage", { viewName: "ProjectActivityDetail", viewModel: oDayHistory });
 
 		},
 
@@ -330,7 +327,6 @@ sap.ui.define([
 
 		// Activity Detail
 		setDetailActivityPage: function (channel, event, data) {
-			debugger;
 
 			this.detailView = sap.ui.view({
 				viewName: "sap.ui.elev8rerp.componentcontainer.view.ProjectManagement." + data.viewName,
@@ -566,6 +562,7 @@ sap.ui.define([
 					data[0][index].actualenddate = data[0]?.[index]?.actualenddate ?? null;
 					currentContext.projectCompletionObj[value.stageid] = value.stagecompletionpercentage;
 				});
+				//  delete currentContext.projectCompletionObj.null
 				var tblModel = currentContext.getView().getModel("tblModel");
 				currentContext.StageList = JSON.parse(JSON.stringify(data[0]));// Array consist of all Activity
 				tblModel.setData(data[0]);

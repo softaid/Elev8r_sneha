@@ -109,7 +109,8 @@
                                                 value="{StageDetailModel>/startdate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="true" />
+                                                editable="true" 
+                                                change="dayCalculation"/>
                                         </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label="End Date">
@@ -131,29 +132,32 @@
                                 </form:FormElement> 
                                   <form:FormElement label=" Actual Start Date">
                                     <form:fields>
-                                    <DatePicker id="ActualstartDate" width="100%" 
+                                    <DatePicker id="ActualStartDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
                                                 value="{StageDetailModel>/actualstartdate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="true" />
+                                                editable="true" 
+                                                change="dayCalculationActual"/>
                                         </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label=" Actual End Date">
                                         <form:fields>
-                                    <DatePicker id="actualendDate" width="100%" 
+                                    <DatePicker id="actualEndDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
                                                 value="{StageDetailModel>/actualenddate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="true"/>
+                                                editable="true" 
+                                                change="dayCalculationActual"/>
                                         </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label=" Actual Completion Day">
                                     <form:fields>
-                                        <Input id="actualcompletionDay" value="{StageDetailModel>/actualdays}"  editable="true"/>
+                                        <Input id="actualCompletionDay" value="{StageDetailModel>/actualdays}"  editable="true"
+                                        change="dayCalculationActual"/>
                                     </form:fields>
                                 </form:FormElement> 
                                 <form:FormElement label="Stage %">
@@ -161,11 +165,11 @@
                                         <Input id="StagePercent" value="{StageDetailModel>/stagecompletionpercentage}"/>
                                     </form:fields>
                                 </form:FormElement>
-                                <!-- <form:FormElement label="Project %">
+                                <form:FormElement label="Project %"  visible="true">
                                     <form:fields>
                                 <Input id="projectPercent" value="{StageDetailModel>/projectweightage}"/>
                                     </form:fields>
-                                </form:FormElement> -->
+                                </form:FormElement>
                                  <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
                                        <form:fields>
                                             <Switch  state="{StageDetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No">
