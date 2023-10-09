@@ -822,7 +822,7 @@
 										</FlexBox>
 									</Panel>
 								</IconTabFilter>
-								<IconTabFilter text="Gantt Chart">
+								<!-- <IconTabFilter text="Gantt Chart">
 									<VBox fitContainer="true">
 										<Table id="tblGantteStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
                                 path: 'activitymodel>/',
@@ -936,7 +936,7 @@
 											</items>
 										</FlexBox>
 									</Panel>
-								</IconTabFilter>
+								</IconTabFilter> -->
 							</items>
 							<layoutData>
 								<FlexItemData growFactor="1" baseSize="0%"/>
