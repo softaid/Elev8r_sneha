@@ -69,9 +69,26 @@
                                     </form:fields>
                                 </form:FormElement>
 
+                            <form:FormElement id="Stagetype" label="Stage type">
+                                <form:fields>
+                                    <Select id="Stagetypeid"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{StageDetailModel>/stgtypeid}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'stagetypeModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{stagetypeModel>id}" text="{stagetypeModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+
                                   <form:FormElement id="projecttype" label="Department">
                                 <form:fields>
-                                    <Select id="project"
+                                    <Select id="projecttypeid"
 					                    required="true" 
                                         change=""
                                         selectedKey="{StageDetailModel>/departmentid}" 
@@ -160,12 +177,12 @@
                                         change="dayCalculationActual"/>
                                     </form:fields>
                                 </form:FormElement> 
-                                <form:FormElement label="Stage %">
+                                <form:FormElement label="Stage Completion">
                                     <form:fields>
                                         <Input id="StagePercent" value="{StageDetailModel>/stagecompletionpercentage}"/>
                                     </form:fields>
                                 </form:FormElement>
-                                <form:FormElement label="Project %"  visible="true">
+                                <form:FormElement label="Project completion"  visible="true">
                                     <form:fields>
                                 <Input id="projectPercent" value="{StageDetailModel>/projectweightage}"/>
                                     </form:fields>
@@ -179,9 +196,13 @@
                                             </Switch>
                                         </form:fields>
                                     </form:FormElement>
-                                      <!-- <form:FormElement label="Is Standard">
+                                      <!-- <form:FormElement label="Is Added"   
+                                       visible="{
+                                        path: 'StageDetailModel>/id',
+                                        formatter: '.formatter.setaddStage'
+                                       }">
                                        <form:fields>
-                                            <Switch  state="{StageDetailModel>/isstd}" id="isstd" customTextOn="Yes" customTextOff="No" enabled="false">
+                                            <Switch  state="{StageDetailModel>/isadd}" id="isadd" customTextOn="Yes" customTextOff="No" enabled="true">
                                                 <layoutData>
                                                     <FlexItemData growFactor="1" />
                                                 </layoutData>

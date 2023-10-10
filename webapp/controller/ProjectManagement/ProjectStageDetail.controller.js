@@ -469,7 +469,7 @@ sap.ui.define([
 
 			let objPush = {
 				id: null,
-				stageid: oModel.stageid,
+				stageid: oModel?.stageid ?? null,
 				projectid: oModel.projectid,
 				parentstageid: null,
 				companyid: commonService.session("companyId"),
@@ -487,52 +487,10 @@ sap.ui.define([
 			oModel.isactive = oModel.isactive === true ? 1 : 0;
 			oModel.isstd = oModel.isstd === true ? 1 : 0;
 
-			if (oModel.id == undefined) {
-
-				let obj = {
-					id: null,
-					typecode: 'ProMilestones',
-					parentid: oModel?.parentid ?? null,
-					type: "Stage",
-					stgtypeid: 1,
-					description: oModel?.stagename ?? null,
-					active: oModel?.isactive ?? null,
-					dependency: oModel?.dependency ?? null,
-					defaultvalue: 0,
-					stageper: oModel?.stagecompletionpercentage ?? null,
-					projectper: oModel?.projectweightage ?? null,
-					departmentid: oModel?.departmentid ?? null,
-					sequenceno: null,
-					modelid: null,
-					isrelatedtopayment: null,
-					iscustomersignoffrequired: null,
-					notifyinternaluser: 0,
-					attributetypes: null,
-					companyid: oModel["companyid"],
-					userid: commonService.session("userId")
-				}
-
-				masterService.saveReference(obj, function (data) {
-					console.log(data);
-					Projectservice.getProjectdetail({ id: oModel.projectid, field: "stage" }, function (data) {
-						console.log("data", data);
-						data[0].map(function (value, index) {
-							data[0][index].activestatus = value.isactive == 1 ? "Active" : "InActive";
-						});
-
-						let tblModel = currentContext.getView().getModel("tblModel");
-						tblModel.setData(data[0]);
-
-						// var StageModel = currentContext.getView().getModel("StageModel");
-						// StageModel.setData(data[0]);
-					})
-				})
-			}
-
-			else {
+		
 				Projectservice.saveProjectActivityDetail(oModel, function (savedata) {
 
-					objPush.stageid = savedata.stageid  //  get id of  new save activity  for document save
+                   objPush.stageid= savedata.id;
 
 					currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
 						if (document.id == undefined) {
@@ -566,8 +524,7 @@ sap.ui.define([
 						// var StageModel = currentContext.getView().getModel("StageModel");
 						// StageModel.setData(data[0]);
 					})
-				})
-			};
+				});
 
 
 			currentContext.DeleteDocumentArr.length > 0 ? currentContext.onDeleteDocumentSave() : "No image is available to delete";
@@ -708,11 +665,11 @@ sap.ui.define([
 			let oThis = this;
 			let StageDetailModel = oThis.getView().getModel("StageDetailModel");
 			let ItemConsumptiondata = StageDetailModel.getData();
-			ItemConsumptiondata.startdate =  (ItemConsumptiondata?.startdate??null)==null?null:ItemConsumptiondata.startdate.trim() == ""  ? null : ItemConsumptiondata.startdate;
-			ItemConsumptiondata.enddate = (ItemConsumptiondata?.enddate??null)==null?null: ItemConsumptiondata.enddate.trim() == "" ? null : ItemConsumptiondata.enddate;
-			ItemConsumptiondata.completiondays = (ItemConsumptiondata?.completiondays??null)==null?null:`${ItemConsumptiondata.completiondays}`.trim() == "" ? null : ItemConsumptiondata.completiondays;
-			if ((ItemConsumptiondata.startdate == null || ItemConsumptiondata.enddate == null || ItemConsumptiondata.completiondays == null)&& oEvent.mParameters.id.match("completionDay") == null ){
-				ItemConsumptiondata.completiondays =null
+			ItemConsumptiondata.startdate = (ItemConsumptiondata?.startdate ?? null) == null ? null : ItemConsumptiondata.startdate.trim() == "" ? null : ItemConsumptiondata.startdate;
+			ItemConsumptiondata.enddate = (ItemConsumptiondata?.enddate ?? null) == null ? null : ItemConsumptiondata.enddate.trim() == "" ? null : ItemConsumptiondata.enddate;
+			ItemConsumptiondata.completiondays = (ItemConsumptiondata?.completiondays ?? null) == null ? null : `${ItemConsumptiondata.completiondays}`.trim() == "" ? null : ItemConsumptiondata.completiondays;
+			if ((ItemConsumptiondata.startdate == null || ItemConsumptiondata.enddate == null || ItemConsumptiondata.completiondays == null) && oEvent.mParameters.id.match("completionDay") == null) {
+				ItemConsumptiondata.completiondays = null
 			}
 
 			if (ItemConsumptiondata.enddate != null && ItemConsumptiondata.startdate != null && oEvent.mParameters.id.match("endDate") != null) {
@@ -774,11 +731,11 @@ sap.ui.define([
 			let oThis = this;
 			let StageDetailModel = oThis.getView().getModel("StageDetailModel");
 			let ItemConsumptiondata = StageDetailModel.getData();
-			ItemConsumptiondata.actualstartdate = (ItemConsumptiondata?.actualstartdate??null)==null?null:ItemConsumptiondata.actualstartdate.trim() == ""? null : ItemConsumptiondata.actualstartdate;
-			ItemConsumptiondata.actualenddate = (ItemConsumptiondata?.actualenddate??null)==null?null:ItemConsumptiondata.actualenddate.trim() == "" ? null : ItemConsumptiondata.actualenddate;
-			ItemConsumptiondata.actualdays =(ItemConsumptiondata?.actualdays??null)==null?null:`${ItemConsumptiondata.actualdays}`.trim() == "" ? null : ItemConsumptiondata.actualdays;
-			
-			if ((ItemConsumptiondata.actualstartdate == null || ItemConsumptiondata.actualenddate == null || ItemConsumptiondata.actualdays == null ) && oEvent.mParameters.id.match("actualCompletionDay") == null) {
+			ItemConsumptiondata.actualstartdate = (ItemConsumptiondata?.actualstartdate ?? null) == null ? null : ItemConsumptiondata.actualstartdate.trim() == "" ? null : ItemConsumptiondata.actualstartdate;
+			ItemConsumptiondata.actualenddate = (ItemConsumptiondata?.actualenddate ?? null) == null ? null : ItemConsumptiondata.actualenddate.trim() == "" ? null : ItemConsumptiondata.actualenddate;
+			ItemConsumptiondata.actualdays = (ItemConsumptiondata?.actualdays ?? null) == null ? null : `${ItemConsumptiondata.actualdays}`.trim() == "" ? null : ItemConsumptiondata.actualdays;
+
+			if ((ItemConsumptiondata.actualstartdate == null || ItemConsumptiondata.actualenddate == null || ItemConsumptiondata.actualdays == null) && oEvent.mParameters.id.match("actualCompletionDay") == null) {
 				ItemConsumptiondata.actualdays = null;
 			}
 
@@ -793,7 +750,7 @@ sap.ui.define([
 				}
 				else {
 					MessageToast.show(`please select valide date`);
-					ItemConsumptiondata.actualenddate =null
+					ItemConsumptiondata.actualenddate = null
 					ItemConsumptiondata.actualdays = null
 
 
@@ -812,7 +769,7 @@ sap.ui.define([
 				else {
 					MessageToast.show(`please select valide date`);
 					ItemConsumptiondata.actualstartdate = null
-					ItemConsumptiondata.actualdays=null
+					ItemConsumptiondata.actualdays = null
 
 				}
 

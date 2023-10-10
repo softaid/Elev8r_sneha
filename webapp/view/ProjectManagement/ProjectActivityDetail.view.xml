@@ -83,6 +83,24 @@
                                     </Select>
                                 </form:fields>
                             </form:FormElement>
+
+                              <form:FormElement id="Stagetype" label="Activity type">
+                                <form:fields>
+                                    <Select id="Stagetypeid"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{ActivityDetailModel>/stgtypeid}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'stagetypeModel>/modelData',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{stagetypeModel>id}" text="{stagetypeModel>description}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+
                                 <form:FormElement label="Start Date">
                                     <form:fields>
                                     <DatePicker id="startDate" width="100%" 
@@ -111,6 +129,18 @@
                                         <Input id="completionDay" value="{ActivityDetailModel>/completiondays}" change="dayCalculation"/>
                                     </form:fields>
                                 </form:FormElement> 
+
+                                 <form:FormElement label="Warning" 
+                               visible="{
+                                        path: 'ActivityDetailModel>/WarningStatus',
+                                        formatter: '.formatter.setvisibiltywarning'
+                                    }"
+                               >
+                                <form:fields>
+                                <TextArea placeholder="Warning"  value="{ActivityDetailModel>/WarningStatus}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+                                </form:fields>
+                            </form:FormElement> 
+
                                   <form:FormElement label=" Actual Start Date"
                                    visible="{
                                         path: 'ActivityDetailModel>/dependencyStatus',
@@ -125,7 +155,8 @@
                                                 value="{ActivityDetailModel>/actualstartdate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="true" />
+                                                editable="true"
+                                                change="dayCalculationActual" />
                                         </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label=" Actual End Date" 
@@ -138,7 +169,8 @@
                                                 value="{ActivityDetailModel>/actualenddate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="true"/>
+                                                editable="true" 
+                                                change="dayCalculationActual"/>
                                         </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label=" Actual Completion Day"  
@@ -148,10 +180,10 @@
                                     }"
                                 >
                                     <form:fields>
-                                        <Input id="actualcompletionDay" value="{ActivityDetailModel>/actualcompletiondays}"  editable="true"/>
+                                        <Input id="actualcompletionDay" value="{ActivityDetailModel>/actualcompletiondays}"  editable="true"  change="dayCalculationActual"/>
                                     </form:fields>
                                 </form:FormElement> 
-                                <form:FormElement label="Stage %"
+                                <form:FormElement label="Stage Completion"
 
                                  visible="{
                                         path: 'ActivityDetailModel>/dependencyStatus',
@@ -162,7 +194,7 @@
                                         <Input id="StagePercent" value="{ActivityDetailModel>/stagecompletionpercentage}"/>
                                     </form:fields>
                                 </form:FormElement>
-                                <form:FormElement label="Project %"  visible="false" 
+                                <form:FormElement label="Activity completion"  visible="false" 
                                 > 
                                     <form:fields>
                                 <Input id="projectPercent" value="{ActivityDetailModel>/projectweightage}"

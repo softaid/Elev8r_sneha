@@ -86,6 +86,8 @@ sap.ui.define([
 			stageModel.setData({});
 			this.getView().setModel(model, "StageModel");
 
+			commonFunction.getReferenceByType("ProjStgType", "stagetypeModel", this);
+
 
 			this.flag = false;
 
@@ -425,7 +427,7 @@ sap.ui.define([
 				oDayHistory.dependencyStatus= dependency!=null?(dependency.split(",").every((ele) => {
 					 return currentContext.projectCompletionObj[ele]==100;
 				})):true;
-
+				oDayHistory.WarningStatus= oDayHistory.dependencyStatus==false?"To start the Activity you need to first complete dependency stages":null;
 				currentContext.bus = sap.ui.getCore().getEventBus();
 				currentContext.bus.publish("activitystatus", "setDetailActivityPage", { viewName: "ProjectActivityDetail", viewModel: oDayHistory });
 
@@ -896,6 +898,30 @@ sap.ui.define([
 			const formattedDateTime = `${formattedDate}`;
 
 			return formattedDateTime;
+
+
+		},
+
+		getAllStageArActivity: async function (oEvent) {
+
+			let currentContext = this;
+
+
+			if (oEvent.mParameters.id.match("btnallstage") != null) {
+
+				var tblModel = currentContext.getView().getModel("tblModel");
+				tblModel.setData(currentContext.StageList);
+
+				
+			}
+			else if (oEvent.mParameters.id.match("btnallactivity") != null) {
+				var activitymodel = currentContext.getView().getModel("activitymodel");
+				activitymodel.setData(currentContext.ActivityList);
+			
+
+			}
+			// else if (oEvent.mParameters.id.match("startDate") != null) {
+
 
 
 		},
