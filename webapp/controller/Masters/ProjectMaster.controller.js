@@ -75,6 +75,9 @@ sap.ui.define([
                 "typecode": viewModel.getProperty("typecode"),
                 "description": viewModel.getProperty("description"),
                 "active": viewModel.getProperty("active"),
+                "iscustomersignoffrequired": viewModel.getProperty("iscustomersignoffrequired"),
+                "addtocurrentproject": viewModel.getProperty("addtocurrentproject"),
+                "notifyinternaluser": viewModel.getProperty("notifyinternaluser"),
                 "defaultvalue": viewModel.getProperty("defaultvalue"),
                 "projectper": viewModel.getProperty("projectper"),
                 "stageper": viewModel.getProperty("stageper"),
@@ -214,6 +217,9 @@ sap.ui.define([
                 typename: oModel.oData.typename,
                 description: oModel.oData.description,
                 active: true,
+                iscustomersignoffrequired:false,
+                addtocurrentproject:false,
+                notifyinternaluser:false,
                 defaultvalue: true,
                 type : "Stage"
             };

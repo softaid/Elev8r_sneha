@@ -1064,11 +1064,11 @@ sap.ui.define([
 
 		// function for calculate end date or completion day
 		dayCalculation: async function (oEvent) {
-
+       
 			let oThis = this;
 			let DetailModel = oThis.getView().getModel("projectModel");
 			let ItemConsumptiondata = DetailModel.oData;
-			if (oEvent.mParameters.id == "componentcontainer---projectactivitiesAdd--txtenddate") {
+			if (oEvent.mParameters.id == "componentcontainer---projectdetail--txtenddate") {
 				var parts = ItemConsumptiondata.startdate.split('/');
 				let startdate = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
 
