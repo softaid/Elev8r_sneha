@@ -102,7 +102,9 @@ sap.ui.define([
                         console.log(data[0][0]);
                         data[0][0].active = data[0][0].active == 1 ? true : false;
                         data[0][0].defaultvalue = data[0][0].defaultvalue == 1 ? true : false;
-                        data[0][0].intialprojectper = data[0][0].projectper
+                        data[0][0].iscustomersignoffrequired = data[0][0].iscustomersignoffrequired == 1 ? true : false;
+                        data[0][0].notifyinternaluser = data[0][0].notifyinternaluser == 1 ? true : false;
+                        data[0][0].intialprojectper = data[0][0].projectper;
                         oModel.setData(data[0][0]);
                     }
                 });
@@ -206,7 +208,6 @@ sap.ui.define([
 			else {
 				oprojectModeldata.attributetypes = stageortype.join(",");
 			}
-
 		},
 
         validateForm: function () {
