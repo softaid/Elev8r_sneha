@@ -7673,5 +7673,48 @@ END$$
 DELIMITER ;
 ;
 
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_documentcollectionlist_search`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_documentcollectionlist_search`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_documentcollectionlist_search`(
+	IN p_projectid INT(11)
+)
+BEGIN
+	SELECT DD.id,
+		   DD.stageid,
+           DD.document_id,
+           DD.document_url,
+		   DD.document_name,
+           REF.description,
+           DD.type,
+           CASE
+				WHEN (DD.type = 'Stage') THEN ifnull(REF.description,'-')
+				ELSE '-'
+			END as stagename,
+            CASE
+				WHEN (DD.type = 'Activity') THEN REF.description
+				ELSE '-'
+			END as activityname,
+            CASE
+				WHEN (DD.type = 'Attribute') THEN REF.description
+				ELSE '-'
+			END as attributename
+    
+    FROM documentcollectiondetails DD
+    LEFT JOIN reference REF ON REF.id = IFNULL(DD.parentstageid,DD.stageid)
+    
+    WHERE
+        DD.projectid = p_projectid;
+END$$
+
+DELIMITER ;
+;
+
 
 
