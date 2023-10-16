@@ -7,12 +7,16 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
+	'sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter',
 	'sap/ui/elev8rerp/componentcontainer/services/Masters/Masters.service',
 	'sap/m/MessageToast',
-], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, commonFunction, masterService, MessageToast) {
+], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, commonFunction,formatter,masterService, MessageToast) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectStageDetail", {
+
+		formatter: formatter,
+
 		onInit: function () {
 
 			//this.handleRouteMatched(null);
@@ -44,8 +48,6 @@ sap.ui.define([
 
 			if (StageDetailModel.id != undefined) {
 				currentContext.getView().byId("dependency").setSelectedKeys(StageDetailModel.dependency && StageDetailModel.dependency.split(","));
-
-
 
 				// get document list
 				await Projectservice.getDocumentCollectionDetails({ projectid: StageDetailModel.projectid, stageid: StageDetailModel.stageid }, function (data) {

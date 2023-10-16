@@ -200,12 +200,9 @@ sap.ui.define(function () {
 			return sValue;
 
 		},
+	
 		setvisibiltywarning: function (sValue) {
 			return Boolean(sValue);
-
-		},
-		setvisibiltywarning: function (sValue) {
-			return !Boolean(sValue);
 
 		},
 

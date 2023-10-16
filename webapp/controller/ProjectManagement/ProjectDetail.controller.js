@@ -96,7 +96,7 @@ sap.ui.define([
 			// this.getAllProject();
 			this.getRole();
 			this.getAllDepartment();
-			commonFunction.getUser(this,18);
+			commonFunction.getUser(this, 18);
 
 			let subcontractorModel = new JSONModel();
 			subcontractorModel.setData(commonFunction.getAllSubcontractors(this));
@@ -148,7 +148,7 @@ sap.ui.define([
 			}
 		},
 
-        
+
 		//Activity grouping confirm dialog
 		handleGroupDialogConfirm: function (oEvent) {
 			this.groupReset = false;
@@ -171,7 +171,7 @@ sap.ui.define([
 				oBinding.sort();
 				// apply the selected group settingss
 				oBinding.sort(aGroups);
-			} else if (this.groupReset== false) {
+			} else if (this.groupReset == false) {
 				oBinding.sort(aGroups);
 				this.groupReset = false;
 			}
@@ -240,14 +240,14 @@ sap.ui.define([
 			oBinding.sort(oSorter);
 		},
 
-		 // Function to reset all filters applied to table
-		 getAllStages: async function(){
+		// Function to reset all filters applied to table
+		getAllStages: async function () {
 			this.groupReset = false;
-            var oTable = this.byId("tblProjectStages"),
-                oBinding = oTable.getBinding("items"),
-                aGroups = [];
-                oBinding.sort(aGroups);
-                this.groupReset = false;
+			var oTable = this.byId("tblProjectStages"),
+				oBinding = oTable.getBinding("items"),
+				aGroups = [];
+			oBinding.sort(aGroups);
+			this.groupReset = false;
 		},
 
 		handleAttributeGroupDialogConfirm: function (oEvent) {
@@ -267,7 +267,7 @@ sap.ui.define([
 				aGroups.push(new Sorter(sPath, bDescending, vGroup));
 				// apply the selected group settingss
 				oBinding.sort(aGroups);
-			} else if (this.groupReset== false) {
+			} else if (this.groupReset == false) {
 				oBinding.sort(aGroups);
 				this.groupReset = false;
 			}
@@ -285,41 +285,41 @@ sap.ui.define([
 			}
 			this._oDialog2.open();
 		},
-		
-			//Search functionality for all columns for particular value
-			onSearchAttribute: function (oEvent) {
-				var oTableSearchState = [],
-					sQuery = oEvent.getParameter("query");
-				var contains = sap.ui.model.FilterOperator.Contains;
-				var columns = ['stagename','attributename','parentstagename'];
-				var filters = new sap.ui.model.Filter(columns.map(function (colName) {
-					return new sap.ui.model.Filter(colName, contains, sQuery);
-				}),
-					false);
-				if (sQuery && sQuery.length > 0) {
-					oTableSearchState = [filters];
-				}
-				this.getView().byId("tblAttributes").getBinding("items").filter(oTableSearchState, "Application");
-			},
-	
-			onAttributeSort: function (oEvent) {
-				this._bDescendingSort = !this._bDescendingSort;
-				var oView = this.getView(),
-					oTable = oView.byId("tblAttributes"),
-					oBinding = oTable.getBinding("items"),
-					oSorter = new Sorter("stagename", this._bDescendingSort);
-				oBinding.sort(oSorter);
-			},
-	
-			 // Function to reset all filters applied to table
-			 getAllAttrubutes: async function(){
-				this.groupReset = false;
-				var oTable = this.byId("tblAttributes"),
-					oBinding = oTable.getBinding("items"),
-					aGroups = [];
-					oBinding.sort(aGroups);
-					this.groupReset = false;
-			},
+
+		//Search functionality for all columns for particular value
+		onSearchAttribute: function (oEvent) {
+			var oTableSearchState = [],
+				sQuery = oEvent.getParameter("query");
+			var contains = sap.ui.model.FilterOperator.Contains;
+			var columns = ['stagename', 'attributename', 'parentstagename'];
+			var filters = new sap.ui.model.Filter(columns.map(function (colName) {
+				return new sap.ui.model.Filter(colName, contains, sQuery);
+			}),
+				false);
+			if (sQuery && sQuery.length > 0) {
+				oTableSearchState = [filters];
+			}
+			this.getView().byId("tblAttributes").getBinding("items").filter(oTableSearchState, "Application");
+		},
+
+		onAttributeSort: function (oEvent) {
+			this._bDescendingSort = !this._bDescendingSort;
+			var oView = this.getView(),
+				oTable = oView.byId("tblAttributes"),
+				oBinding = oTable.getBinding("items"),
+				oSorter = new Sorter("stagename", this._bDescendingSort);
+			oBinding.sort(oSorter);
+		},
+
+		// Function to reset all filters applied to table
+		getAllAttrubutes: async function () {
+			this.groupReset = false;
+			var oTable = this.byId("tblAttributes"),
+				oBinding = oTable.getBinding("items"),
+				aGroups = [];
+			oBinding.sort(aGroups);
+			this.groupReset = false;
+		},
 
 
 		getModelDefault: function () {
@@ -397,6 +397,7 @@ sap.ui.define([
 
 		onListItemPressStage: function (oEvent) {
 			console.log(oEvent);
+			let currentContext=this;
 			let oDayHistory = oEvent.getSource().getBindingContext("tblModel").getObject();
 			let projectModel = this.getView().getModel("projectModel").getData();
 			oDayHistory.projectid = projectModel.id;
@@ -404,6 +405,12 @@ sap.ui.define([
 			oDayHistory.isstd = oDayHistory.isstd === 1 ? true : false;
 			oDayHistory.isstarted = oDayHistory.actualstartdate != null ? true : false;
 
+			let dependency = oDayHistory.dependency;
+			// if dependencyStatus  is true means all dependency stage are completed  so we can proceed it  otherwise false mean  condition is not satisfied
+			oDayHistory.dependencyStatus = dependency != null ? (dependency.split(",").every((ele) => {
+				return currentContext.projectCompletionObj[ele] == 100;
+			})) : true;
+			oDayHistory.WarningStatus = oDayHistory.dependencyStatus == false ? "To start the Stage you need to first complete dependency stages" : null;
 
 			this.bus = sap.ui.getCore().getEventBus();
 			this.bus.publish("billofmaterial", "setDetailPage", { viewName: "projectstagedetail", viewModel: oDayHistory });
@@ -412,7 +419,7 @@ sap.ui.define([
 
 
 		onListItemPressActivity: function (oEvent) {
-			let currentContext=this;
+			let currentContext = this;
 			let oDayHistory = oEvent.getSource().getBindingContext("activitymodel").getObject();
 			let projectModel = this.getView().getModel("projectModel").getData();
 			oDayHistory.projectid = projectModel.id;
@@ -422,12 +429,12 @@ sap.ui.define([
 
 			Projectservice.getStageOrActivityDetail({ parentid: oDayHistory.parentid, projectid: oDayHistory.projectid }, function (data) {
 
-				let dependency= data[0][0].dependency;
+				let dependency = data[0][0].dependency;
 				// if dependencyStatus  is true means all dependency stage are completed  so we can proceed it  otherwise false mean  condition is not satisfied
-				oDayHistory.dependencyStatus= dependency!=null?(dependency.split(",").every((ele) => {
-					 return currentContext.projectCompletionObj[ele]==100;
-				})):true;
-				oDayHistory.WarningStatus= oDayHistory.dependencyStatus==false?"To start the Activity you need to first complete dependency stages":null;
+				oDayHistory.dependencyStatus = dependency != null ? (dependency.split(",").every((ele) => {
+					return currentContext.projectCompletionObj[ele] == 100;
+				})) : true;
+				oDayHistory.WarningStatus = oDayHistory.dependencyStatus == false ? "To start the Activity you need to first complete dependency stages" : null;
 				currentContext.bus = sap.ui.getCore().getEventBus();
 				currentContext.bus.publish("activitystatus", "setDetailActivityPage", { viewName: "ProjectActivityDetail", viewModel: oDayHistory });
 
@@ -607,7 +614,7 @@ sap.ui.define([
 				currentContext.getActivitesdetail(data[0][0].id);
 				currentContext.getAttributeList(data[0][0].id);
 				currentContext.getAttachmentList(data[0][0].id);
-				currentContext.getPaymentStages('ProjStgType',data[0][0].id);
+				currentContext.getPaymentStages('ProjStgType', data[0][0].id);
 
 				//currentContext.getNIdetail(data[0][0].id);
 			});
@@ -776,7 +783,7 @@ sap.ui.define([
 			});
 		},
 
-		
+
 
 
 
@@ -842,10 +849,10 @@ sap.ui.define([
 			});
 		},
 
-		getAttachmentList : function(projectid){
+		getAttachmentList: function (projectid) {
 			let oThis = this;
-			Projectservice.getAttachmentList({projectid : projectid},function(data){
-				if(data.length && data[0].length){
+			Projectservice.getAttachmentList({ projectid: projectid }, function (data) {
+				if (data.length && data[0].length) {
 					var attachmenttblmodel = oThis.getView().getModel("attachmenttblmodel");
 
 					attachmenttblmodel.setData(data[0]);
@@ -855,10 +862,10 @@ sap.ui.define([
 			})
 		},
 
-		getPaymentStages : function(typecode,projectid){
+		getPaymentStages: function (typecode, projectid) {
 			let oThis = this;
-			Projectservice.getReferenceRelatedPayment({typecode : typecode,projectid : projectid},function(data){
-				if(data.length && data[0].length){
+			Projectservice.getReferenceRelatedPayment({ typecode: typecode, projectid: projectid }, function (data) {
+				if (data.length && data[0].length) {
 					var paymenttblmodel = oThis.getView().getModel("paymenttblmodel");
 
 					paymenttblmodel.setData(data[0]);
@@ -902,7 +909,7 @@ sap.ui.define([
 
 		},
 
-		getAllStageArActivity: async function (oEvent) {
+		getAllStageOrActivity: async function (oEvent) {
 
 			let currentContext = this;
 
@@ -912,16 +919,18 @@ sap.ui.define([
 				var tblModel = currentContext.getView().getModel("tblModel");
 				tblModel.setData(currentContext.StageList);
 
-				
+
 			}
 			else if (oEvent.mParameters.id.match("btnallactivity") != null) {
 				var activitymodel = currentContext.getView().getModel("activitymodel");
 				activitymodel.setData(currentContext.ActivityList);
-			
+
 
 			}
-			// else if (oEvent.mParameters.id.match("startDate") != null) {
-
+			else if (oEvent.mParameters.id.match("btnallattribute") != null) {
+				var attributeModel = currentContext.getView().getModel("attributeModel");
+				attributeModel.setData(currentContext.AttributeList);
+			}
 
 
 		},
@@ -1243,15 +1252,15 @@ sap.ui.define([
 
 			})
 		},
-		
-        // Function to reset all filters applied to table
-		getAllActivities: async function(){
+
+		// Function to reset all filters applied to table
+		getAllActivities: async function () {
 			this.groupReset = false;
-            var oTable = this.byId("tblActiviteStatus"),
-                oBinding = oTable.getBinding("items"),
-                aGroups = [];
-                oBinding.sort(aGroups);
-                this.groupReset = false;
+			var oTable = this.byId("tblActiviteStatus"),
+				oBinding = oTable.getBinding("items"),
+				aGroups = [];
+			oBinding.sort(aGroups);
+			this.groupReset = false;
 		},
 
 		onniclick: async function (oEvent) {
