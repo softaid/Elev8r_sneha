@@ -147,7 +147,24 @@
                                         <Input id="completionDay" value="{StageDetailModel>/completiondays}" change="dayCalculation"/>
                                     </form:fields>
                                 </form:FormElement> 
-                                  <form:FormElement label=" Actual Start Date">
+
+                                    <form:FormElement label="Warning" 
+                               visible="{
+                                        path: 'StageDetailModel>/WarningStatus',
+                                        formatter: '.formatter.setvisibiltywarning'
+                                    }"
+                               >
+                                <form:fields>
+                                <TextArea placeholder="Warning"  value="{StageDetailModel>/WarningStatus}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+                                </form:fields>
+                            </form:FormElement>     
+
+                                  <form:FormElement label="Actual Start Date"  
+                                   visible="{
+                                        path: 'StageDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                                  >
                                     <form:fields>
                                     <DatePicker id="ActualStartDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
@@ -159,7 +176,12 @@
                                                 change="dayCalculationActual"/>
                                         </form:fields>
                                 </form:FormElement>
-                                 <form:FormElement label=" Actual End Date">
+                                 <form:FormElement label=" Actual End Date" 
+                                  visible="{
+                                        path: 'StageDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                                    >
                                         <form:fields>
                                     <DatePicker id="actualEndDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
@@ -171,23 +193,42 @@
                                                 change="dayCalculationActual"/>
                                         </form:fields>
                                 </form:FormElement>
-                                 <form:FormElement label=" Actual Completion Day">
+                                 <form:FormElement label=" Actual Completion Day" 
+                                  visible="{
+                                        path: 'StageDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }">
                                     <form:fields>
                                         <Input id="actualCompletionDay" value="{StageDetailModel>/actualdays}"  editable="true"
                                         change="dayCalculationActual"/>
                                     </form:fields>
                                 </form:FormElement> 
-                                <form:FormElement label="Stage Completion">
+                                <form:FormElement label="Stage Completion"
+                                 visible="{
+                                        path: 'StageDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                                    >
                                     <form:fields>
                                         <Input id="StagePercent" value="{StageDetailModel>/stagecompletionpercentage}"/>
                                     </form:fields>
                                 </form:FormElement>
-                                <form:FormElement label="Project completion"  visible="true">
+                                <form:FormElement label="Project completion"
+                                 visible="{
+                                        path: 'StageDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                                    >
                                     <form:fields>
                                 <Input id="projectPercent" value="{StageDetailModel>/projectweightage}"/>
                                     </form:fields>
                                 </form:FormElement>
-                                 <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
+                                 <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}"
+                                   visible="{
+                                        path: 'StageDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                                    >
                                        <form:fields>
                                             <Switch  state="{StageDetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No">
                                                 <layoutData>
@@ -238,7 +279,12 @@
 
 
 
-                              <form:FormElement label="Upload Image">
+                              <form:FormElement label="Upload Image" 
+                               visible="{
+                                        path: 'StageDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                                    >
                                         <form:fields>
                                             <u:FileUploader
                                                 id="fileUploader"
@@ -254,7 +300,12 @@
                                             </u:FileUploader>
                                         </form:fields>
                                     </form:FormElement>
-                                    <form:FormElement>
+                                    <form:FormElement   
+                                     visible="{
+                                        path: 'StageDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                        }"
+                                    >
                                         <form:fields>
                                             <Image
                                                 src="{editDocumentCollectionModel>/image_url}"
@@ -297,7 +348,11 @@
                                            </HBOX>
                                         </form:fields>
                                     </form:FormElement>
-                                     <form:FormElement label="Upload Document">
+                                     <form:FormElement label="Upload Document"
+                                       visible="{
+                                        path: 'StageDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                        }">
                                         <form:fields>
                                             <u:FileUploader
                                                 id="fileUploaderpdf"
@@ -314,13 +369,21 @@
                                         </form:fields>
                                     </form:FormElement>
                                     
-                                      <form:FormElement label="">
+                                      <form:FormElement label=""
+                                        visible="{
+                                        path: 'StageDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }">
                                     <form:fields>
                                         <Input id="inputField"  width="53%" value="{editDocumentCollectionModel>/pdf_name}"  editable="true"/>
                                     </form:fields>
                                 </form:FormElement>
 
-                                    <form:FormElement>
+                                    <form:FormElement  
+                                     visible="{
+                                        path: 'StageDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }">
                                         <form:fields>
                                             <HBox>
                                         <!-- <PDFViewer source="{editDocumentCollectionModel>/pdf_url}" height="10em"  press="functiondownload">
