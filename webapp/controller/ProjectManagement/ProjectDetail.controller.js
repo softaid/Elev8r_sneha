@@ -439,7 +439,7 @@ sap.ui.define([
 
 
 		onListItemPressAttribute: function (oEvent) {
-
+			
 			let oDayHistory = oEvent.getSource().getBindingContext("attributeModel").getObject();
 			let projectModel = this.getView().getModel("projectModel").getData();
 			oDayHistory.projectid = projectModel.id;

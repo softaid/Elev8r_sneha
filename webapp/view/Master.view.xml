@@ -98,7 +98,7 @@
 					           </layoutData>
 				            </Button>
 
-                            <Button
+                            <!-- <Button
 					            id="notificationButton"
 					            icon="sap-icon://ui-notifications"
 					            visible="{= ${notificationPopupModel>/modelData}.length === 0 ? false : true }"
@@ -108,7 +108,9 @@
 					            <layoutData>
 						            <OverflowToolbarLayoutData priority="NeverOverflow"/>
 					            </layoutData>
-				            </Button>
+				            </Button> -->
+
+							
 
 							<tnt:InfoLabel id="notificationcount" class="notificationCount"
 								visible="{= ${notificationPopupModel>/modelData}.length === 0 ? false : true }"
@@ -129,6 +131,16 @@
 							valueFormat="M/d/yy h:mm a"
 							class="sapUiSmallMarginBottom"/>
 
+							<Button
+					            id="notificationButton"
+					            icon="sap-icon://ui-notifications"
+					            type="Transparent"
+					            press="onNotificationPress"
+					            tooltip="{i18n>notificationButtonTooltip}">
+					            <layoutData>
+						            <OverflowToolbarLayoutData priority="NeverOverflow"/>
+					            </layoutData>
+				            </Button>
 							<Button
 					            id="logoutButton"
 					            icon="sap-icon://log"

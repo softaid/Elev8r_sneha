@@ -43,7 +43,7 @@ sap.ui.define([
 			currentContext.resultArr = [];// image array
 			currentContext.resultpdfArr = [];// pdf array
 			currentContext.DeleteDocumentArr = [];//in this array we  push index of array we want to delete
-			currentContext.getActivitydetail({ projectid: 60, field: "activity" })
+			currentContext.getActivitydetail({ projectid: 1, field: "activity" })
 
 		},
 

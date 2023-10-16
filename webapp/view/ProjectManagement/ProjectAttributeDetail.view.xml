@@ -1,6 +1,3 @@
-
-
-
 <mvc:View
 	xmlns:c="sap.ui.core"
 	controllerName="sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectAttributeDetail"

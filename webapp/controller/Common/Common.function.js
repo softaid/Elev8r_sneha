@@ -229,13 +229,13 @@ sap.ui.define([
                             }
 
                             // Send SMS Notification 
-                            if (notification.sms) {
-                                // If mobile exists, (user may exists without mobile)
-                                if (mobileNos.length > 0) {
-                                    // Send SMS using SMSLane service (template must be registered in SMSLane website template)
-                                    this.sendSMSNotification(mobileNos, template);
-                                }
-                            }
+                            // if (notification.sms) {
+                            //     // If mobile exists, (user may exists without mobile)
+                            //     if (mobileNos.length > 0) {
+                            //         // Send SMS using SMSLane service (template must be registered in SMSLane website template)
+                            //         this.sendSMSNotification(mobileNos, template);
+                            //     }
+                            // }
 
 
                             // Notification History - Data Save
@@ -329,6 +329,7 @@ sap.ui.define([
 
         // Notification Placeholders
         getNotificationPlaceholders: function (currentContext, transactiontypeid) {
+            
             commonService.getNotificationPlaceholders({ transactiontypeid: transactiontypeid }, function (data) {
                 var oModel = new sap.ui.model.json.JSONModel();
                 oModel.setData({ modelData: data[0] });

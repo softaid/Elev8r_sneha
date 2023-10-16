@@ -536,6 +536,7 @@ sap.ui.define([
 			}
 
 			orderService[callService](model, function (data) {
+				console.log("----order save data---------",data)
 
 				if (data.id != null) {
 					var message = model.id == null ? "Order created successfully!" : "Order edited successfully!";
@@ -545,7 +546,23 @@ sap.ui.define([
 					currentContext.bus.publish("loadorderdata", "loadOrderData");
 				}
 
+				if(model["status"]=="Confirmed"){
+					debugger;
+					var histroydata = {
+						purchaseorderno: model.id,
+						transactionid : model.id,
+						purchaseorderdate:commonFunction.getDate(model.orderdate),
+						username: commonService.session("userName"),
+						suppliername :"Pooja",
+						orderamount:model.quotevalue
+					}
+					commonFunction.sendTransNotification(currentContext,29,histroydata);
+				}
+				
 			});
+
+
+		
 			// }
 			//this.reset();
 

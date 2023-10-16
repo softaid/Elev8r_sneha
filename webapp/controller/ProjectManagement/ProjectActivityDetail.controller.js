@@ -542,7 +542,7 @@ sap.ui.define([
 				Projectservice.saveProjectActivityDetail(oModel, function (savedata) {
 					console.log(savedata);
 
-					 objPush.stageid=savedata.id  //  get id of  new save activity  for document save
+					// objPush.stageid=savedata.id  //  get id of  new save activity  for document save
 
 					currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
 						if (document.id == undefined) {

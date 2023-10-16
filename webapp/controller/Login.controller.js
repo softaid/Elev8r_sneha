@@ -93,7 +93,8 @@ sap.ui.define([
                     //OneSignal.provideUserConsent(true);
 
                     OneSignal.getUserId(function (userkey) {
-                        localStorage.setItem("userkey", userkey);
+                       // localStorage.setItem("userkey", userkey);
+                       localStorage.setItem("userkey", "1234567890");
                     });
 
                     // OneSignal.registerForPushNotifications({
@@ -102,7 +103,8 @@ sap.ui.define([
 
                     OneSignal.on('subscriptionChange', function (isSubscribed) {
                         OneSignal.getUserId(function (userkey) {
-                            localStorage.setItem("userkey", userkey);
+                            //localStorage.setItem("userkey", userkey);
+                            localStorage.setItem("userkey", "1234567890");
                         });
                     });
 
@@ -254,7 +256,8 @@ sap.ui.define([
                 companycode : companycode, 
                 companyid : lModel.oData.companyid,
                 token: lModel.oData.token,
-                userkey: localStorage.getItem("userkey")
+               // userkey: localStorage.getItem("userkey")
+                userkey: "1234567890"
             }
 
             if (this.validateForgetPsw()) {
@@ -307,7 +310,8 @@ sap.ui.define([
                     pwd : pwd,
                     companyid : lModel.oData.companyid,
                     token: lModel.oData.token,
-                    userkey: localStorage.getItem("userkey")
+                   // userkey: localStorage.getItem("userkey")
+                    userkey: "9021723962"
                 }
 
                 if (this.validateResetPsw()) {
@@ -482,7 +486,8 @@ sap.ui.define([
                     companycode: oModel.oData.companycode,
                     companyid: oModel.oData.companyid,
                     token: oModel.oData.token,
-                    userkey: localStorage.getItem("userkey")
+                    //userkey: localStorage.getItem("userkey")
+                    userkey: "9021723962"
                 };
 
                 loginService.userLogin(loginData,

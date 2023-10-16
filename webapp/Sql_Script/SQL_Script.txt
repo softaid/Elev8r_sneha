@@ -2497,5 +2497,46 @@ BEGIN
 END$$
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS spc_project_search;
+DELIMITER $$
+CREATE  PROCEDURE `spc_project_search`(
+	IN p_companyid INT
+)
+BEGIN
+    SET @row_number = 0; -- Initialize the row number variable
+	SELECT
+           (@row_number:=@row_number + 1) AS srno,
+			P.id,
+            P.orderid,
+            O.jobcode as JobNo,
+            O.quotename,
+            P.ordervalue,
+            REF.description as model,
+            DATE_FORMAT(P.startdate,'%d/%m/%Y') as startdate,
+			DATE_FORMAT(P.enddate,'%d/%m/%Y') as enddate,
+            P.completiondays,
+            P.assignedby,
+            P.assignedto,
+            P.nicompletionper,
+            P.completionper,
+            CASE
+				WHEN P.completionper = 0 THEN 'Not Start'
+				WHEN P.completionper = 100 THEN 'Complete'
+				ELSE 'In Process'
+			END as pstatus,
+            P.customerid,
+            U.username
+	FROM project P
+    LEFT JOIN `order` O ON O.id = P.orderid
+    LEFT JOIN quotation Q ON Q.id = O.quoteid
+    LEFT JOIN `reference` REF ON REF.id = O.modelid
+    LEFT JOIN `user1` U ON U.id = P.customerid
+    
+	WHERE P.companyid = p_companyid;
+	
+END$$
+DELIMITER ;
+
+
 
 
