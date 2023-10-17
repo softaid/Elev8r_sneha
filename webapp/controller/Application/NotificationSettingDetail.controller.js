@@ -23,9 +23,9 @@ sap.ui.define([
 			this.bus = sap.ui.getCore().getEventBus();
 
 			//bind  type dropdown			
-			commonFunction.getReference("PLOSMod", "moduleModel", this);
-			commonFunction.getReference("PLOSNotiRoles", "rolesModel", this);
-			commonFunction.getReference("PLOSNotiAct", "actionModel", this);
+			commonFunction.getReferenceByType("PLOSMod", "moduleModel", this);
+			commonFunction.getReferenceByType("PLOSNotiRoles", "rolesModel", this);
+			commonFunction.getReferenceByType("PLOSNotiAct", "actionModel", this);
 
 			this.getTransactionData();
 
@@ -59,6 +59,7 @@ sap.ui.define([
 				var placeholder = currentContext.uniqueByColumn(data[0], function(x){return x.valuetype;});
 				oModel.setData({ modelData: placeholder });
 				currentContext.getView().setModel(oModel, "placeholderModel");
+				console.log("------placeholderModel---------",oModel)
 			});
 		},
 
@@ -114,6 +115,7 @@ sap.ui.define([
 
 
 		onBeforeRendering: function () {
+			debugger;
 			var currentContext = this;
 			this.model = this.getView().getModel("viewModel");
 			var oModel = new JSONModel();
@@ -155,6 +157,7 @@ sap.ui.define([
 
 				var currentContext = this;
 				var model = this.getView().getModel("editNotificationModel").oData;
+				console.log("------editNotificationModel---------",model);
 				model["companyid"] = model["companyid"] == null ? commonService.session("companyId") : model["companyid"];
 				model["userid"] = commonService.session("userId");
 				model["roleids"] = model["roleids"] instanceof Array ? model["roleids"].join() : "";
