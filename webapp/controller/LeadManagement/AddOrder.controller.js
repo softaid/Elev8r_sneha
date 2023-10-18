@@ -549,9 +549,9 @@ sap.ui.define([
 				if(model["status"]=="Confirmed"){
 					debugger;
 					var histroydata = {
-						purchaseorderno: model.id,
+						orderno: model.id,
 						transactionid : model.id,
-						purchaseorderdate:commonFunction.getDate(model.orderdate),
+						orderdate:commonFunction.getDate(model.orderdate),
 						username: commonService.session("userName"),
 						suppliername :"Pooja",
 						orderamount:model.quotevalue

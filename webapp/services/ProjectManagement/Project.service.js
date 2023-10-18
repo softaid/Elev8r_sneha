@@ -187,5 +187,8 @@ sap.ui.define([
                 commonService.runJQueryX("GET", "manageuser/department/"+params.departmentid , null, callback, null);
             },
 
-         }
+            getProjectDashboard : function(params, callback){
+                commonService.runJQueryX("GET","elevproject/projectdashboard/" + commonService.session("companyId") + "/" + params.userid, null, callback, null)
+            }
+        }
     })
