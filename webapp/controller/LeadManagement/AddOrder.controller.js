@@ -140,6 +140,9 @@ sap.ui.define([
 			// bind Group control 
 			commonFunction.getReferenceByType("LftGrpCtrl", "leadGroupControlModel", this);
 
+			// Purchase Order - Placeholders
+			commonFunction.getNotificationPlaceholders(this, 29);
+
 			//bind all Leads
 			leadService.getAllLeads(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
