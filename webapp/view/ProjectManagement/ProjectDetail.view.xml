@@ -380,7 +380,7 @@
 																icon="sap-icon://group-2"
 																press="handleGroupButtonPressed"/>
 															<Button icon="sap-icon://sort" type="Transparent" press="onAcivitySort"/>
-															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="niadd" visible="true"/>
+															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowactivity" id ="niadd" visible="true"/>
 														</HBOX>
 													</content>
 												</Toolbar>

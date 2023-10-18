@@ -90,7 +90,7 @@
                                 <form:fields>
                                     <Select id="projecttypeid"
 					                    required="true" 
-                                        change=""
+                                        change="onDepartmentChange"
                                         selectedKey="{StageDetailModel>/departmentid}" 
                                         forceSelection="false"
                                         width="500px"
@@ -99,6 +99,40 @@
                                             sorter: { path: 'id' }
                                         }">
                                         <core:Item key="{DepartmentModel>id}" text="{DepartmentModel>department}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+
+                              <form:FormElement id="assignto" label="Assign to">
+                                <form:fields>
+                                    <Select id="assigntoid"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{StageDetailModel>/assignedto}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'roleModel>/',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{roleModel>id}" text="{roleModel>username}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+
+                            <form:FormElement id="assignby" label="Approve By">
+                                <form:fields>
+                                    <Select id="assignbyid"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{StageDetailModel>/assignedby}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'roleModel>/',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{roleModel>id}" text="{roleModel>username}" />
                                     </Select>
                                 </form:fields>
                             </form:FormElement>
@@ -166,7 +200,7 @@
                                     }"
                                   >
                                     <form:fields>
-                                    <DatePicker id="ActualStartDate" width="100%" 
+                                    <DatePicker id="actualStartDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
                                                 value="{StageDetailModel>/actualstartdate}"
@@ -204,30 +238,19 @@
                                     </form:fields>
                                 </form:FormElement> 
                                 <form:FormElement label="Stage Completion"
-                                 visible="{
-                                        path: 'StageDetailModel>/dependencyStatus',
-                                        formatter: '.formatter.setvisibilty'
-                                    }"
+
                                     >
                                     <form:fields>
                                         <Input id="StagePercent" value="{StageDetailModel>/stagecompletionpercentage}"/>
                                     </form:fields>
                                 </form:FormElement>
-                                <form:FormElement label="Project completion"
-                                 visible="{
-                                        path: 'StageDetailModel>/dependencyStatus',
-                                        formatter: '.formatter.setvisibilty'
-                                    }"
-                                    >
+                                <form:FormElement label="Project completion">
                                     <form:fields>
                                 <Input id="projectPercent" value="{StageDetailModel>/projectweightage}"/>
                                     </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}"
-                                   visible="{
-                                        path: 'StageDetailModel>/dependencyStatus',
-                                        formatter: '.formatter.setvisibilty'
-                                    }"
+                                 
                                     >
                                        <form:fields>
                                             <Switch  state="{StageDetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No">
@@ -400,7 +423,6 @@
                                              <Button
                                                 text=""
                                                 width="40%"
-                                                margin="5% 5% 5% 5%"
                                                 type="Emphasized"
                                                 icon="sap-icon://arrow-right"
                                                 press="forwardPress" id="btnForpdf"/>

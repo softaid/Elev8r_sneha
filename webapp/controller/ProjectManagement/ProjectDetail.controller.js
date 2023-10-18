@@ -376,22 +376,21 @@ sap.ui.define([
 			this.bus = sap.ui.getCore().getEventBus();
 			let projectModel = this.getView().getModel("projectModel").getData();
 
-			this.bus.publish("billofmaterial", "setDetailPage", { viewName: "projectstagedetail", viewModel: { projectid: projectModel.id } });
+			this.bus.publish("billofmaterial", "setDetailPage", { viewName: "projectstagedetail", viewModel: { projectid: projectModel.id ,dependencyStatus:true ,WarningStatus:null} });
 		},
 
 		onAddNewRowactivity: function () {
 			this.bus = sap.ui.getCore().getEventBus();
 			let projectModel = this.getView().getModel("projectModel").getData();
 
-
-			this.bus.publish("activitystatus", "setDetailActivityPage", { viewName: "ProjectActivityDetail", viewModel: { projectid: projectModel.id } });
+			this.bus.publish("activitystatus", "setDetailActivityPage", { viewName: "ProjectActivityDetail", viewModel: { projectid: projectModel.id , dependencyStatus:true ,WarningStatus:null} });
 		},
 
 		onAddNewRowAttribute: function () {
 			this.bus = sap.ui.getCore().getEventBus();
 			let projectModel = this.getView().getModel("projectModel").getData();
 
-			this.bus.publish("attributestatus", "setDetailAttributePage", { viewName: "projectattributedetail", viewModel: { projectid: 60, attributetypeids: null } });
+			this.bus.publish("attributestatus", "setDetailAttributePage", { viewName: "projectattributedetail", viewModel: { projectid: projectModel.id, attributetypeids: null } });
 
 		},
 
@@ -410,7 +409,7 @@ sap.ui.define([
 			oDayHistory.dependencyStatus = dependency != null ? (dependency.split(",").every((ele) => {
 				return currentContext.projectCompletionObj[ele] == 100;
 			})) : true;
-			oDayHistory.WarningStatus = oDayHistory.dependencyStatus == false ? "To start the Stage you need to first complete dependency stages" : null;
+			oDayHistory.WarningStatus = oDayHistory.dependencyStatus == false ? "To start the Stage you need to first complete prerequisite stages" : null;
 
 			this.bus = sap.ui.getCore().getEventBus();
 			this.bus.publish("billofmaterial", "setDetailPage", { viewName: "projectstagedetail", viewModel: oDayHistory });
@@ -428,13 +427,16 @@ sap.ui.define([
 			oDayHistory.isstarted = oDayHistory.actualstartdate != null ? true : false;
 
 			Projectservice.getStageOrActivityDetail({ parentid: oDayHistory.parentid, projectid: oDayHistory.projectid }, function (data) {
-
 				let dependency = data[0][0].dependency;
 				// if dependencyStatus  is true means all dependency stage are completed  so we can proceed it  otherwise false mean  condition is not satisfied
 				oDayHistory.dependencyStatus = dependency != null ? (dependency.split(",").every((ele) => {
 					return currentContext.projectCompletionObj[ele] == 100;
 				})) : true;
-				oDayHistory.WarningStatus = oDayHistory.dependencyStatus == false ? "To start the Activity you need to first complete dependency stages" : null;
+				oDayHistory.stageDetail=data[0][0];
+				oDayHistory.stagecompletionpercentageRef=data[0][0].stagecompletionpercentage;
+
+				oDayHistory.WarningStatus = oDayHistory.dependencyStatus == false ? "To start the Activity you need to first complete prerequisite stages" : null;
+				oDayHistory.departmentid=data[0][0].departmentid;
 				currentContext.bus = sap.ui.getCore().getEventBus();
 				currentContext.bus.publish("activitystatus", "setDetailActivityPage", { viewName: "ProjectActivityDetail", viewModel: oDayHistory });
 
@@ -583,19 +585,6 @@ sap.ui.define([
 			if (aContexts != undefined) {
 				var selRow = aContexts.map(function (oContext) { return oContext.getObject(); });
 				currentContext.getProjectDetails(selRow[0].id);
-				// Projectservice.getProject({ id: selRow[0].id }, function (data) {
-				// 	console.log(data[0])
-				// 	data[0][0].isactive = data[0][0].isactive == 1 ? true : false;
-				// 	currentContext.getView().getModel("projectModel").setData(data[0][0]);
-				// 	data[0][0].niengineer != null ? currentContext.getView().byId("eng").setSelectedKeys([...data[0][0].niengineer]) : "data not available";
-				// 	data[0][0].nimanager != null ? currentContext.getView().byId("manager").setSelectedKeys([...data[0][0].nimanager]) : "data not available";
-				// 	data[0][0].salesmanager != null ? currentContext.getView().byId("salesmanager").setSelectedKeys([...data[0][0].salesmanager]) : "data not available";
-				// 	data[0][0].salesengineer != null ? currentContext.getView().byId("salesenginner").setSelectedKeys([...data[0][0].salesengineer]) : "data not available";
-				// 	currentContext.getProjectdetail(data[0][0].id);
-				// 	currentContext.getNIdetail(data[0][0].id);
-
-				// });
-
 			}
 
 		},

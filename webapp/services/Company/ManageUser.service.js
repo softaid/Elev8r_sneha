@@ -35,6 +35,9 @@ sap.ui.define([
             getUserByRole : function(params,callback){
                 commonService.runJQueryX("GET", "manageuser/usersrole/" + commonService.session("companyId")+"/"+params.roleid , null, callback, null);
             },
+            getUserByDepartment : function(params,callback){
+                commonService.runJQueryX("GET", "manageuser/by/department/"+params.departmentid , null, callback, null);
+            },
         };
     }
 );

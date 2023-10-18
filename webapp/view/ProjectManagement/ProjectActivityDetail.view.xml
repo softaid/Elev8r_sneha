@@ -71,7 +71,7 @@
                                 <form:fields>
                                     <Select id="project"
 					                    required="true" 
-                                        change=""
+                                        change="onStageChange"
                                         selectedKey="{ActivityDetailModel>/parentid}" 
                                         forceSelection="false"
                                         width="500px"
@@ -101,6 +101,40 @@
                                 </form:fields>
                             </form:FormElement>
 
+                               <form:FormElement id="assignto" label="Assign to">
+                                <form:fields>
+                                    <Select id="assigntoid"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{ActivityDetailModel>/assignedto}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'roleModel>/',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{roleModel>id}" text="{roleModel>username}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+
+                            <form:FormElement id="assignby" label="Approve By">
+                                <form:fields>
+                                    <Select id="assignbyid"
+					                    required="true" 
+                                        change=""
+                                        selectedKey="{ActivityDetailModel>/assignedby}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'roleModel>/',
+                                            sorter: { path: 'id' }
+                                        }">
+                                        <core:Item key="{roleModel>id}" text="{roleModel>username}" />
+                                    </Select>
+                                </form:fields>
+                            </form:FormElement>
+
                                 <form:FormElement label="Start Date">
                                     <form:fields>
                                     <DatePicker id="startDate" width="100%" 
@@ -109,7 +143,9 @@
                                                 value="{ActivityDetailModel>/startdate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="true" />
+                                                editable="true"
+                                                 change="dayCalculation"
+                                                 />
                                         </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label="End Date">
@@ -160,7 +196,10 @@
                                         </form:fields>
                                 </form:FormElement>
                                  <form:FormElement label=" Actual End Date" 
-                                  visible="{ActivityDetailModel>/dependencyStatus}"
+                                   visible="{
+                                        path: 'ActivityDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
                                  >
                                         <form:fields>
                                     <DatePicker id="actualendDate" width="100%" 
@@ -183,24 +222,22 @@
                                         <Input id="actualcompletionDay" value="{ActivityDetailModel>/actualcompletiondays}"  editable="true"  change="dayCalculationActual"/>
                                     </form:fields>
                                 </form:FormElement> 
-                                <form:FormElement label="Stage Completion"
 
-                                 visible="{
-                                        path: 'ActivityDetailModel>/dependencyStatus',
-                                        formatter: '.formatter.setvisibilty'
-                                    }"
-                                 >
+                                <form:FormElement label="Stage Completion(%)">
                                     <form:fields>
                                         <Input id="StagePercent" value="{ActivityDetailModel>/stagecompletionpercentage}"/>
                                     </form:fields>
                                 </form:FormElement>
-                                <form:FormElement label="Activity completion"  visible="false" 
+
+                                <!-- <form:FormElement label="Activity completion"  visible="false" 
                                 > 
                                     <form:fields>
+
                                 <Input id="projectPercent" value="{ActivityDetailModel>/projectweightage}"
                                 />
                                     </form:fields>
-                                </form:FormElement>
+                                </form:FormElement> -->
+
                                  <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
                                        <form:fields>
                                             <Switch  state="{ActivityDetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No">
@@ -245,10 +282,6 @@
                                 </form:fields>
                             </form:FormElement> 
                             <form:FormElement label="Remarks" 
-                               visible="{
-                                        path: 'ActivityDetailModel>/dependencyStatus',
-                                        formatter: '.formatter.setvisibilty'
-                                    }"
                             >
                                 <form:fields>
                                  <Input id="Remark" value="{ActivityDetailModel>/remark}"/>
@@ -382,7 +415,6 @@
                                              <Button
                                                 text=""
                                                 width="40%"
-                                                margin="5% 5% 5% 5%"
                                                 type="Emphasized"
                                                 icon="sap-icon://arrow-right"
                                                 press="forwardPress" id="btnForpdf"/>
