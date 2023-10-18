@@ -334,7 +334,7 @@
 												<form:formElements>
 													<form:FormElement label="">
 														<form:fields>
-															<Button text="All Stage" id="btnallstage" type="Emphasized" class="sapUiSmallMarginEnd" press="getAllStageArActivity"/>
+															<Button text="All Stage" id="btnallstage" type="Emphasized" class="sapUiSmallMarginEnd" press="getAllStageOrActivity"/>
 														</form:fields>
 													</form:FormElement>
 												</form:formElements>
@@ -476,7 +476,7 @@
 												<form:formElements>
 													<form:FormElement label="">
 														<form:fields>
-															<Button text="All Activity" id="btnallactivity" type="Emphasized" class="sapUiSmallMarginEnd" press="getAllStageArActivity"/>
+															<Button text="All Activity" id="btnallactivity" type="Emphasized" class="sapUiSmallMarginEnd" press="getAllStageOrActivity"/>
 														</form:fields>
 													</form:FormElement>
 												</form:formElements>
@@ -726,12 +726,11 @@
                                                                 sorter: {
                                                                     path: 'stagename'
                                                                 }
-                   
                                					 }">
 											<headerToolbar>
 												<Toolbar>
 													<content>
-														<Title text="Attachment" level="H2"/>
+														<Title text="Attribute" level="H2"/>
 														<ToolbarSpacer />
 														<HBOX>
 															<SearchField search="onSearchAttribute" width="17.5rem" id = "onAttachmentSearchId"/>
@@ -797,6 +796,15 @@
 													<form:FormElement label="Note">
 														<form:fields>
 															<TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{projectModel>/note}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+														</form:fields>
+													</form:FormElement>
+												</form:formElements>
+											</form:FormContainer>
+											<form:FormContainer title="">
+												<form:formElements>
+													<form:FormElement label="">
+														<form:fields>
+															<Button text="All Attribute" id="btnallattribute" type="Emphasized" class="sapUiSmallMarginEnd" press="getAllStageOrActivity"/>
 														</form:fields>
 													</form:FormElement>
 												</form:formElements>
