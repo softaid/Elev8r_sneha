@@ -163,23 +163,44 @@ sap.ui.define([
 
 		getData: function () {
 			var currentContext = this;
-			let to_date = commonFunction.getDateFromDB(new Date());
-			to_date = commonFunction.getDate(to_date);
-			commonService.getCommonDashBoard({ to_date: to_date }, function (data) {
-				var dashBoard_oModel = new sap.ui.model.json.JSONModel();
-				// If data is not get from database  then handle Empty data condition
-				if (data.length === 0 && data.trim().length === 0) {
-					let msg = "Data for dashboard is not available";
-					MessageToast.show(msg);
+			// let to_date = commonFunction.getDateFromDB(new Date());
+			// to_date = commonFunction.getDate(to_date);
+			// commonService.getCommonDashBoard({ to_date: to_date }, function (data) {
+			// 	var dashBoard_oModel = new sap.ui.model.json.JSONModel();
+			// 	// If data is not get from database  then handle Empty data condition
+			// 	if (data.length === 0 && data.trim().length === 0) {
+			// 		let msg = "Data for dashboard is not available";
+			// 		MessageToast.show(msg);
+			// 	}
+			// 	else {
+			// 		if (data.success) {
+			// 			console.log(data);
+			// 			dashBoard_oModel.setData(data[0][0]);
+			// 		}
+			// 	}
+			// 	currentContext.getView().setModel(dashBoard_oModel, "dashBoard_oModel");
+			// })
+
+			commonService.getHomeDashboard(function(data){
+				console.log("home dashboard : ",data);
+				let arr = [];
+
+				if(data.length){
+					var dashBoard_oModel = new sap.ui.model.json.JSONModel();
+					arr.push({
+						totalleads : data[0][0].totalleads,
+						liveprojects : data[1][0].liveprojects,
+						openactivities : data[2][0].openactivities,
+						overdueactivities : data[3][0].overdueactivities
+					})
+
+					dashBoard_oModel.setData(arr[0]);
+					currentContext.getView().setModel(dashBoard_oModel, "dashBoard_oModel");
+
+					console.log(dashBoard_oModel);
 				}
-				else {
-					if (data.success) {
-						console.log(data);
-						dashBoard_oModel.setData(data[0][0]);
-					}
-				}
-				currentContext.getView().setModel(dashBoard_oModel, "dashBoard_oModel");
 			})
+
 			google.charts.load('current', { 'packages': ['corechart'] });
 			google.charts.setOnLoadCallback(this.drawBarColors);
 

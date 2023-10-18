@@ -713,6 +713,10 @@ sap.ui.define([
             getCommonDashBoard: function (params, callback) {
                 this.runJQueryX("GET", "common/commondashboard1/company_id/"+this.session("companyId") +"/to_date/"+ params.to_date, null, callback, null);
             },
+
+            getHomeDashboard : function(callback){
+                this.runJQueryX("GET", "common/homedashboard/companyid/"+this.session("companyId"), null, callback, null);
+            },
             /**
              * Function TO Fecth Data From JE
              * @param {} params 

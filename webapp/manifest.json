@@ -147,6 +147,11 @@
 					"target": "leadmaster"
 				},
 				{
+					"pattern": "project",
+					"name": "project",
+					"target": "project"
+				},
+				{
 					"pattern": "projectmaster",
 					"name": "projectmaster",
 					"target": "projectmaster"
@@ -511,9 +516,15 @@
 					"controlId" : "mainContents",
 					"parent": "master"
 				},
+				"project" : {
+					"viewId" : "project",
+					"viewName" : "ProjectManagement/ProjectDashboard",
+					"controlId" : "mainContents",
+					"parent": "master"
+				},
 				"projectmaster" : {
 					"viewId" : "projectmaster",
-					"viewName" : "Masters/projectMaster",
+					"viewName" : "Masters/ProjectMaster",
 					"controlId" : "mainContents",
 					"parent": "master"
 				},
