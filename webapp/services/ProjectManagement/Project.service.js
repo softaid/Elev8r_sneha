@@ -183,5 +183,8 @@ sap.ui.define([
                 commonService.runJQueryX("GET", "elevproject/searchprojectsg/" + commonService.session("companyId"), null, callback, null);
             },
 
-         }
+            getProjectDashboard : function(params, callback){
+                commonService.runJQueryX("GET","elevproject/projectdashboard/" + commonService.session("companyId") + "/" + params.userid, null, callback, null)
+            }
+        }
     })
