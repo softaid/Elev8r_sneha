@@ -123,6 +123,8 @@ sap.ui.define([
                         case "transactionid":
                         case "transactiondate":
                         case "createdby":
+                        case "quotename" :
+                        case "leadname" :
 
                             template = this.replaceStr(template, "##" + placeholder["valuetype"] + "##", this.replaceStr(placeholder["placeholder"], "#", "") + ": " + data[placeholder["propertyname"]]);
                             break;

@@ -539,7 +539,8 @@ sap.ui.define([
 			}
 
 			orderService[callService](model, function (data) {
-				console.log("----order save data---------",data)
+				console.log("----order save data---------",data);
+				console.log("----model---------",model)
 
 				if (data.id != null) {
 					var message = model.id == null ? "Order created successfully!" : "Order edited successfully!";
@@ -556,7 +557,8 @@ sap.ui.define([
 						transactionid : model.id,
 						orderdate:commonFunction.getDate(model.orderdate),
 						username: commonService.session("userName"),
-						suppliername :"Pooja",
+						quotename : model.quotename,
+						leadname : model.leadname,
 						orderamount:model.quotevalue
 					}
 					commonFunction.sendTransNotification(currentContext,29,histroydata);

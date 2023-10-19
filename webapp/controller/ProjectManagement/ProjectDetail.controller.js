@@ -285,7 +285,7 @@ sap.ui.define(
 			oBinding.sort(oSorter);
 		  },
 		  // Function to reset all filters applied to table
-		  getAllStages: async function () {
+		  getAllStages: async function () {	
 			this.groupReset = false;
 			var oTable = this.byId("tblProjectStages"),
 			  oBinding = oTable.getBinding("items"),
