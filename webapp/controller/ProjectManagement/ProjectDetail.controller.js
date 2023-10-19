@@ -72,7 +72,6 @@ sap.ui.define(
 
 
 					var activitiestblmodel = new JSONModel();
-
 					activitiestblmodel.setData({});
 					this.getView().setModel(activitiestblmodel, "activitymodel");
 					var paymenttblmodel = new JSONModel();
@@ -102,7 +101,9 @@ sap.ui.define(
 					var model = new JSONModel();
 					model.setData({});
 					this.getView().setModel(model, "DepartmentModel");
-					
+					var stageModel = new JSONModel();
+					stageModel.setData({});
+					this.getView().setModel(model, "StageModel");
 					this.flag = false;
 					this.bomArr = [];
 					this.bomDetailArr = [];
@@ -492,29 +493,32 @@ sap.ui.define(
 				onAddNewRowStage: function () {
 					this.bus = sap.ui.getCore().getEventBus();
 					let projectModel = this.getView().getModel("projectModel").getData();
-
-					this.bus.publish("billofmaterial", "setDetailPage", { viewName: "projectstagedetail", viewModel: { projectid: projectModel.id, dependencyStatus: true, WarningStatus: null } });
+					this.bus.publish("billofmaterial", "setDetailPage", {
+						viewName: "projectstagedetail",
+						viewModel: { projectid: projectModel.id },
+					});
 				},
-
 				onAddNewRowactivity: function () {
 					this.bus = sap.ui.getCore().getEventBus();
 					let projectModel = this.getView().getModel("projectModel").getData();
-
-					this.bus.publish("activitystatus", "setDetailActivityPage", { viewName: "ProjectActivityDetail", viewModel: { projectid: projectModel.id, dependencyStatus: true, WarningStatus: null } });
+					this.bus.publish("activitystatus", "setDetailActivityPage", {
+						viewName: "ProjectActivityDetail",
+						viewModel: { projectid: projectModel.id },
+					});
 				},
-
 				onAddNewRowAttribute: function () {
 					this.bus = sap.ui.getCore().getEventBus();
 					let projectModel = this.getView().getModel("projectModel").getData();
-
-					this.bus.publish("attributestatus", "setDetailAttributePage", { viewName: "projectattributedetail", viewModel: { projectid: projectModel.id, attributetypeids: null } });
-
+					this.bus.publish("attributestatus", "setDetailAttributePage", {
+						viewName: "projectattributedetail",
+						viewModel: { projectid: 60, attributetypeids: null },
+					});
 				},
-
 				onListItemPressStage: function (oEvent) {
-					console.log(oEvent);
-					let currentContext = this;
-					let oDayHistory = oEvent.getSource().getBindingContext("tblModel").getObject();
+					let oDayHistory = oEvent
+						.getSource()
+						.getBindingContext("tblModel")
+						.getObject();
 					let projectModel = this.getView().getModel("projectModel").getData();
 					oDayHistory.projectid = projectModel.id;
 					oDayHistory.isactive = oDayHistory.isactive === 1||  oDayHistory.isactive === true? true : false;
@@ -528,15 +532,17 @@ sap.ui.define(
 					})) : true;
 					oDayHistory.WarningStatus = oDayHistory.dependencyStatus == false ? "To start the Stage you need to first complete prerequisite stages" : null;
 
-					this.bus = sap.ui.getCore().getEventBus();
+				this.bus = sap.ui.getCore().getEventBus();
 					this.bus.publish("billofmaterial", "setDetailPage", {
 						viewName: "projectstagedetail",
 						viewModel: oDayHistory,
 					});
 				},
 				onListItemPressActivity: function (oEvent) {
-					let currentContext=this;
-					let oDayHistory = oEvent.getSource().getBindingContext("activitymodel").getObject();
+					let oDayHistory = oEvent
+						.getSource()
+						.getBindingContext("activitymodel")
+						.getObject();
 					let projectModel = this.getView().getModel("projectModel").getData();
 					oDayHistory.projectid = projectModel.id;
 					oDayHistory.isactive = oDayHistory.isactive === 1 ? true : false;
@@ -586,12 +592,12 @@ sap.ui.define(
 						activitymodel.setData(currentContext.AttributeList);
 
 					}
-				},
-
-
+			},
 				onListItemPressAttribute: function (oEvent) {
-
-					let oDayHistory = oEvent.getSource().getBindingContext("attributeModel").getObject();
+					let oDayHistory = oEvent
+						.getSource()
+						.getBindingContext("attributeModel")
+						.getObject();
 					let projectModel = this.getView().getModel("projectModel").getData();
 					oDayHistory.projectid = projectModel.id;
 					this.bus = sap.ui.getCore().getEventBus();
@@ -721,7 +727,9 @@ sap.ui.define(
 					let currentContext = this;
 					var aContexts = oEvent.getParameter("selectedContexts");
 					if (aContexts != undefined) {
-						var selRow = aContexts.map(function (oContext) { return oContext.getObject(); });
+						var selRow = aContexts.map(function (oContext) {
+							return oContext.getObject();
+						});
 						currentContext.getProjectDetails(selRow[0].id);
 					}
 				},
@@ -784,7 +792,7 @@ sap.ui.define(
 						oIconTabBar.setSelectedKey("Activity");
 					} else {
 						Projectservice.getStageOrActivityDetail({ id: id },
-							function (data) {
+								function (data) {
 								let detail = data[0][0];
 								detail.isactive = detail.isactive === 1 ? true : false;
 								detail.isstd = detail.isstd === 1 ? true : false;
@@ -792,7 +800,7 @@ sap.ui.define(
 									detail.actualstartdate != null ? true : false;
 								oThis.bus = sap.ui.getCore().getEventBus();
 								oThis.bus.publish("billofmaterial", "setDetailPage", {viewName: "projectstagedetail",viewModel: detail});
-							}
+								}
 						);
 					}
 				},
@@ -847,7 +855,6 @@ sap.ui.define(
 						oModel.refresh();
 					});
 				},
-
 				// get all department
 				// getAllStage: function () {
 				// 	var currentContext = this;
@@ -858,7 +865,7 @@ sap.ui.define(
 				// 	});
 				// },
 
-				// get project stage and show in table
+			// get project stage and show in table
 				getStageDetail: function (projectid) {
 					var currentContext = this;
 					currentContext.projectCompletionObj = {};
@@ -884,9 +891,7 @@ sap.ui.define(
 							if (data[0]) {
 								let filteredData = data[0].filter(function (ele) {
 									return ele.isactive === 1;
-
 								});
-								currentContext.getView().getModel("stageModel").setData(filteredData);
 
 								if (projectModel.oData.isall == false) {
 									tblModel.setData(filteredData);
@@ -897,7 +902,6 @@ sap.ui.define(
 						}
 					);
 				},
-
 				getAll: function (oEvent) {
 					let currentContext = this;
 					let tblModel = currentContext.getView().getModel("tblModel");
@@ -994,7 +998,8 @@ sap.ui.define(
 							var paymenttblmodel = currentContext.getView().getModel("paymenttblmodel");
 							paymenttblmodel.setData(data[0]);
 							paymenttblmodel.refresh();
-						});
+
+					});
 				},
 				// Get attachment details of projects
 				getAttachmentdetail: function (projectid) {
@@ -1003,8 +1008,8 @@ sap.ui.define(
 					
 						var attachmenttblmodel = currentContext.getView().getModel("attachmenttblmodel");
 						attachmenttblmodel.setData(data[0]);
-						paymenttblmodel.refresh();
-
+						attachmenttblmodel.refresh()
+		
 					});
 				},
 				// get attribute list details of project
@@ -1093,6 +1098,7 @@ sap.ui.define(
 					var oBundle = this.getModel("i18n").getResourceBundle();
 					return oBundle;
 				},
+				
 				onSave: function () {
 					//var isvalid = this.validateForm();
 					//if(isvalid){
@@ -1606,35 +1612,36 @@ sap.ui.define(
 						tableModel.createBindingContext("/" + dropIndex)
 					);
 				},
+
 				handleSelectionFinish: function (oEvt) {
 					let oprojectModel = this.getView().getModel("projectModel");
 					let oprojectModeldata = oprojectModel.oData;
 					let selectedItems = oEvt.getParameter("selectedItems");
 					let roleids = [];
 					for (var i = 0; i < selectedItems.length; i++) {
-						roleids.push(selectedItems[i].getProperty("key"));
+					  roleids.push(selectedItems[i].getProperty("key"));
 					}
 					if (
-						oEvt.mParameters.id ==
-						"componentcontainer---projectactivitiesAdd--eng"
+					  oEvt.mParameters.id ==
+					  "componentcontainer---projectactivitiesAdd--eng"
 					) {
-						oprojectModeldata.niengineer = roleids.join(",");
+					  oprojectModeldata.niengineer = roleids.join(",");
 					} else if (
-						oEvt.mParameters.id ==
-						"componentcontainer---projectactivitiesAdd--manager"
+					  oEvt.mParameters.id ==
+					  "componentcontainer---projectactivitiesAdd--manager"
 					) {
-						oprojectModeldata.nimanager = roleids.join(",");
+					  oprojectModeldata.nimanager = roleids.join(",");
 					} else if (
-						oEvt.mParameters.id ==
-						"componentcontainer---projectactivitiesAdd--salesenginner"
+					  oEvt.mParameters.id ==
+					  "componentcontainer---projectactivitiesAdd--salesenginner"
 					) {
-						oprojectModeldata.salesengineer = roleids.join(",");
+					  oprojectModeldata.salesengineer = roleids.join(",");
 					} else {
-						oprojectModeldata.salesmanager = roleids.join(",");
+					  oprojectModeldata.salesmanager = roleids.join(",");
 					}
-				},
-			}
-		);
-	},
-	true
-);
+				  },
+				}
+			  );
+			},
+			true
+		  );

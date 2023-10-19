@@ -8582,3 +8582,83 @@ END$$
 DELIMITER ;
 ;
 
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_salesdashboard`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_salesdashboard`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_salesdashboard`(
+	IN p_companyid INT(11)
+)
+BEGIN
+
+	SELECT 
+	IFNULL(count(L.id),0) as totalleads,
+    IFNULL(count(REF.description),0) as qualifiedleads
+	FROM leads L 
+    LEFT JOIN `reference` REF ON REF.id = L.leadstatus AND REF.description = 'Qualified'
+	WHERE L.companyid = p_companyid;
+    
+    SELECT IFNULL(count(Q.id),0) as totalquotations FROM quotation WHERE revisionno = 1;
+    
+    SELECT IFNULL(count(O.id),0) as totalorders FROM `order` WHERE companyid = p_companyid;
+    
+    SELECT IFNULL(count(O.id),0) as confirmedorders FROM `order` WHERE `status` = 'Confirmed';
+    
+END$$
+
+DELIMITER ;
+;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_reference_paymentstages`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_paymentstages`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_reference_paymentstages`(
+	IN p_typecode VARCHAR(20),
+    IN p_projectid INT(11)
+)
+BEGIN
+    
+	SET sql_mode = '';
+    
+    SELECT PA.id,
+		   REF.description as activityname,
+		   REF1.description as stagename,
+           'Stage' as type,
+           SUM(IFNULL(JSON_UNQUOTE(JSON_EXTRACT(IFNULL(JSON_UNQUOTE(JSON_EXTRACT(PA.attributevalue,CONCAT('$[0]'))),0), '$.Amount')),0)) AS stageamount,
+           null as activityamount
+	FROM project_attributes PA
+    LEFT JOIN `reference` REF ON REF.id = PA.activityid
+    LEFT JOIN `reference` REF1 ON REF1.id = PA.stageid
+    WHERE PA.projectid = p_projectid
+    GROUP BY PA.stageid
+    
+    UNION ALL
+    
+    SELECT PA.id,
+           REF.description as activityname,
+           REF1.description as stagename,
+           'Activity' as type,
+           null as stageamount,
+           SUM(IFNULL(JSON_UNQUOTE(JSON_EXTRACT(IFNULL(JSON_UNQUOTE(JSON_EXTRACT(PA.attributevalue,CONCAT('$[0]'))),0), '$.Amount')),0)) AS activityamount
+	FROM project_attributes PA
+    LEFT JOIN `reference` REF ON REF.id = PA.activityid
+    LEFT JOIN `reference` REF1 ON REF1.id = PA.stageid
+    WHERE PA.projectid = p_projectid
+    GROUP BY PA.activityid;
+    
+END$$
+
+DELIMITER ;
+;
+

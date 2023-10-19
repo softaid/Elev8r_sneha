@@ -39,6 +39,11 @@ sap.ui.define([
             convertToQuote : function(params, callback){
                 console.log(params);
                 commonService.runJQueryX("GET", "lead/converttoquote/" + params.id, null, callback, null);
+            },
+
+            getSalesDashboard : function(callback){
+                console.log(params);
+                commonService.runJQueryX("GET", "lead/salesdashboard/" + commonService.session("companyId"), null, callback, null);
             }
         };
     }
