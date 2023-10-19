@@ -577,12 +577,13 @@ sap.ui.define([
 				projectid: oModel.projectid,
 				companyid: commonService.session("companyId"),
 				userid: commonService.session("userId"),
-				parentstageid: null
+				parentstageid: null,
 			}
 
 
 			oModel["companyid"] = commonService.session("companyId");
 			oModel.type ="Attribute";
+			oModel.fromreference=0;
 
 			//oModel["userid"] = commonService.session("userId");
 
