@@ -7,7 +7,7 @@ sap.ui.define(
     ],
     function (JSONModel,BaseController,projectService, commonService) {
       return BaseController.extend(
-        "sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.ProjectDashboard",
+        "sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectDashboard",
         {
             onInit : function(){
                 this.getProjectDashboardData();

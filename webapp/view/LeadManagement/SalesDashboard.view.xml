@@ -1,0 +1,58 @@
+<core:View displayBlock="true" controllerName="sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.SalesDashboard" height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core"
+	xmlns:dnd="sap.ui.core.dnd"
+    xmlns:k= "jQuery.sap.ui.event.keyCodes"
+    xmlns:tnt="sap.tnt"
+    xmlns:l="sap.ui.layout">
+    <f:FlexibleColumnLayout  id="fclSalesDashboard" backgroundDesign="Solid">
+		<f:beginColumnPages>
+            <f:DynamicPage preserveHeaderStateOnScroll="true" headerExpanded="{/headerExpanded}">
+                <f:title>
+                    <f:DynamicPageTitle>
+                        <f:heading>
+                            <Title text="Sales"/>
+                        </f:heading>
+                        <f:actions>
+                            <Button id = "btnList" icon="sap-icon://list" type="Transparent" press="onListIconPress" visible="true" />
+                        </f:actions>
+                    </f:DynamicPageTitle>
+                </f:title>
+			    <f:header>
+                    <f:DynamicPageHeader pinnable="true">			
+                    </f:DynamicPageHeader>
+                </f:header>
+                <f:content>
+                    <Page class="pgDashboard" showHeader="false" id="contentDashboard">
+						<content>
+                            <VBox>
+                                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Qualified Leads/Total Leads" press="getTotalLeadsDetail">
+                                    <TileContent footer="">
+                                        <NumericContent truncateValueTo="20" value="{oDashboardTileModel>/qualifiedleads}/{oDashboardTileModel>/totalleads}" valueColor="Good" withMargin="false" />
+                                    </TileContent>
+                                </GenericTile>
+                                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Total quotationss" press="getTotalLeadsDetail">
+                                    <TileContent footer="">
+                                        <NumericContent truncateValueTo="20" value="{oDashboardTileModel>/totalquotations}"/>
+                                    </TileContent>
+                                </GenericTile>
+                                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Confirmed Orders/Total Orders" press="getTotalLeadsDetail">
+                                    <TileContent footer="">
+                                        <NumericContent truncateValueTo="20" value="{oDashboardTileModel>/confirmedorders}/{oDashboardTileModel>/totalorders}" valueColor="Good" withMargin="false" />
+                                    </TileContent>
+                                </GenericTile>
+                            </VBox>
+                        </content>		
+					</Page>  
+                </f:content>
+	        </f:DynamicPage>
+    	</f:beginColumnPages>
+	</f:FlexibleColumnLayout>
+</core:View>
+
+
+
+
+
