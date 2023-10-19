@@ -514,7 +514,9 @@ sap.ui.define(
 						viewModel: { projectid: 60, attributetypeids: null },
 					});
 				},
+
 				onListItemPressStage: function (oEvent) {
+					const currentContext=this;
 					let oDayHistory = oEvent
 						.getSource()
 						.getBindingContext("tblModel")
@@ -524,6 +526,7 @@ sap.ui.define(
 					oDayHistory.isactive = oDayHistory.isactive === 1||  oDayHistory.isactive === true? true : false;
 					oDayHistory.isstd = oDayHistory.isstd === 1 ? true : false;
 					oDayHistory.isstarted = oDayHistory.actualstartdate != null ? true : false;
+					oDayHistory.projectDetail=projectModel;
 
 					let dependency = oDayHistory.dependency;
 					// if dependencyStatus  is true means all dependency stage are completed  so we can proceed it  otherwise false mean  condition is not satisfied
@@ -539,6 +542,7 @@ sap.ui.define(
 					});
 				},
 				onListItemPressActivity: function (oEvent) {
+					let currentContext=this;
 					let oDayHistory = oEvent
 						.getSource()
 						.getBindingContext("activitymodel")
@@ -562,11 +566,7 @@ sap.ui.define(
 						oDayHistory.departmentid = data[0][0].departmentid;
 						currentContext.bus = sap.ui.getCore().getEventBus();
 						currentContext.bus.publish("activitystatus", "setDetailActivityPage", { viewName: "ProjectActivityDetail", viewModel: oDayHistory });
-
-
 					})
-
-
 				},
 
 				getAllStageArActivity: async function (oEvent) {
@@ -588,11 +588,12 @@ sap.ui.define(
 		
 					}
 					else{
-						var activitymodel = currentContext.getView().getModel("attributemodel");
+						var activitymodel = currentContext.getView().getModel("attributeModel");
 						activitymodel.setData(currentContext.AttributeList);
 
 					}
 			},
+
 				onListItemPressAttribute: function (oEvent) {
 					let oDayHistory = oEvent
 						.getSource()
@@ -1098,7 +1099,7 @@ sap.ui.define(
 					var oBundle = this.getModel("i18n").getResourceBundle();
 					return oBundle;
 				},
-				
+
 				onSave: function () {
 					//var isvalid = this.validateForm();
 					//if(isvalid){

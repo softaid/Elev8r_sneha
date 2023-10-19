@@ -198,6 +198,16 @@
                                                     </form:fields>
                                    </form:FormElement>
 
+                                     <form:FormElement label="Approve">
+									<form:fields>
+										<Switch  state="{StageDetailModel>/iscompleted}" id="iscompleted" customTextOn="Yes" customTextOff="No" change="handleStageCompPer">
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</form:fields>
+								</form:FormElement>
+
 						      </form:formElements>
 							</form:FormContainer>
 						</form:formContainers>
