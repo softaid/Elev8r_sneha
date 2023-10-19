@@ -25,202 +25,208 @@
 						</f:actions>
 					</f:DynamicPageTitle>
 				</f:title>
+				<f:header>
+                    <f:DynamicPageHeader pinnable="true">
+                        <VBox>
+							<form:Form editable="true">
+								<form:title></form:title>
+								<form:layout>
+									<form:ResponsiveGridLayout
+								labelSpanXL="4"
+									labelSpanL="4"
+									labelSpanM="4"
+									labelSpanS="12"
+									adjustLabelSpan="false"
+									emptySpanXL="0"
+									emptySpanL="0"
+									emptySpanM="0"
+									emptySpanS="0"
+									columnsXL="3"
+									columnsL="2"
+									columnsM="2"
+								singleContainerFullSize="false" />
+								</form:layout>
+								<form:formContainers>
+									<form:FormContainer title="">
+										<form:formElements>
+											<form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMCOde}">
+												<form:fields>
+													<Input id="textbmcode"  editable="false" value="{projectModel>/id}" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="{i18n>feedMillBillOfMaterialLabelProductName}">
+												<form:fields>
+													<Input
+													id="txtitemname"
+													type="Text"
+													value="{projectModel>/leadname}"
+													enabled="true"
+													required="true"
+													editable="true"></Input>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Order Value">
+												<form:fields>
+													<Input id="quantity"  value="{projectModel>/ordervalue}" editable="false"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="NI Engineer">
+												<form:fields>
+													<MultiComboBox id="eng"
+														required="true" 
+														selectionChange=""
+														selectionFinish="handleSelectionFinish"
+														width="500px"
+														items="{
+															path: 'engRoleModel>/',
+															sorter: { path: 'createdby' }
+															}">
+														<core:Item key="{engRoleModel>createdby}" text="{engRoleModel>createdbyname}" />
+													</MultiComboBox>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="NI Manager ">
+												<form:fields>
+													<MultiComboBox id="manager"
+														required="true" 
+														selectionChange=""
+														selectionFinish="handleSelectionFinish"
+														width="500px"
+														items="{
+															path: 'managerRoleModel>/',
+															sorter: { path: 'createdby' }
+															}">
+														<core:Item key="{managerRoleModel>createdby}" text="{managerRoleModel>createdbyname}" />
+													</MultiComboBox>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Sales Engineer">
+												<form:fields>
+													<MultiComboBox id="salesenginner"
+														required="true" 
+														selectionChange=""
+														selectionFinish="handleSelectionFinish"
+														width="500px"
+														items="{
+															path: 'managerRoleModel>/',
+															sorter: { path: 'createdby' }
+															}">
+														<core:Item key="{managerRoleModel>createdby}" text="{managerRoleModel>createdbyname}" />
+													</MultiComboBox>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="Sales Manager ">
+												<form:fields>
+													<MultiComboBox id="salesmanager"
+														required="true" 
+														selectionChange=""
+														selectionFinish="handleSelectionFinish"
+														width="500px"
+														items="{
+															path: 'managerRoleModel>/',
+															sorter: { path: 'createdby' }
+															}">
+														<core:Item key="{managerRoleModel>createdby}" text="{managerRoleModel>createdbyname}" />
+													</MultiComboBox>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+									<form:FormContainer title="">
+										<form:formElements>
+											<form:FormElement id="subcontractorEle1" label="Subcontractor 1">
+												<form:fields>
+													<Select id="subcontractor1"
+													change=""
+													selectedKey="{projectModel>/subcontractorid1}" 
+													forceSelection="false"
+													width="500px"
+													items="{
+														path: 'subcontractorModel>/modelData',
+														sorter: { path: 'id' }
+													}">
+														<core:Item key="{subcontractorModel>id}" text="{subcontractorModel>subconname}" />
+													</Select>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement id="subcontractorEle2" label="Subcontractor 2">
+												<form:fields>
+													<Select id="subcontractor2"
+													change=""
+													selectedKey="{projectModel>/subcontractorid2}" 
+													forceSelection="false"
+													width="500px"
+													items="{
+														path: 'subcontractorModel>/modelData',
+														sorter: { path: 'id' }
+													}">
+														<core:Item key="{subcontractorModel>id}" text="{subcontractorModel>subconname}" />
+													</Select>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement id="customerEle" label="Customer">
+												<form:fields>
+													<Select id="customer"
+													change=""
+													selectedKey="{projectModel>/customerid}" 
+													forceSelection="false"
+													width="500px"
+													items="{
+														path: 'userModel>/modelData',
+														sorter: { path: 'id' }
+													}">
+														<core:Item key="{userModel>id}" text="{userModel>createdbyname}" />
+													</Select>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMStartDate}">
+												<form:fields>
+													<DatePicker id="txtStartdate" width="100%" 
+													placeholder="{config>/dateFormat/placeholder}"
+													displayFormat="{config>/dateFormat/displayFormat}"
+													value="{projectModel>/startdate}"
+													valueFormat="dd/MM/yyyy"
+													required="true"
+													editable="true" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMEndDate}">
+												<form:fields>
+													<DatePicker id="txtenddate" width="100%" 
+													placeholder="{config>/dateFormat/placeholder}"
+													displayFormat="{config>/dateFormat/displayFormat}"
+													value="{projectModel>/enddate}"
+													valueFormat="dd/MM/yyyy"
+													required="true"
+												editable="true"
+												change="dayCalculation"
+													/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="{i18n>feedMillBillOfMaterialLabelCompleteDay}">
+												<form:fields>
+													<Input id="CompleteDay"  value="{projectModel>/completiondays}"
+												change="dayCalculation" editable="true"/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
+												<form:fields>
+													<Switch  state="{projectModel>/isactive}" id="chkwithrequest" customTextOn="Yes" customTextOff="No"  >
+														<layoutData>
+															<FlexItemData growFactor="1" />
+														</layoutData>
+													</Switch>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+								</form:formContainers>
+							</form:Form>
+						</VBox>
+					</f:DynamicPageHeader>
+				</f:header>	
 				<f:content>
 					<VBox fitContainer="true">
-						<form:Form editable="true">
-							<form:title></form:title>
-							<form:layout>
-								<form:ResponsiveGridLayout
-                             labelSpanXL="4"
-                                labelSpanL="4"
-                                labelSpanM="4"
-                                labelSpanS="12"
-                                adjustLabelSpan="false"
-                                emptySpanXL="0"
-                                emptySpanL="0"
-                                emptySpanM="0"
-                                emptySpanS="0"
-                                columnsXL="3"
-                                columnsL="2"
-                                columnsM="2"
-                            singleContainerFullSize="false" />
-							</form:layout>
-							<form:formContainers>
-								<form:FormContainer title="">
-									<form:formElements>
-										<form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMCOde}">
-											<form:fields>
-												<Input id="textbmcode"  editable="false" value="{projectModel>/id}" />
-											</form:fields>
-										</form:FormElement>
-										<form:FormElement label="{i18n>feedMillBillOfMaterialLabelProductName}">
-											<form:fields>
-												<Input
-                                                id="txtitemname"
-                                                type="Text"
-                                                value="{projectModel>/leadname}"
-                                                enabled="true"
-                                                required="true"
-                                                editable="true"></Input>
-											</form:fields>
-										</form:FormElement>
-										<form:FormElement label="Order Value">
-											<form:fields>
-												<Input id="quantity"  value="{projectModel>/ordervalue}" editable="false"/>
-											</form:fields>
-										</form:FormElement>
-										<form:FormElement label="NI Engineer">
-											<form:fields>
-												<MultiComboBox id="eng"
-                                                    required="true" 
-                                                    selectionChange=""
-                                                    selectionFinish="handleSelectionFinish"
-                                                    width="500px"
-                                                    items="{
-                                                           path: 'engRoleModel>/',
-                                                           sorter: { path: 'createdby' }
-                                                           }">
-													<core:Item key="{engRoleModel>createdby}" text="{engRoleModel>createdbyname}" />
-												</MultiComboBox>
-											</form:fields>
-										</form:FormElement>
-										<form:FormElement label="NI Manager ">
-											<form:fields>
-												<MultiComboBox id="manager"
-                                                    required="true" 
-                                                    selectionChange=""
-                                                    selectionFinish="handleSelectionFinish"
-                                                    width="500px"
-                                                    items="{
-                                                           path: 'managerRoleModel>/',
-                                                           sorter: { path: 'createdby' }
-                                                           }">
-													<core:Item key="{managerRoleModel>createdby}" text="{managerRoleModel>createdbyname}" />
-												</MultiComboBox>
-											</form:fields>
-										</form:FormElement>
-										<form:FormElement label="Sales Engineer">
-											<form:fields>
-												<MultiComboBox id="salesenginner"
-                                                    required="true" 
-                                                    selectionChange=""
-                                                    selectionFinish="handleSelectionFinish"
-                                                    width="500px"
-                                                    items="{
-                                                           path: 'managerRoleModel>/',
-                                                           sorter: { path: 'createdby' }
-                                                           }">
-													<core:Item key="{managerRoleModel>createdby}" text="{managerRoleModel>createdbyname}" />
-												</MultiComboBox>
-											</form:fields>
-										</form:FormElement>
-										<form:FormElement label="Sales Manager ">
-											<form:fields>
-												<MultiComboBox id="salesmanager"
-                                                    required="true" 
-                                                    selectionChange=""
-                                                    selectionFinish="handleSelectionFinish"
-                                                    width="500px"
-                                                    items="{
-                                                           path: 'managerRoleModel>/',
-                                                           sorter: { path: 'createdby' }
-                                                           }">
-													<core:Item key="{managerRoleModel>createdby}" text="{managerRoleModel>createdbyname}" />
-												</MultiComboBox>
-											</form:fields>
-										</form:FormElement>
-									</form:formElements>
-								</form:FormContainer>
-								<form:FormContainer title="">
-									<form:formElements>
-										<form:FormElement id="subcontractorEle1" label="Subcontractor 1">
-											<form:fields>
-												<Select id="subcontractor1"
-                                                change=""
-                                                selectedKey="{projectModel>/subcontractorid1}" 
-                                                forceSelection="false"
-                                                width="500px"
-                                                items="{
-                                                    path: 'subcontractorModel>/modelData',
-                                                    sorter: { path: 'id' }
-                                                }">
-													<core:Item key="{subcontractorModel>id}" text="{subcontractorModel>subconname}" />
-												</Select>
-											</form:fields>
-										</form:FormElement>
-										<form:FormElement id="subcontractorEle2" label="Subcontractor 2">
-											<form:fields>
-												<Select id="subcontractor2"
-                                                change=""
-                                                selectedKey="{projectModel>/subcontractorid2}" 
-                                                forceSelection="false"
-                                                width="500px"
-                                                items="{
-                                                    path: 'subcontractorModel>/modelData',
-                                                    sorter: { path: 'id' }
-                                                }">
-													<core:Item key="{subcontractorModel>id}" text="{subcontractorModel>subconname}" />
-												</Select>
-											</form:fields>
-										</form:FormElement>
-										<form:FormElement id="customerEle" label="Customer">
-											<form:fields>
-												<Select id="customer"
-                                                change=""
-                                                selectedKey="{projectModel>/customerid}" 
-                                                forceSelection="false"
-                                                width="500px"
-                                                items="{
-                                                    path: 'userModel>/modelData',
-                                                    sorter: { path: 'id' }
-                                                }">
-													<core:Item key="{userModel>id}" text="{userModel>createdbyname}" />
-												</Select>
-											</form:fields>
-										</form:FormElement>
-										<form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMStartDate}">
-											<form:fields>
-												<DatePicker id="txtStartdate" width="100%" 
-                                                placeholder="{config>/dateFormat/placeholder}"
-                                                displayFormat="{config>/dateFormat/displayFormat}"
-                                                value="{projectModel>/startdate}"
-                                                valueFormat="dd/MM/yyyy"
-                                                required="true"
-                                                editable="true" />
-											</form:fields>
-										</form:FormElement>
-										<form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMEndDate}">
-											<form:fields>
-												<DatePicker id="txtenddate" width="100%" 
-                                                placeholder="{config>/dateFormat/placeholder}"
-                                                displayFormat="{config>/dateFormat/displayFormat}"
-                                                value="{projectModel>/enddate}"
-                                                valueFormat="dd/MM/yyyy"
-                                                required="true"
-                                               editable="true"
-                                               change="dayCalculation"
-                                                />
-											</form:fields>
-										</form:FormElement>
-										<form:FormElement label="{i18n>feedMillBillOfMaterialLabelCompleteDay}">
-											<form:fields>
-												<Input id="CompleteDay"  value="{projectModel>/completiondays}"
-                                            change="dayCalculation" editable="true"/>
-											</form:fields>
-										</form:FormElement>
-										<form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
-											<form:fields>
-												<Switch  state="{projectModel>/isactive}" id="chkwithrequest" customTextOn="Yes" customTextOff="No"  >
-													<layoutData>
-														<FlexItemData growFactor="1" />
-													</layoutData>
-												</Switch>
-											</form:fields>
-										</form:FormElement>
-									</form:formElements>
-								</form:FormContainer>
-							</form:formContainers>
-						</form:Form>
 						<IconTabBar selectedKey="{view>/selectedTabKey}"  id="projectDetail" expanded="{= !${device>/system/phone} }" expandable="{device>/system/phone}" class="sapUiResponsiveContentPadding" select="onTabSelect">
 							<items>
 								<IconTabFilter text="Project Stage">
