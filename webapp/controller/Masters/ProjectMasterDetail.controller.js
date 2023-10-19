@@ -273,7 +273,7 @@ sap.ui.define([
                 else if (projectper < 100) {
                     let error = `Sum of project percentage of all stage  is ${projectper} and it needs to be 100`;
                     MessageBox.warning(error);
-                    isValid = editMasterModel.defaultvalue == true ? false : true;
+                    // isValid = editMasterModel.defaultvalue == true ? false : true;
                 }
             }
 

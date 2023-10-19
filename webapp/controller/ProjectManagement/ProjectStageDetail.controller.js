@@ -10,6 +10,7 @@ sap.ui.define(
 		"sap/ui/elev8rerp/componentcontainer/services/Masters/Masters.service",
 		'sap/ui/elev8rerp/componentcontainer/services/Company/ManageUser.service',
 		'sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter',
+		"sap/ui/elev8rerp/componentcontainer/controller/ProjectManagement/ProjectStageDetail.controller",
 		"sap/m/MessageToast",
 	],
 	function (
@@ -23,6 +24,7 @@ sap.ui.define(
 		masterService,
 		ManageUserService,
 		formatter,
+		ProjectStageDetailC,
 		MessageToast
 	) {
 		"use strict";
@@ -575,9 +577,7 @@ sap.ui.define(
 					Projectservice.saveProjectActivityDetail(oModel, function (savedata) {
 						objPush.stageid= savedata.id;
 
-						currentContext.resultArr
-							.concat(currentContext.resultpdfArr)
-							.forEach((document) => {
+						currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
 								if (document.id == undefined) {
 									Projectservice.saveDocumentCollectionDetails(
 										{ ...objPush, ...document },
@@ -595,23 +595,24 @@ sap.ui.define(
 									);
 								}
 							});
+							commonFunction.getStageDetail(oModel.projectid,currentContext);
 
-						Projectservice.getProjectdetail(
-							{ id: oModel.projectid, field: "stage" },
-							function (data) {
-								console.log("data", data);
-								data[0].map(function (value, index) {
-									data[0][index].activestatus =
-										value.isactive == 1 ? "Active" : "InActive";
-								});
+						// Projectservice.getProjectdetail(
+						// 	{ id: oModel.projectid, field: "stage" },
+						// 	function (data) {
+						// 		console.log("data", data);
+						// 		data[0].map(function (value, index) {
+						// 			data[0][index].activestatus =
+						// 				value.isactive == 1 ? "Active" : "InActive";
+						// 		});
 
-								let tblModel = currentContext.getView().getModel("tblModel");
-								tblModel.setData(data[0]);
+						// 		let tblModel = currentContext.getView().getModel("tblModel");
+						// 		tblModel.setData(data[0]);
 
-								// var StageModel = currentContext.getView().getModel("StageModel");
-								// StageModel.setData(data[0]);
-							}
-						);
+						// 		// var StageModel = currentContext.getView().getModel("StageModel");
+						// 		// StageModel.setData(data[0]);
+						// 	}
+						// );
 					});
 
 					currentContext.DeleteDocumentArr.length > 0 ? currentContext.onDeleteDocumentSave(): "No image is available to delete";

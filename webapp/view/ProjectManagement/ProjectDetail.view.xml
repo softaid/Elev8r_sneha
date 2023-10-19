@@ -334,7 +334,7 @@
 												<form:formElements>
 													<form:FormElement label="">
 														<form:fields>
-															<Button text="All Stage" id="btnallstage" type="Emphasized" class="sapUiSmallMarginEnd" press="getAllStageOrActivity"/>
+															<Button text="All Stage" id="btnallstage" type="Emphasized" class="sapUiSmallMarginEnd" press="getAllStageArActivity"/>
 														</form:fields>
 													</form:FormElement>
 												</form:formElements>
@@ -476,7 +476,7 @@
 												<form:formElements>
 													<form:FormElement label="">
 														<form:fields>
-															<Button text="All Activity" id="btnallactivity" type="Emphasized" class="sapUiSmallMarginEnd" press="getAllStageOrActivity"/>
+															<Button text="All Activity" id="btnallactivity" type="Emphasized" class="sapUiSmallMarginEnd" press="getAllStageArActivity"/>
 														</form:fields>
 													</form:FormElement>
 												</form:formElements>
@@ -512,30 +512,30 @@
 												</Toolbar>
 											</headerToolbar>
 											<columns>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Stage/Activity" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
+											<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Type" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Payment(%)" />
+													<Text text ="Stage" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Expected Amount" />
+													<Text text ="Activity" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Received Amount" />
+													<Text text ="Stage Amount" />
+												</Column>
+												<Column minScreenWidth="Tablet" demandPopin="true">
+													<Text text ="Activity Amount" />
 												</Column>
 											</columns>
 											<items>
 												<ColumnListItem type="Navigation" press="onListItemPressPayments">
 													<cells>
-														<Text text="{paymenttblmodel>stagename}" />
 														<Text text="{paymenttblmodel>type}" />
-														<Text text="{paymenttblmodel>paymentper}" />
-														<Text text="{paymenttblmodel>expectedamount}"/>
-														<Text text="{paymenttblmodel>receivedamount}"/>
+														<Text text="{paymenttblmodel>stagename}"  />
+														<Text text="{paymenttblmodel>activityname}" />
+														<Text text="{paymenttblmodel>stageamount}" />
+														<Text text="{paymenttblmodel>activityamount}"/>
 														<tnt:InfoLabel 
                                                 text="1"
                                                 displayOnly= "false"
@@ -804,7 +804,7 @@
 												<form:formElements>
 													<form:FormElement label="">
 														<form:fields>
-															<Button text="All Attribute" id="btnallattribute" type="Emphasized" class="sapUiSmallMarginEnd" press="getAllStageOrActivity"/>
+															<Button text="All Attribute" id="btnallattribute" type="Emphasized" class="sapUiSmallMarginEnd" press="getAllStageArActivity"/>
 														</form:fields>
 													</form:FormElement>
 												</form:formElements>

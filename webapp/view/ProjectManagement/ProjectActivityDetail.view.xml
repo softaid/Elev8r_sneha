@@ -10,40 +10,40 @@
 	xmlns:layout="sap.ui.layout"
 	xmlns:form="sap.ui.layout.form"
 	height="100%">
-		
-	 <f:DynamicPage toggleHeaderOnTitleClick="false">
-        <f:title>
-            <f:DynamicPageTitle>
-                <f:heading>
-                    <Title text="Activity Details"/>
-                </f:heading>
-                <f:actions>
-						<ToolbarSpacer/>
-						 <Button
+	<f:DynamicPage toggleHeaderOnTitleClick="false">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Activity Details"/>
+				</f:heading>
+				<f:actions>
+					<ToolbarSpacer/>
+					<Button
 							text="{i18n>saveButtonText}"
                             type="Emphasized"
                             press="onSave" id="btnSave"/>
-						<Button
+					<Button
 							text="{i18n>deleteButtonText}"
 							type="Emphasized"
                             press="onDelete"
-							id= "btnDelete"/>						
-					</f:actions>
-					<f:navigationActions>
-						<Button
+							id= "btnDelete"/>
+				</f:actions>
+				<f:navigationActions>
+					<Button
 								icon="sap-icon://decline"
 								type="Transparent" press="onCancel" />
-					</f:navigationActions>
-            </f:DynamicPageTitle>
-        </f:title>
-        <f:content>	
-            <VBox fitContainer="true">
-                <form:Form editable="true">
-                    <form:title>
-                        <core:Title text="" />
-                    </form:title>
-                    <form:layout>
-                        <form:ResponsiveGridLayout
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>
+			<VBox fitContainer="true">
+             <Panel id="approvepanel" expandable="true" expanded="true"  headerText="Actual" width="auto">
+				<form:Form editable="true">
+					<form:title>
+						<core:Title text="" />
+					</form:title>
+					<form:layout>
+						<form:ResponsiveGridLayout
                             labelSpanXL="2"
                             labelSpanL="4"
                             labelSpanM="4"
@@ -57,36 +57,36 @@
                             columnsL="1"
                             columnsM="1"
                             singleContainerFullSize="false" />
-                    </form:layout>
-                    <form:formContainers>
-                        <form:FormContainer>
-                            <form:formElements>
-                                 <form:FormElement label="Activity Name">
-                                    <form:fields>
-                                        <Input id="Stage" value="{ActivityDetailModel>/stagename}"/>
-                                    </form:fields>
-                                </form:FormElement>
+					</form:layout>
+					<form:formContainers>
+						<form:FormContainer>
+							<form:formElements>
+								<form:FormElement label="Activity Name">
+									<form:fields>
+										<Input id="Stage" value="{ActivityDetailModel>/stagename}"/>
+									</form:fields>
+								</form:FormElement>
 
-                                  <form:FormElement id="stageid" label="Stage">
-                                <form:fields>
-                                    <Select id="project"
+								<form:FormElement id="stageid" label="Stage">
+									<form:fields>
+										<Select id="project"
 					                    required="true" 
                                         change="onStageChange"
                                         selectedKey="{ActivityDetailModel>/parentid}" 
                                         forceSelection="false"
                                         width="500px"
                                         items="{
-                                            path: 'tblModel>/',
+                                            path: 'stageModel>/',
                                             sorter: { path: 'id' }
                                         }">
-                                        <core:Item key="{tblModel>stageid}" text="{tblModel>stagename}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
+											<core:Item key="{stageModel>stageid}" text="{stageModel>stagename}" />
+										</Select>
+									</form:fields>
+								</form:FormElement>
 
-                              <form:FormElement id="Stagetype" label="Activity type">
-                                <form:fields>
-                                    <Select id="Stagetypeid"
+								<form:FormElement id="Stagetype" label="Activity type">
+									<form:fields>
+										<Select id="Stagetypeid"
 					                    required="true" 
                                         change=""
                                         selectedKey="{ActivityDetailModel>/stgtypeid}" 
@@ -96,14 +96,14 @@
                                             path: 'stagetypeModel>/modelData',
                                             sorter: { path: 'id' }
                                         }">
-                                        <core:Item key="{stagetypeModel>id}" text="{stagetypeModel>description}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
+											<core:Item key="{stagetypeModel>id}" text="{stagetypeModel>description}" />
+										</Select>
+									</form:fields>
+								</form:FormElement>
 
-                               <form:FormElement id="assignto" label="Assign to">
-                                <form:fields>
-                                    <Select id="assigntoid"
+								<form:FormElement id="assignto" label="Assign to">
+									<form:fields>
+										<Select id="assigntoid"
 					                    required="true" 
                                         change=""
                                         selectedKey="{ActivityDetailModel>/assignedto}" 
@@ -113,14 +113,14 @@
                                             path: 'roleModel>/',
                                             sorter: { path: 'id' }
                                         }">
-                                        <core:Item key="{roleModel>id}" text="{roleModel>username}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
+											<core:Item key="{roleModel>id}" text="{roleModel>username}" />
+										</Select>
+									</form:fields>
+								</form:FormElement>
 
-                            <form:FormElement id="assignby" label="Approve By">
-                                <form:fields>
-                                    <Select id="assignbyid"
+								<form:FormElement id="assignby" label="Approve By">
+									<form:fields>
+										<Select id="assignbyid"
 					                    required="true" 
                                         change=""
                                         selectedKey="{ActivityDetailModel>/assignedby}" 
@@ -130,14 +130,14 @@
                                             path: 'roleModel>/',
                                             sorter: { path: 'id' }
                                         }">
-                                        <core:Item key="{roleModel>id}" text="{roleModel>username}" />
-                                    </Select>
-                                </form:fields>
-                            </form:FormElement>
+											<core:Item key="{roleModel>id}" text="{roleModel>username}" />
+										</Select>
+									</form:fields>
+								</form:FormElement>
 
-                                <form:FormElement label="Start Date">
-                                    <form:fields>
-                                    <DatePicker id="startDate" width="100%" 
+								<form:FormElement label="Start Date">
+									<form:fields>
+										<DatePicker id="startDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
                                                 value="{ActivityDetailModel>/startdate}"
@@ -146,11 +146,12 @@
                                                 editable="true"
                                                  change="dayCalculation"
                                                  />
-                                        </form:fields>
-                                </form:FormElement>
-                                 <form:FormElement label="End Date">
-                                        <form:fields>
-                                    <DatePicker id="endDate" width="100%" 
+									</form:fields>
+								</form:FormElement>
+
+								<form:FormElement label="End Date">
+									<form:fields>
+										<DatePicker id="endDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
                                                 value="{ActivityDetailModel>/enddate}"
@@ -158,34 +159,66 @@
                                                 required="true"
                                                 editable="true"
                                                 change="dayCalculation"/>
-                                        </form:fields>
-                                </form:FormElement>
-                                 <form:FormElement label="Completion Day">
-                                    <form:fields>
-                                        <Input id="completionDay" value="{ActivityDetailModel>/completiondays}" change="dayCalculation"/>
-                                    </form:fields>
-                                </form:FormElement> 
+									</form:fields>
+								</form:FormElement>
 
-                                 <form:FormElement label="Warning" 
-                               visible="{
+								<form:FormElement label="Completion Day">
+									<form:fields>
+										<Input id="completionDay" value="{ActivityDetailModel>/completiondays}" change="dayCalculation"/>
+									</form:fields>
+								</form:FormElement>
+
+								<form:FormElement label="Warning" 
+                                 visible="{
                                         path: 'ActivityDetailModel>/WarningStatus',
                                         formatter: '.formatter.setvisibiltywarning'
                                     }"
-                               >
-                                <form:fields>
-                                <TextArea placeholder="Warning"  value="{ActivityDetailModel>/WarningStatus}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
-                                </form:fields>
-                            </form:FormElement> 
-
-                                  <form:FormElement label=" Actual Start Date"
+                                 >
+									<form:fields>
+										<TextArea placeholder="Warning"  value="{ActivityDetailModel>/WarningStatus}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+									</form:fields>
+								</form:FormElement>
+								
+									
+							
+							</form:formElements>
+						</form:FormContainer>
+					</form:formContainers>
+				</form:Form>
+             </Panel>
+             <Panel id="assignpanel" expandable="true" expanded="true"  headerText="Starting" width="auto">
+				<form:Form editable="true">
+					<form:title>
+						<core:Title text="" />
+					</form:title>
+					<form:layout>
+						<form:ResponsiveGridLayout
+                            labelSpanXL="2"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="2"
+                            columnsL="1"
+                            columnsM="1"
+                            singleContainerFullSize="false" />
+					</form:layout>
+					<form:formContainers>
+						<form:FormContainer>
+							<form:formElements>
+								<form:FormElement label=" Actual Start Date"
                                    visible="{
                                         path: 'ActivityDetailModel>/dependencyStatus',
                                         formatter: '.formatter.setvisibilty'
                                     }"
                                   
                                    >
-                                    <form:fields>
-                                    <DatePicker id="ActualstartDate" width="100%" 
+									<form:fields>
+										<DatePicker id="ActualstartDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
                                                 value="{ActivityDetailModel>/actualstartdate}"
@@ -193,16 +226,16 @@
                                                 required="true"
                                                 editable="true"
                                                 change="dayCalculationActual" />
-                                        </form:fields>
-                                </form:FormElement>
-                                 <form:FormElement label=" Actual End Date" 
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label=" Actual End Date" 
                                    visible="{
                                         path: 'ActivityDetailModel>/dependencyStatus',
                                         formatter: '.formatter.setvisibilty'
                                     }"
                                  >
-                                        <form:fields>
-                                    <DatePicker id="actualendDate" width="100%" 
+									<form:fields>
+										<DatePicker id="actualendDate" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
                                                 value="{ActivityDetailModel>/actualenddate}"
@@ -210,95 +243,75 @@
                                                 required="true"
                                                 editable="true" 
                                                 change="dayCalculationActual"/>
-                                        </form:fields>
-                                </form:FormElement>
-                                 <form:FormElement label=" Actual Completion Day"  
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label=" Actual Completion Day"  
                                   visible="{
                                         path: 'ActivityDetailModel>/dependencyStatus',
                                         formatter: '.formatter.setvisibilty'
                                     }"
                                 >
-                                    <form:fields>
-                                        <Input id="actualcompletionDay" value="{ActivityDetailModel>/actualcompletiondays}"  editable="true"  change="dayCalculationActual"/>
-                                    </form:fields>
-                                </form:FormElement> 
-
-                                <form:FormElement label="Stage Completion(%)">
-                                    <form:fields>
-                                        <Input id="StagePercent" value="{ActivityDetailModel>/stagecompletionpercentage}"/>
-                                    </form:fields>
-                                </form:FormElement>
-
-                                <!-- <form:FormElement label="Activity completion"  visible="false" 
-                                > 
-                                    <form:fields>
-
-                                <Input id="projectPercent" value="{ActivityDetailModel>/projectweightage}"
-                                />
-                                    </form:fields>
-                                </form:FormElement> -->
-
-                                 <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
-                                       <form:fields>
-                                            <Switch  state="{ActivityDetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No">
-                                                <layoutData>
-                                                    <FlexItemData growFactor="1" />
-                                                </layoutData>
-                                            </Switch>
-                                        </form:fields>
-                                    </form:FormElement>
-                                      <!-- <form:FormElement label="Is Standard">
-                                       <form:fields>
-                                            <Switch  state="{ActivityDetailModel>/isstd}" id="isstd" customTextOn="Yes" customTextOff="No" enabled="false">
-                                                <layoutData>
-                                                    <FlexItemData growFactor="1" />
-                                                </layoutData>
-                                            </Switch>
-                                        </form:fields>
-                                    </form:FormElement> -->
-                                      <form:FormElement label="Is Started"  
+									<form:fields>
+										<Input id="actualcompletionDay" value="{ActivityDetailModel>/actualcompletiondays}"  editable="true"  change="dayCalculationActual"/>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="Stage Completion(%)">
+									<form:fields>
+										<Input id="StagePercent" value="{ActivityDetailModel>/stagecompletionpercentage}"/>
+									</form:fields>
+								</form:FormElement>
+								<!-- <form:FormElement label="Activity completion"  visible="false" 
+                                ><form:fields><Input id="projectPercent" value="{ActivityDetailModel>/projectweightage}"
+                                /></form:fields></form:FormElement> -->
+								<form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
+									<form:fields>
+										<Switch  state="{ActivityDetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No">
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</form:fields>
+								</form:FormElement>
+								<!-- <form:FormElement label="Is Standard"><form:fields><Switch  state="{ActivityDetailModel>/isstd}" id="isstd" customTextOn="Yes" customTextOff="No" enabled="false"><layoutData><FlexItemData growFactor="1" /></layoutData></Switch></form:fields></form:FormElement> -->
+								<form:FormElement label="Is Started"  
                                        visible="{
                                         path: 'ActivityDetailModel>/dependencyStatus',
                                         formatter: '.formatter.setvisibilty'
                                     }"
                                      >
-                                       <form:fields>
-                                            <Switch  state="{ActivityDetailModel>/isstarted}" id="isstart"
+									<form:fields>
+										<Switch  state="{ActivityDetailModel>/isstarted}" id="isstart"
                                             change="isstartchange" customTextOn="Yes" customTextOff="No">
-                                                <layoutData>
-                                                    <FlexItemData growFactor="1" />
-                                                </layoutData>
-                                            </Switch>
-                                        </form:fields>
-                                    </form:FormElement>
-                                      <form:FormElement label="stage Per"  visible="false">
-                                <form:fields>
-                                   <Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="stage Per"  visible="false">
+									<form:fields>
+										<Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
                                         max="100" min="0" progress="true" change="onsliderchange"
                                         showAdvancedTooltip="true" value="{ActivityDetailModel>/completionper}">
-                                        <ResponsiveScale id="rScaleWarningLevel"
+											<ResponsiveScale id="rScaleWarningLevel"
                                             tickmarksBetweenLabels="20" />
-                                    </Slider>
-                                </form:fields>
-                            </form:FormElement> 
-                            <form:FormElement label="Remarks" 
+										</Slider>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="Remarks" 
                             >
-                                <form:fields>
-                                 <Input id="Remark" value="{ActivityDetailModel>/remark}"/>
-                                </form:fields>
-                            </form:FormElement> 
-                            
-
-
-
-                              <form:FormElement label="Upload Image" 
+									<form:fields>
+										<Input id="Remark" value="{ActivityDetailModel>/remark}"/>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="Upload Image" 
                                visible="{
                                         path: 'ActivityDetailModel>/dependencyStatus',
                                         formatter: '.formatter.setvisibilty'
                                     }" 
                               >
-                                        <form:fields>
-                                            <u:FileUploader
+									<form:fields>
+										<u:FileUploader
                                                 id="fileUploader"
                                                 name="myFileUpload"
                                                 tooltip="Upload Product Image"
@@ -308,66 +321,64 @@
                                                 style="Emphasized"
                                                 fileType="png,jpg,gif,pdf,txt,doc,jpeg"
                                                  multiple="true"
-                                                placeholder="Choose a document image...">
-                                            </u:FileUploader>
-                                        </form:fields>
-                                    </form:FormElement>
-                                    <form:FormElement  
+                                                placeholder="Choose a document image..."></u:FileUploader>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement  
                                      visible="{
                                         path: 'ActivityDetailModel>/dependencyStatus',
                                         formatter: '.formatter.setvisibilty'
                                     }"
                                      >
-                                        <form:fields>
-                                            <Image
+									<form:fields>
+										<Image
                                                 src="{editDocumentCollectionModel>/image_url}"
                                                 densityAware="false"
                                                 width="10em" 
                                                 press=""
                                                 id="image">
-                                                <layoutData>
-                                                    <FlexItemData growFactor="1" />
-                                                </layoutData>
-                                            </Image>
-                                            <HBOX>
-                                             <Button 
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Image>
+										<HBOX>
+											<Button 
                                             text=""
                                             type="Emphasized"
                                             icon="sap-icon://download"
                                               press="functiondownload"
                                             id="btnDowimage" />
-                                              <Button
+											<Button
                                                 text=""
                                                 width="40%"
                                                 type="Emphasized"
                                                 icon="sap-icon://arrow-right"
                                                 press="forwardPress" id="btnFor"/>
-                                                
-                                                <Button
+											<Button
                                                 text=""
                                                 width="40%"
                                                 type="Emphasized"
                                                 icon="sap-icon://arrow-left"
                                                 press="backwardPress"
-                                                id= "btnBack"/> 
-                                                <Button 
+                                                id= "btnBack"/>
+											<Button 
                                                 text=""
                                                 width="40%"
                                                 type="Emphasized"
                                                 icon="sap-icon://delete"
                                                 press="onDeleteDocument"
                                                 id= "btndelete"/>
-                                           </HBOX>
-                                        </form:fields>
-                                    </form:FormElement>
-                                     <form:FormElement label="Upload Document" 
+										</HBOX>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="Upload Document" 
                                       visible="{
                                         path: 'ActivityDetailModel>/dependencyStatus',
                                         formatter: '.formatter.setvisibilty'
                                     }"
                                       >
-                                        <form:fields>
-                                            <u:FileUploader
+									<form:fields>
+										<u:FileUploader
                                                 id="fileUploaderpdf"
                                                 name="myFileUpload"
                                                 tooltip="Upload Product Document"
@@ -377,87 +388,63 @@
                                                 typeMissmatch="handleTypeMissmatch"
                                                 style="Emphasized"
                                                 fileType="pdf"
-                                                placeholder="Choose a document...">
-                                            </u:FileUploader>
-                                        </form:fields>
-                                    </form:FormElement>
-                                    
-                                      <form:FormElement label=""
+                                                placeholder="Choose a document..."></u:FileUploader>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label=""
                                        visible="{
                                         path: 'ActivityDetailModel>/dependencyStatus',
                                         formatter: '.formatter.setvisibilty'
                                     }"
                                        >
-                                    <form:fields>
-                                        <Input id="inputField"  width="53%" value="{editDocumentCollectionModel>/pdf_name}"  editable="true"/>
-                                    </form:fields>
-                                </form:FormElement>
-
-                                    <form:FormElement   
+									<form:fields>
+										<Input id="inputField"  width="53%" value="{editDocumentCollectionModel>/pdf_name}"  editable="true"/>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement   
                                      visible="{
                                         path: 'ActivityDetailModel>/dependencyStatus',
                                         formatter: '.formatter.setvisibilty'
                                     }"
                                     >
-                                        <form:fields>
-                                            <HBox>
-                                        <!-- <PDFViewer source="{editDocumentCollectionModel>/pdf_url}" height="10em"  press="functiondownload">
-                                        <layoutData>
-                                            <FlexItemData growFactor="1" />
-                                        </layoutData>
-                                    </PDFViewer> -->
-                                     <Button 
+									<form:fields>
+										<HBox>
+											<!-- <PDFViewer source="{editDocumentCollectionModel>/pdf_url}" height="10em"  press="functiondownload"><layoutData><FlexItemData growFactor="1" /></layoutData></PDFViewer> -->
+											<Button 
                                             text=""
                                             type="Emphasized"
                                             icon="sap-icon://download"
                                               press="functiondownload"
                                             id="btnDowpdf" />
-                                             <Button
+											<Button
                                                 text=""
                                                 width="40%"
                                                 type="Emphasized"
                                                 icon="sap-icon://arrow-right"
                                                 press="forwardPress" id="btnForpdf"/>
-                                                <Button
+											<Button
                                                 text=""
                                                 width="40%"
                                                 type="Emphasized"
                                                 icon="sap-icon://arrow-left"
                                                 press="backwardPress"
-                                                id= "btnBackpdf"/> 
-                                                <Button 
+                                                id= "btnBackpdf"/>
+											<Button 
                                                 text=""
                                                 width="40%"
                                                 type="Emphasized"
                                                 icon="sap-icon://delete"
                                                 press="onDeleteDocument"
                                                 id= "btndeletepdf"/>
-                                        </HBox>
-                                        </form:fields>
-                                    </form:FormElement> 
-                                         <!-- <form:FormElement label="">
-                                    <form:fields>
-                                        <Input id="inputField" value="{ActivityDetailModel>/actualcompletiondays}"  editable="true"/>
-                                    </form:fields>
-                                </form:FormElement>  -->
-            <!-- <FlexBox direction="Column" renderType="Div" class="sapUiSmallMargin">
-			<FlexBox>
-				<Button text="Correctly Displayed" press="onCorrectPathClick"/>
-				<Button text="Loading Error" press="onIncorrectPathClick"/>
-			</FlexBox>
-			<PDFViewer source="{/Source}" title="{/Title}" height="{/Height}">
-				<layoutData>
-					<FlexItemData growFactor="1" />
-				</layoutData>
-			</PDFViewer>
-		</FlexBox> -->
-
-        
-                            </form:formElements>
-                        </form:FormContainer>
-                    </form:formContainers>
-                </form:Form>
-            </VBox>
-        </f:content>				
+										</HBox>
+									</form:fields>
+								</form:FormElement>
+							</form:formElements>
+						</form:FormContainer>
+					</form:formContainers>
+				</form:Form>
+             </Panel>
+			</VBox>
+		</f:content>
 	</f:DynamicPage>
 </mvc:View>
