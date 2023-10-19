@@ -262,6 +262,7 @@ sap.ui.define([
                                 filteredUserKeys: filteredUserKeys
                             };
 
+                            console.log("------------------------histroydata---------------",histroydata);
                             // Notification History - Save Data
                             commonService.saveNotificationHistory(histroydata, function (data) { });
 
