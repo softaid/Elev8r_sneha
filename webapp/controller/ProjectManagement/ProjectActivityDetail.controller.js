@@ -7,9 +7,10 @@ sap.ui.define([
 	'sap/ui/elev8rerp/componentcontainer/utility/xlsx',
 	'sap/ui/elev8rerp/componentcontainer/services/Common.service',
 	'sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter',
+	'sap/ui/elev8rerp/componentcontainer/services/Company/ManageUser.service',
 	'sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function',
 	'sap/m/MessageToast',
-], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, formatter, commonFunction, MessageToast) {
+], function (JSONModel, BaseController, Sorter, Projectservice, xlsx, commonService, formatter, ManageUserService, commonFunction, MessageToast) {
 	"use strict";
 
 	return BaseController.extend("sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectActivityDetail", {
@@ -20,6 +21,12 @@ sap.ui.define([
 			var model = new JSONModel();
 			model.setData(emptyModel);
 			this.getView().setModel(model, "editDocumentCollectionModel");
+
+			let roleModel = new JSONModel();
+			roleModel.setData({});
+			this.getView().setModel(roleModel, "roleModel");
+
+			this.actualEndDateRef = null;
 
 			var currentContext = this;
 			currentContext.resultArr = [];// image array
@@ -37,10 +44,13 @@ sap.ui.define([
 		onBeforeRendering: async function () {
 
 			let ActivityDetailModel = this.getView().getModel("ActivityDetailModel").oData;
+			this.getView().getModel("stageModel").oData;
 			var currentContext = this;
 
 
 			if (ActivityDetailModel.id != undefined) {
+				currentContext.actualEndDateRef = ActivityDetailModel?.actualenddate ?? null;
+
 
 				// get document list
 				await Projectservice.getDocumentCollectionDetails({ projectid: ActivityDetailModel.projectid, stageid: ActivityDetailModel.stageid }, function (data) {
@@ -69,6 +79,8 @@ sap.ui.define([
 					}
 				})
 			}
+			currentContext.getUserByDepartment(ActivityDetailModel?.departmentid ?? "notSelect");
+
 		},
 
 		functiondownload: async function (OEvent) {
@@ -253,6 +265,30 @@ sap.ui.define([
 			return uniqueString;
 		},
 
+		getUserByDepartment: function (departmentid) {
+			let currentContext = this;
+			if (departmentid != "notSelect") {
+				ManageUserService.getUserByDepartment({ departmentid: departmentid }, function (data) {
+					console.log(data);
+					let roleModel = currentContext.getView().getModel("roleModel");
+					roleModel.setData(data[0]);
+				})
+			}
+			else {
+				MessageToast.show("Please Select Stage to set assign to and approve by");
+			}
+
+		},
+
+		onStageChange: function (OEvent) {
+			let currentContext = this;
+			let ActivityDetailModel = currentContext.getView().getModel("ActivityDetailModel").oData;
+			Projectservice.getStageOrActivityDetail({ parentid: ActivityDetailModel.parentid, projectid: ActivityDetailModel.projectid }, function (data) {
+				currentContext.getUserByDepartment(data?.[0][0]?.departmentid ?? "notSelect");
+			})
+
+		},
+
 		// Usage example:
 
 		forwardPress: function (OEvent) {
@@ -416,7 +452,7 @@ sap.ui.define([
 			var oFileUploader = this.byId("fileUploaderpdf");
 			var aFiles = oEvent.getParameter("files");
 
-			this.createPdfFormate(oFileUploader, aFiles)
+			this.createPdfFormate(oFileUploader, aFiles);
 
 		},
 
@@ -442,7 +478,43 @@ sap.ui.define([
 			reader.readAsDataURL(file);
 		},
 
+		handleStageCompPer: function () {
+			let currentContext = this;
+			let oModel = currentContext.getView().getModel("ActivityDetailModel").oData;
 
+			// if intially actual end date is null but if actual end date during save is null means we  we don't need to update  total stage completion percentage  and if final date is not null means add stagecompletionpercentage to total stage completion percentage
+			if (currentContext.actualEndDateRef == null) {
+				oModel.stageDetail.stagecompletionpercentage = oModel.actualenddate == null ? oModel.stageDetail.stagecompletionpercentage : Math.abs(+oModel.stageDetail.stagecompletionpercentage + (+oModel.stagecompletionpercentage))
+			}
+			else {
+				// if intially actual end date is not null but if actual end date during save is not null means we  we don't need to update  total stage completion percentage  and if final date is  null means subtract stagecompletionpercentage to total stage completion percentage
+				oModel.stageDetail.stagecompletionpercentage = oModel.actualenddate == null ? (+oModel.stageDetail.stagecompletionpercentage - (+oModel.stagecompletionpercentage)) : oModel.stageDetail.stagecompletionpercentage;
+
+			}
+			if (oModel.stageDetail.stagecompletionpercentage != oModel.stagecompletionpercentageRef) {
+				const obj = {
+					...oModel.stageDetail,
+					startdate: (oModel.stageDetail.startdate != null) ? commonFunction.getDate(oModel.stageDetail.startdate) : oModel.stageDetail.startdate,
+					enddate: (oModel.stageDetail.enddate != null) ? commonFunction.getDate(oModel.stageDetail.enddate) : oModel.stageDetail.enddate,
+					actualstartdate: (oModel.stageDetail.actualstartdate != null) ? commonFunction.getDate(oModel.stageDetail.actualstartdate) : oModel.stageDetail.actualstartdate,
+					actualenddate:  oModel.stageDetail.stagecompletionpercentage==100? commonFunction.getDate(oModel.actualenddate): (oModel.stageDetail.actualenddate != null)? commonFunction.getDate(oModel.stageDetail.actualenddate) : oModel?.stageDetail?.actualenddate??null,
+					isactive: oModel.stageDetail.isactive === true ? 1 : 0,
+					isstd: oModel.stageDetail.isstd === true ? 1 : 0,
+					userid: commonService.session("userId"),
+					stagecompletionpercentage: oModel.stageDetail.stagecompletionpercentage,
+					fromreference: 0,
+				}
+
+				Projectservice.saveProjectActivityDetail(obj, function (savedata) {
+					commonFunction.getStageDetail( oModel.projectid,currentContext);
+
+				})
+
+
+
+			}
+
+		},
 
 		onSave: function () {
 			// if (this.validateForm()) {
@@ -460,68 +532,8 @@ sap.ui.define([
 				type: "Activity"
 			}
 
-			// if (oModel.id == undefined) {
-
-			// 	let obj = {
-			// 		id: null,
-			// 		typecode: 'ProMilestones',
-			// 		parentid: oModel?.parentid ?? null,
-			// 		type: "Activity",
-			// 		stgtypeid: oModel?.stgtypeid ?? null,
-			// 		description: oModel?.stagename ?? null,
-			// 		active: oModel?.isactive ?? null,
-			// 		dependency: oModel?.dependency ?? null,
-			// 		defaultvalue: 0,
-			// 		stageper: oModel?.stagecompletionpercentage ?? null,
-			// 		projectper: oModel?.projectweightage ?? null,
-			// 		departmentid: oModel?.departmentid ?? null,
-			// 		sequenceno: null,
-			// 		modelid: null,
-			// 		isrelatedtopayment: null,
-			// 		iscustomersignoffrequired: null,
-			// 		notifyinternaluser: 0,
-			// 		attributetypes: null,
-			// 		companyid: oModel["companyid"],
-			// 		userid: commonService.session("userId")
-			// 	}
-
-			// 	masterService.saveReference(obj, function (data) {
-			// 		console.log(data);
-			// 		 objPush.stageid=data.id;
-			// 		currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
-			// 			if (document.id == undefined) {
-			// 				Projectservice.saveDocumentCollectionDetails({ ...objPush, ...document }, function (obj) {
-			// 					var saveMsg = "Data Saved Successfully.";
-			// 					var editMsg = "Data Updated Successfully";
-			// 					var ErrorMsg = "Data not Saved Successfully";
-			// 					var message = parentModel.id == null ? saveMsg : editMsg
-			// 					if (message == null) {
-			// 						MessageToast.show(ErrorMsg);
-	
-			// 					}
-			// 					else {
-			// 						MessageToast.show(message);
-			// 					}
-			// 				})
-			// 			}
-			// 		});
-	
-
-			// 		Projectservice.getProjectdetail({ id: oModel.projectid, field: "Activity" }, function (data) {
-			// 			console.log("data", data);
-			// 			data[0].map(function (value, index) {
-			// 				data[0][index].activestatus = value.isactive == 1 ? "Active" : "InActive";
-			// 			});
-
-			// 			let tblModel = currentContext.getView().getModel("activitymodel");
-			// 			tblModel.setData(data[0]);
-
-			// 		})
-			// 	})
-			// }
-
-
-			 {
+			currentContext.handleStageCompPer();
+			{
 				parentModel["id"] = null;
 				parentModel["projectid"] = oModel.projectid;
 				parentModel["companyid"] = commonService.session("companyId");
@@ -539,11 +551,11 @@ sap.ui.define([
 				oModel.isactive = oModel.isactive === true ? 1 : 0;
 				oModel.isstd = oModel.isstd === true ? 1 : 0;
 
+				// when we add any stage or activity from project detail screen we only add those stage in reference and only for that particular project  the fromreference=0 this condition we check in project detail and reference also ...
+				oModel.fromreference = 0;
+
 				Projectservice.saveProjectActivityDetail(oModel, function (savedata) {
-					console.log(savedata);
-
-					// objPush.stageid=savedata.id  //  get id of  new save activity  for document save
-
+					objPush.stageid = savedata.id  //  get id of  new save activity  for document save
 					currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
 						if (document.id == undefined) {
 							Projectservice.saveDocumentCollectionDetails({ ...objPush, ...document }, function (obj) {
@@ -561,7 +573,6 @@ sap.ui.define([
 							})
 						}
 					});
-
 
 					Projectservice.getProjectdetail({ id: oModel.projectid, field: "Activity" }, function (data) {
 						console.log("data", data);
@@ -817,49 +828,49 @@ sap.ui.define([
 			let ItemConsumptiondata = StageDetailModel.getData();
 			ItemConsumptiondata.actualstartdate = (ItemConsumptiondata?.actualstartdate ?? null) == null ? null : ItemConsumptiondata.actualstartdate.trim() == "" ? null : ItemConsumptiondata.actualstartdate;
 			ItemConsumptiondata.actualenddate = (ItemConsumptiondata?.actualenddate ?? null) == null ? null : ItemConsumptiondata.actualenddate.trim() == "" ? null : ItemConsumptiondata.actualenddate;
-			ItemConsumptiondata.actualdays = (ItemConsumptiondata?.actualdays ?? null) == null ? null : `${ItemConsumptiondata.actualdays}`.trim() == "" ? null : ItemConsumptiondata.actualdays;
+			ItemConsumptiondata.actualcompletiondays = (ItemConsumptiondata?.actualcompletiondays ?? null) == null ? null : `${ItemConsumptiondata.actualcompletiondays}`.trim() == "" ? null : ItemConsumptiondata.actualcompletiondays;
 
-			if ((ItemConsumptiondata.actualstartdate == null || ItemConsumptiondata.actualenddate == null || ItemConsumptiondata.actualdays == null) && oEvent.mParameters.id.match("actualCompletionDay") == null) {
-				ItemConsumptiondata.actualdays = null;
+			if ((ItemConsumptiondata.actualstartdate == null || ItemConsumptiondata.actualenddate == null || ItemConsumptiondata.actualcompletiondays == null) && oEvent.mParameters.id.match("actualCompletionDay") == null) {
+				ItemConsumptiondata.actualcompletiondays = null;
 			}
 
-			if (ItemConsumptiondata.actualenddate != null && ItemConsumptiondata.actualstartdate != null && oEvent.mParameters.id.match("actualEndDate") != null) {
+			if (ItemConsumptiondata.actualenddate != null && ItemConsumptiondata.actualstartdate != null && oEvent.mParameters.id.match("actualendDate") != null) {
 				var parts = ItemConsumptiondata.actualstartdate.split('/');
 				let startdate = Date.parse(new Date(parts[2], parts[1], parts[0]));
 
 				parts = ItemConsumptiondata.actualenddate.split('/');
 				let enddate = Date.parse(new Date(parts[2], parts[1], parts[0]));// get  difference in start date and end date in millseconds
 				if ((enddate - startdate) >= 0) {
-					ItemConsumptiondata.actualdays = `${Math.round((enddate - startdate) / (86400 * 1000))}`;// Days
+					ItemConsumptiondata.actualcompletiondays = `${Math.round((enddate - startdate) / (86400 * 1000))}`;// Days
 				}
 				else {
 					MessageToast.show(`please select valide date`);
 					ItemConsumptiondata.actualenddate = null
-					ItemConsumptiondata.actualdays = null
+					ItemConsumptiondata.actualcompletiondays = null
 				}
 
 			}
-			else if (ItemConsumptiondata.actualenddate != null && ItemConsumptiondata.actualstartdate != null && oEvent.mParameters.id.match("actualStartDate") != null) {
+			else if (ItemConsumptiondata.actualenddate != null && ItemConsumptiondata.actualstartdate != null && oEvent.mParameters.id.match("ActualstartDate") != null) {
 				var parts = ItemConsumptiondata.actualstartdate.split('/');
 				let startdate = Date.parse(new Date(parts[2], parts[1], parts[0]));
 
 				parts = ItemConsumptiondata.actualenddate.split('/');
 				let enddate = Date.parse(new Date(parts[2], parts[1], parts[0]));// get  difference in start date and end date in millseconds
 				if ((enddate - startdate) >= 0) {
-					ItemConsumptiondata.actualdays = `${Math.round((enddate - startdate) / (86400 * 1000))}`;// Days
+					ItemConsumptiondata.actualcompletiondays = `${Math.round((enddate - startdate) / (86400 * 1000))}`;// Days
 				}
 				else {
 					MessageToast.show(`please select valide date`);
 					ItemConsumptiondata.actualstartdate = null
-					ItemConsumptiondata.actualdays = null
+					ItemConsumptiondata.actualcompletiondays = null
 				}
 
 			}
 
 
-			else if (ItemConsumptiondata.actualdays != null && ItemConsumptiondata.actualstartdate != null && oEvent.mParameters.id.match("actualCompletionDay") != null) {
+			else if (ItemConsumptiondata.actualcompletiondays != null && ItemConsumptiondata.actualstartdate != null && oEvent.mParameters.id.match("actualcompletionDay") != null) {
 				var endDate = new Date(commonFunction.getDate(ItemConsumptiondata.actualstartdate));
-				endDate.setDate(endDate.getDate() + parseInt(ItemConsumptiondata.actualdays));
+				endDate.setDate(endDate.getDate() + parseInt(ItemConsumptiondata.actualcompletiondays));
 
 				let originalDate = new Date(endDate);
 				let dateFormatter = sap.ui.core.format.DateFormat.getInstance({ pattern: "dd/MM/yyyy" });

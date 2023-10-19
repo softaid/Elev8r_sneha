@@ -5,9 +5,11 @@ sap.ui.define([
     'sap/m/MessageToast',
     "sap/ui/core/format/NumberFormat",
     'sap/ui/model/json/JSONModel',
-    'sap/ui/elev8rerp/componentcontainer/services/Company/ManageUser.service'
+    'sap/ui/elev8rerp/componentcontainer/services/Company/ManageUser.service',
+    "sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/Project.service"
 
-], function (commonService,masterService, MessageBox, MessageToast, oNumberFormat, JSONModel,ManageUserService) {
+
+], function (commonService,masterService, MessageBox, MessageToast, oNumberFormat, JSONModel,ManageUserService,Projectservice) {
     "use strict";
 
     return {
@@ -123,6 +125,8 @@ sap.ui.define([
                         case "transactionid":
                         case "transactiondate":
                         case "createdby":
+                        case "quotename" :
+                        case "leadname" :
 
                             template = this.replaceStr(template, "##" + placeholder["valuetype"] + "##", this.replaceStr(placeholder["placeholder"], "#", "") + ": " + data[placeholder["propertyname"]]);
                             break;
@@ -628,6 +632,45 @@ sap.ui.define([
                     currentContext.getView().setModel(selectModel, modelName);
                 }
             });
+        },
+
+        getStageDetail: function (projectid,currentContext) {
+            var currentContext = currentContext;
+            currentContext.projectCompletionObj = {};
+            var projectModel = currentContext.getView().getModel("projectModel");
+            Projectservice.getProjectdetail(
+                { id: projectid, field: "stage" },
+                function (data) {
+                    data[0].forEach(function (value, index) {
+                        data[0][index].activestatus =
+                            value.isactive == 1 ? "Active" : "In Active";
+                        data[0][index].actualstartdate =
+                            data[0]?.[index]?.actualstartdate ?? null;
+                        data[0][index].actualenddate =
+                            data[0]?.[index]?.actualenddate ?? null;
+                        currentContext.projectCompletionObj[value.stageid] =
+                            value.stagecompletionpercentage;
+                    });
+
+                    var tblModel = currentContext.getView().getModel("tblModel");
+                    currentContext.StageList = JSON.parse(JSON.stringify(data[0])); // Array consist of all Activity
+
+
+                    if (data[0]) {
+                        let filteredData = data[0].filter(function (ele) {
+                            return ele.isactive === 1;
+
+                        });
+                        currentContext.getView().getModel("stageModel").setData(filteredData);
+
+                        if (projectModel.oData.isall == false) {
+                            tblModel.setData(filteredData);
+                        } else {
+                            tblModel.setData(data[0]);
+                        }
+                    }
+                }
+            );
         },
 
         getReferenceStages : function(typeCode,modelName, currentContext) {

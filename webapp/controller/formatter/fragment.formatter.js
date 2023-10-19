@@ -204,6 +204,7 @@ sap.ui.define(function () {
 		},
 	
 		setvisibiltywarning: function (sValue) {
+			// here we pass the value  WarningStatus  which we set during onlistitempress or addnewrow selection function call
 			return Boolean(sValue);
 
 		},
