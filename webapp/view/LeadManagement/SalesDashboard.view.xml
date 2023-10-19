@@ -42,6 +42,22 @@
                                     <NumericContent truncateValueTo="20" value="{oDashboardTileModel>/confirmedorders}/{oDashboardTileModel>/totalorders}" valueColor="Good" withMargin="false" />
                                 </TileContent>
                             </GenericTile>
+
+                            <Panel expandable="false" expanded="true"  headerText="Lead to Order Conversion Ratio" width="auto">
+                                <core:HTML  content="&lt;div id='orderpiechart' style='height: 500px;width:1000px'&gt;&lt;/div&gt;">
+                                </core:HTML>
+                                <layoutData>
+                                    <l:GridData span="L6" />
+                                </layoutData>
+                            </Panel>
+
+                            <Panel expandable="false" expanded="true"  headerText="Modelwise No. of Lead" width="auto">
+                                <core:HTML  content="&lt;div id='modeldonutchart' style='height: 500px;width:1000px'&gt;&lt;/div&gt;">
+                                </core:HTML>
+                                <layoutData>
+                                    <l:GridData span="L6" />
+                                </layoutData>
+                            </Panel>
                         </content>		
 					</Page>  
                 </f:content>
