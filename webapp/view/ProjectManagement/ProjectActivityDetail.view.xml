@@ -178,6 +178,16 @@
 										<TextArea placeholder="Warning"  value="{ActivityDetailModel>/WarningStatus}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
 									</form:fields>
 								</form:FormElement>
+
+                                <form:FormElement label="Approve">
+									<form:fields>
+										<Switch  state="{ActivityDetailModel>/iscompleted}" id="iscompleted" customTextOn="Yes" customTextOff="No" change="handleStageCompPer">
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</form:fields>
+								</form:FormElement>
 								
 									
 							
