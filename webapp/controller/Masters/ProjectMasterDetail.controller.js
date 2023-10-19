@@ -57,6 +57,8 @@ sap.ui.define([
                 this.getView().byId("customerSignOffEle").setVisible(true);
                 this.getView().byId("addToggleEle").setVisible(true);
             }else if(this.model.typecode == "ProMilestones" && this.model.type == "Activity"){
+                commonFunction.getReferenceByTypeCodeAndParentType("ProMilestones", "Stage", "parentStageModel", this);
+                
                 this.getView().byId("stgTypeEle").setVisible(true);
                 this.getView().byId("departmentEle").setVisible(false);
                 this.getView().byId("sequenceEle").setVisible(false);
@@ -68,6 +70,9 @@ sap.ui.define([
                 this.getView().byId("customerSignOffEle").setVisible(true);
                 this.getView().byId("addToggleEle").setVisible(true);
             }else if(this.model.typecode == "ProMilestones" && this.model.type == "Attribute"){
+                commonFunction.getReferenceByTypeCodeAndParentType("ProMilestones", "Activity", "parentStageModel", this);
+                commonFunction.getReferenceStages("InputAttribute", "attributeModel", this);
+                
                 this.getView().byId("stgTypeEle").setVisible(false);
                 this.getView().byId("departmentEle").setVisible(false);
                 this.getView().byId("sequenceEle").setVisible(false);

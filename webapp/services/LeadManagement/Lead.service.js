@@ -42,8 +42,7 @@ sap.ui.define([
             },
 
             getSalesDashboard : function(callback){
-                console.log(params);
-                commonService.runJQueryX("GET", "lead/salesdashboard/" + commonService.session("companyId"), null, callback, null);
+                commonService.runJQueryX("GET", "leadmaster/salesdashboard/companyid/" + commonService.session("companyId"), null, callback, null);
             }
         };
     }
