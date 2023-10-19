@@ -27,23 +27,21 @@
                 <f:content>
                     <Page class="pgDashboard" showHeader="false" id="contentDashboard">
 						<content>
-                            <VBox>
-                                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Qualified Leads/Total Leads" press="getTotalLeadsDetail">
-                                    <TileContent footer="">
-                                        <NumericContent truncateValueTo="20" value="{oDashboardTileModel>/qualifiedleads}/{oDashboardTileModel>/totalleads}" valueColor="Good" withMargin="false" />
-                                    </TileContent>
-                                </GenericTile>
-                                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Total quotationss" press="getTotalLeadsDetail">
-                                    <TileContent footer="">
-                                        <NumericContent truncateValueTo="20" value="{oDashboardTileModel>/totalquotations}"/>
-                                    </TileContent>
-                                </GenericTile>
-                                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Confirmed Orders/Total Orders" press="getTotalLeadsDetail">
-                                    <TileContent footer="">
-                                        <NumericContent truncateValueTo="20" value="{oDashboardTileModel>/confirmedorders}/{oDashboardTileModel>/totalorders}" valueColor="Good" withMargin="false" />
-                                    </TileContent>
-                                </GenericTile>
-                            </VBox>
+                            <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Qualified Leads/Total Leads" press="getTotalLeadsDetail">
+                                <TileContent footer="">
+                                    <NumericContent truncateValueTo="20" value="{oDashboardTileModel>/qualifiedleads}/{oDashboardTileModel>/totalleads}" valueColor="Good" withMargin="false" />
+                                </TileContent>
+                            </GenericTile>
+                            <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Total quotations" press="getTotalLeadsDetail">
+                                <TileContent footer="">
+                                    <NumericContent truncateValueTo="20" value="{oDashboardTileModel>/totalquotations}"/>
+                                </TileContent>
+                            </GenericTile>
+                            <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Confirmed Orders/Total Orders" press="getTotalLeadsDetail">
+                                <TileContent footer="">
+                                    <NumericContent truncateValueTo="20" value="{oDashboardTileModel>/confirmedorders}/{oDashboardTileModel>/totalorders}" valueColor="Good" withMargin="false" />
+                                </TileContent>
+                            </GenericTile>
                         </content>		
 					</Page>  
                 </f:content>

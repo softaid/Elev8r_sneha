@@ -1099,7 +1099,6 @@ sap.ui.define(
 					var oBundle = this.getModel("i18n").getResourceBundle();
 					return oBundle;
 				},
-
 				onSave: function () {
 					//var isvalid = this.validateForm();
 					//if(isvalid){

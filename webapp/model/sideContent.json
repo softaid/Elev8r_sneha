@@ -24,19 +24,19 @@
 					"items": []
 				},
 				{
+					"title": "Lift Master",
+					"icon": "sap-icon://activity-2",
+					"expanded": true,
+					"key": "liftmaster",
+					"eid": [26],
+					"items": []
+				},
+				{
 					"title": "Project Master",
 					"icon": "sap-icon://activity-2",
 					"expanded": false,
 					"key": "projectmaster",
 					"eid": [4],
-					"items": []
-				},
-				{
-					"title": "NI Master",
-					"icon": "sap-icon://activity-2",
-					"expanded": false,
-					"key": "nimaster",
-					"eid": [34],
 					"items": []
 				},
 				{
@@ -46,78 +46,6 @@
 					"key": "subcontractor",
 					"eid": [35],
 					"items": []
-				},
-				{
-					"title": "Lift Master",
-					"icon": "sap-icon://activity-2",
-					"expanded": true,
-					"key": "liftmaster",
-					"eid": [26],
-					"items": []
-				},
-				{
-					"title": "Inventory",
-					"icon": "sap-icon://area-chart",
-					"expanded": true,
-					"key": "inventory",
-					"eid": [],
-					"items": []
-				},
-				{
-					"title": "Location",
-					"icon": "sap-icon://functional-location",
-					"expanded": true,
-					"key": "locationmaster",
-					"eid": [24],
-					"items": []
-				},
-				{
-					"title": "Warehouse",
-					"icon": "sap-icon://factory",
-					"expanded": true,
-					"key": "warehousemaster",
-					"eid": [],
-					"items": []
-				},
-				{
-					"title": "Employee",
-					"icon": "sap-icon://employee",
-					"expanded": true,
-					"key": "employeemaster",
-					"eid": [23],
-					"items": []
-				},
-				{
-					"title": "Material Request and Transfer",
-					"icon": "sap-icon://cart-5",
-					"expanded": true,
-					"key": "materialrequestandtransfer",
-					"eid": [],
-					"items": []
-				},
-				{
-					"title": "Bill Of Material",
-					"icon": "sap-icon://activity-items",
-					"expanded": true,
-					"key": "billofmateriallist",
-					"eid": [],
-					"items": []
-				},
-				{
-					"title": "Users",
-					"icon": "sap-icon://account",
-					"expanded": true,
-					"key": "users",
-					"eid": [],
-					"items": []
-				},
-				{
-					"title": "Contacts",
-					"icon": "sap-icon://contacts",
-					"expanded": true,
-					"key": "contactmaster",
-					"eid": [25],
-					"items": []
 				}
 			]
 		},
@@ -125,7 +53,7 @@
 			"title": "Lead Management",
 			"icon": "sap-icon://kpi-managing-my-area",
 			"expanded": false,
-			"key": "leads",
+			"key": "salesdashboard",
 			"eid": [7],
 			"items": [
 				{
@@ -134,14 +62,6 @@
 					"expanded": false,
 					"key": "leads",
 					"eid": [8],
-					"items": []
-				},
-				{
-					"title": "Activities",
-					"icon": "sap-icon://activities",
-					"expanded": false,
-					"key": "leadactivities",
-					"eid": [9],
 					"items": []
 				},
 				{
