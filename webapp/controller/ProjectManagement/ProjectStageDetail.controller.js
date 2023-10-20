@@ -531,7 +531,7 @@ sap.ui.define(
 				},
 
 				onSave: function () {
-					// if (this.validateForm()) {
+					if (this.validateForm()) {
 					let currentContext = this;
 					let oModel = this.getView().getModel("StageDetailModel").oData;
 
@@ -622,38 +622,54 @@ sap.ui.define(
 					}
 		
 					currentContext.onCancel();
+				}
 				},
 
 				validateForm: function () {
 					var isValid = true;
-					var ItemNameMsg = this.resourcebundle().getText(
-						"feedMillBOMvalidMsgItem"
-					);
-					var qtyMsg = this.resourcebundle().getText("feedMillBOMvalidMsgQty");
-					var unitcostMsg = this.resourcebundle().getText(
-						"feedMillBOMvalidMsgUnitCost"
-					);
-					var matTypeMsg = "Material type is required";
+					var stageTypeMsg = "stage type is required!";
+					var departmentMsg = "Department is required!";
+					var stageMsg = "Stage is required!";
+					var assignto = "Assign to required!";
+					var approveby = "Approved by is required!";
 
-					if (!commonFunction.isRequired(this, "txtitemname", ItemNameMsg))
-						isValid = false;
-
-					if (!commonFunction.isRequired(this, "textqty", qtyMsg))
-						isValid = false;
-
-					if (!commonFunction.isRequired(this, "textunitcost", unitcostMsg))
+					if (!commonFunction.isRequired(this, "Stage", stageMsg))
 						isValid = false;
 
 					if (
 						!commonFunction.isSelectRequired(
 							this,
-							"txtMaterialType",
-							matTypeMsg
+							"Stagetypeid",
+							stageTypeMsg
 						)
 					)
-						isValid = false;
-					if (!commonFunction.isDecimal(this, "textqty")) isValid = false;
+					isValid = false;
 
+					if (
+						!commonFunction.isSelectRequired(
+							this,
+							"projecttypeid",
+							departmentMsg
+						)
+					)
+				    isValid = false;
+					if (
+						!commonFunction.isSelectRequired(
+							this,
+							"assigntoid",
+							assignto
+						)
+					)
+				    isValid = false;
+					if (
+						!commonFunction.isSelectRequired(
+							this,
+							"assignbyid",
+							approveby
+						)
+					)
+					isValid = false;
+							
 					return isValid;
 				},
 
