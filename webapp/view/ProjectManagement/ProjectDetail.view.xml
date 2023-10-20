@@ -269,7 +269,7 @@
 													<Text text ="Actual End" />
 												</Column>
                                                 <Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Stage Complt(%)" />
+													<Text text ="Stage(%)" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="OverDueDays" />
@@ -408,7 +408,7 @@
 													<Text text ="Actual End" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Activity Complt(%)" />
+													<Text text ="Stage(%)" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="OverDueDay" />

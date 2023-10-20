@@ -209,6 +209,12 @@ sap.ui.define(function () {
 
 		},
 
+		setEditable: function (sValue) {
+			// here we pass the value  WarningStatus  which we set during onlistitempress or addnewrow selection function call
+			return !(sValue);
+
+		},
+
 
 
 		setItemStockColor: function (sValue) {

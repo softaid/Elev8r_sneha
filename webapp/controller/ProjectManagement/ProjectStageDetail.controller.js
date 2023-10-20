@@ -124,6 +124,16 @@ sap.ui.define(
 
 				},
 
+				handleStageApproveToggle:function(){
+					let currentContext = this;
+					let oModel = currentContext.getView().getModel("StageDetailModel").oData;
+					if(oModel.actualenddate==null){
+					oModel.isactive=false;
+					MessageToast.show("stage is not completed yet so first complete the stage then approve it");
+
+					}
+				},
+
 				handleStageCompPer: function () {
 					let currentContext = this;
 					let oModel = currentContext.getView().getModel("StageDetailModel").oData;
@@ -143,13 +153,16 @@ sap.ui.define(
 							...oModel.projectDetail,
 							startdate: (oModel.projectDetail.startdate != null) ? commonFunction.getDate(oModel.projectDetail.startdate) : oModel.projectDetail.startdate,
 							enddate: (oModel.projectDetail.enddate != null) ? commonFunction.getDate(oModel.projectDetail.enddate) : oModel.projectDetail.enddate,
-							actualenddate: oModel.projectDetail.stagecompletionpercentage == 100 ? commonFunction.getDate(oModel.actualenddate) : (oModel.projectDetail.actualenddate != null) ? commonFunction.getDate(oModel.projectDetail.actualenddate) : oModel?.projectDetail?.actualenddate ?? null,
-							isactive: oModel.projectDetail.isactive === true ? 1 : 0,
+							isactive: oModel.projectDetail.isactive === true||oModel.stageDetail.isactive == 1 ? 1 : 0,
 							isstd: oModel.projectDetail.isstd === true ? 1 : 0,
 							userid: commonService.session("userId"),
-							stagecompletionpercentage: (oModel?.stageDetail?.projectweightage??0)+(oModel?.stagecompletionpercentage??0),
+							completionper: (oModel?.stageDetail?.completionper??0)+(oModel?.projectweightage??0),
 							fromreference: 0,
+							companyid: commonService.session("companyId")
+
 						}
+
+						obj.actualenddate=obj.completionper == 100 ? commonFunction.getDate(oModel.actualenddate) : (oModel.projectDetail.actualenddate != null) ? commonFunction.getDate(oModel.projectDetail.actualenddate) : oModel?.projectDetail?.actualenddate ?? null,
 
 						Projectservice.saveProject(obj, function (savedata) {
 							// commonFunction.getStageDetail( oModel.projectid,currentContext);
@@ -610,7 +623,7 @@ sap.ui.define(
 					// when we add any stage or activity from project detail screen we only add those stage in reference and only for that particular project  the fromreference=0 this condition we check in project detail and reference also ...
 					oModel.fromreference = 0;
 
-
+					  currentContext.handleStageCompPer();
 					Projectservice.saveProjectActivityDetail(oModel, function (savedata) {
 						objPush.stageid = savedata.id;
 

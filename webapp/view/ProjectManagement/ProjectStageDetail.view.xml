@@ -68,7 +68,12 @@
 
 									<form:FormElement label="Stage Name">
 										<form:fields>
-											<Input id="Stage" value="{StageDetailModel>/stagename}"/>
+											<Input id="Stage"
+                                             editable="{
+                                                    path: 'StageDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
+                                                 value="{StageDetailModel>/stagename}"/>
 										</form:fields>
 									</form:FormElement>
 
@@ -77,6 +82,10 @@
 											<Select id="Stagetypeid"
 					                    required="true" 
                                         change=""
+                                        editable="{
+                                                    path: 'StageDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
                                         selectedKey="{StageDetailModel>/stgtypeid}" 
                                         forceSelection="false"
                                         width="500px"
@@ -97,6 +106,10 @@
                                         selectedKey="{StageDetailModel>/departmentid}" 
                                         forceSelection="false"
                                         width="500px"
+                                        editable="{
+                                                    path: 'StageDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
                                         items="{
                                             path: 'DepartmentModel>/',
                                             sorter: { path: 'id' }
@@ -114,6 +127,10 @@
                                         selectedKey="{StageDetailModel>/assignedto}" 
                                         forceSelection="false"
                                         width="500px"
+                                        editable="{
+                                                    path: 'StageDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
                                         items="{
                                             path: 'roleModel>/',
                                             sorter: { path: 'id' }
@@ -131,6 +148,10 @@
                                         selectedKey="{StageDetailModel>/assignedby}" 
                                         forceSelection="false"
                                         width="500px"
+                                        editable="{
+                                                    path: 'StageDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
                                         items="{
                                             path: 'roleModel>/',
                                             sorter: { path: 'id' }
@@ -146,6 +167,10 @@
                                                     required="true" 
                                                     selectionFinish="handleSelectionFinish"
                                                     width="500px"
+                                                    editable="{
+                                                    path: 'StageDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
                                                     items="{
                                                            path: 'tblModel>/',
                                                            sorter: {path:'id'}
@@ -198,15 +223,38 @@
                                                     </form:fields>
                                    </form:FormElement>
 
-                                     <form:FormElement label="Approve">
+                                     <form:FormElement label="Approve" >
 									<form:fields>
-										<Switch  state="{StageDetailModel>/iscompleted}" id="iscompleted" customTextOn="Yes" customTextOff="No" change="handleStageCompPer">
+										<Switch  state="{StageDetailModel>/iscompleted}" id="iscompleted" customTextOn="Yes" customTextOff="No" change="handleStageApproveToggle"
+                                         enabled="{
+                                                    path: 'StageDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }">
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>
 										</Switch>
 									</form:fields>
 								</form:FormElement>
+
+                                	<form:FormElement label="Stage Completion">
+										<form:fields>
+											<Input id="StagePercent" 
+                                                  editable="{
+                                                    path: 'StageDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }" value="{StageDetailModel>/stagecompletionpercentage}"/>
+										</form:fields>
+									</form:FormElement>
+                                    
+									<form:FormElement label="Project completion">
+										<form:fields>
+											<Input id="projectPercent"  editable="{
+                                                    path: 'StageDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }" value="{StageDetailModel>/projectweightage}"/>
+										</form:fields>
+									</form:FormElement>
 
 						      </form:formElements>
 							</form:FormContainer>
@@ -251,7 +299,10 @@
                                                 value="{StageDetailModel>/actualstartdate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="true" 
+                                                editable="{
+                                                    path: 'StageDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
                                                 change="dayCalculationActual"/>
 										</form:fields>
 									</form:FormElement>
@@ -268,7 +319,10 @@
                                                 value="{StageDetailModel>/actualenddate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="true" 
+                                                enabled="{
+                                                    path: 'StageDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }" 
                                                 change="dayCalculationActual"/>
 										</form:fields>
 									</form:FormElement>
@@ -278,27 +332,25 @@
                                         formatter: '.formatter.setvisibilty'
                                     }">
 										<form:fields>
-											<Input id="actualCompletionDay" value="{StageDetailModel>/actualdays}"  editable="true"
+											<Input id="actualCompletionDay" value="{StageDetailModel>/actualdays}"  
+                                            editable="{
+                                                    path: 'StageDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
                                         change="dayCalculationActual"/>
 										</form:fields>
 									</form:FormElement>
-									<form:FormElement label="Stage Completion"
-
-                                    >
-										<form:fields>
-											<Input id="StagePercent" value="{StageDetailModel>/stagecompletionpercentage}"/>
-										</form:fields>
-									</form:FormElement>
-									<form:FormElement label="Project completion">
-										<form:fields>
-											<Input id="projectPercent" value="{StageDetailModel>/projectweightage}"/>
-										</form:fields>
-									</form:FormElement>
+								
 									<form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}"
                                  
                                     >
 										<form:fields>
-											<Switch  state="{StageDetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No">
+											<Switch  state="{StageDetailModel>/isactive}"  
+                                             enabled="{
+                                                    path: 'StageDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
+                                                id="DetailActive" customTextOn="Yes" customTextOff="No">
 												<layoutData>
 													<FlexItemData growFactor="1" />
 												</layoutData>
@@ -308,7 +360,7 @@
 								
 									<form:FormElement label="Remarks">
 										<form:fields>
-											<Input id="Remark" value="{StageDetailModel>/remark}"/>
+											<Input id="Remark"  value="{StageDetailModel>/remark}"/>
 										</form:fields>
 									</form:FormElement>
 									<form:FormElement label="Upload Image" 

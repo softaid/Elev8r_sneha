@@ -478,6 +478,17 @@ sap.ui.define([
 			reader.readAsDataURL(file);
 		},
 
+		handleStageApproveToggle:function(){
+			let currentContext = this;
+			let oModel = currentContext.getView().getModel("ActivityDetailModel").oData;
+			if(oModel.actualenddate==null){
+			oModel.isactive=false;
+			MessageToast.show("Activity is not completed yet so first complete the Activity then approve it");
+
+			}
+		},
+
+
 		handleStageCompPer: function () {
 			let currentContext = this;
 			let oModel = currentContext.getView().getModel("ActivityDetailModel").oData;
@@ -499,7 +510,7 @@ sap.ui.define([
 					startdate: (oModel.stageDetail.startdate != null) ? commonFunction.getDate(oModel.stageDetail.startdate) : oModel.stageDetail.startdate,
 					enddate: (oModel.stageDetail.enddate != null) ? commonFunction.getDate(oModel.stageDetail.enddate) : oModel.stageDetail.enddate,
 					actualstartdate: (oModel.stageDetail.actualstartdate != null) ? commonFunction.getDate(oModel.stageDetail.actualstartdate) : oModel.stageDetail.actualstartdate,
-					isactive: oModel.stageDetail.isactive === true ? 1 : 0,
+					isactive: oModel.stageDetail.isactive === true||oModel.stageDetail.isactive == 1 ? 1 : 0,
 					isstd: oModel.stageDetail.isstd === true ? 1 : 0,
 					userid: commonService.session("userId"),
 					stagecompletionpercentage: (oModel?.stageDetail?.stagecompletionpercentage??0)+(oModel?.stagecompletionpercentage??0),
