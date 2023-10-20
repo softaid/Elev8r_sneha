@@ -478,41 +478,52 @@ sap.ui.define([
 			reader.readAsDataURL(file);
 		},
 
+		handleStageApproveToggle:function(){
+			let currentContext = this;
+			let oModel = currentContext.getView().getModel("ActivityDetailModel").oData;
+			if(oModel.actualenddate==null){
+			oModel.isactive=false;
+			MessageToast.show("Activity is not completed yet so first complete the Activity then approve it");
+
+			}
+		},
+
+
 		handleStageCompPer: function () {
 			let currentContext = this;
 			let oModel = currentContext.getView().getModel("ActivityDetailModel").oData;
 
 			// if intially actual end date is null but if actual end date during save is null means we  we don't need to update  total stage completion percentage  and if final date is not null means add stagecompletionpercentage to total stage completion percentage
-			if (currentContext.actualEndDateRef == null) {
-				oModel.stageDetail.stagecompletionpercentage = oModel.actualenddate == null ? oModel.stageDetail.stagecompletionpercentage : Math.abs(+oModel.stageDetail.stagecompletionpercentage + (+oModel.stagecompletionpercentage))
-			}
-			else {
-				// if intially actual end date is not null but if actual end date during save is not null means we  we don't need to update  total stage completion percentage  and if final date is  null means subtract stagecompletionpercentage to total stage completion percentage
-				oModel.stageDetail.stagecompletionpercentage = oModel.actualenddate == null ? (+oModel.stageDetail.stagecompletionpercentage - (+oModel.stagecompletionpercentage)) : oModel.stageDetail.stagecompletionpercentage;
+			// if (currentContext.actualEndDateRef == null) {
+			// 	oModel.stageDetail.stagecompletionpercentage = oModel.actualenddate == null ? oModel.stageDetail.stagecompletionpercentage : Math.abs(+oModel.stageDetail.stagecompletionpercentage + (+oModel.stagecompletionpercentage))
+			// }
+			// else {
+			// 	// if intially actual end date is not null but if actual end date during save is not null means we  we don't need to update  total stage completion percentage  and if final date is  null means subtract stagecompletionpercentage to total stage completion percentage
+			// 	oModel.stageDetail.stagecompletionpercentage = oModel.actualenddate == null ? (+oModel.stageDetail.stagecompletionpercentage - (+oModel.stagecompletionpercentage)) : oModel.stageDetail.stagecompletionpercentage;
 
-			}
-			if (oModel.stageDetail.stagecompletionpercentage != oModel.stagecompletionpercentageRef) {
+			// };
+
+			// if (oModel.stageDetail.stagecompletionpercentage != oModel.stagecompletionpercentageRef) {
+				if(oModel.iscompleted==true){
 				const obj = {
 					...oModel.stageDetail,
 					startdate: (oModel.stageDetail.startdate != null) ? commonFunction.getDate(oModel.stageDetail.startdate) : oModel.stageDetail.startdate,
 					enddate: (oModel.stageDetail.enddate != null) ? commonFunction.getDate(oModel.stageDetail.enddate) : oModel.stageDetail.enddate,
 					actualstartdate: (oModel.stageDetail.actualstartdate != null) ? commonFunction.getDate(oModel.stageDetail.actualstartdate) : oModel.stageDetail.actualstartdate,
-					actualenddate:  oModel.stageDetail.stagecompletionpercentage==100? commonFunction.getDate(oModel.actualenddate): (oModel.stageDetail.actualenddate != null)? commonFunction.getDate(oModel.stageDetail.actualenddate) : oModel?.stageDetail?.actualenddate??null,
-					isactive: oModel.stageDetail.isactive === true ? 1 : 0,
+					isactive: oModel.stageDetail.isactive === true||oModel.stageDetail.isactive == 1 ? 1 : 0,
 					isstd: oModel.stageDetail.isstd === true ? 1 : 0,
 					userid: commonService.session("userId"),
-					stagecompletionpercentage: oModel.stageDetail.stagecompletionpercentage,
+					stagecompletionpercentage: (oModel?.stageDetail?.stagecompletionpercentage??0)+(oModel?.stagecompletionpercentage??0),
 					fromreference: 0,
-				}
+				};
+				obj.actualenddate= obj.stagecompletionpercentage==100? commonFunction.getDate(oModel.actualenddate): (oModel.stageDetail.actualenddate != null)? commonFunction.getDate(oModel.stageDetail.actualenddate) : oModel?.stageDetail?.actualenddate??null,
 
 				Projectservice.saveProjectActivityDetail(obj, function (savedata) {
 					commonFunction.getStageDetail( oModel.projectid,currentContext);
 
 				})
 
-
-
-			}
+			 }
 
 		},
 

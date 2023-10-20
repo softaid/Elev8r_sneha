@@ -64,7 +64,6 @@ sap.ui.define([
 
 			// Transaction Notification cached in browser
 			commonService.getTransactionNotificationAll(function (data) {
-				debugger;
 				var oModel = currentContext.getView().getModel("notificationsTemplateModel");
 				oModel.oData.modelData = data[0];
 				oModel.refresh();

@@ -222,6 +222,11 @@
 					"target": "users"
 				},
 				{
+					"pattern": "salesdashboard",
+					"name": "salesdashboard",
+					"target": "salesdashboard"
+				},
+				{
 					"pattern": "leads",
 					"name": "leads",
 					"target": "leads"
@@ -441,6 +446,12 @@
 				"leadmaster": {
 					"viewId": "leadmaster",
 					"viewName": "Masters/LeadMaster",
+					"controlId": "mainContents",
+					"parent": "master"
+				},
+				"salesdashboard" : {
+					"viewId": "salesdashboard",
+					"viewName": "LeadManagement/SalesDashboard",
 					"controlId": "mainContents",
 					"parent": "master"
 				},

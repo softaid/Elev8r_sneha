@@ -32,7 +32,7 @@ sap.ui.define(
 		return BaseController.extend(
 			"sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectStageDetail",
 			{
-				formatter:formatter,
+				formatter: formatter,
 
 				onInit: function () {
 					//this.handleRouteMatched(null);
@@ -59,7 +59,7 @@ sap.ui.define(
 				},
 
 				onBeforeRendering: async function () {
-					let StageDetailModel =this.getView().getModel("StageDetailModel").oData;
+					let StageDetailModel = this.getView().getModel("StageDetailModel").oData;
 					var currentContext = this;
 
 					if (StageDetailModel.id != undefined) {
@@ -120,7 +120,58 @@ sap.ui.define(
 
 					}
 
-					currentContext.getUserByDepartment(StageDetailModel?.departmentid??"notSelect") ;
+					currentContext.getUserByDepartment(StageDetailModel?.departmentid ?? "notSelect");
+
+				},
+
+				handleStageApproveToggle:function(){
+					let currentContext = this;
+					let oModel = currentContext.getView().getModel("StageDetailModel").oData;
+					if(oModel.actualenddate==null){
+					oModel.isactive=false;
+					MessageToast.show("stage is not completed yet so first complete the stage then approve it");
+
+					}
+				},
+
+				handleStageCompPer: function () {
+					let currentContext = this;
+					let oModel = currentContext.getView().getModel("StageDetailModel").oData;
+
+					// if intially actual end date is null but if actual end date during save is null means we  we don't need to update  total stage completion percentage  and if final date is not null means add stagecompletionpercentage to total stage completion percentage
+					// if (currentContext.actualEndDateRef == null) {
+					// 	oModel.stageDetail.stagecompletionpercentage = oModel.actualenddate == null ? oModel.stageDetail.stagecompletionpercentage : Math.abs(+oModel.stageDetail.stagecompletionpercentage + (+oModel.stagecompletionpercentage))
+					// }
+					// else {
+					// 	// if intially actual end date is not null but if actual end date during save is not null means we  we don't need to update  total stage completion percentage  and if final date is  null means subtract stagecompletionpercentage to total stage completion percentage
+					// 	oModel.stageDetail.stagecompletionpercentage = oModel.actualenddate == null ? (+oModel.stageDetail.stagecompletionpercentage - (+oModel.stagecompletionpercentage)) : oModel.stageDetail.stagecompletionpercentage;
+
+					// }
+
+					if (oModel.iscompleted == true) {
+						const obj = {
+							...oModel.projectDetail,
+							startdate: (oModel.projectDetail.startdate != null) ? commonFunction.getDate(oModel.projectDetail.startdate) : oModel.projectDetail.startdate,
+							enddate: (oModel.projectDetail.enddate != null) ? commonFunction.getDate(oModel.projectDetail.enddate) : oModel.projectDetail.enddate,
+							isactive: oModel.projectDetail.isactive === true||oModel.stageDetail.isactive == 1 ? 1 : 0,
+							isstd: oModel.projectDetail.isstd === true ? 1 : 0,
+							userid: commonService.session("userId"),
+							completionper: (oModel?.stageDetail?.completionper??0)+(oModel?.projectweightage??0),
+							fromreference: 0,
+							companyid: commonService.session("companyId")
+
+						}
+
+						obj.actualenddate=obj.completionper == 100 ? commonFunction.getDate(oModel.actualenddate) : (oModel.projectDetail.actualenddate != null) ? commonFunction.getDate(oModel.projectDetail.actualenddate) : oModel?.projectDetail?.actualenddate ?? null,
+
+						Projectservice.saveProject(obj, function (savedata) {
+							// commonFunction.getStageDetail( oModel.projectid,currentContext);
+
+						})
+
+
+
+					}
 
 				},
 
@@ -332,23 +383,23 @@ sap.ui.define(
 
 				getUserByDepartment: function (departmentid) {
 					let currentContext = this;
-	                   if(departmentid!="notSelect"){
-						ManageUserService.getUserByDepartment({ departmentid:departmentid}, function (data) {
+					if (departmentid != "notSelect") {
+						ManageUserService.getUserByDepartment({ departmentid: departmentid }, function (data) {
 							console.log(data);
-							 let roleModel = currentContext.getView().getModel("roleModel");
-							 roleModel.setData(data[0]);
+							let roleModel = currentContext.getView().getModel("roleModel");
+							roleModel.setData(data[0]);
 						})
 					}
-					else{
+					else {
 						MessageToast.show("Please Select Department to set assign to and approve by");
 					}
-		
+
 				},
 
-				
-				onDepartmentChange: function(){
+
+				onDepartmentChange: function () {
 					let currentContext = this;
-					let StageDetailModel =currentContext.getView().getModel("StageDetailModel").oData;
+					let StageDetailModel = currentContext.getView().getModel("StageDetailModel").oData;
 
 					currentContext.getUserByDepartment(StageDetailModel.departmentid)
 				},
@@ -535,9 +586,8 @@ sap.ui.define(
 					let currentContext = this;
 					let oModel = this.getView().getModel("StageDetailModel").oData;
 
-					var parentModel = currentContext
-						.getView()
-						.getModel("editDocumentCollectionModel").oData;
+					var parentModel = currentContext.getView().getModel("editDocumentCollectionModel").oData;
+
 
 					let objPush = {
 						id: null,
@@ -571,31 +621,31 @@ sap.ui.define(
 					oModel.isactive = oModel.isactive === true ? 1 : 0;
 					oModel.isstd = oModel.isstd === true ? 1 : 0;
 					// when we add any stage or activity from project detail screen we only add those stage in reference and only for that particular project  the fromreference=0 this condition we check in project detail and reference also ...
-					oModel.fromreference =0;
+					oModel.fromreference = 0;
 
-
+					  currentContext.handleStageCompPer();
 					Projectservice.saveProjectActivityDetail(oModel, function (savedata) {
-						objPush.stageid= savedata.id;
+						objPush.stageid = savedata.id;
 
 						currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
-								if (document.id == undefined) {
-									Projectservice.saveDocumentCollectionDetails(
-										{ ...objPush, ...document },
-										function (obj) {
-											var saveMsg = "Data Saved Successfully.";
-											var editMsg = "Data Updated Successfully";
-											var ErrorMsg = "Data not Saved Successfully";
-											var message = parentModel.id == null ? saveMsg : editMsg;
-											if (message == null) {
-												MessageToast.show(ErrorMsg);
-											} else {
-												MessageToast.show(message);
-											}
+							if (document.id == undefined) {
+								Projectservice.saveDocumentCollectionDetails(
+									{ ...objPush, ...document },
+									function (obj) {
+										var saveMsg = "Data Saved Successfully.";
+										var editMsg = "Data Updated Successfully";
+										var ErrorMsg = "Data not Saved Successfully";
+										var message = parentModel.id == null ? saveMsg : editMsg;
+										if (message == null) {
+											MessageToast.show(ErrorMsg);
+										} else {
+											MessageToast.show(message);
 										}
-									);
-								}
-							});
-							commonFunction.getStageDetail(oModel.projectid,currentContext);
+									}
+								);
+							}
+						});
+						commonFunction.getStageDetail(oModel.projectid, currentContext);
 
 						// Projectservice.getProjectdetail(
 						// 	{ id: oModel.projectid, field: "stage" },
@@ -615,12 +665,12 @@ sap.ui.define(
 						// );
 					});
 
-					currentContext.DeleteDocumentArr.length > 0 ? currentContext.onDeleteDocumentSave(): "No image is available to delete";
+					currentContext.DeleteDocumentArr.length > 0 ? currentContext.onDeleteDocumentSave() : "No image is available to delete";
 					if (oModel.dependencyStatus == false) {
 
 						MessageToast.show("Please need to first complete the prerequisite  stage for  starting the current stage");
 					}
-		
+
 					currentContext.onCancel();
 				}
 				},

@@ -63,7 +63,12 @@
 							<form:formElements>
 								<form:FormElement label="Activity Name">
 									<form:fields>
-										<Input id="Stage" value="{ActivityDetailModel>/stagename}"/>
+										<Input id="Stage"   
+                                         editable="{
+                                                    path: 'ActivityDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
+                                         value="{ActivityDetailModel>/stagename}"/>
 									</form:fields>
 								</form:FormElement>
 
@@ -75,6 +80,10 @@
                                         selectedKey="{ActivityDetailModel>/parentid}" 
                                         forceSelection="false"
                                         width="500px"
+                                           editable="{
+                                                    path: 'ActivityDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
                                         items="{
                                             path: 'stageModel>/',
                                             sorter: { path: 'id' }
@@ -91,6 +100,10 @@
                                         change=""
                                         selectedKey="{ActivityDetailModel>/stgtypeid}" 
                                         forceSelection="false"
+                                           editable="{
+                                                    path: 'ActivityDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
                                         width="500px"
                                         items="{
                                             path: 'stagetypeModel>/modelData',
@@ -106,6 +119,10 @@
 										<Select id="assigntoid"
 					                    required="true" 
                                         change=""
+                                        editable="{
+                                                    path: 'ActivityDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
                                         selectedKey="{ActivityDetailModel>/assignedto}" 
                                         forceSelection="false"
                                         width="500px"
@@ -124,6 +141,10 @@
 					                    required="true" 
                                         change=""
                                         selectedKey="{ActivityDetailModel>/assignedby}" 
+                                          editable="{
+                                                    path: 'ActivityDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
                                         forceSelection="false"
                                         width="500px"
                                         items="{
@@ -135,6 +156,17 @@
 									</form:fields>
 								</form:FormElement>
 
+                                <form:FormElement label="Stage Completion(%)">
+									<form:fields>
+										<Input id="StagePercent" 
+                                          editable="{
+                                                    path: 'ActivityDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
+                                        value="{ActivityDetailModel>/stagecompletionpercentage}"/>
+									</form:fields>
+								</form:FormElement>
+
 								<form:FormElement label="Start Date">
 									<form:fields>
 										<DatePicker id="startDate" width="100%" 
@@ -143,7 +175,10 @@
                                                 value="{ActivityDetailModel>/startdate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="true"
+                                                  editable="{
+                                                    path: 'ActivityDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
                                                  change="dayCalculation"
                                                  />
 									</form:fields>
@@ -157,14 +192,23 @@
                                                 value="{ActivityDetailModel>/enddate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="true"
+                                                   editable="{
+                                                    path: 'ActivityDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
                                                 change="dayCalculation"/>
 									</form:fields>
 								</form:FormElement>
 
 								<form:FormElement label="Completion Day">
 									<form:fields>
-										<Input id="completionDay" value="{ActivityDetailModel>/completiondays}" change="dayCalculation"/>
+										<Input id="completionDay"
+                                                editable="{
+                                                            path: 'ActivityDetailModel>/iscompleted',
+                                                            formatter: '.formatter.setEditable'
+                                                        }"
+                                         value="{ActivityDetailModel>/completiondays}" change="dayCalculation"
+                                        />
 									</form:fields>
 								</form:FormElement>
 
@@ -176,6 +220,21 @@
                                  >
 									<form:fields>
 										<TextArea placeholder="Warning"  value="{ActivityDetailModel>/WarningStatus}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+									</form:fields>
+								</form:FormElement>
+
+                                <form:FormElement label="Approve">
+									<form:fields>
+										<Switch  state="{ActivityDetailModel>/iscompleted}" id="iscompleted" customTextOn="Yes" customTextOff="No"  
+                                         enabled="{
+                                                    path: 'ActivityDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
+                                         change="handleStageApproveToggle">
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
 									</form:fields>
 								</form:FormElement>
 								
@@ -224,7 +283,10 @@
                                                 value="{ActivityDetailModel>/actualstartdate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="true"
+                                                editable="{
+                                                    path: 'ActivityDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
                                                 change="dayCalculationActual" />
 									</form:fields>
 								</form:FormElement>
@@ -241,10 +303,14 @@
                                                 value="{ActivityDetailModel>/actualenddate}"
                                                 valueFormat="dd/MM/yyyy"
                                                 required="true"
-                                                editable="true" 
+                                                 editable="{
+                                                    path: 'ActivityDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
                                                 change="dayCalculationActual"/>
 									</form:fields>
 								</form:FormElement>
+
 								<form:FormElement label=" Actual Completion Day"  
                                   visible="{
                                         path: 'ActivityDetailModel>/dependencyStatus',
@@ -252,12 +318,12 @@
                                     }"
                                 >
 									<form:fields>
-										<Input id="actualcompletionDay" value="{ActivityDetailModel>/actualcompletiondays}"  editable="true"  change="dayCalculationActual"/>
-									</form:fields>
-								</form:FormElement>
-								<form:FormElement label="Stage Completion(%)">
-									<form:fields>
-										<Input id="StagePercent" value="{ActivityDetailModel>/stagecompletionpercentage}"/>
+										<Input id="actualcompletionDay" value="{ActivityDetailModel>/actualcompletiondays}" 
+                                         editable="{
+                                                    path: 'ActivityDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
+                                      change="dayCalculationActual"/>
 									</form:fields>
 								</form:FormElement>
 								<!-- <form:FormElement label="Activity completion"  visible="false" 
@@ -265,7 +331,12 @@
                                 /></form:fields></form:FormElement> -->
 								<form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}">
 									<form:fields>
-										<Switch  state="{ActivityDetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No">
+										<Switch  state="{ActivityDetailModel>/isactive}" id="DetailActive"
+                                         enabled="{
+                                                    path: 'ActivityDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
+                                         customTextOn="Yes" customTextOff="No">
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>
@@ -273,7 +344,7 @@
 									</form:fields>
 								</form:FormElement>
 								<!-- <form:FormElement label="Is Standard"><form:fields><Switch  state="{ActivityDetailModel>/isstd}" id="isstd" customTextOn="Yes" customTextOff="No" enabled="false"><layoutData><FlexItemData growFactor="1" /></layoutData></Switch></form:fields></form:FormElement> -->
-								<form:FormElement label="Is Started"  
+								<!-- <form:FormElement label="Is Started"  
                                        visible="{
                                         path: 'ActivityDetailModel>/dependencyStatus',
                                         formatter: '.formatter.setvisibilty'
@@ -281,13 +352,18 @@
                                      >
 									<form:fields>
 										<Switch  state="{ActivityDetailModel>/isstarted}" id="isstart"
-                                            change="isstartchange" customTextOn="Yes" customTextOff="No">
+                                            change="isstartchange" customTextOn="Yes"
+                                              enabled="{
+                                                    path: 'ActivityDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }"
+                                                 customTextOff="No">
 											<layoutData>
 												<FlexItemData growFactor="1" />
 											</layoutData>
 										</Switch>
 									</form:fields>
-								</form:FormElement>
+								</form:FormElement> -->
 								<form:FormElement label="stage Per"  visible="false">
 									<form:fields>
 										<Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
