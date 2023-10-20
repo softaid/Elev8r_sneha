@@ -30,6 +30,42 @@ sap.ui.define(
     
                         oDashboardTileModel.setData(arr[0]);
                         oThis.getView().setModel(oDashboardTileModel, "oDashboardTileModel");
+
+
+                        // pichart for lead to order conversion ratio
+                        
+                        var pieData = google.visualization.arrayToDataTable([
+                            ['Type','No.s'],
+                            ['Converted to Order',dashboardData[4][0].convertedorders],
+                            ['Not Converted to Order',(parseInt(dashboardData[0][0].totalleads) - parseInt(dashboardData[4][0].convertedorders))]
+                          ]);
+                  
+                        var pieOptions = {
+                            title: 'Lead to Order Conversion Ratio'
+                        };
+                  
+                        var pieChart = new google.visualization.PieChart(document.getElementById('orderpiechart'));
+                  
+                        pieChart.draw(pieData, pieOptions);
+
+                        //donut chart for typewise leads
+
+                        let donutArr = [];
+                        donutArr[0] = ['Type','No. of Leads']
+                        for(let i = 1; i <= dashboardData[6].length; i++){
+                            donutArr[i] = [dashboardData[6][i-1].model, dashboardData[6][i-1].leads]
+                        }
+
+                        var donutData = google.visualization.arrayToDataTable(donutArr);
+                  
+                        var donutOptions = {
+                            title: 'Modelwise No. of Leads',
+                            pieHole: 0.4,
+                        };
+                  
+                        var donutChart = new google.visualization.PieChart(document.getElementById('modeldonutchart'));
+                  
+                        donutChart.draw(donutData, donutOptions);
                     }
                 })
             },
