@@ -633,20 +633,14 @@
 												</Toolbar>
 											</headerToolbar>
 											<columns>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Type" />
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true" visible="false" >
+												<Column minScreenWidth="Tablet" demandPopin="true" >
 													<Text text ="Stage Name"/>
 												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true" visible="false" >
+												<Column minScreenWidth="Tablet" demandPopin="true" >
 													<Text text ="Activity Name"/>
 												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true" visible="false" >
+												<Column minScreenWidth="Tablet" demandPopin="true" >
 													<Text text ="Attribute Name"/>
-												</Column>
-												<Column minScreenWidth="Tablet" demandPopin="true">
-													<Text text ="Description" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="Document Name" />
@@ -658,11 +652,9 @@
 											<items>
 												<ColumnListItem type="Inactive" press="onListItemPressAttachment">
 													<cells>
-														<Text text="{attachmenttblmodel>type}" />
 														<Text text="{attachmenttblmodel>stagename}"/>
 														<Text text="{attachmenttblmodel>activityname}" />
 														<Text text="{attachmenttblmodel>attributename}" />
-														<Text text="{attachmenttblmodel>description}" />
 														<Text text="{attachmenttblmodel>document_name}" />
 														<Button icon="sap-icon://download" type="Transparent" press="onDownload" app:mySuperExtraData="{attachmenttblmodel>document_url}_{attachmenttblmodel>document_name}" visible="true"/>
 													</cells>

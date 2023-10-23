@@ -9303,3 +9303,48 @@ END$$
 DELIMITER ;
 ;
 
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_reference_typewisecompletionpercentage`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_typewisecompletionpercentage`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_reference_typewisecompletionpercentage`(
+	IN p_id INT(11),
+    IN p_projectid INT(11),
+    IN p_type VARCHAR(50),
+    IN p_parentid INT(11)
+)
+BEGIN
+	SET @refid = 0;
+    SELECT IFNULL(id,0) INTO @refid FROM project_detail WHERE projectid = p_projectid AND id = p_id;
+    
+	IF(p_type = 'Stage') THEN
+
+		SELECT  
+		IFNULL(SUM(projectweightage),0) as totalper
+		FROM project_detail
+		WHERE projectid = p_projectid
+        AND type = p_type
+		AND id <> @refid;
+        
+	ELSE
+    
+		SELECT  
+		IFNULL(SUM(stagecompletionpercentage),0) as totalper
+		FROM project_detail
+		WHERE parentid = p_parentid
+        AND projectid = p_projectid
+		AND type = p_type
+		AND id <> @refid;
+    
+    END IF;
+
+END$$
+
+DELIMITER ;
+;
+
