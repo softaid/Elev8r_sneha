@@ -127,6 +127,7 @@ sap.ui.define([
                         case "createdby":
                         case "quotename" :
                         case "leadname" :
+                        case "jobcode" :    
 
                             template = this.replaceStr(template, "##" + placeholder["valuetype"] + "##", this.replaceStr(placeholder["placeholder"], "#", "") + ": " + data[placeholder["propertyname"]]);
                             break;
@@ -597,6 +598,7 @@ sap.ui.define([
         getUser: function (currentContext, roleid) {
 
             commonService.getUser(roleid, function (data) {
+                console.log("------Sale User-------",data);
                 var oUserModel = new sap.ui.model.json.JSONModel();
                 oUserModel.setData({ modelData: data[0] });
                 currentContext.getView().setModel(oUserModel, "userModel");
