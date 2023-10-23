@@ -44,11 +44,21 @@ sap.ui.define(
                             vAxis: { title: 'Amount' },
                             hAxis: { title: 'Jobcode' },
                             seriesType: 'bars',
-                            isStacked : true,
                             series: { 5: { type: 'point' } }
                         };
                         var chart = new google.visualization.ComboChart(document.getElementById('liechart_3d_1'));
                         chart.draw(data, options);
+
+                        let oAssigneeModel = new JSONModel();
+                        oAssigneeModel.setData(dashboardData[3]);
+                        oThis.getView().setModel(oAssigneeModel, "oAssigneeModel");
+
+                        let oApproverModel = new JSONModel();
+                        oApproverModel.setData(dashboardData[4]);
+                        oThis.getView().setModel(oApproverModel, "oApproverModel");
+
+
+
                     }
                 })
             },
