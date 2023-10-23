@@ -233,8 +233,15 @@ sap.ui.define([
                                     this.sendEmailNotification(transactiontypeid, transactionid, emailIds.join(), emailFrom, subject, template);
                                     // Emial notification to sale person
 
-                                    var emailId ="poojadeshmukh396@gmail.com";
-                                    this.sendEmailNotification(transactiontypeid, transactionid, emailId, emailFrom, subject, template);
+                                    var emailId = transaction.email;
+                                    console.log("-----------------emailId----------",emailId);
+
+                                    //When order confirm send notification to sale users
+                                    if(transactiontypeid==29)
+                                    {
+                                        this.sendEmailNotification(transactiontypeid, transactionid, transaction.email, emailFrom, subject, template);
+                                    }
+                                   
                                 }
                             }
 
