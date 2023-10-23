@@ -573,7 +573,7 @@ sap.ui.define([
 			let objPush = {
 				id: null,
 				stageid: oModel.stageid,
-				stageid: oModel.activityid,
+				activityid: oModel.activityid,
 				projectid: oModel.projectid,
 				companyid: commonService.session("companyId"),
 				userid: commonService.session("userId"),
@@ -806,16 +806,18 @@ sap.ui.define([
 			// var aContexts = oEvent.getParameter("selectedContexts");
 			// var selRow = aContexts.map(function (oContext) { return oContext.getObject(); });
 			// currentContext.getProjectDetails(selRow[0].id);
-			let oModel = this.getView().getModel("AttributeDetailModel").oData;
+			let currentContext=this;
+			let oModel = this.getView().getModel("AttributeDetailModel").getData();
 			let activityModel = this.getView().getModel("activityModel").oData;
 
 			//  inthis we stage id  under which our activity is present and we add attribute agains that activity
 			activityModel.forEach((ele) => {
 				if (ele.stageid == oModel.activityid) {
-					oModel.stageid = ele.parentid
+					oModel.stageid = ele.parentid;
+					currentContext.getView().getModel("AttributeDetailModel").refresh();
 				}
 			})
-			console.log(oModel);
+
 		},
 
 

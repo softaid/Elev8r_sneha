@@ -74,6 +74,11 @@ sap.ui.define(
 					var activitiestblmodel = new JSONModel();
 					activitiestblmodel.setData({});
 					this.getView().setModel(activitiestblmodel, "activitymodel");
+
+					var activityListModel = new JSONModel();
+					activityListModel.setData({});
+					this.getView().setModel(activityListModel, "activityListModel");
+
 					var paymenttblmodel = new JSONModel();
 					paymenttblmodel.setData({});
 					this.getView().setModel(paymenttblmodel, "paymenttblmodel");
@@ -503,7 +508,7 @@ sap.ui.define(
 					let projectModel = this.getView().getModel("projectModel").getData();
 					this.bus.publish("activitystatus", "setDetailActivityPage", {
 						viewName: "ProjectActivityDetail",
-						viewModel: { projectid: projectModel.id },
+						viewModel: { projectid: projectModel.id ,dependencyStatus : true},
 					});
 				},
 				onAddNewRowAttribute: function () {
@@ -511,7 +516,7 @@ sap.ui.define(
 					let projectModel = this.getView().getModel("projectModel").getData();
 					this.bus.publish("attributestatus", "setDetailAttributePage", {
 						viewName: "projectattributedetail",
-						viewModel: { projectid: 60, attributetypeids: null },
+						viewModel: { projectid: projectModel.id, attributetypeids: null },
 					});
 				},
 
@@ -576,14 +581,10 @@ sap.ui.define(
 				getAllStageArActivity: async function (oEvent) {
 
 					let currentContext = this;
-		
-		
 					if (oEvent.mParameters.id.match("btnallstage") != null) {
 		
 						var tblModel = currentContext.getView().getModel("tblModel");
 						tblModel.setData(currentContext.StageList);
-		
-						
 					}
 					else if (oEvent.mParameters.id.match("btnallactivity") != null) {
 						var activitymodel = currentContext.getView().getModel("activitymodel");
@@ -945,6 +946,7 @@ sap.ui.define(
 				getActivitesdetail: function (projectid) {
 					var currentContext = this;
 					var projectModel = currentContext.getView().getModel("projectModel");
+					var activityListModel = currentContext.getView().getModel("activityListModel")
 					Projectservice.getProjectdetail(
 						{ id: projectid, field: "activity" },
 						function (data) {
@@ -964,6 +966,7 @@ sap.ui.define(
 								let filteredData = data[0].filter(function (ele) {
 									return ele.isactive === 1;
 								});
+								activityListModel.setData(filteredData);
 
 								if (projectModel.oData.isallactivities == false) {
 									activitymodel.setData(filteredData);
