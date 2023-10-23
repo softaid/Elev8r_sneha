@@ -478,54 +478,59 @@ sap.ui.define([
 			reader.readAsDataURL(file);
 		},
 
-		handleStageApproveToggle:function(){
+		handleStageApproveToggle: function () {
 			let currentContext = this;
-			let oModel = currentContext.getView().getModel("ActivityDetailModel").oData;
-			if(oModel.actualenddate==null){
-			oModel.isactive=false;
-			MessageToast.show("Activity is not completed yet so first complete the Activity then approve it");
+			let oModel = currentContext.getView().getModel("ActivityDetailModel").getData();
+			var sessionDataString = sessionStorage.getItem('currentSession');
 
+			// Parse the JSON string to an object
+			var sessionData = JSON.parse(sessionDataString);
+			console.log(sessionData)
+			var approveById = sessionData.userId;
+			if (oModel.assignedby != approveById || sessionData.roleNames != "AD") {
+				oModel.iscompleted = false;
+				MessageToast.show("You have not acces to approve the stage");
+				currentContext.getView().getModel("ActivityDetailModel").refresh();
+			}
+			else if (oModel?.actualenddate == null) {
+				oModel.iscompleted = false;
+				MessageToast.show("Activity is not completed yet so first complete the Activity then approve it");
+				currentContext.getView().getModel("ActivityDetailModel").refresh();
 			}
 		},
 
 
 		handleStageCompPer: function () {
 			let currentContext = this;
-			let oModel = currentContext.getView().getModel("ActivityDetailModel").oData;
+			let oModel = this.getView().getModel("ActivityDetailModel").getData();
 
-			// if intially actual end date is null but if actual end date during save is null means we  we don't need to update  total stage completion percentage  and if final date is not null means add stagecompletionpercentage to total stage completion percentage
-			// if (currentContext.actualEndDateRef == null) {
-			// 	oModel.stageDetail.stagecompletionpercentage = oModel.actualenddate == null ? oModel.stageDetail.stagecompletionpercentage : Math.abs(+oModel.stageDetail.stagecompletionpercentage + (+oModel.stagecompletionpercentage))
-			// }
-			// else {
-			// 	// if intially actual end date is not null but if actual end date during save is not null means we  we don't need to update  total stage completion percentage  and if final date is  null means subtract stagecompletionpercentage to total stage completion percentage
-			// 	oModel.stageDetail.stagecompletionpercentage = oModel.actualenddate == null ? (+oModel.stageDetail.stagecompletionpercentage - (+oModel.stagecompletionpercentage)) : oModel.stageDetail.stagecompletionpercentage;
-
-			// };
-
-			// if (oModel.stageDetail.stagecompletionpercentage != oModel.stagecompletionpercentageRef) {
-				if(oModel.iscompleted==true){
+			if (oModel.iscompleted == true) {
 				const obj = {
 					...oModel.stageDetail,
 					startdate: (oModel.stageDetail.startdate != null) ? commonFunction.getDate(oModel.stageDetail.startdate) : oModel.stageDetail.startdate,
 					enddate: (oModel.stageDetail.enddate != null) ? commonFunction.getDate(oModel.stageDetail.enddate) : oModel.stageDetail.enddate,
 					actualstartdate: (oModel.stageDetail.actualstartdate != null) ? commonFunction.getDate(oModel.stageDetail.actualstartdate) : oModel.stageDetail.actualstartdate,
-					isactive: oModel.stageDetail.isactive === true||oModel.stageDetail.isactive == 1 ? 1 : 0,
+					isactive: oModel.stageDetail.isactive === true || oModel.stageDetail.isactive == 1 ? 1 : 0,
 					isstd: oModel.stageDetail.isstd === true ? 1 : 0,
 					userid: commonService.session("userId"),
-					stagecompletionpercentage: (oModel?.stageDetail?.stagecompletionpercentage??0)+(oModel?.stagecompletionpercentage??0),
+					actualstartdate: oModel?.stageDetail?.stagecompletionpercentage ?? 0 == 0 ? commonFunction.getDate(oModel.actualstartdate) : (oModel.stageDetail.actualstartdate != null) ? commonFunction.getDate(oModel.stageDetail.actualstartdate) : oModel?.stageDetail?.actualstartdate ?? null,
+					stagecompletionpercentage: (oModel?.stageDetail?.stagecompletionpercentage ?? 0) + (oModel?.stagecompletionpercentage ?? 0),
 					fromreference: 0,
+					type:"Stage"
 				};
-				obj.actualenddate= obj.stagecompletionpercentage==100? commonFunction.getDate(oModel.actualenddate): (oModel.stageDetail.actualenddate != null)? commonFunction.getDate(oModel.stageDetail.actualenddate) : oModel?.stageDetail?.actualenddate??null,
+				obj.actualenddate = obj.stagecompletionpercentage == 100 ? commonFunction.getDate(oModel.actualenddate) : (oModel.stageDetail.actualenddate != null) ? commonFunction.getDate(oModel.stageDetail.actualenddate) : oModel?.stageDetail?.actualenddate ?? null,
 
-				Projectservice.saveProjectActivityDetail(obj, function (savedata) {
-					commonFunction.getStageDetail( oModel.projectid,currentContext);
 
-				})
 
-			 }
+					Projectservice.saveProjectActivityDetail(obj, function (savedata) {
+						commonFunction.getStageDetail(oModel.projectid, currentContext);
+
+					})
+
+			}
 
 		},
+
 
 		onSave: function () {
 			// if (this.validateForm()) {
@@ -544,6 +549,8 @@ sap.ui.define([
 			}
 
 			currentContext.handleStageCompPer();
+
+
 			{
 				parentModel["id"] = null;
 				parentModel["projectid"] = oModel.projectid;
@@ -606,33 +613,36 @@ sap.ui.define([
 				MessageToast.show("Please need to first complete the prerequisite  stage for  starting the current stage");
 			}
 
+			// }
 
 		},
 
 
-		validateForm: function () {
-			var isValid = true;
-			var ItemNameMsg = this.resourcebundle().getText("feedMillBOMvalidMsgItem");
-			var qtyMsg = this.resourcebundle().getText("feedMillBOMvalidMsgQty");
-			var unitcostMsg = this.resourcebundle().getText("feedMillBOMvalidMsgUnitCost");
-			var matTypeMsg = "Material type is required"
+		validateForm: async function () {
+			let isValid = true;
+			let currentContext = this;
 
-			if (!commonFunction.isRequired(this, "txtitemname", ItemNameMsg))
-				isValid = false;
+			let oModel = currentContext.getView().getModel("ActivityDetailModel").oData;
 
+			let obj = {
+				id: oModel?.id ?? 0,// activity id  in reference
+				projectid: oModel.projectid,
+				parentid: oModel?.parentid ?? null, //stage id in refernce
+				type: "activity"
+			};
+			await Projectservice.getSumOfAllStageOrActivity(obj, async function (data) {
+				console.log(data);
+				let completionPer = +(oModel?.stagecompletionpercentage ?? 0) + +(data?.[0]?.[0]?.totalper ?? 0);
+				if (completionPer > 100) {
+					MessageToast.show(`Sum of stage completion percentage of all activity is ${completionPer}  and greater than 100 so please change it then save it`);
+					isValid = false;
+				}
+				else {
+					isValid = true;
 
-			if (!commonFunction.isRequired(this, "textqty", qtyMsg))
-				isValid = false;
-
-			if (!commonFunction.isRequired(this, "textunitcost", unitcostMsg))
-				isValid = false;
-
-			if (!commonFunction.isSelectRequired(this, "txtMaterialType", matTypeMsg))
-				isValid = false;
-			if (!commonFunction.isDecimal(this, "textqty"))
-				isValid = false;
-
-
+					await currentContext.onSave();
+				}
+			})
 			return isValid;
 		},
 		resourcebundle: function () {

@@ -189,6 +189,11 @@ sap.ui.define([
 
             getProjectDashboard : function(params, callback){
                 commonService.runJQueryX("GET","elevproject/projectdashboard/" + commonService.session("companyId") + "/" + params.userid, null, callback, null)
-            }
+            },
+
+            getSumOfAllStageOrActivity: function(params, callback){
+                commonService.runJQueryX("GET",'elevproject/completionpercentage/'+params.id+'/'+params.parentid+'/'+params.projectid+'/'+params.type, null, callback, null)
+            },
+
         }
     })
