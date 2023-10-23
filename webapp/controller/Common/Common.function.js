@@ -178,15 +178,14 @@ sap.ui.define([
                 var notifications = $.grep(oModelTemplate.oData.modelData, function (h) {
                     return h.transactiontypeid == transactiontypeid
                 });
-                debugger;
                 if (notifications && notifications.length > 0) {
 
                     for (var indx in notifications) {
-                        debugger;
                         // Current notification object
                         var notification = notifications[indx];
                         // Get Filtered CreatedFor users
                         var filteredUser = this.filterCreatedFor(currentContext, notification.rolenames.split(','));
+                        console.log("--------------filteredUser----------------",filteredUser);
                         if (filteredUser != null) {
 
                             // Get Ready data template for notification
@@ -219,7 +218,6 @@ sap.ui.define([
 
                             // Send In Application
                             if (notification.inapp) {
-                                debugger;
                                 // If UserKeys exists, (user may exists without Userkeys)
                                 if (filteredUserKeys.length > 0)
                                     this.sendInAppNotification(filteredUserKeys, template, notification.pagekey);
@@ -233,6 +231,10 @@ sap.ui.define([
                                     var emailFrom = (currUser) ? currUser.username + " <" + currUser.email + ">" : null;
                                     // Send Email using Node JS call
                                     this.sendEmailNotification(transactiontypeid, transactionid, emailIds.join(), emailFrom, subject, template);
+                                    // Emial notification to sale person
+
+                                    var emailId ="poojadeshmukh396@gmail.com";
+                                    this.sendEmailNotification(transactiontypeid, transactionid, emailId, emailFrom, subject, template);
                                 }
                             }
 
@@ -278,7 +280,6 @@ sap.ui.define([
         },
 
         sendInAppNotification: function (createdFor, template, pagekey) {
-            debugger;
             var prams = {
                 "app_id": "69ddb77d-4aa5-488c-afcb-e1146ab59fe4",
                 "contents": { "en": template },
@@ -339,7 +340,6 @@ sap.ui.define([
 
         // Notification Placeholders
         getNotificationPlaceholders: function (currentContext, transactiontypeid) {
-            debugger;
             commonService.getNotificationPlaceholders({ transactiontypeid: transactiontypeid }, function (data) {
                 var oModel = new sap.ui.model.json.JSONModel();
                 oModel.setData({ modelData: data[0] });

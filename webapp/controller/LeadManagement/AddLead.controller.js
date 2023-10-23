@@ -142,6 +142,9 @@ sap.ui.define([
 			// get all employees list 
 			commonFunction.getEmployeeList(this);
 
+			// get Sale Manager and Sale Executive
+			commonFunction.getUser(this,'2,3');
+
 			//bind all locations
 			locationService.getAllLocations(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();

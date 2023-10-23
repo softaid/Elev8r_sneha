@@ -882,9 +882,9 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                                                path: 'employeeList>/modelData'                                                
+                                                path: 'userModel>/modelData'                                                
                                             }">
-                                            <core:Item key="{employeeList>id}" text="{employeeList>employeename}" />
+                                            <core:Item key="{userModel>createdby}" text="{userModel>createdbyname}" />
                                         </Select>
                                     </form:fields>
                                 </form:FormElement>   

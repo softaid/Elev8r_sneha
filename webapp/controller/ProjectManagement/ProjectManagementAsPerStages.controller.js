@@ -332,7 +332,6 @@ sap.ui.define([
 
 
 		_filter: function () {
-			debugger;
 			var oFilter = null;
 
 			if (this._oGlobalFilter) {
