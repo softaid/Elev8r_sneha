@@ -487,7 +487,7 @@ sap.ui.define([
 			var sessionData = JSON.parse(sessionDataString);
 			console.log(sessionData)
 			var approveById = sessionData.userId;
-			if (oModel.assignedby != approveById  || sessionData.roleNames!="AD") {
+			if (oModel.assignedby != approveById || sessionData.roleNames != "AD") {
 				oModel.iscompleted = false;
 				MessageToast.show("You have not acces to approve the stage");
 				currentContext.getView().getModel("ActivityDetailModel").refresh();
@@ -513,51 +513,14 @@ sap.ui.define([
 					isactive: oModel.stageDetail.isactive === true || oModel.stageDetail.isactive == 1 ? 1 : 0,
 					isstd: oModel.stageDetail.isstd === true ? 1 : 0,
 					userid: commonService.session("userId"),
-					actualstartdate : oModel?.stageDetail?.stagecompletionpercentage??0 == 0 ? commonFunction.getDate(oModel.actualstartdate) : (oModel.stageDetail.actualstartdate != null) ? commonFunction.getDate(oModel.stageDetail.actualstartdate) : oModel?.stageDetail?.actualstartdate ?? null,
+					actualstartdate: oModel?.stageDetail?.stagecompletionpercentage ?? 0 == 0 ? commonFunction.getDate(oModel.actualstartdate) : (oModel.stageDetail.actualstartdate != null) ? commonFunction.getDate(oModel.stageDetail.actualstartdate) : oModel?.stageDetail?.actualstartdate ?? null,
 					stagecompletionpercentage: (oModel?.stageDetail?.stagecompletionpercentage ?? 0) + (oModel?.stagecompletionpercentage ?? 0),
 					fromreference: 0,
+					type:"Stage"
 				};
 				obj.actualenddate = obj.stagecompletionpercentage == 100 ? commonFunction.getDate(oModel.actualenddate) : (oModel.stageDetail.actualenddate != null) ? commonFunction.getDate(oModel.stageDetail.actualenddate) : oModel?.stageDetail?.actualenddate ?? null,
-			
 
 
-					Projectservice.saveProjectActivityDetail(obj, function (savedata) {
-						commonFunction.getStageDetail(oModel.projectid, currentContext);
-
-					})
-
-			}
-
-		},
-
-		handleStageStart: function () {
-			let currentContext = this;
-			let oModel = currentContext.getView().getModel("ActivityDetailModel").oData;
-
-			// if intially actual end date is null but if actual end date during save is null means we  we don't need to update  total stage completion percentage  and if final date is not null means add stagecompletionpercentage to total stage completion percentage
-			// if (currentContext.actualEndDateRef == null) {
-			// 	oModel.stageDetail.stagecompletionpercentage = oModel.actualenddate == null ? oModel.stageDetail.stagecompletionpercentage : Math.abs(+oModel.stageDetail.stagecompletionpercentage + (+oModel.stagecompletionpercentage))
-			// }
-			// else {
-			// 	// if intially actual end date is not null but if actual end date during save is not null means we  we don't need to update  total stage completion percentage  and if final date is  null means subtract stagecompletionpercentage to total stage completion percentage
-			// 	oModel.stageDetail.stagecompletionpercentage = oModel.actualenddate == null ? (+oModel.stageDetail.stagecompletionpercentage - (+oModel.stagecompletionpercentage)) : oModel.stageDetail.stagecompletionpercentage;
-
-			// };
-
-			// if (oModel.stageDetail.stagecompletionpercentage != oModel.stagecompletionpercentageRef) {
-			if (oModel.actualstartdate != null && (oModel?.stageDetail?.stagecompletionpercentage ?? 0 == 0)) {
-				const obj = {
-					...oModel.stageDetail,
-					startdate: (oModel.stageDetail.startdate != null) ? commonFunction.getDate(oModel.stageDetail.startdate) : oModel.stageDetail.startdate,
-					enddate: (oModel.stageDetail.enddate != null) ? commonFunction.getDate(oModel.stageDetail.enddate) : oModel.stageDetail.enddate,
-					actualstartdate: oModel.actualstartdate,
-					isactive: oModel.stageDetail.isactive === true || oModel.stageDetail.isactive == 1 ? 1 : 0,
-					isstd: oModel.stageDetail.isstd === true ? 1 : 0,
-					userid: commonService.session("userId"),
-					stagecompletionpercentage: (oModel?.stageDetail?.stagecompletionpercentage ?? 0),
-					fromreference: 0,
-				};
-				obj.actualenddate = (oModel.stageDetail.actualenddate != null) ? commonFunction.getDate(oModel.stageDetail.actualenddate) : oModel?.stageDetail?.actualenddate ?? null,
 
 					Projectservice.saveProjectActivityDetail(obj, function (savedata) {
 						commonFunction.getStageDetail(oModel.projectid, currentContext);
@@ -568,91 +531,87 @@ sap.ui.define([
 
 		},
 
-		handleActivitySave: async function (isValid) {
-			let currentContext = this;
-			
-		},
 
 		onSave: function () {
 			// if (this.validateForm()) {
-				let currentContext = this;
-				let oModel = this.getView().getModel("ActivityDetailModel").oData;
+			let currentContext = this;
+			let oModel = this.getView().getModel("ActivityDetailModel").oData;
 
-				var parentModel = currentContext.getView().getModel("editDocumentCollectionModel").oData;
-				let objPush = {
-					id: null,
-					stageid: oModel?.stageid ?? null,
-					projectid: oModel.projectid,
-					companyid: commonService.session("companyId"),
-					userid: commonService.session("userId"),
-					parentstageid: oModel.parentid,
-					type: "Activity"
-				}
+			var parentModel = currentContext.getView().getModel("editDocumentCollectionModel").oData;
+			let objPush = {
+				id: null,
+				stageid: oModel?.stageid ?? null,
+				projectid: oModel.projectid,
+				companyid: commonService.session("companyId"),
+				userid: commonService.session("userId"),
+				parentstageid: oModel.parentid,
+				type: "Activity"
+			}
 
-				currentContext.handleStageCompPer();
-
-
-				{
-					parentModel["id"] = null;
-					parentModel["projectid"] = oModel.projectid;
-					parentModel["companyid"] = commonService.session("companyId");
-					parentModel["userid"] = commonService.session("userId");
-					oModel.type = "Activity";
-					oModel["companyid"] = commonService.session("companyId");
-					oModel["userid"] = commonService.session("userId");
-					oModel.type = "Activity";
+			currentContext.handleStageCompPer();
 
 
-					oModel.startdate = (oModel.startdate != null) ? commonFunction.getDate(oModel.startdate) : oModel.startdate;
-					oModel.enddate = (oModel.enddate != null) ? commonFunction.getDate(oModel.enddate) : oModel.enddate;
-					oModel.actualstartdate = (oModel.actualstartdate != null) ? commonFunction.getDate(oModel.actualstartdate) : oModel.actualstartdate;
-					oModel.actualenddate = (oModel.actualenddate != null) ? commonFunction.getDate(oModel.actualenddate) : oModel.actualenddate;
-					oModel.isactive = oModel.isactive === true ? 1 : 0;
-					oModel.isstd = oModel.isstd === true ? 1 : 0;
+			{
+				parentModel["id"] = null;
+				parentModel["projectid"] = oModel.projectid;
+				parentModel["companyid"] = commonService.session("companyId");
+				parentModel["userid"] = commonService.session("userId");
+				oModel.type = "Activity";
+				oModel["companyid"] = commonService.session("companyId");
+				oModel["userid"] = commonService.session("userId");
+				oModel.type = "Activity";
 
-					// when we add any stage or activity from project detail screen we only add those stage in reference and only for that particular project  the fromreference=0 this condition we check in project detail and reference also ...
-					oModel.fromreference = 0;
 
-					Projectservice.saveProjectActivityDetail(oModel, function (savedata) {
-						objPush.stageid = savedata.id  //  get id of  new save activity  for document save
-						currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
-							if (document.id == undefined) {
-								Projectservice.saveDocumentCollectionDetails({ ...objPush, ...document }, function (obj) {
-									var saveMsg = "Data Saved Successfully.";
-									var editMsg = "Data Updated Successfully";
-									var ErrorMsg = "Data not Saved Successfully";
-									var message = parentModel.id == null ? saveMsg : editMsg
-									if (message == null) {
-										MessageToast.show(ErrorMsg);
+				oModel.startdate = (oModel.startdate != null) ? commonFunction.getDate(oModel.startdate) : oModel.startdate;
+				oModel.enddate = (oModel.enddate != null) ? commonFunction.getDate(oModel.enddate) : oModel.enddate;
+				oModel.actualstartdate = (oModel.actualstartdate != null) ? commonFunction.getDate(oModel.actualstartdate) : oModel.actualstartdate;
+				oModel.actualenddate = (oModel.actualenddate != null) ? commonFunction.getDate(oModel.actualenddate) : oModel.actualenddate;
+				oModel.isactive = oModel.isactive === true ? 1 : 0;
+				oModel.isstd = oModel.isstd === true ? 1 : 0;
 
-									}
-									else {
-										MessageToast.show(message);
-									}
-								})
-							}
-						});
+				// when we add any stage or activity from project detail screen we only add those stage in reference and only for that particular project  the fromreference=0 this condition we check in project detail and reference also ...
+				oModel.fromreference = 0;
 
-						Projectservice.getProjectdetail({ id: oModel.projectid, field: "Activity" }, function (data) {
-							console.log("data", data);
-							data[0].map(function (value, index) {
-								data[0][index].activestatus = value.isactive == 1 ? "Active" : "InActive";
-							});
-							let tblModel = currentContext.getView().getModel("activitymodel");
-							tblModel.setData(data[0]);
-							tblModel.refresh();
-						})
+				Projectservice.saveProjectActivityDetail(oModel, function (savedata) {
+					objPush.stageid = savedata.id  //  get id of  new save activity  for document save
+					currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
+						if (document.id == undefined) {
+							Projectservice.saveDocumentCollectionDetails({ ...objPush, ...document }, function (obj) {
+								var saveMsg = "Data Saved Successfully.";
+								var editMsg = "Data Updated Successfully";
+								var ErrorMsg = "Data not Saved Successfully";
+								var message = parentModel.id == null ? saveMsg : editMsg
+								if (message == null) {
+									MessageToast.show(ErrorMsg);
+
+								}
+								else {
+									MessageToast.show(message);
+								}
+							})
+						}
 					});
 
-					currentContext.DeleteDocumentArr.length > 0 ? currentContext.onDeleteDocumentSave() : "No image is available to delete";
-				}
+					Projectservice.getProjectdetail({ id: oModel.projectid, field: "Activity" }, function (data) {
+						console.log("data", data);
+						data[0].map(function (value, index) {
+							data[0][index].activestatus = value.isactive == 1 ? "Active" : "InActive";
+						});
+						let tblModel = currentContext.getView().getModel("activitymodel");
+						tblModel.setData(data[0]);
+						tblModel.refresh();
+					})
+				});
 
-				currentContext.onCancel();
+				currentContext.DeleteDocumentArr.length > 0 ? currentContext.onDeleteDocumentSave() : "No image is available to delete";
+			}
 
-				if (oModel.dependencyStatus == false) {
+			currentContext.onCancel();
 
-					MessageToast.show("Please need to first complete the prerequisite  stage for  starting the current stage");
-				}
+			if (oModel.dependencyStatus == false) {
+
+				MessageToast.show("Please need to first complete the prerequisite  stage for  starting the current stage");
+			}
 
 			// }
 
@@ -662,7 +621,6 @@ sap.ui.define([
 		validateForm: async function () {
 			let isValid = true;
 			let currentContext = this;
-			// isValid=  await currentContext.handleActivitySave(isValid);
 
 			let oModel = currentContext.getView().getModel("ActivityDetailModel").oData;
 
@@ -674,15 +632,13 @@ sap.ui.define([
 			};
 			await Projectservice.getSumOfAllStageOrActivity(obj, async function (data) {
 				console.log(data);
-				let completionPer = +(oModel?.stagecompletionpercentage ?? 0) +  +(data?.[0]?.[0]?.totalper??0);
-				if(completionPer > 100) {
+				let completionPer = +(oModel?.stagecompletionpercentage ?? 0) + +(data?.[0]?.[0]?.totalper ?? 0);
+				if (completionPer > 100) {
 					MessageToast.show(`Sum of stage completion percentage of all activity is ${completionPer}  and greater than 100 so please change it then save it`);
 					isValid = false;
-					// return isValid;
 				}
-				else{
+				else {
 					isValid = true;
-					// return isVa	lid;
 
 					await currentContext.onSave();
 				}

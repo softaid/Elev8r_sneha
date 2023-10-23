@@ -124,70 +124,6 @@ sap.ui.define(
 
 				},
 
-				handleStageApproveToggle: function () {
-					let currentContext = this;
-					let oModel = currentContext.getView().getModel("StageDetailModel").getData();
-					if (oModel.actualenddate == null) {
-						oModel.iscompleted = false;
-						MessageToast.show("stage is not completed yet so first complete the stage then approve it");
-						currentContext.getView().getModel("StageDetailModel").refresh();
-					}
-				},
-
-				handleStageCompPer: function () {
-					let currentContext = this;
-					let oModel = currentContext.getView().getModel("StageDetailModel").oData;
-
-					// if intially actual end date is null but if actual end date during save is null means we  we don't need to update  total stage completion percentage  and if final date is not null means add stagecompletionpercentage to total stage completion percentage
-					// if (currentContext.actualEndDateRef == null) {
-					// 	oModel.stageDetail.stagecompletionpercentage = oModel.actualenddate == null ? oModel.stageDetail.stagecompletionpercentage : Math.abs(+oModel.stageDetail.stagecompletionpercentage + (+oModel.stagecompletionpercentage))
-					// }
-					// else {
-					// 	// if intially actual end date is not null but if actual end date during save is not null means we  we don't need to update  total stage completion percentage  and if final date is  null means subtract stagecompletionpercentage to total stage completion percentage
-					// 	oModel.stageDetail.stagecompletionpercentage = oModel.actualenddate == null ? (+oModel.stageDetail.stagecompletionpercentage - (+oModel.stagecompletionpercentage)) : oModel.stageDetail.stagecompletionpercentage;
-
-					// }
-
-					if (oModel.iscompleted == true) {
-						const obj = {
-							...oModel.projectDetail,
-							startdate: (oModel.projectDetail.startdate != null) ? commonFunction.getDate(oModel.projectDetail.startdate) : oModel.projectDetail.startdate,
-							enddate: (oModel.projectDetail.enddate != null) ? commonFunction.getDate(oModel.projectDetail.enddate) : oModel.projectDetail.enddate,
-							isactive: oModel.projectDetail.isactive === true || oModel.stageDetail.isactive == 1 ? 1 : 0,
-							isstd: oModel.projectDetail.isstd === true ? 1 : 0,
-							userid: commonService.session("userId"),
-							completionper: (oModel?.stageDetail?.completionper ?? 0) + (oModel?.projectweightage ?? 0),
-							fromreference: 0,
-							companyid: commonService.session("companyId")
-
-						}
-
-						obj.actualenddate = obj.completionper == 100 ? commonFunction.getDate(oModel.actualenddate) : (oModel.projectDetail.actualenddate != null) ? commonFunction.getDate(oModel.projectDetail.actualenddate) : oModel?.projectDetail?.actualenddate ?? null,
-
-							Projectservice.saveProject(obj, function (savedata) {
-								// commonFunction.getStageDetail( oModel.projectid,currentContext);
-
-							})
-
-
-
-					}
-
-				},
-
-				handleStageAdd: function () {
-					let currentContext = this;
-					let oModel = currentContext.getView().getModel("StageDetailModel").oData;
-					if (oModel?.id ?? null == null) {
-						let completionPer = (oModel?.projectweightage ?? 0) + (oModel?.projectDetail?.stagecompletionpercentage ?? 0);
-						if (completionPer > 100) {
-							MessageToast.show("Sum of project completion percentage of all stage is greater than 100 so please change it and save it");
-							return false;
-						}
-					}
-					return true;
-				},
-
 				handleSelectionFinish: function (oEvt) {
 					let StageDetailModel = this.getView().getModel("StageDetailModel");
 					let selectedItems = oEvt.getParameter("selectedItems");
@@ -595,7 +531,6 @@ sap.ui.define(
 				},
 
 				onSave: function () {
-					if (this.validateForm()) {
 						let currentContext = this;
 						let oModel = this.getView().getModel("StageDetailModel").oData;
 
@@ -636,7 +571,7 @@ sap.ui.define(
 						// when we add any stage or activity from project detail screen we only add those stage in reference and only for that particular project  the fromreference=0 this condition we check in project detail and reference also ...
 						oModel.fromreference = 0;
 
-						currentContext.handleStageCompPer();
+						currentContext.handleProjectCompPer();
 						Projectservice.saveProjectActivityDetail(oModel, function (savedata) {
 							objPush.stageid = savedata.id;
 
@@ -670,61 +605,71 @@ sap.ui.define(
 						}
 
 						currentContext.onCancel();
-					}
 				},
 
-				handleStageAdd: function () {
+				handleStageApproveToggle: function () {
 					let currentContext = this;
-					let oModel = currentContext.getView().getModel("ActivityDetailModel").oData;
-		
-					if (oModel?.id ?? null == null) {
-						let obj = {
-							id:oModel?.id??null,// stage id  in reference
-							projectid:oModel.projectid,
-							parentid:null, //stage id in refernce
-							type:"stage"
-						}
-						
-						let completionPer = (oModel?.stagecompletionpercentage ?? 0) + ( 20?? 0);
-						if (completionPer > 100) {
-							MessageToast.show("Sum of stage completion percentage of all activity is greater than 100 so please change it and save it");
-							return false;
-						}
+					let oModel = currentContext.getView().getModel("StageDetailModel").getData();
+					if (oModel.actualenddate == null) {
+						oModel.iscompleted = false;
+						MessageToast.show("stage is not completed yet so first complete the stage then approve it");
+						currentContext.getView().getModel("StageDetailModel").refresh();
 					}
-					return true;
 				},
+
+				handleProjectCompPer: function () {
+					let currentContext = this;
+					let oModel = currentContext.getView().getModel("StageDetailModel").oData;
+
+					if (oModel.iscompleted == true) {
+						const obj = {
+							...oModel.projectDetail,
+							startdate: (oModel.projectDetail.startdate != null) ? commonFunction.getDate(oModel.projectDetail.startdate) : oModel.projectDetail.startdate,
+							enddate: (oModel.projectDetail.enddate != null) ? commonFunction.getDate(oModel.projectDetail.enddate) : oModel.projectDetail.enddate,
+							isactive: oModel.projectDetail.isactive === true || oModel.stageDetail.isactive == 1 ? 1 : 0,
+							isstd: oModel.projectDetail.isstd === true ? 1 : 0,
+							userid: commonService.session("userId"),
+							completionper: (oModel?.projectDetail?.completionper ?? 0) + (oModel?.projectweightage ?? 0),
+							fromreference: 0,
+							companyid: commonService.session("companyId")
+
+						}
+
+						obj.actualenddate = obj.completionper == 100 ? commonFunction.getDate(oModel.actualenddate) : (oModel.projectDetail.actualenddate != null) ? commonFunction.getDate(oModel.projectDetail.actualenddate) : oModel?.projectDetail?.actualenddate ?? null,
+
+							Projectservice.saveProject(obj, function (savedata) {
+
+							})
+					}
+
+				},
+
+				validateForm: async function () {
+					let isValid = true;
+					let currentContext = this;
 		
-				validateForm: function () {
-					var isValid = true;
+					let oModel = currentContext.getView().getModel("StageDetailModel").oData;
+		
+					let obj = {
+						id: oModel?.id ?? 0,// activity id  in reference
+						projectid: oModel.projectid,
+						parentid: oModel?.parentid ?? 0, //stage id in refernce
+						type: "Stage"
+					};
+					 Projectservice.getSumOfAllStageOrActivity(obj, async function (data) {
+						console.log(data);
+						let completionPer = +(oModel?.projectweightage ?? 0) + +(data?.[0]?.[0]?.totalper ?? 0);
+						if (completionPer > 100) {
+							MessageToast.show(`Sum of project weightage of all stage is ${completionPer}  and greater than 100 so please change it then save it`);
+							isValid = false;
+						}
+						else {
+							isValid = true;
 
-					if (
-						!commonFunction.isSelectRequired(
-							this,
-							"projecttypeid",
-							departmentMsg
-						)
-					)
-				    isValid = false;
-					if (
-						!commonFunction.isSelectRequired(
-							this,
-							"assigntoid",
-							assignto
-						)
-					)
-				    isValid = false;
-					if (
-						!commonFunction.isSelectRequired(
-							this,
-							"assignbyid",
-							approveby
-						)
-					)
-					isValid = false;
-							
-					return isValid;
+							await currentContext.onSave();
+						}
+					})
 				},
-
 				resourcebundle: function () {
 					var currentContext = this;
 					var oBundle = this.getModel("i18n").getResourceBundle();
