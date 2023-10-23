@@ -21,7 +21,7 @@
 					<Button
 							text="{i18n>saveButtonText}"
                             type="Emphasized"
-                            press="onSave" id="btnSave"/>
+                            press="validateForm" id="btnSave"/>
 					<Button
 							text="{i18n>deleteButtonText}"
 							type="Emphasized"

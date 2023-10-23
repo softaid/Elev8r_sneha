@@ -70,10 +70,10 @@
                                         showSecondaryValues= "true"
                                         width="500px"
                                         items="{
-                                            path: 'activityModel>/',
+                                            path: 'activityListModel>/',
                                             sorter: { path: 'id' }
                                         }">
-											<core:Item key="{activityModel>stageid}" text="{activityModel>stagename}"/>
+											<core:Item key="{activityListModel>stageid}" text="{activityListModel>stagename}"/>
 										</Select>
 									</form:fields>
 								</form:FormElement>
