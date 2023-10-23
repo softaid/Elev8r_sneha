@@ -143,6 +143,9 @@ sap.ui.define([
 			// Purchase Order - Placeholders
 			commonFunction.getNotificationPlaceholders(this, 29);
 
+			// get Sale Manager and Sale Executive
+			commonFunction.getUser(this,'2,3');
+
 			//bind all Leads
 			leadService.getAllLeads(function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
@@ -531,6 +534,7 @@ sap.ui.define([
 			model["status"] = currentContext.getView().byId("statusid").getSelectedItem().mProperties.text; 
 			let callService =model["revisions"]==null?"saveOrder":"saveOrderRevisions";
 
+
 			if(model["status"]=="Confirmed"){
 				model["revisions"]=model["revisions"]==null?model.quotevalue:model.revisions.concat(",",model.quotevalue);
 			}
@@ -538,11 +542,13 @@ sap.ui.define([
 				model["revisions"]=null;
 			}
 
+			console.log("------------OrderModel-------------",model);
+
 			orderService[callService](model, function (data) {
 				console.log("----order save data---------",data);
 				console.log("----model---------",model)
 
-				if (data.id != null) {
+				if (data[3][0].id != null) {
 					var message = model.id == null ? "Order created successfully!" : "Order edited successfully!";
 					currentContext.onCancel();
 					MessageToast.show(message);
@@ -559,7 +565,8 @@ sap.ui.define([
 						username: commonService.session("userName"),
 						quotename : model.quotename,
 						leadname : model.leadname,
-						orderamount:model.quotevalue
+						orderamount:model.quotevalue,
+						jobcode:data[4][0].jobid == null ? '-' : data[4][0].jobid
 					}
 					commonFunction.sendTransNotification(currentContext,29,histroydata);
 				}

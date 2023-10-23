@@ -164,7 +164,7 @@
 									<form:FormElement label="prerequisite">
 										<form:fields>
 											<MultiComboBox id="dependency"
-                                                    required="true" 
+                                                   
                                                     selectionFinish="handleSelectionFinish"
                                                     width="500px"
                                                     editable="{

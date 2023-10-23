@@ -132,7 +132,6 @@
                                 <form:FormElement label="Prerequisites" id="prerequisitesEle">
                                     <form:fields>
                                         <MultiComboBox id="prerequisites"
-                                            required="true" 
                                             selectionChange=""
                                             selectionFinish="handleSelectionFinish"
                                             width="500px"

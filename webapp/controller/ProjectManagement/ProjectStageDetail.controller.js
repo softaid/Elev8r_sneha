@@ -697,6 +697,31 @@ sap.ui.define(
 				validateForm: function () {
 					var isValid = true;
 
+					if (
+						!commonFunction.isSelectRequired(
+							this,
+							"projecttypeid",
+							departmentMsg
+						)
+					)
+				    isValid = false;
+					if (
+						!commonFunction.isSelectRequired(
+							this,
+							"assigntoid",
+							assignto
+						)
+					)
+				    isValid = false;
+					if (
+						!commonFunction.isSelectRequired(
+							this,
+							"assignbyid",
+							approveby
+						)
+					)
+					isValid = false;
+							
 					return isValid;
 				},
 
