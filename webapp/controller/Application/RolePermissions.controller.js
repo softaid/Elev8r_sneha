@@ -131,7 +131,6 @@ sap.ui.define([
 				obj.permissions = "";
 			}
 			else if(state == "Mixed" || state == "Checked"){
-				debugger;
 				if(obj.permissions != undefined){
 
 					var perm = [];
