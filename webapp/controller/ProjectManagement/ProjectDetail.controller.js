@@ -524,6 +524,8 @@ sap.ui.define(
 					let projectModel = this.getView().getModel("projectModel").getData();
 					oDayHistory.projectid = projectModel.id;
 					oDayHistory.isactive = oDayHistory.isactive === 1||  oDayHistory.isactive === true? true : false;
+					oDayHistory.iscompleted = oDayHistory.iscompleted === 1||  oDayHistory.iscompleted === true? true : false;
+
 					oDayHistory.isstd = oDayHistory.isstd === 1 ? true : false;
 					oDayHistory.isstarted = oDayHistory.actualstartdate != null ? true : false;
 					oDayHistory.projectDetail=projectModel;
@@ -549,7 +551,9 @@ sap.ui.define(
 						.getObject();
 					let projectModel = this.getView().getModel("projectModel").getData();
 					oDayHistory.projectid = projectModel.id;
-					oDayHistory.isactive = oDayHistory.isactive === 1 ? true : false;
+					oDayHistory.isactive = oDayHistory.isactive == 1|| oDayHistory.isactive==true ? true : false;
+					oDayHistory.iscompleted = oDayHistory.iscompleted === 1||  oDayHistory.iscompleted === true? true : false;
+
 					oDayHistory.isstd = oDayHistory.isstd === 1 ? true : false;
 					oDayHistory.isstarted = oDayHistory.actualstartdate != null ? true : false;
 

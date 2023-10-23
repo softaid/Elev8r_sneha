@@ -112,9 +112,7 @@
 
 							
 
-							<tnt:InfoLabel id="notificationcount" class="notificationCount"
-								visible="{= ${notificationPopupModel>/modelData}.length === 0 ? false : true }"
-							 	text="0" renderMode="Narrow" colorScheme="1" displayOnly= "true" />
+							
 
 				            <Button
 					            id="userButton"
@@ -130,10 +128,12 @@
 							value= "{/valueDTP3}"
 							valueFormat="M/d/yy h:mm a"
 							class="sapUiSmallMarginBottom"/>
-
+							<tnt:InfoLabel id="notificationcount" class="notificationCount"
+								visible="{= ${notificationPopupModel>/modelData}.length === 0 ? false : true }"
+							 	text="0" renderMode="Narrow" colorScheme="1" displayOnly= "true" />
 							<Button
 					            id="notificationButton"
-					            icon="sap-icon://ui-notifications"
+					            icon="sap-icon://bell"
 					            type="Transparent"
 					            press="onNotificationPress"
 					            tooltip="{i18n>notificationButtonTooltip}">
