@@ -52,7 +52,6 @@ sap.ui.define([
 
 		// Notification Placeholders
 		getNotificationPlaceholders: function (currentContext, transactiontypeid) {
-			debugger;
 			commonService.getNotificationPlaceholders({ transactiontypeid: transactiontypeid }, function (data) {
 				var oModel = new sap.ui.model.json.JSONModel();
 				
@@ -76,7 +75,6 @@ sap.ui.define([
 		},
 
 		onTransactionChange: function (oEvent) {
-			debugger;
 			var transactiontypeid = this.getView().byId('ddlTransaction').getSelectedKey();
 			this.getNotificationPlaceholders(this, transactiontypeid);
 		},

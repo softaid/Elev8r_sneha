@@ -557,7 +557,6 @@ sap.ui.define([
 				}
 
 				if(model["status"]=="Confirmed"){
-					debugger;
 					var histroydata = {
 						orderno: model.id,
 						transactionid : model.id,
@@ -566,7 +565,8 @@ sap.ui.define([
 						quotename : model.quotename,
 						leadname : model.leadname,
 						orderamount:model.quotevalue,
-						jobcode:data[4][0].jobid == null ? '-' : data[4][0].jobid
+						jobcode:data[4][0].jobid == null ? '-' : data[4][0].jobid,
+						email:model.email
 					}
 					commonFunction.sendTransNotification(currentContext,29,histroydata);
 				}

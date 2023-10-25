@@ -228,8 +228,8 @@
                                     <items>
                                         <IconTabFilter text="Stages Assigned to You">
                                             <VBox fitContainer="true">           
-                                                <Table id="tblBillOfMaterial" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
-                                                    path: 'tblModel>/',
+                                                <Table id="tblAssignedTo" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
+                                                    path: 'oAssigneeModel>/',
                                                         sorter: {
                                                             path: 'id'
                                                         }
@@ -248,22 +248,13 @@
                                                         <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Job Code" /></Column>
                                                         <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Type" /></Column>
                                                         <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Stage/Activity" /></Column>
-                                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Stage Completion(%)" /></Column>
-                                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Project Completion(%)" />
-                                                        </Column>
-                                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Status" />
-                                                        </Column>
                                                     </columns>
                                                     <items>
                                                         <ColumnListItem type="Navigation" press="onListItemPress">
                                                             <cells>        
-                                                                <Text text="{tblModel>count}" /> 
-                                                                <Text text="{tblModel>stagename}" />         
-                                                                <Text text="{tblModel>startdate}" />   
-                                                                <Text text="{tblModel>enddate}"/>
-                                                                <Text text="{tblModel>completiondaystable}"/> 
-                                                                <Text text="{tblModel>stagecompletionpercentage}"/>
-                                                            </cells>
+                                                                <Text text="{oAssigneeModel>jobcode}" /> 
+                                                                <Text text="{oAssigneeModel>type}" />         
+                                                                <Text text="{oAssigneeModel>stagename}" />                                                             </cells>
                                                         </ColumnListItem>
                                                     </items>
                                                 </Table>
@@ -281,8 +272,8 @@
                                         </IconTabFilter>
                                         <IconTabFilter text="Stages Pending for Your Approval">
                                             <VBox fitContainer="true">
-                                                <Table id="tblActiviteStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
-                                                    path: 'activitymodel>/',
+                                                <Table id="tblApprovedBy" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
+                                                    path: 'oApproverModel>/',
                                                         sorter: {
                                                             path: 'id'
                                                         }
@@ -298,23 +289,16 @@
                                                         </Toolbar>
                                                     </headerToolbar>
                                                     <columns>
+                                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Job Code" /></Column>
                                                         <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Type" /></Column>
-                                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Stage/Type" /></Column>
-                                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Assigned To" /></Column>
-                                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Stage Completion(%)" /></Column>
-                                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Project Completion(%)" /></Column>
-                                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Status" />
-                                                        </Column>
+                                                        <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Stage/Activity" /></Column>
                                                     </columns>
                                                     <items>
                                                         <ColumnListItem type="Navigation" press="onListItemPressActivity">
                                                             <cells>        
-                                                                <Text text="{activitymodel>count}" /> 
-                                                                <Text text="{activitymodel>stagename}" />         
-                                                                <Text text="{activitymodel>startdate}" />   
-                                                                <Text text="{activitymodel>enddate}"/>
-                                                                <Text text="{activitymodel>completiondays}"/> 
-                                                                <Text text="{activitymodel>stagecompletionpercentage}"/>
+                                                                <Text text="{oApproverModel>jobcode}" /> 
+                                                                <Text text="{oApproverModel>type}" />         
+                                                                <Text text="{oApproverModel>stagename}" /> 
                                                             </cells>
                                                         </ColumnListItem>
                                                     </items>
