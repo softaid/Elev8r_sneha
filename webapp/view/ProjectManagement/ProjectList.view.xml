@@ -39,6 +39,7 @@
                                                 icon="sap-icon://group-2"
                                                 press="handleProjectGroupButtonPressed"/>
                                             <Button icon="sap-icon://sort" type="Transparent" press="onProjectSort"/>
+                                            <Button text="" icon="sap-icon://excel-attachment" press="onDataExport"/>
                                         </HBOX>
                                     </content>
                                 </Toolbar>

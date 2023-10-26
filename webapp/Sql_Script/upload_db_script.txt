@@ -9692,6 +9692,7 @@ BEGIN
     
     
 END$$
+
 DELIMITER ;
 DROP PROCEDURE IF EXISTS spk_notificationtemplate_select;
 

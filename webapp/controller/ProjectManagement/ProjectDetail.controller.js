@@ -11,6 +11,8 @@ sap.ui.define(
 		"sap/m/MessageToast",
 		"sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function",
 		"sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter",
+		'sap/ui/core/util/Export',
+		'sap/ui/core/util/ExportTypeCSV',
 	],
 	function (
 		JSONModel,
@@ -23,7 +25,9 @@ sap.ui.define(
 		ManageUserService,
 		MessageToast,
 		commonFunction,
-		formatter
+		formatter,
+		Export, 
+    	ExportTypeCSV
 	) {
 		"use strict";
 		return BaseController.extend(
@@ -31,6 +35,7 @@ sap.ui.define(
 			{
 				formatter: formatter,
 				onInit: function () {
+					this.currentContext = this;
 					this.bus = sap.ui.getCore().getEventBus();
 					this.bus.subscribe(
 						"billofmaterial",
@@ -1647,6 +1652,277 @@ sap.ui.define(
 					  oprojectModeldata.salesmanager = roleids.join(",");
 					}
 				  },
+
+				   /* generate CSV for  Setter  Report */
+				   onDataExport: sap.m.Table.prototype.exportData || function (oEvent) {
+					var currentContext = this;
+					var oModel= currentContext.getView().getModel("tblModel");
+					var aData = oModel.oData;
+					var tbloModel = new sap.ui.model.json.JSONModel();
+					tbloModel.setData({ modelData: aData });
+					currentContext.getView().setModel(tbloModel, "CSVtblModel");
+		  
+		  
+					//https://openui5.hana.ondemand.com/1.36.5/docs/guide/f1ee7a8b2102415bb0d34268046cd3ea.html
+					//http://www.saplearners.com/download-data-in-excel-in-sapui5-application/
+		  
+					var oExport = new Export({
+		  
+						// Type that will be used to generate the content. Own ExportType's can be created to support other formats
+						exportType: new ExportTypeCSV({
+							separatorChar: ","
+						}),
+		  
+						// Pass in the model created above
+						models: this.currentContext.getView().getModel("CSVtblModel"),
+						// binding information for the rows aggregation
+						rows: {
+							path: "/modelData"
+						},
+		  
+						// column definitions with column name and binding info for the content
+		  
+						columns: [
+							{
+								name: "ID",
+								template: { content: "{count}" }
+							},
+							{
+								name: "Stage Name",
+								template: { content: "{stagename}" }
+							},
+							{
+								name: "Actual Start Date",
+								template: { content: "{actualstartdate}" }
+							},
+							{
+								name: "Actual End Date",
+								template: { content: "{actualenddate}" }
+							},
+							{
+							  name: "Stage(%)",
+							  template: { content: "{stagecompletionpercentage}" }
+							},
+							{
+								name: "OverDueDays",
+								template: { content: "{overduedays}" }
+							},
+							{
+							  name: "Status",
+							  template: { content: "{status}" }
+						   }
+						]
+					});
+		  
+					// download exported file
+					oExport.saveFile("StageList")
+						.catch(function (oError) {
+							MessageBox.error("Error when downloading data. Browser might not be supported!\n\n" + oError);
+						})
+						.then(function () {
+		  
+							oExport.destroy();
+						});
+				},
+
+				 /* generate CSV for  Setter  Report */
+				 onDataActivityExport: sap.m.Table.prototype.exportData || function (oEvent) {
+					var currentContext = this;
+					var oActivityModel= currentContext.getView().getModel("activitymodel");
+					var activityData = oActivityModel.oData;
+					var activityoModel = new sap.ui.model.json.JSONModel();
+					activityoModel.setData({ modelData: activityData });
+					currentContext.getView().setModel(activityoModel, "CSVActivityModel");
+		  
+		  
+					//https://openui5.hana.ondemand.com/1.36.5/docs/guide/f1ee7a8b2102415bb0d34268046cd3ea.html
+					//http://www.saplearners.com/download-data-in-excel-in-sapui5-application/
+		  
+					var oExport = new Export({
+		  
+						// Type that will be used to generate the content. Own ExportType's can be created to support other formats
+						exportType: new ExportTypeCSV({
+							separatorChar: ","
+						}),
+		  
+						// Pass in the model created above
+						models: this.currentContext.getView().getModel("CSVActivityModel"),
+						// binding information for the rows aggregation
+						rows: {
+							path: "/modelData"
+						},
+		  
+						// column definitions with column name and binding info for the content
+		  
+						columns: [
+							{
+								name: "ID",
+								template: { content: "{count}" }
+							},
+							{
+								name: "Stage Name",
+								template: { content: "{parentstage}" }
+							},
+							{
+								name: "Activity Name",
+								template: { content: "{stagename}" }
+							},
+							{
+								name: "Actual Start",
+								template: { content: "{actualstartdate}" }
+							},
+							{
+							  name: "Actual End",
+							  template: { content: "{actualenddate}" }
+							},
+							{
+								name: "Stage(%)",
+								template: { content: "{stagecompletionpercentage}" }
+							},
+							{
+							  name: "OverDueDay",
+							  template: { content: "{overduedays}" }
+						    },
+							{
+								name: "Status",
+								template: { content: "{status}" }
+							 }
+						]
+					});
+		  
+					// download exported file
+					oExport.saveFile("ActivityList")
+						.catch(function (oError) {
+							MessageBox.error("Error when downloading data. Browser might not be supported!\n\n" + oError);
+						})
+						.then(function () {
+		  
+							oExport.destroy();
+						});
+				},
+
+				 /* generate CSV for  Setter  Report */
+				 onDataPaymentExport: sap.m.Table.prototype.exportData || function (oEvent) {
+					var currentContext = this;
+					var oPaymentModel= currentContext.getView().getModel("paymenttblmodel");
+					var paymentData = oPaymentModel.oData;
+					var paymentoModel = new sap.ui.model.json.JSONModel();
+					paymentoModel.setData({ modelData: paymentData });
+					currentContext.getView().setModel(paymentoModel, "CSVPaymentModel");
+		  
+		  
+					//https://openui5.hana.ondemand.com/1.36.5/docs/guide/f1ee7a8b2102415bb0d34268046cd3ea.html
+					//http://www.saplearners.com/download-data-in-excel-in-sapui5-application/
+		  
+					var oExport = new Export({
+		  
+						// Type that will be used to generate the content. Own ExportType's can be created to support other formats
+						exportType: new ExportTypeCSV({
+							separatorChar: ","
+						}),
+		  
+						// Pass in the model created above
+						models: this.currentContext.getView().getModel("CSVPaymentModel"),
+						// binding information for the rows aggregation
+						rows: {
+							path: "/modelData"
+						},
+		  
+						// column definitions with column name and binding info for the content
+		  
+						columns: [
+							{
+								name: "Type",
+								template: { content: "{type}" }
+							},
+							{
+								name: "Stage",
+								template: { content: "{stagename}" }
+							},
+							{
+								name: "Activity",
+								template: { content: "{activityname}" }
+							},
+							{
+								name: "Stage Amount",
+								template: { content: "{stageamount}" }
+							},
+							{
+							  name: "Activity Amount",
+							  template: { content: "{activityamount}" }
+							}
+						]
+					});
+		  
+					// download exported file
+					oExport.saveFile("PaymentList")
+						.catch(function (oError) {
+							MessageBox.error("Error when downloading data. Browser might not be supported!\n\n" + oError);
+						})
+						.then(function () {
+		  
+							oExport.destroy();
+						});
+				},
+				 /* generate CSV for  Setter  Report */
+				 onDataAttributeExport: sap.m.Table.prototype.exportData || function (oEvent) {
+					var currentContext = this;
+					var oAttributeModel= currentContext.getView().getModel("attributeModel");
+					var attributeData = oAttributeModel.oData;
+					var attributeoModel = new sap.ui.model.json.JSONModel();
+					attributeoModel.setData({ modelData: attributeData });
+					currentContext.getView().setModel(attributeoModel, "CSVAttributeModel");
+		  
+		  
+					//https://openui5.hana.ondemand.com/1.36.5/docs/guide/f1ee7a8b2102415bb0d34268046cd3ea.html
+					//http://www.saplearners.com/download-data-in-excel-in-sapui5-application/
+		  
+					var oExport = new Export({
+		  
+						// Type that will be used to generate the content. Own ExportType's can be created to support other formats
+						exportType: new ExportTypeCSV({
+							separatorChar: ","
+						}),
+		  
+						// Pass in the model created above
+						models: this.currentContext.getView().getModel("CSVAttributeModel"),
+						// binding information for the rows aggregation
+						rows: {
+							path: "/modelData"
+						},
+		  
+						// column definitions with column name and binding info for the content
+		  
+						columns: [
+							{
+								name: "Stage",
+								template: { content: "{parentstagename}" }
+							},
+							{
+								name: "Activity",
+								template: { content: "{stagename}" }
+							},
+							{
+								name: "Attribute",
+								template: { content: "{attributename}" }
+							},
+							{
+								name: "Remark",
+								template: { content: "{remark}" }
+							}
+						]
+					});
+		  
+					// download exported file
+					oExport.saveFile("AttributeList")
+						.catch(function (oError) {
+							MessageBox.error("Error when downloading data. Browser might not be supported!\n\n" + oError);
+						})
+						.then(function () {
+		  
+							oExport.destroy();
+						});
+				}
 				}
 			  );
 			},
