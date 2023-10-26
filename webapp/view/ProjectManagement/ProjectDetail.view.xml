@@ -222,7 +222,7 @@
 											<form:FormElement label="Project(%)"  visible="true" >
 									<form:fields>
 										<Slider width="100%" class="customInputHeight" enableTickmarks="false" id="inpWarningLevel"
-                                        max="100" min="0" progress="true" editable="false"
+                                        max="100" min="0" progress="true" enabled="false"
                                         showAdvancedTooltip="true" value="{projectModel>/completionper}">
 											<ResponsiveScale id="rScaleWarningLevel"
                                             tickmarksBetweenLabels="20" />
