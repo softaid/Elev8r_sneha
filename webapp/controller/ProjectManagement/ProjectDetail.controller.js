@@ -56,6 +56,10 @@ sap.ui.define(
 						this.handleProjectDetailsList,
 						this
 					);
+
+					this.bus.subscribe("projectdetailassign", "handleAssignList", this.handleAssignList, this);
+					this.bus.subscribe("projectdetailapprove", "handleApproveList", this.handleApproveList, this);
+
 					this.oFlexibleColumnLayout = this.byId("fclProjectActivity");
 					var emptyModel = this.getModelDefault();
 					var model = new JSONModel();
@@ -228,6 +232,7 @@ sap.ui.define(
 						this.groupReset = false;
 					}
 				},
+
 				//reset activity dialog
 				resetGroupDialog: function (oEvent) {
 					this.groupReset = true;
@@ -472,6 +477,32 @@ sap.ui.define(
 						note: null,
 					};
 				},
+
+				
+				handleApproveList: function (sChannel, sEvent, oData) {
+					let selRow = oData.viewModel;
+					let currentContext=this;
+					console.log(selRow)
+					currentContext.getProjectDetails(selRow.projectid);
+					if(selRow.type=="Stage"){
+						currentContext.onListItemPressStage(undefined,selRow);
+					}
+					else{
+						var oIconTabBar = currentContext.getView().byId("projectDetail");
+						// Set the selected key to switch to the "Other Tab"
+						oIconTabBar.setSelectedKey("Activity");
+						currentContext.onListItemPressActivity(undefined,selRow);
+					}
+
+				},
+		  
+				handleAssignList: function (sChannel, sEvent, oData) {
+		  
+					let selRow = oData.viewModel;
+					console.log(selRow)
+				},
+
+
 				handleProjectDetailsList: function (sChannel, sEvent, oData) {
 					let selRow = oData.viewModel;
 					let oThis = this;
@@ -485,16 +516,19 @@ sap.ui.define(
 						oThis.getProjectDetails(selRow.id);
 					}
 				},
+
 				onAfterRendering: function () {
 					jQuery.sap.delayedCall(1000, this, function () {
 						this.getView().byId("btnList").focus();
 					});
 				},
+
 				onExit: function () {
 					if (this._oDialog) {
 						this._oDialog.destroy();
 					}
 				},
+
 				onAddNewRowStage: function () {
 					this.bus = sap.ui.getCore().getEventBus();
 					let projectModel = this.getView().getModel("projectModel").getData();
@@ -520,14 +554,11 @@ sap.ui.define(
 					});
 				},
 
-				onListItemPressStage: function (oEvent) {
+				onListItemPressStage: function (oEvent,obj) {
 					const currentContext=this;
-					let oDayHistory = oEvent
-						.getSource()
-						.getBindingContext("tblModel")
-						.getObject();
+					let oDayHistory = oEvent?.getSource()?.getBindingContext("tblModel")?.getObject()??obj;
 					let projectModel = this.getView().getModel("projectModel").getData();
-					oDayHistory.projectid = projectModel.id;
+					oDayHistory.projectid = projectModel?.id??oDayHistory.projectid;
 					oDayHistory.isactive = oDayHistory.isactive === 1||  oDayHistory.isactive === true? true : false;
 					oDayHistory.iscompleted = oDayHistory.iscompleted === 1||  oDayHistory.iscompleted === true? true : false;
 
@@ -548,12 +579,9 @@ sap.ui.define(
 						viewModel: oDayHistory,
 					});
 				},
-				onListItemPressActivity: function (oEvent) {
+				onListItemPressActivity: function (oEvent,obj) {
 					let currentContext=this;
-					let oDayHistory = oEvent
-						.getSource()
-						.getBindingContext("activitymodel")
-						.getObject();
+					let oDayHistory = oEvent?.getSource()?.getBindingContext("activitymodel")?.getObject()??obj;
 					let projectModel = this.getView().getModel("projectModel").getData();
 					oDayHistory.projectid = projectModel.id;
 					oDayHistory.isactive = oDayHistory.isactive == 1|| oDayHistory.isactive==true ? true : false;
@@ -1221,6 +1249,7 @@ sap.ui.define(
 					)
 						return isValid;
 				},
+
 				loadData: function () {
 					var currentContext = this;
 					billofMaterialService.getAllBillOfMaterialResult(function (data) {
@@ -1230,6 +1259,7 @@ sap.ui.define(
 						//
 					});
 				},
+				
 				resetModel: function () {
 					var emptyModel = this.getModelDefault();
 					var model = this.getView().getModel("projectModel");
