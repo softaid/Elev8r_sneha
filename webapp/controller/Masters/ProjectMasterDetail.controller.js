@@ -210,7 +210,7 @@ sap.ui.define([
 			for (var i = 0; i < selectedItems.length; i++) {
 				stageortype.push(selectedItems[i].getProperty("key"));
 			}
-			if (oEvt.mParameters.id == "__xmlview0--prerequisites") {
+			if (oEvt.mParameters.id.indexOf("prerequisites") != -1) {
 				oprojectModeldata.dependency = stageortype.join(",");
 			}
 			else {

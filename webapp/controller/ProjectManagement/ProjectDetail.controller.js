@@ -507,7 +507,7 @@ sap.ui.define(
           this.bus = sap.ui.getCore().getEventBus();
           let projectModel = this.getView().getModel("projectModel").getData();
           this.bus.publish("billofmaterial", "setDetailPage", {
-            viewName: "projectstagedetail",
+            viewName: "ProjectStageDetail",
             viewModel: { projectid: projectModel.id },
           });
         },
@@ -523,7 +523,7 @@ sap.ui.define(
           this.bus = sap.ui.getCore().getEventBus();
           let projectModel = this.getView().getModel("projectModel").getData();
           this.bus.publish("attributestatus", "setDetailAttributePage", {
-            viewName: "projectattributedetail",
+            viewName: "ProjectAttributeDetail",
             viewModel: { projectid: projectModel.id, attributetypeids: null },
           });
         },
@@ -565,7 +565,7 @@ sap.ui.define(
 
           this.bus = sap.ui.getCore().getEventBus();
           this.bus.publish("billofmaterial", "setDetailPage", {
-            viewName: "projectstagedetail",
+            viewName: "ProjectStageDetail",
             viewModel: oDayHistory,
           });
         },
@@ -650,7 +650,7 @@ sap.ui.define(
           oDayHistory.projectid = projectModel.id;
           this.bus = sap.ui.getCore().getEventBus();
           this.bus.publish("attributestatus", "setDetailAttributePage", {
-            viewName: "projectattributedetail",
+            viewName: "ProjectAttributeDetail",
             viewModel: { ...oDayHistory },
           });
         },
@@ -839,6 +839,7 @@ sap.ui.define(
             oIconTabBar.setSelectedKey("Activity");
           } else {
             Projectservice.getStageOrActivityDetail(
+				
               { id: id },
               function (data) {
                 let detail = data[0][0];
@@ -848,7 +849,7 @@ sap.ui.define(
                   detail.actualstartdate != null ? true : false;
                 oThis.bus = sap.ui.getCore().getEventBus();
                 oThis.bus.publish("billofmaterial", "setDetailPage", {
-                  viewName: "projectstagedetail",
+                  viewName: "ProjectStageDetail",
                   viewModel: detail,
                 });
               }
@@ -881,7 +882,7 @@ sap.ui.define(
                   detail.actualstartdate != null ? true : false;
                 oThis.bus = sap.ui.getCore().getEventBus();
                 oThis.bus.publish("billofmaterial", "setDetailPage", {
-                  viewName: "projectactivitydetail",
+                  viewName: "ProjectActivityDetail",
                   viewModel: detail,
                 });
               }
@@ -1165,20 +1166,24 @@ sap.ui.define(
           var currentContext = this;
           let parentModel = this.getView().getModel("projectModel").oData;
           let tableModel = this.getView().getModel("tblModel").oData;
-          let nitblmodel = this.getView().getModel("nitblmodel").oData;
+          var subcontractorstring = currentContext.getView().byId("subcontractor1")?.getSelectedKeys() ?? null;
+          var subcontractorStr = "";
+              for (var i = 0; i < subcontractorstring.length; i++) {
+                  if (i == 0)
+                  subcontractorStr = parseInt(subcontractorstring[i]);
+                  else
+                  subcontractorStr = subcontractorStr + "," + parseInt(subcontractorstring[i]);
+              }
+       //   let nitblmodel = this.getView().getModel("nitblmodel").oData;
           parentModel["companyid"] = commonService.session("companyId");
           parentModel["userid"] = commonService.session("userId");
           parentModel.startdate = commonFunction.getDate(parentModel.startdate);
           parentModel.enddate = commonFunction.getDate(parentModel.enddate);
-          parentModel["subcontractorid1"] =
-            currentContext.getView().byId("subcontractor1")?.getSelectedItem()
-              ?.mProperties.key ?? null;
-          parentModel["subcontractorid2"] =
-            currentContext.getView().byId("subcontractor2")?.getSelectedItem()
-              ?.mProperties.key ?? null;
+          parentModel["subcontractorid1"] = subcontractorStr;
+          console.log("----------parentModel-----------",parentModel);
           Projectservice.saveProject(parentModel, function (data) {
-            MessageToast.show("Project  update sucessfully");
-            tableModel.map(function (oModel, index) {
+          MessageToast.show("Project  update sucessfully");
+          tableModel.map(function (oModel, index) {
               oModel["companyid"] = commonService.session("companyId");
               oModel["userid"] = commonService.session("userId");
               oModel.startdate =
@@ -1221,9 +1226,9 @@ sap.ui.define(
           parentModel["subcontractorid1"] =
             currentContext.getView().byId("subcontractor1")?.getSelectedItem()
               ?.mProperties?.key ?? null;
-          parentModel["subcontractorid2"] =
-            currentContext.getView().byId("subcontractor2")?.getSelectedItem()
-              ?.mProperties?.key ?? null;
+          // parentModel["subcontractorid2"] =
+          //   currentContext.getView().byId("subcontractor2")?.getSelectedItem()
+          //     ?.mProperties?.key ?? null;
           Projectservice.saveProject(parentModel, function (data) {
             MessageToast.show("Project  update sucessfully");
             nitblmodel.map(function (oModel, index) {
@@ -1293,7 +1298,7 @@ sap.ui.define(
           this.getView().byId("salesmanager").setSelectedKeys([]);
           var tableModel = this.getView().getModel("tblModel");
           tableModel.setData({});
-          this.getView().getModel("nitblmodel").setData({});
+          //this.getView().getModel("nitblmodel").setData({});
           // this.loadData();
         },
         // function for calculate end date or completion day
@@ -1674,6 +1679,7 @@ sap.ui.define(
         },
 
         handleSelectionFinish: function (oEvt) {
+          debugger;
           let oprojectModel = this.getView().getModel("projectModel");
           let oprojectModeldata = oprojectModel.oData;
           let selectedItems = oEvt.getParameter("selectedItems");
@@ -1683,20 +1689,28 @@ sap.ui.define(
           }
           if (
             oEvt.mParameters.id ==
-            "componentcontainer---projectactivitiesAdd--eng"
+            "componentcontainer---projectdetail--eng"
           ) {
             oprojectModeldata.niengineer = roleids.join(",");
           } else if (
             oEvt.mParameters.id ==
-            "componentcontainer---projectactivitiesAdd--manager"
+            "componentcontainer---projectdetail--manager"
           ) {
             oprojectModeldata.nimanager = roleids.join(",");
           } else if (
             oEvt.mParameters.id ==
-            "componentcontainer---projectactivitiesAdd--salesenginner"
+            "componentcontainer---projectdetail--salesenginner"
           ) {
             oprojectModeldata.salesengineer = roleids.join(",");
-          } else {
+          }
+          else if (
+            oEvt.mParameters.id ==
+            "componentcontainer---projectdetail--subcontractor1"
+          ) {
+            oprojectModeldata.customerid = roleids.join(",");
+          }
+          
+          else {
             oprojectModeldata.salesmanager = roleids.join(",");
           }
         },

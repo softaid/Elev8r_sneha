@@ -128,6 +128,15 @@ sap.ui.define([
                         case "quotename" :
                         case "leadname" :
                         case "jobcode" :    
+                        case "status" :
+
+                        case "approvedby" :
+                        case "assignto" :
+                        case "project" :    
+                        case "stagecompletionpercentage" :
+                        case "orderdate" :
+                        case "stage" :        
+
 
                             template = this.replaceStr(template, "##" + placeholder["valuetype"] + "##", this.replaceStr(placeholder["placeholder"], "#", "") + ": " + data[placeholder["propertyname"]]);
                             break;
@@ -241,6 +250,10 @@ sap.ui.define([
                                     {
                                         this.sendEmailNotification(transactiontypeid, transactionid, transaction.email, emailFrom, subject, template);
                                     }
+                                    if(transactiontypeid==30)
+                                    {
+                                        this.sendEmailNotification(transactiontypeid, transactionid, transaction.email, emailFrom, subject, template);
+                                    }
                                    
                                 }
                             }
@@ -347,6 +360,7 @@ sap.ui.define([
 
         // Notification Placeholders
         getNotificationPlaceholders: function (currentContext, transactiontypeid) {
+            debugger;
             commonService.getNotificationPlaceholders({ transactiontypeid: transactiontypeid }, function (data) {
                 var oModel = new sap.ui.model.json.JSONModel();
                 oModel.setData({ modelData: data[0] });

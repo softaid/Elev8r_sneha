@@ -73,7 +73,6 @@
 											<form:FormElement label="NI Engineer">
 												<form:fields>
 													<MultiComboBox id="eng"
-														required="true" 
 														selectionChange=""
 														selectionFinish="handleSelectionFinish"
 														width="500px"
@@ -88,7 +87,6 @@
 											<form:FormElement label="NI Manager ">
 												<form:fields>
 													<MultiComboBox id="manager"
-														required="true" 
 														selectionChange=""
 														selectionFinish="handleSelectionFinish"
 														width="500px"
@@ -103,7 +101,6 @@
 											<form:FormElement label="Sales Engineer">
 												<form:fields>
 													<MultiComboBox id="salesenginner"
-														required="true" 
 														selectionChange=""
 														selectionFinish="handleSelectionFinish"
 														width="500px"
@@ -118,7 +115,6 @@
 											<form:FormElement label="Sales Manager ">
 												<form:fields>
 													<MultiComboBox id="salesmanager"
-														required="true" 
 														selectionChange=""
 														selectionFinish="handleSelectionFinish"
 														width="500px"
@@ -134,7 +130,7 @@
 									</form:FormContainer>
 									<form:FormContainer title="">
 										<form:formElements>
-											<form:FormElement id="subcontractorEle1" label="Subcontractor 1">
+											<!-- <form:FormElement id="subcontractorEle1" label="Subcontractor 1">
 												<form:fields>
 													<Select id="subcontractor1"
 													change=""
@@ -148,8 +144,22 @@
 														<core:Item key="{subcontractorModel>id}" text="{subcontractorModel>subconname}" />
 													</Select>
 												</form:fields>
-											</form:FormElement>
-											<form:FormElement id="subcontractorEle2" label="Subcontractor 2">
+											</form:FormElement> -->
+
+											 <form:FormElement id="subcontractorEle1" label="Subcontractor">
+                                            <form:fields>
+                                                <MultiComboBox id="subcontractor1"
+												    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'subcontractorModel>/modelData',
+                                                        sorter: { path: 'Nidame' }
+                                                    }">
+                                                    <core:Item key="{subcontractorModel>id}" text="{subcontractorModel>subconname}" />
+                                                </MultiComboBox>
+                                            </form:fields>
+                                        </form:FormElement>
+											<!-- <form:FormElement id="subcontractorEle2" label="Subcontractor 2">
 												<form:fields>
 													<Select id="subcontractor2"
 													change=""
@@ -163,7 +173,7 @@
 														<core:Item key="{subcontractorModel>id}" text="{subcontractorModel>subconname}" />
 													</Select>
 												</form:fields>
-											</form:FormElement>
+											</form:FormElement> -->
 											<form:FormElement id="customerEle" label="Customer">
 												<form:fields>
 													<Select id="customer"
@@ -197,7 +207,6 @@
 													displayFormat="{config>/dateFormat/displayFormat}"
 													value="{projectModel>/enddate}"
 													valueFormat="dd/MM/yyyy"
-													required="true"
 												editable="true"
 												change="dayCalculation"
 													/>
@@ -528,7 +537,6 @@
 														<Title text="Payments" level="H2"/>
 														<ToolbarSpacer />
 														<Button text="" icon="sap-icon://excel-attachment" press="onDataPaymentExport"/>
-														<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowpayments" id ="paymentadd" visible="true"/>
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -642,7 +650,6 @@
 																icon="sap-icon://group-2"
 																press="handleAttachementGroupButtonPressed"/>
 															<Button icon="sap-icon://sort" type="Transparent" press="onAttachementSort"/>
-															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="Attachmentadd" visible="true"/>
 														</HBOX>
 													</content>
 												</Toolbar>

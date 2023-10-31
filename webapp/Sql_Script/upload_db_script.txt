@@ -12250,7 +12250,119 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+
+ALTER TABLE `project` 
+CHANGE COLUMN `customerid` `customerid` VARCHAR(101) NULL DEFAULT NULL ;
+
+
+DROP procedure IF EXISTS `spc_project_save`;
+
+DROP procedure IF EXISTS `spc_project_save`;
 ;
+
+DELIMITER $$
+CREATE DEFINER=`sa`@`%` PROCEDURE `spc_project_save`(
+	IN p_id INT,
+	IN p_orderid INT(11),
+    IN p_ordervalue DECIMAL(12,3),
+    IN p_completiondays INT(11),
+    IN p_startdate DATE,
+    IN p_enddate DATE,
+	IN p_leadname VARCHAR(20),
+	IN p_isactive TINYINT(4),
+	IN p_niengineer VARCHAR(20),
+	IN p_nimanager VARCHAR(20),
+    IN p_salesengineer VARCHAR(50),
+	IN p_salesmanager VARCHAR(50),
+    IN p_assignedto INT(11),
+    IN p_assignedby INT(11), 
+    IN p_subcontractorid1 INT(11),
+    IN p_subcontractorid2 INT(11),
+    IN p_completionper INT(11),
+    IN p_customerid VARCHAR(101),
+    IN p_companyid INT,
+    IN p_userid INT,
+    OUT out_id INT
+)
+BEGIN
+
+	SET @action = null;
+    
+    SET @action = null;
+	SET @leadid = null;
+    SET @orderid= null;
+
+	BEGIN
+		
+		IF(NULLIF(p_id, '0') IS NULL) THEN
+		
+			INSERT INTO project 
+				(orderid, ordervalue, completiondays, startdate, enddate,isactive,niengineer,nimanager, assignedto, assignedby, 
+                customerid, companyid,salesengineer,salesmanager, subcontractorid1, subcontractorid2,completionper)
+			VALUES 
+				(p_orderid, p_ordervalue, p_completiondays, p_startdate, p_enddate,p_isactive,p_niengineer,p_nimanager, p_assignedto, p_assignedby, 
+                p_customerid, p_companyid,p_salesengineer,p_salesmanager, p_subcontractorid1, p_subcontractorid2,p_completionper);
+				
+		SET @action = 'INSERT';
+		
+	ELSE
+    
+    IF(p_leadname IS  NOT NULL) THEN
+     SELECT 
+     O.leadid  INTO  @leadid 
+     from
+     `order` O where  O.id=p_orderid;
+    
+    UPDATE leads 
+    SET leadname =p_leadname
+    where  id= @leadid ;
+    
+    UPDATE quotation 
+    SET quotename = p_leadname
+    WHERE leadid = @leadid;
+    END IF;
+
+
+		UPDATE project
+			SET 
+				orderid = p_orderid,
+                ordervalue = p_ordervalue,
+                completiondays = p_completiondays,
+                startdate = p_startdate,
+                enddate = p_enddate,
+                niengineer=p_niengineer,
+                nimanager=p_nimanager,
+				salesengineer=p_salesengineer,
+                salesmanager=p_salesmanager,
+                assignedto = p_assignedto,
+                assignedby = p_assignedby,
+                customerid = p_customerid,
+                companyid = p_companyid,
+                isactive=p_isactive,
+                subcontractorid1 = p_subcontractorid1,
+                subcontractorid2 = p_subcontractorid2,
+                completionper = p_completionper,
+				id = LAST_INSERT_ID(id)
+			WHERE
+				id = p_id 
+				AND companyid = p_companyid;
+				
+			SET @action = 'UPDATE';        
+					
+		END IF;
+		
+		SELECT LAST_INSERT_ID() INTO out_id; 
+		
+	END;
+    
+END$$
+
+DELIMITER ;
+;
+
+
+
 
 
 
