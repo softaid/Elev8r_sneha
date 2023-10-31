@@ -252,6 +252,7 @@
 															</Switch>
 															<SearchField search="onSearchStages" width="17.5rem" id = "onStageSearchId"/>
 															<Button icon="sap-icon://sort" type="Transparent" press="onStagesSort"/>
+															<Button text="" icon="sap-icon://excel-attachment" press="onDataExport"/>
 															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowStage" id ="add" visible="true"/>
 														</HBox>
 													</content>
@@ -388,6 +389,7 @@
 																icon="sap-icon://group-2"
 																press="handleGroupButtonPressed"/>
 															<Button icon="sap-icon://sort" type="Transparent" press="onAcivitySort"/>
+															<Button text="" icon="sap-icon://excel-attachment" press="onDataActivityExport"/>
 															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowactivity" id ="niadd" visible="true"/>
 														</HBox>
 													</content>
@@ -515,6 +517,7 @@
 													<content>
 														<Title text="Payments" level="H2"/>
 														<ToolbarSpacer />
+														<Button text="" icon="sap-icon://excel-attachment" press="onDataPaymentExport"/>
 														<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowpayments" id ="paymentadd" visible="true"/>
 													</content>
 												</Toolbar>
@@ -741,6 +744,7 @@
 																icon="sap-icon://group-2"
 																press="handleAttributeGroupButtonPressed"/>
 															<Button icon="sap-icon://sort" type="Transparent" press="onAttributeSort"/>
+															<Button text="" icon="sap-icon://excel-attachment" press="onDataAttributeExport"/>
 															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowAttribute" id ="AddAttribute" visible="true"/>
 														</HBox>
 													</content>
