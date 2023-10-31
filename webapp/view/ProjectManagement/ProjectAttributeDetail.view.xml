@@ -257,12 +257,12 @@
                                                 width="10em" 
                                                 press=""
                                                 id="image">
-												<layoutData>
-													<FlexItemData growFactor="1" />
-												</layoutData>
-											</Image>
-											<HBOX>
-												<Button 
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Image>
+										<HBox>
+											<Button 
                                             text=""
                                             type="Emphasized"
                                             icon="sap-icon://download"
@@ -288,10 +288,10 @@
                                                 icon="sap-icon://delete"
                                                 press="onDeleteDocument"
                                                 id= "btndelete"/>
-											</HBOX>
-										</form:fields>
-									</form:FormElement>
-									<form:FormElement label="Upload Document"
+										</HBox>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="Upload Document"
                                       visible="{
                                         path: 'attributeSelectModel>/Attachment',
                                         formatter: '.formatter.setvisibilty'

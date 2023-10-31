@@ -13,7 +13,7 @@
                 <f:title>
                     <f:DynamicPageTitle>
                         <f:heading>
-                            <Title text="Project"/>
+                            <Title text="Project Management Dashboard"/>
                         </f:heading>
                         <f:actions>
                             <Button id = "btnList" icon="sap-icon://list" type="Transparent" press="onListIconPress" visible="true" />
@@ -217,7 +217,7 @@
                                 </GenericTile>
 
                                 <Panel expandable="false" expanded="true"  headerText="Total and OutstandingPayments" width="auto">
-                                    <core:HTML  content="&lt;div id='liechart_3d_1' style='height: 200px;width:1000px'&gt;&lt;/div&gt;">
+                                    <core:HTML  content="&lt;div id='liechart_3d_1' style='height: 200px;width:100%'&gt;&lt;/div&gt;">
                                     </core:HTML>
                                     <layoutData>
                                         <l:GridData span="L6" />

@@ -1467,12 +1467,6 @@ DELIMITER ;
 
 USE `db_elev8r_local`;
 DROP procedure IF EXISTS `db_elev8r_local`.`spc_attributelist_select`;
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `spc_order_save`;
-
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `db_elev8r_local`.`spc_order_save`;
-;
 
 DELIMITER $$
 USE `db_elev8r_local`$$
@@ -1494,6 +1488,20 @@ BEGIN
      PD.id AS projectdetailid
 	FROM project_attributes PA  LEFT JOIN  project_detail PD ON PD.stageid=PA.activityid
     WHERE PA.projectid =p_projectid AND  PD.projectid =p_projectid;
+END$$
+
+DELIMITER ;
+;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_order_save`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_order_save`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
 CREATE DEFINER=`sa`@`%` PROCEDURE `spc_order_save`(
 	IN p_id int(11), 
     IN p_quoteid int(11),
@@ -9692,6 +9700,7 @@ BEGIN
     
     
 END$$
+
 DELIMITER ;
 DROP PROCEDURE IF EXISTS spk_notificationtemplate_select;
 

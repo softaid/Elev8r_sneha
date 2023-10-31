@@ -399,7 +399,7 @@
 													<FlexItemData growFactor="1" />
 												</layoutData>
 											</Image>
-											<HBOX>
+											<HBox>
 												<Button 
                                             text=""
                                             type="Emphasized"
@@ -426,7 +426,7 @@
                                                 icon="sap-icon://delete"
                                                 press="onDeleteDocument"
                                                 id= "btndelete"/>
-											</HBOX>
+											</HBox>
 										</form:fields>
 									</form:FormElement>
 									<form:FormElement label="Upload Document"
