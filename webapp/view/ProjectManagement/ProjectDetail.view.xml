@@ -166,17 +166,7 @@
 											</form:FormElement>
 											<form:FormElement id="customerEle" label="Customer">
 												<form:fields>
-													<Select id="customer"
-													change=""
-													selectedKey="{projectModel>/customerid}" 
-													forceSelection="false"
-													width="500px"
-													items="{
-														path: 'userModel>/modelData',
-														sorter: { path: 'id' }
-													}">
-														<core:Item key="{userModel>id}" text="{userModel>createdbyname}" />
-													</Select>
+													<Input id="customer"  value="{projectModel>/username}" editable="false"/>
 												</form:fields>
 											</form:FormElement>
 											<form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMStartDate}">
@@ -222,7 +212,7 @@
 											<form:FormElement label="Project(%)"  visible="true" >
 									<form:fields>
 										<Slider width="100%" class="customInputHeight" enableTickmarks="false" id="inpWarningLevel"
-                                        max="100" min="0" progress="true" editable="false"
+                                        max="100" min="0" progress="true" enabled="false"
                                         showAdvancedTooltip="true" value="{projectModel>/completionper}">
 											<ResponsiveScale id="rScaleWarningLevel"
                                             tickmarksBetweenLabels="20" />
@@ -254,7 +244,7 @@
 													<content>
 														<Title text="Project Stage" level="H2"/>
 														<ToolbarSpacer />
-														<HBOX>
+														<HBox>
 															<Switch tooltip="Show All"  state="{projectModel>/isall}" id="showallstages" customTextOn="Yes" customTextOff="No"  change= "getAll">
 																<layoutData>
 																	<FlexItemData growFactor="1" />
@@ -263,7 +253,7 @@
 															<SearchField search="onSearchStages" width="17.5rem" id = "onStageSearchId"/>
 															<Button icon="sap-icon://sort" type="Transparent" press="onStagesSort"/>
 															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowStage" id ="add" visible="true"/>
-														</HBOX>
+														</HBox>
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -384,7 +374,7 @@
 													<content>
 														<Title text="Project Activity" level="H2"/>
 														<ToolbarSpacer />
-														<HBOX>
+														<HBox>
 															<Switch tooltip="Show All"  state="{projectModel>/isallactivities}" id="showallactivities" customTextOn="Active" customTextOff="All"  change= "getAllActivitiesForToggle">
 															<layoutData>
 																<FlexItemData growFactor="1" />
@@ -399,7 +389,7 @@
 																press="handleGroupButtonPressed"/>
 															<Button icon="sap-icon://sort" type="Transparent" press="onAcivitySort"/>
 															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowactivity" id ="niadd" visible="true"/>
-														</HBOX>
+														</HBox>
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -630,7 +620,7 @@
 													<content>
 														<Title text="Attachment" level="H2"/>
 														<ToolbarSpacer />
-														<HBOX>
+														<HBox>
 															<SearchField search="onSearchAttachment" width="17.5rem" id = "onattachementSearchId"/>
 															<Button
 																width="20%"
@@ -640,7 +630,7 @@
 																press="handleAttachementGroupButtonPressed"/>
 															<Button icon="sap-icon://sort" type="Transparent" press="onAttachementSort"/>
 															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="Attachmentadd" visible="true"/>
-														</HBOX>
+														</HBox>
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -742,7 +732,7 @@
 													<content>
 														<Title text="Attribute" level="H2"/>
 														<ToolbarSpacer />
-														<HBOX>
+														<HBox>
 															<SearchField search="onSearchAttribute" width="17.5rem" id = "onAttachmentSearchId"/>
 															<Button
 																width="20%"
@@ -752,7 +742,7 @@
 																press="handleAttributeGroupButtonPressed"/>
 															<Button icon="sap-icon://sort" type="Transparent" press="onAttributeSort"/>
 															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowAttribute" id ="AddAttribute" visible="true"/>
-														</HBOX>
+														</HBox>
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -775,7 +765,7 @@
 													<Text text="{attributeModel>parentstagename}" />
 													<Text text="{attributeModel>stagename}" />
 													<Text text="{attributeModel>attributename}" />
-													<input value="{attributeModel>remark}" />
+													<Input value="{attributeModel>remark}" />
 												</ColumnListItem>
 											</items>
 										</Table>

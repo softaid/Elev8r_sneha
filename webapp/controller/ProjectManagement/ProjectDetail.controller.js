@@ -499,7 +499,7 @@ sap.ui.define(
 					this.bus = sap.ui.getCore().getEventBus();
 					let projectModel = this.getView().getModel("projectModel").getData();
 					this.bus.publish("billofmaterial", "setDetailPage", {
-						viewName: "projectstagedetail",
+						viewName: "ProjectStageDetail",
 						viewModel: { projectid: projectModel.id },
 					});
 				},
@@ -544,7 +544,7 @@ sap.ui.define(
 
 				this.bus = sap.ui.getCore().getEventBus();
 					this.bus.publish("billofmaterial", "setDetailPage", {
-						viewName: "projectstagedetail",
+						viewName: "ProjectStageDetail",
 						viewModel: oDayHistory,
 					});
 				},
@@ -805,7 +805,7 @@ sap.ui.define(
 								detail.isstarted =
 									detail.actualstartdate != null ? true : false;
 								oThis.bus = sap.ui.getCore().getEventBus();
-								oThis.bus.publish("billofmaterial", "setDetailPage", {viewName: "projectstagedetail",viewModel: detail});
+								oThis.bus.publish("billofmaterial", "setDetailPage", {viewName: "ProjectStageDetail",viewModel: detail});
 								}
 						);
 					}

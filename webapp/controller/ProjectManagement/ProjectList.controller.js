@@ -4,28 +4,13 @@ sap.ui.define(
     "sap/ui/elev8rerp/componentcontainer/controller/BaseController",
     "sap/ui/model/Sorter",
     "sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/Project.service",
-    "sap/ui/elev8rerp/componentcontainer/utility/xlsx",
-    "sap/ui/elev8rerp/componentcontainer/services/Common.service",
-    "sap/ui/elev8rerp/componentcontainer/services/Company/ManageUser.service",
-    "sap/m/MessageToast",
-    "sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function",
-    "sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter",
+    "sap/ui/elev8rerp/componentcontainer/formatter/ProjectHealthFragment.formatter",
   ],
-  function (
-    JSONModel,
-    BaseController,
-    Sorter,
-    Projectservice,
-    xlsx,
-    commonService,
-    ManageUserService,
-    MessageToast,
-    commonFunction,
-    formatter
-  ) {
+  function (JSONModel, BaseController, Sorter, Projectservice, formatter) {
     return BaseController.extend(
       "sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.ProjectList",
       {
+        formatter: formatter,
         onInit: function () {
           this.bus = sap.ui.getCore().getEventBus();
 
@@ -227,9 +212,30 @@ sap.ui.define(
 
         loadProjectlistData: function () {
           var currentContext = this;
+          let prjArr = [];
           Projectservice.getAllProjects(function (data) {
+            if(data.length){
+              for(let i = 0; i < data[0].length; i++){
+                prjArr.push({
+                  srno : data[0][i].srno,
+                  JobNo : data[0][i].JobNo,
+                  id:data[0][i].id,
+                  quotename:data[0][i].quotename,
+                  startdate:data[0][i].startdate,
+                  enddate:data[0][i].enddate,
+                  pstatus:data[0][i].pstatus,
+                  completionper:data[0][i].completionper,
+                  model : data[0][i].model,
+                  totalstagecount : data[1][i].totalstagecount,
+                  delayedstagecount : data[2][i].delayedstagecount,
+                  delayedstagecountper : (data[1][i].totalstagecount > 0) ? ((data[2][i].delayedstagecount/data[1][i].totalstagecount) * 100) : null
+                })
+              }
+            }
+
+            console.log(prjArr);
             var oModel = currentContext.getView().getModel("projectListModel");
-            oModel.setData(data[0]);
+            oModel.setData(prjArr);
             oModel.refresh();
           });
         },
