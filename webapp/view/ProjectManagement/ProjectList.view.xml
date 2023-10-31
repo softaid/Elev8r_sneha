@@ -6,7 +6,7 @@
 	xmlns:form="sap.ui.layout.form"
     xmlns:u="sap.ui.unified"
     xmlns:tnt="sap.tnt">
-    <f:FlexibleColumnLayout  id="fclLead" backgroundDesign="Solid">
+    <f:FlexibleColumnLayout  id="fclProjectList" backgroundDesign="Solid">
         <f:beginColumnPages>
             <f:DynamicPage toggleHeaderOnTitleClick="false">
                 <f:title>
@@ -40,8 +40,7 @@
                                                 icon="sap-icon://group-2"
                                                 press="handleProjectGroupButtonPressed"/>
                                             <Button icon="sap-icon://sort" type="Transparent" press="onProjectSort"/>
-                                            <Button text="" icon="sap-icon://excel-attachment" press="onDataExport"/>
-                                        </HBOX>
+                                        </HBox>
                                     </content>
                                 </Toolbar>
                             </headerToolbar>

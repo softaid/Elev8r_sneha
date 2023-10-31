@@ -87,7 +87,18 @@ sap.ui.define(function () {
 			}
 		},
 
-	
+		setProjectHealth : function (sValue) {
+			
+			if (sValue == 25) { 
+				return 1;// yellow
+			}
+			else if (sValue < 25) {
+				return 8;// green
+			}
+			else if (sValue > 25) {
+				return 3; //red color
+			}
+		}
 
 	};
 
