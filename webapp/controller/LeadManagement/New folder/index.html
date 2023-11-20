@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta charset="utf-8">
+	<title>Elev8r</title>
+	<script id="util-coreloader" src="http://staging.poultryos.com/utility/CoreLoader.js"
+		data-loader-src="resources/sap-ui-core.js" data-sap-ui-theme="sap_belize"
+		data-sap-ui-libs="sap.m,sap.tnt,sap.ui.table,sap.ui.commons,sap.ui.ux3" data-sap-ui-compatVersion="edge"
+		data-sap-ui-preload="async" data-sap-ui-async="true" data-sap-ui-xx-componentpreload="off"
+		data-sap-ui-language="en" data-sap-ui-resourceroots='{"sap.ui.elev8rerp.componentcontainer": "./"}'>
+		</script>
+    <link rel="stylesheet" href="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.css">
+	<script src="https://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.js"></script>		
+	<script src="jspdf/dist/jspdf.debug.js"></script>
+	<script src="jspdf/dist/html2canvas.js"></script>
+	<script src="jspdf-autotable/dist/jspdf.plugin.autotable.min.js"></script>
+	<script src="jspdf/dist/pdfmake.min.js"></script>
+	<script src="jspdf/dist/vfs_fonts.js"></script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+	<script>
+
+		CoreLoader.onReadyState(function () {
+			jQuery.sap.require("sap.ui.elev8rerp.componentcontainer.control.XNavigationListItem");
+			sap.ui.getCore().attachInit(function () {
+				sap.ui.require([
+					"sap/ui/core/ComponentContainer"
+				], function () {
+
+					new sap.ui.core.ComponentContainer({
+						id: "componentcontainer",
+						async: true,
+						name: "sap.ui.elev8rerp.componentcontainer",
+						height: "100%",
+						handleValidation: true,
+						settings: {
+							id: "componentcontainer"
+						}
+					}).placeAt("content");
+					CoreLoader.ready();
+				});
+
+			});
+
+		});
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/custom.css" />
+	<script>
+		google.load('visualization', '1', { packages: ["corechart"] });
+
+		var commonSessionStorage = null;
+	</script>
+
+	<link rel="manifest" href="onesignal/manifest.json" />
+	<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+
+
+	<script>
+
+		(function () {
+
+			if (!sessionStorage.length) {
+				// Ask other tabs for session storage
+				localStorage.setItem('getSessionStorage', Date.now());
+			};
+
+			window.addEventListener('storage', function (event) {
+
+				//console.log('storage event', event);
+
+				if (event.key == 'getSessionStorage') {
+					// Some tab asked for the sessionStorage -> send it
+
+					localStorage.setItem('currentSession', JSON.stringify(sessionStorage));
+					localStorage.removeItem('currentSession');
+
+				} else if (event.key == 'currentSession' && !sessionStorage.length) {
+					// sessionStorage is empty -> fill it
+
+					var data = JSON.parse(event.newValue),
+						value;
+
+					for (key in data) {
+						sessionStorage.setItem(key, data[key]);
+					}
+
+					showSessionStorage();
+				}
+			});
+
+			window.onbeforeunload = function () {
+				//sessionStorage.clear();
+			};
+
+			var commonSessionStorage;
+
+			function showSessionStorage() {
+				if (sessionStorage)
+					commonSessionStorage.innerHTML = sessionStorage.length ? JSON.stringify(sessionStorage) : 'sessionStorage is empty';
+			}
+
+			window.addEventListener('load', function () {
+				commonSessionStorage = document.getElementById('stData');
+				showSessionStorage();
+			})
+
+		})();
+
+	</script>
+
+<style type="text/css">
+    html, body{
+      height:100%;
+      padding:0px;
+      margin:0px;
+      overflow: hidden;
+    }
+
+  </style>
+</head>
+
+<body class="sapUiBody" id="content">
+	<!-- <div id="gantt_here" style='width:100%; height:100%;'></div>
+	<script type="text/javascript">
+	  gantt.init("gantt_here");
+	</script> -->
+</body>
+
+
+
+
+
+</html>
