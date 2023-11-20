@@ -250,7 +250,7 @@
                                                         <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Stage/Activity" /></Column>
                                                     </columns>
                                                     <items>
-                                                        <ColumnListItem type="Navigation" press="onListItemPress">
+                                                        <ColumnListItem type="Navigation" press="onListItemPressAssign">
                                                             <cells>        
                                                                 <Text text="{oAssigneeModel>jobcode}" /> 
                                                                 <Text text="{oAssigneeModel>type}" />         
@@ -294,7 +294,7 @@
                                                         <Column minScreenWidth="Tablet" demandPopin="true"><Text text ="Stage/Activity" /></Column>
                                                     </columns>
                                                     <items>
-                                                        <ColumnListItem type="Navigation" press="onListItemPressActivity">
+                                                        <ColumnListItem type="Navigation" press="onListItemPressApprove">
                                                             <cells>        
                                                                 <Text text="{oApproverModel>jobcode}" /> 
                                                                 <Text text="{oApproverModel>type}" />         

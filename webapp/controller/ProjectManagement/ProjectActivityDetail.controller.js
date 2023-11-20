@@ -516,7 +516,7 @@ sap.ui.define([
 					actualstartdate: oModel?.stageDetail?.stagecompletionpercentage ?? 0 == 0 ? commonFunction.getDate(oModel.actualstartdate) : (oModel.stageDetail.actualstartdate != null) ? commonFunction.getDate(oModel.stageDetail.actualstartdate) : oModel?.stageDetail?.actualstartdate ?? null,
 					stagecompletionpercentage: (oModel?.stageDetail?.stagecompletionpercentage ?? 0) + (oModel?.stagecompletionpercentage ?? 0),
 					fromreference: 0,
-					type:"Stage"
+					type: "Stage"
 				};
 				obj.actualenddate = obj.stagecompletionpercentage == 100 ? commonFunction.getDate(oModel.actualenddate) : (oModel.stageDetail.actualenddate != null) ? commonFunction.getDate(oModel.stageDetail.actualenddate) : oModel?.stageDetail?.actualenddate ?? null,
 
@@ -624,12 +624,79 @@ sap.ui.define([
 
 			let oModel = currentContext.getView().getModel("ActivityDetailModel").oData;
 
+			if (oModel.enddate) {
+				if (oModel.startdate) {
+					if ((oModel.assignedby) && (oModel.assignedto)) {
+
+					}
+					else {
+						return MessageToast.show(`Before start the stage you need to select assign to and approve by`);
+
+					}
+				}
+				else {
+					return MessageToast.show(` First fill  start date `);
+				}
+
+			};
+
+			if (oModel.startdate) {
+					if ((oModel.assignedby) && (oModel.assignedto)) {
+
+					}
+					else {
+						return MessageToast.show(`Before start the stage you need to select assign to and approve by`);
+
+					}
+				
+			};
+
+			if (oModel.actualenddate) {
+				if (oModel.actualstartdate) {
+					if ((oModel.assignedby) && (oModel.assignedto)) {
+						if (oModel.startdate && oModel.enddate) {
+
+						}
+						else {
+							return MessageToast.show(`Before start the activity you need to select start date and end date `);
+						}
+
+					}
+					else {
+						return MessageToast.show(`Before start the activity you need to select assign to and approve by`);
+
+					}
+				}
+
+				else {
+					return MessageToast.show(` First fill actual start date `);
+				}
+
+			}
+
+			if (oModel.actualstartdate) {
+				if ((oModel.assignedby) && (oModel.assignedto)) {
+					if (oModel.startdate && oModel.enddate) {
+
+					}
+					else {
+						return MessageToast.show(`Before start the activity you need to select start date and end date `);
+					}
+
+				}
+				else {
+					return MessageToast.show(`Before start the activity you need to select assign to and approve by`);
+				}
+			}
+		
+
 			let obj = {
 				id: oModel?.id ?? 0,// activity id  in reference
 				projectid: oModel.projectid,
 				parentid: oModel?.parentid ?? null, //stage id in refernce
 				type: "activity"
 			};
+			
 			await Projectservice.getSumOfAllStageOrActivity(obj, async function (data) {
 				console.log(data);
 				let completionPer = +(oModel?.stagecompletionpercentage ?? 0) + +(data?.[0]?.[0]?.totalper ?? 0);
@@ -638,8 +705,6 @@ sap.ui.define([
 					isValid = false;
 				}
 				else {
-					isValid = true;
-
 					await currentContext.onSave();
 				}
 			})

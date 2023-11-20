@@ -26,6 +26,9 @@ sap.ui.define(
             this.handleQutationList,
             this
           );
+
+ 
+
           this.bus.subscribe(
             "projectdetail",
             "handleProjectDetails",
@@ -134,6 +137,8 @@ sap.ui.define(
             this.groupReset = false;
           }
         },
+
+
 
         //reset activity dialog
         resetProjectGroupDialog: function (oEvent) {

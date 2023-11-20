@@ -504,6 +504,7 @@
 										</FlexBox>
 									</Panel>
 								</IconTabFilter>
+
 								<IconTabFilter text="Payments">
 									<VBox fitContainer="true">
 										<Table id="tblpaymentStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
@@ -610,6 +611,7 @@
 										</FlexBox>
 									</Panel>
 								</IconTabFilter>
+								
 								<IconTabFilter text="Attachments"  key="Attachment">
 									<VBox fitContainer="true">
 										<Table id="tblAttachmentStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
