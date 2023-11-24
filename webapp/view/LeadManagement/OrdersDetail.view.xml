@@ -8,7 +8,8 @@
 	xmlns:mvc="sap.ui.core.mvc"
     xmlns:table="sap.ui.table"
     xmlns:u="sap.ui.unified"
-	xmlns:layout="sap.ui.layout">
+	xmlns:layout="sap.ui.layout"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Page class="pgDashboard" showHeader="true" title="Order Details">
         <headerContent>
             <!-- <layout:VerticalLayout
@@ -178,6 +179,51 @@
                                     </table:columns>
                                 </table:Table>
                             </Panel>
+                        </ScrollContainer>
+                    </IconTabFilter>
+                    <IconTabFilter icon="sap-icon://sales-quote" text="Attachments" key="document">
+                        <ScrollContainer
+                            height="100%"
+                            width="100%"
+                            horizontal="true"
+                            vertical="true"
+                            focusable="true">
+                            <VBox fitContainer="true">
+								<Table id="tblAttachments" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
+                                path: 'attachmenttblmodel>/',
+                                    sorter: {
+                                        path: 'id'
+                                    }
+                                }">
+                                    <headerToolbar>
+                                        <Toolbar>
+                                            <content>
+                                                <Title text="Attachment" level="H2"/>
+                                                <ToolbarSpacer />
+                                                <HBox>
+                                                    <SearchField search="onSearchAttachment" width="17.5rem" id = "onattachementSearchId"/>
+                                                </HBox>
+                                            </content>
+                                        </Toolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column minScreenWidth="Tablet" demandPopin="true">
+                                            <Text text ="Document Name" />
+                                        </Column>
+                                        <Column minScreenWidth="Tablet" demandPopin="true">
+                                            <Text text ="Download" />
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem type="Inactive" press="onListItemPressAttachment">
+                                            <cells>
+                                                <Text text="{attachmenttblmodel>document_name}" />
+                                                <Button icon="sap-icon://download" type="Transparent" press="onDownload" app:mySuperExtraData="{attachmenttblmodel>document_url}_{attachmenttblmodel>document_name}" visible="true"/>
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </VBox>
                         </ScrollContainer>
                     </IconTabFilter>
                 </items>

@@ -449,6 +449,53 @@ sap.ui.define([
                 orderService.getOrder({ id: id }, function (data) {
                     data[0][0].statusing = data[0][0]["status"] == 'Confirmed' ? false : true;
                     oModel.setData(data[0][0]);
+
+					// get document list
+					orderService.getOrderDocumentCollectionDetails(
+						{
+							orderid: id,
+							type: 'order',
+						},
+						function (data) {
+							var oConfig = sap.ui.getCore().getModel("configModel");
+							if (data[0].length > 0) {
+								data[0].forEach((document) => {
+									if (document.document_id == 3) {
+										document.image_url =
+											oConfig.oData.webapi.docurl + document.document_url;
+										currentContext.resultArr.push(document);
+									} else {
+										document.pdf_url =
+											oConfig.oData.webapi.docurl + document.document_url;
+										currentContext.resultpdfArr.push(document);
+									}
+								});
+
+								var tblmodel = currentContext
+									.getView()
+									.getModel("editDocumentCollectionModel");
+								tblmodel.oData.image_url =
+									currentContext.resultArr?.[0]?.image_url ?? null;
+								tblmodel.oData.pdf_url =
+									currentContext.resultpdfArr?.[0]?.pdf_url ?? null;
+								tblmodel.oData.imageid =
+									(currentContext.resultArr?.[0]?.image_url ?? null) == null
+										? null
+										: 0;
+								tblmodel.oData.pdfid =
+									(currentContext.resultpdfArr?.[0]?.pdf_url ?? null) == null
+										? null
+										: 0;
+								tblmodel.oData.pdf_name =
+									(currentContext.resultpdfArr?.[0]?.document_name ?? null) ==
+										null
+										? null
+										: currentContext.resultpdfArr?.[0]?.document_name;
+
+								tblmodel.refresh();
+							}
+						}
+					);
                 });
                 this.getView().byId("btnSave").setText("Update");
 
