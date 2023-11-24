@@ -141,7 +141,7 @@
                                             </Select>
                                         </form:fields>
                                     </form:FormElement>
-                                    <!-- <form:FormElement label="Lead">
+                                    <form:FormElement label="Lead">
                                         <form:fields>
                                             <Select id="txtLead"
                                                 required="false" 
@@ -156,7 +156,7 @@
                                                 <core:Item key="{LeadsMasterModel>id}" text="{LeadsMasterModel>leadname}" />
                                             </Select>
                                         </form:fields>
-                                    </form:FormElement> -->
+                                    </form:FormElement>
                                     <form:FormElement label="Quotation Value">
                                         <form:fields>
                                             <Input id="txtQutationValue" valueLiveUpdate="true" value="{editQutationModel>/quotevalue}" required="false" change="onPartyNameChange"/>
@@ -214,7 +214,7 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
-                      1                          path: 'leadSourceModel>/modelData',
+                                                path: 'leadSourceModel>/modelData',
                                                 sorter: { path: 'id' }
                                             }">
                                         <core:Item key="{leadSourceModel>id}" text="{leadSourceModel>description}" />
@@ -271,6 +271,34 @@
                                                 path: 'employeeList>/modelData'                                                
                                             }">
                                             <core:Item key="{employeeList>id}" text="{employeeList>employeename}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+				<form:FormElement label="Sales Engineer">
+                                    <form:fields>
+                                        <Select id="salesengineerid"                                             
+                                            change=""
+                                            selectedKey="{editQutationModel>/salesengineerid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'userModel>/modelData'                                                
+                                            }">
+                                            <core:Item key="{userModel>createdby}" text="{userModel>createdbyname}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Sales Manager">
+                                    <form:fields>
+                                        <Select id="salesmanagerid"                                             
+                                            change=""
+                                            selectedKey="{editQutationModel>/salesmanagerid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'userModel>/modelData'                                                
+                                            }">
+                                            <core:Item key="{userModel>createdby}" text="{userModel>createdbyname}" />
                                         </Select>
                                     </form:fields>
                                 </form:FormElement>
@@ -531,6 +559,11 @@
                                         <Input id="txtstopid"  valueLiveUpdate="true" value="{editQutationModel>/stopsid}" liveChange="onclickstop"/>
                                     </form:fields>
                                 </form:FormElement>
+				<form:FormElement label="Door Opening Type">
+                                    <form:fields>
+                                        <Input id="dooropeningtype" valueLiveUpdate="true" value="{editQutationModel>/dooropeningytpe}"/>
+                                    </form:fields>
+                                </form:FormElement>
                                 <form:FormElement label="Floor Marking">
                                     <form:fields>
                                         <Input id="txtfloormarking"  valueLiveUpdate="true" value="{editQutationModel>/floormarking}"/>
@@ -579,6 +612,12 @@
                                 <form:FormElement label="Mr Height">
                                     <form:fields>
                                         <Input id="txtmrheight"  valueLiveUpdate="true" value="{editQutationModel>/mrheight}" 
+                                        description="mm"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Car Depth">
+                                    <form:fields>
+                                        <Input id="txtcardepth"  valueLiveUpdate="true" value="{editQutationModel>/cardepth}" 
                                         description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
@@ -631,22 +670,6 @@
                                             }">
                                             <core:Item key="{carPanelModel>id}" text="{carPanelModel>description}" />
                                         </Select>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="Car Width">
-                                    <form:fields>
-                                        <Input id="txtcarwidth"  valueLiveUpdate="true" value="{editQutationModel>/carwidth}" description="mm"/>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="Car Height">
-                                    <form:fields>
-                                        <Input id="txtcarheight"  valueLiveUpdate="true" value="{editQutationModel>/carheight}" description="mm"/>
-                                    </form:fields>
-                                </form:FormElement>
-                                <form:FormElement label="Car Depth">
-                                    <form:fields>
-                                        <Input id="txtcardepth"  valueLiveUpdate="true" value="{editQutationModel>/cardepth}" 
-                                        description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="False Ceiling">
@@ -936,6 +959,16 @@
                                             }">
                                             <core:Item key="{rightOpeningModel>id}" text="{rightOpeningModel>description}" />
                                         </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Car Width">
+                                    <form:fields>
+                                        <Input id="txtcarwidth"  valueLiveUpdate="true" value="{editQutationModel>/carwidth}" description="mm"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Car Height">
+                                    <form:fields>
+                                        <Input id="txtcarheight"  valueLiveUpdate="true" value="{editQutationModel>/carheight}" description="mm"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Door Width">

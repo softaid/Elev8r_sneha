@@ -29,15 +29,14 @@ sap.ui.define(
 			"sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddQutation",
 			{
 				onInit: function () {
-					debugger;
-					console.log("Quote");
 					var currentContext = this;
 
 					// currentContext.reset();
 					this.bus = sap.ui.getCore().getEventBus();
+					this.bus.subscribe("qutationcreen", "handleQutationList", this.handleQutationList, this);
 					this.bus.subscribe(
-						"qutationcreen",
-						"handleQutationList",
+						"qutationdetails",
+						"newQutation",
 						this.qutationdetail,
 						this
 					);
@@ -50,7 +49,7 @@ sap.ui.define(
 					// currentContext.reset();
 					this.bus = sap.ui.getCore().getEventBus();
 					this.bus.subscribe(
-						"qutationcreen",
+						"qutationdetail",
 						"handleQutationDetails",
 						this.handleQutationDetails,
 						this
@@ -338,11 +337,24 @@ sap.ui.define(
 					this.getView().getModel("editQutationModel").refresh()
 				},
 
+				handleQutationList : function (sChannel, sEvent, oData) {
+					let selRow = oData.viewModel;
+					let editPartyModel = this.getView().getModel("editQutationModel");
+					 this.onModelSelection();
+					 this.setModelDefault();
+					editPartyModel.refresh();
+		
+					if (selRow.id != undefined) {
+						this.getView().byId("btnSave").setText("Update");
+					} else {
+						this.getView().byId("btnSave").setText("Save");
+					}
+				},
 
 				handleQutationDetails: function (sChannel, sEvent, oData) {
 					let selRow = oData.viewModel;
 					let editPartyModel = this.getView().getModel("editQutationModel");
-					editQutationModel.oData.leadid = selRow.nextid;
+					// editQutationModel.oData.leadid = selRow.nextid;
 					 this.onModelSelection();
 					 this.setModelDefault();
 					editPartyModel.refresh();
@@ -442,9 +454,9 @@ sap.ui.define(
 					}
 
 					this.getView().setModel(oModel, "editQutationModel");
-					var oModel = this.getView().getModel("editQutationModel");
-					// this.bindDefaultValue();
-					oModel.refresh();
+					// var oModel = this.getView().getModel("editQutationModel");
+					// // this.bindDefaultValue();
+					// oModel.refresh();
 				},
 
 
@@ -750,6 +762,8 @@ sap.ui.define(
 						model["companyid"] = commonService.session("companyId");
 						model["quotedate"] = commonFunction.getDate(model.quotedate);
 						model["userid"] = commonService.session("userId");
+						model["salesengineerid"] = currentContext.getView().byId("salesengineerid").getSelectedKey();
+						model["salesmanagerid"] = currentContext.getView().byId("salesmanagerid").getSelectedKey();
 
 						quotationService.saveQuotation(model, function (data) {
 							if (data.id > 0) {

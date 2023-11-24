@@ -942,6 +942,92 @@
                                             <Input id="txtmrheight" type="number" editable ="{editOrderModel>/statusing}" valueLiveUpdate="true" value="{editOrderModel>/mrheight}"/>
                                         </form:fields>
                                     </form:FormElement>
+                                    <form:FormElement label="Upload Image" 
+                               visible="{
+                                        path: 'StageDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                    }"
+                                    >
+										<form:fields>
+											<u:FileUploader
+                                                id="fileUploader"
+                                                name="myFileUpload"
+                                                tooltip="Upload Product Image"
+                                                uploadComplete="handleUploadComplete"
+                                                change="handleValueChange"
+                                                typeMissmatch="handleTypeMissmatch"
+                                                style="Emphasized"
+                                                fileType="png,jpg,gif,pdf,txt,doc,jpeg"
+                                                 multiple="true"
+                                                placeholder="Choose a document image..."></u:FileUploader>
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement   
+                                     visible="{
+                                        path: 'StageDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                        }"
+                                    >
+										<form:fields>
+											<Image
+                                                src="{editDocumentCollectionModel>/image_url}"
+                                                densityAware="false"
+                                                width="10em" 
+                                                press=""
+                                                id="image">
+												<layoutData>
+													<FlexItemData growFactor="1" />
+												</layoutData>
+											</Image>
+											<HBox>
+												<Button 
+                                            text=""
+                                            type="Emphasized"
+                                            icon="sap-icon://download"
+                                            press="functiondownload"
+                                            id="btnDowimage" />
+												<Button
+                                                text=""
+                                                width="40%"
+                                                type="Emphasized"
+                                                icon="sap-icon://arrow-right"
+                                                press="forwardPress" id="btnFor"/>
+												<Button
+                                                text=""
+                                                width="40%"
+                                                type="Emphasized"
+                                                icon="sap-icon://arrow-left"
+                                                press="backwardPress"
+                                                id= "btnBack"/>
+												<Button 
+                                                text=""
+                                                width="40%"
+                                                type="Emphasized"
+                                                icon="sap-icon://delete"
+                                                press="onDeleteDocument"
+                                                id= "btndelete"/>
+											</HBox>
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement label="Upload Document"
+                                       visible="{
+                                        path: 'StageDetailModel>/dependencyStatus',
+                                        formatter: '.formatter.setvisibilty'
+                                        }">
+										<form:fields>
+											<u:FileUploader
+                                                id="fileUploaderpdf"
+                                                name="myFileUpload"
+                                                tooltip="Upload Product Document"
+                                                multiple="true"
+                                                uploadComplete="handleUploadCompletePDF"
+                                                change="handleValueChangePDF"
+                                                typeMissmatch="handleTypeMissmatch"
+                                                style="Emphasized"
+                                                fileType="pdf"
+                                                placeholder="Choose a document..."></u:FileUploader>
+										</form:fields>
+									</form:FormElement>
                                 </form:formElements>      
                             </form:FormContainer>
                         </form:formContainers>

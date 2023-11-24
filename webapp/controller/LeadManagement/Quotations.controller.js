@@ -19,7 +19,6 @@ sap.ui.define([
 
 			this.bus.subscribe("qutationcreen", "handleQutationList", this.handleQutationList, this);
 			this.bus.subscribe("qutationdetail", "handleQutationDetails", this.handleQutationDetails, this);
-			this.bus.subscribe("loaddata", "loadData", this.loadData, this);
 			
 			this.bus.subscribe("loadQuotationData", "loadQuotationData", this.loadQuotationData, this);
 			//this.oFlexibleColumnLayout = this.byId("fclQuotation");
