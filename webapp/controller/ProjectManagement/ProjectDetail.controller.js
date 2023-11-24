@@ -116,6 +116,21 @@ sap.ui.define(
           var stageModel = new JSONModel();
           stageModel.setData({});
           this.getView().setModel(model, "StageModel");
+
+          this.imagepath = null;
+          this.toDataURL('../images/snehaelev8r.png', function (dataUrl) {
+            currentContext.imagepath = dataUrl;
+          });
+
+          // get all Company Details  
+          this.companyname = commonFunction.session("companyname");
+          this.companycontact = commonFunction.session("companycontact");
+          this.companyemail = commonFunction.session("companyemail");
+          this.address = commonFunction.session("address");
+          this.city = commonFunction.session("city");
+          this.pincode = commonFunction.session("pincode");
+
+
           this.flag = false;
           this.bomArr = [];
           this.bomDetailArr = [];
@@ -665,7 +680,7 @@ sap.ui.define(
           oDayHistory.projectid = projectModel.id;
           this.bus = sap.ui.getCore().getEventBus();
           this.bus.publish("attributestatus", "setDetailAttributePage", {
-            viewName: "projectattributedetail",
+            viewName: "ProjectAttributeDetail",
             viewModel: { ...oDayHistory },
           });
         },
@@ -797,6 +812,7 @@ sap.ui.define(
           }
         },
         getProjectDetails: function (id) {
+          debugger;
           let currentContext = this;
           Projectservice.getProject({ id: id }, function (data) {
             data[0][0].isactive = data[0][0].isactive == 1 ? true : false;
@@ -824,6 +840,12 @@ sap.ui.define(
                 .byId("salesmanager")
                 .setSelectedKeys([...data[0][0].salesmanager])
               : "data not available";
+            data[0][0].subcontractorid1 != null
+              ? currentContext
+                  .getView()
+                  .byId("subcontractor1")
+                  .setSelectedKeys([...`${data[0][0].subcontractorid1}`])
+              : "data not available";  
             data[0][0].salesengineer != null
               ? currentContext
                 .getView()
@@ -863,7 +885,7 @@ sap.ui.define(
                   detail.actualstartdate != null ? true : false;
                 oThis.bus = sap.ui.getCore().getEventBus();
                 oThis.bus.publish("billofmaterial", "setDetailPage", {
-                  viewName: "projectstagedetail",
+                  viewName: "ProjectStageDetail",
                   viewModel: detail,
                 });
               }
@@ -896,7 +918,7 @@ sap.ui.define(
                   detail.actualstartdate != null ? true : false;
                 oThis.bus = sap.ui.getCore().getEventBus();
                 oThis.bus.publish("billofmaterial", "setDetailPage", {
-                  viewName: "projectactivitydetail",
+                  viewName: "ProjectActivityDetail",
                   viewModel: detail,
                 });
               }
@@ -1180,17 +1202,25 @@ sap.ui.define(
           var currentContext = this;
           let parentModel = this.getView().getModel("projectModel").oData;
           let tableModel = this.getView().getModel("tblModel").oData;
-          let nitblmodel = this.getView().getModel("nitblmodel").oData;
+          var subcontractorstring =
+            currentContext
+              .getView()
+              .byId("subcontractor1")
+              ?.getSelectedKeys() ?? null;
+          var subcontractorStr = "";
+          for (var i = 0; i < subcontractorstring.length; i++) {
+            if (i == 0) subcontractorStr = parseInt(subcontractorstring[i]);
+            else
+              subcontractorStr =
+                subcontractorStr + "," + parseInt(subcontractorstring[i]);
+          }
+          //   let nitblmodel = this.getView().getModel("nitblmodel").oData;
           parentModel["companyid"] = commonService.session("companyId");
           parentModel["userid"] = commonService.session("userId");
           parentModel.startdate = commonFunction.getDate(parentModel.startdate);
           parentModel.enddate = commonFunction.getDate(parentModel.enddate);
-          parentModel["subcontractorid1"] =
-            currentContext.getView().byId("subcontractor1")?.getSelectedItem()
-              ?.mProperties.key ?? null;
-          parentModel["subcontractorid2"] =
-            currentContext.getView().byId("subcontractor2")?.getSelectedItem()
-              ?.mProperties.key ?? null;
+          parentModel["subcontractorid1"] = subcontractorStr;
+          console.log("----------parentModel-----------", parentModel);
           Projectservice.saveProject(parentModel, function (data) {
             MessageToast.show("Project  update sucessfully");
             tableModel.map(function (oModel, index) {
@@ -1236,9 +1266,9 @@ sap.ui.define(
           parentModel["subcontractorid1"] =
             currentContext.getView().byId("subcontractor1")?.getSelectedItem()
               ?.mProperties?.key ?? null;
-          parentModel["subcontractorid2"] =
-            currentContext.getView().byId("subcontractor2")?.getSelectedItem()
-              ?.mProperties?.key ?? null;
+          // parentModel["subcontractorid2"] =
+          //   currentContext.getView().byId("subcontractor2")?.getSelectedItem()
+          //     ?.mProperties?.key ?? null;
           Projectservice.saveProject(parentModel, function (data) {
             MessageToast.show("Project  update sucessfully");
             nitblmodel.map(function (oModel, index) {
@@ -1308,7 +1338,7 @@ sap.ui.define(
           this.getView().byId("salesmanager").setSelectedKeys([]);
           var tableModel = this.getView().getModel("tblModel");
           tableModel.setData({});
-          this.getView().getModel("nitblmodel").setData({});
+          //this.getView().getModel("nitblmodel").setData({});
           // this.loadData();
         },
         // function for calculate end date or completion day
@@ -1730,6 +1760,7 @@ sap.ui.define(
         },
 
         handleSelectionFinish: function (oEvt) {
+          debugger;
           let oprojectModel = this.getView().getModel("projectModel");
           let oprojectModeldata = oprojectModel.oData;
           let selectedItems = oEvt.getParameter("selectedItems");
@@ -1738,20 +1769,23 @@ sap.ui.define(
             roleids.push(selectedItems[i].getProperty("key"));
           }
           if (
-            oEvt.mParameters.id ==
-            "componentcontainer---projectactivitiesAdd--eng"
+            oEvt.mParameters.id == "componentcontainer---projectdetail--eng"
           ) {
             oprojectModeldata.niengineer = roleids.join(",");
           } else if (
-            oEvt.mParameters.id ==
-            "componentcontainer---projectactivitiesAdd--manager"
+            oEvt.mParameters.id == "componentcontainer---projectdetail--manager"
           ) {
             oprojectModeldata.nimanager = roleids.join(",");
           } else if (
             oEvt.mParameters.id ==
-            "componentcontainer---projectactivitiesAdd--salesenginner"
+            "componentcontainer---projectdetail--salesenginner"
           ) {
             oprojectModeldata.salesengineer = roleids.join(",");
+          } else if (
+            oEvt.mParameters.id ==
+            "componentcontainer---projectdetail--subcontractor1"
+          ) {
+            oprojectModeldata.subcontractorid1 = roleids.join(",");
           } else {
             oprojectModeldata.salesmanager = roleids.join(",");
           }
@@ -2053,7 +2087,470 @@ sap.ui.define(
                 oExport.destroy();
               });
           },
-      }
+
+          onPdf : function(){
+            var fullHtml = "";
+            var headertable1 = "";
+            headertable1 += "<!DOCTYPE html> <html> <head> <title>" + "Order" + "</title>" +
+              "<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>" +
+              "<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js'></script>" +
+              "<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.62/vfs_fonts.js'></script>" +
+              "<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>" +
+              "<style type='text/css'>" +
+              "table {font-family: arial, sans-serif;border-collapse: collapse;width: 100%; } td, th {border: 1px solid #000;text-align: left;padding: 5px; } th, td {width: 100px;overflow: hidden; } img { width: 180px; height: 120px; text-align: center; } </style> </head>";
+      
+            headertable1 += "<body id='tblCustomers' class='amin-logo'>";
+            headertable1 += "</body>";
+            headertable1 += "<script>";
+      
+            var phone = (this.companycontact === null || this.companycontact == undefined) ? "-" : this.companycontact;
+            var email = (this.companyemail === null || this.companyemail == undefined) ? "-" : this.companyemail;
+            var address = (this.address === null || this.address == undefined) ? "-" : this.address;
+            var city = (this.city === null || this.city == undefined) ? "-" : this.city;
+            var pincode = (this.pincode === null || this.pincode == undefined) ? "-" : this.pincode;
+            var companyname = this.companyname;
+            
+          //  let pdfModel = this.getView().getModel("pdfModel");
+           // let previousModel = this.getView().getModel("previousModel");
+      
+          
+      
+        //  console.log("Array : ",array);
+      
+            headertable1 += "html2canvas($('#tblCustomers')[0], {" +
+              "onrendered: function (canvas) {" +
+              "var data = canvas.toDataURL();" +
+              "var width = canvas.width;" +
+              "var height = canvas.height;" +
+              "var docDefinition = {" +
+              "pageMargins: [ 40, 20, 40, 60 ]," +
+              "content: [";
+      
+              headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+              headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+              headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+            // headertable1 += "{columns: [{image:'" + this.imagepath + "', width:160, height:35,margin: [0, -30, 0, 0]}]},";
+            headertable1 += "{columns: [{text:'HANDOVER CERTIFICATE" + " " + "', style: 'subheaderwithbold'},{text:'" + " " + "', style: 'subheaderone'}]},";
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+
+            headertable1 += "{columns: [{text:'M/s.____________________________," + " " + "', style: 'subheaderhoc'}]},";
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderhoc'},{text:'" + " " + "', style: 'subheaderonespacehoc'}]},";
+            headertable1 += "{text: '" + "Address_________________," + "', style: 'subheaderhoc'},";
+            headertable1 += "{text: '" + "_________________________," + "', style: 'subheader'},";
+            headertable1 += "{text: '" + "_________________________." + " " + "', style: 'subheader'},";
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+            headertable1 += "{text: 'Sub: Hand Over of Elevator installed at__________________________________________For Free Maintenance.', style: 'title'},";
+            headertable1 += "{text: 'Job No.___________________.', style: 'title'},";
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+            headertable1 += "{text: 'Dear Sir/Madam,', style: 'title'},";
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+            headertable1 += "{text: 'We are pleased to inform you that we have successfully completed the installation of 1 (one) elevator installed at above mentioned site.', style: 'title'},";
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+            headertable1 += "{text: 'Our team of experts have carried out all required functional and safety tests on the equipment and found it to be satisfactory in line with highest standards set by Sneha Elevators LLP.', style: 'title'},";
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+            headertable1 += "{text: 'We are offering Warranty/Free Maintenance for a period of one year.  Our service department would be maintaining the elevator as per enclosed terms and conditions of maintenance.', style: 'title'},";
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+
+           // headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+            headertable1 += "{text: 'Details of Equipment: JOB NO_____________________,CAPACITY:________,PASS/________,KGS,STOPS:_______.', style: 'subheaderboldwithoutunderline'},";
+            headertable1 += "{text: 'Free Maintenance Period Start From_________/______/________to________/_____/__________.', style: 'subheaderboldwithoutunderline'},";
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+            headertable1 += "{text: [{text:'Before completion of the Free Maintenance period we urge you to enter into Annual Maintenance Contract (AMC) with us to ensure that the elevator is uninterruptedly serviced.  Well maintained for trouble free operations and passenger safety.', style: 'title'}]},";
+           
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+            headertable1 += "{text: 'In order to prolong the life of the equipment, minimize breakdowns and further improve the services being rendered to you, we seek your kind cooperation in attending to the items of work circled in the list “Recommendations to the Owner” printed on the elevator inside the cabin area.', style: 'title'},";
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+            headertable1 += "{text: 'For any technical assistance or help, please call the Sneha Elevator LLP.', style: 'title'},";
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+         
+            headertable1 += "{text: 'ELEV8R Toll Free No. +91 77318 77318.', style: 'subheaderboldwithoutunderlinespace'},";
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+           // headertable1 += "{text: 'We have handed over the', style: 'title'},{text: '1 (one) no. Emergency Door Open Key to Mr._______________', style: 'subheaderboldwithoutunderline'},";
+            
+            headertable1 += "{text: [{text:'We have handed over the', style: 'title'},{text:'1 (one) no. Emergency Door Open Key ', style: 'subheaderboldwithoutunderline'},{text:'to Mr.______________________', style: 'title'}]},";
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+            headertable1 += "{text: 'Thanking you and assure you of the best services at all times.', style: 'title'},";
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheaderspace'},{text:'" + " " + "', style: 'subheaderonespace'}]},";
+            headertable1 += "{text: 'Yours faithfully,', style: 'title'},";
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+          
+
+            headertable1 += "{ style: 'tableExample4',";
+            headertable1 += " table: {";
+            headertable1 += "widths: ['50%','50%'],";
+            headertable1 += " body: [";
+            headertable1 += "[ { columns: [{text:'For and on behalf of Sneha Elevators LLP " + " " + "', style: 'subheaderformarginenobold'}] },{ columns: [ {text:'" + "For and on behalf of Customer" + "', style: 'subheaderformarginenobold'}] }],";
+            headertable1 += "[ { columns: [ {text:'Name :" + " " + "', style: 'subheaderformarginenobold'}] },{ columns: [ {text:'" + "Name :" + "', style: 'subheaderformarginenobold'} ] }],";
+            headertable1 += "[ { columns: [ {text:'Signature :" + " " + "', style: 'subheaderformarginenobold'}] },{ columns: [ {text:'" + "Signature :" + "', style: 'subheaderformarginenobold'} ] }],";
+            headertable1 += "[ { columns: [ {text:'Designation :" + " " + "', style: 'subheaderformarginenobold'}] },{ columns: [ {text:'" + "Designation :" + "', style: 'subheaderformarginenobold'} ] }],";
+            
+            headertable1 += "]";
+            headertable1 += "},";
+      
+            headertable1 += "  layout: {";
+            headertable1 += "    hLineWidth: function (i, node) {";
+            headertable1 += "    return (i === 0 || i === 1) ? 0.5 : 0.5;";
+            headertable1 += "    },";
+            headertable1 += "    vLineWidth: function (i, node) {";
+            headertable1 += "    return (i === 0 || i === 1) ? 0.5 : 0.5;";
+            headertable1 += "    }";
+            headertable1 += "},";
+            headertable1 += "},";
+
+
+
+
+            headertable1 += "{columns: [{text:'TERMS AND CONDITIONS" + " " + "', style: 'subheaderwithbold'},{text:'" + " " + "', style: 'subheaderone'}]},";
+           // headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+           // headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+          
+            headertable1 += "{ style: 'tableExample4',";
+            headertable1 += " table: {";
+            headertable1 += "widths: ['50%','50%'],";
+            headertable1 += " body: [";
+          //  headertable1 += "[ { columns: [ {text:'  SECTION 1– SNEHA RESPONSIBILITIES " + "    " + "1.1 SNEHA " + "will use trained and appropriately skilled personnel which it directly employs and/or supervises. They will be qualified to keep THE EQUIPMENT properly adjusted and they will use all reasonable care to maintain THE EQUIPMENT in efficient, reliable and safe operating condition. " + "', style: 'subheaderformarginenobold'}] },{ columns: [ {text:'" + "Designation :" + "', style: 'subheaderformarginenobold'} ] }],";
+           
+            headertable1 += "[ { columns: [ {text:'  SECTION 1–SNEHA RESPONSIBILITIES " + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'" + "to use, access, examine, copy, disclose or disassemble the " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            headertable1 += "[ { columns: [ {text:'  1.1 SNEHA  " + " will use trained and appropriately skilled personnel which it directly employs and/or supervises. They will be qualified to keep THE EQUIPMENT properly adjusted and they will use all reasonable care to maintain THE EQUIPMENT in efficient, reliable and safe operating condition." +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'" + "service equipment or the software resident in the service equipment for any purpose whatsoever. If the service is terminated for any reason, we will be given access to your premises to remove the service equipment, including the resident software, at our expense. " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            headertable1 += "[ { columns: [ {text:'  1.2	PLANNED MAINTAENANCE: " + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'" + "Failure to comply with any of above requirements may result in" + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            headertable1 += "[ { columns: [ {text:' " + " SNEHA will in accordance with their terms hereof, regularly examine, lubricate and adjust THE EQUIPMENT and generally carry out planned maintenance in a systematic and controlled manner using SNEHA developed techniques and expertise. The frequency of examination will depend on the type of equipment and its location." +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'" + "SNEHA suspending the services until the needful is done in consideration of the potential safety hazard." + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            headertable1 += "[ { columns: [ {text:' " + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:' SECTION 4–EXCLUSIONS :" + "  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            headertable1 += "[ { columns: [ {text:'  1.3	REPAIR OR REPLACE PARTS:  " + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:' 4. 1 EXCLUSIONS :" + "  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            headertable1 += "[ { columns: [ {text:' " + "SNEHA will at its option, repair or replace any parts detailed in the following section which, in its option are defective. Parts will be furnished by SNEHA on an exchange basis under which the replaced parts become the property of SNEHA. However, SNEHA will not make any replacements or repairs necessitated (except ordinary wear and  tear) including, but not limited to, fire, explosion, theft, floods, water, weather, earthquake, vandalism,  misuse, abuse, mischief, or repairs by others." +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'" + "SNEHA assumes no responsibility for the following items of elevator equipment, not included in this contract.Car enclosures, door panels, hung ceilings, car gates,light diffusers, light bulbs, fluorescent tubes, handrails, starters, chokes, mirrors, floor coverings, carpets, other architectural features, hoist way enclosure, hoist way gates, door frames, doors, sills, batteries, security system, external wiring to elevator and hoist way/machine room. Imported components like ELD, Plasma Display & EVAIS etc." + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            headertable1 += "[ { columns: [ {text:'  NON – SNEHA ELEVATORS – SPARE PARTS:  " + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'4.2 NEGLIGENCE OR MISUSE OF EQUIPMENT:" + "  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+           
+            headertable1 += "[ { columns: [ {text:'  " + "THE CUSTOMER has a right to keep the elevator in usable/working condition, which gives him a right for the replacement of worn out/damaged parts/components. The components/parts requiring replacement/repair would be procured by SNEHA on behalf of THE CUSTOMER from the available sources. SNEHA will check the quality and reliability of the components/parts. You retain your rights to any software not provided by SNEHA contained in the Units and agree to allow SNEHA to make one backup or archival copy for you and only for the limited purpose of maintenance    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'  " + "SNEHA will not incur expenses and is not required, under the terms of this Agreement repairs  necessitated by reason of negligence or misuse or any other cause beyond SNEHA control except ordinary wear and tear. Cost of such repairs necessitated by reason of negligence or cause will be charged to THE CUSTOMER.  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            
+            headertable1 += "[ { columns: [ {text:'SERVICE TOOLS:" + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'4.3 OTHER SAFETY TESTS, etc." + "  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            headertable1 += "[ { columns: [ {text:'  " + "You are responsible to secure our right to use any special service tools required to maintain your non-SNEHA equipment. These tools must be provided prior to our beginning maintenance on such equipment.    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'  " + "SNEHA will not require to make safety tests other than as set out in section 2.4 (d) hereof nor to install new attachments, nor carry out structural or other alternations on THE EQUIPMENT whether or not recommended  or directed by insurance companies or by governmental authorities, nor to make any replacement with parts of a different design.  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            headertable1 += "[ { columns: [ {text:'" + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'SECTION 5 – WORN ITEMS" + "  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            headertable1 += "[ { columns: [ {text:'2.10	WORK SCHEDULE:" + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'5.1 WORN – OUT ITEMS" + "  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            headertable1 += "[ { columns: [ {text:'" + "All work and services provided for in this Agreement are to be performed during normal working hours on normal working days. Additional costs incurred in carrying out work outside such times will be charged as extra for the overtime premium hours." +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'" + "All worn out items are SNEHA property.  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            headertable1 += "[ { columns: [ {text:'SECTION 2 – CALL BACK SERVICE" + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'SECTION 6 – SNEHA LIABILITY" + "  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            headertable1 += "[ { columns: [ {text:'2.1 EMERGENCY MINOR ADJUSTMENT CALL BACK SERVICE" + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'6.1 NOT AN INSURANCE CONTRACT:" + "  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+
+            headertable1 += "[ { columns: [ {text:'" + "SNEHA will provide emergency minor adjustment CALL-BACK service under this Agreement. This  Call-Back service will be extended 24 hours on all working days as well as holidays for elevators located in cities/towns where SNEHA has a Service Centre                                                            .                                       SECTION 3 – CUSTOMER’S OBLIGATIONS                                   .3.1ACCESS :  THE CUSTOMER will allow SNEHA employees free and unhindered access to THE EQUIPMENT, and the landings, lobbies and machine room associated therewith and all areas mentioned herein.  These areas should be free of danger of falling objects; of ungrounded electrical wires and of tripping hazards, etc. which would pose a danger to those working on THE EQUIPMENT.With due concern for safety of its employees, SNEHA reserves the right to suspend services when in their option SNEHA personnel are subjected to hazardous working environment at site.      " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'" + "SNEHA will not be liable for any loss, damage or delay due to any cause beyond its reasonable control including, but not limited to, lack of shipping space, embargoes, acts of government, strikes, lockouts, fire, explosion, theft, heavy rains, floods riots, civil commotion, war, malicious mischief or acts of God. Should damage occur to SNEHA material, tools or work on the premises from any cause beyond its reasonable control, THE CUSTOMER shall compensate SNEHA thereof. Water seepage in pit/overhead areas/shaft, high/low voltage (standard power supply of 3 phase 380V – 440V, single phase 220V -240V, Hence failed and proven customer shall compensate there off. SNEHA will also not be liable for indirect/consequential losses, under this contract, under any circumstances." + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            
+            headertable1 += "[ { columns: [ {text:'3.2	ONLY SNEHA TO MAKE REPAIRS:" + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'6.2 NO POSSESSION:" + "  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            headertable1 += "[ { columns: [ {text:'  " + "In the interest of safety of THE EQUIPMENT and its users THE CUSTOMER shall not direct or permit the repair, alternation, replacement or any interference with any of THE EQUIPMENT or ant part thereof, of any items specified herein, by any person or organisation other than SNEHA, its employees or contractors, without SNEHA prior consent.  Such consent will not be unreasonably withheld by SNEHA    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'  " + "SNEHA does not assume or accept possession or management of any part of THE EQUIPMENT, but such remains THE CUSTOMER’S, exclusively, as the owner or lessee thereof." + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+           
+            headertable1 += "[ { columns: [ {text:'" + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'SECTION 7 – TERMINATION" + "  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            headertable1 += "[ { columns: [ {text:'3.3 LIGHTING/VENTILATION:" + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'7.1 SNEHA RIGHT OF TERMINATION:" + "  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+           
+             headertable1 += "[ { columns: [ {text:'" + "THE CUSTOMER will provide the machine room with adequate lighting, cooling, moisture control and/or ventilation as may be required in the judgment of SNEHA to assist its men in providing the work  set out hereunder and in enhancing the effective operation of THE EQUIPMENT" +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'" + "SNEHA shall be entitled to terminate this agreement forthwith in any of the following events and SNEHA liability hereunder shall, therefore, cease: Where the legal and beneficial ownership of the building has changed Where, in SNEHA opinion, THE EQUIPMENT is or has been subjected to unreasonable use Where SNEHA is prevented from performing any obligation under this agreement by any cause outside its control. Where, in SNEHA opinion, there is a material change in the original intent of the usage of THE  EQUIP-MENT or in the function or character of the building.Where, without SNEHA consent, any work upon THE EQUIPMENT within the scope of this Agreement is undertaken by anyone other than SNEHA employees or its authorised representatives." + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+             headertable1 += "[ { columns: [ {text:'" + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'SECTION 9 – MISCELLANEOUS" + "  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+             headertable1 += "[ { columns: [ {text:'3.4 RESTRICTED AREAS :" + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'9.1  CUSTOMER SERVICE :" + "  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+             headertable1 += "[ { columns: [ {text:'" + "THE CUSTOMER will keep away from any areas enclosing mechanical or electrical equipment, persons other than SNEHA authorized employees and those expressly authorized by SNEHA. These areas will be used solely for their proper purposes.THE CUSTOMER will provide SNEHA unrestricted ready access to all areas of the building in which any parts of the units are located and to keep all machine rooms and pit areas free from water, stored materials and rubbish/debris. If any unit is malfunctioning or is in a dangerous condition, THE CUSTOMER should immediately notify SNEHA and until SNEHA rectifies the problem, THE CUSTOMER should agree to remove the unit from service and take all possible precautions to prevent its access or use. THE CUSTOMER should agree to display any publicity material relating to safety/use of equipment and warnings to passengers in connection with the use of the elevators." +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'" + "SNEHA will assign a representative to your account who will periodically visit your building and will be available for consultation in any matter relating to the maintenance of the elevators, SNEHA Service Representative will be available to discuss with THE CUSTOMER, THE CUSTOMER’S elevator needs in the areas of modernisation and proper use and care of the elevators. It is agreed between THE CUSTOMER and SNEHA that all disputes, differences and  claims whatsoever which shall at any time arise between the parties hereto or their respective representatives concerning this Contract and all other documents in pursuance hereof as to the rights, duties, obligations or liabilities of the parties hereto respectively by virtue of this contract shall be referred to Arbitration in accordance with the provisions of the Arbitration and Conciliation Act, 1996 as amended from time to time.THE CUSTOMER agrees and accepts that SNEHA will be relieved from all legal provisions/claims,immediately in case of un – authorised repair/access/modification to the elevator done by any other person than SNEHA representative.The contract shall deem to be concluded at Hyderabad and only the courts in Hyderabad shall have jurisdiction in the event of any dispute whatsoever.  This agreement shall be governed by and construed in accordance with India." + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+             headertable1 += "[ { columns: [ {text:'3.5 MAINLINE DISCONNECTS :" + "    " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'SECTION 10 – INTELLECTUAL PROPERTY RIGHTS" + "  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+             headertable1 += "[ { columns: [ {text:'" + "You agree to engage a qualified electrician to service at least once annually the elevator mainline disconnects located in the elevator equipment room. Any counters, meters, tools, remote monitoring devices, or communication devices which we may use or install under this Contract remain our property, solely for the use of SNEHA employees. Such service equipment is not considered a part of the Units. You grant us the right to store or install such service equipment in your building and to authorized SNEHA personnel  You agree to keep the software resident in the service equipment in confidence as a trade secret for SNEHA You will not permit others" +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'" + "10.1 SNEHA may install additional equipment and/or software to enhance the functionality of the control software installed in  the Equipment if appropriate to connect with SNEHA’s service equipment, which additional equipment and/or software shall at all times belong to SNEHA and SNEHA may remove on termination of this contract.  The Customer grants SNEHA the right to connect electronically it service equipment to the equipment and also grants SNEHA full access to read, use and update the data produced by the Control Software." + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            
+            
+             //headertable1 += "[ { columns: [ {text:'" + "THE CUSTOMER will provide the machine room with adequate lighting, cooling, moisture control and/or ventilation as may be required in the judgment of SNEHA to assist its men in providing the work  set out hereunder and in enhancing the effective operation of THE EQUIPMENT                                .       3.4 RESTRICTED AREAS  :  THE CUSTOMER will keep away from any areas enclosing mechanical or electrical equipment,persons other than SNEHA authorized employees and those expressly authorized by SNEHA. These areas will be used solely for their proper purposes. THE CUSTOMER will provide SNEHA unrestricted ready access to all areas of the building in which any parts of the units are located and to keep all machine rooms and pit areas free from water, stored  materials and rubbish/debris.If any unit is malfunctioning or is in a dangerous condition, THE CUSTOMER should immediately notify SNEHA and until SNEHA rectifies the problem, THE CUSTOMER should agree to remove the unit from service and take all possible precautions to prevent its access or use.THE CUSTOMER should agree to display any publicity material relating to safety/use of equipment and warnings to passengers in connection with the use of the elevators.  " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'" + "SNEHA shall be entitled to terminate this agreement forthwith in any of the following events and SNEHA liability hereunder shall, therefore, cease: Where the legal and beneficial ownership of the building has changed Where, in SNEHA opinion, THE EQUIPMENT is or has been subjected to unreasonable use Where SNEHA is prevented from performing any obligation under this agreement by any cause outside its control. Where, in SNEHA opinion, there is a material change in the original intent of the usage of THE  EQUIP-MENT or in the function or character of the building.Where, without SNEHA consent, any work upon THE EQUIPMENT within the scope of this Agreement is undertaken by anyone other than SNEHA employees or its authorised representatives                          .                         SECTION 9 – MISCELLANEOUS :                              .                        9.1  CUSTOMER SERVICE :  SNEHA will assign a representative to your account who will periodically visit your building and will be  " + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+            //headertable1 += "[ { columns: [ {text:' " + " " +  " " + "', style: 'subheaderformarginenoboldfortable'}] },{ columns: [ {text:'4.1 EXCLUSIONS :" + "SNEHA assumes no responsibility for the following items of elevator equipment, not included in this contract." + "', style: 'subheaderformarginenoboldfortable'} ] }],";
+           
+
+
+
+
+            headertable1 += "]";
+            headertable1 += "},";
+      
+            headertable1 += "  layout: {";
+            headertable1 += "    hLineWidth: function (i, node) {";
+            headertable1 += "    return (i === 0 || i === 1) ? 0.0 : 0.0;";
+            headertable1 += "    },";
+            headertable1 += "    vLineWidth: function (i, node) {";
+            headertable1 += "    return (i === 1) ? 0.5 : 0.0;";
+            headertable1 += "    }";
+            headertable1 += "},";
+            headertable1 += "},";
+            
+            headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+            headertable1 += "{columns: [{text:'Authorized Signature" + " " + "', style: 'subheader'},{text:'Customer Signature" + " " + "', style: 'subheaderone'}]},";
+          
+            //headertable1 += "{columns: [{text:'" + " " + "', style: 'subheader'},{text:'" + " " + "', style: 'subheaderone'}]},";
+      
+            //Define Style For PDF Content
+            headertable1 += "]," +
+            
+              "styles: {" +
+              "todatecss: {" +
+              "fontSize:9," +
+              "bold: true," +
+              "alignment:'right'" +
+              "}," +
+      
+              "header: {" +
+              "fontSize:8," +
+              "bold: true," +
+              "border: [false, true, false, false]," +
+              "fillColor: '#eeeeee'," +
+              "alignment: 'center'," +
+              "margin: [0, 5, 0, 0]," +
+              "}," +
+      
+              "title: {" +
+              "fontSize:10," +
+              "alignment: 'left'," +
+              "}," +
+      
+              "titleboldheader: {" +
+              "fontSize:11," +
+              "decoration: 'underline',"+
+              "bold: true," +
+              "alignment: 'left'," +
+              "}," +
+      
+              "titlebold: {" +
+              "fontSize:10," +
+              "bold: true," +
+              "alignment: 'left'," +
+              "}," +
+      
+              "titlewithbold: {" +
+              "fontSize:10," +
+              "bold: true," +
+              "alignment: 'left'," +
+              "}," +
+      
+              "titleincenter: {" +
+              "fontSize:11," +
+              "bold: true," +
+              "alignment: 'center'," +
+              "}," +
+      
+              "titleincenterwithunderline: {" +
+              "fontSize:11," +
+              "bold: true," +
+              "decoration: 'underline',"+
+              "alignment: 'center'," +
+              "}," +
+      
+              "headertitleincenter: {" +
+              "fontSize:12," +
+              "bold: true," +
+              "alignment: 'center'," +
+              "}," +
+      
+              "titleheader: {" +
+              "fontSize:16," +
+              "bold: true," +
+              "border: [false, true, false, false]," +
+              "fillColor: '#eeeeee'," +
+              "alignment: 'center'," +
+              "margin: [0, 5, 0, 0]," +
+              "}," +
+      
+              "Footer: {" +
+              "fontSize: 7," +
+              "margin: [19, 5, 5, 5]," +
+              "}," +
+      
+              "subheader: {" +
+              "fontSize:9," +
+              "bold: true," +
+              "margin: [0, 5, 0, 0]," +
+              "}," +
+
+              "subheaderhoc: {" +
+              "fontSize:9," +
+              "margin: [0, 5, 0, 0]," +
+              "}," +
+      
+              "subheaderformargine: {" +
+              "fontSize:11," +
+              "margin: [0, 5, 0, 20]," +
+              "}," +
+
+              "subheaderformarginenobold: {" +
+              "fontSize:11," +
+              "margin: [0, 12, 0, 12]," +
+              "}," +
+
+              "subheaderformarginenoboldfortable: {" +
+              "fontSize:9," +
+              "alignment: 'justify'," +
+              "margin: [0, 0, 0, 0]," +
+              "}," +
+      
+              "subheaderspace: {" +
+              "fontSize:1," +
+              "bold: true," +
+              "margin: [0, 5, 0, 0]," +
+              "}," +
+      
+              "subheaderwithbold: {" +
+              "fontSize:12," +
+              "bold: true," +
+              "decoration: 'underline',"+
+              "margin: [0, 5, 0, 0]," +
+              "}," +
+
+              "subheaderboldwithoutunderline: {" +
+              "fontSize:10," +
+              "bold: true," +
+              "margin: [0, 5, 0, 0]," +
+              "}," +
+
+              "subheaderboldwithoutunderlinespace: {" +
+              "fontSize:16," +
+              "bold: true," +
+              "margin: [100, 5, 0, 0]," +
+              "}," +
+      
+              "subheaderwithbold13: {" +
+              "fontSize:10," +
+              "bold: true," +
+              "margin: [0, 0, 0, 0]," +
+              "}," +
+      
+              "tablecontent: {" +
+              "fontSize:10," +
+              "margin: [0, 5, 0, 0]," +
+              "}," +
+      
+              "subheaderone: {" +
+              "fontSize:9," +
+              "bold: true," +
+              "alignment:'right'," +
+              "margin: [0, 05, 0, 4]," +
+              "}," +
+      
+              "subheaderonespace: {" +
+              "fontSize:1," +
+              "bold: true," +
+              "alignment:'right'," +
+              "margin: [0, 05, 0, 4]," +
+              "}," +
+
+              "subheaderonespacehoc: {" +
+              "fontSize:1," +
+              "bold: true," +
+              "alignment:'right'," +
+              "margin: [0, 05, 0, 0]," +
+              "}," +
+      
+              "subheaderbold: {" +
+              "fontSize:9," +
+              "bold: true," +
+              "alignment:'right'," +
+              "margin: [0, 04, 0, 4]," +
+              "}," +
+      
+              "subheaderleft: {" +
+              "fontSize:9," +
+              "bold: true," +
+              "alignment:'left'," +
+              "margin: [0, 05, 0, 4]," +
+              "}," +
+      
+              "amtinwords: {" +
+              "fontSize:12," +
+              "bold: true," +
+              "alignment:'left'," +
+              "margin: [0,180, 0,0]," +
+              "}," +
+      
+              "subheadercost: {" +
+              "fontSize:12," +
+              "bold: true," +
+              "alignment:'right'," +
+              "margin: [0,200, 0, 0]," +
+              "}," +
+      
+              "subheaderremark4: {" +
+              "fontSize:12," +
+              "bold: true," +
+              "alignment:'left'," +
+              "margin: [0,200, 0, 0]," +
+              "}," +
+      
+              "subheaderremark: {" +
+              "fontSize:12," +
+              "bold: true," +
+              "alignment:'left'," +
+              "margin: [0,200, 0, 0]," +
+              "}," +
+      
+              "subheadercost1: {" +
+              "fontSize:12," +
+              "bold: true," +
+              "alignment:'right'," +
+              "margin: [0,15, 0, 0]," +
+              "}," +
+      
+              "subheaderremark1: {" +
+              "fontSize:12," +
+              "bold: true," +
+              "alignment:'left'," +
+              "margin: [0,15, 0, 0]," +
+              "}," +
+      
+              "tableExample: {" +
+              "margin: [0, 50, 0, 0]," +
+              "fontSize: 8," +
+              "}," +
+      
+              "tableExample2: {" +
+              "margin: [0, 15, 0, 0]," +
+              "fontSize: 8," +
+              "}," +
+      
+              "specificationHeader: {" +
+              "margin: [0, 15, 0, 0]," +
+              "alignment : 'center'," +
+              "fontSize: 8," +
+              "}," +
+      
+              "specificationTableExample: {" +
+              "margin: [0, 0, 0, 0]," +
+              "fontSize: 8," +
+              "}," +
+      
+              "tableExample5: {" +
+              "margin: [0, 0, 0, 0]," +
+              "fontSize: 8," +
+              "}," +
+      
+              "tableExample4: {" +
+              "margin: [0, 10, 0, 0]," +
+              "fontSize: 9," +
+              "}," +
+      
+              "tableExample3: {" +
+              "margin: [0, 15, 0, 340]," +
+              "fontSize: 8," +
+              "}," +
+      
+      
+              "tableHeader: {" +
+              "bold: true," +
+              "fontSize: 8," +
+              "color: 'black'," +
+              "}," +
+              "}," +
+      
+              "defaultStyle: {" +
+              "fontSize: 8" +
+              "}" +
+              "};" +
+              "pdfMake.createPdf(docDefinition).download('order.pdf');" +
+              "} });";
+            headertable1 += "</script></html>";
+            fullHtml += headertable1;
+            var wind = window.open();
+            wind.document.write(fullHtml);
+            console.log("fullHtml", fullHtml);
+      
+            setTimeout(function () {
+              wind.close();
+            }, 3000);
+          },
+
+
+
+
+            }
     );
   },
   true

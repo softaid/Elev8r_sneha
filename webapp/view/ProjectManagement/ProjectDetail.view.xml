@@ -75,7 +75,7 @@
 													<MultiComboBox id="eng"
 														required="true" 
 														selectionChange=""
-														selectionFinish="handleSelectionFinish"
+														selectionFinish="	"
 														width="500px"
 														items="{
 															path: 'engRoleModel>/',
@@ -134,34 +134,17 @@
 									</form:FormContainer>
 									<form:FormContainer title="">
 										<form:formElements>
-											<form:FormElement id="subcontractorEle1" label="Subcontractor 1">
+												<form:FormElement id="subcontractorEle1" label="Subcontractor">
 												<form:fields>
-													<Select id="subcontractor1"
-													change=""
-													selectedKey="{projectModel>/subcontractorid1}" 
-													forceSelection="false"
-													width="500px"
-													items="{
-														path: 'subcontractorModel>/modelData',
-														sorter: { path: 'id' }
-													}">
+													<MultiComboBox id="subcontractor1"
+												    selectionFinish="handleSelectionFinish"
+                                                    width="500px"
+                                                    items="{
+                                                        path: 'subcontractorModel>/modelData',
+                                                        sorter: { path: 'Nidame' }
+                                                    }">
 														<core:Item key="{subcontractorModel>id}" text="{subcontractorModel>subconname}" />
-													</Select>
-												</form:fields>
-											</form:FormElement>
-											<form:FormElement id="subcontractorEle2" label="Subcontractor 2">
-												<form:fields>
-													<Select id="subcontractor2"
-													change=""
-													selectedKey="{projectModel>/subcontractorid2}" 
-													forceSelection="false"
-													width="500px"
-													items="{
-														path: 'subcontractorModel>/modelData',
-														sorter: { path: 'id' }
-													}">
-														<core:Item key="{subcontractorModel>id}" text="{subcontractorModel>subconname}" />
-													</Select>
+													</MultiComboBox>
 												</form:fields>
 											</form:FormElement>
 											<form:FormElement id="customerEle" label="Customer">
@@ -253,6 +236,7 @@
 															<SearchField search="onSearchStages" width="17.5rem" id = "onStageSearchId"/>
 															<Button icon="sap-icon://sort" type="Transparent" press="onStagesSort"/>
 															<Button text="" icon="sap-icon://excel-attachment" press="onDataExport"/>
+															<Button text="HOC PDF" press="onPdf"/>
 															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowStage" id ="add" visible="true"/>
 														</HBox>
 													</content>
@@ -498,7 +482,7 @@
                                     alignItems="Start"
                                     justifyContent="End">
 											<items>
-												<Button text="{i18n>saveButtonText}" id="btnActivitySave" type="Emphasized" class="sapUiSmallMarginEnd" press="onNISave"/>
+												<Button text="{i18n>saveButtonText}" id="btnActivitySave" type="Emphasized" class="sapUiSmallMarginEnd"/>
 												<Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
 											</items>
 										</FlexBox>
@@ -519,7 +503,7 @@
 														<Title text="Payments" level="H2"/>
 														<ToolbarSpacer />
 														<Button text="" icon="sap-icon://excel-attachment" press="onDataPaymentExport"/>
-														<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowpayments" id ="paymentadd" visible="true"/>
+														<!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowpayments" id ="paymentadd" visible="true"/> -->
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -605,7 +589,7 @@
                                     alignItems="Start"
                                     justifyContent="End">
 											<items>
-												<Button text="{i18n>saveButtonText}" id="btnPaymentSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onNISave"/>
+												<Button text="{i18n>saveButtonText}" id="btnPaymentSave" type="Emphasized" class="sapUiSmallMarginEnd"/>
 												<Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
 											</items>
 										</FlexBox>
@@ -634,7 +618,7 @@
 																icon="sap-icon://group-2"
 																press="handleAttachementGroupButtonPressed"/>
 															<Button icon="sap-icon://sort" type="Transparent" press="onAttachementSort"/>
-															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="Attachmentadd" visible="true"/>
+															<!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="Attachmentadd" visible="true"/> -->
 														</HBox>
 													</content>
 												</Toolbar>
@@ -830,7 +814,7 @@
                                     alignItems="Start"
                                     justifyContent="End">
 											<items>
-												<Button text="{i18n>saveButtonText}" id="btnQCSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onNISave"/>
+												<Button text="{i18n>saveButtonText}" id="btnQCSave" type="Emphasized" class="sapUiSmallMarginEnd"/>
 												<Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
 											</items>
 										</FlexBox>

@@ -45,6 +45,9 @@ sap.ui.define(
 					roleModel.setData({});
 					this.getView().setModel(roleModel, "roleModel");
 
+					// Stage - Placeholders
+					commonFunction.getNotificationPlaceholders(this, 30);
+
 
 					var currentContext = this;
 					currentContext.resultArr = []; // image array
@@ -531,10 +534,39 @@ sap.ui.define(
 				},
 
 				onSave: function () {
-					let currentContext = this;
-					let oModel = this.getView().getModel("StageDetailModel").oData;
+						let currentContext = this;
+						let oModel = this.getView().getModel("StageDetailModel").oData;
+						let RoleData = this.getView().getModel("roleModel").oData;
+						console.log("--------------RoleData-----------",RoleData);
+						var assignMailId;
+						var approvedbyMailId;
 
-					var parentModel = currentContext.getView().getModel("editDocumentCollectionModel").oData;
+						var assigntostring = this.getView().byId("assigntoid").getSelectedItem();
+						var assignStr = assigntostring.mProperties.key;
+						var approvebystring = this.getView().byId("assignbyid").getSelectedItem();
+						var approvebyStr = approvebystring.mProperties.key;
+						console.log("--------------approvebyStr-----------",approvebyStr);
+
+						if(RoleData.length)
+							{
+								for(var p=0; p<RoleData.length; p++)
+									{
+										if(assignStr == RoleData[p].id && RoleData[p].userrole!= "Administrator")
+											{ 
+												assignMailId = RoleData[p].email;
+											}
+
+										else if (approvebyStr == RoleData[p].id && RoleData[p].userrole!= "Administrator")
+										{ 
+											approvedbyMailId = RoleData[p].email;
+										}
+									}
+							}
+
+							console.log("----------assignMailId--------",assignMailId);
+							console.log("----------approvedbyMailId--------",approvedbyMailId);
+						
+						var parentModel = currentContext.getView().getModel("editDocumentCollectionModel").oData;
 
 
 					let objPush = {
@@ -563,9 +595,12 @@ sap.ui.define(
 					// when we add any stage or activity from project detail screen we only add those stage in reference and only for that particular project  the fromreference=0 this condition we check in project detail and reference also ...
 					oModel.fromreference = 0;
 
-					currentContext.handleProjectCompPer();
-					Projectservice.saveProjectActivityDetail(oModel, function (savedata) {
-						objPush.stageid = savedata.id;
+						currentContext.handleProjectCompPer();
+
+						console.log("----------StageoModel----------",oModel);
+						Projectservice.saveProjectActivityDetail(oModel, function (savedata) {
+							console.log("----------savedata----------",savedata);
+							objPush.stageid = savedata.id;
 
 						currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
 							if (document.id == undefined) {
@@ -582,13 +617,50 @@ sap.ui.define(
 											MessageToast.show(message);
 										}
 									}
-								);
+									);
+								}
+							});
+							commonFunction.getStageDetail(oModel.projectid, currentContext);
+							console.log("----------StageoModel----------",oModel);
+
+							if(oModel.status !=="Confirmed"){
+								var assignhistroydata = {
+									transactionid : oModel.stageid,
+									transactiondate:oModel.startdate == null ? '-' : commonFunction.getDate(oModel.startdate),
+									username: commonService.session("userName"),
+									stage : oModel.stagename,
+									assignto:oModel.assignto,
+									approvedby:oModel.approvedby,
+									status : oModel.status,
+									stagecompletionpercentage:oModel.stagecompletionpercentage,
+									project:oModel.jobcode == null ? '-' : oModel.jobcode,
+								    email:assignMailId
+								}
+								commonFunction.sendTransNotification(currentContext,30,assignhistroydata);
 							}
+
+								if(oModel.status =="Confirmed"){
+									var approvedhistroydata = {
+										transactionid : oModel.stageid,
+										transactiondate:commonFunction.getDate(oModel.startdate),
+										username: commonService.session("userName"),
+										stage : oModel.stagename,
+										assignto:oModel.assignto,
+										approvedby:oModel.approvedby,
+										status : oModel.status,
+										stagecompletionpercentage:oModel.stagecompletionpercentage,
+										project:oModel.jobcode == null ? '-' : oModel.jobcode,
+										email:approvedbyMailId
+									}
+								commonFunction.sendTransNotification(currentContext,30,approvedhistroydata);
+							}
+
+
 						});
 						commonFunction.getStageDetail(oModel.projectid, currentContext);
 
 
-					});
+					
 
 					currentContext.DeleteDocumentArr.length > 0 ? currentContext.onDeleteDocumentSave() : "No image is available to delete";
 					if (oModel.dependencyStatus == false) {
@@ -642,6 +714,7 @@ sap.ui.define(
 							Projectservice.saveProject(obj, function (savedata) {
 
 							})
+							
 					}
 
 				},
