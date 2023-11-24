@@ -41,7 +41,7 @@
 		</f:title>
 		<f:content>
 			<VBox fitContainer="true">
-				<Panel id="approvepanel" expandable="true" expanded="true"  headerText="Schedule" width="auto">
+				<Panel id="approvepanel" expandable="true" expanded="true"  headerText="Planning" width="auto">
 					<form:Form editable="true">
 						<form:title>
 							<core:Title text="" />
@@ -163,8 +163,7 @@
 
 									<form:FormElement label="prerequisite">
 										<form:fields>
-											<MultiComboBox id="dependency"
-                                                   
+											<MultiComboBox id="dependency" 
                                                     selectionFinish="handleSelectionFinish"
                                                     width="500px"
                                                     editable="{
@@ -400,7 +399,7 @@
 													<FlexItemData growFactor="1" />
 												</layoutData>
 											</Image>
-											<HBOX>
+											<HBox>
 												<Button 
                                             text=""
                                             type="Emphasized"
@@ -427,7 +426,7 @@
                                                 icon="sap-icon://delete"
                                                 press="onDeleteDocument"
                                                 id= "btndelete"/>
-											</HBOX>
+											</HBox>
 										</form:fields>
 									</form:FormElement>
 									<form:FormElement label="Upload Document"

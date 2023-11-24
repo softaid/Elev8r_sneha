@@ -64,6 +64,7 @@ sap.ui.define([
 
 			// Transaction Notification cached in browser
 			commonService.getTransactionNotificationAll(function (data) {
+
 				var oModel = currentContext.getView().getModel("notificationsTemplateModel");
 				oModel.oData.modelData = data[0];
 				oModel.refresh();
@@ -90,6 +91,9 @@ sap.ui.define([
 
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.attachRouteMatched(this.routeMatched, this);
+
+			var oToolPage = this.getView().byId("app");
+			oToolPage.setSideExpanded(!oToolPage.getSideExpanded());
 
 			this.sUserid = commonFunction.session("userId");
 

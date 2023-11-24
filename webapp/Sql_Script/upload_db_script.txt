@@ -1467,12 +1467,6 @@ DELIMITER ;
 
 USE `db_elev8r_local`;
 DROP procedure IF EXISTS `db_elev8r_local`.`spc_attributelist_select`;
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `spc_order_save`;
-
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `db_elev8r_local`.`spc_order_save`;
-;
 
 DELIMITER $$
 USE `db_elev8r_local`$$
@@ -1494,6 +1488,20 @@ BEGIN
      PD.id AS projectdetailid
 	FROM project_attributes PA  LEFT JOIN  project_detail PD ON PD.stageid=PA.activityid
     WHERE PA.projectid =p_projectid AND  PD.projectid =p_projectid;
+END$$
+
+DELIMITER ;
+;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `spc_order_save`;
+
+USE `db_elev8r_local`;
+DROP procedure IF EXISTS `db_elev8r_local`.`spc_order_save`;
+;
+
+DELIMITER $$
+USE `db_elev8r_local`$$
 CREATE DEFINER=`sa`@`%` PROCEDURE `spc_order_save`(
 	IN p_id int(11), 
     IN p_quoteid int(11),
@@ -10950,16 +10958,10 @@ DELIMITER ;
 ;
 
 
-USE `db_elev8r_local`;
 DROP procedure IF EXISTS `spc_projectdetail_save`;
 
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectdetail_save`;
-;
-
 DELIMITER $$
-USE `db_elev8r_local`$$
-CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectdetail_save`(
+CREATE  PROCEDURE `spc_projectdetail_save`(
 	IN p_id INT(11),
     IN p_projectid int(11), 
 	IN p_stageid int(11), 
@@ -11087,16 +11089,10 @@ DELIMITER ;
 ;
 
 
-USE `db_elev8r_local`;
 DROP procedure IF EXISTS `spc_projectdetail_select`;
 
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectdetail_select`;
-;
-
 DELIMITER $$
-USE `db_elev8r_local`$$
-CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectdetail_select`(
+CREATE  PROCEDURE `spc_projectdetail_select`(
 	IN p_id INT(11),
     IN p_field varchar(30)
     
@@ -11165,16 +11161,12 @@ END$$
 DELIMITER ;
 ;
 
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `spc_projectdetail_save`;
 
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `db_elev8r_local`.`spc_projectdetail_save`;
+DROP procedure IF EXISTS  `spc_projectdetail_save`;
 ;
 
 DELIMITER $$
-USE `db_elev8r_local`$$
-CREATE DEFINER=`sa`@`%` PROCEDURE `spc_projectdetail_save`(
+CREATE  PROCEDURE `spc_projectdetail_save`(
 	IN p_id INT(11),
     IN p_projectid int(11), 
 	IN p_stageid int(11), 
@@ -11302,16 +11294,11 @@ DELIMITER ;
 ;
 
 
-USE `db_elev8r_local`;
 DROP procedure IF EXISTS `spc_order_save`;
 
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `db_elev8r_local`.`spc_order_save`;
-;
 
 DELIMITER $$
-USE `db_elev8r_local`$$
-CREATE DEFINER=`sa`@`%` PROCEDURE `spc_order_save`(
+CREATE  PROCEDURE `spc_order_save`(
 	IN p_id int(11), 
     IN p_quoteid int(11),
 	IN p_leadid int(11), 
@@ -11901,16 +11888,10 @@ DELIMITER ;
 ;
 
 
-USE `db_elev8r_local`;
 DROP procedure IF EXISTS `spc_reference_select_mul`;
 
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `db_elev8r_local`.`spc_reference_select_mul`;
-;
-
 DELIMITER $$
-USE `db_elev8r_local`$$
-CREATE DEFINER=`sa`@`%` PROCEDURE `spc_reference_select_mul`(
+CREATE  PROCEDURE `spc_reference_select_mul`(
 	IN p_id varchar(30)
 )
 BEGIN
@@ -11944,16 +11925,10 @@ DELIMITER ;
 ;
 
 
-USE `db_elev8r_local`;
 DROP procedure IF EXISTS `spc_referencetype_bymaster`;
 
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `db_elev8r_local`.`spc_referencetype_bymaster`;
-;
-
 DELIMITER $$
-USE `db_elev8r_local`$$
-CREATE DEFINER=`sa`@`%` PROCEDURE `spc_referencetype_bymaster`(
+CREATE  PROCEDURE `spc_referencetype_bymaster`(
 	IN p_master VARCHAR(100)
 )
 BEGIN
@@ -11967,16 +11942,11 @@ END$$
 DELIMITER ;
 ;
 
-USE `db_elev8r_local`;
 DROP procedure IF EXISTS `spc_attributelist_save`;
 
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `db_elev8r_local`.`spc_attributelist_save`;
-;
 
 DELIMITER $$
-USE `db_elev8r_local`$$
-CREATE DEFINER=`sa`@`%` PROCEDURE `spc_attributelist_save`(
+CREATE  PROCEDURE `spc_attributelist_save`(
 	IN p_id INT(11), 
 	IN p_projectid INT(11), 
     IN p_stageid INT(11), 
@@ -12043,16 +12013,10 @@ DELIMITER ;
 ;
 
 
-USE `db_elev8r_local`;
 DROP procedure IF EXISTS `spc_attributelist_select`;
 
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `db_elev8r_local`.`spc_attributelist_select`;
-;
-
 DELIMITER $$
-USE `db_elev8r_local`$$
-CREATE DEFINER=`sa`@`%` PROCEDURE `spc_attributelist_select`(
+CREATE  PROCEDURE `spc_attributelist_select`(
 	IN p_projectid INT(11)
 )
 BEGIN
@@ -12081,16 +12045,10 @@ END$$
 DELIMITER ;
 ;
 
-USE `db_elev8r_local`;
 DROP procedure IF EXISTS `spc_project_stage_select`;
 
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `db_elev8r_local`.`spc_project_stage_select`;
-;
-
 DELIMITER $$
-USE `db_elev8r_local`$$
-CREATE DEFINER=`sa`@`%` PROCEDURE `spc_project_stage_select`(
+CREATE  PROCEDURE `spc_project_stage_select`(
 IN p_stageid INT(11),
 IN p_projectid INT(11)
 
@@ -12131,16 +12089,11 @@ END$$
 DELIMITER ;
 ;
 
-USE `db_elev8r_local`;
 DROP procedure IF EXISTS `spc_documentcollectiondetails_save`;
 
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `db_elev8r_local`.`spc_documentcollectiondetails_save`;
-;
 
 DELIMITER $$
-USE `db_elev8r_local`$$
-CREATE DEFINER=`sa`@`%` PROCEDURE `spc_documentcollectiondetails_save`(
+CREATE  PROCEDURE `spc_documentcollectiondetails_save`(
 	IN p_id INT(11),
     IN p_projectid INT(11),
     IN p_stageid INT(11),
@@ -12201,16 +12154,10 @@ DELIMITER ;
 ;
 
 
-USE `db_elev8r_local`;
 DROP procedure IF EXISTS `spc_documentcollectiondetails_select`;
 
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `db_elev8r_local`.`spc_documentcollectiondetails_select`;
-;
-
 DELIMITER $$
-USE `db_elev8r_local`$$
-CREATE DEFINER=`sa`@`%` PROCEDURE `spc_documentcollectiondetails_select`(
+CREATE PROCEDURE `spc_documentcollectiondetails_select`(
     IN p_projectid INT(11),
     IN p_stageid INT(11),
     IN p_companyid INT(11)
@@ -12232,16 +12179,11 @@ DELIMITER ;
 ;
 
 
-USE `db_elev8r_local`;
 DROP procedure IF EXISTS `spc_documentcollectiondetails_delete`;
 
-USE `db_elev8r_local`;
-DROP procedure IF EXISTS `db_elev8r_local`.`spc_documentcollectiondetails_delete`;
-;
 
 DELIMITER $$
-USE `db_elev8r_local`$$
-CREATE DEFINER=`sa`@`%` PROCEDURE `spc_documentcollectiondetails_delete`(
+CREATE  PROCEDURE `spc_documentcollectiondetails_delete`(
     IN p_id INT(11)
 )
 BEGIN
@@ -12360,6 +12302,125 @@ END$$
 
 DELIMITER ;
 ;
+
+
+DROP procedure IF EXISTS `spc_projectmanagement_dashboard`;
+
+DELIMITER $$
+CREATE  PROCEDURE `spc_projectmanagement_dashboard`(
+	IN p_companyid INT(11),
+    IN p_userid INT(11)
+)
+BEGIN
+
+	SELECT IFNULL(count(P.id),0) as totalprojects FROM project P WHERE companyid = p_companyid;
+    
+    SELECT IFNULL(count(P.id),0) as overdueprojects FROM project P WHERE DATEDIFF(IFNULL(actualenddate,enddate),0) > 0;
+    
+    SELECT 
+		SUM(IFNULL(JSON_UNQUOTE(JSON_EXTRACT(IFNULL(JSON_UNQUOTE(JSON_EXTRACT(PA.attributevalue,CONCAT('$[0]'))),0), '$.Amount')),0)) AS amount,
+		PA.projectid,
+        IFNULL(P.ordervalue,0) as ordervalue,
+        (IFNULL(P.ordervalue,0) - (SUM(IFNULL(JSON_UNQUOTE(JSON_EXTRACT(IFNULL(JSON_UNQUOTE(JSON_EXTRACT(PA.attributevalue,CONCAT('$[0]'))),0), '$.Amount')),0)))) as outstanding,
+        O.jobcode
+            
+	FROM `project_attributes` PA
+    LEFT JOIN project P ON P.id = PA.projectid
+    LEFT JOIN `order` O ON O.id = P.orderid
+    WHERE PA.companyid = p_companyid 
+    GROUP BY PA.projectid;
+    
+    SELECT 
+           O.jobcode,
+		   PD.id, 
+           PD.projectid, 
+		   PD.stageid,
+           PD.projectid, 
+		   PD.stageid, 
+           PD.stagename, 
+           PD.parentid, 
+           PD.stagecompletionpercentage, 
+           PD.projectweightage, 
+           PD.managerstatusid,
+		   PD.customerstatusid,
+           PD.completiondays,
+           PD.isactive,
+           PD.iscompleted, 
+           DATE_FORMAT(PD.startdate,'%d/%m/%Y') as startdate,
+		   DATE_FORMAT(PD.enddate,'%d/%m/%Y') as enddate,
+           DATE_FORMAT(PD.actualstartdate,'%d/%m/%Y') as actualstartdate,
+		   DATE_FORMAT(PD.actualenddate,'%d/%m/%Y') as actualenddate,
+           DATEDIFF(PD.enddate,PD.startdate) as planneddays,
+           IF(((DATEDIFF(IFNULL(PD.actualenddate,CURDATE()),PD.actualstartdate) - DATEDIFF(PD.enddate,PD.startdate)) > 0),(DATEDIFF(IFNULL(PD.actualenddate,CURDATE()),PD.actualstartdate) - DATEDIFF(PD.enddate,PD.startdate)),'-') as overduedays,
+			DATEDIFF(PD.actualenddate,PD.actualstartdate) as actualdays,
+           PD.actualcompletiondays,
+           PD.completionper,
+           PD.departmentid,
+           PD.attachment,
+		   PD.remark,
+           PD.isstd,
+           PD.isdeleted,
+           PD.stgtypeid,
+           PD.dependency,
+           PD.iscustomersignoffrequired,
+           PD.companyid,
+           PD.assignedto,
+           PD.assignedby
+           FROM project_detail PD
+    LEFT JOIN project P ON P.id = PD.projectid
+    LEFT JOIN `order` O ON O.id = P.orderid
+    WHERE P.companyid = p_companyid
+    AND PD.assignedto = p_userid;
+    
+    SELECT 
+		   PD.projectid,
+           PD.stagename,
+           PD.type,
+           O.jobcode,
+		   PD.id, 
+           PD.projectid, 
+		   PD.stageid, 
+           PD.stagename, 
+           PD.parentid, 
+           PD.stagecompletionpercentage, 
+           PD.projectweightage, 
+           PD.managerstatusid,
+		   PD.customerstatusid,
+           PD.completiondays,
+           PD.isactive,
+           PD.iscompleted, 
+           DATE_FORMAT(PD.startdate,'%d/%m/%Y') as startdate,
+		   DATE_FORMAT(PD.enddate,'%d/%m/%Y') as enddate,
+           DATE_FORMAT(PD.actualstartdate,'%d/%m/%Y') as actualstartdate,
+		   DATE_FORMAT(PD.actualenddate,'%d/%m/%Y') as actualenddate,
+           DATEDIFF(PD.enddate,PD.startdate) as planneddays,
+           IF(((DATEDIFF(IFNULL(PD.actualenddate,CURDATE()),PD.actualstartdate) - DATEDIFF(PD.enddate,PD.startdate)) > 0),(DATEDIFF(IFNULL(PD.actualenddate,CURDATE()),PD.actualstartdate) - DATEDIFF(PD.enddate,PD.startdate)),'-') as overduedays,
+			DATEDIFF(PD.actualenddate,PD.actualstartdate) as actualdays,
+           PD.actualcompletiondays,
+           PD.completionper,
+           PD.departmentid,
+           PD.attachment,
+		   PD.remark,
+           PD.isstd,
+           PD.isdeleted,
+           PD.stgtypeid,
+           PD.dependency,
+           PD.iscustomersignoffrequired,
+           PD.companyid,
+           PD.assignedto,
+           PD.assignedby
+           
+	FROM project_detail PD
+    LEFT JOIN project P ON P.id = PD.projectid
+    LEFT JOIN `order` O ON O.id = P.orderid
+    WHERE P.companyid = p_companyid
+    AND PD.assignedby = p_userid;
+    
+END$$
+
+DELIMITER ;
+;
+
 
 
 

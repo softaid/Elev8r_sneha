@@ -37,12 +37,14 @@
 		</f:title>
 		<f:content>
 			<VBox fitContainer="true">
-				<form:Form editable="true">
-					<form:title>
-						<core:Title text="" />
-					</form:title>
-					<form:layout>
-						<form:ResponsiveGridLayout
+
+				<Panel id="approvepanel" expandable="true" expanded="true"  headerText="Planning" width="auto">
+					<form:Form editable="true">
+						<form:title>
+							<core:Title text="" />
+						</form:title>
+						<form:layout>
+							<form:ResponsiveGridLayout
                             labelSpanXL="2"
                             labelSpanL="4"
                             labelSpanM="4"
@@ -56,13 +58,13 @@
                             columnsL="1"
                             columnsM="1"
                             singleContainerFullSize="false" />
-					</form:layout>
-					<form:formContainers>
-						<form:FormContainer>
-							<form:formElements>
-								<form:FormElement  label="Activity">
-									<form:fields>
-										<Select id="activity"
+						</form:layout>
+						<form:formContainers>
+							<form:FormContainer>
+								<form:formElements>
+									<form:FormElement  label="Activity">
+										<form:fields>
+											<Select id="activity"
 					                    required="true" 
                                         change="ActivitySelect"
                                         selectedKey="{AttributeDetailModel>/activityid}" 
@@ -73,19 +75,19 @@
                                             path: 'activityListModel>/',
                                             sorter: { path: 'id' }
                                         }">
-											<core:Item key="{activityListModel>stageid}" text="{activityListModel>stagename}"/>
-										</Select>
-									</form:fields>
-								</form:FormElement>
-								<!-- <form:FormElement label="Activity Name"><form:fields><Input id="activity" value="{AttributeDetailModel>/stagename}"/></form:fields></form:FormElement> -->
-								<form:FormElement label="Attribute Name">
-									<form:fields>
-										<Input id="attribute" value="{AttributeDetailModel>/attributename}"/>
-									</form:fields>
-								</form:FormElement>
-								<form:FormElement label="Attribute Type ">
-									<form:fields>
-										<MultiComboBox id="attributetype"
+												<core:Item key="{activityListModel>stageid}" text="{activityListModel>stagename}"/>
+											</Select>
+										</form:fields>
+									</form:FormElement>
+									<!-- <form:FormElement label="Activity Name"><form:fields><Input id="activity" value="{AttributeDetailModel>/stagename}"/></form:fields></form:FormElement> -->
+									<form:FormElement label="Attribute Name">
+										<form:fields>
+											<Input id="attribute" value="{AttributeDetailModel>/attributename}"/>
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement label="Attribute Type ">
+										<form:fields>
+											<MultiComboBox id="attributetype"
                                                     required="true" 
                                                     selectionChange=""
                                                     selectionFinish="handleSelectionFinish"
@@ -94,27 +96,26 @@
                                                            path: 'attributetypeModel>/modelData',
                                                            sorter: { path: 'createdby' }
                                                            }">
-											<core:Item key="{attributetypeModel>id}" text="{attributetypeModel>description}" />
-										</MultiComboBox>
-									</form:fields>
-								</form:FormElement>
-								<form:FormElement label="Header"
+												<core:Item key="{attributetypeModel>id}" text="{attributetypeModel>description}" />
+											</MultiComboBox>
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement label="Header"
                                   visible="{
                                         path: 'attributeSelectModel>/Header',
                                         formatter: '.formatter.setvisibilty'
                                     }">
-									<form:fields>
-										<Input id="header" value="{AttributeDetailModel>/header}"/>
-									</form:fields>
-								</form:FormElement>
-
-								<form:FormElement id="projecttype" label="Group" 
+										<form:fields>
+											<Input id="header" value="{AttributeDetailModel>/header}"/>
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement id="projecttype" label="Group" 
                                      visible="{
                                         path: 'attributeSelectModel>/group',
                                         formatter: '.formatter.setvisibilty'
                                     }">
-									<form:fields>
-										<Select id="project"
+										<form:fields>
+											<Select id="project"
 					                    required="true" 
                                         change=""
                                         selectedKey="{AttributeDetailModel>/departmentid}" 
@@ -124,18 +125,48 @@
                                             path: 'DepartmentModel>/',
                                             sorter: { path: 'id' }
                                         }">
-											<core:Item key="{DepartmentModel>id}" text="{DepartmentModel>department}" />
-										</Select>
-									</form:fields>
-								</form:FormElement>
-								<form:FormElement  label=" Date"
+												<core:Item key="{DepartmentModel>id}" text="{DepartmentModel>department}" />
+											</Select>
+										</form:fields>
+									</form:FormElement>
+								</form:formElements>
+							</form:FormContainer>
+						</form:formContainers>
+					</form:Form>
+				</Panel>
+
+				<Panel id="Assignpanel" expandable="true" expanded="true"  headerText="Actual" width="auto">
+					<form:Form editable="true">
+						<form:title>
+							<core:Title text="" />
+						</form:title>
+						<form:layout>
+							<form:ResponsiveGridLayout
+                            labelSpanXL="2"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="2"
+                            columnsL="1"
+                            columnsM="1"
+                            singleContainerFullSize="false" />
+						</form:layout>
+						<form:formContainers>
+							<form:FormContainer>
+								<form:formElements>
+									<form:FormElement  label=" Date"
                                  visible="{
                                         path: 'attributeSelectModel>/Date',
                                         formatter: '.formatter.setvisibilty'
                                     }"
                                                    >
-									<form:fields>
-										<DatePicker id="Date" width="100%" 
+										<form:fields>
+											<DatePicker id="Date" width="100%" 
                                                 placeholder="{config>/dateFormat/placeholder}"
                                                 displayFormat="{config>/dateFormat/displayFormat}"
                                                 value="{AttributeDetailModel>/Date}"
@@ -144,45 +175,34 @@
                                                 editable="true"
                                                 
                                                         />
-									</form:fields>
-								</form:FormElement>
-								<!-- <form:FormElement label="End Date"><form:fields><DatePicker id="endDate" width="100%" 
-                                                placeholder="{config>/dateFormat/placeholder}"
-                                                displayFormat="{config>/dateFormat/displayFormat}"
-                                                value="{AttributeDetailModel>/enddate}"
-                                                valueFormat="dd/MM/yyyy"
-                                                required="true"
-                                                editable="true"
-                                                change="dayCalculation"/></form:fields></form:FormElement> -->
-
-								<form:FormElement label="Amount" 
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement label="Amount" 
                                       visible="{
                                         path: 'attributeSelectModel>/Amount',
                                         formatter: '.formatter.setvisibilty'
                                     }">
-									<form:fields>
-										<Input id="Amount" value="{AttributeDetailModel>/Amount}"/>
-									</form:fields>
-								</form:FormElement>
-
-                                <form:FormElement label="Input" 
+										<form:fields>
+											<Input id="Amount" value="{AttributeDetailModel>/Amount}"/>
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement label="Input" 
                                       visible="{
                                         path: 'attributeSelectModel>/Input',
                                         formatter: '.formatter.setvisibilty'
                                     }">
-									<form:fields>
-										<Input id="Input" value="{AttributeDetailModel>/Input}" />
-									</form:fields>
-								</form:FormElement>
-
-								<form:FormElement label="Status"  
+										<form:fields>
+											<Input id="Input" value="{AttributeDetailModel>/Input}" />
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement label="Status"  
                                  visible="{
                                         path: 'attributeSelectModel>/Tristate',
                                         formatter: '.formatter.setvisibilty'
                                     }"
                                  >
-									<form:fields>
-									<Select id="tristate"
+										<form:fields>
+											<Select id="tristate"
 					                    required="true" 
                                         change="ActivitySelect"
                                         selectedKey="{AttributeDetailModel>/Tristate}" 
@@ -193,36 +213,27 @@
                                             path: 'tristateModel>/',
                                             sorter: { path: 'id' }
                                         }">
-											<core:Item key="{tristateModel>text}" text="{tristateModel>text}"/>
-										</Select>
-									</form:fields>
-								</form:FormElement>
-								<!-- <form:FormElement label=" Actual Completion Day">
-									<form:fields>
-										<Input id="actualcompletionDay" value="{AttributeDetailModel>/actualcompletiondays}"  editable="true"/>
-									</form:fields>
-								</form:FormElement>
-								<form:FormElement label="Stage %">
-									<form:fields>
-										<Input id="StagePercent" value="{AttributeDetailModel>/stagecompletionpercentage}"/>
-									</form:fields>
-								</form:FormElement> -->
-								<!-- <form:FormElement label="Project %"><form:fields><Input id="projectPercent" value="{AttributeDetailModel>/projectweightage}"/></form:fields></form:FormElement> -->
-								<!-- <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}"><form:fields><Switch  state="{AttributeDetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No"><layoutData><FlexItemData growFactor="1" /></layoutData></Switch></form:fields></form:FormElement><form:FormElement label="Is Standard"><form:fields><Switch  state="{AttributeDetailModel>/isstd}" id="isstd" customTextOn="Yes" customTextOff="No" enabled="false"><layoutData><FlexItemData growFactor="1" /></layoutData></Switch></form:fields></form:FormElement> -->
-								<!-- <form:FormElement label="Is Started"><form:fields><Switch  state="{AttributeDetailModel>/isstarted}" id="isstart"
+												<core:Item key="{tristateModel>text}" text="{tristateModel>text}"/>
+											</Select>
+										</form:fields>
+									</form:FormElement>
+									<!-- <form:FormElement label=" Actual Completion Day"><form:fields><Input id="actualcompletionDay" value="{AttributeDetailModel>/actualcompletiondays}"  editable="true"/></form:fields></form:FormElement><form:FormElement label="Stage %"><form:fields><Input id="StagePercent" value="{AttributeDetailModel>/stagecompletionpercentage}"/></form:fields></form:FormElement> -->
+									<!-- <form:FormElement label="Project %"><form:fields><Input id="projectPercent" value="{AttributeDetailModel>/projectweightage}"/></form:fields></form:FormElement> -->
+									<!-- <form:FormElement label="{i18n>feedMillBillOfMaterialLabelIsActive}"><form:fields><Switch  state="{AttributeDetailModel>/isactive}" id="DetailActive" customTextOn="Yes" customTextOff="No"><layoutData><FlexItemData growFactor="1" /></layoutData></Switch></form:fields></form:FormElement><form:FormElement label="Is Standard"><form:fields><Switch  state="{AttributeDetailModel>/isstd}" id="isstd" customTextOn="Yes" customTextOff="No" enabled="false"><layoutData><FlexItemData growFactor="1" /></layoutData></Switch></form:fields></form:FormElement> -->
+									<!-- <form:FormElement label="Is Started"><form:fields><Switch  state="{AttributeDetailModel>/isstarted}" id="isstart"
                                             change="isstartchange" customTextOn="Yes" customTextOff="No"><layoutData><FlexItemData growFactor="1" /></layoutData></Switch></form:fields></form:FormElement> -->
-								<!-- <form:FormElement label="stage Per"><form:fields><Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
+									<!-- <form:FormElement label="stage Per"><form:fields><Slider width="100%" class="customInputHeight" enableTickmarks="true" id="inpWarningLevel"
                                         max="100" min="0" progress="true" change="onsliderchange"
                                         showAdvancedTooltip="true" value="{AttributeDetailModel>/completionper}"><ResponsiveScale id="rScaleWarningLevel"
                                             tickmarksBetweenLabels="20" /></Slider></form:fields></form:FormElement>  -->
-								<form:FormElement label="Upload Image"
-                               visible="{
+									<form:FormElement label="Upload Image"
+                                  visible="{
                                         path: 'attributeSelectModel>/Attachment',
                                         formatter: '.formatter.setvisibilty'
                                     }"
                                         >
-									<form:fields>
-										<u:FileUploader
+										<form:fields>
+											<u:FileUploader
                                                 id="fileUploader"
                                                 name="myFileUpload"
                                                 tooltip="Upload Product Image"
@@ -233,14 +244,14 @@
                                                 fileType="png,jpg,gif,pdf,txt,doc,jpeg"
                                                  multiple="true"
                                                 placeholder="Choose a document image..."></u:FileUploader>
-									</form:fields>
-								</form:FormElement>
-								<form:FormElement  visible="{
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement  visible="{
                                         path: 'attributeSelectModel>/Attachment',
                                         formatter: '.formatter.setvisibilty'
                                     }">
-									<form:fields>
-										<Image
+										<form:fields>
+											<Image
                                                 src="{editDocumentCollectionModel>/image_url}"
                                                 densityAware="false"
                                                 width="10em" 
@@ -250,34 +261,34 @@
 												<FlexItemData growFactor="1" />
 											</layoutData>
 										</Image>
-										<HBOX>
+										<HBox>
 											<Button 
                                             text=""
                                             type="Emphasized"
                                             icon="sap-icon://download"
                                               press="functiondownload"
                                             id="btnDowimage" />
-											<Button
+												<Button
                                                 text=""
                                                 width="40%"
                                                 type="Emphasized"
                                                 icon="sap-icon://arrow-right"
                                                 press="forwardPress" id="btnFor"/>
-											<Button
+												<Button
                                                 text=""
                                                 width="40%"
                                                 type="Emphasized"
                                                 icon="sap-icon://arrow-left"
                                                 press="backwardPress"
                                                 id= "btnBack"/>
-											<Button 
+												<Button 
                                                 text=""
                                                 width="40%"
                                                 type="Emphasized"
                                                 icon="sap-icon://delete"
                                                 press="onDeleteDocument"
                                                 id= "btndelete"/>
-										</HBOX>
+										</HBox>
 									</form:fields>
 								</form:FormElement>
 								<form:FormElement label="Upload Document"
@@ -285,8 +296,8 @@
                                         path: 'attributeSelectModel>/Attachment',
                                         formatter: '.formatter.setvisibilty'
                                     }">
-									<form:fields>
-										<u:FileUploader
+										<form:fields>
+											<u:FileUploader
                                                 id="fileUploaderpdf"
                                                 name="myFileUpload"
                                                 tooltip="Upload Product Document"
@@ -297,62 +308,63 @@
                                                 style="Emphasized"
                                                 fileType="pdf"
                                                 placeholder="Choose a document..."></u:FileUploader>
-									</form:fields>
-								</form:FormElement>
-								<form:FormElement label="Document Download"    
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement label="Document Download"    
                                       visible="{
                                         path: 'attributeSelectModel>/Attachment',
                                         formatter: '.formatter.setvisibilty'
                                     }">
-									<form:fields>
-										<Input id="inputField"  width="53%" value="{editDocumentCollectionModel>/pdf_name}"  editable="true"/>
-									</form:fields>
-								</form:FormElement>
-								<form:FormElement     visible="{
+										<form:fields>
+											<Input id="inputField"  width="53%" value="{editDocumentCollectionModel>/pdf_name}"  editable="true"/>
+										</form:fields>
+									</form:FormElement>
+									<form:FormElement     visible="{
                                         path: 'attributeSelectModel>/Attachment',
                                         formatter: '.formatter.setvisibilty'
                                     }">
-									<form:fields>
-										<HBox>
-											<Button 
+										<form:fields>
+											<HBox>
+												<Button 
                                             text=""
                                             type="Emphasized"
                                             icon="sap-icon://download"
                                               press="functiondownload"
                                             id="btnDowpdf" />
-											<Button
+												<Button
                                                 text=""
                                                 width="40%"
                                                 type="Emphasized"
                                                 icon="sap-icon://arrow-right"
                                                 press="forwardPress" id="btnForpdf"/>
-											<Button
+												<Button
                                                 text=""
                                                 width="40%"
                                                 type="Emphasized"
                                                 icon="sap-icon://arrow-left"
                                                 press="backwardPress"
                                                 id= "btnBackpdf"/>
-											<Button 
+												<Button 
                                                 text=""
                                                 width="40%"
                                                 type="Emphasized"
                                                 icon="sap-icon://delete"
                                                 press="onDeleteDocument"
                                                 id= "btndeletepdf"/>
-										</HBox>
-									</form:fields>
-								</form:FormElement >
-								<form:FormElement label="Remarks"   visible="true">
-									<form:fields>
-										<TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{AttributeDetailModel>/remark}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
-									</form:fields>
-								</form:FormElement>
-							</form:formElements>
-						</form:FormContainer>
-					</form:formContainers>
-				</form:Form>
+											</HBox>
+										</form:fields>
+									</form:FormElement >
+									<form:FormElement label="Remarks"   visible="true">
+										<form:fields>
+											<TextArea placeholder="{i18n>feedMillBillOfMaterialLabelEnterNote}"  value="{AttributeDetailModel>/remark}" growing="true" rows="4" growingMaxLines="7" width="100%"/>
+										</form:fields>
+									</form:FormElement>
+								</form:formElements>
+							</form:FormContainer>
+						</form:formContainers>
+					</form:Form>
+                </Panel>
 			</VBox>
 		</f:content>
-	</f:DynamicPage>
+    </f:DynamicPage>
 </mvc:View>

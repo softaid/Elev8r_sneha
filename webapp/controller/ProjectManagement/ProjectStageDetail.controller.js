@@ -569,39 +569,39 @@ sap.ui.define(
 						var parentModel = currentContext.getView().getModel("editDocumentCollectionModel").oData;
 
 
-						let objPush = {
-							id: null,
-							stageid: oModel?.stageid ?? null,
-							projectid: oModel.projectid,
-							parentstageid: null,
-							companyid: commonService.session("companyId"),
-							userid: commonService.session("userId"),
-							type: "Stage",
-						};
+					let objPush = {
+						id: null,
+						stageid: oModel?.stageid ?? null,
+						projectid: oModel.projectid,
+						parentstageid: null,
+						companyid: commonService.session("companyId"),
+						userid: commonService.session("userId"),
+						type: "Stage",
+					};
 
-						oModel["companyid"] = commonService.session("companyId");
-						oModel.type = "Stage";
-						oModel["userid"] = commonService.session("userId");
-						oModel.startdate =
-							oModel.startdate != null
-								? commonFunction.getDate(oModel.startdate)
-								: oModel.startdate;
-						oModel.enddate =
-							oModel.enddate != null
-								? commonFunction.getDate(oModel.enddate)
-								: oModel.enddate;
-						oModel.actualstartdate =
-							oModel.actualstartdate != null
-								? commonFunction.getDate(oModel.actualstartdate)
-								: oModel.actualstartdate;
-						oModel.actualenddate =
-							oModel.actualenddate != null
-								? commonFunction.getDate(oModel.actualenddate)
-								: oModel.actualenddate;
-						oModel.isactive = oModel.isactive === true ? 1 : 0;
-						oModel.isstd = oModel.isstd === true ? 1 : 0;
-						// when we add any stage or activity from project detail screen we only add those stage in reference and only for that particular project  the fromreference=0 this condition we check in project detail and reference also ...
-						oModel.fromreference = 0;
+					oModel["companyid"] = commonService.session("companyId");
+					oModel.type = "Stage";
+					oModel["userid"] = commonService.session("userId");
+					oModel.startdate =
+						oModel.startdate != null
+							? commonFunction.getDate(oModel.startdate)
+							: oModel.startdate;
+					oModel.enddate =
+						oModel.enddate != null
+							? commonFunction.getDate(oModel.enddate)
+							: oModel.enddate;
+					oModel.actualstartdate =
+						oModel.actualstartdate != null
+							? commonFunction.getDate(oModel.actualstartdate)
+							: oModel.actualstartdate;
+					oModel.actualenddate =
+						oModel.actualenddate != null
+							? commonFunction.getDate(oModel.actualenddate)
+							: oModel.actualenddate;
+					oModel.isactive = oModel.isactive === true ? 1 : 0;
+					oModel.isstd = oModel.isstd === true ? 1 : 0;
+					// when we add any stage or activity from project detail screen we only add those stage in reference and only for that particular project  the fromreference=0 this condition we check in project detail and reference also ...
+					oModel.fromreference = 0;
 
 						currentContext.handleProjectCompPer();
 
@@ -610,21 +610,21 @@ sap.ui.define(
 							console.log("----------savedata----------",savedata);
 							objPush.stageid = savedata.id;
 
-							currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
-								if (document.id == undefined) {
-									Projectservice.saveDocumentCollectionDetails(
-										{ ...objPush, ...document },
-										function (obj) {
-											var saveMsg = "Data Saved Successfully.";
-											var editMsg = "Data Updated Successfully";
-											var ErrorMsg = "Data not Saved Successfully";
-											var message = parentModel.id == null ? saveMsg : editMsg;
-											if (message == null) {
-												MessageToast.show(ErrorMsg);
-											} else {
-												MessageToast.show(message);
-											}
+						currentContext.resultArr.concat(currentContext.resultpdfArr).forEach((document) => {
+							if (document.id == undefined) {
+								Projectservice.saveDocumentCollectionDetails(
+									{ ...objPush, ...document },
+									function (obj) {
+										var saveMsg = "Data Saved Successfully.";
+										var editMsg = "Data Updated Successfully";
+										var ErrorMsg = "Data not Saved Successfully";
+										var message = parentModel.id == null ? saveMsg : editMsg;
+										if (message == null) {
+											MessageToast.show(ErrorMsg);
+										} else {
+											MessageToast.show(message);
 										}
+									}
 									);
 								}
 							});
@@ -634,7 +634,7 @@ sap.ui.define(
 							if(oModel.status !=="Confirmed"){
 								var assignhistroydata = {
 									transactionid : oModel.stageid,
-									transactiondate:commonFunction.getDate(oModel.startdate),
+									transactiondate:oModel.startdate == null ? '-' : commonFunction.getDate(oModel.startdate),
 									username: commonService.session("userName"),
 									stage : oModel.stagename,
 									assignto:oModel.assignto,
@@ -665,24 +665,38 @@ sap.ui.define(
 
 
 						});
+						commonFunction.getStageDetail(oModel.projectid, currentContext);
 
-						currentContext.DeleteDocumentArr.length > 0 ? currentContext.onDeleteDocumentSave() : "No image is available to delete";
-						if (oModel.dependencyStatus == false) {
 
-							MessageToast.show("Please need to first complete the prerequisite  stage for  starting the current stage");
-						}
+					
 
-						currentContext.onCancel();
+					currentContext.DeleteDocumentArr.length > 0 ? currentContext.onDeleteDocumentSave() : "No image is available to delete";
+					if (oModel.dependencyStatus == false) {
+
+						MessageToast.show("Please need to first complete the prerequisite  stage for  starting the current stage");
+					}
+
+					currentContext.onCancel();
 				},
 
 				handleStageApproveToggle: function () {
 					let currentContext = this;
 					let oModel = currentContext.getView().getModel("StageDetailModel").getData();
-					if (oModel.actualenddate == null) {
+
+					var sessionData = JSON.parse(sessionDataString);
+					console.log(sessionData)
+					var approveById = sessionData.userId;
+					if (oModel.assignedby != approveById || sessionData.roleNames != "AD") {
+						oModel.iscompleted = false;
+						MessageToast.show("You have not acces to approve the stage");
+						currentContext.getView().getModel("StageDetailModel").refresh();
+					}
+					else if (oModel.actualenddate == null) {
 						oModel.iscompleted = false;
 						MessageToast.show("stage is not completed yet so first complete the stage then approve it");
 						currentContext.getView().getModel("StageDetailModel").refresh();
 					}
+
 				},
 
 				handleProjectCompPer: function () {
@@ -708,6 +722,7 @@ sap.ui.define(
 							Projectservice.saveProject(obj, function (savedata) {
 
 							})
+							
 					}
 
 				},
@@ -715,16 +730,59 @@ sap.ui.define(
 				validateForm: async function () {
 					let isValid = true;
 					let currentContext = this;
-		
+
 					let oModel = currentContext.getView().getModel("StageDetailModel").oData;
-		
+
+					if (oModel.actualenddate) {
+						if (oModel.actualstartdate) {
+							if ((oModel.assignedby) && (oModel.assignedto)) {
+								if (oModel.startdate && oModel.enddate) {
+
+								}
+								else {
+									return MessageToast.show(`Before start the stage you need to select start date and end date `);
+								}
+
+							}
+							else {
+								return MessageToast.show(`Before start the stage you need to select assign to and approve by`);
+
+							}
+						}
+						else {
+							return MessageToast.show(` First fill actual start date `);
+						}
+
+					}
+
+					if (oModel.actualstartdate) {
+						if ((oModel.assignedby) && (oModel.assignedto)) {
+							if (oModel.startdate && oModel.enddate) {
+
+							}
+							else {
+								return MessageToast.show(`Before start the stage you need to select start date and end date `);
+							}
+
+						}
+						else {
+							return MessageToast.show(`Before start the stage you need to select assign to and approve by`);
+
+						}
+					}
+					
+
+
+
+
+
 					let obj = {
 						id: oModel?.id ?? 0,// activity id  in reference
 						projectid: oModel.projectid,
 						parentid: oModel?.parentid ?? 0, //stage id in refernce
 						type: "Stage"
 					};
-					 Projectservice.getSumOfAllStageOrActivity(obj, async function (data) {
+					Projectservice.getSumOfAllStageOrActivity(obj, async function (data) {
 						console.log(data);
 						let completionPer = +(oModel?.projectweightage ?? 0) + +(data?.[0]?.[0]?.totalper ?? 0);
 						if (completionPer > 100) {

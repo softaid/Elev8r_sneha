@@ -4,34 +4,18 @@ sap.ui.define(
     "sap/ui/elev8rerp/componentcontainer/controller/BaseController",
     "sap/ui/model/Sorter",
     "sap/ui/elev8rerp/componentcontainer/services/ProjectManagement/Project.service",
-    "sap/ui/elev8rerp/componentcontainer/utility/xlsx",
-    "sap/ui/elev8rerp/componentcontainer/services/Common.service",
-    "sap/ui/elev8rerp/componentcontainer/services/Company/ManageUser.service",
-    "sap/m/MessageToast",
-    "sap/ui/elev8rerp/componentcontainer/controller/Common/Common.function",
-    "sap/ui/elev8rerp/componentcontainer/controller/formatter/fragment.formatter",
+    "sap/ui/elev8rerp/componentcontainer/formatter/fragment.formatter",
     'sap/ui/core/util/Export',
     'sap/ui/core/util/ExportTypeCSV',
   ],
   function (
-    JSONModel,
-    BaseController,
-    Sorter,
-    Projectservice,
-    xlsx,
-    commonService,
-    ManageUserService,
-    MessageToast,
-    commonFunction,
-    formatter,
-    Export, 
-    ExportTypeCSV
+    JSONModel, BaseController, Sorter, Projectservice, formatter, Export, ExportTypeCSV
   ) {
     return BaseController.extend(
-      "sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.ProjectList",
+      "sap.ui.elev8rerp.componentcontainer.controller.ProjectManagement.ProjectList",
       {
+        formatter: formatter,
         onInit: function () {
-          this.currentContext = this;
           this.bus = sap.ui.getCore().getEventBus();
 
           this.afilters = [];
@@ -42,6 +26,9 @@ sap.ui.define(
             this.handleQutationList,
             this
           );
+
+ 
+
           this.bus.subscribe(
             "projectdetail",
             "handleProjectDetails",
@@ -151,6 +138,8 @@ sap.ui.define(
           }
         },
 
+
+
         //reset activity dialog
         resetProjectGroupDialog: function (oEvent) {
           this.groupReset = true;
@@ -234,9 +223,7 @@ sap.ui.define(
           var currentContext = this;
           Projectservice.getAllProjects(function (data) {
             var oModel = currentContext.getView().getModel("projectListModel");
-            //oModel.setData({ modelData: data[0] });
             oModel.setData(data[0]);
-            console.log("----------projectListModel------------",oModel);
             oModel.refresh();
           });
         },
@@ -249,86 +236,6 @@ sap.ui.define(
             this
           );
         },
-
-         /* generate CSV for  Setter  Report */
-         onDataExport: sap.m.Table.prototype.exportData || function (oEvent) {
-          var currentContext = this;
-          var oModel= currentContext.getView().getModel("projectListModel");
-          var aData = oModel.oData;
-          var oModelone = new sap.ui.model.json.JSONModel();
-          oModelone.setData({ modelData: aData });
-          currentContext.getView().setModel(oModelone, "CSVModel");
-
-
-          //https://openui5.hana.ondemand.com/1.36.5/docs/guide/f1ee7a8b2102415bb0d34268046cd3ea.html
-          //http://www.saplearners.com/download-data-in-excel-in-sapui5-application/
-
-          var oExport = new Export({
-
-              // Type that will be used to generate the content. Own ExportType's can be created to support other formats
-              exportType: new ExportTypeCSV({
-                  separatorChar: ","
-              }),
-
-              // Pass in the model created above
-              models: this.currentContext.getView().getModel("CSVModel"),
-              // binding information for the rows aggregation
-              rows: {
-                  path: "/modelData"
-              },
-
-              // column definitions with column name and binding info for the content
-
-              columns: [
-                  {
-                      name: "Sr.No.",
-                      template: { content: "{srno}" }
-                  },
-                  {
-                      name: "Job No.",
-                      template: { content: "{JobNo}" }
-                  },
-                  {
-                      name: "Project Id",
-                      template: { content: "{id}" }
-                  },
-                  {
-                      name: "Customer Name",
-                      template: { content: "{quotename}" }
-                  },
-                  {
-                    name: "Start Date",
-                    template: { content: "{startdate}" }
-                  },
-                  {
-                      name: "End date",
-                      template: { content: "{enddate}" }
-                  },
-                  {
-                    name: "Project Status",
-                    template: { content: "{pstatus}" }
-                 },
-                 {
-                    name: "Project %",
-                    template: { content: "{completionper}" }
-                 },
-                 {
-                  name: "Model",
-                  template: { content: "{model}" }
-               }
-              ]
-          });
-
-          // download exported file
-          oExport.saveFile("ProjectList")
-              .catch(function (oError) {
-                  MessageBox.error("Error when downloading data. Browser might not be supported!\n\n" + oError);
-              })
-              .then(function () {
-
-                  oExport.destroy();
-              });
-      }
       }
     );
   },

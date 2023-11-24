@@ -13,7 +13,7 @@
                 <f:title>
                     <f:DynamicPageTitle>
                         <f:heading>
-                            <Title text="Sales"/>
+                            <Title text="Sales Dashboard"/>
                         </f:heading>
                         <f:actions>
                             <Button id = "btnList" icon="sap-icon://list" type="Transparent" press="onListIconPress" visible="true" />
@@ -43,21 +43,23 @@
                                 </TileContent>
                             </GenericTile>
 
-                            <Panel expandable="false" expanded="true"  headerText="Lead to Order Conversion Ratio" width="auto">
-                                <core:HTML  content="&lt;div id='orderpiechart' style='height: 500px;width:1000px'&gt;&lt;/div&gt;">
-                                </core:HTML>
-                                <layoutData>
-                                    <l:GridData span="L6" />
-                                </layoutData>
-                            </Panel>
+                            <HBox>
+                                <Panel expandable="false" expanded="true"  headerText="Lead to Order Conversion Ratio" width="auto">
+                                    <core:HTML  content="&lt;div id='orderpiechart' style='height: 400px;width:600px'&gt;&lt;/div&gt;">
+                                    </core:HTML>
+                                    <layoutData>
+                                        <l:GridData span="L6" />
+                                    </layoutData>
+                                </Panel>
 
-                            <Panel expandable="false" expanded="true"  headerText="Modelwise No. of Lead" width="auto">
-                                <core:HTML  content="&lt;div id='modeldonutchart' style='height: 500px;width:1000px'&gt;&lt;/div&gt;">
-                                </core:HTML>
-                                <layoutData>
-                                    <l:GridData span="L6" />
-                                </layoutData>
-                            </Panel>
+                                <Panel expandable="false" expanded="true"  headerText="Modelwise No. of Leads" width="auto">
+                                    <core:HTML  content="&lt;div id='modeldonutchart' style='height: 400px;width:600px'&gt;&lt;/div&gt;">
+                                    </core:HTML>
+                                    <layoutData>
+                                        <l:GridData span="L6" />
+                                    </layoutData>
+                                </Panel>
+                            </HBox>
                         </content>		
 					</Page>  
                 </f:content>

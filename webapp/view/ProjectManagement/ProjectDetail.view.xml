@@ -73,8 +73,9 @@
 											<form:FormElement label="NI Engineer">
 												<form:fields>
 													<MultiComboBox id="eng"
+														required="true" 
 														selectionChange=""
-														selectionFinish="handleSelectionFinish"
+														selectionFinish="	"
 														width="500px"
 														items="{
 															path: 'engRoleModel>/',
@@ -87,6 +88,7 @@
 											<form:FormElement label="NI Manager ">
 												<form:fields>
 													<MultiComboBox id="manager"
+														required="true" 
 														selectionChange=""
 														selectionFinish="handleSelectionFinish"
 														width="500px"
@@ -101,6 +103,7 @@
 											<form:FormElement label="Sales Engineer">
 												<form:fields>
 													<MultiComboBox id="salesenginner"
+														required="true" 
 														selectionChange=""
 														selectionFinish="handleSelectionFinish"
 														width="500px"
@@ -115,6 +118,7 @@
 											<form:FormElement label="Sales Manager ">
 												<form:fields>
 													<MultiComboBox id="salesmanager"
+														required="true" 
 														selectionChange=""
 														selectionFinish="handleSelectionFinish"
 														width="500px"
@@ -130,63 +134,22 @@
 									</form:FormContainer>
 									<form:FormContainer title="">
 										<form:formElements>
-											<!-- <form:FormElement id="subcontractorEle1" label="Subcontractor 1">
+												<form:FormElement id="subcontractorEle1" label="Subcontractor">
 												<form:fields>
-													<Select id="subcontractor1"
-													change=""
-													selectedKey="{projectModel>/subcontractorid1}" 
-													forceSelection="false"
-													width="500px"
-													items="{
-														path: 'subcontractorModel>/modelData',
-														sorter: { path: 'id' }
-													}">
-														<core:Item key="{subcontractorModel>id}" text="{subcontractorModel>subconname}" />
-													</Select>
-												</form:fields>
-											</form:FormElement> -->
-
-											 <form:FormElement id="subcontractorEle1" label="Subcontractor">
-                                            <form:fields>
-                                                <MultiComboBox id="subcontractor1"
+													<MultiComboBox id="subcontractor1"
 												    selectionFinish="handleSelectionFinish"
                                                     width="500px"
                                                     items="{
                                                         path: 'subcontractorModel>/modelData',
                                                         sorter: { path: 'Nidame' }
                                                     }">
-                                                    <core:Item key="{subcontractorModel>id}" text="{subcontractorModel>subconname}" />
-                                                </MultiComboBox>
-                                            </form:fields>
-                                        </form:FormElement>
-											<!-- <form:FormElement id="subcontractorEle2" label="Subcontractor 2">
-												<form:fields>
-													<Select id="subcontractor2"
-													change=""
-													selectedKey="{projectModel>/subcontractorid2}" 
-													forceSelection="false"
-													width="500px"
-													items="{
-														path: 'subcontractorModel>/modelData',
-														sorter: { path: 'id' }
-													}">
 														<core:Item key="{subcontractorModel>id}" text="{subcontractorModel>subconname}" />
-													</Select>
+													</MultiComboBox>
 												</form:fields>
-											</form:FormElement> -->
+											</form:FormElement>
 											<form:FormElement id="customerEle" label="Customer">
 												<form:fields>
-													<Select id="customer"
-													change=""
-													selectedKey="{projectModel>/customerid}" 
-													forceSelection="false"
-													width="500px"
-													items="{
-														path: 'userModel>/modelData',
-														sorter: { path: 'id' }
-													}">
-														<core:Item key="{userModel>id}" text="{userModel>createdbyname}" />
-													</Select>
+													<Input id="customer"  value="{projectModel>/username}" editable="false"/>
 												</form:fields>
 											</form:FormElement>
 											<form:FormElement label="{i18n>feedMillBillOfMaterialLabelBOMStartDate}">
@@ -207,6 +170,7 @@
 													displayFormat="{config>/dateFormat/displayFormat}"
 													value="{projectModel>/enddate}"
 													valueFormat="dd/MM/yyyy"
+													required="true"
 												editable="true"
 												change="dayCalculation"
 													/>
@@ -263,7 +227,7 @@
 													<content>
 														<Title text="Project Stage" level="H2"/>
 														<ToolbarSpacer />
-														<HBOX>
+														<HBox>
 															<Switch tooltip="Show All"  state="{projectModel>/isall}" id="showallstages" customTextOn="Yes" customTextOff="No"  change= "getAll">
 																<layoutData>
 																	<FlexItemData growFactor="1" />
@@ -272,8 +236,9 @@
 															<SearchField search="onSearchStages" width="17.5rem" id = "onStageSearchId"/>
 															<Button icon="sap-icon://sort" type="Transparent" press="onStagesSort"/>
 															<Button text="" icon="sap-icon://excel-attachment" press="onDataExport"/>
+															<Button text="HOC PDF" press="onPdf"/>
 															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowStage" id ="add" visible="true"/>
-														</HBOX>
+														</HBox>
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -394,7 +359,7 @@
 													<content>
 														<Title text="Project Activity" level="H2"/>
 														<ToolbarSpacer />
-														<HBOX>
+														<HBox>
 															<Switch tooltip="Show All"  state="{projectModel>/isallactivities}" id="showallactivities" customTextOn="Active" customTextOff="All"  change= "getAllActivitiesForToggle">
 															<layoutData>
 																<FlexItemData growFactor="1" />
@@ -410,7 +375,7 @@
 															<Button icon="sap-icon://sort" type="Transparent" press="onAcivitySort"/>
 															<Button text="" icon="sap-icon://excel-attachment" press="onDataActivityExport"/>
 															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowactivity" id ="niadd" visible="true"/>
-														</HBOX>
+														</HBox>
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -517,12 +482,13 @@
                                     alignItems="Start"
                                     justifyContent="End">
 											<items>
-												<Button text="{i18n>saveButtonText}" id="btnActivitySave" type="Emphasized" class="sapUiSmallMarginEnd" press="onNISave"/>
+												<Button text="{i18n>saveButtonText}" id="btnActivitySave" type="Emphasized" class="sapUiSmallMarginEnd"/>
 												<Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
 											</items>
 										</FlexBox>
 									</Panel>
 								</IconTabFilter>
+
 								<IconTabFilter text="Payments">
 									<VBox fitContainer="true">
 										<Table id="tblpaymentStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
@@ -537,6 +503,7 @@
 														<Title text="Payments" level="H2"/>
 														<ToolbarSpacer />
 														<Button text="" icon="sap-icon://excel-attachment" press="onDataPaymentExport"/>
+														<!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowpayments" id ="paymentadd" visible="true"/> -->
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -622,12 +589,13 @@
                                     alignItems="Start"
                                     justifyContent="End">
 											<items>
-												<Button text="{i18n>saveButtonText}" id="btnPaymentSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onNISave"/>
+												<Button text="{i18n>saveButtonText}" id="btnPaymentSave" type="Emphasized" class="sapUiSmallMarginEnd"/>
 												<Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
 											</items>
 										</FlexBox>
 									</Panel>
 								</IconTabFilter>
+								
 								<IconTabFilter text="Attachments"  key="Attachment">
 									<VBox fitContainer="true">
 										<Table id="tblAttachmentStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
@@ -641,7 +609,7 @@
 													<content>
 														<Title text="Attachment" level="H2"/>
 														<ToolbarSpacer />
-														<HBOX>
+														<HBox>
 															<SearchField search="onSearchAttachment" width="17.5rem" id = "onattachementSearchId"/>
 															<Button
 																width="20%"
@@ -650,7 +618,8 @@
 																icon="sap-icon://group-2"
 																press="handleAttachementGroupButtonPressed"/>
 															<Button icon="sap-icon://sort" type="Transparent" press="onAttachementSort"/>
-														</HBOX>
+															<!-- <Button icon="sap-icon://add" type="Transparent" press="onAddNewRowNI" id ="Attachmentadd" visible="true"/> -->
+														</HBox>
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -752,7 +721,7 @@
 													<content>
 														<Title text="Attribute" level="H2"/>
 														<ToolbarSpacer />
-														<HBOX>
+														<HBox>
 															<SearchField search="onSearchAttribute" width="17.5rem" id = "onAttachmentSearchId"/>
 															<Button
 																width="20%"
@@ -763,7 +732,7 @@
 															<Button icon="sap-icon://sort" type="Transparent" press="onAttributeSort"/>
 															<Button text="" icon="sap-icon://excel-attachment" press="onDataAttributeExport"/>
 															<Button icon="sap-icon://add" type="Transparent" press="onAddNewRowAttribute" id ="AddAttribute" visible="true"/>
-														</HBOX>
+														</HBox>
 													</content>
 												</Toolbar>
 											</headerToolbar>
@@ -786,7 +755,7 @@
 													<Text text="{attributeModel>parentstagename}" />
 													<Text text="{attributeModel>stagename}" />
 													<Text text="{attributeModel>attributename}" />
-													<input value="{attributeModel>remark}" />
+													<Input value="{attributeModel>remark}" />
 												</ColumnListItem>
 											</items>
 										</Table>
@@ -845,7 +814,7 @@
                                     alignItems="Start"
                                     justifyContent="End">
 											<items>
-												<Button text="{i18n>saveButtonText}" id="btnQCSave" type="Emphasized" class="sapUiSmallMarginEnd" press="onNISave"/>
+												<Button text="{i18n>saveButtonText}" id="btnQCSave" type="Emphasized" class="sapUiSmallMarginEnd"/>
 												<Button text="{i18n>cancelButtonText}" type="Emphasized" class="sapUiSmallMarginEnd" press="resetModel"/>
 											</items>
 										</FlexBox>

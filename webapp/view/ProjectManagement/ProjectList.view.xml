@@ -4,8 +4,9 @@
     xmlns:core="sap.ui.core"
     xmlns:layout="sap.ui.layout"
 	xmlns:form="sap.ui.layout.form"
-    xmlns:u="sap.ui.unified">
-    <f:FlexibleColumnLayout  id="fclLead" backgroundDesign="Solid">
+    xmlns:u="sap.ui.unified"
+    xmlns:tnt="sap.tnt">
+    <f:FlexibleColumnLayout  id="fclProjectList" backgroundDesign="Solid">
         <f:beginColumnPages>
             <f:DynamicPage toggleHeaderOnTitleClick="false">
                 <f:title>
@@ -30,7 +31,7 @@
                                     <content>
                                         <Title text="" level="H2"/>
                                         <ToolbarSpacer />
-                                        <HBOX>
+                                        <HBox>
                                             <SearchField search="onSearch" width="17.5rem" id = "onSearchId"/>
                                             <Button
                                                 width="20%"
@@ -39,8 +40,7 @@
                                                 icon="sap-icon://group-2"
                                                 press="handleProjectGroupButtonPressed"/>
                                             <Button icon="sap-icon://sort" type="Transparent" press="onProjectSort"/>
-                                            <Button text="" icon="sap-icon://excel-attachment" press="onDataExport"/>
-                                        </HBOX>
+                                        </HBox>
                                     </content>
                                 </Toolbar>
                             </headerToolbar>
@@ -72,6 +72,9 @@
                                 <Column minScreenWidth="Tablet" demandPopin="true">
                                     <Text text ="Model"/>
                                 </Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true">
+                                    <Text text ="Project Health"/>
+                                </Column>
                             </columns>
                             <items>
                                 <ColumnListItem type="Navigation" press="onListItemPress">
@@ -85,6 +88,13 @@
                                         <Text text="{projectListModel>pstatus}"/>
                                         <Text text="{projectListModel>completionper}"/>
                                         <Text text="{projectListModel>model}"/>
+                                        <tnt:InfoLabel 
+                                            text="{projectListModel>delayedstagecount}/{projectListModel>totalstagecount}"
+                                            displayOnly= "false"
+                                            class="sapMInfoLabelSmall" 
+                                            colorScheme= "{parts: [{path: 'projectListModel>delayedstagecountper'}],
+                                            formatter: '.formatter.setProjectHealth'}"
+                                        />
                                     </cells>
                                 </ColumnListItem>
                             </items>
