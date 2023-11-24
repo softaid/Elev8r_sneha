@@ -623,6 +623,34 @@ sap.ui.define([
 			let currentContext = this;
 
 			let oModel = currentContext.getView().getModel("ActivityDetailModel").oData;
+
+			if (oModel.enddate) {
+				if (oModel.startdate) {
+					if ((oModel.assignedby) && (oModel.assignedto)) {
+
+					}
+					else {
+						return MessageToast.show(`Before start the stage you need to select assign to and approve by`);
+
+					}
+				}
+				else {
+					return MessageToast.show(` First fill  start date `);
+				}
+
+			};
+
+			if (oModel.startdate) {
+					if ((oModel.assignedby) && (oModel.assignedto)) {
+
+					}
+					else {
+						return MessageToast.show(`Before start the stage you need to select assign to and approve by`);
+
+					}
+				
+			};
+
 			if (oModel.actualenddate) {
 				if (oModel.actualstartdate) {
 					if ((oModel.assignedby) && (oModel.assignedto)) {
@@ -662,13 +690,13 @@ sap.ui.define([
 			}
 		
 
-
 			let obj = {
 				id: oModel?.id ?? 0,// activity id  in reference
 				projectid: oModel.projectid,
 				parentid: oModel?.parentid ?? null, //stage id in refernce
 				type: "activity"
 			};
+			
 			await Projectservice.getSumOfAllStageOrActivity(obj, async function (data) {
 				console.log(data);
 				let completionPer = +(oModel?.stagecompletionpercentage ?? 0) + +(data?.[0]?.[0]?.totalper ?? 0);

@@ -274,6 +274,34 @@
                                         </Select>
                                     </form:fields>
                                 </form:FormElement>
+				<form:FormElement label="Sales Engineer">
+                                    <form:fields>
+                                        <Select id="salesengineerid"                                             
+                                            change=""
+                                            selectedKey="{editQutationModel>/salesengineerid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'userModel>/modelData'                                                
+                                            }">
+                                            <core:Item key="{userModel>createdby}" text="{userModel>createdbyname}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
+                                <form:FormElement label="Sales Manager">
+                                    <form:fields>
+                                        <Select id="salesmanagerid"                                             
+                                            change=""
+                                            selectedKey="{editQutationModel>/salesmanagerid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'userModel>/modelData'                                                
+                                            }">
+                                            <core:Item key="{userModel>createdby}" text="{userModel>createdbyname}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
                                 <form:FormElement label="Quote Score">
                                     <form:fields>
                                         <Input id="txtLeadScore"  valueLiveUpdate="true" value="{editQutationModel>/quotescore}" required="false" />
@@ -529,6 +557,11 @@
                                 <form:FormElement label="Stop">
                                     <form:fields>
                                         <Input id="txtstopid"  valueLiveUpdate="true" value="{editQutationModel>/stopsid}" liveChange="onclickstop"/>
+                                    </form:fields>
+                                </form:FormElement>
+				<form:FormElement label="Door Opening Type">
+                                    <form:fields>
+                                        <Input id="dooropeningtype" valueLiveUpdate="true" value="{editQutationModel>/dooropeningytpe}"/>
                                     </form:fields>
                                 </form:FormElement>
                                 <form:FormElement label="Floor Marking">

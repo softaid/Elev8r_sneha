@@ -582,17 +582,9 @@ sap.ui.define(
 					oModel["companyid"] = commonService.session("companyId");
 					oModel.type = "Stage";
 					oModel["userid"] = commonService.session("userId");
-					oModel.startdate =
-						oModel.startdate != null
-							? commonFunction.getDate(oModel.startdate)
-							: oModel.startdate;
-					oModel.enddate =
-						oModel.enddate != null
-							? commonFunction.getDate(oModel.enddate)
-							: oModel.enddate;
-					oModel.actualstartdate =
-						oModel.actualstartdate != null
-							? commonFunction.getDate(oModel.actualstartdate)
+					oModel.startdate =oModel.startdate != null? commonFunction.getDate(oModel.startdate): oModel.startdate;
+					oModel.enddate =oModel.enddate != null? commonFunction.getDate(oModel.enddate): oModel.enddate;
+					oModel.actualstartdate =oModel.actualstartdate != null? commonFunction.getDate(oModel.actualstartdate)
 							: oModel.actualstartdate;
 					oModel.actualenddate =
 						oModel.actualenddate != null
@@ -733,6 +725,33 @@ sap.ui.define(
 
 					let oModel = currentContext.getView().getModel("StageDetailModel").oData;
 
+					if (oModel.enddate) {
+						if (oModel.startdate) {
+							if ((oModel.assignedby) && (oModel.assignedto)) {
+
+							}
+							else {
+								return MessageToast.show(`Before start the stage you need to select assign to and approve by`);
+
+							}
+						}
+						else {
+							return MessageToast.show(` First fill  start date `);
+						}
+
+					};
+
+					if (oModel.startdate) {
+							if ((oModel.assignedby) && (oModel.assignedto)) {
+
+							}
+							else {
+								return MessageToast.show(`Before start the stage you need to select assign to and approve by`);
+
+							}
+						
+					};
+
 					if (oModel.actualenddate) {
 						if (oModel.actualstartdate) {
 							if ((oModel.assignedby) && (oModel.assignedto)) {
@@ -770,9 +789,7 @@ sap.ui.define(
 
 						}
 					}
-					
-
-
+				
 
 
 

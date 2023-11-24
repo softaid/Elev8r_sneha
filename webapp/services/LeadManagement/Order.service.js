@@ -37,6 +37,45 @@ sap.ui.define([
                 commonService.runJQueryX("POST", "order/saveorder/revisionsave" , params, callback, null);
             },
 
+            // Document collection services
+
+            getAllDocumentCollection : function(callback){
+                console.log(commonService.session("companyId"));
+                commonService.runJQueryX("GET", "documentcollection/search/" + commonService.session("companyId"), null, callback, null);
+            },
+     
+            getDocumentCollection : function(params, callback){
+                commonService.runJQueryX("GET", "documentcollection/select/id/" + params.id, null, callback, null);
+            },
+
+            saveDocumentCollection : function(params, callback){
+                console.log("Params : " , params);
+                commonService.runJQueryX("POST", "documentcollection" , params, callback, null);
+           },
+
+            deleteDocumentCollection : function(params, callback){
+                commonService.runJQueryX("DELETE", "documentcollection" , params, callback, null);
+            },
+
+            getAllDocumentCollectionDetails : function(params, callback){
+                commonService.runJQueryX("GET", "elevproject/documentcollectiondetails/search/" + commonService.session("companyId"), null, callback, null);
+            },
+     
+            // get document   for that particular stage or activity or attribute
+            getOrderDocumentCollectionDetails : function(params, callback){
+                commonService.runJQueryX("GET", "elevproject/orderdocumentcollectiondetails/select/" +  params.orderid + "/" +  params.type + "/"+  commonService.session("companyId"), null, callback, null);
+            },
+
+            saveDocumentCollectionDetails : function(params, callback){
+                console.log("Params : " , params);
+                commonService.runJQueryX("POST", "elevproject/documentcollectiondetails" , params, callback, null);
+            },
+
+
+            deleteDocumentCollectionDetails : function(params, callback){
+                commonService.runJQueryX("DELETE", "elevproject/documentcollectiondetails/delete" , params, callback, null);
+            },
+
         };
     }
 );

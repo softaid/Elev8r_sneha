@@ -604,6 +604,11 @@
                                         <Input id="txtstopid"  type="number" valueLiveUpdate="true" value="{editPartyModel>/stopsid}" liveChange="onclickstop"/>
                                     </form:fields>
                                 </form:FormElement>
+                                <form:FormElement label="Door Opening Type">
+                                    <form:fields>
+                                        <Input id="dooropeningtype" type="text" valueLiveUpdate="true" value="{editPartyModel>/dooropeningtype}"/>
+                                    </form:fields>
+                                </form:FormElement>
                                 <form:FormElement label="{i18n>laedLowestFloorMarking}">
                                     <form:fields>
                                         <Select id="landingfloorsid"                                             
@@ -882,12 +887,40 @@
                                             forceSelection="true"
                                             width="500px"
                                             items="{
+                                                path: 'employeeList>/modelData'                                                
+                                            }">
+                                            <core:Item key="{employeeList>id}" text="{employeeList>employeename}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>   
+                                <form:FormElement label="Sales Engineer">
+                                    <form:fields>
+                                        <Select id="salesengineerid"                                             
+                                            change=""
+                                            selectedKey="{editPartyModel>/salesengineerid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
                                                 path: 'userModel>/modelData'                                                
                                             }">
                                             <core:Item key="{userModel>createdby}" text="{userModel>createdbyname}" />
                                         </Select>
                                     </form:fields>
-                                </form:FormElement>   
+                                </form:FormElement>
+                                <form:FormElement label="Sales Manager">
+                                    <form:fields>
+                                        <Select id="salesmanagerid"                                             
+                                            change=""
+                                            selectedKey="{editPartyModel>/salesmanagerid}" 
+                                            forceSelection="true"
+                                            width="500px"
+                                            items="{
+                                                path: 'userModel>/modelData'                                                
+                                            }">
+                                            <core:Item key="{userModel>createdby}" text="{userModel>createdbyname}" />
+                                        </Select>
+                                    </form:fields>
+                                </form:FormElement>
                             </form:formElements>
                         </form:FormContainer>
                     </form:formContainers>
