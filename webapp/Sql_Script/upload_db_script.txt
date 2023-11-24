@@ -12419,7 +12419,10 @@ BEGIN
 END$$
 
 DELIMITER ;
-;
+
+ALTER TABLE `db_elev8r_local`.`project` 
+CHANGE COLUMN `subcontractorid1` `subcontractorid1` VARCHAR(101) NULL DEFAULT NULL ;
+
 
 
 

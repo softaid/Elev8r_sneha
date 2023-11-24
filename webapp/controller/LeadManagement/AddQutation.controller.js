@@ -29,15 +29,13 @@ sap.ui.define(
 			"sap.ui.elev8rerp.componentcontainer.controller.LeadManagement.AddQutation",
 			{
 				onInit: function () {
-					debugger;
-					console.log("Quote");
 					var currentContext = this;
 
 					// currentContext.reset();
 					this.bus = sap.ui.getCore().getEventBus();
 					this.bus.subscribe(
-						"qutationcreen",
-						"handleQutationList",
+						"qutationdetails",
+						"newQutation",
 						this.qutationdetail,
 						this
 					);
@@ -47,15 +45,6 @@ sap.ui.define(
 						this.quoteConversion,
 						this
 					);
-					// currentContext.reset();
-					this.bus = sap.ui.getCore().getEventBus();
-					this.bus.subscribe(
-						"qutationcreen",
-						"handleQutationDetails",
-						this.handleQutationDetails,
-						this
-					);
-
 					var emptyModel = this.getModelDefault();
 					var model = new JSONModel();
 					model.setData(emptyModel);
@@ -291,10 +280,8 @@ sap.ui.define(
 					commonService.getAllCities(function (data) {
 						var oModel = new sap.ui.model.json.JSONModel();
 						oModel.setData({ modelData: data[0] });
-						currentContext.setModelDefault();
 						oModel.setSizeLimit(data[0].length);
 						currentContext.getView().setModel(oModel, "partyCityModel");
-						currentContext.setModelDefault();
 					});
 
 					
@@ -302,56 +289,6 @@ sap.ui.define(
 					this.getAllQuotations();
 
 
-				},
-
-				setModelDefault: function () {
-
-					let  lead= this.getView().getModel("editQutationModel").oData;
-		
-					lead["quotevalue"] = lead["quotevalue"] == null ? 0 :parseFloat(lead.quotevalue) ;
-					lead["nooflifts"] =lead["nooflifts"] == null ? 0:parseInt(lead.nooflifts) ;
-					lead["leadscore"]=lead["leadscore"] == null ? 0:parseFloat(lead.leadscore) ;
-					lead["winprobability"]=lead["winprobability"] == null ? 0:(lead.winprobability) ;
-					lead["stopsid"]=lead["stopsid"] == null ? 0:parseInt(lead.stopsid) ;
-					lead["floormarking"]=lead["floormarking"] == null ? 0:parseFloat(lead.floormarking) ;
-					lead["shaftwidth"] =lead["shaftwidth"] == null ? 0:parseFloat(lead.shaftwidth) ;
-					lead["shaftdepth"]=lead["shaftdepth"] == null ?0: parseFloat(lead.shaftdepth) ;
-					lead["cardepth"]=lead["cardepth"] == null ? 0:parseFloat(lead.cardepth) ;
-					lead["carwidth"]=lead["carwidth"] == null ? 0:parseFloat(lead.carwidth) ;
-					lead["carheight"]=lead["carheight"] == null ? 0:parseFloat(lead.carheight) ;
-					lead["doorwidth"]=lead["doorwidth"] == null ? 0:parseFloat(lead.doorwidth) ;
-					lead["doorheight"]=lead["doorheight"] == null ?0: parseFloat(lead.doorheight) ;
-					lead["travel"]=lead["travel"] == null ?0: parseFloat(lead.travel) ;
-					lead["pitdepth"]=lead["pitdepth"] == null ? 0:parseFloat(lead.pitdepth) ;
-					lead["overhead"]=lead["overhead"] == null ? 0:parseFloat(lead.overhead) ;
-					lead["mrwidth"]=lead["mrwidth"] == null ? 0:parseFloat(lead.mrwidth) ;
-					lead["mrdepth"]=lead["mrdepth"] == null ? 0:parseFloat(lead.mrdepth) ;
-					lead["mrheight"]=lead["mrheight"] == null ? 0:parseFloat(lead.mrheight) ;
-					lead["completiondays"]=lead["completiondays"] == null ? 0:parseFloat(lead.completiondays) ;
-					lead["advanceonorderreception"]=lead["advanceonorderreception"] == null ? 10:parseFloat(lead.advanceonorderreception) ;
-					lead["forrequestofmechanicalmaterial"]=lead["forrequestofmechanicalmaterial"] == null ? 60:parseFloat(lead.forrequestofmechanicalmaterial) ;
-					lead["forrequestofelectricalmaterial"]=lead["forrequestofelectricalmaterial"] == null ? 25:parseFloat(lead.forrequestofelectricalmaterial) ;
-					lead["oncustomerhandover"]=lead["oncustomerhandover"] == null ? 5:parseFloat(lead.oncustomerhandover) ;
-
-
-		
-					this.getView().getModel("editQutationModel").refresh()
-				},
-
-
-				handleQutationDetails: function (sChannel, sEvent, oData) {
-					let selRow = oData.viewModel;
-					let editPartyModel = this.getView().getModel("editQutationModel");
-					editQutationModel.oData.leadid = selRow.nextid;
-					 this.onModelSelection();
-					 this.setModelDefault();
-					editPartyModel.refresh();
-		
-					if (selRow.id != undefined) {
-						this.getView().byId("btnSave").setText("Update");
-					} else {
-						this.getView().byId("btnSave").setText("Save");
-					}
 				},
 
 				getModelDefault: function () {
@@ -461,7 +398,6 @@ sap.ui.define(
 				qutationdetail: function (sChannel, sEvent, oData) {
 					let selRow = oData.viewModel;
 					let oThis = this;
-					// this.setModelDefault();
 
 					if (selRow != null) {
 						if (selRow.action == "view") {
@@ -469,10 +405,12 @@ sap.ui.define(
 						} else {
 							oThis.getView().byId("btnSave").setEnabled(true);
 						}
+
 						oThis.bindQutationDetails(selRow.id);
 					} else {
 						oThis.getAllQuotations();
-						oThis.onModelSelection();
+					oThis.onModelSelection();
+
 					}
 
 				},
@@ -650,16 +588,11 @@ sap.ui.define(
 					var oModel = new JSONModel();
 					if (id != undefined) {
 						quotationService.getQuotation({ id: id }, function (data) {
-
-
 							data[0][0].withgst = data[0][0].withgst == 1 ? true : false;
 							oModel.setData(data[0][0]);
 						});
-
-
 						this.getView().byId("btnSave").setText("Update");
 					}
-					
 
 					this.getView().setModel(oModel, "editQutationModel");
 					var oModel = this.getView().getModel("editQutationModel");
@@ -759,10 +692,10 @@ sap.ui.define(
 										: "Qutation edited successfully!";
 								currentContext.onCancel();
 								MessageToast.show(message);
-								// currentContext.sendEmail(data.id, emaildate);
+								currentContext.sendEmail(data.id, emaildate);
 								currentContext.bus = sap.ui.getCore().getEventBus();
 								currentContext.bus.publish(
-									"loadquotationData",
+									"loadquotationdata",
 									"loadQuotationData"
 								);
 							}
@@ -793,59 +726,6 @@ sap.ui.define(
 
 					if (quotevalue != null) {
 						if (!commonFunction.isNumbermessage(this, "txtQutationValue", "please enter correct quotation value!")) {
-							isValid = false;
-						}
-						if (!commonFunction.isNumbermessage(this, "txtLeadScore", "please enter correct quote score value!")) {
-							isValid = false;
-						}
-
-						if (!commonFunction.isNumbermessage(this, "txtnooflifts", "please enter valid no of lift!")) {
-							isValid = false;
-						}
-						if (!commonFunction.isNumbermessage(this, "txtstopid", "please enter valid stop!")) {
-							isValid = false;
-						}
-						if (!commonFunction.isNumbermessage(this, "txtfloormarking", "please enter valid floor marking!")) {
-							isValid = false;
-						}
-						if (!commonFunction.isNumbermessage(this, "txtshaftwidth", "please enter valid shaft width!")) {
-							isValid = false;
-						}
-						if (!commonFunction.isNumbermessage(this, "txtshaftdepth", "please enter valid shaft depth!")) {
-							isValid = false;
-						}
-						if (!commonFunction.isNumbermessage(this, "txtmrwidth", "please enter valid mr width!")) {
-							isValid = false;
-						}
-						if (!commonFunction.isNumbermessage(this, "txtmrdepth", "please enter valid mr depth!")) {
-							isValid = false;
-						}
-						if (!commonFunction.isNumbermessage(this, "txtmrheight", "please enter valid mr height!")) {
-							isValid = false;
-						}
-						if (!commonFunction.isNumbermessage(this, "txtcardepth", "please enter valid car depth!")) {
-							isValid = false;
-						}
-						if (!commonFunction.isNumbermessage(this, "txtcarwidth", "please enter valid car width!")) {
-							isValid = false;
-						}
-						if (!commonFunction.isNumbermessage(this, "txtcarheight", "please enter valid car height!")) {
-							isValid = false;
-						}
-						if (!commonFunction.isNumbermessage(this, "txtdoorwidth", "please enter valid door width!")) {
-							isValid = false;
-						}
-						if (!commonFunction.isNumbermessage(this, "txtdoorheight", "please enter valid door height!")) {
-							isValid = false;
-						}
-						if (!commonFunction.isNumbermessage(this, "txttravel", "please enter valid travel !")) {
-							isValid = false;
-						}
-						if (!commonFunction.isNumbermessage(this, "txtpitdepth", "please enter valid pit depth!")) {
-							isValid = false;
-						}
-
-						if (!commonFunction.isNumbermessage(this, "completiondays", "please enter valid completiondays!")) {
 							isValid = false;
 						}
 					}
