@@ -90,9 +90,9 @@ sap.ui.define([
 			this.getView().setModel(saleManagrPDFModel, "saleManagrPDFModel");
 
 			//Define Model for Attachement
-			let attachmentModel = new JSONModel();
-			attachmentModel.setData({ modelData: [] });
-			this.getView().setModel(attachmentModel, "attachmentModel");
+			let attachmenttblmodel = new JSONModel();
+			attachmenttblmodel.setData({ modelData: [] });
+			this.getView().setModel(attachmenttblmodel, "attachmenttblmodel");
 		},
 
 		//Genrate 64bit image
@@ -155,6 +155,7 @@ sap.ui.define([
 					revisionModel.setData({modelData: Arr});
 
                     revisionModel.refresh();
+
 				}
 					// aRowsCount.push({
 					// 	rowsCount: data[4].length
@@ -174,6 +175,21 @@ sap.ui.define([
 					// }
 				}
 			})
+
+			// get document collection list
+			orderService.getOrderDocumentCollectionDetails(
+				{
+					orderid: id,
+					type: 'order',
+				},
+				function (data) {
+					if(data.length && data[0].length){
+						var attachmenttblmodel = oThis.getView().getModel("attachmenttblmodel");
+						attachmenttblmodel.setData(data[0]);
+						attachmenttblmodel.refresh();
+					}
+				}
+			);
 		},
 
 		orderConversion: function (sChannel, sEvent, oData) {
@@ -375,9 +391,45 @@ sap.ui.define([
 				saveAs(blob, "example.docx");
 				console.log("Document created successfully");
 			});
-		}
+		},
 
-
+		onDownload: async function (OEvent) {
+			let oThis = this;
+			let checkbox = OEvent.getSource();
+			let data = checkbox.data("mySuperExtraData");
+			oThis.count = 1;
+  
+			let [document_url, document_name] = data.split("_");  // 
+  
+			let oConfig = sap.ui.getCore().getModel("configModel");
+			let url = oConfig.oData.webapi.docurl + document_url;
+  
+			var oXHR = new XMLHttpRequest();
+			oXHR.open("GET", url, true);
+			oXHR.responseType = "blob";
+  
+			oXHR.onload = function (event) {
+			  var blob = oXHR.response;
+  
+			  // Create a temporary anchor element to initiate the download
+			  var link = document.createElement("a");
+			  link.href = URL.createObjectURL(blob);
+  
+  
+			  // Set the download attribute to specify the filename for the downloaded file
+			  link.setAttribute("download", document_name);
+  
+			  // Trigger the click event on the anchor element
+			  link.click();
+  
+			  // Clean up - revoke the object URL and remove the anchor element after the click event has been triggered
+			  URL.revokeObjectURL(link.href);
+			};
+  
+			oXHR.send();
+  
+  
+		  },
 
 	});
 
