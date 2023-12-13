@@ -76,6 +76,7 @@ sap.ui.define([
                 "description": viewModel.getProperty("description"),
                 "active": viewModel.getProperty("active"),
                 "iscustomersignoffrequired": viewModel.getProperty("iscustomersignoffrequired"),
+                "isparent":viewModel.getProperty("isparent"),
                 "addtocurrentproject": viewModel.getProperty("addtocurrentproject"),
                 "notifyinternaluser": viewModel.getProperty("notifyinternaluser"),
                 "defaultvalue": viewModel.getProperty("defaultvalue"),
@@ -203,6 +204,8 @@ sap.ui.define([
                 oModel.setData({ modelData: roots });
                 currentContext.getView().setModel(oModel, "masterDetailModel");
 
+                console.log("----------------masterDetailModel----------------",oModel);
+
             });
         },
 
@@ -218,6 +221,7 @@ sap.ui.define([
                 description: oModel.oData.description,
                 active: true,
                 iscustomersignoffrequired:false,
+                isparent:false,
                 addtocurrentproject:false,
                 notifyinternaluser:false,
                 defaultvalue: true,

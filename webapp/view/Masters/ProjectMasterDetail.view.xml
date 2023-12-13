@@ -200,6 +200,15 @@
                                         </Switch>
                                     </form:fields>
                                 </form:FormElement>
+                                  <form:FormElement id="isParent" label="Is Parent">
+                                    <form:fields>
+                                        <Switch  state="{editMasterModel>/isparent}" id="isParenttogle" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" change="isParentChange">
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </form:fields>
+                                </form:FormElement>
                                 <form:FormElement id="addToggleEle" label="Add to current project">
                                     <form:fields>
                                         <Switch  state="{editMasterModel>/addtocurrentproject}" id="addToggle" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" >

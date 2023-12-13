@@ -94,6 +94,11 @@ sap.ui.define([
                 commonService.runJQueryX("POST", "elevproject/updateProjectManagement/", params,callback, null);
             },
 
+             // save project details like  end date , completion per
+             updateProjectManagementStageComPer : function(params,callback){
+                commonService.runJQueryX("POST", "elevproject/updateProjectManagementstagecomper/", params,callback, null);
+            },
+
             // save project details like  end date , completion per
             updateNIProjectDetail : function(params,callback){
                 commonService.runJQueryX("POST", "elevproject/updateProjectNIManagement/", params,callback, null);

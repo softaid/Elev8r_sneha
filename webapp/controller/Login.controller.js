@@ -217,6 +217,7 @@ sap.ui.define([
             this.getView().byId("vboxForPsw").setVisible(true);
             this.getView().byId("ufmobile").setValue('');
             this.getView().byId("ufcompanycode").setValue('elev8r1');
+            //this.getView().byId("ufcompanycode").setValue('POS6296');
             this.getView().byId("pwd").setValue('');
             this.getView().byId("cpwd").setValue('');
 
@@ -403,6 +404,7 @@ sap.ui.define([
             var currentContext = this;
             var loginData = {
                 companycode: 'elev8r1',
+              // companycode: 'POS6296',
             };
 
             if (this.validateCompCode()) {

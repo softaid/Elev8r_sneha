@@ -247,6 +247,9 @@
 													<Text text ="Id" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
+													<Text text ="Parent Stage" />
+												</Column>
+												<Column minScreenWidth="Tablet" demandPopin="true">
 													<Text text ="{i18n>feedMillBillOfMaterialLabelQuantity}" />
 												</Column>
 												<Column minScreenWidth="Tablet" demandPopin="true">
@@ -272,6 +275,7 @@
 												<ColumnListItem type="Navigation" press="onListItemPressStage">
 													<cells>
 														<Text text="{tblModel>count}" />
+														<Text text="{tblModel>parentstage}" />
 														<Text text="{tblModel>stagename}" />
 														<Text text="{tblModel>actualstartdate}" />
 														<Text text="{tblModel>actualenddate}"/>
@@ -348,7 +352,7 @@
 							
 								<IconTabFilter text="Activities"   key="Activity">
 									<VBox fitContainer="true">
-										<Table id="tblActiviteStatus" width="100%"  mode="singleSelect" backgroundDesign="Solid" growingScrollToLoad="true" items="{
+										<Table id="tblActiviteStatus" width="100%"  mode="singleSelect"  backgroundDesign="Solid" growingScrollToLoad="true" items="{
 											path: 'activitymodel>/',
 												sorter: {
 													path: 'id'

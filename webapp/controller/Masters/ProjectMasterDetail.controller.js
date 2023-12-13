@@ -21,6 +21,18 @@ sap.ui.define([
 
         },
 
+        isParentChange: function(oEvent){
+            
+            let isparentState = oEvent.mParameters.state;
+            console.log("isparentState",isparentState);
+            if(this.model.typecode == "ProMilestones" && this.model.type == "Stage" && isparentState === true)
+            {
+                this.getView().byId("parentStageEle").setVisible(true);
+                commonFunction.getReferenceByTypeCodeAndParentTypeStage("ProMilestones", "Stage", "parentStageModel", this);
+            }
+
+        },
+
         onBeforeRendering: function () {
             var currentContext = this;
 
@@ -42,7 +54,7 @@ sap.ui.define([
             // get all departments
             commonFunction.getAllDepartments("departmentModel", this);
 
-            if (this.model.typecode == "ProMilestones" && this.model.type == "Stage") {
+            if (this.model.typecode == "ProMilestones" && this.model.type == "Stage" && this.model.isparent === false) {
                 
                 this.getView().byId("departmentEle").setVisible(true);
                 this.getView().byId("typeEle").setVisible(true);
@@ -56,7 +68,21 @@ sap.ui.define([
                 this.getView().byId("attributeEle").setVisible(false);
                 this.getView().byId("customerSignOffEle").setVisible(true);
                 this.getView().byId("addToggleEle").setVisible(true);
-            }else if(this.model.typecode == "ProMilestones" && this.model.type == "Activity"){
+            }else if(this.model.typecode == "ProMilestones" && this.model.type == "Stage" && this.model.isparent === true){
+                commonFunction.getReferenceByTypeCodeAndParentTypeStage("ProMilestones", "Stage", "parentStageModel", this);
+                
+                this.getView().byId("stgTypeEle").setVisible(true);
+                this.getView().byId("departmentEle").setVisible(false);
+                this.getView().byId("sequenceEle").setVisible(false);
+                this.getView().byId("prerequisitesEle").setVisible(false);
+                this.getView().byId("projectPerEle").setVisible(false);
+                this.getView().byId("stagePerEle").setVisible(true);
+                this.getView().byId("parentStageEle").setVisible(true);
+                this.getView().byId("attributeEle").setVisible(false);
+                this.getView().byId("customerSignOffEle").setVisible(true);
+                this.getView().byId("addToggleEle").setVisible(true);
+            }
+            else if(this.model.typecode == "ProMilestones" && this.model.type == "Activity"){
                 commonFunction.getReferenceByTypeCodeAndParentType("ProMilestones", "Stage", "parentStageModel", this);
                 
                 this.getView().byId("stgTypeEle").setVisible(true);
@@ -154,7 +180,7 @@ sap.ui.define([
                 this.getView().byId("prerequisitesEle").setVisible(true);
                 this.getView().byId("projectPerEle").setVisible(true);
                 this.getView().byId("stagePerEle").setVisible(false);
-                this.getView().byId("parentStageEle").setVisible(false);
+                this.getView().byId("parentStageEle").setVisible(true);
                 this.getView().byId("attributeEle").setVisible(false);
                 this.getView().byId("customerSignOffEle").setVisible(true);
                 this.getView().byId("addToggleEle").setVisible(true);
@@ -289,8 +315,6 @@ sap.ui.define([
             var isValid = this.validateForm();
             if (isValid) {
                 var model = this.getView().getModel("editMasterModel").oData;
-
-
                 console.log("model : ", model);
 
                 model["companyid"] = commonService.session("companyId");
@@ -300,9 +324,6 @@ sap.ui.define([
                     model["stgtypeid"] = this.getView().byId("stgtype").getSelectedItem().mProperties.key;
                 else
                     model["stgtypeid"] = null;
-
-                // var COASaveSuccess = this.resourceBundle().getText("COASaveSuccess");
-                // var COAUpdateSuccess = this.resourceBundle().getText("COAUpdateSuccess");
 
                 console.log(model);
                 var currentContext = this;

@@ -589,8 +589,8 @@ sap.ui.define([
 
 					if(model["status"]=="Confirmed"){
 						var histroydata = {
-							orderno: model.id,
-							transactionid : model.id,
+							orderno: model.id == undefined || null ? data[3][0].id : model.id,
+							transactionid : model.id == undefined || null ? data[3][0].id : model.id,
 							orderdate:commonFunction.getDate(model.orderdate),
 							username: commonService.session("userName"),
 							quotename : model.quotename,

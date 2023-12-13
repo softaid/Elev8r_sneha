@@ -45,6 +45,8 @@ sap.ui.define([
 
 			let ActivityDetailModel = this.getView().getModel("ActivityDetailModel").oData;
 			this.getView().getModel("stageModel").oData;
+			console.log("---------Stage Model----------",this.getView().getModel("stageModel").oData);
+
 			var currentContext = this;
 
 
@@ -281,9 +283,11 @@ sap.ui.define([
 		},
 
 		onStageChange: function (OEvent) {
+			debugger;
 			let currentContext = this;
 			let ActivityDetailModel = currentContext.getView().getModel("ActivityDetailModel").oData;
 			Projectservice.getStageOrActivityDetail({ parentid: ActivityDetailModel.parentid, projectid: ActivityDetailModel.projectid }, function (data) {
+				ActivityDetailModel.stageDetail = data[0][0];
 				currentContext.getUserByDepartment(data?.[0][0]?.departmentid ?? "notSelect");
 			})
 
@@ -493,7 +497,7 @@ sap.ui.define([
 				currentContext.getView().getModel("ActivityDetailModel").refresh();
 			}
 			else if (oModel?.actualenddate == null) {
-				oModel.iscompleted = false;
+				oModel.iscompletevgftttvbd = false;
 				MessageToast.show("Activity is not completed yet so first complete the Activity then approve it");
 				currentContext.getView().getModel("ActivityDetailModel").refresh();
 			}
@@ -514,15 +518,15 @@ sap.ui.define([
 					isstd: oModel.stageDetail.isstd === true ? 1 : 0,
 					userid: commonService.session("userId"),
 					actualstartdate: oModel?.stageDetail?.stagecompletionpercentage ?? 0 == 0 ? commonFunction.getDate(oModel.actualstartdate) : (oModel.stageDetail.actualstartdate != null) ? commonFunction.getDate(oModel.stageDetail.actualstartdate) : oModel?.stageDetail?.actualstartdate ?? null,
-					stagecompletionpercentage: (oModel?.stageDetail?.stagecompletionpercentage ?? 0) + (oModel?.stagecompletionpercentage ?? 0),
+					//stagecompletionpercentage: +(oModel?.stageDetail?.stagecompletionpercentage ?? 0) + +(oModel?.stagecompletionpercentage ?? 0),
 					fromreference: 0,
 					type: "Stage"
 				};
 				obj.actualenddate = obj.stagecompletionpercentage == 100 ? commonFunction.getDate(oModel.actualenddate) : (oModel.stageDetail.actualenddate != null) ? commonFunction.getDate(oModel.stageDetail.actualenddate) : oModel?.stageDetail?.actualenddate ?? null,
 
+                
 
-
-					Projectservice.saveProjectActivityDetail(obj, function (savedata) {
+					Projectservice.saveProjectActivityDetail(obj, function (savedata) {//update
 						commonFunction.getStageDetail(oModel.projectid, currentContext);
 
 					})
@@ -699,7 +703,7 @@ sap.ui.define([
 			
 			await Projectservice.getSumOfAllStageOrActivity(obj, async function (data) {
 				console.log(data);
-				let completionPer = +(oModel?.stagecompletionpercentage ?? 0) + +(data?.[0]?.[0]?.totalper ?? 0);
+				let completionPer = +(oModel?.stagecompletionpercentage ?? 0) + +(data?.[0]?.[0]?.totalper ?? 0); // conver string to no
 				if (completionPer > 100) {
 					MessageToast.show(`Sum of stage completion percentage of all activity is ${completionPer}  and greater than 100 so please change it then save it`);
 					isValid = false;

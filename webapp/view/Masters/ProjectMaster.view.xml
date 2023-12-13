@@ -84,7 +84,7 @@
                                         id="Tree"
                                         expandFirstLevel="true"
                                         items="{masterDetailModel>/modelData}">
-                                        <StandardTreeItem id="txtItem" title="{masterDetailModel>sequenceno} - {masterDetailModel>description}" type="Navigation" press="onListItemPress" expanded="true"/>
+                                        <StandardTreeItem id="txtItem" title="{masterDetailModel>sequenceno} - {masterDetailModel>description} - {masterDetailModel>type}" type="Navigation" press="onListItemPress" expanded="true"/>
                                     </Tree>
                                 </IconTabFilter>
                             </items>

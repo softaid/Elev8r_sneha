@@ -174,6 +174,7 @@ sap.ui.define(
         },
 
         onListItemPress: function (oEvent) {
+          debugger;
           var viewModel = oEvent
             .getSource()
             .getBindingContext("projectListModel")

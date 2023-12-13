@@ -98,6 +98,24 @@
 										</form:fields>
 									</form:FormElement>
 
+                                    <form:FormElement id="stageid" label="Stage">
+									<form:fields>
+										<Select id="parentstage"
+					                    required="true" 
+                                        selectedKey="{StageDetailModel>/parentid}" 
+                                        forceSelection="false"
+                                        width="500px"
+                                        items="{
+                                            path: 'stageModel>/',
+                                            sorter: { path: 'id' }
+                                        }">
+											<core:Item key="{stageModel>stageid}" text="{stageModel>stagename}" />
+										</Select>
+									</form:fields>
+								</form:FormElement>
+
+
+
 									<form:FormElement id="projecttype" label="Department">
 										<form:fields>
 											<Select id="projecttypeid"
@@ -236,6 +254,30 @@
 									</form:fields>
 								</form:FormElement>
 
+                                  <!-- <form:FormElement label="isParent" >
+									<form:fields>
+										<Switch  state="{StageDetailModel>/isparent}" id="isparent" customTextOn="Yes" customTextOff="No" change=""
+                                         enabled="{
+                                                    path: 'StageDetailModel>/isparent',
+                                                    formatter: '.formatter.setEditable'
+                                                }">
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</form:fields>
+								</form:FormElement> -->
+
+                                  <form:FormElement id="isParent" label="Is Parent">
+                                    <form:fields>
+                                        <Switch  state="{StageDetailModel>/isparent}" id="isparent" customTextOn="Yes" customTextOff="No" valueLiveUpdate="true" change="isParentChange">
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" />
+                                            </layoutData>
+                                        </Switch>
+                                    </form:fields>
+                                </form:FormElement>
+
                                 	<form:FormElement label="Stage Completion">
 										<form:fields>
 											<Input id="StagePercent" 
@@ -245,8 +287,18 @@
                                                 }" value="{StageDetailModel>/stagecompletionpercentage}"/>
 										</form:fields>
 									</form:FormElement>
+
+                                    	<form:FormElement label="Parent Stage Completion" id="ParentStagePercentage">
+										<form:fields>
+											<Input id="ParentStagePercent" 
+                                                  editable="{
+                                                    path: 'StageDetailModel>/iscompleted',
+                                                    formatter: '.formatter.setEditable'
+                                                }" value="{StageDetailModel>/parentstagecompletionpercentage}"/>
+										</form:fields>
+									</form:FormElement>
                                     
-									<form:FormElement label="Project completion">
+									<form:FormElement label="Project completion" id="projectPercentele">
 										<form:fields>
 											<Input id="projectPercent"  editable="{
                                                     path: 'StageDetailModel>/iscompleted',

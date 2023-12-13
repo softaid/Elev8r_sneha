@@ -17,6 +17,7 @@ sap.ui.define([
 		formatter: formatter,
 
 		onInit: function () {
+			debugger;
 			this.bus = sap.ui.getCore().getEventBus();
 
 			this.bus.subscribe("billofmaterial", "setDetailPage", this.setDetailPage, this);
@@ -221,9 +222,9 @@ sap.ui.define([
 				var selRow = aContexts.map(function (oContext) { return oContext.getObject(); });
 
 				Projectservice.getProject({ id: selRow[0].id }, function (data) {
-					console.log(data[0])
-					data[0][0].isactive = data[0][0].isactive == 1 ? true : false;
-					currentContext.getView().getModel("projectModel").setData(data[0][0]);
+				console.log(data[0])
+				data[0][0].isactive = data[0][0].isactive == 1 ? true : false;
+				currentContext.getView().getModel("projectModel").setData(data[0][0]);
 				data[0][0].niengineer!=null?currentContext.getView().byId("eng").setSelectedKeys([...data[0][0].niengineer]):"data not available";
 				data[0][0].nimanager!=null?currentContext.getView().byId("manager").setSelectedKeys([...data[0][0].nimanager]):"data not available";
 				data[0][0].salesmanager!=null?currentContext.getView().byId("salesmanager").setSelectedKeys([...data[0][0].salesmanager]):"data not available";

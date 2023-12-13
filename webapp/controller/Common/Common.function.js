@@ -658,6 +658,7 @@ sap.ui.define([
         },
 
         getStageDetail: function (projectid,currentContext) {
+            debugger;
             var currentContext = currentContext;
             currentContext.projectCompletionObj = {};
             var projectModel = currentContext.getView().getModel("projectModel");
@@ -671,6 +672,9 @@ sap.ui.define([
                             data[0]?.[index]?.actualstartdate ?? null;
                         data[0][index].actualenddate =
                             data[0]?.[index]?.actualenddate ?? null;
+
+                        // data[0][index].stagecompletionpercentage =
+                        //     data[0]?.[index]?.stagecompletionpercentage ?? null;
                         currentContext.projectCompletionObj[value.stageid] =
                             value.stagecompletionpercentage;
                     });
@@ -681,6 +685,9 @@ sap.ui.define([
 
                     if (data[0]) {
                         let filteredData = data[0].filter(function (ele) {
+                            ele.parentstagecompletionpercentage= ele.parentid !== null ? parseInt(ele.parentstagecompletionpercentage) : 0;
+                            ele.stagecompletionpercentage= ele.parentid !== null ? parseInt(ele.childstageper) : ele.stagecompletionpercentage;
+                           
                             return ele.isactive === 1;
 
                         });
@@ -715,6 +722,17 @@ sap.ui.define([
 
         getReferenceByTypeCodeAndParentType : function(typeCode,parenttype,modelName, currentContext) {
             masterService.getReferenceByTypeCodeAndParentType({ typecode: typeCode, parenttype : parenttype }, function (data) {
+                if(data.length && data[0].length){
+                    var selectModel = new sap.ui.model.json.JSONModel();
+                    selectModel.setData({ modelData: data[0] });
+                    currentContext.getView().setModel(selectModel, modelName);
+                        
+                }
+            });
+        },
+
+        getReferenceByTypeCodeAndParentTypeStage : function(typeCode,parenttype,modelName, currentContext) {
+            masterService.getReferenceByTypeCodeAndParentTypeStage({ typecode: typeCode, parenttype : parenttype }, function (data) {
                 if(data.length && data[0].length){
                     var selectModel = new sap.ui.model.json.JSONModel();
                     selectModel.setData({ modelData: data[0] });
